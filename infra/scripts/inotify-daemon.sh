@@ -8,7 +8,7 @@ DEBOUNCE_SEC=3
 # 监控的目录
 WATCH_DIRS=(
     "/root/.openclaw/workspace/shared/results"
-    "/root/.openclaw/workspace-dev/projects"
+    "/root/.openclaw/workspace-dev"
     "/root/.openclaw/workspace-research/research"
     "/root/.openclaw/workspace"
 )
@@ -19,7 +19,7 @@ for d in "${WATCH_DIRS[@]}"; do
     WATCH_ARGS+=("$d")
 done
 
-inotifywait -m -e create,modify,moved_to --format '%w%f' "${WATCH_ARGS[@]}" | while read filepath; do
+inotifywait -m -e create,modify,moved_to,moved_from,delete --format '%w%f' "${WATCH_ARGS[@]}" | while read filepath; do
     # 只处理 md/json/sh 文件
     if ! echo "$filepath" | grep -qE "\.(md|json|sh)$"; then
         continue
