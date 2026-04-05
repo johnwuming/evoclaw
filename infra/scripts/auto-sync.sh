@@ -54,25 +54,12 @@ sync_file() {
 cleanup_deleted() {
     local local_dir="$1"
     local repo_dir="$2"
-    local suffix="$3"
 
-    if [ ! -d "$repo_dir" ]; then
-        return
-    fi
+    [ ! -d "$repo_dir" ] && return
 
-    # 遍历仓库目录下的文件
     find "$repo_dir" -type f | while read repo_file; do
-        # 还原成对应的本地路径
         local rel="${repo_file#$repo_dir/}"
-
-        # research/ 目录特殊处理：本地文件在 RESULTS_DIR 下
-        if [ "$suffix" = "research" ]; then
-            local local_file="$local_dir/$rel"
-        else
-            local local_file="$local_dir/$rel"
-        fi
-
-        # 本地不存在 → git rm
+        local local_file="$local_dir/$rel"
         if [ ! -e "$local_file" ]; then
             (cd "$REPO_DIR" && git rm -f "$repo_file" 2>/dev/null)
         fi
@@ -97,31 +84,24 @@ if [ "$1" = "--all" ]; then
 
     # --- 清理本地已删除的文件 ---
     # research/ 目录：只清理 R-*.md / M-*.md
-    for f in $(find "$REPO_DIR/research" -type f -name "R-*.md" -o -name "M-*.md" 2>/dev/null); do
+    for f in $(find "$REPO_DIR/research" -type f \( -name "R-*.md" -o -name "M-*.md" \) 2>/dev/null); do
         local local_name=$(basename "$f")
         if [ ! -e "$RESULTS_DIR/$local_name" ]; then
             (cd "$REPO_DIR" && git rm -f "$f" 2>/dev/null)
         fi
     done
     # dev/ 目录
-    if [ -d "$REPO_DIR/dev" ]; then
-        find "$REPO_DIR/dev" -type f | while read repo_file; do
-            local rel="${repo_file#$REPO_DIR/dev/}"
-            local local_file="$DEV_PROJECTS_DIR/$rel"
-            if [ ! -e "$local_file" ]; then
-                (cd "$REPO_DIR" && git rm -f "$repo_file" 2>/dev/null)
-            fi
-        done
-    fi
+    cleanup_deleted "$DEV_PROJECTS_DIR" "$REPO_DIR/dev"
     # research/internal/ 目录
-    if [ -d "$REPO_DIR/research/internal" ]; then
-        find "$REPO_DIR/research/internal" -type f | while read repo_file; do
-            local rel="${repo_file#$REPO_DIR/research/internal/}"
-            local local_file="$RESEARCH_INTERNAL_DIR/$rel"
-            if [ ! -e "$local_file" ]; then
-                (cd "$REPO_DIR" && git rm -f "$repo_file" 2>/dev/null)
-            fi
-        done
+    cleanup_deleted "$RESEARCH_INTERNAL_DIR" "$REPO_DIR/research/internal"
+fi
+
+# 当 inotify 提供具体文件时（$1 不是 --all），只同步该文件并处理可能的删除
+# 注意：删除事件只清理仓库，不复制文件
+if [ -n "$1" ] && [ "$1" != "--all" ]; then
+    local_path="$1"
+    if [ -e "$local_path" ]; then
+        sync_file "$local_path"
     fi
 fi
 

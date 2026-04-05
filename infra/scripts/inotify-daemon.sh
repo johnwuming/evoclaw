@@ -29,5 +29,5 @@ inotifywait -m -e create,modify,moved_to,moved_from,delete --format '%w%f' "${WA
         continue
     fi
     sleep $DEBOUNCE_SEC
-    bash "$SYNC_SCRIPT" 2>&1
+    bash "$SYNC_SCRIPT" "$filepath" 2>&1
 done
