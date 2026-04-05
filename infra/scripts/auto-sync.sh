@@ -76,7 +76,7 @@ sync_file() {
 # 如果带参数 --all，全量同步
 if [ "$1" = "--all" ]; then
     # 研究报告
-    for f in "$RESULTS_DIR"/*.md "$RESULTS_DIR"/*.json 2>/dev/null; do
+    for f in $(ls "$RESULTS_DIR"/*.md "$RESULTS_DIR"/*.json 2>/dev/null); do
         [ -f "$f" ] && sync_file "$f"
     done
     # 开发项目
@@ -84,11 +84,11 @@ if [ "$1" = "--all" ]; then
         sync_file "$f"
     done
     # 研究内部
-    for f in "$RESEARCH_INTERNAL_DIR"/* 2>/dev/null; do
+    for f in $(ls "$RESEARCH_INTERNAL_DIR"/* 2>/dev/null); do
         [ -f "$f" ] && sync_file "$f"
     done
     # 主 agent
-    for f in "$MAIN_WS_DIR"/*.md 2>/dev/null; do
+    for f in $(ls "$MAIN_WS_DIR"/*.md 2>/dev/null); do
         [ -f "$f" ] && sync_file "$f"
     done
 fi
