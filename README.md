@@ -18,11 +18,11 @@ evolving-claw-repo/
 
 | 前缀 | 来源 | 格式 | 示例 |
 |------|------|------|------|
-| R-xxx | 研究团队 | R-xxx-kebab-case.md | R-001-research-team-config.md |
-| M-xxx | Main agent | M-xxx-kebab-case.md | M-001-issue-channel-bug.md |
+| R-xxx | 研究团队 | R-xxx-中文标题.md | R-001-深度研究团队配置.md |
+| M-xxx | Main agent | M-xxx-中文标题.md | M-001-频道插件兼容性Bug.md |
 
 - xxx：三位递增编号，不复用
-- kebab-case：英文，≤5 词
+- 中文标题：简洁概括，≤10字，专业术语保留英文
 
 ## 自动同步
 
