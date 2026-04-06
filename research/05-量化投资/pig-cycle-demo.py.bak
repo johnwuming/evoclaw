@@ -1,0 +1,975 @@
+"""
+猪周期可视化 Demo 脚本
+========================
+生成 6 张可视化图表，用于展示猪周期各指标、周期位置判断及投资建议。
+
+数据说明：所有数据均为模拟数据，用于演示目的。
+真实数据待接入 AKShare/官方数据源 后替换。
+
+生成图表：
+1. 01-all-indicators-normalized.png  — 全指标归一化叠加图
+2. 02-pig-price-trend.png           — 猪价走势图
+3. 03-breeding-sow.png              — 能繁母猪存栏图
+4. 04-price-ratio.png               — 猪粮比图
+5. 05-cycle-dashboard.png           — 周期仪表盘（含阶段判断+投资建议）
+6. 06-target-stocks.png             — 投资标的价格走势图
+
+作者：Research Lead Subagent
+日期：2026-04-06
+"""
+
+import os
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.patches import FancyBboxPatch, Rectangle
+from matplotlib.gridspec import GridSpec
+import pandas as pd
+from datetime import datetime, timedelta
+
+# ============================================================
+# 配置
+# ============================================================
+OUTPUT_DIR = "/root/.openclaw/workspace/shared/results/05-量化投资/demo"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# 中文字体设置（避免中文乱码）
+from matplotlib.font_manager import FontProperties
+import os
+
+# 中文字体配置
+_ZH_FONT_PATH = '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'
+_ZH_FONT = FontProperties(fname=_ZH_FONT_PATH) if os.path.exists(_ZH_FONT_PATH) else None
+
+matplotlib.rcParams['axes.unicode_minus'] = False
+matplotlib.rcParams['axes.unicode_minus'] = False
+
+# 颜色主题
+COLORS = {
+    'pig_price':      '#E74C3C',   # 红色 - 猪价
+    'breeding_sow':   '#3498DB',   # 蓝色 - 能繁母猪
+    'piglet_price':   '#F39C12',   # 橙色 - 仔猪价格
+    'pig_corn_ratio': '#27AE60',   # 绿色 - 猪粮比
+    'corn':           '#9B59B6',   # 紫色 - 玉米
+    'soybean':        '#1ABC9C',   # 青色 - 豆粕
+    'inventory':      '#E67E22',   # 深橙 - 生猪存栏
+    'profit':         '#2ECC71',   # 亮绿 - 养殖利润
+    'stock':          '#2980B9',   # 深蓝 - 股票
+    'etf':            '#8E44AD',   # 紫红 - ETF
+}
+
+# ============================================================
+# 模拟数据生成函数
+# ============================================================
+
+def generate_date_range(start_year=2022, end_year=2026, freq='W'):
+    """生成日期序列（2022-01 至 2026-04，周度数据）"""
+    start = datetime(start_year, 1, 1)
+    end = datetime(end_year, 4, 6)
+    dates = pd.date_range(start=start, end=end, freq=freq)
+    return dates
+
+
+def generate_pig_cycle_data():
+    """
+    生成模拟猪周期数据，贴近真实规律：
+    - 3-4年一个完整周期
+    - 2022年高点、2024年低点、2026年处于复苏阶段
+    
+    猪价规律：10个月滞后于能繁母猪变化
+    """
+    dates = generate_date_range(2022, 2026, freq='W')
+    n = len(dates)
+    
+    # 时间索引（以周为单位）
+    t = np.arange(n)
+    
+    # ---- 能繁母猪存栏（万头）----
+    # 周期：约52周 × 3.5年 ≈ 182周
+    # 基准3900万头，波动 ±500万头
+    sow_cycle = 180  # 周期长度（周）
+    sow = 4000 + 500 * np.sin(2 * np.pi * t / sow_cycle - np.pi * 0.3)
+    # 叠加一些噪声
+    np.random.seed(42)
+    sow += np.random.normal(0, 30, n)
+    # 趋势：2025年后有所下降（去产能）
+    trend = np.where(t > 150, -80 * np.ones(n), 0)
+    sow = sow + trend
+    sow = np.clip(sow, 3300, 4500)
+    
+    # ---- 猪价（元/kg）----
+    # 领先能繁母猪约10个月（即滞后10个月×52/12≈43周）
+    # 猪价与能繁母猪负相关（滞后约43周）
+    price_cycle = 180
+    price_phase = t / price_cycle * 2 * np.pi - np.pi * 0.3 - 2 * np.pi * 43 / price_cycle
+    pig_price = 18 + 8 * np.sin(price_phase)
+    np.random.seed(43)
+    pig_price += np.random.normal(0, 0.5, n)
+    # 2026年初跌破10元/kg（接近历史低点）
+    pig_price = np.clip(pig_price, 8, 26)
+    
+    # ---- 仔猪价格（元/kg）----
+    # 领先猪价约2-3个月（26周）
+    piglet_phase = t / price_cycle * 2 * np.pi - np.pi * 0.3 - 2 * np.pi * 30 / price_cycle
+    piglet_price = 35 + 20 * np.sin(piglet_phase)
+    np.random.seed(44)
+    piglet_price += np.random.normal(0, 1.5, n)
+    piglet_price = np.clip(piglet_price, 15, 55)
+    
+    # ---- 猪粮比 ----
+    # 盈亏平衡约5.5:1，当前约4.5-5.0（2026年初亏损状态）
+    corn_price = 2.5 + 0.3 * np.sin(2 * np.pi * t / 52 + 1)
+    np.random.seed(45)
+    corn_price += np.random.normal(0, 0.05, n)
+    corn_price = np.clip(corn_price, 2.0, 3.2)
+    
+    pig_corn_ratio = pig_price / corn_price
+    # 叠加噪声
+    pig_corn_ratio += np.random.normal(0, 0.1, n)
+    
+    # ---- 玉米价格（元/kg）----
+    corn = corn_price
+    
+    # ---- 豆粕价格（元/kg）----
+    soybean = 3.8 + 0.6 * np.sin(2 * np.pi * t / 52 + 2)
+    np.random.seed(46)
+    soybean += np.random.normal(0, 0.1, n)
+    soybean = np.clip(soybean, 3.0, 5.0)
+    
+    # ---- 生猪存栏（万头）----
+    inventory_cycle = 180
+    inventory = 45000 + 8000 * np.sin(2 * np.pi * t / inventory_cycle - np.pi * 0.2)
+    np.random.seed(47)
+    inventory += np.random.normal(0, 500, n)
+    inventory = np.clip(inventory, 35000, 55000)
+    
+    # ---- 养殖利润（元/头，自繁自养）----
+    # 成本约12元/kg，出栏体重约120kg
+    cost_per_kg = 12.0
+    weight = 120
+    profit = (pig_price - cost_per_kg) * weight
+    np.random.seed(48)
+    profit += np.random.normal(0, 50, n)
+    
+    df = pd.DataFrame({
+        'date': dates,
+        'pig_price': pig_price,
+        'breeding_sow': sow,
+        'piglet_price': piglet_price,
+        'pig_corn_ratio': pig_corn_ratio,
+        'corn_price': corn,
+        'soybean_meal': soybean,
+        'inventory': inventory,
+        'profit': profit,
+    })
+    
+    return df
+
+
+def normalize_minmax(series):
+    """最大最小值归一化到 0-1 范围"""
+    mn = series.min()
+    mx = series.max()
+    if mx == mn:
+        return pd.Series([0.5] * len(series), index=series.index)
+    return (series - mn) / (mx - mn)
+
+
+def generate_stock_data():
+    """
+    生成模拟股票/ETF价格数据（2022-01 至 2026-04）
+    贴近真实规律：猪价上涨时畜牧养殖股票走强
+    """
+    dates = generate_date_range(2022, 2026, freq='W')
+    n = len(dates)
+    t = np.arange(n)
+    
+    # 牧原股份 (002714) - 行业龙头，成本最低
+    np.random.seed(50)
+    muyuan_base = 50 + 15 * np.sin(2 * np.pi * t / 180 - np.pi * 0.3)
+    muyuan = muyuan_base + np.random.normal(0, 2, n)
+    muyuan = np.clip(muyuan, 30, 80)
+    
+    # 温氏股份 (300498) - 第二大
+    np.random.seed(51)
+    wenshi_base = 18 + 5 * np.sin(2 * np.pi * t / 180 - np.pi * 0.3)
+    wenshi = wenshi_base + np.random.normal(0, 0.8, n)
+    wenshi = np.clip(wenshi, 10, 28)
+    
+    # 畜牧ETF (159867)
+    np.random.seed(52)
+    etf_base = 0.7 + 0.25 * np.sin(2 * np.pi * t / 180 - np.pi * 0.3)
+    etf = etf_base + np.random.normal(0, 0.03, n)
+    etf = np.clip(etf, 0.4, 1.1)
+    
+    # 养殖ETF (159865)
+    np.random.seed(53)
+    etf2_base = 0.65 + 0.22 * np.sin(2 * np.pi * t / 180 - np.pi * 0.25)
+    etf2 = etf2_base + np.random.normal(0, 0.025, n)
+    etf2 = np.clip(etf2, 0.35, 1.0)
+    
+    # 基准指数（沪深300）用于对比
+    np.random.seed(54)
+    hs300 = 4000 + 600 * np.sin(2 * np.pi * t / 180 + 0.5)
+    hs300 += np.random.normal(0, 80, n)
+    
+    df = pd.DataFrame({
+        'date': dates,
+        'muyuan': muyuan,       # 牧原股份
+        'wenshi': wenshi,       # 温氏股份
+        'livestock_etf': etf,  # 畜牧ETF 159867
+        'breed_etf': etf2,      # 养殖ETF 159865
+        'hs300': hs300,         # 沪深300
+    })
+    
+    return df
+
+
+# ============================================================
+# 图表1：全指标归一化叠加图
+# ============================================================
+def plot_all_indicators_normalized(df, output_path):
+    """
+    全指标归一化叠加图
+    所有指标做最大最小值归一化（0-1），展示领先/滞后关系
+    """
+    fig, ax = plt.subplots(figsize=(16, 8))
+    
+    # 归一化各指标
+    plot_data = pd.DataFrame({'date': df['date']})
+    plot_data['猪价'] = normalize_minmax(df['pig_price'])
+    plot_data['能繁母猪'] = normalize_minmax(df['breeding_sow'])
+    plot_data['仔猪价格'] = normalize_minmax(df['piglet_price'])
+    plot_data['猪粮比'] = normalize_minmax(df['pig_corn_ratio'])
+    plot_data['养殖利润'] = normalize_minmax(df['profit'])
+    plot_data['生猪存栏'] = normalize_minmax(df['inventory'])
+    
+    # 绘制各指标折线
+    ax.plot(plot_data['date'], plot_data['猪价'], 
+            color=COLORS['pig_price'], linewidth=2, label='猪价 (pig price)', alpha=0.9)
+    ax.plot(plot_data['date'], plot_data['能繁母猪'], 
+            color=COLORS['breeding_sow'], linewidth=2, label='能繁母猪 (breeding sow)', alpha=0.9)
+    ax.plot(plot_data['date'], plot_data['仔猪价格'], 
+            color=COLORS['piglet_price'], linewidth=2, label='仔猪价格 (piglet price)', alpha=0.9)
+    ax.plot(plot_data['date'], plot_data['猪粮比'], 
+            color=COLORS['pig_corn_ratio'], linewidth=2, label='猪粮比 (pig-corn ratio)', alpha=0.9)
+    ax.plot(plot_data['date'], plot_data['养殖利润'], 
+            color=COLORS['profit'], linewidth=2, label='养殖利润 (breeding profit)', alpha=0.9)
+    ax.plot(plot_data['date'], plot_data['生猪存栏'], 
+            color=COLORS['inventory'], linewidth=2, label='生猪存栏 (pig inventory)', alpha=0.9)
+    
+    # 标注周期阶段
+    # 在图上用背景色标注周期阶段
+    ax.axvspan(datetime(2024, 6, 1), datetime(2025, 12, 31), 
+               alpha=0.08, color='red', label='下行期')
+    ax.axvspan(datetime(2022, 1, 1), datetime(2023, 6, 30), 
+               alpha=0.08, color='orange', label='上行期')
+    
+    # 添加周期阶段文字标注
+    ax.annotate('周期顶部\n(2022高点)', xy=(datetime(2022, 4, 1), 0.95),
+                fontsize=10, ha='center', color='darkred',
+                bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7))
+    ax.annotate('产能过剩\n猪价低迷', xy=(datetime(2024, 10, 1), 0.05),
+                fontsize=10, ha='center', color='darkred',
+                bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7))
+    ax.annotate('复苏初期', xy=(datetime(2026, 1, 15), 0.55),
+                fontsize=10, ha='center', color='darkgreen',
+                bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7))
+    
+    # 标注领先/滞后关系箭头
+    ax.annotate('', xy=(datetime(2023, 6, 1), 0.85), 
+                xytext=(datetime(2022, 8, 1), 0.85),
+                arrowprops=dict(arrowstyle='->', color='gray', lw=1.5))
+    ax.text(datetime(2023, 1, 1), 0.87, '能繁母猪领先猪价约10个月', 
+            fontsize=9, color='gray', ha='center')
+    
+    ax.set_title('全指标归一化叠加图（2022-2026）\nAll Indicators Normalized (Min-Max 0-1 Scale)',
+                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlabel('日期 (Date)', fontsize=11)
+    ax.set_ylabel('归一化值 Normalized Value (0-1)', fontsize=11)
+    ax.set_ylim(-0.05, 1.1)
+    ax.legend(loc='upper right', fontsize=9, ncol=2)
+    ax.grid(True, alpha=0.3)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+    plt.xticks(rotation=45)
+    
+    # 数据来源标注
+    fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据', 
+             fontsize=8, ha='right', va='bottom', color='gray')
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ 图表1已保存: {output_path}")
+
+
+# ============================================================
+# 图表2：猪价走势图
+# ============================================================
+def plot_pig_price(df, output_path):
+    """猪价走势图"""
+    fig, ax = plt.subplots(figsize=(14, 6))
+    
+    ax.plot(df['date'], df['pig_price'], color=COLORS['pig_price'], linewidth=2)
+    
+    # 标注周期高点/低点
+    # 找到近似高点和低点
+    price = df['pig_price'].values
+    dates = df['date']
+    
+    # 标注2022年高点（约20+元/kg）
+    peak_idx = np.argmax(price[:len(price)//3])
+    ax.annotate(f'2022年高点\n{price[peak_idx]:.1f}元/kg', 
+                xy=(dates.iloc[peak_idx], price[peak_idx]),
+                xytext=(dates.iloc[peak_idx] + timedelta(days=60), price[peak_idx] + 1.5),
+                arrowprops=dict(arrowstyle='->', color='darkred'),
+                fontsize=10, color='darkred', fontweight='bold')
+    
+    # 标注2024年低点（约11元/kg）
+    low_idx = np.argmin(price[len(price)//3:2*len(price)//3]) + len(price)//3
+    ax.annotate(f'2024年低点\n{price[low_idx]:.1f}元/kg', 
+                xy=(dates.iloc[low_idx], price[low_idx]),
+                xytext=(dates.iloc[low_idx] + timedelta(days=60), price[low_idx] - 2),
+                arrowprops=dict(arrowstyle='->', color='darkred'),
+                fontsize=10, color='darkred', fontweight='bold')
+    
+    # 标注2026年初跌破10元
+    late_idx = int(len(price) * 0.85)
+    ax.annotate(f'2026年初\n跌破10元\n{price[late_idx]:.1f}元/kg', 
+                xy=(dates.iloc[late_idx], price[late_idx]),
+                xytext=(dates.iloc[late_idx] + timedelta(days=30), price[late_idx] - 1.5),
+                arrowprops=dict(arrowstyle='->', color='darkred'),
+                fontsize=10, color='darkred', fontweight='bold')
+    
+    # 成本线
+    ax.axhline(y=12, color='gray', linestyle='--', linewidth=1.5, label='行业成本线 (~12元/kg)')
+    # 盈亏平衡线（猪粮比5.5:1对应，假设玉米2.5元/kg）
+    ax.axhline(y=13.75, color='orange', linestyle=':', linewidth=1.5, label='盈亏平衡线 (~13.75元/kg, 猪粮比5.5:1)')
+    # 深度亏损线
+    ax.axhline(y=10, color='darkred', linestyle='-.', linewidth=1, alpha=0.7, label='心理关口 (10元/kg)')
+    
+    ax.set_title('外三元生猪价格走势（2022-2026）\nHog Price Trend (Waishan, CNY/kg)', 
+                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlabel('日期 (Date)', fontsize=11)
+    ax.set_ylabel('价格（元/kg）', fontsize=11)
+    ax.legend(loc='upper right', fontsize=9)
+    ax.grid(True, alpha=0.3)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+    plt.xticks(rotation=45)
+    
+    # 数据来源标注
+    fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据', 
+             fontsize=8, ha='right', va='bottom', color='gray')
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ 图表2已保存: {output_path}")
+
+
+# ============================================================
+# 图表3：能繁母猪存栏图
+# ============================================================
+def plot_breeding_sow(df, output_path):
+    """能繁母猪存栏图（含正常保有量线）"""
+    fig, ax = plt.subplots(figsize=(14, 6))
+    
+    ax.plot(df['date'], df['breeding_sow'], color=COLORS['breeding_sow'], linewidth=2)
+    ax.fill_between(df['date'], df['breeding_sow'], alpha=0.15, color=COLORS['breeding_sow'])
+    
+    # 正常保有量线
+    ax.axhline(y=3900, color='green', linestyle='--', linewidth=2, label='正常保有量 (3900万头)')
+    
+    # 绿黄红区间
+    ax.axhspan(3588, 4095, alpha=0.1, color='green', label='绿色区间 (92%-105%)')
+    ax.axhspan(3315, 3588, alpha=0.1, color='yellow')
+    ax.axhspan(4095, 4290, alpha=0.1, color='yellow')
+    ax.axhspan(0, 3315, alpha=0.1, color='red')
+    ax.axhspan(4290, 5000, alpha=0.1, color='red')
+    
+    # 标注文字
+    ax.text(df['date'].iloc[-1] + timedelta(days=30), 3900, '3900万\n(正常保有量)', 
+            fontsize=9, va='center', color='green', fontweight='bold')
+    ax.text(df['date'].iloc[-1] + timedelta(days=30), 3600, '黄色区间\n下沿', 
+            fontsize=8, va='center', color='darkorange')
+    ax.text(df['date'].iloc[-1] + timedelta(days=30), 4200, '黄色区间\n上沿', 
+            fontsize=8, va='center', color='darkorange')
+    ax.text(df['date'].iloc[-1] + timedelta(days=30), 3300, '红色\n(强制调控)', 
+            fontsize=8, va='center', color='darkred')
+    
+    # 标注高点（2022年约4400万头）
+    sow = df['breeding_sow'].values
+    dates = df['date']
+    peak_idx = np.argmax(sow)
+    ax.annotate(f'2022年高位\n{sow[peak_idx]:.0f}万头', 
+                xy=(dates.iloc[peak_idx], sow[peak_idx]),
+                xytext=(dates.iloc[peak_idx] + timedelta(days=90), sow[peak_idx] + 100),
+                arrowprops=dict(arrowstyle='->', color='darkblue'),
+                fontsize=10, color='darkblue', fontweight='bold')
+    
+    # 标注2025年末约3961万头
+    late_idx = int(len(sow) * 0.82)
+    ax.annotate(f'2025年末\n约3961万头\n(仍在正常保有量上沿)', 
+                xy=(dates.iloc[late_idx], sow[late_idx]),
+                xytext=(dates.iloc[late_idx] + timedelta(days=60), sow[late_idx] - 150),
+                arrowprops=dict(arrowstyle='->', color='darkblue'),
+                fontsize=9, color='darkblue')
+    
+    ax.set_title('能繁母猪存栏量走势（2022-2026）\nBreeding Sow Inventory (10,000 heads)', 
+                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlabel('日期 (Date)', fontsize=11)
+    ax.set_ylabel('存栏量（万头）', fontsize=11)
+    ax.set_ylim(3100, 4700)
+    ax.legend(loc='upper right', fontsize=9)
+    ax.grid(True, alpha=0.3)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+    plt.xticks(rotation=45)
+    
+    # 数据来源标注
+    fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据\n参考真实数据：农业农村部月度数据', 
+             fontsize=8, ha='right', va='bottom', color='gray')
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ 图表3已保存: {output_path}")
+
+
+# ============================================================
+# 图表4：猪粮比图
+# ============================================================
+def plot_pig_corn_ratio(df, output_path):
+    """猪粮比图（含预警区间）"""
+    fig, ax = plt.subplots(figsize=(14, 6))
+    
+    ax.plot(df['date'], df['pig_corn_ratio'], color=COLORS['pig_corn_ratio'], linewidth=2)
+    ax.fill_between(df['date'], df['pig_corn_ratio'], alpha=0.15, color=COLORS['pig_corn_ratio'])
+    
+    # 预警线
+    ax.axhline(y=9.0, color='darkred', linestyle='-.', linewidth=1.5, alpha=0.8, label='过度上涨预警 (≥9.0)')
+    ax.axhline(y=6.0, color='orange', linestyle='--', linewidth=1.5, label='正常偏高 (≥6.0)')
+    ax.axhline(y=5.5, color='green', linestyle='--', linewidth=1.5, label='盈亏平衡 (5.5:1)')
+    ax.axhline(y=5.0, color='orange', linestyle=':', linewidth=1.5, label='二级预警 (≤5.0)')
+    ax.axhline(y=4.5, color='red', linestyle='-.', linewidth=1.5, label='一级预警 (≤4.5)')
+    
+    # 标注背景区域
+    ax.axhspan(9.0, 12, alpha=0.08, color='red')
+    ax.axhspan(6.0, 9.0, alpha=0.05, color='orange')
+    ax.axhspan(5.5, 6.0, alpha=0.05, color='yellow')
+    ax.axhspan(4.5, 5.5, alpha=0.08, color='orange')
+    ax.axhspan(0, 4.5, alpha=0.12, color='red')
+    
+    # 标注2026年初的猪粮比（约4.5-5.0，一级/二级预警区域）
+    late_idx = int(len(df['pig_corn_ratio']) * 0.85)
+    late_ratio = df['pig_corn_ratio'].iloc[late_idx]
+    ax.annotate(f'2026年初\n猪粮比约{late_ratio:.2f}\n二级~一级预警区间', 
+                xy=(df['date'].iloc[late_idx], late_ratio),
+                xytext=(df['date'].iloc[late_idx] - timedelta(days=120), late_ratio + 0.8),
+                arrowprops=dict(arrowstyle='->', color='darkred'),
+                fontsize=9, color='darkred', fontweight='bold')
+    
+    ax.set_title('猪粮比走势（2022-2026）\nPig-Corn Price Ratio (2022-2026)', 
+                 fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlabel('日期 (Date)', fontsize=11)
+    ax.set_ylabel('猪粮比 (Ratio)', fontsize=11)
+    ax.set_ylim(3.5, 10)
+    ax.legend(loc='upper right', fontsize=9)
+    ax.grid(True, alpha=0.3)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+    plt.xticks(rotation=45)
+    
+    # 数据来源标注
+    fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据\n参考真实数据：国家发改委价格监测中心', 
+             fontsize=8, ha='right', va='bottom', color='gray')
+    
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ 图表4已保存: {output_path}")
+
+
+# ============================================================
+# 图表5：周期仪表盘
+# ============================================================
+def plot_cycle_dashboard(df, output_path):
+    """
+    周期仪表盘：展示当前周期位置、评分、投资建议
+    """
+    fig = plt.figure(figsize=(16, 10))
+    
+    # ---- 当前状态设置（基于模拟数据）----
+    # 根据2026年初的数据判断
+    latest_pig_price = df['pig_price'].iloc[-1]
+    latest_sow = df['breeding_sow'].iloc[-1]
+    latest_ratio = df['pig_corn_ratio'].iloc[-1]
+    latest_profit = df['profit'].iloc[-1]
+    
+    # 计算周期评分（0-100，越高越接近底部/投资机会）
+    # 基于多个指标打分
+    score_sow = 0
+    if latest_sow > 4100:
+        score_sow = 15
+    elif latest_sow > 3900:
+        score_sow = 40
+    elif latest_sow > 3700:
+        score_sow = 70
+    else:
+        score_sow = 90
+    
+    score_profit = 0
+    if latest_profit > 300:
+        score_profit = 5
+    elif latest_profit > 0:
+        score_profit = 30
+    elif latest_profit > -200:
+        score_profit = 60
+    else:
+        score_profit = 85
+    
+    score_ratio = 0
+    if latest_ratio > 7:
+        score_ratio = 5
+    elif latest_ratio > 5.5:
+        score_ratio = 25
+    elif latest_ratio > 5.0:
+        score_ratio = 55
+    else:
+        score_ratio = 80
+    
+    score_price = 0
+    if latest_pig_price > 18:
+        score_price = 5
+    elif latest_pig_price > 14:
+        score_price = 25
+    elif latest_pig_price > 12:
+        score_price = 50
+    elif latest_pig_price > 10:
+        score_price = 75
+    else:
+        score_price = 90
+    
+    # 加权综合评分
+    weights = [0.25, 0.25, 0.25, 0.25]
+    overall_score = (score_sow * 0.25 + score_profit * 0.25 + 
+                     score_ratio * 0.25 + score_price * 0.25)
+    
+    # 判断周期阶段
+    if overall_score >= 75:
+        phase = "P0 上升期"
+        phase_desc = "能繁母猪持续低位，猪价回升突破成本线，养殖利润转正"
+        recommendation = "买入/增配"
+        rec_color = 'darkgreen'
+        rec_reason = "周期反转信号增强，建议增配生猪养殖板块"
+    elif overall_score >= 55:
+        phase = "P2 底部去化中后期"
+        phase_desc = "能繁母猪开始加速去化，猪价处于低位，深度亏损中"
+        recommendation = "观望/分批建仓"
+        rec_color = 'darkorange'
+        rec_reason = "底部信号逐步显现，建议等待确认后可分批建仓"
+    elif overall_score >= 35:
+        phase = "P3 下降中后期"
+        phase_desc = "产能过剩，猪价跌破成本线，行业全面亏损"
+        recommendation = "观望"
+        rec_color = 'darkred'
+        rec_reason = "下行趋势未变，建议等待能繁母猪降至正常保有量以下"
+    else:
+        phase = "P4-P5 顶部/下降早期"
+        phase_desc = "产能高峰期，猪价处于相对高位，利润丰厚"
+        recommendation = "减配/卖出"
+        rec_color = 'darkred'
+        rec_reason = "周期顶部区域，建议减配生猪养殖敞口"
+    
+    # ---- 主标题区 ----
+    fig.suptitle('🐷 猪周期仪表盘\nPig Cycle Dashboard — 2026年4月', 
+                 fontsize=18, fontweight='bold', y=0.98)
+    
+    # ---- 左上：综合评分仪表 ----
+    ax_gauge = fig.add_subplot(2, 3, 1, projection='polar')
+    
+    # 半圆仪表盘
+    theta = np.linspace(0, np.pi, 100)
+    r = np.ones(100)
+    ax_gauge.fill_between(theta, 0, r, alpha=0.1, color='gray')
+    
+    # 评分填充
+    score_norm = overall_score / 100
+    score_theta = np.linspace(0, np.pi * score_norm, 100)
+    if overall_score >= 65:
+        color = '#27AE60'  # 绿色（机会区）
+    elif overall_score >= 40:
+        color = '#F39C12'  # 橙色（观望区）
+    else:
+        color = '#E74C3C'  # 红色（风险区）
+    ax_gauge.fill_between(score_theta, 0, r, alpha=0.3, color=color)
+    ax_gauge.plot(score_theta, r, color=color, linewidth=3)
+    
+    # 刻度标注
+    ax_gauge.set_xticks([])
+    ax_gauge.set_yticks([])
+    ax_gauge.set_ylim(0, 1.2)
+    
+    # 中心分数文字
+    ax_gauge.text(np.pi/2, 0.3, f'{overall_score:.0f}', fontsize=36, fontweight='bold', 
+                  ha='center', va='center', color=color)
+    ax_gauge.text(np.pi/2, 0.0, '/100', fontsize=14, ha='center', va='center', color='gray')
+    ax_gauge.text(np.pi/2, -0.15, '周期综合评分', fontsize=10, ha='center', va='center', color='gray')
+    
+    # 阶段文字
+    ax_gauge.annotate(phase, xy=(np.pi * 0.7, 0.7), fontsize=11, fontweight='bold',
+                      color='darkblue', ha='center')
+    ax_gauge.set_title('综合评分', fontsize=12, fontweight='bold', pad=10)
+    
+    # ---- 右上：投资建议卡片 ----
+    ax_advice = fig.add_subplot(2, 3, 2)
+    ax_advice.axis('off')
+    
+    # 投资建议框
+    advice_box = FancyBboxPatch((0.05, 0.5), 0.9, 0.4, 
+                                  boxstyle="round,pad=0.05",
+                                  facecolor='lightgreen' if '买入' in recommendation else 'lightyellow' if '观望' in recommendation else 'lightcoral',
+                                  alpha=0.8, edgecolor=rec_color, linewidth=3)
+    ax_advice.add_patch(advice_box)
+    ax_advice.text(0.5, 0.78, f'📋 投资建议: {recommendation}', 
+                   fontsize=14, fontweight='bold', ha='center', va='center',
+                   color=rec_color)
+    ax_advice.text(0.5, 0.58, rec_reason, 
+                   fontsize=10, ha='center', va='center', color='black', wrap=True)
+    
+    # 理由说明
+    ax_advice.text(0.5, 0.35, '━' * 30, fontsize=8, ha='center', color='gray')
+    ax_advice.text(0.5, 0.25, f'📊 猪价: {latest_pig_price:.2f} 元/kg ({"深度亏损" if latest_pig_price < 12 else "低位"})', 
+                   fontsize=10, ha='center', va='center')
+    ax_advice.text(0.5, 0.15, f'🐷 能繁母猪: {latest_sow:.0f} 万头 ({"正常保有量上沿" if latest_sow > 3900 else "正常区间"})', 
+                   fontsize=10, ha='center', va='center')
+    ax_advice.text(0.5, 0.05, f'📉 猪粮比: {latest_ratio:.2f} ({"一级预警" if latest_ratio < 4.5 else "二级预警" if latest_ratio < 5.0 else "正常"})', 
+                   fontsize=10, ha='center', va='center')
+    
+    ax_advice.set_xlim(0, 1)
+    ax_advice.set_ylim(0, 1)
+    ax_advice.set_title('投资建议', fontsize=12, fontweight='bold', pad=10)
+    
+    # ---- 右：子指标评分条形图 ----
+    ax_sub = fig.add_subplot(2, 3, 3)
+    indicators = ['能繁母猪\n水平', '养殖\n利润', '猪粮比', '猪价\n位置']
+    sub_scores = [score_sow, score_profit, score_ratio, score_price]
+    bar_colors = ['#27AE60' if s >= 65 else '#F39C12' if s >= 40 else '#E74C3C' for s in sub_scores]
+    
+    bars = ax_sub.barh(indicators, sub_scores, color=bar_colors, alpha=0.7, edgecolor='black')
+    ax_sub.set_xlim(0, 100)
+    ax_sub.set_xlabel('评分 (0-100)', fontsize=10)
+    ax_sub.set_title('子指标评分', fontsize=12, fontweight='bold', pad=10)
+    
+    # 添加数值标签
+    for bar, score in zip(bars, sub_scores):
+        ax_sub.text(bar.get_width() + 2, bar.get_y() + bar.get_height()/2, 
+                    f'{score:.0f}', va='center', fontsize=10, fontweight='bold')
+    
+    ax_sub.axvline(x=50, color='gray', linestyle='--', linewidth=1, alpha=0.7)
+    ax_sub.text(52, 0, '机会线', fontsize=8, color='gray')
+    ax_sub.grid(True, axis='x', alpha=0.3)
+    
+    # ---- 下左：猪价走势图（带阶段标注）----
+    ax_price = fig.add_subplot(2, 3, 4)
+    ax_price.plot(df['date'], df['pig_price'], color=COLORS['pig_price'], linewidth=1.5)
+    ax_price.axhline(y=12, color='gray', linestyle='--', linewidth=1, alpha=0.7, label='成本线')
+    ax_price.axhline(y=10, color='darkred', linestyle='-.', linewidth=1, alpha=0.7, label='10元关口')
+    
+    # 标注当前点
+    ax_price.scatter([df['date'].iloc[-1]], [latest_pig_price], 
+                     color='red', s=80, zorder=5, marker='*')
+    ax_price.annotate(f'当前: {latest_pig_price:.2f}元', 
+                      xy=(df['date'].iloc[-1], latest_pig_price),
+                      xytext=(df['date'].iloc[-1] - timedelta(days=120), latest_pig_price + 1.5),
+                      arrowprops=dict(arrowstyle='->', color='red'),
+                      fontsize=9, color='red', fontweight='bold')
+    
+    ax_price.set_title('猪价走势', fontsize=11, fontweight='bold')
+    ax_price.set_xlabel('日期', fontsize=9)
+    ax_price.set_ylabel('元/kg', fontsize=9)
+    ax_price.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax_price.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax_price.tick_params(axis='x', rotation=45)
+    ax_price.legend(fontsize=8)
+    ax_price.grid(True, alpha=0.3)
+    
+    # ---- 下中：能繁母猪走势 ----
+    ax_sow = fig.add_subplot(2, 3, 5)
+    ax_sow.plot(df['date'], df['breeding_sow'], color=COLORS['breeding_sow'], linewidth=1.5)
+    ax_sow.axhline(y=3900, color='green', linestyle='--', linewidth=1.5, label='正常保有量')
+    ax_sow.scatter([df['date'].iloc[-1]], [latest_sow], 
+                   color='red', s=80, zorder=5, marker='*')
+    ax_sow.annotate(f'当前: {latest_sow:.0f}万头', 
+                    xy=(df['date'].iloc[-1], latest_sow),
+                    xytext=(df['date'].iloc[-1] - timedelta(days=120), latest_sow + 200),
+                    arrowprops=dict(arrowstyle='->', color='red'),
+                    fontsize=9, color='red', fontweight='bold')
+    
+    ax_sow.set_title('能繁母猪存栏', fontsize=11, fontweight='bold')
+    ax_sow.set_xlabel('日期', fontsize=9)
+    ax_sow.set_ylabel('万头', fontsize=9)
+    ax_sow.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax_sow.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax_sow.tick_params(axis='x', rotation=45)
+    ax_sow.legend(fontsize=8)
+    ax_sow.grid(True, alpha=0.3)
+    
+    # ---- 下右：养殖利润走势 ----
+    ax_profit = fig.add_subplot(2, 3, 6)
+    ax_profit.plot(df['date'], df['profit'], color=COLORS['profit'], linewidth=1.5)
+    ax_profit.fill_between(df['date'], df['profit'], 0, 
+                            where=df['profit'] < 0, alpha=0.3, color='red', label='亏损区')
+    ax_profit.fill_between(df['date'], df['profit'], 0, 
+                            where=df['profit'] >= 0, alpha=0.3, color='green', label='盈利区')
+    ax_profit.axhline(y=0, color='black', linestyle='-', linewidth=1)
+    
+    ax_profit.scatter([df['date'].iloc[-1]], [latest_profit], 
+                      color='red', s=80, zorder=5, marker='*')
+    ax_profit.annotate(f'当前: {latest_profit:.0f}元/头', 
+                       xy=(df['date'].iloc[-1], latest_profit),
+                       xytext=(df['date'].iloc[-1] - timedelta(days=120), 
+                               latest_profit + 200 if latest_profit < 0 else latest_profit - 200),
+                       arrowprops=dict(arrowstyle='->', color='red'),
+                       fontsize=9, color='red', fontweight='bold')
+    
+    ax_profit.set_title('自繁自养利润', fontsize=11, fontweight='bold')
+    ax_profit.set_xlabel('日期', fontsize=9)
+    ax_profit.set_ylabel('元/头', fontsize=9)
+    ax_profit.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax_profit.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax_profit.tick_params(axis='x', rotation=45)
+    ax_profit.legend(fontsize=8)
+    ax_profit.grid(True, alpha=0.3)
+    
+    # ---- 底部免责说明 ----
+    fig.text(0.5, 0.01, 
+             '⚠️ 本仪表盘基于模拟数据生成，仅供演示参考，不构成投资建议。\n'
+             '投资决策需结合真实数据和个人风险承受能力。',
+             fontsize=8, ha='center', va='bottom', color='gray', style='italic')
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ 图表5已保存: {output_path}")
+
+
+# ============================================================
+# 图表6：投资标的价格走势图
+# ============================================================
+def plot_target_stocks(stock_df, output_path):
+    """投资标的价格走势图"""
+    fig, axes = plt.subplots(2, 2, figsize=(16, 10))
+    
+    # ---- 左上：牧原股份 ----
+    ax1 = axes[0, 0]
+    ax1.plot(stock_df['date'], stock_df['muyuan'], color='#E74C3C', linewidth=2, label='牧原股份')
+    ax1.set_title('牧原股份 (002714)\n行业龙头，成本最低 (~12元/kg)', 
+                  fontsize=11, fontweight='bold', color='#E74C3C')
+    ax1.set_ylabel('股价（元）', fontsize=10)
+    ax1.grid(True, alpha=0.3)
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax1.tick_params(axis='x', rotation=45)
+    
+    # 最新价格标注
+    latest = stock_df['muyuan'].iloc[-1]
+    change = (latest - stock_df['muyuan'].iloc[-2]) / stock_df['muyuan'].iloc[-2] * 100
+    ax1.annotate(f'最新: {latest:.2f}元\n({change:+.1f}%)', 
+                 xy=(stock_df['date'].iloc[-1], latest),
+                 xytext=(stock_df['date'].iloc[-1] - timedelta(days=180), latest + 8),
+                 arrowprops=dict(arrowstyle='->', color='darkred'),
+                 fontsize=9, color='darkred', fontweight='bold')
+    
+    # ---- 右上：温氏股份 ----
+    ax2 = axes[0, 1]
+    ax2.plot(stock_df['date'], stock_df['wenshi'], color='#3498DB', linewidth=2, label='温氏股份')
+    ax2.set_title('温氏股份 (300498)\n第二大养殖企业，2025年净利52亿', 
+                  fontsize=11, fontweight='bold', color='#3498DB')
+    ax2.set_ylabel('股价（元）', fontsize=10)
+    ax2.grid(True, alpha=0.3)
+    ax2.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax2.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax2.tick_params(axis='x', rotation=45)
+    
+    latest_w = stock_df['wenshi'].iloc[-1]
+    change_w = (latest_w - stock_df['wenshi'].iloc[-2]) / stock_df['wenshi'].iloc[-2] * 100
+    ax2.annotate(f'最新: {latest_w:.2f}元\n({change_w:+.1f}%)', 
+                 xy=(stock_df['date'].iloc[-1], latest_w),
+                 xytext=(stock_df['date'].iloc[-1] - timedelta(days=180), latest_w + 3),
+                 arrowprops=dict(arrowstyle='->', color='darkblue'),
+                 fontsize=9, color='darkblue', fontweight='bold')
+    
+    # ---- 左下：ETF走势 ----
+    ax3 = axes[1, 0]
+    ax3.plot(stock_df['date'], stock_df['livestock_etf'], 
+             color='#8E44AD', linewidth=2, label='畜牧ETF (159867)')
+    ax3.plot(stock_df['date'], stock_df['breed_etf'], 
+             color='#E67E22', linewidth=2, label='养殖ETF (159865)', alpha=0.8)
+    ax3.set_title('畜牧/养殖 ETF 走势\n分散投资，获取行业Beta', 
+                  fontsize=11, fontweight='bold', color='#8E44AD')
+    ax3.set_ylabel('价格（元）', fontsize=10)
+    ax3.legend(fontsize=9)
+    ax3.grid(True, alpha=0.3)
+    ax3.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax3.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax3.tick_params(axis='x', rotation=45)
+    
+    # ---- 右下：与沪深300对比 ----
+    ax4 = axes[1, 1]
+    # 归一化到起始值100
+    muyuan_norm = stock_df['muyuan'] / stock_df['muyuan'].iloc[0] * 100
+    etf_norm = stock_df['livestock_etf'] / stock_df['livestock_etf'].iloc[0] * 100
+    hs300_norm = stock_df['hs300'] / stock_df['hs300'].iloc[0] * 100
+    
+    ax4.plot(stock_df['date'], muyuan_norm, color='#E74C3C', linewidth=2, label='牧原股份')
+    ax4.plot(stock_df['date'], etf_norm, color='#8E44AD', linewidth=2, label='畜牧ETF')
+    ax4.plot(stock_df['date'], hs300_norm, color='gray', linewidth=1.5, 
+             linestyle='--', label='沪深300', alpha=0.7)
+    
+    ax4.axhline(y=100, color='black', linestyle=':', linewidth=1, alpha=0.5)
+    ax4.set_title('相对表现对比（起始=100）\n生猪养殖 vs 沪深300', 
+                  fontsize=11, fontweight='bold')
+    ax4.set_ylabel('相对点位', fontsize=10)
+    ax4.legend(fontsize=9)
+    ax4.grid(True, alpha=0.3)
+    ax4.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    ax4.xaxis.set_major_locator(mdates.MonthLocator(interval=12))
+    ax4.tick_params(axis='x', rotation=45)
+    
+    # ---- 总标题 ----
+    fig.suptitle('🐷 生猪产业链投资标的走势（2022-2026）\nInvestment Targets: Hog Industry Chain Stocks & ETFs',
+                 fontsize=14, fontweight='bold', y=1.02)
+    
+    # ---- 数据表格 ----
+    table_data = [
+        ['牧原股份', '002714', f'{stock_df["muyuan"].iloc[-1]:.2f}', 
+         f'{(stock_df["muyuan"].iloc[-1]/stock_df["muyuan"].iloc[0]-1)*100:+.1f}%', 
+         '行业龙头，成本优势最强'],
+        ['温氏股份', '300498', f'{stock_df["wenshi"].iloc[-1]:.2f}', 
+         f'{(stock_df["wenshi"].iloc[-1]/stock_df["wenshi"].iloc[0]-1)*100:+.1f}%', 
+         '第二大养殖企业'],
+        ['畜牧ETF', '159867', f'{stock_df["livestock_etf"].iloc[-1]:.3f}', 
+         f'{(stock_df["livestock_etf"].iloc[-1]/stock_df["livestock_etf"].iloc[0]-1)*100:+.1f}%', 
+         '分散风险，行业Beta'],
+        ['养殖ETF', '159865', f'{stock_df["breed_etf"].iloc[-1]:.3f}', 
+         f'{(stock_df["breed_etf"].iloc[-1]/stock_df["breed_etf"].iloc[0]-1)*100:+.1f}%', 
+         '中证畜牧养殖指数'],
+    ]
+    
+    # 在底部添加表格
+    ax_table = fig.add_subplot(2, 1, 2)
+    ax_table.axis('off')
+    table = ax_table.table(
+        cellText=table_data,
+        colLabels=['标的名称', '代码', '最新价格', '涨跌幅', '关联说明'],
+        loc='center',
+        cellLoc='center',
+        colColours=['#D5D8DC'] * 5,
+    )
+    table.auto_set_font_size(False)
+    table.set_fontsize(9)
+    table.scale(1, 1.5)
+    ax_table.set_title('投资标的一览（2026-04-06）', fontsize=11, fontweight='bold', pad=20)
+    
+    # 数据来源标注
+    fig.text(0.99, 0.01, 
+             '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据\n'
+             '真实数据来源：Wind/AKShare股票行情接口、交易所公告',
+             fontsize=8, ha='right', va='bottom', color='gray')
+    
+    plt.tight_layout(rect=[0, 0.05, 1, 0.97])
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"✅ 图表6已保存: {output_path}")
+
+
+# ============================================================
+# 主函数
+# ============================================================
+def main():
+    print("=" * 60)
+    print("🐷 猪周期可视化 Demo 生成器")
+    print("=" * 60)
+    print(f"📁 输出目录: {OUTPUT_DIR}")
+    print("⚠️ 所有数据均为模拟数据，仅供演示用途")
+    print("=" * 60)
+    
+    # 生成模拟数据
+    print("\n📊 生成模拟猪周期数据...")
+    df = generate_pig_cycle_data()
+    print(f"   猪周期数据: {len(df)} 行 (周度, {df['date'].min().strftime('%Y-%m-%d')} 至 {df['date'].max().strftime('%Y-%m-%d')})")
+    
+    print("\n📈 生成投资标的模拟数据...")
+    stock_df = generate_stock_data()
+    print(f"   股票数据: {len(stock_df)} 行 (周度)")
+    
+    # 生成6张图表
+    print("\n" + "=" * 60)
+    print("开始生成图表...")
+    print("=" * 60)
+    
+    # 图表1：全指标归一化叠加图
+    plot_all_indicators_normalized(df, os.path.join(OUTPUT_DIR, '01-all-indicators-normalized.png'))
+    
+    # 图表2：猪价走势图
+    plot_pig_price(df, os.path.join(OUTPUT_DIR, '02-pig-price-trend.png'))
+    
+    # 图表3：能繁母猪存栏图
+    plot_breeding_sow(df, os.path.join(OUTPUT_DIR, '03-breeding-sow.png'))
+    
+    # 图表4：猪粮比图
+    plot_pig_corn_ratio(df, os.path.join(OUTPUT_DIR, '04-price-ratio.png'))
+    
+    # 图表5：周期仪表盘
+    plot_cycle_dashboard(df, os.path.join(OUTPUT_DIR, '05-cycle-dashboard.png'))
+    
+    # 图表6：投资标的价格走势图
+    plot_target_stocks(stock_df, os.path.join(OUTPUT_DIR, '06-target-stocks.png'))
+    
+    print("\n" + "=" * 60)
+    print("✅ 全部6张图表生成完成！")
+    print("=" * 60)
+    print(f"\n📁 图表保存位置: {OUTPUT_DIR}")
+    print("\n生成文件清单:")
+    for i in range(1, 7):
+        fname = f'0{i}-' if i < 10 else str(i)
+        print(f"   {fname}*.png")
+    
+    print("\n" + "=" * 60)
+    print("图表说明:")
+    print("=" * 60)
+    print("""
+1. 01-all-indicators-normalized.png
+   → 全指标归一化叠加图：所有指标归一化到0-1，验证领先/滞后关系
+   → 关键发现：能繁母猪领先猪价约10个月，仔猪价格领先约6个月
+
+2. 02-pig-price-trend.png
+   → 猪价走势图：标注周期高低点、成本线、盈亏平衡线
+   → 当前状态：2026年初跌破10元/kg，接近历史低点
+
+3. 03-breeding-sow.png
+   → 能繁母猪存栏图：标注绿黄红区间（3900万头正常保有量线）
+   → 当前状态：约3961万头，仍高于正常保有量，去化进行中
+
+4. 04-price-ratio.png
+   → 猪粮比图：标注国家发改委预警区间（一级/二级预警线）
+   → 当前状态：约4.5-5.0，处于二级~一级预警区域
+
+5. 05-cycle-dashboard.png
+   → 周期仪表盘：综合评分 + 阶段判断 + 投资建议 + 子指标评分
+   → 当前状态：P2底部去化中后期，建议观望/分批建仓
+
+6. 06-target-stocks.png
+   → 投资标的：牧原、温氏、畜牧ETF、养殖ETF 价格走势
+   → 标的说明：各标的与猪周期的关联性和投资逻辑
+
+⚠️ 免责声明：以上所有数据均为模拟数据，仅供演示参考，不构成投资建议。
+    """)
+
+
+if __name__ == '__main__':
+    main()
