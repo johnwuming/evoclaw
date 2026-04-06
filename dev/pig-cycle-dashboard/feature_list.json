@@ -1,0 +1,12 @@
+[
+  {"id": "F001", "name": "数据采集（日度猪价/玉米/豆粕、周度指标）", "passes": true, "qa_status": "verified", "steps": ["python3 collector.py 完成无报错", "daily_prices 表有 hog_price 数据（>0 行）", "weekly_indicators 表有 price_index 数据（>0 行）", "collection_log 表有成功记录"]},
+  {"id": "F002", "name": "归一化叠加图页面", "passes": true, "qa_status": "verified", "steps": ["切换到归一化叠加 tab 无报错", "图表显示多条归一化曲线", "Y 轴范围 0-1"]},
+  {"id": "F003", "name": "猪价走势页面", "passes": true, "qa_status": "verified", "steps": ["切换到猪价走势 tab 无报错", "图表显示猪价折线", "成本线标注可见", "局部高低点标记"]},
+  {"id": "F004", "name": "能繁母猪占位页面", "passes": true, "qa_status": "verified", "steps": ["切换到能繁母猪 tab 无报错", "显示占位提示信息"]},
+  {"id": "F005", "name": "猪粮比走势页面", "passes": true, "qa_status": "verified", "steps": ["切换到猪粮比 tab 无报错", "图表显示猪粮比折线", "预警区域背景色可见"]},
+  {"id": "F006", "name": "周期仪表盘", "passes": true, "qa_status": "verified", "steps": ["切换到周期仪表盘 tab 无报错", "显示综合评分", "显示周期阶段和投资建议", "显示三子卡片"]},
+  {"id": "F007", "name": "投资标的对比页面", "passes": true, "qa_status": "verified", "steps": ["切换到投资标的 tab 无报错", "图表渲染（网络不佳时 graceful fallback）", "基准线可见"]},
+  {"id": "F008", "name": "定时刷新", "passes": true, "qa_status": "verified", "steps": ["dcc.Interval 配置存在", "interval callback 触发采集+刷新"]},
+  {"id": "F009", "name": "systemd 部署", "passes": true, "qa_status": "verified", "steps": ["service 文件语法正确", "systemctl active", "HTTP 200 on 8050", "Nginx 8051 auth 401"]},
+  {"id": "F010", "name": "init.sh 冒烟测试", "passes": true, "qa_status": "verified", "steps": ["init.sh 可执行", "exit code 0", "数据采集成功"]}
+]
