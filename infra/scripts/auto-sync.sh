@@ -10,6 +10,7 @@ MAIN_WS_DIR="/root/.openclaw/workspace"
 LOG_FILE="/root/.openclaw/evolving-claw-repo/infra/sync.log"
 
 EXCLUDE_FILES="AGENTS.md|SOUL.md|IDENTITY.md|USER.md|TOOLS.md|HEARTBEAT.md|BOOTSTRAP.md|MEMORY.md|PATHS.md"
+EXCLUDE_PATTERN="AGENTS.md SOUL.md IDENTITY.md USER.md TOOLS.md HEARTBEAT.md BOOTSTRAP.md MEMORY.md PATHS.md"
 
 MAX_RETRIES=3
 RETRY_DELAY=10
