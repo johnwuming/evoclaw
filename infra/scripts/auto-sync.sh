@@ -66,20 +66,17 @@ cleanup_deleted() {
 # === 同步文件 ===
 
 if [ "$1" = "--all" ]; then
-    for f in $(ls "$RESULTS_DIR"/*.md 2>/dev/null); do
-        [ -f "$f" ] && sync_file "$f"
-    done
+    # shared/results/ 整体镜像到 evoclaw/research/（保留目录结构）
+    if [ -d "$RESULTS_DIR" ]; then
+        rsync -a --delete --exclude="$EXCLUDE_PATTERN" "$RESULTS_DIR/" "$REPO_DIR/research/" 2>/dev/null
+    fi
+    # dev 项目同步
     for f in $(find "$DEV_PROJECTS_DIR" -type f 2>/dev/null); do
         sync_file "$f"
     done
+    # 研究过程文件同步
     for f in $(find "$RESEARCH_INTERNAL_DIR" -type f 2>/dev/null); do
         sync_file "$f"
-    done
-    for f in $(find "$REPO_DIR/research" -type f \( -name "R-*.md" -o -name "M-*.md" \) 2>/dev/null); do
-        fname=$(basename "$f")
-        if [ ! -e "$RESULTS_DIR/$fname" ]; then
-            (cd "$REPO_DIR" && git rm -f "$f" 2>/dev/null)
-        fi
     done
     cleanup_deleted "$DEV_PROJECTS_DIR" "$REPO_DIR/dev"
     cleanup_deleted "$RESEARCH_INTERNAL_DIR" "$REPO_DIR/research/internal"
@@ -88,7 +85,12 @@ fi
 if [ -n "$1" ] && [ "$1" != "--all" ]; then
     local_path="$1"
     if [ -e "$local_path" ]; then
-        sync_file "$local_path"
+        # 如果是 shared/results/ 下的文件，用 rsync 增量同步
+        if [[ "$local_path" == "$RESULTS_DIR"/* ]]; then
+            rsync -a --exclude="$EXCLUDE_PATTERN" "$RESULTS_DIR/" "$REPO_DIR/research/" 2>/dev/null
+        else
+            sync_file "$local_path"
+        fi
     fi
 fi
 
