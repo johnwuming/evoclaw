@@ -34,15 +34,12 @@ from datetime import datetime, timedelta
 OUTPUT_DIR = "/root/.openclaw/workspace/shared/results/05-量化投资/demo"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 中文字体设置（避免中文乱码）
-from matplotlib.font_manager import FontProperties
 import os
 
 # 中文字体配置
-_ZH_FONT_PATH = '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'
-_ZH_FONT = FontProperties(fname=_ZH_FONT_PATH) if os.path.exists(_ZH_FONT_PATH) else None
 
-matplotlib.rcParams['axes.unicode_minus'] = False
+matplotlib.rcParams['font.family'] = 'sans-serif'
+matplotlib.rcParams['font.sans-serif'] = ['WenQuanYi Micro Hei', 'WenQuanYi Zen Hei', 'SimHei']
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 # 颜色主题
@@ -268,13 +265,13 @@ def plot_all_indicators_normalized(df, output_path):
     
     # 添加周期阶段文字标注
     ax.annotate('周期顶部\n(2022高点)', xy=(datetime(2022, 4, 1), 0.95),
-                fontsize=10, fontproperties=_ZH_FONT, ha='center', color='darkred',
+                fontsize=10, ha='center', color='darkred',
                 bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7))
     ax.annotate('产能过剩\n猪价低迷', xy=(datetime(2024, 10, 1), 0.05),
-                fontsize=10, fontproperties=_ZH_FONT, ha='center', color='darkred',
+                fontsize=10, ha='center', color='darkred',
                 bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7))
     ax.annotate('复苏初期', xy=(datetime(2026, 1, 15), 0.55),
-                fontsize=10, fontproperties=_ZH_FONT, ha='center', color='darkgreen',
+                fontsize=10, ha='center', color='darkgreen',
                 bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7))
     
     # 标注领先/滞后关系箭头
@@ -282,14 +279,14 @@ def plot_all_indicators_normalized(df, output_path):
                 xytext=(datetime(2022, 8, 1), 0.85),
                 arrowprops=dict(arrowstyle='->', color='gray', lw=1.5))
     ax.text(datetime(2023, 1, 1), 0.87, '能繁母猪领先猪价约10个月', 
-            fontsize=9, fontproperties=_ZH_FONT, color='gray', ha='center')
+            fontsize=9, color='gray', ha='center')
     
     ax.set_title('全指标归一化叠加图（2022-2026）\nAll Indicators Normalized (Min-Max 0-1 Scale)',
-                 fontsize=14, fontproperties=_ZH_FONT, fontweight='bold', pad=15)
+                 fontsize=14, fontweight='bold', pad=15)
     ax.set_xlabel('日期 (Date)', fontsize=11)
     ax.set_ylabel('归一化值 Normalized Value (0-1)', fontsize=11)
     ax.set_ylim(-0.05, 1.1)
-    ax.legend(loc='upper right', fontsize=9, fontproperties=_ZH_FONT, ncol=2)
+    ax.legend(loc='upper right', fontsize=9, ncol=2)
     ax.grid(True, alpha=0.3)
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
     ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
@@ -297,7 +294,7 @@ def plot_all_indicators_normalized(df, output_path):
     
     # 数据来源标注
     fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据', 
-             fontsize=8, fontproperties=_ZH_FONT, ha='right', va='bottom', color='gray')
+             fontsize=8, ha='right', va='bottom', color='gray')
     
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
@@ -325,7 +322,7 @@ def plot_pig_price(df, output_path):
                 xy=(dates.iloc[peak_idx], price[peak_idx]),
                 xytext=(dates.iloc[peak_idx] + timedelta(days=60), price[peak_idx] + 1.5),
                 arrowprops=dict(arrowstyle='->', color='darkred'),
-                fontsize=10, fontproperties=_ZH_FONT, color='darkred', fontweight='bold')
+                fontsize=10, color='darkred', fontweight='bold')
     
     # 标注2024年低点（约11元/kg）
     low_idx = np.argmin(price[len(price)//3:2*len(price)//3]) + len(price)//3
@@ -333,7 +330,7 @@ def plot_pig_price(df, output_path):
                 xy=(dates.iloc[low_idx], price[low_idx]),
                 xytext=(dates.iloc[low_idx] + timedelta(days=60), price[low_idx] - 2),
                 arrowprops=dict(arrowstyle='->', color='darkred'),
-                fontsize=10, fontproperties=_ZH_FONT, color='darkred', fontweight='bold')
+                fontsize=10, color='darkred', fontweight='bold')
     
     # 标注2026年初跌破10元
     late_idx = int(len(price) * 0.85)
@@ -341,7 +338,7 @@ def plot_pig_price(df, output_path):
                 xy=(dates.iloc[late_idx], price[late_idx]),
                 xytext=(dates.iloc[late_idx] + timedelta(days=30), price[late_idx] - 1.5),
                 arrowprops=dict(arrowstyle='->', color='darkred'),
-                fontsize=10, fontproperties=_ZH_FONT, color='darkred', fontweight='bold')
+                fontsize=10, color='darkred', fontweight='bold')
     
     # 成本线
     ax.axhline(y=12, color='gray', linestyle='--', linewidth=1.5, label='行业成本线 (~12元/kg)')
@@ -351,7 +348,7 @@ def plot_pig_price(df, output_path):
     ax.axhline(y=10, color='darkred', linestyle='-.', linewidth=1, alpha=0.7, label='心理关口 (10元/kg)')
     
     ax.set_title('外三元生猪价格走势（2022-2026）\nHog Price Trend (Waishan, CNY/kg)', 
-                 fontsize=14, fontproperties=_ZH_FONT, fontweight='bold', pad=15)
+                 fontsize=14, fontweight='bold', pad=15)
     ax.set_xlabel('日期 (Date)', fontsize=11)
     ax.set_ylabel('价格（元/kg）', fontsize=11)
     ax.legend(loc='upper right', fontsize=9)
@@ -362,7 +359,7 @@ def plot_pig_price(df, output_path):
     
     # 数据来源标注
     fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据', 
-             fontsize=8, fontproperties=_ZH_FONT, ha='right', va='bottom', color='gray')
+             fontsize=8, ha='right', va='bottom', color='gray')
     
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
@@ -392,13 +389,13 @@ def plot_breeding_sow(df, output_path):
     
     # 标注文字
     ax.text(df['date'].iloc[-1] + timedelta(days=30), 3900, '3900万\n(正常保有量)', 
-            fontsize=9, fontproperties=_ZH_FONT, va='center', color='green', fontweight='bold')
+            fontsize=9, va='center', color='green', fontweight='bold')
     ax.text(df['date'].iloc[-1] + timedelta(days=30), 3600, '黄色区间\n下沿', 
-            fontsize=8, fontproperties=_ZH_FONT, va='center', color='darkorange')
+            fontsize=8, va='center', color='darkorange')
     ax.text(df['date'].iloc[-1] + timedelta(days=30), 4200, '黄色区间\n上沿', 
-            fontsize=8, fontproperties=_ZH_FONT, va='center', color='darkorange')
+            fontsize=8, va='center', color='darkorange')
     ax.text(df['date'].iloc[-1] + timedelta(days=30), 3300, '红色\n(强制调控)', 
-            fontsize=8, fontproperties=_ZH_FONT, va='center', color='darkred')
+            fontsize=8, va='center', color='darkred')
     
     # 标注高点（2022年约4400万头）
     sow = df['breeding_sow'].values
@@ -408,7 +405,7 @@ def plot_breeding_sow(df, output_path):
                 xy=(dates.iloc[peak_idx], sow[peak_idx]),
                 xytext=(dates.iloc[peak_idx] + timedelta(days=90), sow[peak_idx] + 100),
                 arrowprops=dict(arrowstyle='->', color='darkblue'),
-                fontsize=10, fontproperties=_ZH_FONT, color='darkblue', fontweight='bold')
+                fontsize=10, color='darkblue', fontweight='bold')
     
     # 标注2025年末约3961万头
     late_idx = int(len(sow) * 0.82)
@@ -416,10 +413,10 @@ def plot_breeding_sow(df, output_path):
                 xy=(dates.iloc[late_idx], sow[late_idx]),
                 xytext=(dates.iloc[late_idx] + timedelta(days=60), sow[late_idx] - 150),
                 arrowprops=dict(arrowstyle='->', color='darkblue'),
-                fontsize=9, fontproperties=_ZH_FONT, color='darkblue')
+                fontsize=9, color='darkblue')
     
     ax.set_title('能繁母猪存栏量走势（2022-2026）\nBreeding Sow Inventory (10,000 heads)', 
-                 fontsize=14, fontproperties=_ZH_FONT, fontweight='bold', pad=15)
+                 fontsize=14, fontweight='bold', pad=15)
     ax.set_xlabel('日期 (Date)', fontsize=11)
     ax.set_ylabel('存栏量（万头）', fontsize=11)
     ax.set_ylim(3100, 4700)
@@ -431,7 +428,7 @@ def plot_breeding_sow(df, output_path):
     
     # 数据来源标注
     fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据\n参考真实数据：农业农村部月度数据', 
-             fontsize=8, fontproperties=_ZH_FONT, ha='right', va='bottom', color='gray')
+             fontsize=8, ha='right', va='bottom', color='gray')
     
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
@@ -470,10 +467,10 @@ def plot_pig_corn_ratio(df, output_path):
                 xy=(df['date'].iloc[late_idx], late_ratio),
                 xytext=(df['date'].iloc[late_idx] - timedelta(days=120), late_ratio + 0.8),
                 arrowprops=dict(arrowstyle='->', color='darkred'),
-                fontsize=9, fontproperties=_ZH_FONT, color='darkred', fontweight='bold')
+                fontsize=9, color='darkred', fontweight='bold')
     
     ax.set_title('猪粮比走势（2022-2026）\nPig-Corn Price Ratio (2022-2026)', 
-                 fontsize=14, fontproperties=_ZH_FONT, fontweight='bold', pad=15)
+                 fontsize=14, fontweight='bold', pad=15)
     ax.set_xlabel('日期 (Date)', fontsize=11)
     ax.set_ylabel('猪粮比 (Ratio)', fontsize=11)
     ax.set_ylim(3.5, 10)
@@ -485,7 +482,7 @@ def plot_pig_corn_ratio(df, output_path):
     
     # 数据来源标注
     fig.text(0.99, 0.01, '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据\n参考真实数据：国家发改委价格监测中心', 
-             fontsize=8, fontproperties=_ZH_FONT, ha='right', va='bottom', color='gray')
+             fontsize=8, ha='right', va='bottom', color='gray')
     
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
@@ -586,7 +583,7 @@ def plot_cycle_dashboard(df, output_path):
     
     # ---- 主标题区 ----
     fig.suptitle('🐷 猪周期仪表盘\nPig Cycle Dashboard — 2026年4月', 
-                 fontsize=18, fontproperties=_ZH_FONT, fontweight='bold', y=0.98)
+                 fontsize=18, fontweight='bold', y=0.98)
     
     # ---- 左上：综合评分仪表 ----
     ax_gauge = fig.add_subplot(2, 3, 1, projection='polar')
@@ -614,15 +611,15 @@ def plot_cycle_dashboard(df, output_path):
     ax_gauge.set_ylim(0, 1.2)
     
     # 中心分数文字
-    ax_gauge.text(np.pi/2, 0.3, f'{overall_score:.0f}', fontsize=36, fontproperties=_ZH_FONT, fontweight='bold', 
+    ax_gauge.text(np.pi/2, 0.3, f'{overall_score:.0f}', fontsize=36, fontweight='bold', 
                   ha='center', va='center', color=color)
-    ax_gauge.text(np.pi/2, 0.0, '/100', fontsize=14, fontproperties=_ZH_FONT, ha='center', va='center', color='gray')
-    ax_gauge.text(np.pi/2, -0.15, '周期综合评分', fontsize=10, fontproperties=_ZH_FONT, ha='center', va='center', color='gray')
+    ax_gauge.text(np.pi/2, 0.0, '/100', fontsize=14, ha='center', va='center', color='gray')
+    ax_gauge.text(np.pi/2, -0.15, '周期综合评分', fontsize=10, ha='center', va='center', color='gray')
     
     # 阶段文字
-    ax_gauge.annotate(phase, xy=(np.pi * 0.7, 0.7), fontsize=11, fontproperties=_ZH_FONT, fontweight='bold',
+    ax_gauge.annotate(phase, xy=(np.pi * 0.7, 0.7), fontsize=11, fontweight='bold',
                       color='darkblue', ha='center')
-    ax_gauge.set_title('综合评分', fontsize=12, fontproperties=_ZH_FONT, fontweight='bold', pad=10)
+    ax_gauge.set_title('综合评分', fontsize=12, fontweight='bold', pad=10)
     
     # ---- 右上：投资建议卡片 ----
     ax_advice = fig.add_subplot(2, 3, 2)
@@ -635,23 +632,23 @@ def plot_cycle_dashboard(df, output_path):
                                   alpha=0.8, edgecolor=rec_color, linewidth=3)
     ax_advice.add_patch(advice_box)
     ax_advice.text(0.5, 0.78, f'📋 投资建议: {recommendation}', 
-                   fontsize=14, fontproperties=_ZH_FONT, fontweight='bold', ha='center', va='center',
+                   fontsize=14, fontweight='bold', ha='center', va='center',
                    color=rec_color)
     ax_advice.text(0.5, 0.58, rec_reason, 
-                   fontsize=10, fontproperties=_ZH_FONT, ha='center', va='center', color='black', wrap=True)
+                   fontsize=10, ha='center', va='center', color='black', wrap=True)
     
     # 理由说明
-    ax_advice.text(0.5, 0.35, '━' * 30, fontsize=8, fontproperties=_ZH_FONT, ha='center', color='gray')
+    ax_advice.text(0.5, 0.35, '━' * 30, fontsize=8, ha='center', color='gray')
     ax_advice.text(0.5, 0.25, f'📊 猪价: {latest_pig_price:.2f} 元/kg ({"深度亏损" if latest_pig_price < 12 else "低位"})', 
-                   fontsize=10, fontproperties=_ZH_FONT, ha='center', va='center')
+                   fontsize=10, ha='center', va='center')
     ax_advice.text(0.5, 0.15, f'🐷 能繁母猪: {latest_sow:.0f} 万头 ({"正常保有量上沿" if latest_sow > 3900 else "正常区间"})', 
-                   fontsize=10, fontproperties=_ZH_FONT, ha='center', va='center')
+                   fontsize=10, ha='center', va='center')
     ax_advice.text(0.5, 0.05, f'📉 猪粮比: {latest_ratio:.2f} ({"一级预警" if latest_ratio < 4.5 else "二级预警" if latest_ratio < 5.0 else "正常"})', 
-                   fontsize=10, fontproperties=_ZH_FONT, ha='center', va='center')
+                   fontsize=10, ha='center', va='center')
     
     ax_advice.set_xlim(0, 1)
     ax_advice.set_ylim(0, 1)
-    ax_advice.set_title('投资建议', fontsize=12, fontproperties=_ZH_FONT, fontweight='bold', pad=10)
+    ax_advice.set_title('投资建议', fontsize=12, fontweight='bold', pad=10)
     
     # ---- 右：子指标评分条形图 ----
     ax_sub = fig.add_subplot(2, 3, 3)
@@ -662,15 +659,15 @@ def plot_cycle_dashboard(df, output_path):
     bars = ax_sub.barh(indicators, sub_scores, color=bar_colors, alpha=0.7, edgecolor='black')
     ax_sub.set_xlim(0, 100)
     ax_sub.set_xlabel('评分 (0-100)', fontsize=10)
-    ax_sub.set_title('子指标评分', fontsize=12, fontproperties=_ZH_FONT, fontweight='bold', pad=10)
+    ax_sub.set_title('子指标评分', fontsize=12, fontweight='bold', pad=10)
     
     # 添加数值标签
     for bar, score in zip(bars, sub_scores):
         ax_sub.text(bar.get_width() + 2, bar.get_y() + bar.get_height()/2, 
-                    f'{score:.0f}', va='center', fontsize=10, fontproperties=_ZH_FONT, fontweight='bold')
+                    f'{score:.0f}', va='center', fontsize=10, fontweight='bold')
     
     ax_sub.axvline(x=50, color='gray', linestyle='--', linewidth=1, alpha=0.7)
-    ax_sub.text(52, 0, '机会线', fontsize=8, fontproperties=_ZH_FONT, color='gray')
+    ax_sub.text(52, 0, '机会线', fontsize=8, color='gray')
     ax_sub.grid(True, axis='x', alpha=0.3)
     
     # ---- 下左：猪价走势图（带阶段标注）----
@@ -686,9 +683,9 @@ def plot_cycle_dashboard(df, output_path):
                       xy=(df['date'].iloc[-1], latest_pig_price),
                       xytext=(df['date'].iloc[-1] - timedelta(days=120), latest_pig_price + 1.5),
                       arrowprops=dict(arrowstyle='->', color='red'),
-                      fontsize=9, fontproperties=_ZH_FONT, color='red', fontweight='bold')
+                      fontsize=9, color='red', fontweight='bold')
     
-    ax_price.set_title('猪价走势', fontsize=11, fontproperties=_ZH_FONT, fontweight='bold')
+    ax_price.set_title('猪价走势', fontsize=11, fontweight='bold')
     ax_price.set_xlabel('日期', fontsize=9)
     ax_price.set_ylabel('元/kg', fontsize=9)
     ax_price.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
@@ -707,9 +704,9 @@ def plot_cycle_dashboard(df, output_path):
                     xy=(df['date'].iloc[-1], latest_sow),
                     xytext=(df['date'].iloc[-1] - timedelta(days=120), latest_sow + 200),
                     arrowprops=dict(arrowstyle='->', color='red'),
-                    fontsize=9, fontproperties=_ZH_FONT, color='red', fontweight='bold')
+                    fontsize=9, color='red', fontweight='bold')
     
-    ax_sow.set_title('能繁母猪存栏', fontsize=11, fontproperties=_ZH_FONT, fontweight='bold')
+    ax_sow.set_title('能繁母猪存栏', fontsize=11, fontweight='bold')
     ax_sow.set_xlabel('日期', fontsize=9)
     ax_sow.set_ylabel('万头', fontsize=9)
     ax_sow.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
@@ -734,9 +731,9 @@ def plot_cycle_dashboard(df, output_path):
                        xytext=(df['date'].iloc[-1] - timedelta(days=120), 
                                latest_profit + 200 if latest_profit < 0 else latest_profit - 200),
                        arrowprops=dict(arrowstyle='->', color='red'),
-                       fontsize=9, fontproperties=_ZH_FONT, color='red', fontweight='bold')
+                       fontsize=9, color='red', fontweight='bold')
     
-    ax_profit.set_title('自繁自养利润', fontsize=11, fontproperties=_ZH_FONT, fontweight='bold')
+    ax_profit.set_title('自繁自养利润', fontsize=11, fontweight='bold')
     ax_profit.set_xlabel('日期', fontsize=9)
     ax_profit.set_ylabel('元/头', fontsize=9)
     ax_profit.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
@@ -749,7 +746,7 @@ def plot_cycle_dashboard(df, output_path):
     fig.text(0.5, 0.01, 
              '⚠️ 本仪表盘基于模拟数据生成，仅供演示参考，不构成投资建议。\n'
              '投资决策需结合真实数据和个人风险承受能力。',
-             fontsize=8, fontproperties=_ZH_FONT, ha='center', va='bottom', color='gray', style='italic')
+             fontsize=8, ha='center', va='bottom', color='gray', style='italic')
     
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
@@ -768,7 +765,7 @@ def plot_target_stocks(stock_df, output_path):
     ax1 = axes[0, 0]
     ax1.plot(stock_df['date'], stock_df['muyuan'], color='#E74C3C', linewidth=2, label='牧原股份')
     ax1.set_title('牧原股份 (002714)\n行业龙头，成本最低 (~12元/kg)', 
-                  fontsize=11, fontproperties=_ZH_FONT, fontweight='bold', color='#E74C3C')
+                  fontsize=11, fontweight='bold', color='#E74C3C')
     ax1.set_ylabel('股价（元）', fontsize=10)
     ax1.grid(True, alpha=0.3)
     ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
@@ -782,13 +779,13 @@ def plot_target_stocks(stock_df, output_path):
                  xy=(stock_df['date'].iloc[-1], latest),
                  xytext=(stock_df['date'].iloc[-1] - timedelta(days=180), latest + 8),
                  arrowprops=dict(arrowstyle='->', color='darkred'),
-                 fontsize=9, fontproperties=_ZH_FONT, color='darkred', fontweight='bold')
+                 fontsize=9, color='darkred', fontweight='bold')
     
     # ---- 右上：温氏股份 ----
     ax2 = axes[0, 1]
     ax2.plot(stock_df['date'], stock_df['wenshi'], color='#3498DB', linewidth=2, label='温氏股份')
     ax2.set_title('温氏股份 (300498)\n第二大养殖企业，2025年净利52亿', 
-                  fontsize=11, fontproperties=_ZH_FONT, fontweight='bold', color='#3498DB')
+                  fontsize=11, fontweight='bold', color='#3498DB')
     ax2.set_ylabel('股价（元）', fontsize=10)
     ax2.grid(True, alpha=0.3)
     ax2.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
@@ -801,7 +798,7 @@ def plot_target_stocks(stock_df, output_path):
                  xy=(stock_df['date'].iloc[-1], latest_w),
                  xytext=(stock_df['date'].iloc[-1] - timedelta(days=180), latest_w + 3),
                  arrowprops=dict(arrowstyle='->', color='darkblue'),
-                 fontsize=9, fontproperties=_ZH_FONT, color='darkblue', fontweight='bold')
+                 fontsize=9, color='darkblue', fontweight='bold')
     
     # ---- 左下：ETF走势 ----
     ax3 = axes[1, 0]
@@ -810,7 +807,7 @@ def plot_target_stocks(stock_df, output_path):
     ax3.plot(stock_df['date'], stock_df['breed_etf'], 
              color='#E67E22', linewidth=2, label='养殖ETF (159865)', alpha=0.8)
     ax3.set_title('畜牧/养殖 ETF 走势\n分散投资，获取行业Beta', 
-                  fontsize=11, fontproperties=_ZH_FONT, fontweight='bold', color='#8E44AD')
+                  fontsize=11, fontweight='bold', color='#8E44AD')
     ax3.set_ylabel('价格（元）', fontsize=10)
     ax3.legend(fontsize=9)
     ax3.grid(True, alpha=0.3)
@@ -832,7 +829,7 @@ def plot_target_stocks(stock_df, output_path):
     
     ax4.axhline(y=100, color='black', linestyle=':', linewidth=1, alpha=0.5)
     ax4.set_title('相对表现对比（起始=100）\n生猪养殖 vs 沪深300', 
-                  fontsize=11, fontproperties=_ZH_FONT, fontweight='bold')
+                  fontsize=11, fontweight='bold')
     ax4.set_ylabel('相对点位', fontsize=10)
     ax4.legend(fontsize=9)
     ax4.grid(True, alpha=0.3)
@@ -842,7 +839,7 @@ def plot_target_stocks(stock_df, output_path):
     
     # ---- 总标题 ----
     fig.suptitle('🐷 生猪产业链投资标的走势（2022-2026）\nInvestment Targets: Hog Industry Chain Stocks & ETFs',
-                 fontsize=14, fontproperties=_ZH_FONT, fontweight='bold', y=1.02)
+                 fontsize=14, fontweight='bold', y=1.02)
     
     # ---- 数据表格 ----
     table_data = [
@@ -873,13 +870,13 @@ def plot_target_stocks(stock_df, output_path):
     table.auto_set_font_size(False)
     table.set_fontsize(9)
     table.scale(1, 1.5)
-    ax_table.set_title('投资标的一览（2026-04-06）', fontsize=11, fontproperties=_ZH_FONT, fontweight='bold', pad=20)
+    ax_table.set_title('投资标的一览（2026-04-06）', fontsize=11, fontweight='bold', pad=20)
     
     # 数据来源标注
     fig.text(0.99, 0.01, 
              '⚠️ 模拟数据 (Simulated Data) — 演示用途，非真实数据\n'
              '真实数据来源：Wind/AKShare股票行情接口、交易所公告',
-             fontsize=8, fontproperties=_ZH_FONT, ha='right', va='bottom', color='gray')
+             fontsize=8, ha='right', va='bottom', color='gray')
     
     plt.tight_layout(rect=[0, 0.05, 1, 0.97])
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
