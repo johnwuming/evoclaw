@@ -1,0 +1,168 @@
+{
+  "project": "pig-cycle-dashboard-v3",
+  "features": [
+    {
+      "id": "F001",
+      "name": "项目骨架与数据采集",
+      "description": "FastAPI 项目搭建、AKShare 数据采集脚本、SQLite 建表入库、cron 定时采集",
+      "phase": 1,
+      "passes": true,
+      "qa_status": "verified",
+      "steps": [
+        "FastAPI 服务启动无报错（uvicorn app:app）",
+        "运行采集脚本后 SQLite 中有日度猪价数据",
+        "GET /api/price?range=3y 返回 JSON 数据且包含 date/price 字段",
+        "cron 定时采集脚本可执行（手动运行成功即可）"
+      ]
+    },
+    {
+      "id": "F002",
+      "name": "主图：猪价 vs 能繁母猪双轴图",
+      "description": "ECharts 双轴图，上轴猪价+期货，下轴能繁母猪柱状，dataZoom 缩放，十字光标联动",
+      "phase": 1,
+      "passes": true,
+      "qa_status": "verified",
+      "steps": [
+        "页面加载后主图渲染正常，猪价折线可见",
+        "能繁母猪柱状图可见（如果数据存在）",
+        "dataZoom 滑块可拖拽缩放时间范围",
+        "鼠标悬停显示十字光标和 tooltip",
+        "时间范围快捷按钮（1Y/3Y/5Y/ALL）可用"
+      ]
+    },
+    {
+      "id": "F003",
+      "name": "核心指标卡片",
+      "description": "4张卡片显示猪价/能繁母猪/仔猪价格/养殖利润当前值+环比+同比变化",
+      "phase": 2,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "4张卡片均显示指标名称、当前值、更新时间",
+        "环比变化（MoM）和同比变化（YoY）数值可见",
+        "涨跌箭头/颜色正确（红涨绿跌）",
+        "点击卡片后主图切换为该指标详细视图"
+      ]
+    },
+    {
+      "id": "F004",
+      "name": "猪粮比与养殖利润图",
+      "description": "周度双线图，叠加盈亏平衡线（猪粮比5.5），利润负值红色填充正值绿色填充",
+      "phase": 2,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "猪粮比和养殖利润两条线可见",
+        "盈亏平衡线（猪粮比5.5）标注可见",
+        "利润为负时区域填充为浅红色"
+      ]
+    },
+    {
+      "id": "F005",
+      "name": "成本结构图",
+      "description": "玉米/豆粕/饲料价格三线叠加周度对比图",
+      "phase": 2,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "玉米、豆粕、饲料三条线均可见",
+        "图例可切换显示/隐藏",
+        "时间范围与主图联动"
+      ]
+    },
+    {
+      "id": "F006",
+      "name": "深色主题与响应式布局",
+      "description": "深色背景（#1a1a2e）、卡片背景（#16213e）、红涨绿跌配色、等宽数字字体、桌面端适配",
+      "phase": 2,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "整体为深色主题，背景色 #1a1a2e 或近似",
+        "卡片背景色 #16213e 或近似",
+        "数字使用等宽字体（检查 font-family 含等宽）",
+        "页面在 1920px 宽度下布局正常无溢出"
+      ]
+    },
+    {
+      "id": "F007",
+      "name": "周期位置指示器",
+      "description": "Header 区域五阶段进度条（繁荣→高峰→衰退→谷底→复苏），基于规则引擎评分",
+      "phase": 3,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "进度条可见，标注五个阶段名称",
+        "当前位置指示器可见（非默认左端或右端）",
+        "评分基于能繁母猪同比、猪粮比、仔猪价格趋势计算",
+        "GET /api/overview 返回 cycle_position 字段"
+      ]
+    },
+    {
+      "id": "F008",
+      "name": "周期对比图",
+      "description": "当前周期猪价与历史3轮周期重叠展示，X轴为距谷底月数",
+      "phase": 3,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "图表可见，展示多条周期曲线",
+        "X轴为距周期谷底的月数（非绝对日期）",
+        "GET /api/cycle-compare 返回历史周期数据"
+      ]
+    },
+    {
+      "id": "F009",
+      "name": "季节性热力图",
+      "description": "X轴1-12月，Y轴年份，颜色表示当月猪价环比涨跌幅，底部汇总每月平均涨跌概率",
+      "phase": 3,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "热力图可见，行列标注正确（月份+年份）",
+        "颜色反映涨跌方向（红涨绿跌）",
+        "底部有每月平均涨跌概率汇总",
+        "GET /api/seasonality 返回月度涨跌矩阵"
+      ]
+    },
+    {
+      "id": "F010",
+      "name": "数据明细表",
+      "description": "可折叠表格显示最近30日数据，支持CSV导出",
+      "phase": 3,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "表格区域默认收起，点击可展开",
+        "展开后显示日期、猪价、玉米、豆粕、猪粮比、养殖利润列",
+        "导出CSV按钮点击后下载CSV文件"
+      ]
+    },
+    {
+      "id": "F011",
+      "name": "视觉打磨与错误处理",
+      "description": "视觉细节优化、数据源失败时的优雅降级、数据更新时间标注、移动端基础适配",
+      "phase": 4,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "页面各元素间距、对齐合理",
+        "数据更新时间可见（如'数据更新于 2026-04-07 18:00'）",
+        "数据源异常时页面显示降级提示而非白屏"
+      ]
+    },
+    {
+      "id": "F012",
+      "name": "Nginx反代与systemd部署",
+      "description": "Nginx配置文件、systemd service文件、部署可用",
+      "phase": 4,
+      "passes": false,
+      "qa_status": "",
+      "steps": [
+        "systemd service 文件存在且语法正确",
+        "Nginx 配置文件存在且语法正确（nginx -t 通过）",
+        "init.sh 冒烟测试通过（FastAPI 服务启动、API 返回数据）"
+      ]
+    }
+  ]
+}
