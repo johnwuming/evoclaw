@@ -65,57 +65,63 @@ cleanup_deleted() {
 }
 
 # === 自动更新 shared/results/README.md ===
+# 只在 shared/results/ 下有 R-*.md 或 M-*.md 变更时才更新
 
 update_results_readme() {
     local readme="$RESULTS_DIR/README.md"
     local today=$(date +%Y-%m-%d)
+    local -a new_entries=()
 
-    # 检测 staged 中 research/ 下的 R-*.md 和 M-*.md 变更（排除 README.md）
-    local entries=""
-    while IFS=$'\t' read -r status filepath; do
-        [[ "$filepath" == research/README.md ]] && continue
+    # 读取 staged 变更，git 对含特殊字符的路径会加引号，需要去掉首尾引号
+    while IFS= read -r line; do
+        # line 格式: 状态\t路径  （git 可能在路径两端加引号）
+        local status="${line%%$'\t'*}"
+        local filepath="${line#"$status"$'\t'}"
+        filepath="${filepath#\"}"       # 去掉首引号
+        filepath="${filepath%\"}"       # 去掉尾引号
+
+        [[ "$filepath" == "research/README.md" ]] && continue
         [[ "$filepath" != research/* ]] && continue
-        local basename=$(basename "$filepath")
-        [[ "$basename" != R-*.md && "$basename" != M-*.md ]] && continue
+        local fname=$(basename "$filepath")
+        [[ "$fname" != R-*.md && "$fname" != M-*.md ]] && continue
+        [[ "$status" == "D" ]] && continue  # 不记录删除
 
-        # 只处理新增(A)和修改(M)，不记录删除(D)
-        [[ "$status" == "D" ]] && continue
-
-        # rel_path: 去掉 "research/" 前缀，保留子目录结构（如 05-量化投资/R-037-xxx.md）
         local rel_path="${filepath#research/}"
-        # 提取编号和标题
-        local code=$(echo "$basename" | grep -oE '^(R|M)-[0-9]+')
-        local title=$(echo "$basename" | sed -E "s/^${code}-//" | sed 's/\.md$//')
-
+        local code=$(echo "$fname" | grep -oE '^(R|M)-[0-9]+')
+        local title=$(echo "$fname" | sed -E "s/^${code}-//; s/\.md$//")
         local action="修改"
         [[ "$status" == "A" ]] && action="新增"
 
-        entries="${entries}| ${today} | ${action} | ${code} | ${title} | ${rel_path} |"$'\n'
+        new_entries+=("| ${today} | ${action} | ${code} | ${title} | ${rel_path} |")
     done < <(cd "$REPO_DIR" && git diff --cached --name-status 2>/dev/null)
 
-    # 如果没有 R-/M- 文件变更，跳过
-    [ -z "$entries" ] && return
+    # 没有 R-/M- 文件变更则跳过
+    [[ ${#new_entries[@]} -eq 0 ]] && return
 
-    # 创建或更新 README.md
-    if [ -f "$readme" ]; then
-        # 检查是否是旧格式（4列，无操作列），如果是则迁移到5列
-        if grep -q '| 日期 | 编号 |' "$readme" && ! grep -q '| 日期 | 操作 | 编号 |' "$readme"; then
-            # 迁移旧4列格式到新5列格式：给每行数据加"修改"操作列
-            sed -i '/^| [0-9]/s/^| \([^|]*\) | /| \1 | 修改 | /' "$readme"
-            # 更新表头
-            sed -i 's/^| 日期 | 编号 |/| 日期 | 操作 | 编号 |/' "$readme"
-            sed -i 's/^|------|------|$/|------|------|------|/' "$readme"
-        fi
+    # ---- 迁移旧格式（4列）到新格式（5列含操作列） ----
+    if [[ -f "$readme" ]] && grep -q '| 日期 | 编号 |' "$readme" && ! grep -q '| 日期 | 操作 | 编号 |' "$readme"; then
+        sed -i '/^| [0-9]/s/^| \([^|]*\) | /| \1 | 修改 | /' "$readme"
+        sed -i 's/^| 日期 | 编号 |/| 日期 | 操作 | 编号 |/' "$readme"
+        sed -i 's/^|------|------|$/|------|------|------|/' "$readme"
+    fi
 
-        local new_rows=$(echo -n "$entries" | sed '/^$/d')
-        # 用 awk 在表头分隔行之后、第一个数据行之前插入
-        awk -v rows="$new_rows" '
-            NR==1 { print; next }
-            /^|[-| ]+$/ { print; printf "%s", rows; next }
-            { print }
-        ' "$readme" > "${readme}.tmp" && mv "${readme}.tmp" "$readme"
+    # ---- 插入新行 ----
+    if [[ -f "$readme" ]]; then
+        local inserted=0
+        local tmpfile="${readme}.tmp.$$"
+        {
+            while IFS= read -r rl; do
+                echo "$rl"
+                # 检测到分隔行 |------|...| 后，插入所有新记录
+                if [[ $inserted -eq 0 && "$rl" =~ ^\|[-|[:space:]]+\|$ ]]; then
+                    for entry in "${new_entries[@]}"; do
+                        echo "$entry"
+                    done
+                    inserted=1
+                fi
+            done < "$readme"
+        } > "$tmpfile" && mv "$tmpfile" "$readme"
     else
-        # 创建新文件
         mkdir -p "$(dirname "$readme")"
         {
             echo "# 研究交付物"
@@ -124,11 +130,13 @@ update_results_readme() {
             echo ""
             echo "| 日期 | 操作 | 编号 | 标题 | 路径 |"
             echo "|------|------|------|------|------|"
-            echo -n "$entries" | sed '/^$/d'
+            for entry in "${new_entries[@]}"; do
+                echo "$entry"
+            done
         } > "$readme"
     fi
 
-    log "Updated $readme with new entries"
+    log "Updated $readme with ${#new_entries[@]} entries"
 }
 
 # === 同步文件 ===
@@ -169,10 +177,10 @@ cd "$REPO_DIR"
 if [ -n "$(git status --porcelain)" ]; then
     git add -A
 
-    # 在 commit 前更新 README.md
+    # 在 commit 前更新 README.md（读取当前已 staged 的变更）
     update_results_readme
 
-    # 如果 README.md 有更新，也 stage 它
+    # README.md 更新后也 stage 进去
     if [ -f "$RESULTS_DIR/README.md" ]; then
         git add "research/README.md" 2>/dev/null
     fi
