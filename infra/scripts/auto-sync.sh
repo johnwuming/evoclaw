@@ -97,7 +97,8 @@ update_results_readme() {
         local action="修改"
         [[ "$status" == "A" ]] && action="新增"
 
-        printf '| %s | %s | %s | %s | %s |\n' "$today" "$action" "$code" "$title" "$rel_path" >> "$entries_file"
+        local project=$(echo "$rel_path" | grep -q '/' && echo "$rel_path" | cut -d'/' -f1 || echo "根目录")
+        printf '| %s | %s | %s | %s | %s | %s |\n' "$today" "$action" "$code" "$title" "$project" "$rel_path" >> "$entries_file"
     done < <(cd "$REPO_DIR" && git diff --cached --name-status 2>/dev/null)
 
     if [[ ! -s "$entries_file" ]]; then
@@ -108,11 +109,11 @@ update_results_readme() {
     local entry_count
     entry_count=$(wc -l < "$entries_file")
 
-    # 迁移旧4列格式到新5列格式
+    # 迁移旧4列格式到新6列格式
     if [[ -f "$readme" ]] && grep -q '| 日期 | 编号 |' "$readme" && ! grep -q '| 日期 | 操作 | 编号 |' "$readme"; then
-        sed -i '/^| [0-9]/s/^| \([^|]*\) | /| \1 | 修改 | /' "$readme"
-        sed -i 's/^| 日期 | 编号 |/| 日期 | 操作 | 编号 |/' "$readme"
-        sed -i 's/^|------|------|$/|------|------|------|/' "$readme"
+        sed -i '/^| [0-9]/s/^| \([^|]*\) | \([^|]*\) | \([^|]*\) |$/| \1 | 修改 | \2 | from旧格式 | \3 |/' "$readme"
+        sed -i 's/^| 日期 | 编号 |$/| 日期 | 操作 | 编号 | 标题 | 项目 |/' "$readme"
+        sed -i 's/^|------|------|$/|------|------|------|------|------|------|/' "$readme"
     fi
 
     if [[ -f "$readme" ]]; then
@@ -132,8 +133,8 @@ update_results_readme() {
         {
             printf '%s\n\n' "# 研究交付物"
             printf '%s\n\n' "## 变更记录"
-            printf '%s\n' "| 日期 | 操作 | 编号 | 标题 | 路径 |"
-            printf '%s\n' "|------|------|------|------|------|"
+            printf '%s\n' "| 日期 | 操作 | 编号 | 标题 | 项目 | 路径 |"
+            printf '%s\n' "|------|------|------|------|------|------|"
             cat "$entries_file"
         } > "$readme"
     fi
