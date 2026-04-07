@@ -70,26 +70,27 @@ update_results_readme() {
     local readme="$RESULTS_DIR/README.md"
     local today=$(date +%Y-%m-%d)
 
-    # 检测 staged 中 shared/results/ 下的 R-*.md 和 M-*.md 变更（排除 README.md 本身）
+    # 检测 staged 中 research/ 下的 R-*.md 和 M-*.md 变更（排除 README.md）
     local entries=""
     while IFS=$'\t' read -r status filepath; do
-        [[ "$filepath" == "$readme" ]] && continue
-        [[ "$filepath" != shared/results/* ]] && continue
+        [[ "$filepath" == research/README.md ]] && continue
+        [[ "$filepath" != research/* ]] && continue
         local basename=$(basename "$filepath")
         [[ "$basename" != R-*.md && "$basename" != M-*.md ]] && continue
 
         # 只处理新增(A)和修改(M)，不记录删除(D)
         [[ "$status" == "D" ]] && continue
 
-        local rel_path="${filepath#shared/results/}"
+        # rel_path: 去掉 "research/" 前缀，保留子目录结构（如 05-量化投资/R-037-xxx.md）
+        local rel_path="${filepath#research/}"
         # 提取编号和标题
-        local code=$(echo "$basename" | sed -E 's/^(R|M)-[0-9]+.*//; s/\.md$//' | grep -oE '^(R|M)-[0-9]+')
+        local code=$(echo "$basename" | grep -oE '^(R|M)-[0-9]+')
         local title=$(echo "$basename" | sed -E "s/^${code}-//" | sed 's/\.md$//')
 
         local action="修改"
         [[ "$status" == "A" ]] && action="新增"
 
-        entries="${entries}| ${today} | ${action} | ${code} | ${title} | ${rel_path } |"$'\n'
+        entries="${entries}| ${today} | ${action} | ${code} | ${title} | ${rel_path} |"$'\n'
     done < <(cd "$REPO_DIR" && git diff --cached --name-status 2>/dev/null)
 
     # 如果没有 R-/M- 文件变更，跳过
@@ -97,21 +98,22 @@ update_results_readme() {
 
     # 创建或更新 README.md
     if [ -f "$readme" ]; then
-        # 在表格头部（表头行之后）插入新记录
-        local new_rows=$(echo -n "$entries" | sed '/^$/d')
-        # 找到表头行（| 日期 | ...）并在其后插入
-        if grep -q '| 日期 |' "$readme"; then
-            # 用 awk 在第一个数据行前插入
-            awk -v rows="$new_rows" '
-                NR==1 { header=$0; print }
-                NR==2 && /^|[-| ]+$/ { sep=$0; print; printf "%s", rows; next }
-                { print }
-            ' "$readme" > "${readme}.tmp" && mv "${readme}.tmp" "$readme"
-        else
-            # 找不到表头，追加
-            echo "" >> "$readme"
-            echo -n "$entries" | sed '/^$/d' >> "$readme"
+        # 检查是否是旧格式（4列，无操作列），如果是则迁移到5列
+        if grep -q '| 日期 | 编号 |' "$readme" && ! grep -q '| 日期 | 操作 | 编号 |' "$readme"; then
+            # 迁移旧4列格式到新5列格式：给每行数据加"修改"操作列
+            sed -i '/^| [0-9]/s/^| \([^|]*\) | /| \1 | 修改 | /' "$readme"
+            # 更新表头
+            sed -i 's/^| 日期 | 编号 |/| 日期 | 操作 | 编号 |/' "$readme"
+            sed -i 's/^|------|------|$/|------|------|------|/' "$readme"
         fi
+
+        local new_rows=$(echo -n "$entries" | sed '/^$/d')
+        # 用 awk 在表头分隔行之后、第一个数据行之前插入
+        awk -v rows="$new_rows" '
+            NR==1 { print; next }
+            /^|[-| ]+$/ { print; printf "%s", rows; next }
+            { print }
+        ' "$readme" > "${readme}.tmp" && mv "${readme}.tmp" "$readme"
     else
         # 创建新文件
         mkdir -p "$(dirname "$readme")"
