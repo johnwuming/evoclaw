@@ -134,7 +134,7 @@
       "qa_status": "verified",
       "steps": [
         "表格区域默认收起，点击可展开",
-        "展开后显示日期、猪价、玉米、豆粕、猪粮比、养殖利润列",
+        "展开后显示日期、猪价、玉米、豆粕、猪粮比、利润列",
         "导出CSV按钮点击后下载CSV文件"
       ]
     },
@@ -162,6 +162,36 @@
         "systemd service 文件存在且语法正确",
         "Nginx 配置文件存在且语法正确（nginx -t 通过）",
         "init.sh 冒烟测试通过（FastAPI 服务启动、API 返回数据）"
+      ]
+    },
+    {
+      "id": "F013",
+      "name": "指标领先滞后传导图",
+      "description": "完整的猪周期传导链条可视化：能繁母猪→仔猪供应→生猪出栏→猪价→利润，标注各环节传导周期，ECharts graph 展示",
+      "phase": 5,
+      "passes": true,
+      "qa_status": "verified",
+      "steps": [
+        "GET /api/transmission 返回 JSON 包含 chain 和 indicators 字段",
+        "传导图可见，展示 5 个节点和连线箭头",
+        "连线标注传导周期（如'领先 4 月'）",
+        "下方显示各指标当前趋势卡片"
+      ]
+    },
+    {
+      "id": "F014",
+      "name": "投资标的日维度跟踪",
+      "description": "跟踪 A 股生猪产业链股票（牧原、温氏、新希望等），展示日K蜡烛图+涨跌幅，模拟数据标注清楚",
+      "phase": 5,
+      "passes": true,
+      "qa_status": "verified",
+      "steps": [
+        "GET /api/stocks 返回 JSON 包含 stocks 数组和 is_mock=true",
+        "Tab 导航可切换到'投资标的跟踪'面板",
+        "股票卡片显示名称、代码、最新价、涨跌幅",
+        "点击股票卡片切换下方K线图",
+        "K线图使用蜡烛图展示（红涨绿跌）",
+        "页面有模拟数据免责声明"
       ]
     }
   ]

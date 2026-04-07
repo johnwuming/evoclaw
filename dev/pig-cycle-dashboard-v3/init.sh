@@ -39,6 +39,8 @@ ENDPOINTS=(
     "/api/details?limit=5"
     "/api/profit?range=1y"
     "/api/cost?range=1y"
+    "/api/transmission"
+    "/api/stocks?days=30"
 )
 FAIL=0
 for endpoint in "${ENDPOINTS[@]}"; do
