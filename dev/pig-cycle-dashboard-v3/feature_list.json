@@ -35,8 +35,8 @@
       "name": "核心指标卡片",
       "description": "4张卡片显示猪价/能繁母猪/仔猪价格/养殖利润当前值+环比+同比变化",
       "phase": 2,
-      "passes": false,
-      "qa_status": "",
+      "passes": true,
+      "qa_status": "verified",
       "steps": [
         "4张卡片均显示指标名称、当前值、更新时间",
         "环比变化（MoM）和同比变化（YoY）数值可见",
@@ -49,8 +49,8 @@
       "name": "猪粮比与养殖利润图",
       "description": "周度双线图，叠加盈亏平衡线（猪粮比5.5），利润负值红色填充正值绿色填充",
       "phase": 2,
-      "passes": false,
-      "qa_status": "",
+      "passes": true,
+      "qa_status": "verified",
       "steps": [
         "猪粮比和养殖利润两条线可见",
         "盈亏平衡线（猪粮比5.5）标注可见",
@@ -62,8 +62,8 @@
       "name": "成本结构图",
       "description": "玉米/豆粕/饲料价格三线叠加周度对比图",
       "phase": 2,
-      "passes": false,
-      "qa_status": "",
+      "passes": true,
+      "qa_status": "verified",
       "steps": [
         "玉米、豆粕、饲料三条线均可见",
         "图例可切换显示/隐藏",
@@ -75,8 +75,8 @@
       "name": "深色主题与响应式布局",
       "description": "深色背景（#1a1a2e）、卡片背景（#16213e）、红涨绿跌配色、等宽数字字体、桌面端适配",
       "phase": 2,
-      "passes": false,
-      "qa_status": "",
+      "passes": true,
+      "qa_status": "verified",
       "steps": [
         "整体为深色主题，背景色 #1a1a2e 或近似",
         "卡片背景色 #16213e 或近似",
@@ -90,7 +90,7 @@
       "description": "Header 区域五阶段进度条（繁荣→高峰→衰退→谷底→复苏），基于规则引擎评分",
       "phase": 3,
       "passes": false,
-      "qa_status": "",
+      "qa_status": "needs-fix",
       "steps": [
         "进度条可见，标注五个阶段名称",
         "当前位置指示器可见（非默认左端或右端）",
@@ -104,7 +104,7 @@
       "description": "当前周期猪价与历史3轮周期重叠展示，X轴为距谷底月数",
       "phase": 3,
       "passes": false,
-      "qa_status": "",
+      "qa_status": "needs-fix",
       "steps": [
         "图表可见，展示多条周期曲线",
         "X轴为距周期谷底的月数（非绝对日期）",
@@ -117,7 +117,7 @@
       "description": "X轴1-12月，Y轴年份，颜色表示当月猪价环比涨跌幅，底部汇总每月平均涨跌概率",
       "phase": 3,
       "passes": false,
-      "qa_status": "",
+      "qa_status": "needs-fix",
       "steps": [
         "热力图可见，行列标注正确（月份+年份）",
         "颜色反映涨跌方向（红涨绿跌）",
@@ -131,7 +131,7 @@
       "description": "可折叠表格显示最近30日数据，支持CSV导出",
       "phase": 3,
       "passes": false,
-      "qa_status": "",
+      "qa_status": "needs-fix",
       "steps": [
         "表格区域默认收起，点击可展开",
         "展开后显示日期、猪价、玉米、豆粕、猪粮比、养殖利润列",
