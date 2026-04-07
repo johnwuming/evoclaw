@@ -102,8 +102,10 @@ cd "$REPO_DIR"
 if [ -n "$(git status --porcelain)" ]; then
     git add -A
     local_time=$(date +%Y-%m-%d\ %H:%M)
-    git commit -m "auto: $local_time" --quiet
-    log "Committed: auto: $local_time"
+    # 生成变更文件摘要
+    changed=$(git diff --cached --name-only | sed 's|^research/||' | tr '\n' ', ' | sed 's/,$//')
+    git commit -m "auto: $local_time | $changed" --quiet
+    log "Committed: auto: $local_time | $changed"
 
     push_success=false
     for attempt in $(seq 1 $MAX_RETRIES); do
