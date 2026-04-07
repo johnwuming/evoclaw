@@ -1,0 +1,59 @@
+{
+  "research_topic": "本轮猪周期能繁母猪去化拐点预测",
+  "collected_at": "2026-04-07",
+  "findings": {
+    "breeding_sow_inventory": {
+      "unit": "万头",
+      "data_points": [
+        {"date": "2021-06", "value": 4564, "note": "本轮周期峰值"},
+        {"date": "2021-12", "value": 4329},
+        {"date": "2022-04", "value": 4177, "note": "上轮去化低点"},
+        {"date": "2022-12", "value": 4390},
+        {"date": "2023-02", "value": 4343},
+        {"date": "2024-02", "value": 4042},
+        {"date": "2024-03", "value": 3992},
+        {"date": "2024-04", "value": 3986, "note": "上轮去化低点"},
+        {"date": "2024-11", "value": 4080},
+        {"date": "2024-12", "value": 4078},
+        {"date": "2025-06", "value": 4043},
+        {"date": "2025-08", "value": 4038, "note": "本轮去化起始"},
+        {"date": "2025-10", "value": 3990},
+        {"date": "2025-12", "value": 3961, "note": "最新数据"}
+      ],
+      "policy_benchmarks": {
+        "normal": 4100,
+        "green_zone": "3900-4100",
+        "yellow_zone": "3700-3900",
+        "red_zone": "below 3700"
+      }
+    },
+    "cross_validation": {
+      "piglet_price": {"2025-03": "37.24元/kg", "2025-12": "23.39元/kg", "trend": "连续下跌37%, 补栏意愿极低"},
+      "pig_grain_ratio": {"2025-03": 6.54, "2025-06": 6.16, "2025-09": 5.84, "2025-11": 5.37, "trend": "全年下行, 连续15周破6"},
+      "breeding_profit": "2025H2全面亏损, 头均亏损扩大, 远期期货跌破多数企业成本线",
+      "broker_views": "天风: 去化预期转强但拐点需等待; 行业共识: 2026H1出栏高峰, 拐点或在2026H2"
+    },
+    "historical_cycles": [
+      {"period": "2014-2015", "peak": "~5000", "trough": "~3970", "duration_months": 19, "total_decline_pct": 20.6},
+      {"period": "2018-2019(AFS)", "peak": "~3074", "trough": "~1913", "duration_months": 13, "total_decline_pct": 38, "note": "非正常周期"},
+      {"period": "2021-2022", "peak": 4564, "trough": 4177, "duration_months": 10, "total_decline_pct": 8.5},
+      {"period": "2023-2024", "peak": "~4367", "trough": 3986, "duration_months": 15, "total_decline_pct": 8.6}
+    ]
+  },
+  "data_gaps": [
+    "2021年1-11月逐月数据缺失",
+    "2022年大部分月份缺失",
+    "2023年大部分月份缺失",
+    "2024年5-10月数据缺失",
+    "2025年1-5月、7月、9月、11月数据缺失",
+    "农业农村部自2025年11月起不再按月公布"
+  ],
+  "sources": [
+    "农业农村部/国家统计局",
+    "大畜牧网 dxumu.com",
+    "发改委价格监测中心",
+    "东方财富研报",
+    "联合资信",
+    "天风证券"
+  ]
+}
