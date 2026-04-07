@@ -14,6 +14,7 @@ EXCLUDE_PATTERN="AGENTS.md SOUL.md IDENTITY.md USER.md TOOLS.md HEARTBEAT.md BOO
 
 MAX_RETRIES=3
 RETRY_DELAY=10
+TAB=$'\t'
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
@@ -65,58 +66,63 @@ cleanup_deleted() {
 }
 
 # === 自动更新 shared/results/README.md ===
-# 只在 shared/results/ 下有 R-*.md 或 M-*.md 变更时才更新
 
 update_results_readme() {
     local readme="$RESULTS_DIR/README.md"
-    local today=$(date +%Y-%m-%d)
-    local -a new_entries=()
+    local today
+    today=$(date +%Y-%m-%d)
+    local entries_file
+    entries_file=$(mktemp)
 
-    # 读取 staged 变更，git 对含特殊字符的路径会加引号，需要去掉首尾引号
     while IFS= read -r line; do
-        # line 格式: 状态\t路径  （git 可能在路径两端加引号）
-        local status="${line%%$'\t'*}"
-        local filepath="${line#"$status"$'\t'}"
-        filepath="${filepath#\"}"       # 去掉首引号
-        filepath="${filepath%\"}"       # 去掉尾引号
+        [[ -z "$line" ]] && continue
+        local status="${line%%"$TAB"*}"
+        local filepath="${line#*"$TAB"}"
+        filepath="${filepath#\"}"
+        filepath="${filepath%\"}"
 
         [[ "$filepath" == "research/README.md" ]] && continue
         [[ "$filepath" != research/* ]] && continue
-        local fname=$(basename "$filepath")
+        local fname
+        fname=$(basename "$filepath")
         [[ "$fname" != R-*.md && "$fname" != M-*.md ]] && continue
-        [[ "$status" == "D" ]] && continue  # 不记录删除
+        [[ "$status" == "D" ]] && continue
 
         local rel_path="${filepath#research/}"
-        local code=$(echo "$fname" | grep -oE '^(R|M)-[0-9]+')
-        local title=$(echo "$fname" | sed -E "s/^${code}-//; s/\.md$//")
+        local code
+        code=$(printf '%s' "$fname" | grep -oE '^(R|M)-[0-9]+')
+        local title
+        title=$(printf '%s' "$fname" | sed "s/^${code}-//" | sed 's/\.md$//')
+
         local action="修改"
         [[ "$status" == "A" ]] && action="新增"
 
-        new_entries+=("| ${today} | ${action} | ${code} | ${title} | ${rel_path} |")
+        printf '| %s | %s | %s | %s | %s |\n' "$today" "$action" "$code" "$title" "$rel_path" >> "$entries_file"
     done < <(cd "$REPO_DIR" && git diff --cached --name-status 2>/dev/null)
 
-    # 没有 R-/M- 文件变更则跳过
-    [[ ${#new_entries[@]} -eq 0 ]] && return
+    if [[ ! -s "$entries_file" ]]; then
+        rm -f "$entries_file"
+        return
+    fi
 
-    # ---- 迁移旧格式（4列）到新格式（5列含操作列） ----
+    local entry_count
+    entry_count=$(wc -l < "$entries_file")
+
+    # 迁移旧4列格式到新5列格式
     if [[ -f "$readme" ]] && grep -q '| 日期 | 编号 |' "$readme" && ! grep -q '| 日期 | 操作 | 编号 |' "$readme"; then
         sed -i '/^| [0-9]/s/^| \([^|]*\) | /| \1 | 修改 | /' "$readme"
         sed -i 's/^| 日期 | 编号 |/| 日期 | 操作 | 编号 |/' "$readme"
         sed -i 's/^|------|------|$/|------|------|------|/' "$readme"
     fi
 
-    # ---- 插入新行 ----
     if [[ -f "$readme" ]]; then
         local inserted=0
         local tmpfile="${readme}.tmp.$$"
         {
             while IFS= read -r rl; do
-                echo "$rl"
-                # 检测到分隔行 |------|...| 后，插入所有新记录
+                printf '%s\n' "$rl"
                 if [[ $inserted -eq 0 && "$rl" =~ ^\|[-|[:space:]]+\|$ ]]; then
-                    for entry in "${new_entries[@]}"; do
-                        echo "$entry"
-                    done
+                    cat "$entries_file"
                     inserted=1
                 fi
             done < "$readme"
@@ -124,33 +130,27 @@ update_results_readme() {
     else
         mkdir -p "$(dirname "$readme")"
         {
-            echo "# 研究交付物"
-            echo ""
-            echo "## 变更记录"
-            echo ""
-            echo "| 日期 | 操作 | 编号 | 标题 | 路径 |"
-            echo "|------|------|------|------|------|"
-            for entry in "${new_entries[@]}"; do
-                echo "$entry"
-            done
+            printf '%s\n\n' "# 研究交付物"
+            printf '%s\n\n' "## 变更记录"
+            printf '%s\n' "| 日期 | 操作 | 编号 | 标题 | 路径 |"
+            printf '%s\n' "|------|------|------|------|------|"
+            cat "$entries_file"
         } > "$readme"
     fi
 
-    log "Updated $readme with ${#new_entries[@]} entries"
+    rm -f "$entries_file"
+    log "Updated $readme with $entry_count entries"
 }
 
 # === 同步文件 ===
 
 if [ "$1" = "--all" ]; then
-    # shared/results/ 整体镜像到 evoclaw/research/（保留目录结构）
     if [ -d "$RESULTS_DIR" ]; then
         rsync -a --delete --exclude="$EXCLUDE_PATTERN" "$RESULTS_DIR/" "$REPO_DIR/research/" 2>/dev/null
     fi
-    # dev 项目同步
     for f in $(find "$DEV_PROJECTS_DIR" -type f 2>/dev/null); do
         sync_file "$f"
     done
-    # 研究过程文件同步
     for f in $(find "$RESEARCH_INTERNAL_DIR" -type f 2>/dev/null); do
         sync_file "$f"
     done
@@ -161,7 +161,6 @@ fi
 if [ -n "$1" ] && [ "$1" != "--all" ]; then
     local_path="$1"
     if [ -e "$local_path" ]; then
-        # 如果是 shared/results/ 下的文件，用 rsync 增量同步
         if [[ "$local_path" == "$RESULTS_DIR"/* ]]; then
             rsync -a --exclude="$EXCLUDE_PATTERN" "$RESULTS_DIR/" "$REPO_DIR/research/" 2>/dev/null
         else
@@ -177,7 +176,7 @@ cd "$REPO_DIR"
 if [ -n "$(git status --porcelain)" ]; then
     git add -A
 
-    # 在 commit 前更新 README.md（读取当前已 staged 的变更）
+    # 在 commit 前更新 README.md
     update_results_readme
 
     # README.md 更新后也 stage 进去
@@ -186,7 +185,6 @@ if [ -n "$(git status --porcelain)" ]; then
     fi
 
     local_time=$(date +%Y-%m-%d\ %H:%M)
-    # 生成变更文件摘要
     changed=$(git diff --cached --name-only | sed 's|^research/||' | tr '\n' ', ' | sed 's/,$//')
     git commit -m "auto: $local_time | $changed" --quiet
     log "Committed: auto: $local_time | $changed"
@@ -204,7 +202,6 @@ if [ -n "$(git status --porcelain)" ]; then
 
         log "Push failed (attempt $attempt/$MAX_RETRIES): $push_output"
 
-        # 处理 non-fast-forward：先 pull --rebase 再重试
         if echo "$push_output" | grep -q "non-fast-forward\|fetch first"; then
             log "Non-fast-forward detected, pulling..."
             pull_output=$(git pull --rebase --quiet 2>&1)
@@ -216,7 +213,6 @@ if [ -n "$(git status --porcelain)" ]; then
             fi
         fi
 
-        # 处理网络错误：等待后重试
         if echo "$push_output" | grep -qi "TLS\|timeout\|connect\|refused\|network"; then
             log "Network error detected, waiting ${RETRY_DELAY}s before retry..."
             sleep $RETRY_DELAY
