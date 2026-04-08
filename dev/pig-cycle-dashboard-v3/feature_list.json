@@ -193,6 +193,19 @@
         "K线图使用蜡烛图展示（红涨绿跌）",
         "页面有模拟数据免责声明"
       ]
+    },
+    {
+      "id": "F015",
+      "name": "浏览器标签页图标（Favicon）",
+      "description": "生成32x32 favicon.ico，放在static/目录，在index.html的head中添加link标签引用",
+      "phase": 6,
+      "passes": true,
+      "qa_status": "verified",
+      "steps": [
+        "static/favicon.ico 文件存在且为有效的ICO格式",
+        "index.html head中包含 <link rel=\"icon\" href=\"/static/favicon.ico\">",
+        "浏览器标签页显示favicon图标"
+      ]
     }
   ]
 }
