@@ -1,14 +1,15 @@
 {
-  "topic": "2026年全球AI Agent框架最新发展趋势（重点开源框架）",
-  "complexity": "中等",
-  "complexity_reason": "需要覆盖多个开源框架的最新动态、版本更新、生态变化等多维度，但不需要深度建模或投资决策级验证",
+  "topic": "AI发展对芯片（半导体）和内存（存储）行业的影响分析及投资标的和择时建议",
+  "complexity": "深度",
+  "complexity_reason": "涉及投资决策建议（强制双Reviewer），需覆盖芯片/内存两大行业、全球主要玩家竞争格局、A股美股投资标的筛选、半导体周期择时等多个独立维度，每个维度都需要深度数据支撑",
   "sub_questions": [
-    "2026年主流开源AI Agent框架（LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Dify等）的最新版本和重大更新",
-    "2026年AI Agent框架的技术趋势：多模态、工具调用、记忆机制、编排模式等方向",
-    "2026年AI Agent框架的市场格局：新兴框架、融资并购、企业采用情况"
+    "AI算力需求对GPU/ASIC/SoC等芯片细分赛道的影响，NVIDIA、AMD、Intel、台积电、中芯国际等关键玩家的市场格局变化和财务表现",
+    "AI对HBM、DDR5、NAND/DRAM的需求拉动，三星、SK海力士、美光的竞争态势和技术路线",
+    "A股和美股中受益于AI芯片/内存需求的标的（含ETF），按直接受益/间接受益/边缘受益分类",
+    "2025-2026年半导体周期和内存周期位置、估值水平、HBM技术路线切换节点，给出择时建议"
   ],
-  "searcher_count": 3,
-  "review_rounds": 1,
-  "report_id": "R-042",
-  "category": "02-AI技术调研"
+  "searcher_count": 4,
+  "review_rounds": 2,
+  "report_id": "R-043",
+  "category": "05-量化投资"
 }
