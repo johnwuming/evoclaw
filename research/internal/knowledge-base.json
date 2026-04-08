@@ -1,59 +1,31 @@
 {
-  "research_topic": "本轮猪周期能繁母猪去化拐点预测",
-  "collected_at": "2026-04-07",
-  "findings": {
-    "breeding_sow_inventory": {
-      "unit": "万头",
-      "data_points": [
-        {"date": "2021-06", "value": 4564, "note": "本轮周期峰值"},
-        {"date": "2021-12", "value": 4329},
-        {"date": "2022-04", "value": 4177, "note": "上轮去化低点"},
-        {"date": "2022-12", "value": 4390},
-        {"date": "2023-02", "value": 4343},
-        {"date": "2024-02", "value": 4042},
-        {"date": "2024-03", "value": 3992},
-        {"date": "2024-04", "value": 3986, "note": "上轮去化低点"},
-        {"date": "2024-11", "value": 4080},
-        {"date": "2024-12", "value": 4078},
-        {"date": "2025-06", "value": 4043},
-        {"date": "2025-08", "value": 4038, "note": "本轮去化起始"},
-        {"date": "2025-10", "value": 3990},
-        {"date": "2025-12", "value": 3961, "note": "最新数据"}
-      ],
-      "policy_benchmarks": {
-        "normal": 4100,
-        "green_zone": "3900-4100",
-        "yellow_zone": "3700-3900",
-        "red_zone": "below 3700"
-      }
-    },
-    "cross_validation": {
-      "piglet_price": {"2025-03": "37.24元/kg", "2025-12": "23.39元/kg", "trend": "连续下跌37%, 补栏意愿极低"},
-      "pig_grain_ratio": {"2025-03": 6.54, "2025-06": 6.16, "2025-09": 5.84, "2025-11": 5.37, "trend": "全年下行, 连续15周破6"},
-      "breeding_profit": "2025H2全面亏损, 头均亏损扩大, 远期期货跌破多数企业成本线",
-      "broker_views": "天风: 去化预期转强但拐点需等待; 行业共识: 2026H1出栏高峰, 拐点或在2026H2"
-    },
-    "historical_cycles": [
-      {"period": "2014-2015", "peak": "~5000", "trough": "~3970", "duration_months": 19, "total_decline_pct": 20.6},
-      {"period": "2018-2019(AFS)", "peak": "~3074", "trough": "~1913", "duration_months": 13, "total_decline_pct": 38, "note": "非正常周期"},
-      {"period": "2021-2022", "peak": 4564, "trough": 4177, "duration_months": 10, "total_decline_pct": 8.5},
-      {"period": "2023-2024", "peak": "~4367", "trough": 3986, "duration_months": 15, "total_decline_pct": 8.6}
-    ]
-  },
-  "data_gaps": [
-    "2021年1-11月逐月数据缺失",
-    "2022年大部分月份缺失",
-    "2023年大部分月份缺失",
-    "2024年5-10月数据缺失",
-    "2025年1-5月、7月、9月、11月数据缺失",
-    "农业农村部自2025年11月起不再按月公布"
+  "research_topic": "2026年全球AI Agent框架最新发展趋势（重点开源框架）",
+  "collected_at": "2026-04-08",
+  "findings": [
+    {"id":"f01","claim":"LangGraph v1.0于2025年底发布，2026年4月最新v1.1.6，是首个稳定版durable agent framework，GitHub stars约126K","evidence":"LangGraph v1.0是durable agent framework space中首个稳定主要版本。2026年4月3日发布v1.1.6。v1.1引入类型安全流式传输。GitHub stars 126K。","source_url":"https://github.com/langchain-ai/langgraph/releases","confidence":"high","source_name":"GitHub/SparkCo"},
+    {"id":"f02","claim":"LangChain v1.0于2025年10月发布，采用agent-centric架构，2026年Q1被评价为production readiness首选","evidence":"LangChain v1.0于2025年10月发布，Python和JavaScript同步推出，引入agent-centric架构。2025年10月完成1.25亿美元B轮融资，估值12.5亿美元。","source_url":"https://sparkco.ai/blog/ai-agent-frameworks-compared-langchain-autogen-crewai-and-openclaw-in-2026","confidence":"high","source_name":"SparkCo/TechCrunch"},
+    {"id":"f03","claim":"CrewAI最新版本v1.13.0（2026-04-02），已融资1800万美元，声称2026年1月70%新AI原生业务工作流使用其框架","evidence":"PyPI显示crewai最新版本1.13.0。v1.9.1引入工具调用前后钩子。2026年3月发布crewai-soul（Markdown Memory with RAG+RLM）。融资1800万美元。","source_url":"https://pypi.org/project/crewai/","confidence":"high","source_name":"PyPI/Evalics"},
+    {"id":"f04","claim":"Google ADK 2.0 Alpha已发布，支持Python/Go/Java，GitHub stars 13,100，单CLI命令可部署到Agent Engine","evidence":"Google ADK 2025年4月首次发布v0.0.3，2026年发布ADK 2.0 Alpha和ADK Go 1.0。ADK for Java 1.0.0支持Google Maps grounding。","source_url":"https://google.github.io/adk-docs/2.0/","confidence":"high","source_name":"Google ADK Docs/ZenML"},
+    {"id":"f05","claim":"OpenAI Agents SDK达到19,000+ GitHub stars和1030万月下载量，增加Realtime更新和MCP能力","evidence":"2025年3月发布，支持Python 3.10+和TypeScript。近期更新含Realtime默认更新、MCP能力和运行时稳定性修复。","source_url":"https://www.firecrawl.dev/blog/best-open-source-agent-frameworks","confidence":"medium","source_name":"Firecrawl/OpenAI"},
+    {"id":"f06","claim":"Claude Agent SDK（原Claude Code SDK）已更名，tool-use-first架构，已与Microsoft Agent Framework集成","evidence":"Anthropic将Claude Code SDK更名为Claude Agent SDK以反映更广泛用途。提供tool-use-first架构，支持Unix工具进行agentic search。","source_url":"https://composio.dev/content/claude-agents-sdk-vs-openai-agents-sdk-vs-google-adk","confidence":"high","source_name":"Composio"},
+    {"id":"f07","claim":"Dify v1.13.3，完成3000万美元Pre-A融资，v1.13.0引入Human Input节点","evidence":"Dify v1.13.3专注于工作流执行稳定性。v1.13.0引入Human Input节点允许工作流暂停等待人工审核。2026年3月完成3000万美元Pre-A融资。","source_url":"https://github.com/langgenius/dify/releases","confidence":"high","source_name":"GitHub langgenius/dify"},
+    {"id":"f08","claim":"Microsoft发布开源Microsoft Agent Framework，支持.NET/Python，兼容MCP/A2A/OpenAPI，正在迁移AutoGen","evidence":"Microsoft Agent Framework达.NET和Python RC阶段。官方提供从AutoGen到Microsoft Agent Framework的迁移指南。兼容MCP、A2A和OpenAPI协议。","source_url":"https://devblogs.microsoft.com/foundry/introducing-microsoft-agent-framework-the-open-source-engine-for-agentic-ai-apps/","confidence":"high","source_name":"Microsoft DevBlogs/Microsoft Learn"},
+    {"id":"f09","claim":"MCP已捐赠给Linux基金会AAIF，超10,000个公开服务器，月SDK下载量9700万，被ChatGPT/Claude/Gemini等平台采用","evidence":"Anthropic于2025年12月将MCP捐赠给AAIF。月SDK下载量9700万（2026年3月）。Anthropic、OpenAI、Block等均为创始成员。","source_url":"https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation","confidence":"high","source_name":"Anthropic Official"},
+    {"id":"f10","claim":"2026年从单体Agent转向分布式多Agent生态系统，Deloitte预测碎片化将跨语言/框架/协议扩展","evidence":"LinkedIn文章指出2026年正从单体智能Agent转向分布式、可互操作的多Agent生态系统。Deloitte预测AI Agent碎片化将跨不同编程语言、框架和协议扩展。","source_url":"https://www.linkedin.com/posts/rakeshgohel01_these-new-design-patterns-will-lead-ai-agents-activity-7404507762258280448-P-pc","confidence":"high","source_name":"LinkedIn/Deloitte"},
+    {"id":"f11","claim":"Gartner预测2026年底40%企业应用将集成AI Agent（vs 2025年<5%），McKinsey发现约10%企业功能已使用AI Agent，ROI 171%","evidence":"Gartner官方新闻发布。McKinsey发现约10%企业功能已使用AI Agent，平均投资回报率171%，美国企业达192%。","source_url":"https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025","confidence":"high","source_name":"Gartner/Forbes/McKinsey"},
+    {"id":"f12","claim":"AI Agent可观测性成为生产部署基石，主要工具包括Langfuse、LangSmith、Arize AI、Arthur AI等11+款","evidence":"Arthur AI称可观测性是Agentic AI关键环节。Arize AI等列出11+款Agent可观测性工具，覆盖多轮追踪、工具调用监控。","source_url":"https://www.arthur.ai/column/agentic-ai-observability-playbook-2026","confidence":"high","source_name":"Arthur AI/Arize AI"},
+    {"id":"f13","claim":"AI Agent安全面临严重挑战，CISO普遍反映Agent缺乏有效管控，Guardrails采用防御纵深多层架构","evidence":"Security Boulevard报道CISO们表示AI Agent已在组织中推理但缺乏管控。Snyk提出基于hook的控制机制。多层安全系统可捕获95%故障。","source_url":"https://securityboulevard.com/2026/03/everyone-is-deploying-ai-agents-almost-nobody-knows-what-theyre-doing/","confidence":"high","source_name":"Security Boulevard/Snyk"},
+    {"id":"f14","claim":"全球Agentic AI市场预计从2024年52.5亿美元增长至2034年1990亿美元，CAGR超43%","evidence":"Cyntexa汇总的统计数据，预计2024-2034年CAGR超43%。AI agent市场整体CAGR达35%。","source_url":"https://cyntexa.com/blog/agentic-ai-statistics/","confidence":"medium","source_name":"Cyntexa"},
+    {"id":"f15","claim":"2026年框架格局分四类：生态型(LangChain/LangGraph)、角色型(CrewAI)、大厂型(Google ADK/OpenAI SDK/Microsoft)、轻量型(Pydantic AI/Mastra)","evidence":"AWS Builder文章分析2026年AI Agent开发格局由四大类框架主导。","source_url":"https://builder.aws.com/content/3AzsgG6TreTO3uLRqpWNxfEyUhe/picking-an-ai-agent-framework-in-2026","confidence":"medium","source_name":"AWS Builder"},
+    {"id":"f16","claim":"阿里2026年2月开源桌面级AI助手Copaw（AgentScope团队研发），中国AI Agent市场垂直行业深耕被视为唯一可持续路径","evidence":"阿里云2026年2月28日宣布开源Copaw。虎嗅报告显示中国AI Agent市场垂直行业深耕是唯一可持续路径，金融与医疗领域存活率显著高于通用框架。","source_url":"https://www.itsolotime.com/archives/23582","confidence":"medium","source_name":"鲸林向海/虎嗅"},
+    {"id":"f17","claim":"Agent记忆机制实现关键突破，Context窗口处理能力提升10倍+，Mem0将记忆封装为标准工具通过MCP集成","evidence":"Gartner数据2026年AI Agent将实现数周级任务连贯性。Mem0将记忆封装为两个工具，框架通过标准tool-calling使用。","source_url":"https://mem0.ai/blog/state-of-ai-agent-memory-2026","confidence":"medium","source_name":"Mem0/Gartner"},
+    {"id":"f18","claim":"2026年正式从提示词工程时代进入智能体架构（Agentic Architecture）时代，68%基于主流框架的AI应用采用多工具组合策略","evidence":"cnblogs深度选型文章指出2026年AI范式已跨越提示词工程。","source_url":"https://www.cnblogs.com/AJun816/p/19678341","confidence":"medium","source_name":"CN Blogs"},
+    {"id":"f19","claim":"MCP 2026年预计完成标准化，但安全性和企业级需求存在显著差距","evidence":"MCP官方路线图（2026年3月更新）承认'企业在大规模部署MCP时遇到了协议尚未解决的差距'。","source_url":"https://modelcontextprotocol.io/development/roadmap","confidence":"high","source_name":"MCP Official Roadmap"}
   ],
-  "sources": [
-    "农业农村部/国家统计局",
-    "大畜牧网 dxumu.com",
-    "发改委价格监测中心",
-    "东方财富研报",
-    "联合资信",
-    "天风证券"
-  ]
+  "dedup_note": "去重说明：LangChain融资信息(f02)合并了两个来源；Gartner 40%预测(f11)被多个搜索员独立发现；MCP AAIF(f09)与MCP标准化(f19)保留为两个独立finding",
+  "agent_summaries": {
+    "searcher-1": "9 findings, 9 tool calls, 无block",
+    "searcher-2": "12 findings, 8 tool calls, 无block",
+    "searcher-3": "14 findings, 9 tool calls, 遇到429限流和浏览器不可用"
+  }
 }
