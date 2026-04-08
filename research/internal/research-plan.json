@@ -1,0 +1,14 @@
+{
+  "topic": "2026年全球AI Agent框架最新发展趋势（重点开源框架）",
+  "complexity": "中等",
+  "complexity_reason": "需要覆盖多个开源框架的最新动态、版本更新、生态变化等多维度，但不需要深度建模或投资决策级验证",
+  "sub_questions": [
+    "2026年主流开源AI Agent框架（LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Dify等）的最新版本和重大更新",
+    "2026年AI Agent框架的技术趋势：多模态、工具调用、记忆机制、编排模式等方向",
+    "2026年AI Agent框架的市场格局：新兴框架、融资并购、企业采用情况"
+  ],
+  "searcher_count": 3,
+  "review_rounds": 1,
+  "report_id": "R-042",
+  "category": "02-AI技术调研"
+}
