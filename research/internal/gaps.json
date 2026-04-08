@@ -1,0 +1,5 @@
+{
+  "iterations": [
+    {"round":1,"reviewer_score":null,"gaps_found":["个人开发者具体成功案例收入拆解数据缺乏","不同游戏类型ARPU精确对比数据缺失","2025年eCPM具体数值缺失","AI辅助开发效率量化数据缺失"],"action":"pending_review"}
+  ]
+}
