@@ -1,5 +1,5 @@
 {
   "iterations": [
-    {"round": 1, "accuracy_score": 8, "completeness_score": 6, "gaps_found": ["Pydantic AI/AutoGen(AG2)具体动态缺失", "多模态Agent能力未覆盖", "无框架性能benchmark"], "action": "进入收敛，报告中标注缺口"}
+    {"round": 1, "accuracy_score": 6.5, "completeness_score": 6, "gaps_found": ["Rubin发布场合和制程节点需修正(GTC非CES,A16属Feynman)", "TSMC 2nm量产时间需修正(2026年volume production非2025)", "SMIC营收单位存疑(可能为人民币误标为美元)", "TSM/INTC最新估值缺失", "SOX历史PE分位数缺失", "半导体设备B/B ratio缺失"], "action": "进入收敛，报告中标注修正和缺口"}
   ]
 }
