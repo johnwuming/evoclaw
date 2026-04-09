@@ -1,32 +1,51 @@
 {
-  "topic": "一人独立开发者适合做什么微信小游戏，收益如何？",
-  "complexity": "中等",
-  "complexity_reason": "需要覆盖游戏类型对比、广告变现数据、真实案例，但不需要超深度建模",
-  "dimensions": ["游戏类型对比", "AI开发工具效率", "IAA广告变现数据", "真实案例与收益", "开发成本与回本"],
+  "topic": "魂系游戏核心玩法 × 微信小程序架构设计",
+  "complexity": "深度",
+  "complexity_reason": "跨游戏设计和技术架构两个领域，需要覆盖FromSoftware五部作品的玩法演变、微信小程序技术限制、触屏战斗系统设计、以及多平台参考游戏，涉及设计/技术/市场多个维度",
+  "dimensions": ["游戏设计-魂系机制拆解", "技术-微信小程序限制与适配", "设计-触屏战斗系统", "设计-关卡叙事", "市场-参考游戏"],
+  "report_id": "R-047",
+  "category": "game-research",
   "search_queries": [
-    {"id":1,"query":"微信小游戏 一人独立开发 最赚钱类型 2024 2025 放置 模拟经营","dimension":"游戏类型对比","priority":"high","assigned_to":"searcher-1"},
-    {"id":2,"query":"微信小游戏 游戏类型排行 DAU 收入对比 2024 2025","dimension":"游戏类型对比","priority":"high","assigned_to":"searcher-1"},
-    {"id":3,"query":"微信小游戏 个人开发者 成功案例 月收入 真实分享","dimension":"真实案例与收益","priority":"high","assigned_to":"searcher-1"},
-    {"id":4,"query":"微信小游戏 IAA广告变现 eCPM 激励视频 插屏 banner 2024 2025 数据","dimension":"IAA广告变现数据","priority":"high","assigned_to":"searcher-1"},
-    {"id":5,"query":"微信小游戏 不同DAU 月收入估算 广告收入计算","dimension":"IAA广告变现数据","priority":"high","assigned_to":"searcher-1"},
-    {"id":6,"query":"AI编程 Cursor Claude Code 开发小游戏 效率提升 经验分享","dimension":"AI开发工具效率","priority":"medium","assigned_to":"searcher-1"},
-    {"id":7,"query":"Cocos Creator 微信小游戏 一人开发 教程 周期","dimension":"AI开发工具效率","priority":"medium","assigned_to":"searcher-1"},
-    {"id":8,"query":"微信小游戏 消除类 三消 开发成本 个人开发者","dimension":"游戏类型对比","priority":"medium","assigned_to":"searcher-2"},
-    {"id":9,"query":"微信小游戏 文字游戏 解谜 MUD 独立开发 收入","dimension":"游戏类型对比","priority":"medium","assigned_to":"searcher-2"},
-    {"id":10,"query":"微信小游戏 益智类 卡牌类 独立开发者 市场表现","dimension":"游戏类型对比","priority":"medium","assigned_to":"searcher-2"},
-    {"id":11,"query":"微信小游戏 开发成本 服务器成本 回本周期 个人开发者","dimension":"开发成本与回本","priority":"high","assigned_to":"searcher-2"},
-    {"id":12,"query":"微信小游戏 流量主 广告分成 比例 2024 2025 最新政策","dimension":"IAA广告变现数据","priority":"high","assigned_to":"searcher-2"},
-    {"id":13,"query":"微信小游戏 放置类 模拟经营类 留存率 数据 ARPU","dimension":"游戏类型对比","priority":"medium","assigned_to":"searcher-2"},
-    {"id":14,"query":"独立游戏开发者 AI工具 一人团队 月入 过万 经验帖","dimension":"真实案例与收益","priority":"medium","assigned_to":"searcher-2"},
-    {"id":15,"query":"微信小游戏 入驻条件 版号要求 个人开发者 2024 2025","dimension":"开发成本与回本","priority":"medium","assigned_to":"searcher-1"},
-    {"id":16,"query":"Laya Air Cocos Creator 微信小游戏 性能对比 选择建议","dimension":"AI开发工具效率","priority":"low","assigned_to":"searcher-2"}
+    {"id": 1, "query": "魂系游戏 Soulslike 核心机制定义 高难度战斗 死亡惩罚 碎片化叙事 设计哲学分析", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "FromSoftware 恶魔之魂 黑暗之魂 系列玩法演变 战斗系统进化 从动作RPG到开放世界", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "血源诅咒 只狼 艾尔登法环 战斗系统对比 攻防机制 差异化设计", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "魂系游戏 Boss战设计哲学 多阶段 招式学习 节奏控制 难度曲线", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "魂系游戏关卡设计 捷径 篝火存档点 地图连通性 立体关卡结构", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "魂系体验最小可玩单元 核心乐趣循环 哪些元素可精简 轻量化设计", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "微信小程序游戏 技术限制 包体大小 2MB主包 Canvas WebGL 性能限制 2024 2025", "dimension": "技术", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "微信小程序游戏 开发框架 Cocos Creator Laya Egret 性能优化 经验", "dimension": "技术", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "微信小游戏 动作游戏 ARPG 实现 触屏操控 虚拟摇杆 战斗系统", "dimension": "技术", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "手机触屏动作游戏 操作方案设计 虚拟按键 手势操作 精准控制方案", "dimension": "技术", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "微信小游戏 分包加载 资源管理 20MB限制 最佳实践", "dimension": "技术", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "微信小程序 WebGL 性能基准 drawcall限制 shader 帧率优化", "dimension": "技术", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "独立魂系游戏 推荐 死亡细胞 Hollow Knight Blasphemous Mortal Shell 小型团队魂味游戏", "dimension": "市场-参考游戏", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "手机平台魂系游戏 手游硬核动作游戏 Pascal's Wager 帕斯卡契约 安魂曲 Lament", "dimension": "市场-参考游戏", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "微信小程序硬核游戏 微信小游戏动作类 已上线产品 案例分析", "dimension": "市场-参考游戏", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "轻量魂系 indie soulslike 低成本实现 像素风魂系 小体量魂味游戏 2D soulslike", "dimension": "市场-参考游戏", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "Salt and Sanctuary 海盐与避难所 Momodora 月光备忘录 Ender Lilies 魂系元素分析", "dimension": "市场-参考游戏", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "动作游戏 死亡惩罚设计 魂系死亡机制 掉落灵魂 肉鸽元素 成长循环 设计分析", "dimension": "游戏设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 19, "query": "碎片化叙事设计 游戏叙事手法 物品描述 环境叙事 魂系叙事 宫崎英高", "dimension": "游戏设计", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 20, "query": "Tunic 蒂肯的传说 外观魂系 游戏设计 碎片化手册 探索解谜", "dimension": "市场-参考游戏", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 21, "query": "微信小游戏 月营收过百万 独立游戏 成功案例 2024 2025", "dimension": "市场", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 22, "query": "Slay the Spire 杀戮尖塔 回合制魂味 Hades 哈迪斯 战斗节奏 设计启示", "dimension": "市场-参考游戏", "priority": "low", "assigned_to": "searcher-3"},
+    {"id": 23, "query": "微信小游戏 WebGL 2D骨骼动画 Spine 性能 DragonBones", "dimension": "技术", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 24, "query": "手机动作游戏帧率需求 60fps 战斗反馈 打击感实现 触觉振动", "dimension": "技术", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 25, "query": "魂系游戏 存档机制 检查点设计 死亡复活 关卡重置 短循环设计", "dimension": "游戏设计", "priority": "medium", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1,2,3,4,5,6,7,15], "focus": "游戏类型对比+广告变现+真实案例"},
-    "searcher-2": {"queries": [8,9,10,11,12,13,14,16], "focus": "具体类型分析+成本政策+工具"}
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 6, 18, 19, 25],
+      "focus": "魂系游戏核心机制深度拆解：从FromSoftware系列到核心元素提炼"
+    },
+    "searcher-2": {
+      "queries": [7, 8, 9, 10, 11, 12, 21, 23, 24],
+      "focus": "微信小程序技术限制与动作游戏适配方案"
+    },
+    "searcher-3": {
+      "queries": [13, 14, 15, 16, 17, 20, 22],
+      "focus": "参考游戏推荐：魂系独立游戏、手游、微信小游戏案例"
+    }
   },
-  "searcher_count": 2,
-  "review_rounds": 1,
-  "report_id": "R-046b",
-  "category": "06-产品调研"
+  "searcher_count": 3,
+  "review_rounds": 1
 }
