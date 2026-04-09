@@ -1,29 +1,25 @@
 {
-  "topic": "一人独立开发者适合做什么微信小游戏，收益如何？",
-  "updated": "2026-04-09",
-  "findings": [
-    {"claim":"2024年国内小游戏市场收入398.36亿元，同比增长99.18%；2025年达535.35亿元，同比增长34.39%","evidence":"伽马数据《2024/2025年中国游戏产业报告》","source_url":"https://www.cls.cn/detail/2075030","confidence":"high","source_name":"财联社","query_id":2},
-    {"claim":"微信小游戏月活用户稳定5亿，累计注册用户超10亿，2025年近70款游戏DAU破百万，超300款单季度流水超千万","evidence":"微信公开课2025数据","source_url":"http://www.gamelook.com.cn/2025/01/562190/","confidence":"high","source_name":"GameLook","query_id":2},
-    {"claim":"累计开发者超40万，80%为不足30人的中小团队，2025年新入驻开发者超5000人","evidence":"微信官方数据","source_url":"http://www.zqrb.cn/gscy/gongsi/2026-01-17/A1768566351773.html","confidence":"high","source_name":"证券日报","query_id":3},
-    {"claim":"小游戏变现模式从广告为主转向内购为主：2022年IAA占61%、IAP占39%；2024年内购占比升至68.7%","evidence":"2024年中国游戏产业报告","source_url":"https://news.qq.com/rain/a/20250401A09V8700","confidence":"high","source_name":"36氪","query_id":4},
-    {"claim":"个人开发者只能通过IAA广告变现，内购(IAP)需企业主体且必须有版号","evidence":"微信开放社区+Cocos论坛","source_url":"https://forum.cocos.org/t/topic/167916","confidence":"high","source_name":"Cocos社区","query_id":8},
-    {"claim":"IAA小游戏无需版号即可运营变现","evidence":"微信开放社区","source_url":"https://developers.weixin.qq.com/community/minigame/doc/0008ae63a2cbc0f2c003ee8bf61400","confidence":"high","source_name":"微信开放社区","query_id":8},
-    {"claim":"创意小游戏单日200万以内开发者获70%分成，超过200万部分获50%","evidence":"腾讯控股公司资料","source_url":"https://pdf.dfcfw.com/pdf/H3_AP202309271600016084_1.pdf","confidence":"high","source_name":"腾讯财报资料","query_id":4},
-    {"claim":"2026年IAA小游戏激励政策简化，30天短期激励最高90%分成，90天长期激励最高85%","evidence":"虎嗅网报道","source_url":"https://m.huxiu.com/article/4827162.html","confidence":"high","source_name":"虎嗅","query_id":5},
-    {"claim":"个人开发者DAU 5000可月入约4000元，DAU 5万才能与上班工资持平","evidence":"Cocos社区开发者经验","source_url":"https://forum.cocos.org/t/topic/76531","confidence":"medium","source_name":"Cocos社区","query_id":5},
-    {"claim":"10个活跃用户日收入3-8元，50个活跃用户20-40元，100个活跃用户50-100元","evidence":"微信开放社区开发者讨论","source_url":"https://developers.weixin.qq.com/community/minigame/doc/000ca0208789c0dc16a1d3c9c66c00","confidence":"medium","source_name":"微信开放社区","query_id":4},
-    {"claim":"2025年女性用户IAA ARPU同比提升70%","evidence":"微信公开课李卿分享","source_url":"http://www.gamelook.com.cn/2025/01/562190/","confidence":"high","source_name":"GameLook","query_id":1},
-    {"claim":"策略塔防类包揽MAU前三，'躺平发育'增长率53.8%；休闲益智类多款增长亮眼","evidence":"月狐数据2025年Q3","source_url":"https://moonfox.cn/insight/report/1822","confidence":"high","source_name":"月狐数据","query_id":1},
-    {"claim":"消除类是最热门品类之一，已从传统平面三消演进到3D三消","evidence":"微信小游戏开发者大会2025","source_url":"http://www.gamelook.com.cn/2025/01/562190/","confidence":"high","source_name":"GameLook","query_id":1},
-    {"claim":"修仙模拟器等挂机数值类小游戏ARPU均值≥1元，eCPM≥300，属于较优水平","evidence":"知乎专栏微信小游戏研究","source_url":"https://zhuanlan.zhihu.com/p/690949280","confidence":"medium","source_name":"知乎","query_id":6},
-    {"claim":"氪金小游戏头部产品次日留存仅10%-20%，14日留存仅1%-5%","evidence":"GameLook引用三方数据","source_url":"http://www.gamelook.com.cn/2023/11/530748/","confidence":"medium","source_name":"GameLook","query_id":6},
-    {"claim":"Cocos Creator是2D小游戏首选引擎，与微信小游戏适配最好；LayaAir适合3D项目","evidence":"知乎高赞回答+阿里云文章","source_url":"https://www.zhihu.com/question/359744898","confidence":"high","source_name":"知乎","query_id":8},
-    {"claim":"个人开发者开发周期约1个月，1-2周可出Demo提交审核","evidence":"豹变采访小游戏开发者","source_url":"https://tech.sina.cn/2024-05-03/detail-inatyezv6172934.d.html","confidence":"medium","source_name":"新浪科技","query_id":7},
-    {"claim":"AI工具使独立游戏开发成本大幅降低，非技术背景产品经理也能独立开发","evidence":"虎嗅+知乎多篇实战分享","source_url":"https://zhuanlan.zhihu.com/p/1944392763287253507","confidence":"medium","source_name":"知乎/虎嗅","query_id":6},
-    {"claim":"有开发者用60小时+AI完成游戏，收益超1万元","evidence":"GameLook报道","source_url":"http://www.gamelook.com.cn/2024/01/536138/","confidence":"medium","source_name":"GameLook","query_id":7},
-    {"claim":"小游戏研发成本和周期至少可降至手游APP的50%","evidence":"微信小游戏增长白皮书","source_url":"https://www.authing.cn/blog/464","confidence":"medium","source_name":"Authing","query_id":4},
-    {"claim":"2026年IAP激励政策升级，首发新游戏激励金上限提升至400万元","evidence":"证券日报","source_url":"http://www.zqrb.cn/gscy/gongsi/2026-01-17/A1768566351773.html","confidence":"high","source_name":"证券日报","query_id":5},
-    {"claim":"申请版号必须企业主体，注册资本不低于100万，个人和个体工商户不行","evidence":"Cocos论坛IAP全流程攻略","source_url":"https://forum.cocos.org/t/topic/167916","confidence":"high","source_name":"Cocos社区","query_id":8},
-    {"claim":"腾讯广告投放激励：注册用户活跃≥5分钟，30天流水额外获40%广告金，31-90天额外获10%","evidence":"B站引用微信官方政策","source_url":"https://www.bilibili.com/read/cv34100317/","confidence":"medium","source_name":"B站","query_id":4}
+  "topic": "魂系游戏核心玩法 × 微信小程序架构设计",
+  "report_id": "R-047",
+  "phase": "completed",
+  "searcher_results": {
+    "searcher-1": {
+      "status": "timeout",
+      "note": "超时未返回，由Lead直接补充搜索"
+    },
+    "searcher-2": {
+      "status": "completed",
+      "findings_count": 28,
+      "key_topics": ["微信小游戏包体限制", "内存限制", "高性能模式", "Cocos/Laya框架", "WebGL性能", "分包加载", "骨骼动画", "打击感"]
+    },
+    "searcher-3": {
+      "status": "completed",
+      "findings_count": 24,
+      "key_topics": ["Bleak Sword极简魂系", "Salt and Sanctuary 2D魂系", "帕斯卡契约手游", "Tunic碎片化叙事", "Ender Lilies", "微信小游戏市场空白"]
+    }
+  },
+  "total_findings": 52,
+  "iterations": [
+    {"round": 1, "action": "完成，数据充足直接产出报告"}
   ]
 }
