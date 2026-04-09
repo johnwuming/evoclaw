@@ -1,0 +1,175 @@
+{
+  "searcher": "searcher-3",
+  "focus": "魂系/硬核游戏成瘾心理学",
+  "status": "completed",
+  "findings": [
+    {
+      "claim": "自我决定论（SDT）解释了魂系游戏的成瘾动机：Dark Souls通过满足自主性、胜任感和关联感三大基本心理需求来驱动玩家内在动机",
+      "evidence": "Interacciones期刊定性研究应用SDT框架分析Dark Souls。自主性：多种武器build、探索路线选择；胜任感：击败Boss后的成就感；关联感：联机留言和召唤系统",
+      "source_url": "https://revistainteracciones.com/index.php/rin/article/view/479/640",
+      "confidence": "high",
+      "source_name": "Interacciones期刊 - SDT applied to Dark Souls",
+      "query_id": 1
+    },
+    {
+      "claim": "心流理论解释魂系'受苦-征服'循环：当挑战难度与玩家技能匹配时产生最优体验，魂系渐进式难度曲线创造持续心流通道",
+      "evidence": "Csikszentmihalyi(1990)心流理论 + Frontiers in Neuroscience(2017)确认挑战与内在动机呈倒U型曲线关系。死亡后通过学习提升技能匹配挑战难度",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5368271/",
+      "confidence": "high",
+      "source_name": "Frontiers in Neuroscience - Challenge and Intrinsic Motivation",
+      "query_id": 1
+    },
+    {
+      "claim": "ACM研究(CHI PLAY 2024)发现Dark Souls帮助玩家应对抑郁症，Hollowing机制被玩家视为抑郁的隐喻",
+      "evidence": "主题分析研究，玩家将Hollowing(失魂)视为抑郁症隐喻，'优于预期的表现'理论解释了痛苦如何转化为心理疗愈",
+      "source_url": "https://dl.acm.org/doi/10.1145/3706598.3714075",
+      "confidence": "medium",
+      "source_name": "ACM - Dark Souls Helps Players Cope with Depression",
+      "query_id": 1
+    },
+    {
+      "claim": "Elden Ring主通关卡约40%，100%达成率约10%，45%的Steam玩家游玩超过100小时",
+      "evidence": "Alinea Analytics数据：PS上10.9%、Steam上10.2%解锁所有成就。通常100小时大作完成率仅20-25%，Elden Ring达近40%。累计销量超3600万份",
+      "source_url": "https://alineaanalytics.com/blog/elden-ring/",
+      "confidence": "high",
+      "source_name": "Alinea Analytics - Elden Ring player engagement",
+      "query_id": 2
+    },
+    {
+      "claim": "FromSoftware各魂系作品Steam完成率：DSR约50%，DS3约47%，Sekiro约44%，DS2约44%，Bloodborne约36%",
+      "evidence": "Reddit用户汇总Steam全球成就数据和PSN奖杯数据。Sekiro线性设计提高了完成率",
+      "source_url": "https://www.reddit.com/r/fromsoftware/comments/1f3e9nn/",
+      "confidence": "medium",
+      "source_name": "Reddit r/fromsoftware - Souls completion rates",
+      "query_id": 2
+    },
+    {
+      "claim": "Elden Ring累计销量超3600万份，收入超20亿美元，45% Steam玩家游玩超100小时",
+      "evidence": "Alinea Analytics分析，PCGamesN报道确认留存数据'惊人'",
+      "source_url": "https://www.pcgamesn.com/elden-ring/player-data",
+      "confidence": "high",
+      "source_name": "PCGamesN - Elden Ring retention on Steam",
+      "query_id": 2
+    },
+    {
+      "claim": "难度与参与度呈正相关（任务可行时），但难度过高时参与度急剧下降——动机强度理论",
+      "evidence": "Strojny等(2023) PLOS ONE研究：任务被认为可行时，参与度随难度增加；过于困难被认为不可行时急剧下降。需精心设计难度曲线",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10004480/",
+      "confidence": "high",
+      "source_name": "PLOS ONE - Player involvement vs difficulty (Strojny 2023)",
+      "query_id": 3
+    },
+    {
+      "claim": "挑战对留存有显著影响但非线性，受玩家细分、社交互动和时间等情境因素调节",
+      "evidence": "Debeauvais(2016) UC Irvine博士论文：高/低技能玩家、是否有朋友一起玩、投入时间后遇到挑战是重要调节变量",
+      "source_url": "https://escholarship.org/content/qt6k3357qx/qt6k3357qx.pdf",
+      "confidence": "high",
+      "source_name": "UC Irvine - Challenge and Retention (Debeauvais 2016)",
+      "query_id": 3
+    },
+    {
+      "claim": "降低游戏难度可显著提升参与度和长期收入：哥伦比亚大学30万玩家随机对照试验",
+      "evidence": "Ascarza等哥伦比亚大学研究：为流失风险玩家降低难度后，游戏时间显著增加，购买收入提升79%，广告收入提升21%。发表于INFORMS期刊",
+      "source_url": "https://business.columbia.edu/research-brief/digital-future/easier-games-more-revenue",
+      "confidence": "high",
+      "source_name": "Columbia Business School - Personalized Game Design",
+      "query_id": 3
+    },
+    {
+      "claim": "魂系游戏多巴胺奖励循环：长期多巴胺剥夺后的一次性大量释放产生极强成瘾性",
+      "evidence": "失败降低预期(多巴胺抑制)，成功产生巨大正预测误差(多巴胺爆发)。反复死亡后击败Boss创造最大奖励预测误差",
+      "source_url": "https://casebycase.substack.com/p/why-pain-is-addicting",
+      "confidence": "medium",
+      "source_name": "CaseByCase - Why pain is addicting through Dark Souls",
+      "query_id": 4
+    },
+    {
+      "claim": "多巴胺奖励预测误差编码：实际奖励超过预期时多巴胺释放最强（Schultz 2016, 被引930次）",
+      "evidence": "PMC经典研究：奖励预测误差=实际奖励-预期奖励。正预测误差时多巴胺释放最强。直接解释魂系'反复失败后突然成功'的上瘾机制",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4826767/",
+      "confidence": "high",
+      "source_name": "PMC - Dopamine reward prediction error (Schultz 2016)",
+      "query_id": 4
+    },
+    {
+      "claim": "成长导向心态和掌控感是重试动机的核心预测因子——《Celeste》玩家行为研究",
+      "evidence": "Computers in Human Behavior(2023)：能在失败中识别改进方向时，失败促进坚持；失败后休息间隔有助于毅力；将失败视为学习机会的玩家更可能继续",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S1071581923002082",
+      "confidence": "high",
+      "source_name": "Computers in Human Behavior - Fail Better in Celeste",
+      "query_id": 5
+    },
+    {
+      "claim": "85%规则(Wilson et al. 2019 Nature)：约15%失败率是学习最优难度平衡点",
+      "evidence": "Nature发表研究：85%成功率时学习效率最高。魂系Boss失败率通常远高于15%，可能通过间隔强化效应补偿",
+      "source_url": "https://www.reddit.com/r/gamedesign/comments/s8fqci/",
+      "confidence": "medium",
+      "source_name": "Nature - 85% rule for optimal learning",
+      "query_id": 5
+    },
+    {
+      "claim": "重生机制设计对玩家体验影响显著：检查点距离是关键变量",
+      "evidence": "Die-r Consequences研究：原地重生/检查点/永久死亡对挫败感和重试意愿有显著影响。过远=挫败累积放弃，过近=降低挑战分量。魂系篝火系统是精心设计的平衡",
+      "source_url": "https://www.researchgate.net/publication/354020467",
+      "confidence": "medium",
+      "source_name": "ResearchGate - Die-r Consequences: Respawning Mechanisms",
+      "query_id": 5
+    },
+    {
+      "claim": "Near-Miss效应：差一点赢的结果比完全输更强烈激活大脑奖励系统",
+      "evidence": "PMC神经行为学研究：near-miss不是'另一种输'，大脑激活模式更接近赢而非输。Frontiers in Psychiatry(2024)元分析：约30% near-miss比例能最大程度增加赌博行为",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2861872/",
+      "confidence": "high",
+      "source_name": "PMC - Near-Miss Effect in Pathological Gambling",
+      "query_id": 6
+    },
+    {
+      "claim": "《心理科学进展》(2018)系统综述Near-Miss效应：'几乎赢'诱发更高生理唤醒和更强赌博动机",
+      "evidence": "中科院心理所综述(P1689-1699)：near-miss定义、行为研究、神经生理机制和个体差异",
+      "source_url": "https://journal.psych.ac.cn/xlkxjz/article/2018/1671-3710/1671-3710-26-9-1689.shtml",
+      "confidence": "high",
+      "source_name": "心理科学进展 - Near-Miss效应综述(2018)",
+      "query_id": 6
+    },
+    {
+      "claim": "Dark Souls和Celeste运用Near-Miss效应：Boss战打到最后一丝血时被击败=激励重试的核心机制",
+      "evidence": "Medium文章'The Art of the Near-Miss'：心理学家指出near-miss体验使玩家更有动力继续尝试。机核网也讨论了这一机制",
+      "source_url": "https://medium.com/illumination-gaming/the-art-of-the-near-miss-bf21ce5b620f",
+      "confidence": "medium",
+      "source_name": "Medium - The Art of the Near-Miss",
+      "query_id": 6
+    },
+    {
+      "claim": "Roguelike核心心理机制：将失败转化为学习信号，通过永久升级(meta-progression)创造'虽然失败但有进步'的错觉",
+      "evidence": "Polygon分析：meta-progression使每次死亡后获得可保留升级，大脑感觉'在进步'。这正是持续动力的时刻",
+      "source_url": "https://www.polygon.com/psychology-roguelikes-punishment-into-reward/",
+      "confidence": "medium",
+      "source_name": "Polygon - Why losing in roguelikes feels like winning",
+      "query_id": 7
+    },
+    {
+      "claim": "间隔强化(Intermittent Reinforcement)是最难戒除的行为模式——操作条件反射理论",
+      "evidence": "Guul Games分析：不是每次努力都得到奖励，而是不确定的奖励时间表。B.F. Skinner研究中最能维持行为的强化模式。与老虎机成瘾机制同源",
+      "source_url": "https://guul.games/blog/why-we-play-again-and-again-the-psychology-of-repeat-gaming",
+      "confidence": "medium",
+      "source_name": "Guul Games - Psychology of Repeat Gaming",
+      "query_id": 7
+    },
+    {
+      "claim": "乌普萨拉大学研究：魂系'失败-学习-成长'循环本质上是韧性训练，能力可迁移到现实",
+      "evidence": "硕士论文运用自我效能感理论和SDT分析魂系四个设计元素如何培养韧性",
+      "source_url": "https://uu.diva-portal.org/smash/get/diva2:1762862/FULLTEXT01.pdf",
+      "confidence": "medium",
+      "source_name": "Uppsala University - Resilience Building in Soulsborne Games",
+      "query_id": 7
+    },
+    {
+      "claim": "游戏成瘾症状与尾状核异常奖励处理有关联——Lopez等(2024)纵向研究",
+      "evidence": "PMC研究：对青少年纵向研究发现尾状核异常奖励处理与游戏成瘾症状有纵向关联",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11737415/",
+      "confidence": "high",
+      "source_name": "PMC - Reward processing and gaming addiction (Lopez 2024)",
+      "query_id": 4
+    }
+  ]
+}
