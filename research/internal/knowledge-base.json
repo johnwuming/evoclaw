@@ -1,25 +1,17 @@
 {
-  "topic": "微信小游戏用户行为数据 × 魂系留存/成瘾机制",
-  "report_id": "R-048",
-  "phase": "completed",
-  "status": "report_written",
-  "data_quality": {
-    "part1_user_behavior": "良好 - 来源权威（QuestMobile/微信官方/伽马数据），分品类精确数据有缺口",
-    "part2_psychology": "优秀 - 学术文献扎实（Nature/PLOS ONE/PMC/ACM），22个高质量finding",
-    "part3_game_pacing": "良好 - 行业最佳实践数据充分，缺少小游戏魂系直接案例"
-  },
+  "topic": "全球独立游戏一人工作室商业模式调研",
+  "report_id": "R-049",
+  "phase": "data_collected",
+  "total_findings": 95,
   "searcher_results": {
-    "searcher-1": {"status": "timeout", "note": "由Lead直接补充搜索用户行为数据"},
-    "searcher-2": {"status": "timeout", "note": "由Lead直接补充搜索商业化数据"},
-    "searcher-3": {"status": "completed", "findings_count": 22, "key_topics": ["SDT自我决定论", "心流理论", "多巴胺奖励预测误差", "Near-Miss效应", "死亡惩罚设计", "重试动机", "Elden Ring留存数据"]},
-    "searcher-4": {"status": "timeout", "note": "由Lead直接补充搜索游戏节奏数据"},
+    "searcher-1": {"status": "completed", "findings_count": 18, "key_topics": ["全球独立游戏市场规模$4.85B", "Steam独立游戏收入占比", "收入集中度top 0.5%", "自发行vs发行商收入对比", "经验积累效应"]},
+    "searcher-2": {"status": "failed_loop", "findings_count": 0, "note": "搜索员陷入循环未产出，由Lead直接补充搜索了Toby Fox、Lucas Pope、Balatro、Vampire Survivors、Celeste、Megabonk等案例"},
+    "searcher-3": {"status": "completed", "findings_count": 24, "key_topics": ["Red Hook Studios", "Supergiant Games", "Team Cherry", "ConcernedApe团队成长", "中国独立游戏案例", "微信小游戏市场¥398亿"]},
+    "searcher-4": {"status": "completed", "findings_count": 30, "key_topics": ["Steam收入模型", "Game Pass支付", "Early Access统计", "开发成本", "ROI", "引擎对比", "营销策略", "发行商vs自发行"]},
     "lead_direct_search": true,
-    "lead_search_queries": 12,
-    "lead_findings": 40
+    "lead_search_queries": 8,
+    "lead_findings": 23
   },
-  "total_findings": 62,
-  "key_sources": ["QuestMobile", "伽马数据", "微信官方2025开发者大会", "TopOn&Taku 2024广告报告", "腾讯2024混变白皮书", "Unity ironSource", "Google AdMob", "Nature 85%规则", "PLOS ONE Strojny2023", "PMC Schultz2016多巴胺", "Alinea Analytics Elden Ring", "ACM CHI PLAY 2024"],
-  "iterations": [
-    {"round": 1, "action": "4个搜索员spawn，3个超时，1个(心理学)完成。Lead直接搜索补充其余3个领域数据", "data_quality": "sufficient"}
-  ]
+  "data_quality": "良好-优秀",
+  "key_sources": ["Mordor Intelligence", "Newzoo", "Sensor Tower", "VG Insights", "GameDiscoverCo", "Statista", "Gamalytic", "HowToMarketAGame", "GameLook", "虎嗅", "伽马数据"]
 }
