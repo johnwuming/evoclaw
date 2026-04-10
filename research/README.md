@@ -4,6 +4,7 @@
 
 | 日期 | 操作 | 编号 | 标题 | 路径 |
 |------|------|------|------|------|
+| 2026-04-10 | 新增 | R-050 | R-050 | game-research | game-research/R-050.md |
 | 2026-04-10 | 新增 | R-049 | appendix | game-research | game-research/R-049-appendix.md |
 | 2026-04-10 | 新增 | R-049 | R-049 | game-research | game-research/R-049.md |
 | 2026-04-10 | 修改 | R-048 | R-048 | game-research | game-research/R-048.md |
