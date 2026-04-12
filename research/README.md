@@ -4,14 +4,14 @@
 
 | 日期 | 操作 | 编号 | 标题 | 路径 |
 |------|------|------|------|------|
+| 2026-04-12 | 新增 | R-051 | 产品经理AI提效与AI驱动的产品转型实践（2026年3-4月） | 02-AI技术调研/R-051.md |
 | 2026-04-12 | 新增 | R-021 | R-021 | 07-\345\205\266\344\273\226 | 07-\345\205\266\344\273\226/R-021.md |
 | 2026-04-10 | 新增 | R-050 | R-050 | game-research | game-research/R-050.md |
-| 2026-04-10 | 新增 | R-049 | appendix | game-research | game-research/R-049-appendix.md |
 | 2026-04-10 | 新增 | R-049 | R-049 | game-research | game-research/R-049.md |
-| 2026-04-10 | 修改 | R-048 | R-048 | game-research | game-research/R-048.md |
+| 2026-04-10 | 新增 | R-049 | R-049 | game-research | game-research/R-049-appendix.md |
 | 2026-04-10 | 新增 | R-048 | R-048 | game-research | game-research/R-048.md |
 | 2026-04-10 | 新增 | R-047 | R-047 | game-research | game-research/R-047.md |
-| 2026-04-10 | 新增 | R-047 | 魂系游戏核心玩法×微信小程序架构设计 | game-research/R-047.md |
+| 2026-04-10 | 新增 | R-047 | 魂系游戏核心玩法×微信小程序架构设计 | game-research | game-research/R-047.md |
 | 2026-04-09 | 新增 | R-046 | R-046b | 06-开发实践/R-046b.md |
 | 2026-04-08 | 新增 | R-046 | R-046a | 06-开发实践/R-046a.md |
 | 2026-04-08 | 新增 | R-047 | R-047 | 02-AI技术调研/R-047.md |
