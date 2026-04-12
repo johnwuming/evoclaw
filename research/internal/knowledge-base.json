@@ -1,17 +1,52 @@
 {
-  "topic": "全球独立游戏一人工作室商业模式调研",
-  "report_id": "R-049",
-  "phase": "data_collected",
-  "total_findings": 95,
-  "searcher_results": {
-    "searcher-1": {"status": "completed", "findings_count": 18, "key_topics": ["全球独立游戏市场规模$4.85B", "Steam独立游戏收入占比", "收入集中度top 0.5%", "自发行vs发行商收入对比", "经验积累效应"]},
-    "searcher-2": {"status": "failed_loop", "findings_count": 0, "note": "搜索员陷入循环未产出，由Lead直接补充搜索了Toby Fox、Lucas Pope、Balatro、Vampire Survivors、Celeste、Megabonk等案例"},
-    "searcher-3": {"status": "completed", "findings_count": 24, "key_topics": ["Red Hook Studios", "Supergiant Games", "Team Cherry", "ConcernedApe团队成长", "中国独立游戏案例", "微信小游戏市场¥398亿"]},
-    "searcher-4": {"status": "completed", "findings_count": 30, "key_topics": ["Steam收入模型", "Game Pass支付", "Early Access统计", "开发成本", "ROI", "引擎对比", "营销策略", "发行商vs自发行"]},
-    "lead_direct_search": true,
-    "lead_search_queries": 8,
-    "lead_findings": 23
-  },
-  "data_quality": "良好-优秀",
-  "key_sources": ["Mordor Intelligence", "Newzoo", "Sensor Tower", "VG Insights", "GameDiscoverCo", "Statista", "Gamalytic", "HowToMarketAGame", "GameLook", "虎嗅", "伽马数据"]
+  "topic": "南京开市客（Costco）线上线下商品差异与优惠活动",
+  "last_updated": "2026-04-12",
+  "findings": [
+    {
+      "claim": "Costco开市客线上平台仅覆盖约400+SKU，门店约4000种，覆盖率约10%",
+      "confidence": "high",
+      "sources": ["物流指闻", "FoodTalks", "腾讯新闻"]
+    },
+    {
+      "claim": "Costco官方不提供半份装/小份装，采用'原装货盘运送'策略",
+      "confidence": "high",
+      "sources": ["物流指闻", "赢商网"]
+    },
+    {
+      "claim": "Costco不入驻美团、饿了么、京东到家等第三方外卖平台",
+      "confidence": "high",
+      "sources": ["多方搜索综合判断"]
+    },
+    {
+      "claim": "2025年4月起Costco官方声明线上线下同价",
+      "confidence": "high",
+      "sources": ["搜狐"]
+    },
+    {
+      "claim": "Costco线上起送门槛299元+运费12-20元",
+      "confidence": "high",
+      "sources": ["物流指闻", "赢商网", "观点网"]
+    },
+    {
+      "claim": "南京Costco江宁店2024年5月28日开业，2026年5月将迎来2周年",
+      "confidence": "high",
+      "sources": ["新华网"]
+    },
+    {
+      "claim": "线上不支持购买的商品品类：服饰鞋包、熟食/热食、轮胎服务、光学眼镜、试吃体验",
+      "confidence": "high",
+      "sources": ["官方公告综合分析"]
+    },
+    {
+      "claim": "第三方平台上的'开市客半份面包'为个人代购拆分销售，非官方行为",
+      "confidence": "medium",
+      "sources": ["逻辑推断+搜索验证"]
+    }
+  ],
+  "gaps": [
+    "无法获取开市客到家小程序实时商品列表（需会员登录）",
+    "用户提到的'半份装面包'具体是哪款商品、哪个平台，需用户补充信息",
+    "南京门店具体当期促销商品清单（需实时查看小程序或到店）",
+    "Costco是否在南京有区域性独家促销（非常规公开信息）"
+  ]
 }
