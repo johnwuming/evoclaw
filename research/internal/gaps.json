@@ -1,5 +1,14 @@
 {
   "iterations": [
-    {"round": 1, "gaps_found": ["searcher-1超时"], "action": "Lead直接补充搜索魂系核心机制", "status": "resolved"}
+    {
+      "round": 1,
+      "reviewer_score": null,
+      "notes": "直接由Lead Researcher执行搜索（无法spawn搜索员，无exec权限）。基于10+次web搜索和2篇关键文章深度阅读完成报告。"
+    }
+  ],
+  "gaps": [
+    "用户提到的'半份装面包'具体是哪款商品、哪个平台——需用户补充",
+    "开市客到家小程序实时商品列表——需会员登录才能查看",
+    "南京门店当期具体促销清单——需实时到店或登录小程序查看"
   ]
 }
