@@ -1,14 +1,24 @@
 {
-  "topic": "产品经理AI提效与AI驱动的产品转型实践（2026年3-4月最新）",
   "iterations": [
     {
       "round": 1,
-      "searcher_results": "4个搜索员：1个成功返回25条发现，2个超时（无结构化输出），1个完成但结果未推送",
-      "reviewer_accuracy_score": 6.8,
-      "reviewer_completeness_score": 7.5,
-      "accuracy_issues": "7条发现低置信度（薪资/增长率数据来源不可靠、McKinsey数据有误、Gartner数据疑似编造）",
-      "completeness_gaps": "缺少数据分析AI工具、用户研究AI工具、AI落地障碍/失败案例",
-      "action": "手动补充搜索填补完整性缺口，在最终报告中剔除/标注低置信度数据"
+      "searcher_results": {
+        "searcher-1": "completed - 26 findings, background/philosophy/revenue",
+        "searcher-2": "completed - 20 findings, products/skills/content/videos",
+        "searcher-3": "completed - 24 findings, book/framework/cn-analysis/videos"
+      },
+      "total_findings": 62,
+      "reviewer_completeness_score": 7.2,
+      "reviewer_accuracy": "timed_out",
+      "gaps_found": [
+        "视频内容深度提取不足(5/10)",
+        "技能栈缺少具体学习路径(6/10)",
+        "Kortex转型故事不完整",
+        "利润率数据矛盾(90% vs 98%)",
+        "2024-2025最新收入数据缺失"
+      ],
+      "action": "收敛写报告 — 评分>=7，缺口在报告中标注为知识局限",
+      "gaps_addressed_in_report": true
     }
   ]
 }
