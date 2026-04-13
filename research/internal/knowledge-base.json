@@ -1,282 +1,69 @@
 {
-  "topic": "产品经理AI提效与AI驱动的产品转型实践（2026年3-4月最新）",
-  "last_updated": "2026-04-12",
+  "topic": "Dan Koe 一人公司体系深度研究",
+  "findings_count": 62,
+  "sources_count": 35,
   "findings": [
-    {
-      "claim": "AI工具帮助PM每周节省5-15小时，PRD撰写时间从3-8小时缩短到1-2小时",
-      "confidence": "high",
-      "sources": ["IdeaPlan 2026数据报告", "prodmgmt.world", "LinkedIn调研"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "McKinsey研究显示AI工具已将PM重复性任务时间削减50-60%",
-      "confidence": "high",
-      "sources": ["McKinsey研究", "Medium分析文章"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "ChatPRD是2026年最受推荐的PM专用AI工具，专注PRD文档自动化生成",
-      "confidence": "high",
-      "sources": ["ChatPRD官网", "多个工具评测文章"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "2026年PM核心AI工具栈：ChatGPT/Claude用于研究和起草、Cursor用于原型开发、ChatPRD用于文档、Notion AI用于知识管理",
-      "confidence": "high",
-      "sources": ["Replit Blog", "Builder.io", "alfred.ai"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "Cursor让PM可以不依赖工程师直接构建可工作原型，Google AI PM实践了先在AI Studio构建原型再与工程师讨论",
-      "confidence": "high",
-      "sources": ["ChatPRD工作流", "YouTube Google AI PM视频"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "2026年PRD写作已从'从0到1的创作'变为'1到10的优化'，关键是提供业务背景和功能列表让AI转化为标准PRD结构",
-      "confidence": "high",
-      "sources": ["什么值得买实战文章", "掘金"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "国内PM AI工具：墨刀AI Agent可写PRD+画原型+做调研一站式；豆包/DeepSeek用于快速竞品调研",
-      "confidence": "high",
-      "sources": ["掘金", "PMEcho", "墨刀官方"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "GPT-4o支持截图分析竞品页面总结产品逻辑，已有大量PM专用自定义GPT（PRD写作助手、用户故事生成器等）",
-      "confidence": "medium",
-      "sources": ["知乎专栏"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "2026年AI竞品分析进入三维视野：显性对手+跨界掠夺者+技术黑盒分析，Token经济学博弈成为新分析维度",
-      "confidence": "medium",
-      "sources": ["人人都是产品经理"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "腾讯云开发者社区介绍AI智能体竞品分析方法：结构化方法论+实战案例，从市场洞察到策略建议全流程",
-      "confidence": "medium",
-      "sources": ["腾讯云开发者社区"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "2026年PM必备的5款免费AI PRD生成器：IdeaPlan Forge、Claude、FreePRD.ai、AI Architect、ChatGPT（含PM提示词）",
-      "confidence": "medium",
-      "sources": ["IdeaPlan评测"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "2026年PM需要建立Prompt模板和系统Prompt库，针对PRD撰写、竞品分析、用户故事拆解等高频场景复用",
-      "confidence": "medium",
-      "sources": ["人人都是产品经理"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "2026年AI PM工具市场爆发：ChatPRD、Cursor、v0、Lovable、Bolt等工具让PM可以直接构建工作原型",
-      "confidence": "high",
-      "sources": ["ChatPRD", "Medium Product Powerhouse"],
-      "dimension": "AI提效工具与方法"
-    },
-    {
-      "claim": "字节跳动50多个内部业务已大量使用豆包大模型进行AI创新，包括抖音、头条等数亿DAU产品",
-      "confidence": "high",
-      "sources": ["火山引擎官方文档", "新浪财经"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "字节扣子平台超过30万开发者，平均每3分钟就有一个新AI应用被创建",
-      "confidence": "high",
-      "sources": ["新浪财经2026复盘"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "2026年春节AI大战：阿里千问一句话下单近2亿次，腾讯元宝日活超5000万，字节豆包除夕创AI互动记录",
-      "confidence": "high",
-      "sources": ["新浪财经", "澎湃新闻"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "阿里做系统、字节搭积木、腾讯连流量——三大互联网巨头走出三条完全不同的企业级AI战略路线",
-      "confidence": "medium",
-      "sources": ["腾讯云开发者社区"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "高盛认为字节跳动在AI、电商与本地服务的全面突破，正倒逼阿里、腾讯等巨头加码To-C AI",
-      "confidence": "high",
-      "sources": ["华尔街见闻"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "Google/Microsoft/Meta/Amazon 2026年AI投资合计6500亿美元",
-      "confidence": "high",
-      "sources": ["eWeek", "Fast Company"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "2026年互联网大厂春招AI岗位激增14倍，字节跳动研发岗位扩招20%优先AI产品",
-      "confidence": "medium",
-      "sources": ["超级简历"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "大厂AI产品经理招聘均明确要求'具备大模型落地实战经验'，腾讯、字节、阿里均如此",
-      "confidence": "high",
-      "sources": ["CSDN/GitCode"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "AI Native PM核心变化：从需求定义转向决策与判断，PM不再依赖设计师和工程师来尝试想法",
-      "confidence": "high",
-      "sources": ["Medium - Erdeniz Tunch", "Forbes"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "Forbes指出当构建速度不再是瓶颈，PM核心价值从'执行'转向'选择'",
-      "confidence": "high",
-      "sources": ["Forbes 2026年2月"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "Maven与Lenny Rachitsky合作推出AI Native PM大师课，标志着PM角色重新定义成为行业共识",
-      "confidence": "medium",
-      "sources": ["Maven平台"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "AI Native产品需14种思维模式转变，最核心是从确定性思维转向概率思维",
-      "confidence": "medium",
-      "sources": ["Medium Design Bootcamp"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "2026年某大厂AI产品团队裁员30%，'会调API就能做AI产品'的红利期正在消失",
-      "confidence": "medium",
-      "sources": ["人人都是产品经理"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "传统PM依赖确定性规则与线性流程，AI产品需建立概率思维框架。行业分化出三类AI PM：AI平台PM、AI应用PM、AI数据PM",
-      "confidence": "medium",
-      "sources": ["知乎专栏"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "新浪财经2026年3月报道：第一批用AI代替员工的老板暴雷了，直接用AI替换真实人员的策略出现大量失败案例",
-      "confidence": "high",
-      "sources": ["新浪财经"],
-      "dimension": "产品经理角色演变"
-    },
-    {
-      "claim": "Gartner预测到2030年75%的IT工作将由人类+AI完成，25%由AI独立完成",
-      "confidence": "high",
-      "sources": ["Gartner"],
-      "dimension": "产品经理角色演变"
-    },
-    {
-      "claim": "Gartner预测2026年全球AI支出2.52万亿美元，同比增长44%",
-      "confidence": "high",
-      "sources": ["Gartner支出预测"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "McKinsey 2026数据：AI企业采用率跃升至72%（此前2020-2023年徘徊在50%左右）",
-      "confidence": "high",
-      "sources": ["McKinsey", "Intuition"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "AI产品经理岗位需求同比增长240%，全球AI市场规模突破5000亿美元",
-      "confidence": "medium",
-      "sources": ["知乎专栏"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "智联招聘数据：2024年AI PM岗位量暴增230%，平均薪资45K+，超越传统产品岗76%",
-      "confidence": "medium",
-      "sources": ["火山引擎ADG社区（引用智联招聘）"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "2026年AI PM月薪4-7万元，程序员转型AI PM薪资可涨40%",
-      "confidence": "medium",
-      "sources": ["知乎专栏"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "翰德2026人才趋势报告：AI相关岗位薪资水涨船高，流程化标准化职位加速萎缩，K型分化显著",
-      "confidence": "high",
-      "sources": ["新浪财经（翰德报告）"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "Gartner报告：成功实现AI商业化的企业中87%配备了专业化AI PM团队",
-      "confidence": "medium",
-      "sources": ["知乎专栏（引用Gartner）"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "2026年已有超过150K技术岗位被裁，受AI影响最大的是涉及重复性任务的角色",
-      "confidence": "medium",
-      "sources": ["Tech Insider"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "硅谷大佬集体共识AI正在消灭中层管理者，Palantir CTO认为AI将压平组织结构",
-      "confidence": "medium",
-      "sources": ["51CTO"],
-      "dimension": "产品经理角色演变"
-    },
-    {
-      "claim": "2026年PM技术栈转向Agents和Infrastructure，最常见错误是构建'AI Feature'而非基础设施",
-      "confidence": "medium",
-      "sources": ["Medium Design Bootcamp"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "Agentic AI产品管理需通过'自主性阶梯'思考：从建议行动到完全自主执行",
-      "confidence": "medium",
-      "sources": ["Mind the Product"],
-      "dimension": "AI Native产品经理"
-    },
-    {
-      "claim": "人民网2026年1月：AI训练师、AI PM、AI伦理审核员等新职业涌现，'一人公司'创业新范式兴起",
-      "confidence": "high",
-      "sources": ["人民网"],
-      "dimension": "产品经理角色演变"
-    },
-    {
-      "claim": "字节CEO梁汝波：豆包AI 2026年要勇攀高峰，基础模型综合实力处中国第一梯队",
-      "confidence": "high",
-      "sources": ["21世纪经济报道"],
-      "dimension": "大厂AI转型案例"
-    },
-    {
-      "claim": "2026年AI产品经理面试重点已从技术问题转向AI工作流能力：你平时用哪些AI工具？有没有真实用AI提效的案例？",
-      "confidence": "high",
-      "sources": ["知乎专栏"],
-      "dimension": "产品经理角色演变"
-    },
-    {
-      "claim": "McKinsey 2026 AI Trust调查：AI信任成熟度在进步，但策略和治理仍有持续缺口",
-      "confidence": "high",
-      "sources": ["McKinsey"],
-      "dimension": "行业报告与调查数据"
-    },
-    {
-      "claim": "81%的销售团队已实施或正在试验AI，使用AI的团队效率提升1.3倍",
-      "confidence": "medium",
-      "sources": ["Autobound 2026报告"],
-      "dimension": "行业报告与调查数据"
-    }
-  ],
-  "gaps": [
-    "腾讯/阿里/美团具体产品团队AI工作方式变革的一线案例较少",
-    "缺少PM AI提效的严谨A/B测试数据",
-    "AI Native与传统PM工作效率对比缺乏量化数据",
-    "国内大厂PM使用AI的具体工具选择和工作流细节信息有限"
+    {"id": 1, "claim": "Dan Koe 真名 Daniel Koenigslieb，在宗教家庭长大，从小质疑教会教义，培养独立思考", "dimension": "个人背景", "confidence": "medium", "source": "Amazon Author Page"},
+    {"id": 2, "claim": "16岁开始创业尝试，与好友创建健身YouTube频道", "dimension": "个人背景", "confidence": "high", "source": "StartupAnatomy"},
+    {"id": 3, "claim": "大学期间学习网页开发课程，爱上设计，转向自由职业网页设计", "dimension": "个人背景", "confidence": "high", "source": "Dan Koe Instagram"},
+    {"id": 4, "claim": "尝试多种副业：Instagram艺术账号、锐舞音乐节卖衣服、Amazon FBA、数字营销咨询，失败7种在线商业模式", "dimension": "个人背景", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 5, "claim": "2020年仅靠自由职业网页设计赚$100,000，这是突破点", "dimension": "个人背景", "confidence": "high", "source": "Dan Koe Medium"},
+    {"id": 6, "claim": "通过每天2小时写作构建了$3M+一人公司", "dimension": "个人背景", "confidence": "high", "source": "StartupAnatomy"},
+    {"id": 7, "claim": "从2019年至今累计赚取超过$690万美元，拥有近400万全网关注者", "dimension": "个人背景", "confidence": "medium", "source": "Tenten AI"},
+    {"id": 8, "claim": "2023年收入超过$420万，利润率90%，运作模式为一人公司", "dimension": "商业逻辑", "confidence": "medium", "source": "掘金+Facebook"},
+    {"id": 9, "claim": "定义一人公司为'允许你通过实践、实验和迭代来创造理想生活方式的商业模式'", "dimension": "核心哲学", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 10, "claim": "核心理念'把你自己产品化'(Productize Yourself)——将兴趣、专业知识、好奇心和个性转化为商业价值", "dimension": "核心哲学", "confidence": "high", "source": "Dan Koe YouTube"},
+    {"id": 11, "claim": "'你就是利基'(You Are the Niche)——不需要选择特定话题领域，围绕自己独特观点和人生哲学构建", "dimension": "核心哲学", "confidence": "high", "source": "Dan Koe Medium"},
+    {"id": 12, "claim": "强调技能叠加(Skill Stacking)是一人公司核心策略，而非专精单一技能", "dimension": "核心哲学", "confidence": "medium", "source": "LinkedIn"},
+    {"id": 13, "claim": "人们付费买的不是信息本身，而是'速度'——聚合综合信息、提炼可行步骤为客户节省时间", "dimension": "核心哲学", "confidence": "medium", "source": "Tenten AI"},
+    {"id": 14, "claim": "明确反对传统创业思维，认为95%的人不应该追求十亿美元公司", "dimension": "核心哲学", "confidence": "high", "source": "Dan Koe LinkedIn"},
+    {"id": 15, "claim": "一人公司优于传统创业：不需要雇佣员工、外部融资、每周工作80小时", "dimension": "核心哲学", "confidence": "medium", "source": "Reddit+中文源"},
+    {"id": 16, "claim": "'更大不等于更好'(Bigger is not better)，追求高利润率和高自由度，98%利润率", "dimension": "核心哲学", "confidence": "high", "source": "YouTube"},
+    {"id": 17, "claim": "现代个人比过去的20人公司拥有更大权力", "dimension": "核心哲学", "confidence": "medium", "source": "Medium"},
+    {"id": 18, "claim": "一人公司是传统教育负面影响的'解药'，反对从众性和被训练成讨厌的工作", "dimension": "核心哲学", "confidence": "high", "source": "Dan Koe Newsletter"},
+    {"id": 19, "claim": "4大支柱框架：Brand=你的故事, Content=你的地图, Product=你的解决方案, Marketing=你的扩音器", "dimension": "执行流程", "confidence": "high", "source": "Dan Koe LinkedIn/X"},
+    {"id": 20, "claim": "3点在线商业模式：社交媒体账号→邮件列表→付费产品", "dimension": "执行流程", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 21, "claim": "内容金字塔：2-3个主支柱向下分支到具体话题", "dimension": "执行流程", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 22, "claim": "$2M内容飞轮5系统：You Are the Niche框架、Newsletter优先飞轮、3步写作框架、产品价值阶梯、内容金字塔", "dimension": "执行流程", "confidence": "high", "source": "StartupStash"},
+    {"id": 23, "claim": "写作框架'痛点-洞察-行动'(Pain-Insight-Action)", "dimension": "执行流程", "confidence": "medium", "source": "Tenten AI"},
+    {"id": 24, "claim": "内容分发策略：先写Newsletter→拆解为Thread→社媒帖子→YouTube脚本→Reels/TikTok", "dimension": "执行流程", "confidence": "high", "source": "Tenten AI"},
+    {"id": 25, "claim": "起步'先广后窄'：话题宽泛引起共鸣，不过早细分", "dimension": "执行流程", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 26, "claim": "60天赚$1,000挑战：微技能栈(内容写作+销售/营销)+微报价策略", "dimension": "执行流程", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 27, "claim": "$1M/年拆解：每月$83,333，可行路径包括每天18个$150产品或每2天1个$5,000客户", "dimension": "执行流程", "confidence": "high", "source": "Dan Koe Substack 2026"},
+    {"id": 28, "claim": "Koe's Law：从$100K/年到$100K/月的演化路径，Stage 1从客户工作起步逐步产品化", "dimension": "执行流程", "confidence": "medium", "source": "Medium"},
+    {"id": 29, "claim": "Digital Economics课程：Bachelors $499, Masters $999", "dimension": "商业逻辑", "confidence": "high", "source": "digitaleconomics.school"},
+    {"id": 30, "claim": "产品价值阶梯：免费内容→2 Hour Writer($150)→Mental Monetization($225)→Kortex Bootcamp($350)→Digital Economics Bachelors($499)→Masters($999)", "dimension": "商业逻辑", "confidence": "high", "source": "Stan Store"},
+    {"id": 31, "claim": "产品定价演进：$20→$50→$500→现在$500-$3,000课程，$39-$99书籍", "dimension": "商业逻辑", "confidence": "high", "source": "StartupAnatomy"},
+    {"id": 32, "claim": "Mental Monetization $225：将知识、兴趣和技能转化为收入组合，$0到$100K到$100万路线图", "dimension": "商业逻辑", "confidence": "high", "source": "mentalmonetization.com"},
+    {"id": 33, "claim": "2 Hour Writer $150：写作作为高收入技能的核心培训，2小时内容生态系统(Notion模板)", "dimension": "商业逻辑", "confidence": "high", "source": "2hourwriter.com"},
+    {"id": 34, "claim": "The Art of Focus书籍(2024年1月，230页)——27条原则围绕3大支柱(The Self, The Game, The Lens)", "dimension": "核心哲学", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 35, "claim": "写作是元技能(Meta-Skill)，技能栈学习顺序：写作→演讲→营销→销售，辅助技能：设计、视频、邮件营销、编程", "dimension": "技能栈", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 36, "claim": "文案写作(Copywriting)是'说服性写作'，营销和销售在书面形式的结合，未来10年最重要生存技能", "dimension": "技能栈", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 37, "claim": "7条数字职业路径：内容创作、自由职业到SaaS、电商等", "dimension": "技能栈", "confidence": "medium", "source": "Dan Koe Medium"},
+    {"id": 38, "claim": "Synthesizer(综合者)定义：以好奇心为指南针走独特路径、连接想法实现自设目标的新型数字职业人", "dimension": "核心哲学", "confidence": "high", "source": "Dan Koe Medium"},
+    {"id": 39, "claim": "Kortex是联合创办的创业公司(Kortex Enterprises, LLC)，约10人团队，定位创作者第二大脑工具", "dimension": "商业逻辑", "confidence": "high", "source": "kortex.co"},
+    {"id": 40, "claim": "Kortex未公开发布前6个月创造$759,900收入，燃烧率接近$30,000/周", "dimension": "商业逻辑", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 41, "claim": "Kortex转型为Eden(eden.so)，Dan称Kortex为'$3M Mistake'，Eden定价更高", "dimension": "商业逻辑", "confidence": "high", "source": "kortex.co blog"},
+    {"id": 42, "claim": "YouTube频道@DanKoeTalks约135万订阅者，238个视频，总观看量超4600万", "dimension": "视频内容", "confidence": "high", "source": "SocialCounts+vidIQ"},
+    {"id": 43, "claim": "核心视频：《The One-Person Business Model》约120万观看, 《How To Get Ahead Of 99% Of People》约170万观看", "dimension": "视频内容", "confidence": "high", "source": "YouTube"},
+    {"id": 44, "claim": "2024-2025热门视频：One Person Business Model 2.0(217K), How I'd Build in 2026, $1M One-Person Business With AI(252K)", "dimension": "视频内容", "confidence": "high", "source": "YouTube"},
+    {"id": 45, "claim": "One Person Business播放列表包含系列视频，11 Lessons From Growing A 7-Figure One Person Business", "dimension": "视频内容", "confidence": "high", "source": "YouTube"},
+    {"id": 46, "claim": "使用平台工具：beehiiv(邮件)、Stan Store(销售)、YouTube(视频)、X/Twitter(短内容)、Eden(AI第二大脑)", "dimension": "技能栈", "confidence": "high", "source": "Multiple Official"},
+    {"id": 47, "claim": "Substack 'future/proof' 超290,000订阅者，Koe Letters 120,000+周六订阅", "dimension": "商业逻辑", "confidence": "high", "source": "Substack+官网"},
+    {"id": 48, "claim": "内容营销核心理念：'写任何你想写的，当你打算推广时，多谈论那个话题'", "dimension": "执行流程", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 49, "claim": "付费增长偏好Instagram Stories分享而非传统广告，认为更真实互动质量更高", "dimension": "执行流程", "confidence": "medium", "source": "掘金"},
+    {"id": 50, "claim": "每周1-2篇Newsletter + 每天2-3则社媒帖子构成全部内容机器", "dimension": "执行流程", "confidence": "medium", "source": "Tenten AI"},
+    {"id": 51, "claim": "推崇'4小时工作日'哲学，每天第一小时用于最重要任务(写书/开发产品)", "dimension": "核心哲学", "confidence": "medium", "source": "掘金"},
+    {"id": 52, "claim": "The Art of Focus核心：专注是解决平庸生活的方案，人类每秒仅处理10-50比特有意识信息", "dimension": "核心哲学", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 53, "claim": "The Art of Focus概念：心理熵(psychic entropy)——必须通过自设目标创造秩序抵抗分心", "dimension": "核心哲学", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 54, "claim": "中文社区归纳Dan Koe成功5要素：相信自己是破除限制性思维、善用社群打造个人品牌、持续输出高价值内容、建立人脉网络借力、精实管理与保持弹性", "dimension": "中文社区", "confidence": "medium", "source": "掘金"},
+    {"id": 55, "claim": "Vista Cheng深度解读四大支柱：品牌(清晰价值主张+一致视觉+专业声音+清晰愿景)、内容策略(找细分+理解痛点+一致性+重质量+复用)", "dimension": "中文社区", "confidence": "medium", "source": "vista.tw"},
+    {"id": 56, "claim": "2026年最新建议：初学者更易通过卖$1,000-$5,000服务给一个客户起步，而非卖100-200个订阅", "dimension": "执行流程", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 57, "claim": "精通报价创建、社媒营销和文案撰写需2-5年", "dimension": "执行流程", "confidence": "high", "source": "Dan Koe Substack 2026"},
+    {"id": 58, "claim": "3个变现阶段(3 Stages of Monetization)——大多数创作者实际亏损", "dimension": "商业逻辑", "confidence": "medium", "source": "thedankoe.com"},
+    {"id": 59, "claim": "Newsletter-First Content Strategy：邮件订阅作为内容分发核心", "dimension": "执行流程", "confidence": "medium", "source": "StartupStash"},
+    {"id": 60, "claim": "商业本质是'Traffic & Offers'——创建好产品并推送到正确人群面前", "dimension": "核心哲学", "confidence": "high", "source": "thedankoe.com"},
+    {"id": 61, "claim": "Dan Koe 目前在 Eden 工作(LinkedIn)，位于 Scottsdale", "dimension": "个人背景", "confidence": "medium", "source": "LinkedIn"},
+    {"id": 62, "claim": "视频标题中41.7%包含数字(来自158个视频分析)", "dimension": "视频内容", "confidence": "high", "source": "YouTube分析"}
   ]
 }
