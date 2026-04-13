@@ -218,7 +218,7 @@ if [ -n "$(git status --porcelain)" ]; then
 
     push_success=false
     for attempt in $(seq 1 $MAX_RETRIES); do
-        push_output=$(git push --quiet 2>&1)
+        push_output=$(GIT_SSH_COMMAND="ssh -i /root/.ssh/id_evoclaw -p 443 -o StrictHostKeyChecking=no" git push ssh://git@ssh.github.com:443/johnwuming/evoclaw.git HEAD:refs/heads/main --quiet 2>&1)
         push_exit=$?
 
         if [ $push_exit -eq 0 ]; then
