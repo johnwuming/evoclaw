@@ -80,6 +80,8 @@ update_results_readme() {
         local filepath="${line#*"$TAB"}"
         filepath="${filepath#\"}"
         filepath="${filepath%\"}"
+        # Decode git octal-encoded paths
+        filepath=$(printf '%b' "$filepath")
 
         [[ "$filepath" == "research/README.md" ]] && continue
         [[ "$filepath" != research/* ]] && continue
@@ -93,6 +95,19 @@ update_results_readme() {
         code=$(printf '%s' "$fname" | grep -oE '^(R|M)-[0-9]+')
         local title
         title=$(printf '%s' "$fname" | sed "s/^${code}-//" | sed 's/\.md$//')
+        # Try to extract title from file content if filename lacks it
+        if [[ -z "$title" || "$title" == "$code" ]]; then
+            local real_file="$RESULTS_DIR/$rel_path"
+            if [[ -f "$real_file" ]]; then
+                local first_line
+                first_line=$(head -1 "$real_file" 2>/dev/null)
+                local extracted
+                extracted=$(echo "$first_line" | sed -E 's/^#\s*(R|M)-[0-9]+\s*[:：-]\s*//' | sed -E 's/^#\s*//')
+                if [[ -n "$extracted" && "$extracted" != "$first_line" ]]; then
+                    title="$extracted"
+                fi
+            fi
+        fi
 
         local action="修改"
         [[ "$status" == "A" ]] && action="新增"
@@ -100,6 +115,17 @@ update_results_readme() {
         local project=$(echo "$rel_path" | grep -q '/' && echo "$rel_path" | cut -d'/' -f1 || echo "根目录")
         printf '| %s | %s | %s | %s | %s | %s |\n' "$today" "$action" "$code" "$title" "$project" "$rel_path" >> "$entries_file"
     done < <(cd "$REPO_DIR" && git diff --cached --name-status 2>/dev/null)
+
+    # Remove existing entries with same code to prevent duplicates
+    if [[ -f "$readme" ]]; then
+        while IFS= read -r entry; do
+            local entry_code
+            entry_code=$(echo "$entry" | awk -F'|' '{gsub(/^ +| +$/, "", $4); print $4}')
+            if [[ -n "$entry_code" ]]; then
+                sed -i "/| ${entry_code} |/d" "$readme"
+            fi
+        done < "$entries_file"
+    fi
 
     if [[ ! -s "$entries_file" ]]; then
         rm -f "$entries_file"
