@@ -1,37 +1,46 @@
 {
-  "topic": "Claude Code长时间持续coding的最佳实践与提示词工程",
-  "complexity": "中等",
-  "complexity_reason": "这是一个实践性很强的技术调研，需要覆盖官方文档、社区经验、GitHub配置模板和前端重构实战。内容明确但来源分散，需要中英文双源覆盖。4个搜索员分别覆盖：官方基础、前端重构实战、提示词模板、中文来源。",
-  "dimensions": ["Claude Code基础最佳实践", "前端重构实战经验", "CLAUDE.md提示词工程", "工具链与MCP配置"],
+  "topic": "Dan Koe 一人公司（One Person Business）体系深度研究",
+  "complexity": "深度",
+  "complexity_reason": "需要全面调研Dan Koe的个人背景、哲学体系、商业模式、执行框架、视频内容和技能栈，涉及英文和中文多源信息，需要提炼结构化框架",
+  "dimensions": ["个人背景", "核心哲学", "商业逻辑", "执行流程", "视频内容", "技能栈"],
+  "report_id": "R-051",
+  "category": "04-变现与增长",
   "search_queries": [
-    {"id": 1, "query": "Claude Code CLAUDE.md best practices 2025 2026", "dimension": "Claude Code基础最佳实践", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Claude Code long coding session context management tips", "dimension": "Claude Code基础最佳实践", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Claude Code official best practices docs", "dimension": "Claude Code基础最佳实践", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Claude Code .claude directory structure skills commands hooks", "dimension": "Claude Code基础最佳实践", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Claude Code React project refactor large codebase strategy", "dimension": "前端重构实战经验", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 6, "query": "Claude Code Vue frontend rewrite API reuse backend existing", "dimension": "前端重构实战经验", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "Claude Code plan mode subagent parallel development frontend", "dimension": "前端重构实战经验", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "AI coding assistant frontend refactor dashboard data visualization", "dimension": "前端重构实战经验", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "Claude Code large frontend project module decomposition strategy", "dimension": "前端重构实战经验", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "Claude Code CLAUDE.md template example GitHub stars", "dimension": "CLAUDE.md提示词工程", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 11, "query": "Claude Code CLAUDE.md project architecture API conventions component specs", "dimension": "CLAUDE.md提示词工程", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "everything-claude-code GitHub 91k stars configuration", "dimension": "CLAUDE.md提示词工程", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "Claude Code prompt engineering frontend API reuse constraint writing", "dimension": "CLAUDE.md提示词工程", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "Claude Code hooks MCP configuration frontend development", "dimension": "工具链与MCP配置", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "Claude Code 最佳实践 CLAUDE.md 配置 前端 中文", "dimension": "中文来源", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 16, "query": "Claude Code 长时间编码 上下文管理 大型项目 重构", "dimension": "中文来源", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 17, "query": "Claude Code 前端重构 React Vue 提示词 模板", "dimension": "中文来源", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 18, "query": "Claude Code hooks MCP 配置 前端开发工具链", "dimension": "中文来源", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 19, "query": "Anthropic Claude Code 官方文档 最佳实践 中文解读", "dimension": "中文来源", "priority": "medium", "assigned_to": "searcher-4"}
+    {"id": 1, "query": "Dan Koe biography personal background story how he started one person business", "dimension": "个人背景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Dan Koe one person business philosophy definition core principles", "dimension": "核心哲学", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Dan Koe anti traditional entrepreneurship views why one person company better", "dimension": "核心哲学", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Dan Koe 4 focus areas framework for one person business", "dimension": "执行流程", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Dan Koe revenue income sources courses products pricing", "dimension": "商业逻辑", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Dan Koe Digital Economics school course pricing product matrix funnel", "dimension": "商业逻辑", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "Dan Koe high income skills writing design marketing coding stack", "dimension": "技能栈", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "Dan Koe content creation audience building monetization step by step", "dimension": "执行流程", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "Dan Koe YouTube channel best videos one person business personal brand", "dimension": "视频内容", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "Dan Koe tools platforms recommended software for solopreneur", "dimension": "技能栈", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "Dan Koe the art of focus book summary key ideas", "dimension": "核心哲学", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "Dan Koe from zero to one startup steps guide for beginners", "dimension": "执行流程", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "Dan Koe mental models frameworks for building online business", "dimension": "执行流程", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "Dan Koe newsletter email list strategy audience growth", "dimension": "执行流程", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "Dan Koe community brand Kortex company structure team", "dimension": "商业逻辑", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "Dan Koe 一人公司 中文分析 解读", "dimension": "中文社区", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "Dan Koe annual revenue million dollar one person business income report", "dimension": "商业逻辑", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 18, "query": "Dan Koe digital products course creation selling online framework", "dimension": "商业逻辑", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 19, "query": "Dan Koe YouTube most popular videos views one person business guide 2024 2025", "dimension": "视频内容", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 20, "query": "Dan Koe writing as high income skill content marketing strategy", "dimension": "技能栈", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4], "focus": "Claude Code基础最佳实践和官方文档"},
-    "searcher-2": {"queries": [5, 6, 7, 8, 9], "focus": "前端重构实战经验"},
-    "searcher-3": {"queries": [10, 11, 12, 13, 14], "focus": "CLAUDE.md提示词模板和工具链"},
-    "searcher-4": {"queries": [15, 16, 17, 18, 19], "focus": "中文来源补充"}
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 17],
+      "focus": "Dan Koe个人背景、一人公司哲学、收入模式和核心框架"
+    },
+    "searcher-2": {
+      "queries": [6, 7, 8, 9, 10, 18, 20],
+      "focus": "产品矩阵、技能栈、内容创作方法论和YouTube核心视频"
+    },
+    "searcher-3": {
+      "queries": [11, 12, 13, 14, 15, 16, 19],
+      "focus": "著作、从0到1路径、心智模型、社区结构和中文分析"
+    }
   },
-  "searcher_count": 4,
-  "review_rounds": 1,
-  "report_id": "R-052",
-  "category": "02-AI技术调研"
+  "searcher_count": 3,
+  "review_rounds": 1
 }
