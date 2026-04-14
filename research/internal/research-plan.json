@@ -1,46 +1,37 @@
 {
-  "topic": "Dan Koe 一人公司（One Person Business）体系深度研究",
-  "complexity": "深度",
-  "complexity_reason": "需要全面调研Dan Koe的个人背景、哲学体系、商业模式、执行框架、视频内容和技能栈，涉及英文和中文多源信息，需要提炼结构化框架",
-  "dimensions": ["个人背景", "核心哲学", "商业逻辑", "执行流程", "视频内容", "技能栈"],
-  "report_id": "R-051",
-  "category": "04-变现与增长",
+  "topic": "2026年五一黄金周家庭自驾游攻略（南京出发，3岁幼儿，纯电车）",
+  "complexity": "中等",
+  "complexity_reason": "旅游攻略类任务，不需要深度数据分析，但需要多维度信息（假期安排、目的地、充电网络、亲子设施、天气等），且需要给出明确推荐而非泛泛列举。分配2-3个搜索员，1轮搜索+1轮补充即可覆盖。",
+  "dimensions": ["假期政策", "目的地评估", "充电基础设施", "亲子设施与活动", "天气与路况", "预算估算"],
   "search_queries": [
-    {"id": 1, "query": "Dan Koe biography personal background story how he started one person business", "dimension": "个人背景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Dan Koe one person business philosophy definition core principles", "dimension": "核心哲学", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Dan Koe anti traditional entrepreneurship views why one person company better", "dimension": "核心哲学", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Dan Koe 4 focus areas framework for one person business", "dimension": "执行流程", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Dan Koe revenue income sources courses products pricing", "dimension": "商业逻辑", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "Dan Koe Digital Economics school course pricing product matrix funnel", "dimension": "商业逻辑", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "Dan Koe high income skills writing design marketing coding stack", "dimension": "技能栈", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "Dan Koe content creation audience building monetization step by step", "dimension": "执行流程", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "Dan Koe YouTube channel best videos one person business personal brand", "dimension": "视频内容", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "Dan Koe tools platforms recommended software for solopreneur", "dimension": "技能栈", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "Dan Koe the art of focus book summary key ideas", "dimension": "核心哲学", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "Dan Koe from zero to one startup steps guide for beginners", "dimension": "执行流程", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "Dan Koe mental models frameworks for building online business", "dimension": "执行流程", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "Dan Koe newsletter email list strategy audience growth", "dimension": "执行流程", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "Dan Koe community brand Kortex company structure team", "dimension": "商业逻辑", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "Dan Koe 一人公司 中文分析 解读", "dimension": "中文社区", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "Dan Koe annual revenue million dollar one person business income report", "dimension": "商业逻辑", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 18, "query": "Dan Koe digital products course creation selling online framework", "dimension": "商业逻辑", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 19, "query": "Dan Koe YouTube most popular videos views one person business guide 2024 2025", "dimension": "视频内容", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 20, "query": "Dan Koe writing as high income skill content marketing strategy", "dimension": "技能栈", "priority": "medium", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "2026年五一劳动节放假安排调休日期 国务院通知", "dimension": "假期政策", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "五一高速免费政策2026 免费时段 7座以下客车", "dimension": "假期政策", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "南京到千岛湖自驾路线 距离时间 充电桩", "dimension": "目的地评估", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "南京到舟山自驾路线 距离时间 充电桩", "dimension": "目的地评估", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "南京到莫干山自驾路线 距离时间 充电桩", "dimension": "目的地评估", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "千岛湖亲子游 3岁幼儿 适合景点 酒店", "dimension": "亲子设施与活动", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "舟山亲子游 带娃 朱家尖 普陀 酒店", "dimension": "亲子设施与活动", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "莫干山亲子游 幼儿 民宿 竹海", "dimension": "亲子设施与活动", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "乐道L60充电网络 蔚来换电站兼容 2025 2026", "dimension": "充电基础设施", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 10, "query": "浙江高速服务区充电桩分布 国网e充电 2025 2026", "dimension": "充电基础设施", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 11, "query": "五一自驾出峰避堵策略 错峰出行 2025 2026经验", "dimension": "天气与路况", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "五月初浙江天气 千岛湖舟山 温度降雨 适合旅游", "dimension": "天气与路况", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "带3岁幼儿自驾游注意事项 安全座椅 午睡 饮食", "dimension": "亲子设施与活动", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "南京到青岛自驾 距离时间 充电桩 亲子", "dimension": "目的地评估", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 15, "query": "千岛湖亲子酒店排名 2025 推荐", "dimension": "亲子设施与活动", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 17],
-      "focus": "Dan Koe个人背景、一人公司哲学、收入模式和核心框架"
+      "queries": [1, 2, 3, 4, 5, 9, 10, 14],
+      "focus": "假期政策、目的地路线、充电基础设施"
     },
     "searcher-2": {
-      "queries": [6, 7, 8, 9, 10, 18, 20],
-      "focus": "产品矩阵、技能栈、内容创作方法论和YouTube核心视频"
-    },
-    "searcher-3": {
-      "queries": [11, 12, 13, 14, 15, 16, 19],
-      "focus": "著作、从0到1路径、心智模型、社区结构和中文分析"
+      "queries": [6, 7, 8, 11, 12, 13, 15],
+      "focus": "亲子景点活动、酒店推荐、天气路况、带娃自驾注意"
     }
   },
-  "searcher_count": 3,
-  "review_rounds": 1
+  "searcher_count": 2,
+  "review_rounds": 1,
+  "report_id": "R-056",
+  "category": "07-其他"
 }
