@@ -1,0 +1,320 @@
+{
+  "findings": [
+    {
+      "claim": "百度文心一言深度搜索功能于2025年2月上线，4月1日起全面免费开放",
+      "evidence": "百度于2025年2月13日宣布文心一言上线深度搜索功能，采用'推理模型+搜索'架构，具备更强的思考规划和使用工具的能力。4月1日零时起，文心一言全面免费，PC端和APP端用户均可体验最新模型并使用深度搜索功能。深度搜索将复杂问题问答查询拉至专业级，具备多模态输入与输出能力。",
+      "source_url": "https://www.qbitai.com/2025/02/253568.html",
+      "confidence": "high",
+      "source_name": "量子位",
+      "query_id": 1
+    },
+    {
+      "claim": "百度深度搜索功能入口为文心一言APP和PC端，具备专家级内容回复和多场景处理能力",
+      "evidence": "深度搜索功能在文心一言APP和PC端均可使用，可为用户提供专家级内容回复，处理多场景任务，实现多模态输入与输出。功能包括语义理解、文献定位、实验数据检索等学术研究场景。",
+      "source_url": "https://cloud.baidu.com/article/5666692",
+      "confidence": "high",
+      "source_name": "百度智能云",
+      "query_id": 1
+    },
+    {
+      "claim": "百度千帆Deep Research采用Agentic架构，技术内核为'规划-问题演化-网页探索-报告生成'四阶段闭环",
+      "evidence": "百度千帆Deep Research的核心技术内核是模拟顶尖研究人员工作流程的智能代理架构，技术逻辑可拆解为'规划-问题演化-网页探索-报告生成'四个闭环阶段。采用'任务理解分析→任务思考规划→任务调度执行'的循环式执行体系，支持可扩展、并行、专业化调度。",
+      "source_url": "https://qianfan.cloud.baidu.com/qianfandev/topic/687065",
+      "confidence": "high",
+      "source_name": "百度千帆开发者社区",
+      "query_id": 2
+    },
+    {
+      "claim": "百度千帆Deep Research能自主完成多步骤研究任务，实时整合多模态数据，生成带引用的专业级研究报告",
+      "evidence": "百度千帆深度研究（DeepResearch）Agent作为AI深度研究工具，能够自主完成多步骤研究任务，实时整合文本、图像、PDF等多模态数据，在十几分钟内生成带引用的专业级研究报告。支持HTML渲染、多格式导出（PDF/Word/Markdown），已登顶DeepResearch Bench榜首。",
+      "source_url": "https://qianfan.cloud.baidu.com/qianfandev/topic/687217",
+      "confidence": "high",
+      "source_name": "百度千帆开发者社区",
+      "query_id": 2
+    },
+    {
+      "claim": "百度千帆Deep Research分为标准版和Pro版本，面向企业级应用场景",
+      "evidence": "DeepResearch提供标准版和Pro版本，Pro版本与标准版分别拿下DeepResearch Bench冠亚军。在复杂任务拆解、多源信息整合、逻辑推理、报告生成等所有维度全面领先。目前已广泛应用于学术综述、金融投研、商业分析等领域。",
+      "source_url": "https://qianfan.cloud.baidu.com/qianfandev/topic/687650",
+      "confidence": "high",
+      "source_name": "百度千帆开发者社区",
+      "query_id": 2
+    },
+    {
+      "claim": "阿里通义千问Deep Research于2025年5月14日正式上线并免费开放",
+      "evidence": "2025年5月14日，通义千问官方公众号宣布上线Deep Research智能助理系统。该系统能规划复杂研究任务，综合大量信息，协助完成科研任务。过去需要数小时才能完成的任务，现在可在十几分钟内完成。用户可免费体验。",
+      "source_url": "https://finance.sina.com.cn/tech/roll/2025-05-14/doc-inewpfia1119334.shtml",
+      "confidence": "high",
+      "source_name": "新浪财经",
+      "query_id": 3
+    },
+    {
+      "claim": "通义Deep Research基于300亿参数MoE模型（激活30亿），专门用于长期深入信息检索",
+      "evidence": "通义千问深度研究（Qwen-Deep-Research）是一个具有300亿总参数的代理大语言模型，每个token仅激活30亿参数。由通义实验室开发，专门用于长期、深入的信息检索任务。在一系列代理搜索基准测试中展示了最先进的性能，包括人类最后的考试等。",
+      "source_url": "https://tongyi.aliyun.com/news?id=pxwhvf/suodqg/ha8na5lndb8a07pc",
+      "confidence": "high",
+      "source_name": "阿里云通义千问官网",
+      "query_id": 3
+    },
+    {
+      "claim": "通义Deep Research功能包含任务规划、多轮搜索、信息整合和结构化研究报告生成",
+      "evidence": "Qwen-Deep-Research能自动规划研究步骤、执行多轮的深入搜索与信息整合，并最终生成一份结构化的研究报告。系统目标：帮助用户梳理复杂问题，快速理清头绪，并生成条理清晰、数据可信的研究报告。Deep Research可以结合互联网上的海量信息，对复杂任务进行多步骤的搜索和分析总结。",
+      "source_url": "https://help.aliyun.com/zh/model-studio/qwen-deep-research",
+      "confidence": "high",
+      "source_name": "阿里云官方文档",
+      "query_id": 3
+    },
+    {
+      "claim": "阿里通义深度搜索是面向复杂研究任务的高级智能体系统，具备多轮推理与全局规划能力",
+      "evidence": "通义深度搜索面向复杂研究任务，具备多轮推理与全局规划能力，能够运用互联网搜索等多种工具，对任务进行精细化拆解，开展推理与分析。阿里云AI搜索通过Agentic Search重构搜索范式，实现从信息匹配到智能问答的下一代搜索体验。",
+      "source_url": "https://help.aliyun.com/zh/model-studio/tongyi-deep-search-introduction",
+      "confidence": "high",
+      "source_name": "阿里云官方文档",
+      "query_id": 4
+    },
+    {
+      "claim": "通义Deep Research模型API定价为输入0.054元/千tokens、输出0.163元/千tokens",
+      "evidence": "根据API价格信息，qwen-deep-research模型的定价为输入0.054元/千tokens、输出0.163元/千tokens。通义千问深入研究模型可以拆解复杂问题，结合互联网搜索进行推理分析并生成研究报告。",
+      "source_url": "https://doc.zhizengzeng.com/doc-3979947",
+      "confidence": "medium",
+      "source_name": "智增增API文档",
+      "query_id": 4
+    },
+    {
+      "claim": "智谱AutoGLM沉思于2025年3月31日发布，是国内首个集深度研究和操作能力于一体的AI Agent",
+      "evidence": "2025年3月31日，智谱在中关村论坛上正式发布AutoGLM沉思。作为全球首个集深度研究与实际操作能力于一体的Agent，AutoGLM沉思能一边进行复杂思考，一边执行实际操作。沉思功能已正式上线智谱清言网页端、PC端和手机App，免费、不限量地开放使用。这也是国内首个正式开放的Deep Research功能。",
+      "source_url": "https://stcn.com/article/detail/1626583.html",
+      "confidence": "high",
+      "source_name": "证券时报",
+      "query_id": 5
+    },
+    {
+      "claim": "智谱AutoGLM沉思采用GLM-Z1-Rumination沉思模型驱动，技术演进路径为GLM-4→GLM-Z1→GLM-Z1-Rumination→AutoGLM",
+      "evidence": "AutoGLM沉思的技术演进路径包括：GLM-4基座模型→GLM-Z1推理模型→GLM-Z1-Rumination沉思模型→AutoGLM模型。沉思模型通过强化学习让模型学会自我批评、反思甚至沉思，通过更长的深度思考时间换取更优的输出质量。AutoGLM沉思是一个能探究开放式问题并根据结果执行操作的自主智能体。",
+      "source_url": "https://finance.sina.com.cn/roll/2025-03-31/doc-inerpiyq8341879.shtml",
+      "confidence": "high",
+      "source_name": "新浪财经",
+      "query_id": 5
+    },
+    {
+      "claim": "智谱AutoGLM沉思完全免费、不限量开放，在智谱清言网页端/PC端/App均可使用",
+      "evidence": "目前沉思功能已经正式上线智谱清言网页端、PC端和手机App，免费、不限量地开放使用。在ChatGPT上要花200美元的功能，在智谱清言上可以免费不限量体验。核心理念：深度思考+感知世界+使用工具。",
+      "source_url": "https://zhuanlan.zhihu.com/p/1890366621287166337",
+      "confidence": "high",
+      "source_name": "知乎",
+      "query_id": 5
+    },
+    {
+      "claim": "智谱AutoGLM沉思工作流程包含数据检索、分析到生成报告的全流程，支持工具使用和代码编写",
+      "evidence": "AutoGLM沉思能够模拟人类的思维过程，完成从数据检索、分析到生成报告的全流程工作。智谱的技术演进分为三个阶段：第一阶段是工具使用和代码编写（Function Call），第二阶段是工具流编排（GLMs），第三个阶段是自主智能体（AutoGLM沉思）。具备自主推理、计划与执行能力。",
+      "source_url": "https://zhuanlan.zhihu.com/p/1891486483136881164",
+      "confidence": "high",
+      "source_name": "知乎",
+      "query_id": 6
+    },
+    {
+      "claim": "字节豆包'深入研究'功能已上线App、网页版及电脑版，用户可免费体验",
+      "evidence": "豆包「深入研究」功能已经在豆包App、网页版及电脑版正式开启测试，用户可免费体验。基于模型的搜索、推理及Agent能力，「深入研究」可以帮助用户更快速、全面和结构化地处理高难度的复杂任务，如长途旅行攻略、复杂购买决策、最新政策解读等。",
+      "source_url": "https://www.infoq.cn/article/iisjg457hzzbimkmrizn",
+      "confidence": "high",
+      "source_name": "InfoQ",
+      "query_id": 7
+    },
+    {
+      "claim": "豆包深度思考功能于2025年3月全量上线APP，支持'边想边搜'的检索+推理组合模式",
+      "evidence": "2025年3月豆包APP全量上线深度思考功能。新版深度思考将推理过程的思维链与搜索深度结合，支持'边想边搜'。'边搜边想'模式更像'检索+推理'的组合，分步骤处理机制在面对需要外部数据支持的问题和复杂问题时能明显提升回复质量。",
+      "source_url": "https://www.stdaily.com/web/gdxw/2025-03/28/content_316285.html",
+      "confidence": "high",
+      "source_name": "中国科技网",
+      "query_id": 7
+    },
+    {
+      "claim": "豆包深入研究功能类似Agent能力，输入指令后可自动进行多步骤搜索和分析",
+      "evidence": "豆包'深入研究'功能类似Agent能力，输入详细指令或一句话即可启动。该功能基于模型的搜索、推理及Agent能力构建，能自动进行多步骤搜索和信息整合，生成结构化报告。财联社记者实测发现该功能可处理复杂任务。",
+      "source_url": "https://www.cls.cn/detail/2071329",
+      "confidence": "high",
+      "source_name": "财联社",
+      "query_id": 8
+    },
+    {
+      "claim": "字节火山方舟提供深度思考API，模型在回答前进行多步骤规划，擅长编程、科学推理和智能体工作流",
+      "evidence": "火山方舟深度思考功能：模型在回答前对问题进行分析及多步骤规划，再尝试解决问题。擅长处理编程、科学推理、智能体工作流等复杂及抽象场景。启用深度思考后会在指定字段返回思维过程。豆包大模型1.6版本在复杂推理、竞赛级数学计算、多轮对话连贯性等核心能力上有显著提升。",
+      "source_url": "https://www.volcengine.com/docs/82379/1449737",
+      "confidence": "high",
+      "source_name": "火山引擎官方文档",
+      "query_id": 8
+    },
+    {
+      "claim": "xAI在Grok 3发布时推出DeepSearch功能，能扫描互联网和X平台数据生成深度分析",
+      "evidence": "xAI在2025年2月17日发布Grok 3时，同时推出了DeepSearch功能。DeepSearch能实时搜索互联网和X平台（Twitter）的数据，整合信息生成深度分析。后续还推出了DeeperSearch功能，能深入挖掘并分析过去48小时内Twitter上的数据。",
+      "source_url": "https://www.businessinsider.com/xai-deepsearch-google-gemini-openai-2025-2",
+      "confidence": "high",
+      "source_name": "Business Insider",
+      "query_id": 9
+    },
+    {
+      "claim": "Grok DeepSearch核心优势是与X平台深度整合，支持实时舆情追踪和新闻分析",
+      "evidence": "Grok DeepSearch深度搜索功能的核心优势在于与X平台（Twitter）的深度整合，能实时检索X平台数据。适用于新闻追踪、舆情监控等场景。Grok 3引入了链式思维（Chain of Thought）推理能力，逐步拆解复杂任务。Grok 4.1 beta进一步提升了推理和多模态理解能力。",
+      "source_url": "https://x-grok.top/blog/deepsearch-guide",
+      "confidence": "medium",
+      "source_name": "X-Grok.Top",
+      "query_id": 9
+    },
+    {
+      "claim": "Grok DeepSearch需Premium+订阅才能使用API，免费版功能有限",
+      "evidence": "Grok DeepSearch功能在Grok APP内可用，但完整API功能需要Premium+订阅（每月约30美元）。Grok Research API专注于提供全面、深入的研究报告，与标准聊天模型不同。开发者需通过x.ai/api生成Key，集成Grok工具。",
+      "source_url": "https://help.apiyi.com/grok-3-research-api-guide.html",
+      "confidence": "medium",
+      "source_name": "API易文档",
+      "query_id": 9
+    },
+    {
+      "claim": "2025年全球Deep Research产品竞争格局：OpenAI o3、Google Gemini 2.5 Pro领先，Kimi和豆包紧随其后",
+      "evidence": "基于o3模型开发的OpenAI Deep Research能实时联网搜索、进行长时间深度思考，最终生成带完整引用的专业级研究报告。Google推出Gemini 2.5 Pro Deep Research紧随其后。在全球DeepResearch产品大比拼中，Gemini和OpenAI霸榜，Kimi和豆包等国产品牌也在积极追赶。",
+      "source_url": "https://cloud.tencent.com/developer/article/2556072",
+      "confidence": "high",
+      "source_name": "腾讯云开发者社区",
+      "query_id": 10
+    },
+    {
+      "claim": "Deep Research AI工具对比：五大平台（ChatGPT、Claude、Gemini、Grok、Perplexity）各有优劣",
+      "evidence": "经过五大平台实测对比：ChatGPT Deep Research在综合研究质量上领先；Gemini Deep Research速度较快且免费可用；Perplexity在引用透明度和学术搜索上有优势；Grok的差异化在于与X平台实时数据整合；Claude Pro目前尚无独立的Deep Research功能，主要依靠搜索+推理组合。",
+      "source_url": "https://brightinventions.pl/blog/ai-deep-research-comparison/",
+      "confidence": "high",
+      "source_name": "Bright Inventions",
+      "query_id": 10
+    },
+    {
+      "claim": "OpenAI Deep Research基于o3模型，需Pro订阅（每月200美元），生成带引用的长篇研究报告",
+      "evidence": "OpenAI于2025年2月2日推出Deep Research功能，基于o3模型，专为网络浏览和数据分析优化。该功能需要ChatGPT Pro订阅（每月200美元），能实时联网搜索、进行长时间深度思考，生成带完整引用的专业级研究报告。在GAIA评测等基准中表现优异。",
+      "source_url": "https://www.helicone.ai/blog/openai-deep-research",
+      "confidence": "high",
+      "source_name": "Helicone Blog",
+      "query_id": 10
+    },
+    {
+      "claim": "通义Deep Research全开源：模型、框架、方案全部开源，支持开发者自定义部署",
+      "evidence": "阿里云宣布通义DeepResearch模型、框架、方案全开源。300亿参数MoE模型（激活30亿参数）完全开源，开发者可以基于开源方案进行自定义部署和二次开发，支持API调用。在代理搜索基准测试中展示了最先进性能。",
+      "source_url": "https://tongyi.aliyun.com/news?id=pxwhvf/suodqg/ha8na5lndb8a07pc",
+      "confidence": "high",
+      "source_name": "阿里云通义千问官网",
+      "query_id": 3
+    },
+    {
+      "claim": "百度千帆Deep Research采用多模态数据整合，支持图表渲染和多格式导出",
+      "evidence": "百度千帆Deep Research引入增强型HTML渲染引擎，通过标准化Web技术与定制化样式规则实现多图表精准呈现。支持PDF、Word、Markdown等多格式导出。能实时整合文本、图像、PDF等多模态数据，在十几分钟内生成带引用的专业级研究报告。",
+      "source_url": "https://qianfan.cloud.baidu.com/qianfandev/topic/687428",
+      "confidence": "high",
+      "source_name": "百度千帆开发者社区",
+      "query_id": 2
+    },
+    {
+      "claim": "智谱AutoGLM沉思具备'边想边干'能力，不仅能深度研究还能执行实际操作",
+      "evidence": "AutoGLM沉思的突破性在于将Deep Research（深度研究）和Operator（实际操作）融为一体。能像人一样深度研究和反思、像人一样感知世界、像人一样使用工具。这是全球首个集深度研究和操作能力于一体的Agent，推动AI Agent进入'边想边干'阶段。",
+      "source_url": "https://www.eet-china.com/mp/a393071.html",
+      "confidence": "high",
+      "source_name": "电子工程专辑",
+      "query_id": 6
+    },
+    {
+      "claim": "智谱AutoGLM沉思具备多Agent协同能力，包含GLMs工具编排系统",
+      "evidence": "智谱的技术演进分为三个阶段：第一阶段是工具使用和代码编写（智谱清言Function Call），第二阶段是工具流编排（GLMs系统，2024年初上线），第三个阶段是自主智能体（AutoGLM沉思）。这意味着AutoGLM沉思在技术架构上融合了Function Call工具调用和多Agent编排能力。",
+      "source_url": "https://www.digitaling.com/articles/1336390.html",
+      "confidence": "high",
+      "source_name": "数英网",
+      "query_id": 6
+    },
+    {
+      "claim": "豆包大模型1.6版本为深入研究功能提供底层支撑，支持多模态理解和图形界面操作",
+      "evidence": "2025年6月火山引擎发布豆包大模型1.6版本，在复杂推理、竞赛级数学计算、多轮对话连贯性等核心能力上显著提升。该模型支持多模态理解和图形界面操作能力。豆包大模型日均tokens调用量超4万亿，支撑超过50个应用场景。",
+      "source_url": "https://blog.csdn.net/2402_85546360/article/details/154795818",
+      "confidence": "medium",
+      "source_name": "CSDN博客",
+      "query_id": 8
+    },
+    {
+      "claim": "Deep Research技术架构主要分为静态工作流和动态工作流两种范式",
+      "evidence": "静态工作流通过手动预定义的任务管道将研究过程分解为顺序子任务（如AI Scientist的构思-实验-报告阶段）。动态工作流支持动态任务规划，允许智能体根据执行过程中收到的反馈调整未来步骤，完全由模型自主完成任务规划、执行、反思、迭代。多数商用Deep Research产品采用动态工作流范式。",
+      "source_url": "https://modelscope.cn/learn/2107",
+      "confidence": "high",
+      "source_name": "ModelScope",
+      "query_id": 2
+    },
+    {
+      "claim": "全球Deep Research产品发展时间线：OpenAI(2025.2)→Google(2025.2)→智谱(2025.3)→通义(2025.5)→豆包(2025.7)",
+      "evidence": "OpenAI于2025年2月2日率先推出Deep Research；Google于2025年2月推出Gemini 2.5 Pro Deep Research；智谱于2025年3月31日发布AutoGLM沉思（国内首个Deep Research）；通义千问于2025年5月14日上线Deep Research；豆包于2025年7月上线'深入研究'功能。",
+      "source_url": "https://www.rjtj.cn/news/show-35562.html",
+      "confidence": "high",
+      "source_name": "人天通讯",
+      "query_id": 10
+    }
+  ],
+  "visited_urls": [
+    "https://www.qbitai.com/2025/02/253568.html",
+    "https://cloud.baidu.com/article/5666692",
+    "https://qianfan.cloud.baidu.com/qianfandev/topic/687065",
+    "https://qianfan.cloud.baidu.com/qianfandev/topic/687217",
+    "https://qianfan.cloud.baidu.com/qianfandev/topic/687650",
+    "https://qianfan.cloud.baidu.com/qianfandev/topic/687428",
+    "https://finance.sina.com.cn/tech/roll/2025-05-14/doc-inewpfia1119334.shtml",
+    "https://tongyi.aliyun.com/news?id=pxwhvf/suodqg/ha8na5lndb8a07pc",
+    "https://help.aliyun.com/zh/model-studio/qwen-deep-research",
+    "https://help.aliyun.com/zh/model-studio/tongyi-deep-search-introduction",
+    "https://doc.zhizengzeng.com/doc-3979947",
+    "https://stcn.com/article/detail/1626583.html",
+    "https://finance.sina.com.cn/roll/2025-03-31/doc-inerpiyq8341879.shtml",
+    "https://zhuanlan.zhihu.com/p/1890366621287166337",
+    "https://zhuanlan.zhihu.com/p/1891486483136881164",
+    "https://www.eet-china.com/mp/a393071.html",
+    "https://www.digitaling.com/articles/1336390.html",
+    "https://www.infoq.cn/article/iisjg457hzzbimkmrizn",
+    "https://www.cls.cn/detail/2071329",
+    "https://www.stdaily.com/web/gdxw/2025-03/28/content_316285.html",
+    "https://www.volcengine.com/docs/82379/1449737",
+    "https://blog.csdn.net/2402_85546360/article/details/154795818",
+    "https://www.businessinsider.com/xai-deepsearch-google-gemini-openai-2025-2",
+    "https://x-grok.top/blog/deepsearch-guide",
+    "https://help.apiyi.com/grok-3-research-api-guide.html",
+    "https://cloud.tencent.com/developer/article/2556072",
+    "https://brightinventions.pl/blog/ai-deep-research-comparison/",
+    "https://www.helicone.ai/blog/openai-deep-research",
+    "https://modelscope.cn/learn/2107",
+    "https://www.rjtj.cn/news/show-35562.html"
+  ],
+  "used_queries": [
+    "百度 文心一言 深度搜索 研究模式 功能详解 2025",
+    "百度 深度搜索 agent 架构 技术原理 多步骤搜索",
+    "百度千帆 Deep Research 技术架构 规划 问题演化 网页探索 报告生成",
+    "阿里 通义千问 深度研究 Qwen Research 功能详解 2025",
+    "通义千问 深度研究 DeepResearch agent架构 技术原理 工作流程",
+    "阿里 通义深度搜索 智能体 多轮推理 全局规划",
+    "智谱 GLM 深度研究 智谱清言 research agent 功能 2025",
+    "智谱 AutoGLM 沉思 深度研究 技术架构 agent 工作流程",
+    "字节跳动 豆包 深度研究 功能详解 2025",
+    "豆包 深入研究 deep research agent 架构 技术原理 工作流",
+    "豆包 深度研究 研究助手 deep research 功能上线",
+    "xAI Grok deep research function capabilities 2025",
+    "xAI DeepSearch Grok 深度搜索 功能详解 2025",
+    "Deep Research AI comparison OpenAI Google Anthropic 2025",
+    "深度研究功能对比 Deep Research 百度 阿里 智谱 豆包 xAI OpenAI Google",
+    "Deep Research 定价 价格 免费付费 OpenAI Google 百度 智谱 通义 豆包",
+    "中国AI大厂深度研究功能对比 百度 阿里 智谱 字节 2025"
+  ],
+  "gaps_found": [
+    "百度深度搜索与千帆Deep Research的具体技术架构差异未完全明确（C端免费版vs企业付费版）",
+    "字节豆包'深入研究'的具体agent架构和工作流程细节较少公开（企业未深度披露）",
+    "xAI Grok DeepSearch的技术架构（是否agent/tool use）信息较少，需要更多一手资料",
+    "各厂商Deep Research的具体token消耗量和单次研究耗时数据不完整",
+    "Claude/Anthropic目前没有独立的Deep Research产品，但具体是否在开发中不确定",
+    "各厂商Deep Research的准确率和基准测试结果对比数据不够全面"
+  ],
+  "agent_metadata": {
+    "tool_calls_used": 18,
+    "blocked_reasons": [
+      "web-search-prime: 多次遇到429速率限制，需控制请求频率",
+      "web_search (DuckDuckGo): 完全不可用，fetch failed",
+      "browser (sandbox): 不可用，未启用",
+      "browser (host): 连接超时"
+    ]
+  }
+}
