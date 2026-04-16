@@ -1,40 +1,37 @@
 {
-  "topic": "南京小朋友玩沙子地点全清单与精选推荐",
+  "topic": "空气炸锅全价位深度横评与选购指南",
   "complexity": "中等",
-  "complexity_reason": "本地生活类调研，核心是全面搜索南京所有适合3岁小朋友玩沙的地点（公园沙池、室内沙乐园、江滩河滩、特色景区、商场游乐设施），并给出分场景精选推荐和实用建议。不需要跨行业深度分析或数据建模，但需要覆盖面广、信息准确（收费、位置、特色等）。",
-  "dimensions": ["公园沙池", "室内沙乐园", "江滩河滩", "特色景区", "商场游乐设施", "实用建议"],
+  "complexity_reason": "产品横评任务，需覆盖9+品牌和4个价位段共20-30款型号，但属于消费品类产品调研，信息来源丰富（电商平台、测评文章），不需要深度技术分析或财务建模。2-3个搜索员各负责2个价位段即可覆盖。",
+  "dimensions": ["品牌格局", "技术差异", "各价位产品横评", "选购参数"],
   "search_queries": [
-    {"id": 1, "query": "南京公园沙池 玩沙子 小朋友 绿博园 玄武湖 情侣园 沙坑 亲子", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "南京免费公园沙池 沙坑 带小孩玩沙 2024 2025", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "南京绿博园沙池 位置 收费 体验 亲子", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "南京玄武湖 情侣园 沙滩 玩沙 儿童", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "南京室内沙乐园 沙画体验 商场 小朋友 室内玩沙", "dimension": "室内沙乐园", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "南京儿童乐园 沙池 商场室内 室内游乐场 玩沙", "dimension": "室内沙乐园", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "南京八卦洲 江心洲 长江江滩 玩沙 亲子 自驾", "dimension": "江滩河滩", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "南京周边江滩玩沙 河滩 带小孩 自然沙地 长江沿岸", "dimension": "江滩河滩", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 9, "query": "南京不老村 水墨大埝 玩沙 亲子游 特色景区 沙池", "dimension": "特色景区", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "南京银杏湖乐园 沙滩 玩沙 亲子 游乐场", "dimension": "特色景区", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "南京红山动物园 玩沙 沙池 儿童游乐", "dimension": "特色景区", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "南京珍珠泉 老山森林公园 沙滩 玩沙 亲子", "dimension": "特色景区", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "南京鱼嘴湿地公园 绿地 江滩 玩沙 亲子", "dimension": "江滩河滩", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "南京商场儿童游乐场 玩沙设施 室内 沙池 永旺 万达", "dimension": "商场游乐设施", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 15, "query": "南京带小孩玩沙推荐 亲子 周末 人少 小众 宝藏地点", "dimension": "精选推荐", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 16, "query": "南京河西 南京南站 江宁 仙林 附近玩沙 公园 儿童", "dimension": "公园沙池", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 17, "query": "南京亲子玩沙攻略 工具自带 注意事项 3岁 幼儿", "dimension": "实用建议", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 18, "query": "南京收费沙乐园 室内沙画 亲子乐园 价格 体验评价", "dimension": "室内沙乐园", "priority": "high", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "2025 2026年空气炸锅品牌排行榜 市场占有率 飞利浦 九阳 苏泊尔 美的", "dimension": "品牌格局", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "空气炸锅核心技术对比 热风循环 加热管类型 旋风技术 海星底盘 温控精度", "dimension": "技术差异", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "空气炸锅容量选择 2L 3L 4L 5L 6L 单身 情侣 家庭 几人用", "dimension": "品牌格局", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "100-300元空气炸锅推荐 2025 2026 入门款 性价比 山本 利仁 九阳 美的", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "300-600元空气炸锅推荐 2025 2026 主流款 横评 九阳 苏泊尔 美的 小米", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "600-1000元空气炸锅推荐 2025 2026 进阶款 飞利浦 松下 九阳", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "1000元以上高端空气炸锅推荐 2025 2026 飞利浦 松下 Ninja 双层", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "飞利浦空气炸锅 全系列型号对比 HD9860 HD9870 HD9650 HD9270 价格 参数", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "空气炸锅选购指南 功率 容量 温控 内胆材质 涂层安全 关键参数", "dimension": "选购参数", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "空气炸锅智商税功能 预设菜单 APP控制 可视窗口 无油真实效果", "dimension": "选购参数", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "九阳空气炸锅 KL系列 型号对比 2025 2026 价格 容量 卖点", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 12, "query": "苏泊尔空气炸锅 KD系列 型号对比 2025 2026 价格 参数", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 13, "query": "小米空气炸锅 Pro Max 型号参数 价格 对比 2025 2026", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "Ninja空气炸锅 中国型号 价格 AF100 AF120 AF150 对比 2025 2026", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 15, "query": "空气炸锅测评视频 总结 真实体验 缺点 翻车 噪音 加热不均", "dimension": "选购参数", "priority": "medium", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6, 7, 8, 16, 18],
-      "focus": "公园沙池+室内沙乐园+江滩河滩+各区公园"
+      "queries": [1, 2, 3, 4, 5, 11, 12, 15],
+      "focus": "品牌格局、技术差异、入门款与主流款横评"
     },
     "searcher-2": {
-      "queries": [9, 10, 11, 12, 13, 14, 15, 17],
-      "focus": "特色景区+商场游乐+精选推荐+实用建议"
+      "queries": [6, 7, 8, 9, 10, 13, 14],
+      "focus": "进阶款与高端款横评、飞利浦全系列、选购参数"
     }
   },
   "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-059",
+  "report_id": "R-060",
   "category": "06-产品调研"
 }
