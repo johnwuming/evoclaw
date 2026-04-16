@@ -2,23 +2,10 @@
   "iterations": [
     {
       "round": 1,
-      "searcher_results": {
-        "searcher-1": "completed - 26 findings, background/philosophy/revenue",
-        "searcher-2": "completed - 20 findings, products/skills/content/videos",
-        "searcher-3": "completed - 24 findings, book/framework/cn-analysis/videos"
-      },
-      "total_findings": 62,
-      "reviewer_completeness_score": 7.2,
-      "reviewer_accuracy": "timed_out",
-      "gaps_found": [
-        "视频内容深度提取不足(5/10)",
-        "技能栈缺少具体学习路径(6/10)",
-        "Kortex转型故事不完整",
-        "利润率数据矛盾(90% vs 98%)",
-        "2024-2025最新收入数据缺失"
-      ],
-      "action": "收敛写报告 — 评分>=7，缺口在报告中标注为知识局限",
-      "gaps_addressed_in_report": true
+      "accuracy_score": 7.5,
+      "completeness_score": 7,
+      "gaps_found": ["价格区间分类矛盾3处", "噪音数据缺失", "加热均匀度实测缺失", "小熊品牌未覆盖"],
+      "action": "直接收敛，在报告中修正分类问题并补充关键缺失"
     }
   ]
 }
