@@ -1,46 +1,40 @@
 {
-  "topic": "空气炸锅深度横评与选购指南",
+  "topic": "南京小朋友玩沙子地点全清单与精选推荐",
   "complexity": "中等",
-  "complexity_reason": "产品选购类调研，需要横向对比技术指标和具体型号，但不需要跨行业深度分析或复杂建模。核心是找到可信赖的测评数据和用户口碑，覆盖4个价位段、10+品牌的具体型号推荐。",
-  "dimensions": ["技术指标", "品牌对比", "价位段分析", "用户口碑", "性价比推荐"],
+  "complexity_reason": "本地生活类调研，核心是全面搜索南京所有适合3岁小朋友玩沙的地点（公园沙池、室内沙乐园、江滩河滩、特色景区、商场游乐设施），并给出分场景精选推荐和实用建议。不需要跨行业深度分析或数据建模，但需要覆盖面广、信息准确（收费、位置、特色等）。",
+  "dimensions": ["公园沙池", "室内沙乐园", "江滩河滩", "特色景区", "商场游乐设施", "实用建议"],
   "search_queries": [
-    {"id": 1, "query": "2025-2026年空气炸锅核心技术指标解析 加热方式 温控精度 风道设计 影响体验的关键参数", "dimension": "技术指标", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "空气炸锅哪些参数是真正有用的 哪些是营销噱头 功率容量温控选购避坑", "dimension": "技术指标", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "空气炸锅技术演进 蒸汽炸 微压炸 双锅分区 海星底盘 360度热风 最新技术2025", "dimension": "技术指标", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "空气炸锅内胆材质对比 不粘涂层 PTFE 陶瓷 安全性 健康影响", "dimension": "技术指标", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "飞利浦空气炸锅2025最新型号 HD9867 HD9870 价格 技术参数 用户评价", "dimension": "品牌对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "空气炸锅百元级入门款推荐100-300元 2025 性价比 山本 利仁 九阳 美的具体型号对比评测", "dimension": "价位段分析", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "空气炸锅300-500元主流款推荐 2025 九阳 苏泊尔 美的 小米 具体型号 评测对比", "dimension": "价位段分析", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "空气炸锅500-1000元进阶款推荐 2025 飞利浦 松下 西屋 BRUNO 具体型号评测", "dimension": "价位段分析", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "空气炸锅1000元以上旗舰款推荐 2025 飞利浦 松下 双锅分区 高端型号对比评测", "dimension": "价位段分析", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "九阳空气炸锅2025热门型号 KL45-VF511 KL55-VF739 价格参数 评测", "dimension": "品牌对比", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "苏泊尔空气炸锅2025热门型号 KD60D818 价格参数 评测", "dimension": "品牌对比", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "小米空气炸锅2025 MAF04 MAF07 价格参数 评测 智能功能", "dimension": "品牌对比", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "松下空气炸锅2025 NF-HC300 NF-HC500 价格参数 评测", "dimension": "品牌对比", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "空气炸锅噪音对比 清洁便利性评测 可拆卸炸篮 油脂分离 各品牌实际体验", "dimension": "用户口碑", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "空气炸锅2025年销量排行 京东天猫 热销榜 用户评分 口碑", "dimension": "用户口碑", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "空气炸锅有小孩家庭选购 安全性 防烫 锁童功能 容量推荐 3口之家", "dimension": "性价比推荐", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "美的空气炸锅2025热门型号 KZ45E101 KZ60E101 价格参数 评测", "dimension": "品牌对比", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 18, "query": "西屋空气炸锅2025型号 价格参数 评测", "dimension": "品牌对比", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "BRUNO空气炸锅2025型号 BZK-E01 价格参数 评测 颜值", "dimension": "品牌对比", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 20, "query": "空气炸锅性价比之王 2025推荐 全价位横评 值得买 型号", "dimension": "性价比推荐", "priority": "high", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "南京公园沙池 玩沙子 小朋友 绿博园 玄武湖 情侣园 沙坑 亲子", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "南京免费公园沙池 沙坑 带小孩玩沙 2024 2025", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "南京绿博园沙池 位置 收费 体验 亲子", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "南京玄武湖 情侣园 沙滩 玩沙 儿童", "dimension": "公园沙池", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "南京室内沙乐园 沙画体验 商场 小朋友 室内玩沙", "dimension": "室内沙乐园", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "南京儿童乐园 沙池 商场室内 室内游乐场 玩沙", "dimension": "室内沙乐园", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "南京八卦洲 江心洲 长江江滩 玩沙 亲子 自驾", "dimension": "江滩河滩", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "南京周边江滩玩沙 河滩 带小孩 自然沙地 长江沿岸", "dimension": "江滩河滩", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 9, "query": "南京不老村 水墨大埝 玩沙 亲子游 特色景区 沙池", "dimension": "特色景区", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "南京银杏湖乐园 沙滩 玩沙 亲子 游乐场", "dimension": "特色景区", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "南京红山动物园 玩沙 沙池 儿童游乐", "dimension": "特色景区", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "南京珍珠泉 老山森林公园 沙滩 玩沙 亲子", "dimension": "特色景区", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "南京鱼嘴湿地公园 绿地 江滩 玩沙 亲子", "dimension": "江滩河滩", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "南京商场儿童游乐场 玩沙设施 室内 沙池 永旺 万达", "dimension": "商场游乐设施", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 15, "query": "南京带小孩玩沙推荐 亲子 周末 人少 小众 宝藏地点", "dimension": "精选推荐", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 16, "query": "南京河西 南京南站 江宁 仙林 附近玩沙 公园 儿童", "dimension": "公园沙池", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 17, "query": "南京亲子玩沙攻略 工具自带 注意事项 3岁 幼儿", "dimension": "实用建议", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 18, "query": "南京收费沙乐园 室内沙画 亲子乐园 价格 体验评价", "dimension": "室内沙乐园", "priority": "high", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 20],
-      "focus": "核心技术指标+飞利浦旗舰+性价比总结"
+      "queries": [1, 2, 3, 4, 5, 6, 7, 8, 16, 18],
+      "focus": "公园沙池+室内沙乐园+江滩河滩+各区公园"
     },
     "searcher-2": {
-      "queries": [6, 7, 8, 9, 10, 11, 17],
-      "focus": "价位段产品对比+国产品牌型号"
-    },
-    "searcher-3": {
-      "queries": [12, 13, 14, 15, 16, 18, 19],
-      "focus": "小米松下品牌+噪音清洁+销量口碑+家庭选购"
+      "queries": [9, 10, 11, 12, 13, 14, 15, 17],
+      "focus": "特色景区+商场游乐+精选推荐+实用建议"
     }
   },
-  "searcher_count": 3,
+  "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-058",
+  "report_id": "R-059",
   "category": "06-产品调研"
 }
