@@ -1,37 +1,49 @@
 {
-  "topic": "空气炸锅全价位深度横评与选购指南",
+  "topic": "南京到青岛五一自驾路线规划（带3岁女儿，乐道L60纯电车）",
   "complexity": "中等",
-  "complexity_reason": "产品横评任务，需覆盖9+品牌和4个价位段共20-30款型号，但属于消费品类产品调研，信息来源丰富（电商平台、测评文章），不需要深度技术分析或财务建模。2-3个搜索员各负责2个价位段即可覆盖。",
-  "dimensions": ["品牌格局", "技术差异", "各价位产品横评", "选购参数"],
+  "complexity_reason": "旅行攻略类任务，需要多维度信息但不需要深度分析，主要是事实收集和整合",
+  "dimensions": ["路线规划", "充电基础设施", "亲子景点", "住宿餐饮", "预算估算", "五一特别提醒"],
   "search_queries": [
-    {"id": 1, "query": "2025 2026年空气炸锅品牌排行榜 市场占有率 飞利浦 九阳 苏泊尔 美的", "dimension": "品牌格局", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "空气炸锅核心技术对比 热风循环 加热管类型 旋风技术 海星底盘 温控精度", "dimension": "技术差异", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "空气炸锅容量选择 2L 3L 4L 5L 6L 单身 情侣 家庭 几人用", "dimension": "品牌格局", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "100-300元空气炸锅推荐 2025 2026 入门款 性价比 山本 利仁 九阳 美的", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "300-600元空气炸锅推荐 2025 2026 主流款 横评 九阳 苏泊尔 美的 小米", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "600-1000元空气炸锅推荐 2025 2026 进阶款 飞利浦 松下 九阳", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "1000元以上高端空气炸锅推荐 2025 2026 飞利浦 松下 Ninja 双层", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "飞利浦空气炸锅 全系列型号对比 HD9860 HD9870 HD9650 HD9270 价格 参数", "dimension": "各价位产品横评", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "空气炸锅选购指南 功率 容量 温控 内胆材质 涂层安全 关键参数", "dimension": "选购参数", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "空气炸锅智商税功能 预设菜单 APP控制 可视窗口 无油真实效果", "dimension": "选购参数", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "九阳空气炸锅 KL系列 型号对比 2025 2026 价格 容量 卖点", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 12, "query": "苏泊尔空气炸锅 KD系列 型号对比 2025 2026 价格 参数", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 13, "query": "小米空气炸锅 Pro Max 型号参数 价格 对比 2025 2026", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "Ninja空气炸锅 中国型号 价格 AF100 AF120 AF150 对比 2025 2026", "dimension": "各价位产品横评", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 15, "query": "空气炸锅测评视频 总结 真实体验 缺点 翻车 噪音 加热不均", "dimension": "选购参数", "priority": "medium", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "南京到青岛自驾路线推荐 高速公路 距离 时间 2024 2025", "dimension": "路线规划", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "南京到青岛自驾沿途城市景点 连云港 日照 淮安 值得停留", "dimension": "路线规划", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "青岛自驾返程路线 青岛回南京不同路线 环线自驾", "dimension": "路线规划", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "乐道L60续航里程 实际高速续航 充电参数 电池容量", "dimension": "充电基础设施", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "南京到青岛沿途高速服务区充电站 换电站分布 G25 G15", "dimension": "充电基础设施", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "青岛充电桩分布 特斯拉蔚来充电站 充电便利性", "dimension": "充电基础设施", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "青岛适合3岁孩子的亲子景点 海洋馆 动物园 沙滩 公园", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "青岛极地海洋世界 海昌极地海洋公园 带娃攻略 门票价格", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "青岛金沙滩 石老人海水浴场 带小孩玩沙 攻略", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "青岛野生动物世界 青岛动物园 亲子游 带娃攻略", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "连云港亲子游景点 花果山 连岛海滨 适合3岁小孩", "dimension": "亲子景点", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "日照亲子游景点 万平口 日照海洋公园 适合3岁小孩", "dimension": "亲子景点", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "青岛亲子酒店推荐 有儿童设施 停车方便 2024 2025", "dimension": "住宿餐饮", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "青岛五一期间酒店价格 涨价幅度 预订建议 亲子房", "dimension": "住宿餐饮", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "青岛亲子餐厅推荐 适合带小孩吃饭 特色美食", "dimension": "住宿餐饮", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "五一高速免费时间 2025年 免费通行规定", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "5月初青岛天气 气温 穿衣指南 海边风大", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "五一青岛热门景点人流 避峰攻略 冷门景点推荐", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 19, "query": "带3岁小孩自驾出行必备清单 长途自驾注意事项", "dimension": "特别提醒", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 20, "query": "纯电车长途自驾注意事项 充电规划 高速续航打折", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 21, "query": "连云港日照住宿推荐 亲子酒店 自驾中途停留", "dimension": "住宿餐饮", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 22, "query": "青岛自驾游花费预算 油费过路费 门票 餐饮 住宿", "dimension": "预算估算", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 23, "query": "青岛八大关 栈桥 五四广场 带娃游览攻略", "dimension": "亲子景点", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 11, 12, 15],
-      "focus": "品牌格局、技术差异、入门款与主流款横评"
+      "queries": [1, 2, 3, 4, 5, 6],
+      "focus": "路线规划与充电基础设施"
     },
     "searcher-2": {
-      "queries": [6, 7, 8, 9, 10, 13, 14],
-      "focus": "进阶款与高端款横评、飞利浦全系列、选购参数"
+      "queries": [7, 8, 9, 10, 11, 12, 23],
+      "focus": "亲子景点与沿途游玩"
+    },
+    "searcher-3": {
+      "queries": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+      "focus": "住宿餐饮预算与特别提醒"
     }
   },
-  "searcher_count": 2,
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-060",
-  "category": "06-产品调研"
+  "report_id": "R-061",
+  "category": "07-旅行攻略"
 }
