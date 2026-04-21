@@ -1,35 +1,44 @@
 {
-  "topic": "户外软壳/硬壳各品牌材质与性能参数，以及场景化面料选择",
+  "topic": "Polartec NeoShell 面料成品服装全网搜集与最低价格比对",
   "complexity": "中等",
-  "complexity_reason": "产品调研类任务，参数多为公开数据，需要覆盖品牌和面料较多但不涉及深度分析建模，中等复杂度",
-  "dimensions": ["面料技术参数", "品牌产品线", "场景化推荐", "中国市场价格"],
+  "complexity_reason": "这是一个产品搜集+价格比对任务，需要广度搜索但不需要深度分析。核心工作在搜索和整理，不涉及复杂推理。3个搜索员覆盖：品牌产品发现、海外价格、中国价格。",
+  "dimensions": ["品牌产品发现", "海外电商价格", "中国电商价格", "技术参数"],
   "search_queries": [
-    {"id": 1, "query": "Gore-Tex Pro C-Knit vs eVent DVstorm vs Futurelight 防水透气参数对比 mm水柱 RET", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Gore-Tex Infinium softshell waterproof breathability specs 重量 弹性参数", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Polartec NeoShell Power Shield Pro softshell waterproof breathability g/m2 specs", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Schoeller softshell fabric technology dryskin 3xdry waterproof breathability specs", "dimension": "面料技术参数", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Pertex Quantum Shield Apex fabric specs waterproof breathability weight", "dimension": "面料技术参数", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "Arc'teryx hardshell fabric technology Gore-Tex Pro N100D N70D N80D 参数", "dimension": "品牌产品线", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "Patagonia H2No Storm10 Torrentshell 3L hardshell waterproof breathability specs", "dimension": "品牌产品线", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "始祖鸟 软壳 Gamma系列面料 参数 Gamma LT MX 防水 透气", "dimension": "品牌产品线", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "The North Face FUTURELIGHT DryVent 面料参数 防水 透气", "dimension": "品牌产品线", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "Marmot MemBrain Outdoor Research AscentShell 面料参数对比", "dimension": "品牌产品线", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "户外硬壳推荐 2025 高山攀登 Alpha SV Norvan SL 参数价格", "dimension": "场景化推荐", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "滑雪服推荐 2025 2026 防水透气面料 Burton Arcteryx 价格", "dimension": "场景化推荐", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "越野跑 速干衣 防风外套推荐 2025 轻量 透气 Gore-Tex Shakedry Active", "dimension": "场景化推荐", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "攀岩软壳推荐 2025 弹性耐磨 Black Diamond Salomon", "dimension": "场景化推荐", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "户外服装 中国市场 价格 2025 2026 始祖鸟 Patagonia TNF", "dimension": "中国市场价格", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "Columbia Omni-Tech OutDry 面料参数 防水 透气", "dimension": "品牌产品线", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 17, "query": "Mountain Hardwear Dry.Q Elite 面料参数 waterproof breathability", "dimension": "品牌产品线", "priority": "low", "assigned_to": "searcher-2"},
-    {"id": 18, "query": "Gore-Tex 各代产品对比 Pro Paclite C-Knit Performance Shell 参数", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "Polartec NeoShell jacket brands list 2024 2025", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Polartec NeoShell technology specs CFM waterproof breathability comparison GORE-TEX", "dimension": "技术参数", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Marmot NeoShell jacket current models 2024 2025", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Mountain Hardwear NeoShell jacket current models", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Fox Racing NeoShell jacket 2024 2025", "dimension": "品牌产品发现", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Castelli Pearl Izumi NeoShell cycling jacket", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "66 North NeoShell Westcomb NeoShell Black Yarn NeoShell", "dimension": "品牌产品发现", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "Craft NeoShell POC NeoShell Treksta NeoShell Lowe Alpine NeoShell", "dimension": "品牌产品发现", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 9, "query": "Polartec NeoShell jacket sale discount Amazon REI Backcountry 2024 2025 price", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "NeoShell jacket CampSaver SteepandCheap Moosejaw eBay price", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "Marmot NeoShell jacket price sale Amazon", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "Mountain Hardwear NeoShell jacket price sale", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "Castelli NeoShell cycling jacket price", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "NeoShell 夹克 天猫 京东 淘宝 价格", "dimension": "中国价格", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "NeoShell 面料 品牌 中国 服装", "dimension": "中国价格", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "Marmot 土拨鼠 NeoShell 夹克 中国 购买", "dimension": "中国价格", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "Polartec NeoShell 代购 海淘 渠道", "dimension": "中国价格", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "NeoShell 软壳 硬壳 拼多多 1688", "dimension": "中国价格", "priority": "medium", "assigned_to": "searcher-3"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5, 18], "focus": "核心面料技术参数"},
-    "searcher-2": {"queries": [6, 7, 8, 9, 10, 16, 17], "focus": "品牌产品线面料"},
-    "searcher-3": {"queries": [11, 12, 13, 14, 15], "focus": "场景化推荐与价格"}
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 6, 7, 8],
+      "focus": "NeoShell品牌产品全面发现 + 技术参数"
+    },
+    "searcher-2": {
+      "queries": [9, 10, 11, 12, 13],
+      "focus": "海外电商渠道价格搜索"
+    },
+    "searcher-3": {
+      "queries": [14, 15, 16, 17, 18],
+      "focus": "中国电商渠道价格搜索"
+    }
   },
   "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-064",
+  "report_id": "R-065",
   "category": "06-产品调研"
 }
