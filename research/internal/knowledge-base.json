@@ -1,17 +1,24 @@
 {
-  "topic": "南京到青岛五一自驾路线规划",
-  "total_findings": 78,
-  "sources_count": 50,
-  "key_facts": {
-    "route_distance": "544-639km",
-    "route_time": "6-7.5h",
-    "main_highway": "G25长深高速 + G15沈海高速",
-    "ledao_l60_range": "CLTC 555-740km, 高速实际 350-550km",
-    "ledao_l60_charging": "900V架构, 10-80%快充25分钟, 支持蔚来换电",
-    "qingdao_chargers": "7.24万个充电桩, 79-81座蔚来换电站",
-    "holiday_free": "5/1 0:00 - 5/5 24:00",
-    "may_temperature": "白天18-22℃, 夜间12-15℃",
-    "hotel_price_increase": "五一涨幅2-3倍",
-    "total_budget": "约9880元（一家三口9天）"
+  "topic": "Polartec NeoShell面料成品服装全网价格比对",
+  "report_id": "R-065",
+  "total_brands_found": 15,
+  "total_products_found": 35,
+  "active_products": 18,
+  "discontinued_products": 17,
+  "key_findings": [
+    "NeoShell是市面上最透气的防水面料（0.5 CFM空气渗透），但防水性仅10,000mm",
+    "中国市场无任何本土品牌使用NeoShell面料，天猫/京东无成品在售",
+    "全网最低价新品NeoShell夹克：Specialized SL NeoShell Rain Jacket $115（67%off清仓）",
+    "Westcomb是唯一100%加拿大制造且全线使用NeoShell的活跃品牌",
+    "66°North新款Snæfell已从NeoShell转为Power Shield Pro",
+    "Flylow Lab Coat已从NeoShell改为GORE-TEX 3L，Genius仍保留NeoShell",
+    "Polartec NeoShell面料线可能正在缩减，Discovery Fabrics标注discontinued",
+    "骑行品类有最多活跃NeoShell产品（Fox/Pearl Izumi/Specialized/Sportful/Ornot）"
+  ],
+  "chinese_market": {
+    "has_chinese_brands": false,
+    "tmall_jd_available": false,
+    "recommended_channel": "海淘（Amazon/eBay + 转运）",
+    "best_option_for_china": "Specialized门店可订购（线下）或海淘"
   }
 }
