@@ -1,15 +1,24 @@
 {
+  "topic": "户外软壳/硬壳各品牌材质与性能参数，以及场景化面料选择",
   "iterations": [
     {
       "round": 1,
-      "reviewer_score": 7.0,
-      "gaps_found": [
-        "每日详细行程需整合编排（已在报告中完成）",
-        "预算估算需具体化（已在报告中完成）",
-        "3岁幼儿专项需求需补充（已在报告中完成）",
-        "充电规划需更具体可执行（已在报告中完成）"
-      ],
-      "action": "直接收敛生成报告，高优先级缺口已在报告中基于已有数据编排补充"
+      "searcher_results": {
+        "searcher-1": "pending",
+        "searcher-2": "completed - 22 findings，高质量品牌产品线数据",
+        "searcher-3": "pending"
+      },
+      "reviewer_score": null,
+      "gaps_found": [],
+      "action": "等待所有搜索员完成后综合审核"
     }
+  ],
+  "data_corrections_from_searcher2": [
+    "FUTURELIGHT MVTR实测75,000 g/m²/day（需确认测试方法差异）",
+    "Dry.Q Elite 2L版40,000/3L版30,000 g/m²/24h（更新对比表）",
+    "Columbia Omni-Tech Pro旗舰版30K/30K（区分标准版和Pro版）",
+    "OR AscentShell实测防水~10,000mm（非20,000mm，需修正）",
+    "Marmot MemBrain最低10K/10K（非20,000mm，需修正）",
+    "Patagonia H2No透气性未官方公开"
   ]
 }
