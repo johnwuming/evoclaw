@@ -1,49 +1,35 @@
 {
-  "topic": "南京到青岛五一自驾路线规划（带3岁女儿，乐道L60纯电车）",
+  "topic": "户外软壳/硬壳各品牌材质与性能参数，以及场景化面料选择",
   "complexity": "中等",
-  "complexity_reason": "旅行攻略类任务，需要多维度信息但不需要深度分析，主要是事实收集和整合",
-  "dimensions": ["路线规划", "充电基础设施", "亲子景点", "住宿餐饮", "预算估算", "五一特别提醒"],
+  "complexity_reason": "产品调研类任务，参数多为公开数据，需要覆盖品牌和面料较多但不涉及深度分析建模，中等复杂度",
+  "dimensions": ["面料技术参数", "品牌产品线", "场景化推荐", "中国市场价格"],
   "search_queries": [
-    {"id": 1, "query": "南京到青岛自驾路线推荐 高速公路 距离 时间 2024 2025", "dimension": "路线规划", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "南京到青岛自驾沿途城市景点 连云港 日照 淮安 值得停留", "dimension": "路线规划", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "青岛自驾返程路线 青岛回南京不同路线 环线自驾", "dimension": "路线规划", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "乐道L60续航里程 实际高速续航 充电参数 电池容量", "dimension": "充电基础设施", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "南京到青岛沿途高速服务区充电站 换电站分布 G25 G15", "dimension": "充电基础设施", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "青岛充电桩分布 特斯拉蔚来充电站 充电便利性", "dimension": "充电基础设施", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "青岛适合3岁孩子的亲子景点 海洋馆 动物园 沙滩 公园", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "青岛极地海洋世界 海昌极地海洋公园 带娃攻略 门票价格", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "青岛金沙滩 石老人海水浴场 带小孩玩沙 攻略", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "青岛野生动物世界 青岛动物园 亲子游 带娃攻略", "dimension": "亲子景点", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "连云港亲子游景点 花果山 连岛海滨 适合3岁小孩", "dimension": "亲子景点", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "日照亲子游景点 万平口 日照海洋公园 适合3岁小孩", "dimension": "亲子景点", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "青岛亲子酒店推荐 有儿童设施 停车方便 2024 2025", "dimension": "住宿餐饮", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "青岛五一期间酒店价格 涨价幅度 预订建议 亲子房", "dimension": "住宿餐饮", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "青岛亲子餐厅推荐 适合带小孩吃饭 特色美食", "dimension": "住宿餐饮", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "五一高速免费时间 2025年 免费通行规定", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "5月初青岛天气 气温 穿衣指南 海边风大", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "五一青岛热门景点人流 避峰攻略 冷门景点推荐", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "带3岁小孩自驾出行必备清单 长途自驾注意事项", "dimension": "特别提醒", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 20, "query": "纯电车长途自驾注意事项 充电规划 高速续航打折", "dimension": "特别提醒", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 21, "query": "连云港日照住宿推荐 亲子酒店 自驾中途停留", "dimension": "住宿餐饮", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 22, "query": "青岛自驾游花费预算 油费过路费 门票 餐饮 住宿", "dimension": "预算估算", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 23, "query": "青岛八大关 栈桥 五四广场 带娃游览攻略", "dimension": "亲子景点", "priority": "medium", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "Gore-Tex Pro C-Knit vs eVent DVstorm vs Futurelight 防水透气参数对比 mm水柱 RET", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Gore-Tex Infinium softshell waterproof breathability specs 重量 弹性参数", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Polartec NeoShell Power Shield Pro softshell waterproof breathability g/m2 specs", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Schoeller softshell fabric technology dryskin 3xdry waterproof breathability specs", "dimension": "面料技术参数", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Pertex Quantum Shield Apex fabric specs waterproof breathability weight", "dimension": "面料技术参数", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Arc'teryx hardshell fabric technology Gore-Tex Pro N100D N70D N80D 参数", "dimension": "品牌产品线", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "Patagonia H2No Storm10 Torrentshell 3L hardshell waterproof breathability specs", "dimension": "品牌产品线", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "始祖鸟 软壳 Gamma系列面料 参数 Gamma LT MX 防水 透气", "dimension": "品牌产品线", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "The North Face FUTURELIGHT DryVent 面料参数 防水 透气", "dimension": "品牌产品线", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "Marmot MemBrain Outdoor Research AscentShell 面料参数对比", "dimension": "品牌产品线", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "户外硬壳推荐 2025 高山攀登 Alpha SV Norvan SL 参数价格", "dimension": "场景化推荐", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "滑雪服推荐 2025 2026 防水透气面料 Burton Arcteryx 价格", "dimension": "场景化推荐", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "越野跑 速干衣 防风外套推荐 2025 轻量 透气 Gore-Tex Shakedry Active", "dimension": "场景化推荐", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "攀岩软壳推荐 2025 弹性耐磨 Black Diamond Salomon", "dimension": "场景化推荐", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "户外服装 中国市场 价格 2025 2026 始祖鸟 Patagonia TNF", "dimension": "中国市场价格", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "Columbia Omni-Tech OutDry 面料参数 防水 透气", "dimension": "品牌产品线", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 17, "query": "Mountain Hardwear Dry.Q Elite 面料参数 waterproof breathability", "dimension": "品牌产品线", "priority": "low", "assigned_to": "searcher-2"},
+    {"id": 18, "query": "Gore-Tex 各代产品对比 Pro Paclite C-Knit Performance Shell 参数", "dimension": "面料技术参数", "priority": "high", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
-    "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6],
-      "focus": "路线规划与充电基础设施"
-    },
-    "searcher-2": {
-      "queries": [7, 8, 9, 10, 11, 12, 23],
-      "focus": "亲子景点与沿途游玩"
-    },
-    "searcher-3": {
-      "queries": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
-      "focus": "住宿餐饮预算与特别提醒"
-    }
+    "searcher-1": {"queries": [1, 2, 3, 4, 5, 18], "focus": "核心面料技术参数"},
+    "searcher-2": {"queries": [6, 7, 8, 9, 10, 16, 17], "focus": "品牌产品线面料"},
+    "searcher-3": {"queries": [11, 12, 13, 14, 15], "focus": "场景化推荐与价格"}
   },
   "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-061",
-  "category": "07-旅行攻略"
+  "report_id": "R-064",
+  "category": "06-产品调研"
 }
