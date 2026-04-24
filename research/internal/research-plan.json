@@ -1,44 +1,38 @@
 {
-  "topic": "Polartec NeoShell 面料成品服装全网搜集与最低价格比对",
+  "topic": "3岁幼儿尖叫行为的心理学解释与科学应对方法",
   "complexity": "中等",
-  "complexity_reason": "这是一个产品搜集+价格比对任务，需要广度搜索但不需要深度分析。核心工作在搜索和整理，不涉及复杂推理。3个搜索员覆盖：品牌产品发现、海外价格、中国价格。",
-  "dimensions": ["品牌产品发现", "海外电商价格", "中国电商价格", "技术参数"],
+  "complexity_reason": "主题明确聚焦（3岁幼儿尖叫），不需要跨行业/多维度深度拆解，但需要覆盖心理学理论、专家方法对比、预防策略、常见误区和实操步骤，适合2个搜索员并行搜索后整合",
+  "dimensions": ["发展心理学", "育儿方法对比", "预防策略", "常见误区", "实操指南"],
   "search_queries": [
-    {"id": 1, "query": "Polartec NeoShell jacket brands list 2024 2025", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Polartec NeoShell technology specs CFM waterproof breathability comparison GORE-TEX", "dimension": "技术参数", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Marmot NeoShell jacket current models 2024 2025", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Mountain Hardwear NeoShell jacket current models", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Fox Racing NeoShell jacket 2024 2025", "dimension": "品牌产品发现", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "Castelli Pearl Izumi NeoShell cycling jacket", "dimension": "品牌产品发现", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "66 North NeoShell Westcomb NeoShell Black Yarn NeoShell", "dimension": "品牌产品发现", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "Craft NeoShell POC NeoShell Treksta NeoShell Lowe Alpine NeoShell", "dimension": "品牌产品发现", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 9, "query": "Polartec NeoShell jacket sale discount Amazon REI Backcountry 2024 2025 price", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "NeoShell jacket CampSaver SteepandCheap Moosejaw eBay price", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "Marmot NeoShell jacket price sale Amazon", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "Mountain Hardwear NeoShell jacket price sale", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "Castelli NeoShell cycling jacket price", "dimension": "海外价格", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "NeoShell 夹克 天猫 京东 淘宝 价格", "dimension": "中国价格", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "NeoShell 面料 品牌 中国 服装", "dimension": "中国价格", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "Marmot 土拨鼠 NeoShell 夹克 中国 购买", "dimension": "中国价格", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "Polartec NeoShell 代购 海淘 渠道", "dimension": "中国价格", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "NeoShell 软壳 硬壳 拼多多 1688", "dimension": "中国价格", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "3岁幼儿尖叫发脾气 发展心理学解释 大脑发育 情绪调节能力", "dimension": "发展心理学", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "terrible threes 三岁叛逆期 心理学研究 前额叶发育 情绪失控", "dimension": "发展心理学", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "幼儿尖叫行为 行为功能分析 ABC行为分析 表达需求 获取注意", "dimension": "发展心理学", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Daniel Siegel 全脑教养法 幼儿情绪风暴 上下脑模型 应对方法", "dimension": "育儿方法对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "正面管教 positive discipline 幼儿尖叫 自然后果 逻辑后果 应用实例", "dimension": "育儿方法对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "温和育儿 gentle parenting 幼儿情绪爆发 共情验证 情感教练", "dimension": "育儿方法对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "Janet LansburyRIE育儿法 幼儿尖叫 尊重式育儿 情绪接纳", "dimension": "育儿方法对比", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "ABA应用行为分析 幼儿问题行为 正向行为支持 替代行为教授", "dimension": "育儿方法对比", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 9, "query": "3岁幼儿尖叫 家长常见错误做法 打骂 威胁 以暴制暴 有害后果", "dimension": "常见误区", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "幼儿尖叫 妥协退让 条件交换 长期影响 强化问题行为", "dimension": "常见误区", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "忽视冷处理幼儿情绪 研究证据 情感忽视 依恋损伤", "dimension": "常见误区", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "预防幼儿尖叫发脾气 环境调整 作息规律 前置策略", "dimension": "预防策略", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "幼儿情绪管理 教孩子表达情绪 情绪词汇 情绪认知工具", "dimension": "预防策略", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "给选择权减少幼儿抗拒 自主感控制感 3岁心理需求", "dimension": "预防策略", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 15, "query": "3岁孩子尖叫 具体应对步骤 场景化处理 超市餐厅公共场合", "dimension": "实操指南", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 16, "query": "双职工家庭育儿疲劳 情绪失控 压力管理 自我调节策略", "dimension": "实操指南", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
     "searcher-1": {
       "queries": [1, 2, 3, 4, 5, 6, 7, 8],
-      "focus": "NeoShell品牌产品全面发现 + 技术参数"
+      "focus": "3岁幼儿尖叫的心理学解释与主流育儿流派应对方法"
     },
     "searcher-2": {
-      "queries": [9, 10, 11, 12, 13],
-      "focus": "海外电商渠道价格搜索"
-    },
-    "searcher-3": {
-      "queries": [14, 15, 16, 17, 18],
-      "focus": "中国电商渠道价格搜索"
+      "queries": [9, 10, 11, 12, 13, 14, 15, 16],
+      "focus": "常见误区、预防策略与实操步骤"
     }
   },
-  "searcher_count": 3,
+  "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-065",
-  "category": "06-产品调研"
+  "report_id": "R-066",
+  "category": "09-育儿"
 }
