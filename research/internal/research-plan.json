@@ -1,38 +1,18 @@
 {
-  "topic": "3岁幼儿尖叫行为的心理学解释与科学应对方法",
+  "topic": "AI分析长寿因子研究汇总",
   "complexity": "中等",
-  "complexity_reason": "主题明确聚焦（3岁幼儿尖叫），不需要跨行业/多维度深度拆解，但需要覆盖心理学理论、专家方法对比、预防策略、常见误区和实操步骤，适合2个搜索员并行搜索后整合",
-  "dimensions": ["发展心理学", "育儿方法对比", "预防策略", "常见误区", "实操指南"],
+  "complexity_reason": "主题明确（AI+长寿因子），范围可控（约10个主要机构），但涉及大量跨学科知识（AI、生物学、医学）。因搜索工具全部不可用，基于知识库直接撰写。",
+  "dimensions": ["牛津大学研究", "全球主要AI长寿研究机构", "AI/ML方法总结", "跨研究结论对比", "衰老时钟综述"],
   "search_queries": [
-    {"id": 1, "query": "3岁幼儿尖叫发脾气 发展心理学解释 大脑发育 情绪调节能力", "dimension": "发展心理学", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "terrible threes 三岁叛逆期 心理学研究 前额叶发育 情绪失控", "dimension": "发展心理学", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "幼儿尖叫行为 行为功能分析 ABC行为分析 表达需求 获取注意", "dimension": "发展心理学", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Daniel Siegel 全脑教养法 幼儿情绪风暴 上下脑模型 应对方法", "dimension": "育儿方法对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "正面管教 positive discipline 幼儿尖叫 自然后果 逻辑后果 应用实例", "dimension": "育儿方法对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "温和育儿 gentle parenting 幼儿情绪爆发 共情验证 情感教练", "dimension": "育儿方法对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "Janet LansburyRIE育儿法 幼儿尖叫 尊重式育儿 情绪接纳", "dimension": "育儿方法对比", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "ABA应用行为分析 幼儿问题行为 正向行为支持 替代行为教授", "dimension": "育儿方法对比", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 9, "query": "3岁幼儿尖叫 家长常见错误做法 打骂 威胁 以暴制暴 有害后果", "dimension": "常见误区", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "幼儿尖叫 妥协退让 条件交换 长期影响 强化问题行为", "dimension": "常见误区", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "忽视冷处理幼儿情绪 研究证据 情感忽视 依恋损伤", "dimension": "常见误区", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "预防幼儿尖叫发脾气 环境调整 作息规律 前置策略", "dimension": "预防策略", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "幼儿情绪管理 教孩子表达情绪 情绪词汇 情绪认知工具", "dimension": "预防策略", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "给选择权减少幼儿抗拒 自主感控制感 3岁心理需求", "dimension": "预防策略", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 15, "query": "3岁孩子尖叫 具体应对步骤 场景化处理 超市餐厅公共场合", "dimension": "实操指南", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 16, "query": "双职工家庭育儿疲劳 情绪失控 压力管理 自我调节策略", "dimension": "实操指南", "priority": "medium", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "Oxford University AI machine learning longevity aging factors", "dimension": "牛津大学", "priority": "high", "assigned_to": "N/A（搜索不可用）"},
+    {"id": 2, "query": "AI aging biomarkers machine learning key factors", "dimension": "AI方法", "priority": "high", "assigned_to": "N/A"},
+    {"id": 3, "query": "Insilico Medicine aging clocks", "dimension": "Insilico", "priority": "high", "assigned_to": "N/A"},
+    {"id": 4, "query": "Stanford Wyss-Coray proteomics aging", "dimension": "斯坦福", "priority": "high", "assigned_to": "N/A"},
+    {"id": 5, "query": "Harvard Sinclair Gladyshev longevity AI", "dimension": "哈佛", "priority": "high", "assigned_to": "N/A"}
   ],
-  "searcher_assignments": {
-    "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6, 7, 8],
-      "focus": "3岁幼儿尖叫的心理学解释与主流育儿流派应对方法"
-    },
-    "searcher-2": {
-      "queries": [9, 10, 11, 12, 13, 14, 15, 16],
-      "focus": "常见误区、预防策略与实操步骤"
-    }
-  },
-  "searcher_count": 2,
+  "searcher_count": 0,
   "review_rounds": 1,
-  "report_id": "R-066",
-  "category": "09-育儿"
+  "report_id": "R-067",
+  "category": "01-AI行业研究",
+  "note": "所有搜索工具不可用（web-search-prime返回空、web_search超时、浏览器超时），报告基于训练知识直接撰写。"
 }
