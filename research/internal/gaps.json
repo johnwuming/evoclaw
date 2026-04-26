@@ -1,24 +1,24 @@
 {
-  "topic": "户外软壳/硬壳各品牌材质与性能参数，以及场景化面料选择",
   "iterations": [
     {
       "round": 1,
-      "searcher_results": {
-        "searcher-1": "pending",
-        "searcher-2": "completed - 22 findings，高质量品牌产品线数据",
-        "searcher-3": "pending"
-      },
-      "reviewer_score": null,
-      "gaps_found": [],
-      "action": "等待所有搜索员完成后综合审核"
+      "reviewer_score_accuracy": 7,
+      "reviewer_score_completeness": 7,
+      "errors_found": 10,
+      "omissions_found": 12,
+      "action": "修正错误+补充遗漏后交付",
+      "key_fixes": [
+        "参考文献#11年份2021→2019",
+        "裸鼹鼠HAS2基因归因修正（非AI发现）",
+        "Calico-AbbVie金额修正",
+        "补充Horvath独立章节",
+        "补充Gero.ai/Deep Longevity/USC Longo/NIA ITP",
+        "添加Sinclair学术争议提示",
+        "补充数据标准化缺口",
+        "补充衰老统一理论之争",
+        "修正Lehallier论文标题"
+      ]
     }
   ],
-  "data_corrections_from_searcher2": [
-    "FUTURELIGHT MVTR实测75,000 g/m²/day（需确认测试方法差异）",
-    "Dry.Q Elite 2L版40,000/3L版30,000 g/m²/24h（更新对比表）",
-    "Columbia Omni-Tech Pro旗舰版30K/30K（区分标准版和Pro版）",
-    "OR AscentShell实测防水~10,000mm（非20,000mm，需修正）",
-    "Marmot MemBrain最低10K/10K（非20,000mm，需修正）",
-    "Patagonia H2No透气性未官方公开"
-  ]
+  "note": "搜索工具全部不可用，基于训练知识撰写。建议后续用可用搜索工具补充2025-2026年最新研究。"
 }
