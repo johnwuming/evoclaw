@@ -1,24 +1,11 @@
 {
-  "topic": "Polartec NeoShell面料成品服装全网价格比对",
-  "report_id": "R-065",
-  "total_brands_found": 15,
-  "total_products_found": 35,
-  "active_products": 18,
-  "discontinued_products": 17,
-  "key_findings": [
-    "NeoShell是市面上最透气的防水面料（0.5 CFM空气渗透），但防水性仅10,000mm",
-    "中国市场无任何本土品牌使用NeoShell面料，天猫/京东无成品在售",
-    "全网最低价新品NeoShell夹克：Specialized SL NeoShell Rain Jacket $115（67%off清仓）",
-    "Westcomb是唯一100%加拿大制造且全线使用NeoShell的活跃品牌",
-    "66°North新款Snæfell已从NeoShell转为Power Shield Pro",
-    "Flylow Lab Coat已从NeoShell改为GORE-TEX 3L，Genius仍保留NeoShell",
-    "Polartec NeoShell面料线可能正在缩减，Discovery Fabrics标注discontinued",
-    "骑行品类有最多活跃NeoShell产品（Fox/Pearl Izumi/Specialized/Sportful/Ornot）"
+  "topic": "AI分析长寿因子研究汇总",
+  "findings": [
+    {"claim": "牛津大学依托UK Biobank数据，使用ML分析长寿因子，发现生活方式因素贡献远超遗传", "confidence": "high", "source": "训练知识"},
+    {"claim": "Insilico Medicine是衰老时钟先驱，构建了血液、转录组、蛋白质组、影像等多种时钟", "confidence": "high", "source": "训练知识"},
+    {"claim": "斯坦福Wyss-Coray发现血浆蛋白质组在34/60/78岁出现非线性波峰，并建立器官特异性衰老时钟", "confidence": "high", "source": "训练知识"},
+    {"claim": "哈佛Gladyshev通过跨物种ML分析发现DNA修复和肿瘤抑制是长寿物种的核心基因组特征", "confidence": "high", "source": "训练知识"},
+    {"claim": "AI反复验证的共识性长寿因子：吸烟（负向）、运动（正向）、慢性炎症（负向）、APOE/FOXO3基因", "confidence": "high", "source": "训练知识"}
   ],
-  "chinese_market": {
-    "has_chinese_brands": false,
-    "tmall_jd_available": false,
-    "recommended_channel": "海淘（Amazon/eBay + 转运）",
-    "best_option_for_china": "Specialized门店可订购（线下）或海淘"
-  }
+  "caveats": ["搜索工具不可用，未能实时验证最新论文"]
 }
