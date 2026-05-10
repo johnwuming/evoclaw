@@ -2,23 +2,16 @@
   "iterations": [
     {
       "round": 1,
-      "reviewer_score_accuracy": 7,
-      "reviewer_score_completeness": 7,
-      "errors_found": 10,
-      "omissions_found": 12,
-      "action": "修正错误+补充遗漏后交付",
-      "key_fixes": [
-        "参考文献#11年份2021→2019",
-        "裸鼹鼠HAS2基因归因修正（非AI发现）",
-        "Calico-AbbVie金额修正",
-        "补充Horvath独立章节",
-        "补充Gero.ai/Deep Longevity/USC Longo/NIA ITP",
-        "添加Sinclair学术争议提示",
-        "补充数据标准化缺口",
-        "补充衰老统一理论之争",
-        "修正Lehallier论文标题"
-      ]
+      "reviewer_score_accuracy": "pending (timeout)",
+      "reviewer_score_completeness": 6,
+      "gaps_found": [
+        "Cleft Notes/AudioPen/TalkNotes等2024-2025新APP未评估 → 已补充搜索",
+        "CarPlay支持评估缺失 → 已确认Cleft Notes支持",
+        "AirPods免手触发方案 → 已补充Hey Siri方案",
+        "定期AI总结工作流需具体方案 → 在报告中给出"
+      ],
+      "action": "补充搜索后直接写报告",
+      "supplement_done": true
     }
-  ],
-  "note": "搜索工具全部不可用，基于训练知识撰写。建议后续用可用搜索工具补充2025-2026年最新研究。"
+  ]
 }
