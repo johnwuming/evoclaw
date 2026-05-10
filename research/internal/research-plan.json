@@ -1,18 +1,29 @@
 {
-  "topic": "AI分析长寿因子研究汇总",
+  "topic": "iOS 灵感语音记录 APP 调研：快捷指令录音 → 转写 → AI 总结",
   "complexity": "中等",
-  "complexity_reason": "主题明确（AI+长寿因子），范围可控（约10个主要机构），但涉及大量跨学科知识（AI、生物学、医学）。因搜索工具全部不可用，基于知识库直接撰写。",
-  "dimensions": ["牛津大学研究", "全球主要AI长寿研究机构", "AI/ML方法总结", "跨研究结论对比", "衰老时钟综述"],
+  "complexity_reason": "涉及多个 APP 的功能对比（约8个候选），但每个 APP 的评估维度明确，不需要深度行业分析或财务建模。2-3个搜索员可覆盖。",
+  "dimensions": ["APP功能评测", "快捷指令集成能力", "语音转写技术对比", "AI总结工作流", "隐私与离线能力", "价格模式"],
   "search_queries": [
-    {"id": 1, "query": "Oxford University AI machine learning longevity aging factors", "dimension": "牛津大学", "priority": "high", "assigned_to": "N/A（搜索不可用）"},
-    {"id": 2, "query": "AI aging biomarkers machine learning key factors", "dimension": "AI方法", "priority": "high", "assigned_to": "N/A"},
-    {"id": 3, "query": "Insilico Medicine aging clocks", "dimension": "Insilico", "priority": "high", "assigned_to": "N/A"},
-    {"id": 4, "query": "Stanford Wyss-Coray proteomics aging", "dimension": "斯坦福", "priority": "high", "assigned_to": "N/A"},
-    {"id": 5, "query": "Harvard Sinclair Gladyshev longevity AI", "dimension": "哈佛", "priority": "high", "assigned_to": "N/A"}
+    {"id": 1, "query": "Just Press Record iOS app 2025 2026 features shortcuts integration transcription", "dimension": "APP功能评测", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Just Press Record Apple Shortcuts actions URL scheme recording trigger", "dimension": "快捷指令集成", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Otter.ai iOS app features 2025 shortcuts integration pricing offline", "dimension": "APP功能评测", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Whisper based iOS app Aiko transcription offline 2025 features pricing", "dimension": "语音转写技术对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Drafts app iOS voice input Shortcuts actions AI integration 2025", "dimension": "APP功能评测", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 6, "query": "Apple Voice Memos Shortcuts integration iOS 18 transcription", "dimension": "快捷指令集成", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "Voice Notes app iOS AI transcription summary 2025 best apps", "dimension": "APP功能评测", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "iOS shortcuts voice recording workflow automation transcription text", "dimension": "快捷指令集成", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "best iOS voice notes app AI summary transcription 2025 2026 comparison", "dimension": "APP功能评测", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 10, "query": "Moleskine Journal app iOS voice recording features or alternatives like Speechify Rev", "dimension": "APP功能评测", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 11, "query": "iOS快捷指令录音转文字APP推荐 2025", "dimension": "APP功能评测", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "iOS voice memo to ChatGPT summary workflow shortcuts automation", "dimension": "AI总结工作流", "priority": "high", "assigned_to": "searcher-3"}
   ],
-  "searcher_count": 0,
+  "searcher_assignments": {
+    "searcher-1": {"queries": [1, 2, 3, 4], "focus": "Just Press Record + Otter.ai + Whisper类APP详细功能"},
+    "searcher-2": {"queries": [5, 6, 7, 8], "focus": "Drafts + Apple原生 + Voice Notes + 快捷指令工作流"},
+    "searcher-3": {"queries": [9, 10, 11, 12], "focus": "综合横评 + AI总结工作流 + 中文市场信息"}
+  },
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-067",
-  "category": "01-AI行业研究",
-  "note": "所有搜索工具不可用（web-search-prime返回空、web_search超时、浏览器超时），报告基于训练知识直接撰写。"
+  "report_id": "R-047",
+  "category": "06-开发实践"
 }
