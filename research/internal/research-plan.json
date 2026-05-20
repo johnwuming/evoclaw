@@ -1,28 +1,21 @@
 {
-  "topic": "Insta360 视频 NAS 预览与剪辑方案调研",
+  "topic": "唐老唐投资方法与腾讯估值分析",
   "complexity": "中等",
-  "complexity_reason": "涉及多个平台（手机/电脑）和多维度调研，但范围相对聚焦于Insta360生态和NAS使用场景，不需要深度跨行业分析",
-  "dimensions": ["手机端方案", "电脑端方案", "预览视频机制", "替代方案与社区工具", "远程访问加速"],
+  "complexity_reason": "两部分任务：Part1是投资方法体系梳理（已有充足公开信息），Part2是腾讯财报数据采集+估值计算（最新Q1数据已发布）。不需要深度研究级别的多维覆盖，但涉及财务计算需要准确性验证。",
+  "dimensions": ["投资方法论", "财务数据分析", "估值计算"],
   "search_queries": [
-    {"id": 1, "query": "Insta360 App 打开NAS视频 SMB WebDAV 手机端", "dimension": "手机端方案", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Insta360 App iOS Android 支持文件来源 外部存储", "dimension": "手机端方案", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "iPhone iPad 挂载NAS SMB 文件APP 第三方播放器", "dimension": "手机端方案", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Insta360 Studio 桌面版 打开NAS路径 网络驱动器 insp insv", "dimension": "电脑端方案", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Insta360 Studio 剪辑工作流 最佳实践 代理文件", "dimension": "电脑端方案", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 6, "query": "Insta360 视频同步NAS 群晖 威联通 预览视频格式", "dimension": "预览视频机制", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "Insta360 .insv .insp 文件结构 预览视频 proxy 代理", "dimension": "预览视频机制", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "Insta360 预览视频 低分辨率 独立使用 导出", "dimension": "预览视频机制", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "NAS 转码代理文件 自动生成 FFmpeg 群晖 威联通", "dimension": "替代方案", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "Insta360 远程剪辑 NAS Tailscale QuickConnect 方案", "dimension": "远程访问加速", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "Insta360 相机 同步到 NAS 教程 设置方法", "dimension": "预览视频机制", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 12, "query": "Insta360 社区 NAS剪辑 经验分享 Reddit 论坛", "dimension": "替代方案", "priority": "medium", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "唐朝估值法 三大前提 买点卖点公式", "dimension": "投资方法论", "priority": "high"},
+    {"id": 2, "query": "唐朝 合理市盈率 无风险收益率 PE确定方法", "dimension": "投资方法论", "priority": "high"},
+    {"id": 3, "query": "唐朝 腾讯估值 历史案例", "dimension": "投资方法论", "priority": "medium"},
+    {"id": 4, "query": "腾讯2025年报 营收 净利润 各业务板块数据", "dimension": "财务数据分析", "priority": "high"},
+    {"id": 5, "query": "腾讯2026Q1财报 营收 净利润 非IFRS", "dimension": "财务数据分析", "priority": "high"},
+    {"id": 6, "query": "腾讯2026Q1 各业务板块收入 毛利率", "dimension": "财务数据分析", "priority": "high"},
+    {"id": 7, "query": "腾讯控股 最新股价 2025年5月", "dimension": "估值计算", "priority": "high"},
+    {"id": 8, "query": "唐朝 选股标准 排雷方法", "dimension": "投资方法论", "priority": "medium"}
   ],
-  "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 11, 12], "focus": "手机端+电脑端官方方案与NAS同步机制"},
-    "searcher-2": {"queries": [5, 6, 7, 8, 9, 10], "focus": "预览视频机制+剪辑工作流+替代方案"}
-  },
-  "searcher_count": 2,
+  "searcher_count": 1,
   "review_rounds": 1,
-  "report_id": "R-070",
-  "category": "06-开发实践"
+  "report_id": "R-052",
+  "category": "08-财务分析",
+  "notes": "Lead直接执行搜索和编写，因为数据已充分收集完成，无需spawn searcher"
 }
