@@ -2,16 +2,34 @@
   "iterations": [
     {
       "round": 1,
-      "reviewer_score_accuracy": "pending (timeout)",
-      "reviewer_score_completeness": 6,
+      "reviewer_scores": {
+        "accuracy": 6.5,
+        "completeness": 6.5
+      },
       "gaps_found": [
-        "Cleft Notes/AudioPen/TalkNotes等2024-2025新APP未评估 → 已补充搜索",
-        "CarPlay支持评估缺失 → 已确认Cleft Notes支持",
-        "AirPods免手触发方案 → 已补充Hey Siri方案",
-        "定期AI总结工作流需具体方案 → 在报告中给出"
+        "总股本94.5亿过时（实际91.18亿）",
+        "汇率1:1.08有误（实际1:1.145）",
+        "缺少Non-IFRS vs IFRS口径说明",
+        "缺少投资性资产单独估值",
+        "缺少自由现金流验证",
+        "缺少分板块增速假设和情景分析",
+        "缺少仓位管理规则",
+        "净利润预测缺乏推导依据"
       ],
-      "action": "补充搜索后直接写报告",
-      "supplement_done": true
+      "action": "直接修正后定稿",
+      "fixes_applied": [
+        "修正总股本为91.18亿股",
+        "修正汇率为1:1.145",
+        "修正股价为460港元（5月19日收盘）",
+        "新增Non-IFRS口径说明和选择理由",
+        "新增投资性资产分部估值（约6,000亿元）",
+        "新增三大前提的现金流验证",
+        "新增分板块增速假设表",
+        "新增三档情景分析（悲观/中性/乐观）",
+        "新增仓位管理规则",
+        "新增卖出分类（估值过高 vs 基本面恶化）",
+        "新增投资性资产特殊处理说明"
+      ]
     }
   ]
 }
