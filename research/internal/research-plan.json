@@ -1,21 +1,51 @@
 {
-  "topic": "唐老唐投资方法与腾讯估值分析",
+  "topic": "AI Agent 热门应用场景全景扫描（2025-2026，排除coding）",
   "complexity": "中等",
-  "complexity_reason": "两部分任务：Part1是投资方法体系梳理（已有充足公开信息），Part2是腾讯财报数据采集+估值计算（最新Q1数据已发布）。不需要深度研究级别的多维覆盖，但涉及财务计算需要准确性验证。",
-  "dimensions": ["投资方法论", "财务数据分析", "估值计算"],
+  "complexity_reason": "任务涉及三个维度（热门场景、内容管理、小众场景），需要大量具体产品案例而非抽象概念。不需要深度财务分析或技术原理，主要是产品/市场扫描，2-3个搜索员1轮可覆盖。",
+  "dimensions": ["热门AI Agent应用场景", "内容管理类Agent", "小众但具体的Agent场景"],
   "search_queries": [
-    {"id": 1, "query": "唐朝估值法 三大前提 买点卖点公式", "dimension": "投资方法论", "priority": "high"},
-    {"id": 2, "query": "唐朝 合理市盈率 无风险收益率 PE确定方法", "dimension": "投资方法论", "priority": "high"},
-    {"id": 3, "query": "唐朝 腾讯估值 历史案例", "dimension": "投资方法论", "priority": "medium"},
-    {"id": 4, "query": "腾讯2025年报 营收 净利润 各业务板块数据", "dimension": "财务数据分析", "priority": "high"},
-    {"id": 5, "query": "腾讯2026Q1财报 营收 净利润 非IFRS", "dimension": "财务数据分析", "priority": "high"},
-    {"id": 6, "query": "腾讯2026Q1 各业务板块收入 毛利率", "dimension": "财务数据分析", "priority": "high"},
-    {"id": 7, "query": "腾讯控股 最新股价 2025年5月", "dimension": "估值计算", "priority": "high"},
-    {"id": 8, "query": "唐朝 选股标准 排雷方法", "dimension": "投资方法论", "priority": "medium"}
+    {"id": 1, "query": "2025年最火AI Agent应用场景 非coding SaaS产品案例", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "AI Agent customer service automation 2025 top products SaaS", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "AI Agent personal assistant 2025 2026 products Rabbit r1 Humane Pin alternative", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "AI Agent sales automation outreach 2025 products clay.com Apollo instantane", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "AI Agent HR recruiting automation 2025 products hireez fetcher", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "AI Agent finance accounting automation 2025 products rippling breed", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "AI Agent内容审核工具 自动删文删图 社交媒体管理 2025产品", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "AI content moderation agent automated removal 2025 products perspective API OpenAI moderation", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "社交媒体批量内容管理工具 AI自动删除旧帖 清理归档 2025", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "AI Agent brand safety content compliance automated takedown 2025", "dimension": "内容管理", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "digital footprint cleanup AI tool delete old social media posts 2025", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "小众AI Agent应用场景 具体案例 2025 有趣的产品", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "AI Agent niche use cases 2025 weird specific interesting applications", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "AI帮你打官司 法律AI Agent doNotPay legal robot 2025", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "AI砍价议价Agent auto negotiation price bargaining bot 2025", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "AI写遗书 遗产规划AI estate planning will writing AI 2025", "dimension": "小众场景", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "AI Agent travel planning booking automation 2025 products mindtrip", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 18, "query": "AI Agent research automation deep research product 2025 2026", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 19, "query": "AI Agent healthcare medical automation 2025 products notable health", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 20, "query": "AI Agent自动化保险理赔 投诉 维权 consumer rights bot 2025", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 21, "query": "AI Agent dating relationship automation 2025 weird niche", "dimension": "小众场景", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 22, "query": "AI Agent real estate property management automation 2025", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 23, "query": "AI agent supply chain procurement automation 2025 products", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 24, "query": "AI自动清理数字遗产 删除社交媒体 account cleanup after death 2025", "dimension": "内容管理", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 25, "query": "AI Agent cooking recipe meal planning grocery automation 2025 niche", "dimension": "小众场景", "priority": "low", "assigned_to": "searcher-3"}
   ],
-  "searcher_count": 1,
+  "searcher_assignments": {
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 6, 17, 18, 19, 22, 23],
+      "focus": "热门AI Agent应用场景（客服、销售、HR、金融、旅游、研究、医疗、房产、供应链）"
+    },
+    "searcher-2": {
+      "queries": [7, 8, 9, 10, 11, 24],
+      "focus": "内容管理类Agent（内容审核、删文删图、社交媒体管理、数字足迹清理）"
+    },
+    "searcher-3": {
+      "queries": [12, 13, 14, 15, 16, 20, 21, 25],
+      "focus": "小众具体Agent场景（法律、砍价、遗书、维权、约会等）"
+    }
+  },
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-052",
-  "category": "08-财务分析",
-  "notes": "Lead直接执行搜索和编写，因为数据已充分收集完成，无需spawn searcher"
+  "report_id": "R-068",
+  "category": "01-AI行业研究"
 }
