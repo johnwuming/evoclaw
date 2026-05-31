@@ -1,5 +1,16 @@
 {
   "iterations": [
-    {"round": 1, "reviewer_score": 7, "gaps_found": ["医疗/教育/营销缺失", "社交媒体管理缺失", "中国产品覆盖不足"], "action": "补充搜索后直接收敛"}
+    {
+      "round": 1,
+      "reviewer_accuracy_score": 7,
+      "reviewer_completeness_score": 6.5,
+      "gaps_found": [
+        "中国市场覆盖不足（仅2条有效发现）",
+        "数字遗产/罚款申诉方向缺乏独立开发者收入验证",
+        "遗漏教育辅导、社媒管理、邮件管理、知识管理等方向"
+      ],
+      "action": "收敛交付",
+      "action_reason": "准确性7/10达标，完整性6.5/10略低但在报告中已补充遗漏方向。边际收益不足以再跑一轮搜索。"
+    }
   ]
 }
