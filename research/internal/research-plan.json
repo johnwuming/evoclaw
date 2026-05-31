@@ -1,51 +1,55 @@
 {
-  "topic": "AI Agent 热门应用场景全景扫描（2025-2026，排除coding）",
+  "topic": "一人可启动的AI Agent产品方向扫描",
   "complexity": "中等",
-  "complexity_reason": "任务涉及三个维度（热门场景、内容管理、小众场景），需要大量具体产品案例而非抽象概念。不需要深度财务分析或技术原理，主要是产品/市场扫描，2-3个搜索员1轮可覆盖。",
-  "dimensions": ["热门AI Agent应用场景", "内容管理类Agent", "小众但具体的Agent场景"],
+  "complexity_reason": "需要搜索多个方向的独立开发者案例、收入数据和产品参考，但不需要量化建模或深度技术分析。主要工作是广泛搜索和案例验证。",
+  "dimensions": ["独立开发者案例", "消费者工具类Agent", "信息聚合/决策Agent", "生活自动化Agent", "灰色/边缘合法Agent"],
   "search_queries": [
-    {"id": 1, "query": "2025年最火AI Agent应用场景 非coding SaaS产品案例", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "AI Agent customer service automation 2025 top products SaaS", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "AI Agent personal assistant 2025 2026 products Rabbit r1 Humane Pin alternative", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "AI Agent sales automation outreach 2025 products clay.com Apollo instantane", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "AI Agent HR recruiting automation 2025 products hireez fetcher", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "AI Agent finance accounting automation 2025 products rippling breed", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "AI Agent内容审核工具 自动删文删图 社交媒体管理 2025产品", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "AI content moderation agent automated removal 2025 products perspective API OpenAI moderation", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "社交媒体批量内容管理工具 AI自动删除旧帖 清理归档 2025", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "AI Agent brand safety content compliance automated takedown 2025", "dimension": "内容管理", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "digital footprint cleanup AI tool delete old social media posts 2025", "dimension": "内容管理", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "小众AI Agent应用场景 具体案例 2025 有趣的产品", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "AI Agent niche use cases 2025 weird specific interesting applications", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "AI帮你打官司 法律AI Agent doNotPay legal robot 2025", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "AI砍价议价Agent auto negotiation price bargaining bot 2025", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "AI写遗书 遗产规划AI estate planning will writing AI 2025", "dimension": "小众场景", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "AI Agent travel planning booking automation 2025 products mindtrip", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 18, "query": "AI Agent research automation deep research product 2025 2026", "dimension": "热门场景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 19, "query": "AI Agent healthcare medical automation 2025 products notable health", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 20, "query": "AI Agent自动化保险理赔 投诉 维权 consumer rights bot 2025", "dimension": "小众场景", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 21, "query": "AI Agent dating relationship automation 2025 weird niche", "dimension": "小众场景", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 22, "query": "AI Agent real estate property management automation 2025", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 23, "query": "AI agent supply chain procurement automation 2025 products", "dimension": "热门场景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 24, "query": "AI自动清理数字遗产 删除社交媒体 account cleanup after death 2025", "dimension": "内容管理", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 25, "query": "AI Agent cooking recipe meal planning grocery automation 2025 niche", "dimension": "小众场景", "priority": "low", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "indie hacker AI agent product revenue 2024 2025 solo developer", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "one person AI startup profitable indie hacker AI tool making money", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "ProductHunt AI tool solo developer revenue indie 2024 2025", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Reddit indie dev AI product income report side project AI tool", "dimension": "独立开发者案例", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "solo developer AI subscription management cancel tool revenue", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "数字足迹清理 删帖工具 产品 个人隐私 删除 social media delete tool product", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "消费维权 投诉自动化 AI工具 产品 12315 auto complaint tool consumer", "dimension": "消费者工具类Agent", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "账单分析 订阅管理 退款追踪 AI app indie developer subscription tracker", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "比价Agent price comparison AI agent product solo developer 砍价", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "job search aggregator AI tool indie hacker 求职 聚合 agent product revenue", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "二手交易监控 自动议价 AI agent product marketplace deal finder", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "law legal document AI tool for regular people DIY legal tech indie", "dimension": "信息聚合/决策Agent", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "AI dating assistant chat helper tool indie product revenue 2024 2025", "dimension": "生活自动化Agent", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "AI fitness diet meal plan app solo developer revenue subscription", "dimension": "生活自动化Agent", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "AI travel planning agent indie product trip planner solo dev", "dimension": "生活自动化Agent", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "cancel subscription auto refund AI agent product Truebill Rocket Money competitor indie", "dimension": "灰色/边缘合法Agent", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 17, "query": "parking ticket appeal AI fine dispute tool automatic appeal product", "dimension": "灰色/边缘合法Agent", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 18, "query": "personal data breach monitoring privacy leak alert AI tool indie", "dimension": "灰色/边缘合法Agent", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 19, "query": "digital legacy management after death account tool product AI", "dimension": "灰色/边缘合法Agent", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 20, "query": "即刻 独立开发者 AI产品 收入 案例 2024 2025 V2EX", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 21, "query": "solo developer AI Chrome extension making money revenue indie", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 22, "query": "AI agent price tracking alert product deal notification indie hacker", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 23, "query": "housing rent price monitor AI alert apartment tracker product", "dimension": "信息聚合/决策Agent", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 24, "query": "AI personal finance budget tracker app indie developer revenue 2024", "dimension": "生活自动化Agent", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 25, "query": "Redact.dev social media delete tool revenue users alternative", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-4"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6, 17, 18, 19, 22, 23],
-      "focus": "热门AI Agent应用场景（客服、销售、HR、金融、旅游、研究、医疗、房产、供应链）"
+      "queries": [1, 2, 3, 4, 5, 22],
+      "focus": "独立开发者AI案例 + 订阅管理 + 比价追踪"
     },
     "searcher-2": {
-      "queries": [7, 8, 9, 10, 11, 24],
-      "focus": "内容管理类Agent（内容审核、删文删图、社交媒体管理、数字足迹清理）"
+      "queries": [6, 7, 8, 9, 10, 24],
+      "focus": "数字足迹清理 + 消费维权 + 账单分析 + 求职聚合 + 记账理财"
     },
     "searcher-3": {
-      "queries": [12, 13, 14, 15, 16, 20, 21, 25],
-      "focus": "小众具体Agent场景（法律、砍价、遗书、维权、约会等）"
+      "queries": [11, 12, 13, 14, 15, 23],
+      "focus": "二手交易 + 法律DIY + 约会助手 + 健身饮食 + 旅行规划 + 房租监控"
+    },
+    "searcher-4": {
+      "queries": [16, 17, 18, 19, 20, 21, 25],
+      "focus": "取消订阅 + 罚款申诉 + 隐私监控 + 数字遗产 + 中文社区案例 + Chrome插件 + Redact"
     }
   },
-  "searcher_count": 3,
+  "searcher_count": 4,
   "review_rounds": 1,
-  "report_id": "R-068",
+  "report_id": "R-072",
   "category": "01-AI行业研究"
 }
