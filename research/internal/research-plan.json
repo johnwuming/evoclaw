@@ -1,55 +1,60 @@
 {
-  "topic": "一人可启动的AI Agent产品方向扫描",
-  "complexity": "中等",
-  "complexity_reason": "需要搜索多个方向的独立开发者案例、收入数据和产品参考，但不需要量化建模或深度技术分析。主要工作是广泛搜索和案例验证。",
-  "dimensions": ["独立开发者案例", "消费者工具类Agent", "信息聚合/决策Agent", "生活自动化Agent", "灰色/边缘合法Agent"],
+  "topic": "AI 桌面小屏幕硬件产品市场深度调研",
+  "complexity": "深度",
+  "complexity_reason": "涉及7个维度（产品形态、竞品全景、市场规模、价格分析、用户画像、创业机会、社区生态），需要覆盖国内外市场、开源社区、商业化产品、供应链分析，搜索范围广泛",
+  "dimensions": ["产品形态与技术栈", "竞品全景（国内外）", "市场规模与增长", "价格分布与BOM分析", "目标用户画像", "创业机会分析", "社区与生态"],
   "search_queries": [
-    {"id": 1, "query": "indie hacker AI agent product revenue 2024 2025 solo developer", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "one person AI startup profitable indie hacker AI tool making money", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "ProductHunt AI tool solo developer revenue indie 2024 2025", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Reddit indie dev AI product income report side project AI tool", "dimension": "独立开发者案例", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "solo developer AI subscription management cancel tool revenue", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "数字足迹清理 删帖工具 产品 个人隐私 删除 social media delete tool product", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "消费维权 投诉自动化 AI工具 产品 12315 auto complaint tool consumer", "dimension": "消费者工具类Agent", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "账单分析 订阅管理 退款追踪 AI app indie developer subscription tracker", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "比价Agent price comparison AI agent product solo developer 砍价", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "job search aggregator AI tool indie hacker 求职 聚合 agent product revenue", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "二手交易监控 自动议价 AI agent product marketplace deal finder", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "law legal document AI tool for regular people DIY legal tech indie", "dimension": "信息聚合/决策Agent", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "AI dating assistant chat helper tool indie product revenue 2024 2025", "dimension": "生活自动化Agent", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "AI fitness diet meal plan app solo developer revenue subscription", "dimension": "生活自动化Agent", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "AI travel planning agent indie product trip planner solo dev", "dimension": "生活自动化Agent", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "cancel subscription auto refund AI agent product Truebill Rocket Money competitor indie", "dimension": "灰色/边缘合法Agent", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 17, "query": "parking ticket appeal AI fine dispute tool automatic appeal product", "dimension": "灰色/边缘合法Agent", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 18, "query": "personal data breach monitoring privacy leak alert AI tool indie", "dimension": "灰色/边缘合法Agent", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 19, "query": "digital legacy management after death account tool product AI", "dimension": "灰色/边缘合法Agent", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 20, "query": "即刻 独立开发者 AI产品 收入 案例 2024 2025 V2EX", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 21, "query": "solo developer AI Chrome extension making money revenue indie", "dimension": "独立开发者案例", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 22, "query": "AI agent price tracking alert product deal notification indie hacker", "dimension": "信息聚合/决策Agent", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 23, "query": "housing rent price monitor AI alert apartment tracker product", "dimension": "信息聚合/决策Agent", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 24, "query": "AI personal finance budget tracker app indie developer revenue 2024", "dimension": "生活自动化Agent", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 25, "query": "Redact.dev social media delete tool revenue users alternative", "dimension": "消费者工具类Agent", "priority": "high", "assigned_to": "searcher-4"}
+    {"id": 1, "query": "ESP32 桌面小屏幕产品 像素屏 pixel display AWTRIX PixelIt LunaPix 功能参数对比", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Tidbyt smart display price sales revenue funding 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Rabbit R1 Humane AI Pin Frame LM Response AI hardware sales units shipped 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "ESP32-S3 vs RP2040 vs ESP32 small LCD display project comparison 2024 2025", "dimension": "产品形态与技术栈", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "AWTRIX Light BluePixelMatrix ESP32 pixel clock GitHub stars contributors community size", "dimension": "社区与生态", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 6, "query": "PixelIt ESP32 matrix display GitHub stars community Discord size", "dimension": "社区与生态", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "LunaPix ESP32 desktop screen GitHub project stars features", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "淘宝 1688 ESP32 桌面屏 智能像素屏 价格 销量 2024 2025", "dimension": "价格分布", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "ESP32 small screen desktop gadget e-ink LCD OLED smart clock pixel art product 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "AI desktop hardware market size 2024 2025 smart display small screen device market forecast", "dimension": "市场规模", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 11, "query": "maker DIY hardware community size GitHub ESP32 Arduino Raspberry Pi projects growth", "dimension": "社区与生态", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "ESP32 BOM bill of materials cost breakdown small LCD display pixel matrix DIY kit", "dimension": "价格分布", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "Tidbyt Kickstarter Indiegogo crowdfunding campaign data amount raised backers", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "桌面智能硬件 智能音箱 带屏设备 市场规模 2024 2025 中国", "dimension": "市场规模", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "日本 韩国 台湾 ESP32 小屏幕 桌面摆件 pixel display smart gadget product", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 16, "query": "Tricky Nisbet divoom ditoo pixel art speaker display sales popularity", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 17, "query": "小红书 ESP32 桌面屏 像素屏 爆款 DIY 手工 创客 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 18, "query": "DIY pixel clock kit ESP32 e-ink desktop display maker community TaoBao sales", "dimension": "价格分布", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 19, "query": "AI hardware startup one-person company bootstrapping Shenzhen supply chain small electronics", "dimension": "创业机会", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 20, "query": " programmable pixel display smart home dashboard ESP32 e-ink LCD comparison screen types", "dimension": "产品形态与技术栈", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 21, "query": "Divoom Ditoo Pixoo pixel display sales units revenue 2023 2024", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 22, "query": "smart display market size CAGR forecast 2025-2030 small screen IoT devices", "dimension": "市场规模", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 23, "query": "深圳华强北 ESP32 开发板 供应链 成本 硬件创业 small batch manufacturing", "dimension": "创业机会", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 24, "query": "Ulanzi TC001 pixel clock AWTRIX compatible ESP32 features price review", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 25, "query": "SenseCAP Indicator ESP32-S3 e-ink display Seeed Studio features price", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 26, "query": "user profile programmer maker geek desktop gadget purchase behavior survey", "dimension": "目标用户画像", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 27, "query": "hardware startup subscription model content store app ecosystem pixel display monetization", "dimension": "创业机会", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 28, "query": "Inkplate e-ink ESP32 display board price features DIY smart dashboard", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 29, "query": "AI pin AI pendant screenless AI device market failure analysis 2024 2025", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 30, "query": "OpenEPaperLink e-ink display ESP32 DIY project GitHub community", "dimension": "社区与生态", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 22],
-      "focus": "独立开发者AI案例 + 订阅管理 + 比价追踪"
+      "queries": [1, 2, 3, 4, 21, 24, 29],
+      "focus": "核心竞品（Tidbyt/Rabbit R1/AWTRIX/Divoom/Ulanzi）与AI硬件分析"
     },
     "searcher-2": {
-      "queries": [6, 7, 8, 9, 10, 24],
-      "focus": "数字足迹清理 + 消费维权 + 账单分析 + 求职聚合 + 记账理财"
+      "queries": [5, 6, 7, 8, 9, 25, 28, 30],
+      "focus": "开源社区（GitHub项目）与中国市场产品与价格"
     },
     "searcher-3": {
-      "queries": [11, 12, 13, 14, 15, 23],
-      "focus": "二手交易 + 法律DIY + 约会助手 + 健身饮食 + 旅行规划 + 房租监控"
+      "queries": [10, 11, 12, 13, 14, 22, 26],
+      "focus": "市场规模数据、BOM成本分析、用户画像"
     },
     "searcher-4": {
-      "queries": [16, 17, 18, 19, 20, 21, 25],
-      "focus": "取消订阅 + 罚款申诉 + 隐私监控 + 数字遗产 + 中文社区案例 + Chrome插件 + Redact"
+      "queries": [15, 16, 17, 18, 19, 20, 23, 27],
+      "focus": "亚太市场产品、供应链分析、创业机会与变现模式"
     }
   },
   "searcher_count": 4,
   "review_rounds": 1,
-  "report_id": "R-072",
-  "category": "01-AI行业研究"
+  "report_id": "R-073",
+  "category": "06-产品调研"
 }
