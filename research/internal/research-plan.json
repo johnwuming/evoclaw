@@ -1,60 +1,35 @@
 {
-  "topic": "AI 桌面小屏幕硬件产品市场深度调研",
-  "complexity": "深度",
-  "complexity_reason": "涉及7个维度（产品形态、竞品全景、市场规模、价格分析、用户画像、创业机会、社区生态），需要覆盖国内外市场、开源社区、商业化产品、供应链分析，搜索范围广泛",
-  "dimensions": ["产品形态与技术栈", "竞品全景（国内外）", "市场规模与增长", "价格分布与BOM分析", "目标用户画像", "创业机会分析", "社区与生态"],
+  "topic": "SpaceX国内供应链上市公司与相关基金调研",
+  "complexity": "中等",
+  "complexity_reason": "覆盖面较广（供应链梳理+基金产品），但核心是信息收集和交叉验证，不需要深度建模",
+  "dimensions": ["供应链公司梳理", "业务关系验证", "基金/ETF产品"],
   "search_queries": [
-    {"id": 1, "query": "ESP32 桌面小屏幕产品 像素屏 pixel display AWTRIX PixelIt LunaPix 功能参数对比", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Tidbyt smart display price sales revenue funding 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Rabbit R1 Humane AI Pin Frame LM Response AI hardware sales units shipped 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "ESP32-S3 vs RP2040 vs ESP32 small LCD display project comparison 2024 2025", "dimension": "产品形态与技术栈", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "AWTRIX Light BluePixelMatrix ESP32 pixel clock GitHub stars contributors community size", "dimension": "社区与生态", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 6, "query": "PixelIt ESP32 matrix display GitHub stars community Discord size", "dimension": "社区与生态", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "LunaPix ESP32 desktop screen GitHub project stars features", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "淘宝 1688 ESP32 桌面屏 智能像素屏 价格 销量 2024 2025", "dimension": "价格分布", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "ESP32 small screen desktop gadget e-ink LCD OLED smart clock pixel art product 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "AI desktop hardware market size 2024 2025 smart display small screen device market forecast", "dimension": "市场规模", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 11, "query": "maker DIY hardware community size GitHub ESP32 Arduino Raspberry Pi projects growth", "dimension": "社区与生态", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "ESP32 BOM bill of materials cost breakdown small LCD display pixel matrix DIY kit", "dimension": "价格分布", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "Tidbyt Kickstarter Indiegogo crowdfunding campaign data amount raised backers", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "桌面智能硬件 智能音箱 带屏设备 市场规模 2024 2025 中国", "dimension": "市场规模", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "日本 韩国 台湾 ESP32 小屏幕 桌面摆件 pixel display smart gadget product", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 16, "query": "Tricky Nisbet divoom ditoo pixel art speaker display sales popularity", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 17, "query": "小红书 ESP32 桌面屏 像素屏 爆款 DIY 手工 创客 2024 2025", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 18, "query": "DIY pixel clock kit ESP32 e-ink desktop display maker community TaoBao sales", "dimension": "价格分布", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 19, "query": "AI hardware startup one-person company bootstrapping Shenzhen supply chain small electronics", "dimension": "创业机会", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 20, "query": " programmable pixel display smart home dashboard ESP32 e-ink LCD comparison screen types", "dimension": "产品形态与技术栈", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 21, "query": "Divoom Ditoo Pixoo pixel display sales units revenue 2023 2024", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 22, "query": "smart display market size CAGR forecast 2025-2030 small screen IoT devices", "dimension": "市场规模", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 23, "query": "深圳华强北 ESP32 开发板 供应链 成本 硬件创业 small batch manufacturing", "dimension": "创业机会", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 24, "query": "Ulanzi TC001 pixel clock AWTRIX compatible ESP32 features price review", "dimension": "竞品全景", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 25, "query": "SenseCAP Indicator ESP32-S3 e-ink display Seeed Studio features price", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 26, "query": "user profile programmer maker geek desktop gadget purchase behavior survey", "dimension": "目标用户画像", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 27, "query": "hardware startup subscription model content store app ecosystem pixel display monetization", "dimension": "创业机会", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 28, "query": "Inkplate e-ink ESP32 display board price features DIY smart dashboard", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 29, "query": "AI pin AI pendant screenless AI device market failure analysis 2024 2025", "dimension": "竞品全景", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 30, "query": "OpenEPaperLink e-ink display ESP32 DIY project GitHub community", "dimension": "社区与生态", "priority": "medium", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "SpaceX 供应链 上市公司 A股 港股", "dimension": "供应链公司梳理", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "星链 Starlink 概念股 供应链 上市公司", "dimension": "供应链公司梳理", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "SpaceX 国内供应商 名单 直接供应商", "dimension": "供应链公司梳理", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "商业航天 受益股 A股 SpaceX 供应商", "dimension": "供应链公司梳理", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "SpaceX 中国供应商 星链 卫星制造", "dimension": "业务关系验证", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 6, "query": "星链 地面站设备 通信模组 上市公司", "dimension": "业务关系验证", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "SpaceX火箭制造 结构件 电子元器件 国内供应商", "dimension": "业务关系验证", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "银河电子 亚光科技 航天电子 星链供应商", "dimension": "业务关系验证", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "SpaceX supply chain Chinese suppliers listed companies 2024 2025", "dimension": "供应链公司梳理", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 10, "query": "Starlink supply chain China stocks publicly traded", "dimension": "供应链公司梳理", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 11, "query": "卫星互联网 ETF 公募基金 商业航天", "dimension": "基金产品", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "商业航天 ETF 基金代码 规模 2025", "dimension": "基金产品", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "SpaceX概念基金 卫星互联网基金 天天基金", "dimension": "基金产品", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "同花顺 星链概念股 商业航天概念股 名单", "dimension": "供应链公司梳理", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 15, "query": "臻镭科技 铖昌科技 国博电子 相控阵芯片 SpaceX供应商", "dimension": "业务关系验证", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 16, "query": "SpaceX Starlink antenna phased array Chinese supplier", "dimension": "业务关系验证", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "中国卫通 中国卫星 航天科技 星链合作", "dimension": "业务关系验证", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 18, "query": "中信证券 华泰证券 SpaceX供应链研报 2024 2025", "dimension": "供应链公司梳理", "priority": "medium", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
-    "searcher-1": {
-      "queries": [1, 2, 3, 4, 21, 24, 29],
-      "focus": "核心竞品（Tidbyt/Rabbit R1/AWTRIX/Divoom/Ulanzi）与AI硬件分析"
-    },
-    "searcher-2": {
-      "queries": [5, 6, 7, 8, 9, 25, 28, 30],
-      "focus": "开源社区（GitHub项目）与中国市场产品与价格"
-    },
-    "searcher-3": {
-      "queries": [10, 11, 12, 13, 14, 22, 26],
-      "focus": "市场规模数据、BOM成本分析、用户画像"
-    },
-    "searcher-4": {
-      "queries": [15, 16, 17, 18, 19, 20, 23, 27],
-      "focus": "亚太市场产品、供应链分析、创业机会与变现模式"
-    }
+    "searcher-1": {"queries": [1, 2, 3, 4, 14, 18], "focus": "SpaceX/星链供应链上市公司大盘梳理"},
+    "searcher-2": {"queries": [5, 6, 7, 8, 15, 17], "focus": "具体公司业务关系验证"},
+    "searcher-3": {"queries": [9, 10, 11, 12, 13, 16], "focus": "英文来源+基金产品调研"}
   },
-  "searcher_count": 4,
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-073",
-  "category": "06-产品调研"
+  "report_id": "R-075",
+  "category": "08-财务分析"
 }
