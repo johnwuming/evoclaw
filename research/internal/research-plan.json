@@ -1,70 +1,31 @@
 {
-  "topic": "猪周期产业链投资标的与公募基金深度分析",
-  "complexity": "深度",
-  "complexity_reason": "覆盖四大分析维度（周期定位、产业链9+家公司深度分析、公募基金/ETF穿透、投资策略），需要大量最新财务数据、基金持仓数据、期货行情数据，涉及猪周期宏观判断和多个投资标的多维对比",
+  "topic": "OpenClaw 控制 Claude Code 进行 Agent Web Coding",
+  "complexity": "中等",
+  "complexity_reason": "主题明确且文档丰富，涉及 OpenClaw 官方文档、Claude Code CLI 文档、ACP 协议规范和社区实践。不需要多个搜索员，但需要覆盖5种集成路径的细节和实际配置示例。",
   "dimensions": [
-    "周期定位判断（能繁母猪存栏、猪价走势、成本线）",
-    "产业链标的深度分析（上游饲料动保、中游养殖、下游屠宰、期货）",
-    "公募基金/ETF穿透分析（直接持仓基金、主题ETF、隐性持仓）",
-    "投资策略建议（标的优先级、基金选择、风险提示）"
+    "OpenClaw 与 Claude Code 的集成方式（agentRuntime/ACP/exec/MCP）",
+    "Claude Code 的 Agent 模式（CLI/headless/ACP/Agent SDK）",
+    "实际工作流示例和配置",
+    "替代方案对比",
+    "社区实践案例"
   ],
   "search_queries": [
-    {"id": 1, "query": "2025年2026年能繁母猪存栏量 农业农村部 最新数据 历史分位", "dimension": "周期定位判断", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "猪周期 2025年2026年 阶段判断 上行期 去化期 券商研报", "dimension": "周期定位判断", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "历史猪周期 时间规律 周期长度 上一轮猪周期 起止时间", "dimension": "周期定位判断", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "2025年2026年 生猪价格 最新行情 外三元 猪价走势", "dimension": "周期定位判断", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "养殖完全成本 行业平均 2025年 养殖成本线 盈亏平衡", "dimension": "周期定位判断", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "猪粮比 2025年2026年 盈亏平衡点 生猪养殖利润", "dimension": "周期定位判断", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "海大集团 2025年报 2025年业绩 饲料销量 利润", "dimension": "上游饲料动保", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "新希望 2025年报 饲料销量 养殖出栏 资产负债率", "dimension": "上游饲料动保", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 9, "query": "生物股份 2025年报 动保疫苗 口蹄疫 业绩 利润", "dimension": "上游饲料动保", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 10, "query": "饲料行业 2025年2026年 趋景 结构升级 量增价减", "dimension": "上游饲料动保", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 11, "query": "牧原股份 2025年报 出栏量 能繁母猪 完全成本 资产负债率 现金流", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "温氏股份 2025年报 出栏量 能繁母猪 养殖模式 成本", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "新希望 2025年报 生猪出栏 资产负债率 融资 有息负债", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "养殖企业 成本对比 牧原 温氏 新希望 神农 完全成本 2025", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 15, "query": "牧原股份 温氏股份 头均市值 PB估值 历史分位 2025", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 16, "query": "神农集团 2025年报 出栏量 完全成本 产能扩张", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 17, "query": "巨星农牧 2025年报 出栏量 成本 四川养殖龙头", "dimension": "中游养殖龙头", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "京基智农 2025年报 出栏量 转型养殖 财务数据", "dimension": "中游养殖龙头", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "天康生物 2025年报 出栏量 新疆养殖 动保", "dimension": "中游养殖龙头", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 20, "query": "唐人神 2025年报 出栏量 湖南 养殖业绩", "dimension": "中游养殖龙头", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 21, "query": "双汇发展 2025年报 屠宰量 肉制品 业绩", "dimension": "下游屠宰深加工", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 22, "query": "龙大美食 2025年报 屠宰 食品 业绩", "dimension": "下游屠宰深加工", "priority": "low", "assigned_to": "searcher-3"},
-    {"id": 23, "query": "大商所 生猪期货 2025年2026年 合约 基差 交易量 最新行情", "dimension": "期货衍生品", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 24, "query": "畜牧ETF 159867 持仓明细 规模 流动性 2025", "dimension": "公募基金ETF", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 25, "query": "农业ETF 159825 持仓明细 规模 2025", "dimension": "公募基金ETF", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 26, "query": "持有牧原股份的基金 主动管理型 2025Q1 持仓占比", "dimension": "公募基金ETF", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 27, "query": "持有温氏股份的基金 主动管理型 2025Q1 2024Q4", "dimension": "公募基金ETF", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 28, "query": "畜牧养殖 主题基金 ETF 2025年 排名 规模", "dimension": "公募基金ETF", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 29, "query": "消费主题基金 红利基金 隐性持仓 牧原 温氏 养殖股 2025", "dimension": "公募基金ETF", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 30, "query": "养殖股 机构持仓 集中度 基金抱团 2025", "dimension": "公募基金ETF", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 31, "query": "养殖上市公司 逆周期扩张 产能建设 资金储备 2025", "dimension": "中游养殖龙头", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 32, "query": "牧原股份 股权质押 实际控制人 管理层持股 公司治理", "dimension": "中游养殖龙头", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 33, "query": "生猪养殖 非洲猪瘟 2025年 疫病风险", "dimension": "周期定位判断", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 34, "query": "猪周期 投资策略 2025 2026 券商推荐 标的", "dimension": "投资策略", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 35, "query": "神农集团 逆周期扩张 融资能力 产能建设 2025", "dimension": "中游养殖龙头", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "OpenClaw ACP agent runtime configuration claude code integration 2025", "dimension": "集成方式", "priority": "high", "assigned_to": "lead-self"},
+    {"id": 2, "query": "Claude Code CLI headless mode ACP Agent Communication Protocol 2025", "dimension": "Agent模式", "priority": "high", "assigned_to": "lead-self"},
+    {"id": 3, "query": "OpenClaw control Claude Code agent web coding workflow", "dimension": "工作流", "priority": "high", "assigned_to": "lead-self"},
+    {"id": 4, "query": "Claude Code headless mode claude -p print mode non-interactive programmatic Agent SDK", "dimension": "Agent模式", "priority": "high", "assigned_to": "lead-self"},
+    {"id": 5, "query": "openclaw acpx plugin configuration harness claude code ACP sessions_spawn", "dimension": "集成方式", "priority": "high", "assigned_to": "lead-self"},
+    {"id": 6, "query": "openclaw-code-agent plugin clawhub claude code plan review execute workflow", "dimension": "插件方案", "priority": "high", "assigned_to": "lead-self"}
   ],
   "searcher_assignments": {
-    "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 33],
-      "focus": "周期定位判断 + 上游饲料动保（能繁母猪、猪价、成本线、饲料龙头、动保）"
-    },
-    "searcher-2": {
-      "queries": [11, 12, 13, 14, 15, 16, 31, 32],
-      "focus": "中游养殖龙头深度分析（牧原、温氏、新希望、神农的财务、成本、估值、治理）"
-    },
-    "searcher-3": {
-      "queries": [17, 18, 19, 20, 21, 22, 23, 35],
-      "focus": "区域养殖龙头 + 下游屠宰 + 期货（巨星、京基智农、天康、唐人神、双汇、生猪期货）"
-    },
-    "searcher-4": {
-      "queries": [24, 25, 26, 27, 28, 29, 30, 34],
-      "focus": "公募基金/ETF穿透分析（畜牧ETF、农业ETF、主动基金持仓、消费红利基金隐性持仓）"
+    "lead-self": {
+      "queries": [1, 2, 3, 4, 5, 6],
+      "focus": "全部维度（文档丰富的中等复杂度任务，由 lead 直接搜索）"
     }
   },
-  "searcher_count": 4,
+  "searcher_count": 1,
   "review_rounds": 1,
-  "report_id": "R-077",
-  "category": "08-财务分析"
+  "report_id": "R-074",
+  "category": "06-开发实践",
+  "note": "由于文档资源非常丰富（官方docs.openclaw.ai、code.claude.com、多个社区文章），判定为中等复杂度，由 lead 直接搜索编写，无需分配搜索员。"
 }
