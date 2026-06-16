@@ -1,31 +1,45 @@
 {
-  "topic": "OpenClaw 控制 Claude Code 进行 Agent Web Coding",
+  "topic": "单指操作的魂类/打击感小游戏设计方案",
   "complexity": "中等",
-  "complexity_reason": "主题明确且文档丰富，涉及 OpenClaw 官方文档、Claude Code CLI 文档、ACP 协议规范和社区实践。不需要多个搜索员，但需要覆盖5种集成路径的细节和实际配置示例。",
+  "complexity_reason": "主题聚焦于游戏设计，需要覆盖单指操作交互方案、参考游戏案例、魂类核心体验拆解、推荐方案设计。涉及游戏设计理论和实际案例，需要搜索多款具体游戏的机制分析，但不需要海量数据点。由2个搜索员覆盖不同维度即可。",
   "dimensions": [
-    "OpenClaw 与 Claude Code 的集成方式（agentRuntime/ACP/exec/MCP）",
-    "Claude Code 的 Agent 模式（CLI/headless/ACP/Agent SDK）",
-    "实际工作流示例和配置",
-    "替代方案对比",
-    "社区实践案例"
+    "单指操作交互方案（点击/滑动/蓄力/节奏/自动战斗等）",
+    "参考游戏案例分析（Archero、Survivor.io、Downwell等）",
+    "魂类核心体验拆解（打击感、紧张感、风险回报）",
+    "微信小游戏生态适配",
+    "推荐设计方案"
   ],
   "search_queries": [
-    {"id": 1, "query": "OpenClaw ACP agent runtime configuration claude code integration 2025", "dimension": "集成方式", "priority": "high", "assigned_to": "lead-self"},
-    {"id": 2, "query": "Claude Code CLI headless mode ACP Agent Communication Protocol 2025", "dimension": "Agent模式", "priority": "high", "assigned_to": "lead-self"},
-    {"id": 3, "query": "OpenClaw control Claude Code agent web coding workflow", "dimension": "工作流", "priority": "high", "assigned_to": "lead-self"},
-    {"id": 4, "query": "Claude Code headless mode claude -p print mode non-interactive programmatic Agent SDK", "dimension": "Agent模式", "priority": "high", "assigned_to": "lead-self"},
-    {"id": 5, "query": "openclaw acpx plugin configuration harness claude code ACP sessions_spawn", "dimension": "集成方式", "priority": "high", "assigned_to": "lead-self"},
-    {"id": 6, "query": "openclaw-code-agent plugin clawhub claude code plan review execute workflow", "dimension": "插件方案", "priority": "high", "assigned_to": "lead-self"}
+    {"id": 1, "query": "Archero 单指操作机制 移动停止自动攻击 游戏设计分析", "dimension": "参考游戏", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Survivor.io 弹壳特攻队 单指操作 割草游戏 打击感设计", "dimension": "参考游戏", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Downwell 单指操作 竖版动作 打击感 紧张感 设计分析", "dimension": "参考游戏", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "one button action game design single finger mobile game mechanics", "dimension": "操作方案", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "single thumb mobile game controls design pattern press release timing", "dimension": "操作方案", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Crypt of the NecroDancer 节奏地牢 节奏点击 操作设计", "dimension": "操作方案", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "Leap Day 单指跳跃 横版动作 设计分析", "dimension": "参考游戏", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "Reigns 左右滑动决策 单指游戏设计", "dimension": "参考游戏", "priority": "low", "assigned_to": "searcher-1"},
+    {"id": 9, "query": "魂类游戏 Souls-like core feel design 打击感 完美防御 完美闪避 时机判断", "dimension": "魂类体验", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "souls-like game design risk reward attack windup telegraphed enemy", "dimension": "魂类体验", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "game juice impact feel screen shake hitstop damage number VFX mobile", "dimension": "打击感", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "微信小游戏 动作游戏 操作方案 单指 打击感 成功案例", "dimension": "微信生态", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "mobile game boss fight design single touch one button mechanic", "dimension": "Boss设计", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "one finger action game perfect dodge perfect parry timing mechanic mobile", "dimension": "操作方案", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 15, "query": "Death Coming 暗黑风格 单指游戏 设计分析", "dimension": "参考游戏", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 16, "query": "弓箭传说 Arrow.io 单指操作 移动射击 设计", "dimension": "参考游戏", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 17, "query": "press to attack release to dodge one button combat game design", "dimension": "操作方案", "priority": "high", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "lead-self": {
-      "queries": [1, 2, 3, 4, 5, 6],
-      "focus": "全部维度（文档丰富的中等复杂度任务，由 lead 直接搜索）"
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 6, 7, 8],
+      "focus": "参考游戏案例 + 操作方案调研"
+    },
+    "searcher-2": {
+      "queries": [9, 10, 11, 12, 13, 14, 15, 16, 17],
+      "focus": "魂类体验拆解 + 打击感实现 + 微信生态 + 方案设计"
     }
   },
-  "searcher_count": 1,
+  "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-074",
-  "category": "06-开发实践",
-  "note": "由于文档资源非常丰富（官方docs.openclaw.ai、code.claude.com、多个社区文章），判定为中等复杂度，由 lead 直接搜索编写，无需分配搜索员。"
+  "report_id": "R-099",
+  "category": "08-开发实践"
 }
