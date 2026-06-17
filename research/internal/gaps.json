@@ -2,13 +2,13 @@
   "iterations": [
     {
       "round": 1,
-      "reviewer_accuracy_score": 0,
-      "reviewer_completeness_score": 0,
+      "reviewer_score": null,
       "gaps_found": [
-        "所有6个搜索员均因SearXNG未配置+浏览器超时而失败，无法获取2025年实时数据",
-        "本轮研究完全基于训练知识（截至2025年初），所有数据点需用户自行验证最新值"
+        "web_search 提供商未配置（minimax API key 缺失），无法搜索",
+        "browser 工具被禁用，无法抓取页面",
+        "所有结论基于训练知识，无法验证 2025 下半年至 2026 年的最新更新"
       ],
-      "action": "基于训练知识直接交付，标注所有数据置信度"
+      "action": "基于训练知识直接交付，标注所有缺口"
     }
   ]
 }
