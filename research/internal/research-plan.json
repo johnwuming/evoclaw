@@ -1,28 +1,28 @@
 {
-  "topic": "微信AI钱包/微信AI支付调研",
+  "topic": "支付宝AI付（Agent支付能力）调研",
   "complexity": "中等",
-  "complexity_reason": "主题明确（2026年6月17日新闻事件），需覆盖产品功能、接入方式、安全机制、竞品对比，但范围可控",
-  "dimensions": ["产品定义", "接入方式", "安全机制", "第三方可用性", "竞品对比"],
+  "complexity_reason": "需要确认支付宝AI付的产品形态、开放程度、API/SDK可用性、MCP Server等多个维度，但范围聚焦在支付能力接入，不需要覆盖整个行业",
+  "dimensions": ["产品形态", "开放程度/API", "MCP Server", "替代方案", "对比分析"],
   "search_queries": [
-    {"id": 1, "query": "微信AI支付 2026年6月 新功能发布 21经济网", "dimension": "产品定义", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "微信钱包 AI虚拟卡 专属支付功能", "dimension": "产品定义", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "微信AI支付 开通方式 使用方法 用户体验", "dimension": "接入方式", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "微信AI支付 API SDK 开发者文档 第三方接入", "dimension": "接入方式", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "微信AI支付 安全机制 额度控制 风控", "dimension": "安全机制", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "微信支付 AI agent 自主支付 智能体 生态", "dimension": "产品定义", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "支付宝AI支付 3亿笔 数据 对比微信", "dimension": "竞品对比", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "WeChat AI payment virtual card 2026 news", "dimension": "产品定义", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "微信AI支付 第三方AI agent 接入 开放平台 非小程序", "dimension": "接入方式", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "AI支付 行业趋势 2026 中国 移动支付 智能体", "dimension": "竞品对比", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "微信支付 MCP server AI工具集成 2026", "dimension": "接入方式", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "微信AI钱包 与支付宝AI支付 区别对比", "dimension": "竞品对比", "priority": "high", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "支付宝 AI付 产品形态 2025 2026", "dimension": "产品形态", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "支付宝 智能体 AI支付 3亿笔", "dimension": "产品形态", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "支付宝 AI付 用户使用方式 流程", "dimension": "产品形态", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "支付宝 MCP Server AI工具", "dimension": "MCP Server", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Alipay MCP server model context protocol", "dimension": "MCP Server", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "支付宝 开放平台 AI agent 支付API SDK", "dimension": "开放程度/API", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "Ant Group AI payment API developer", "dimension": "开放程度/API", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "支付宝 智能体 开发平台 扣子 MCP", "dimension": "开放程度/API", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "支付宝 当面付 API 第三方接入", "dimension": "替代方案", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "支付宝 代扣 周期扣款 API 开放平台", "dimension": "替代方案", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "支付宝 预授权 冻结 解冻 API", "dimension": "替代方案", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "支付宝 商家支付 API server-to-server 无需用户端", "dimension": "替代方案", "priority": "high", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5, 6], "focus": "微信AI支付产品详情、开通方式、安全机制"},
-    "searcher-2": {"queries": [7, 8, 9, 10, 11, 12], "focus": "竞品对比、第三方接入可行性、行业趋势"}
+    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "产品形态与MCP Server"},
+    "searcher-2": {"queries": [6, 7, 8, 9, 10, 11, 12], "focus": "API开放程度与替代方案"}
   },
   "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-101",
+  "report_id": "R-102",
   "category": "07-产品调研"
 }
