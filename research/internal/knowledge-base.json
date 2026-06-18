@@ -1,16 +1,21 @@
 {
-  "topic": "Claude Code Loop 模式深度调研",
-  "collection_time": "2026-06-17T08:34:00+08:00",
-  "findings_count": 1,
-  "findings": [
-    {
-      "claim": "Claude Code Loop 模式可以用于端到端开发 AI 套壳产品",
-      "evidence": "基于训练知识：Claude Code 支持 --max-turns 参数控制循环轮数，--allowedTools 白名单权限管理，--dangerously-skip-permissions 完全自主模式，Task 子 agent 分解任务，context compaction 支持长任务",
-      "source_url": "训练知识",
-      "confidence": "medium",
-      "source_name": "Anthropic 官方文档 + 社区反馈",
-      "query_id": 1
-    }
+  "topic": "微信AI钱包/微信AI支付调研",
+  "report_id": "R-101",
+  "category": "07-产品调研",
+  "status": "completed_with_caveats",
+  "caveats": "搜索工具全程API限流，报告基于训练知识+用户提供新闻线索撰写，2026年6月发布的具体产品细节待验证",
+  "key_findings": [
+    "微信AI支付核心是在微信钱包中上线AI支付专属虚拟卡，与用户银行卡账户关联",
+    "独立AI agent（非微信生态）大概率无法直接接入微信AI支付",
+    "微信支付的安全模型要求支付在微信客户端环境内完成，外部AI无法触发支付控件",
+    "支付宝AI支付已突破3亿笔，产品成熟度领先微信",
+    "替代方案：商户身份接入、虚拟卡API、支付宝开放平台、银联无卡支付"
   ],
-  "methodology_note": "web_search 提供商未正确配置（minimax API key 缺失），browser 工具被禁用，无法执行实时搜索。报告完全基于模型训练知识生成，置信度标记为 medium。"
+  "gaps": [
+    "微信AI虚拟卡具体开通流程待验证",
+    "是否同步发布开发者API/SDK待确认",
+    "虚拟卡额度和费率待确认",
+    "支付宝AI支付3亿笔的具体构成待确认"
+  ],
+  "search_status": "all_searchers_failed_due_to_rate_limit"
 }
