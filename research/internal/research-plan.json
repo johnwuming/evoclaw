@@ -1,24 +1,28 @@
 {
-  "topic": "Claude Code Loop 模式深度调研",
+  "topic": "微信AI钱包/微信AI支付调研",
   "complexity": "中等",
-  "complexity_reason": "主题明确，主要围绕 Claude Code 的 loop/autonomous 模式，需要覆盖技术原理、能力边界、实践案例和对比分析，但范围可控",
-  "dimensions": ["技术原理", "能力评估", "使用方法", "实际案例", "竞品对比"],
+  "complexity_reason": "主题明确（2026年6月17日新闻事件），需覆盖产品功能、接入方式、安全机制、竞品对比，但范围可控",
+  "dimensions": ["产品定义", "接入方式", "安全机制", "第三方可用性", "竞品对比"],
   "search_queries": [
-    {"id": 1, "query": "Claude Code loop mode agentic autonomous development", "dimension": "技术原理", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Claude Code --allowedTools --dangerously-skip-permissions headless", "dimension": "技术原理", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Claude Code subagent Task tool multi-step development", "dimension": "能力评估", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Claude Code end-to-end product development case study", "dimension": "实际案例", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Claude Code vs Cursor Agent vs Copilot Agent vs Windsurf", "dimension": "竞品对比", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "Anthropic Claude Code official documentation features", "dimension": "技术原理", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "Claude Code OpenClaw ACP integration sessions_spawn", "dimension": "使用方法", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "Claude Code token limits context window compaction", "dimension": "能力评估", "priority": "medium", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "微信AI支付 2026年6月 新功能发布 21经济网", "dimension": "产品定义", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "微信钱包 AI虚拟卡 专属支付功能", "dimension": "产品定义", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "微信AI支付 开通方式 使用方法 用户体验", "dimension": "接入方式", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "微信AI支付 API SDK 开发者文档 第三方接入", "dimension": "接入方式", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "微信AI支付 安全机制 额度控制 风控", "dimension": "安全机制", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "微信支付 AI agent 自主支付 智能体 生态", "dimension": "产品定义", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "支付宝AI支付 3亿笔 数据 对比微信", "dimension": "竞品对比", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "WeChat AI payment virtual card 2026 news", "dimension": "产品定义", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "微信AI支付 第三方AI agent 接入 开放平台 非小程序", "dimension": "接入方式", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "AI支付 行业趋势 2026 中国 移动支付 智能体", "dimension": "竞品对比", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "微信支付 MCP server AI工具集成 2026", "dimension": "接入方式", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "微信AI钱包 与支付宝AI支付 区别对比", "dimension": "竞品对比", "priority": "high", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5, 6, 7, 8], "focus": "Claude Code loop mode 全面调研"}
+    "searcher-1": {"queries": [1, 2, 3, 4, 5, 6], "focus": "微信AI支付产品详情、开通方式、安全机制"},
+    "searcher-2": {"queries": [7, 8, 9, 10, 11, 12], "focus": "竞品对比、第三方接入可行性、行业趋势"}
   },
-  "searcher_count": 1,
-  "review_rounds": 0,
-  "report_id": "R-099",
-  "category": "08-开发实践",
-  "note": "web_search 和 browser 工具均不可用，基于训练知识生成报告"
+  "searcher_count": 2,
+  "review_rounds": 1,
+  "report_id": "R-101",
+  "category": "07-产品调研"
 }
