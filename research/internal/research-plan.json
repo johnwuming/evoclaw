@@ -1,28 +1,32 @@
 {
-  "topic": "支付宝AI付（Agent支付能力）调研",
+  "topic": "哪些外卖/饮品/电商平台的API下单接口支持生成支付宝收银台链接",
   "complexity": "中等",
-  "complexity_reason": "需要确认支付宝AI付的产品形态、开放程度、API/SDK可用性、MCP Server等多个维度，但范围聚焦在支付能力接入，不需要覆盖整个行业",
-  "dimensions": ["产品形态", "开放程度/API", "MCP Server", "替代方案", "对比分析"],
+  "complexity_reason": "需要扫描多个平台的API支付方式，但每个平台的调研深度不需要太深，主要是确认API/MCP是否存在、支付方式是否支持支付宝、能否生成收银台链接",
+  "dimensions": ["外卖平台API", "饮品品牌API/MCP", "生鲜电商API", "MCP Server生态", "支付宝收银台链接格式"],
   "search_queries": [
-    {"id": 1, "query": "支付宝 AI付 产品形态 2025 2026", "dimension": "产品形态", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "支付宝 智能体 AI支付 3亿笔", "dimension": "产品形态", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "支付宝 AI付 用户使用方式 流程", "dimension": "产品形态", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "支付宝 MCP Server AI工具", "dimension": "MCP Server", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Alipay MCP server model context protocol", "dimension": "MCP Server", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "支付宝 开放平台 AI agent 支付API SDK", "dimension": "开放程度/API", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "Ant Group AI payment API developer", "dimension": "开放程度/API", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "支付宝 智能体 开发平台 扣子 MCP", "dimension": "开放程度/API", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "支付宝 当面付 API 第三方接入", "dimension": "替代方案", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "支付宝 代扣 周期扣款 API 开放平台", "dimension": "替代方案", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "支付宝 预授权 冻结 解冻 API", "dimension": "替代方案", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "支付宝 商家支付 API server-to-server 无需用户端", "dimension": "替代方案", "priority": "high", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "美团外卖 开放平台API 下单接口 支付方式 2025 2026", "dimension": "外卖平台API", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "饿了么 开放平台 API 下单 支付宝支付 开放零售", "dimension": "外卖平台API", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "美团外卖 MCP Server AI agent 点餐 2025 2026", "dimension": "MCP Server生态", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "盒马 叮咚买菜 京东到家 开放API 下单 支付方式", "dimension": "生鲜电商API", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "瑞幸咖啡 API MCP Server 点单 支付方式 微信 支付宝", "dimension": "饮品品牌API/MCP", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 6, "query": "星巴克 API MCP 点单 支付方式 2025", "dimension": "饮品品牌API/MCP", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "蜜雪冰城 库迪咖啡 API 小程序点单 支付方式", "dimension": "饮品品牌API/MCP", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "外卖点餐 MCP Server GitHub npm ClawHub 2025 2026", "dimension": "MCP Server生态", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 9, "query": "电商平台 API 下单返回支付宝收银台链接 cashier.alipay.com", "dimension": "支付宝收银台链接格式", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 10, "query": "支付宝手机网站支付 alipay.trade.wap.pay 收银台链接 第三方平台对接", "dimension": "支付宝收银台链接格式", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 11, "query": "美团 饿了么 商家API 是否支持支付宝收银台链接返回", "dimension": "外卖平台API", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 12, "query": "luckin coffee MCP server alipay payment link", "dimension": "MCP Server生态", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "AI agent 外卖点餐 支付宝支付 全链路 API", "dimension": "MCP Server生态", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "拼多多 抖音电商 开放API 下单 支付方式 支付宝", "dimension": "生鲜电商API", "priority": "low", "assigned_to": "searcher-1"},
+    {"id": 15, "query": "肯德基 麦当劳 API MCP 点餐 支付宝", "dimension": "饮品品牌API/MCP", "priority": "low", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "产品形态与MCP Server"},
-    "searcher-2": {"queries": [6, 7, 8, 9, 10, 11, 12], "focus": "API开放程度与替代方案"}
+    "searcher-1": {"queries": [1, 2, 3, 4, 11, 14], "focus": "外卖平台和生鲜电商API"},
+    "searcher-2": {"queries": [5, 6, 7, 12, 15], "focus": "饮品品牌API和MCP"},
+    "searcher-3": {"queries": [8, 9, 10, 13], "focus": "MCP Server生态和支付宝收银台链接格式"}
   },
-  "searcher_count": 2,
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-102",
+  "report_id": "R-103",
   "category": "07-产品调研"
 }
