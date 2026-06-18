@@ -1,21 +1,43 @@
 {
-  "topic": "微信AI钱包/微信AI支付调研",
-  "report_id": "R-101",
+  "topic": "支付宝AI付（Agent支付能力）调研",
+  "report_id": "R-102",
   "category": "07-产品调研",
-  "status": "completed_with_caveats",
-  "caveats": "搜索工具全程API限流，报告基于训练知识+用户提供新闻线索撰写，2026年6月发布的具体产品细节待验证",
-  "key_findings": [
-    "微信AI支付核心是在微信钱包中上线AI支付专属虚拟卡，与用户银行卡账户关联",
-    "独立AI agent（非微信生态）大概率无法直接接入微信AI支付",
-    "微信支付的安全模型要求支付在微信客户端环境内完成，外部AI无法触发支付控件",
-    "支付宝AI支付已突破3亿笔，产品成熟度领先微信",
-    "替代方案：商户身份接入、虚拟卡API、支付宝开放平台、银联无卡支付"
+  "status": "in_progress",
+  "searcher_status": {
+    "searcher-1": "pending",
+    "searcher-2": "completed_with_limitations"
+  },
+  "findings_so_far": [
+    {
+      "claim": "支付宝开放平台提供当面付产品，包含扫码支付和付款码支付两种模式",
+      "evidence": "API包含alipay.trade.precreate（预下单生成二维码）和alipay.trade.pay（付款码支付）",
+      "confidence": "low",
+      "source": "searcher-2 训练数据记忆"
+    },
+    {
+      "claim": "当面付接入需要企业资质或个体工商户",
+      "evidence": "注册支付宝商户→签约当面付→获取appid/密钥→调用API",
+      "confidence": "low",
+      "source": "searcher-2 训练数据记忆"
+    },
+    {
+      "claim": "支付宝代扣/周期扣款需要特定行业资质",
+      "evidence": "支持定期自动扣款，需用户签约授权，有行业限制",
+      "confidence": "low",
+      "source": "searcher-2 训练数据记忆"
+    },
+    {
+      "claim": "支付宝提供预授权/资金冻结能力",
+      "evidence": "API: alipay.fund.auth.order.app.freeze/unfreeze",
+      "confidence": "low",
+      "source": "searcher-2 训练数据记忆"
+    },
+    {
+      "claim": "支付宝AI Agent支付API的公开文档尚未广泛可见",
+      "evidence": "蚂蚁集团发布了百灵大模型、支小宝等产品，但第三方Agent直接调用支付能力的公开API有限",
+      "confidence": "low",
+      "source": "searcher-2 行业推断"
+    }
   ],
-  "gaps": [
-    "微信AI虚拟卡具体开通流程待验证",
-    "是否同步发布开发者API/SDK待确认",
-    "虚拟卡额度和费率待确认",
-    "支付宝AI支付3亿笔的具体构成待确认"
-  ],
-  "search_status": "all_searchers_failed_due_to_rate_limit"
+  "caveats": "两个搜索员均因capabilities=none无法执行实时搜索，所有findings来自训练数据"
 }
