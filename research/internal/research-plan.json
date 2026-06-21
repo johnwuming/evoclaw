@@ -1,59 +1,72 @@
 {
-  "topic": "可商业化的开源软件深度调研",
+  "topic": "可商业化的开源软件深度调研（重新执行，搜索工具已修复）",
   "complexity": "深度",
-  "complexity_reason": "需要覆盖AI/LLM工具链、开发者工具、企业应用、数据工具、安全工具等多个维度，每个维度需要找到具体的高星项目并分析其商业化潜力，还需要结合VC投资动向和行业新闻进行交叉验证。总共需要30+个搜索查询覆盖所有维度。",
+  "complexity_reason": "多维度扫描GitHub高星项目+商业化分析+VC投资动向+分类覆盖6+方向，需要大量实时搜索",
   "dimensions": [
-    "AI/LLM工具链（推理框架、Agent框架、RAG、向量数据库、模型服务）",
-    "开发者工具（低代码、API管理、监控告警、身份认证）",
-    "企业应用（CRM、ERP、项目管理、客服系统、建站CMS）",
-    "数据工具（ETL、BI、数据可视化、数据湖）",
-    "安全工具（SIEM、漏洞扫描）",
-    "其他（文档处理、邮件营销、SaaS替代、金融科技）",
-    "VC投资动向",
-    "一人公司商业化路径"
+    "AI/LLM工具链",
+    "开发者工具",
+    "企业应用",
+    "数据工具",
+    "安全工具",
+    "自托管替代方案",
+    "VC投资与商业化趋势"
   ],
   "search_queries": [
-    {"id": 1, "query": "GitHub trending open source AI LLM inference framework 2025 2026 stars", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 2, "query": "best open source AI agent framework GitHub 2025 commercializable license", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 3, "query": "open source RAG framework GitHub stars 2025 LlamaIndex Haystack", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 4, "query": "open source vector database GitHub Qdrant Milvus Weaviate 2025 stars license", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 5, "query": "open source LLM orchestration platform 2025 GitHub stars commercial", "dimension": "AI/LLM工具链", "priority": "medium", "assigned_to": "searcher-ai-llm"},
-    {"id": 6, "query": "AI coding assistant open source 2025 Cursor alternative GitHub", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 7, "query": "open source workflow automation AI agent 2025 n8n activepieces", "dimension": "AI/LLM工具链", "priority": "medium", "assigned_to": "searcher-ai-llm"},
-    {"id": 8, "query": "open source AI model serving vLLM TGI Ollama 2026 license commercial", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 9, "query": "VC funding open source AI startup 2025 2026 investment rounds", "dimension": "VC投资动向", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 10, "query": "open source AI tools commercialization revenue model SaaS enterprise", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-ai-llm"},
-    {"id": 11, "query": "GitHub trending open source low-code no-code platform 2025 2026 stars", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-devtools"},
-    {"id": 12, "query": "open source API management gateway 2025 Kong APISIX commercial", "dimension": "开发者工具", "priority": "medium", "assigned_to": "searcher-devtools"},
-    {"id": 13, "query": "open source monitoring alerting observability 2025 Grafana SigNoz VictoriaMetrics", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-devtools"},
-    {"id": 14, "query": "open source CRM ERP project management 2025 GitHub stars", "dimension": "企业应用", "priority": "high", "assigned_to": "searcher-devtools"},
-    {"id": 15, "query": "open source customer service helpdesk ticketing 2025 GitHub", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-devtools"},
-    {"id": 16, "query": "open source BI data visualization 2025 Metabase Superset Apache", "dimension": "数据工具", "priority": "high", "assigned_to": "searcher-devtools"},
-    {"id": 17, "query": "open source ETL data pipeline 2025 Airbyte dbt GitHub stars", "dimension": "数据工具", "priority": "high", "assigned_to": "searcher-devtools"},
-    {"id": 18, "query": "open source identity management auth 2025 Keycloak Authentik Logto", "dimension": "开发者工具", "priority": "medium", "assigned_to": "searcher-devtools"},
-    {"id": 19, "query": "open source website builder CMS 2025 Ghost Strapi directus", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-devtools"},
-    {"id": 20, "query": "VC investment open source developer tools SaaS 2025 2026", "dimension": "VC投资动向", "priority": "high", "assigned_to": "searcher-devtools"},
-    {"id": 21, "query": "open source security tools 2025 GitHub stars Wazuh OSSEC SIEM commercial", "dimension": "安全工具", "priority": "high", "assigned_to": "searcher-security"},
-    {"id": 22, "query": "open source vulnerability scanner Snyk alternative 2025 Trivy Semgrep GitHub", "dimension": "安全工具", "priority": "high", "assigned_to": "searcher-security"},
-    {"id": 23, "query": "open source database 2025 PostgreSQL DuckDB Stars Redis license", "dimension": "数据工具", "priority": "medium", "assigned_to": "searcher-security"},
-    {"id": 24, "query": "open source data lakehouse lakeFS 2025 GitHub", "dimension": "数据工具", "priority": "low", "assigned_to": "searcher-security"},
-    {"id": 25, "query": "open source backup recovery 2025 Restic Kopia GitHub stars", "dimension": "其他", "priority": "low", "assigned_to": "searcher-security"},
-    {"id": 26, "query": "open source PDF document processing 2025 Stirling PDF GitHub stars", "dimension": "其他", "priority": "medium", "assigned_to": "searcher-security"},
-    {"id": 27, "query": "open source email marketing 2025 Mautic Listmonk GitHub", "dimension": "其他", "priority": "medium", "assigned_to": "searcher-security"},
-    {"id": 28, "query": "open source self-hosted alternative SaaS 2025 GitHub stars commercial", "dimension": "其他", "priority": "high", "assigned_to": "searcher-security"},
-    {"id": 29, "query": "open source fintech payment infrastructure 2025 GitHub", "dimension": "其他", "priority": "medium", "assigned_to": "searcher-security"},
-    {"id": 30, "query": "GitHub top star open source projects 2025 2026 fastest growing repository", "dimension": "整体趋势", "priority": "high", "assigned_to": "searcher-security"},
-    {"id": 31, "query": "one person company commercialize open source software 2025 indie hacker", "dimension": "一人公司", "priority": "high", "assigned_to": "searcher-security"},
-    {"id": 32, "query": "中国 开源商业化 成功案例 2025 2026", "dimension": "中国市场", "priority": "high", "assigned_to": "searcher-security"}
+    {"id": 1, "query": "github trending 2025 2026 most starred repositories", "dimension": "综合扫描", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "fastest growing github projects 2025 2026 stars growth", "dimension": "综合扫描", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "best open source projects 2025 2026 commercial potential", "dimension": "综合扫描", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "open source commercialization success stories 2025 2026", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "open source startup funding 2025 2026 VC investment", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "YC open source startups 2025 2026 batch", "dimension": "商业化趋势", "priority": "medium", "assigned_to": "searcher-1"},
+
+    {"id": 7, "query": "github AI agent framework most starred 2025 2026 langchain crewai autogen", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "github LLM inference framework stars vllm ollama llama.cpp 2025 2026", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "github RAG vector database open source stars chroma qdrant weaviate 2025 2026", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "github AI coding assistant open source Continue Cline aider 2025 2026", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "open source text to speech TTS models github stars 2025 2026", "dimension": "AI/LLM工具链", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "open source AI image generation models github FLUX stable diffusion 2025 2026", "dimension": "AI/LLM工具链", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "open source workflow automation AI n8n activepieces dify 2025 2026 github", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
+
+    {"id": 14, "query": "github low code no code open source stars 2025 2026 appsmith budibase tooljet", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "github API management open source 2025 2026 hoppscotch postman alternatives", "dimension": "开发者工具", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "github monitoring observability open source stars 2025 2026 grafana uptime kuma", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "github self-hosted alternatives open source 2025 2026 awesome-selfhosted", "dimension": "自托管替代方案", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "open source ERP CRM enterprise github stars 2025 2026 erpnext twenty odoo", "dimension": "企业应用", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 19, "query": "open source project management tool github 2025 2026 plane leantime focustower", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-3"},
+
+    {"id": 20, "query": "open source data tools ETL BI visualization github 2025 2026 metabase superset", "dimension": "数据工具", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 21, "query": "open source security tools github stars 2025 2026 Wazuh Trivy security", "dimension": "安全工具", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 22, "query": "open source customer support helpdesk chatbot github 2025 2026 chatwoot papercups", "dimension": "企业应用", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 23, "query": "open source knowledge management notes github 2025 2026 obsidian affine joplin", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 24, "query": "open source automation integration platform github 2025 2026 activepieces n8n temporal", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 25, "query": "open source form builder survey github 2025 2026 fillout formbricks", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 26, "query": "open source analytics platform github 2025 2026 plausible posthog umami", "dimension": "数据工具", "priority": "medium", "assigned_to": "searcher-4"},
+
+    {"id": 27, "query": "open source license types commercial use MIT Apache AGPL BSL comparison", "dimension": "商业化分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 28, "query": "open core business model SaaS hosting enterprise edition revenue 2025 2026", "dimension": "商业化分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 29, "query": "中国开源软件商业化 2025 2026 国内开源项目融资", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 30, "query": "one person company open source business model indie hacker SaaS 2025 2026", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
-    "searcher-ai-llm": {"queries": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "focus": "AI/LLM工具链 + VC投资动向"},
-    "searcher-devtools": {"queries": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "focus": "开发者工具 + 企业应用 + 数据工具"},
-    "searcher-security": {"queries": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32], "focus": "安全工具 + 数据工具 + 其他 + 一人公司商业化"}
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 6, 27, 28, 29, 30],
+      "focus": "GitHub综合扫描+商业化趋势+VC投资+许可证分析"
+    },
+    "searcher-2": {
+      "queries": [7, 8, 9, 10, 11, 12, 13],
+      "focus": "AI/LLM工具链（Agent框架、推理框架、RAG、向量数据库、AI编码、TTS、图像、工作流）"
+    },
+    "searcher-3": {
+      "queries": [14, 15, 16, 17, 18, 19],
+      "focus": "开发者工具+企业应用（低代码、API管理、监控、自托管、ERP/CRM、项目管理）"
+    },
+    "searcher-4": {
+      "queries": [20, 21, 22, 23, 24, 25, 26],
+      "focus": "数据工具+安全工具+企业应用（ETL/BI、安全、客服、知识管理、自动化、分析）"
+    }
   },
-  "searcher_count": 3,
+  "searcher_count": 4,
   "review_rounds": 1,
   "report_id": "R-101",
-  "category": "01-研发团队架构",
-  "target_output": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-101-可商业化开源软件深度调研.md"
+  "category": "01-AI行业研究"
 }
