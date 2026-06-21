@@ -1,14 +1,45 @@
 {
+  "topic": "可商业化开源软件深度调研",
+  "report_id": "R-101",
   "iterations": [
     {
       "round": 1,
-      "reviewer_score": null,
-      "gaps_found": [
-        "web搜索工具对子agent不可用，所有数据基于训练知识",
-        "无法验证2025下半年至2026年最新星标数和融资数据",
-        "AI/LLM方向搜索员完全失败，由研究主管兜底补充"
-      ],
-      "action": "基于训练知识直接交付，标注所有数据为预估值"
+      "searcher_spawned": 4,
+      "searcher_succeeded": 0,
+      "failure_reason": "GLM-5.2 context overflow on all 4 agents",
+      "action": "respawn with smaller tasks"
+    },
+    {
+      "round": 2,
+      "searcher_spawned": 7,
+      "searcher_succeeded": 0,
+      "failure_reason": "GLM-5.2 context overflow + API rate limit",
+      "action": "respawn with micro tasks (2 queries each)"
+    },
+    {
+      "round": 3,
+      "searcher_spawned": 4,
+      "searcher_succeeded": 3,
+      "failure_reason": "1 API rate limit failure",
+      "action": "Lead fallback for remaining gaps"
+    },
+    {
+      "round": 4,
+      "lead_fallback_searches": 12,
+      "status": "completed",
+      "total_sources": 30,
+      "total_projects": 35
     }
-  ]
+  ],
+  "unresolved_gaps": [
+    "Chatwoot 精确 Stars 数",
+    "n8n Series C 金额分歧 ($60M vs $180M)",
+    "AFFiNE 融资规模未公开",
+    "LangChain/LangSmith 具体融资轮次",
+    "中国国内开源项目覆盖不足",
+    "多数项目 ARR 不公开"
+  ],
+  "report_status": "completed",
+  "report_path": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-101-可商业化开源软件深度调研.md",
+  "note": "Report split into 2 files due to write size limits. Part 1: main analysis. Part 2: Tier 3 + one-person company + China market + conclusions."
 }
