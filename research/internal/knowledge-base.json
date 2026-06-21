@@ -1,43 +1,14 @@
 {
-  "topic": "支付宝AI付（Agent支付能力）调研",
-  "report_id": "R-102",
-  "category": "07-产品调研",
-  "status": "in_progress",
-  "searcher_status": {
-    "searcher-1": "pending",
-    "searcher-2": "completed_with_limitations"
+  "topic": "可商业化的开源软件深度调研",
+  "report_id": "R-101",
+  "category": "01-AI行业研究",
+  "status": "completed",
+  "data_sources": {
+    "searcher-devtools": "completed_with_training_data",
+    "searcher-security-data": "completed_with_training_data",
+    "searcher-ai-llm": "failed_tool_unavailable",
+    "lead_fallback": "AI/LLM部分由研究主管基于训练知识补充"
   },
-  "findings_so_far": [
-    {
-      "claim": "支付宝开放平台提供当面付产品，包含扫码支付和付款码支付两种模式",
-      "evidence": "API包含alipay.trade.precreate（预下单生成二维码）和alipay.trade.pay（付款码支付）",
-      "confidence": "low",
-      "source": "searcher-2 训练数据记忆"
-    },
-    {
-      "claim": "当面付接入需要企业资质或个体工商户",
-      "evidence": "注册支付宝商户→签约当面付→获取appid/密钥→调用API",
-      "confidence": "low",
-      "source": "searcher-2 训练数据记忆"
-    },
-    {
-      "claim": "支付宝代扣/周期扣款需要特定行业资质",
-      "evidence": "支持定期自动扣款，需用户签约授权，有行业限制",
-      "confidence": "low",
-      "source": "searcher-2 训练数据记忆"
-    },
-    {
-      "claim": "支付宝提供预授权/资金冻结能力",
-      "evidence": "API: alipay.fund.auth.order.app.freeze/unfreeze",
-      "confidence": "low",
-      "source": "searcher-2 训练数据记忆"
-    },
-    {
-      "claim": "支付宝AI Agent支付API的公开文档尚未广泛可见",
-      "evidence": "蚂蚁集团发布了百灵大模型、支小宝等产品，但第三方Agent直接调用支付能力的公开API有限",
-      "confidence": "low",
-      "source": "searcher-2 行业推断"
-    }
-  ],
-  "caveats": "两个搜索员均因capabilities=none无法执行实时搜索，所有findings来自训练数据"
+  "findings_count": 55,
+  "caveats": "所有数据基于2025年初训练知识，部分星标数和融资数据可能已有变化"
 }
