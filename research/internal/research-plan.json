@@ -1,72 +1,36 @@
 {
-  "topic": "可商业化的开源软件深度调研（重新执行，搜索工具已修复）",
-  "complexity": "深度",
-  "complexity_reason": "多维度扫描GitHub高星项目+商业化分析+VC投资动向+分类覆盖6+方向，需要大量实时搜索",
+  "topic": "深度研究AI最新成果与实践调研 (Deep Research AI 2025-2026)",
+  "complexity": "中等",
+  "complexity_reason": "5个调研维度需要覆盖，每个维度需要2-3次搜索，但不需要迭代多轮验证",
   "dimensions": [
-    "AI/LLM工具链",
-    "开发者工具",
-    "企业应用",
-    "数据工具",
-    "安全工具",
-    "自托管替代方案",
-    "VC投资与商业化趋势"
+    "主流大厂Deep Research产品对比",
+    "开源Deep Research方案",
+    "多Agent协作最佳实践",
+    "搜索工具链方案对比",
+    "研究质量提升技术"
   ],
   "search_queries": [
-    {"id": 1, "query": "github trending 2025 2026 most starred repositories", "dimension": "综合扫描", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "fastest growing github projects 2025 2026 stars growth", "dimension": "综合扫描", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "best open source projects 2025 2026 commercial potential", "dimension": "综合扫描", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "open source commercialization success stories 2025 2026", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "open source startup funding 2025 2026 VC investment", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "YC open source startups 2025 2026 batch", "dimension": "商业化趋势", "priority": "medium", "assigned_to": "searcher-1"},
-
-    {"id": 7, "query": "github AI agent framework most starred 2025 2026 langchain crewai autogen", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "github LLM inference framework stars vllm ollama llama.cpp 2025 2026", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "github RAG vector database open source stars chroma qdrant weaviate 2025 2026", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "github AI coding assistant open source Continue Cline aider 2025 2026", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "open source text to speech TTS models github stars 2025 2026", "dimension": "AI/LLM工具链", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "open source AI image generation models github FLUX stable diffusion 2025 2026", "dimension": "AI/LLM工具链", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "open source workflow automation AI n8n activepieces dify 2025 2026 github", "dimension": "AI/LLM工具链", "priority": "high", "assigned_to": "searcher-2"},
-
-    {"id": 14, "query": "github low code no code open source stars 2025 2026 appsmith budibase tooljet", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "github API management open source 2025 2026 hoppscotch postman alternatives", "dimension": "开发者工具", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "github monitoring observability open source stars 2025 2026 grafana uptime kuma", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "github self-hosted alternatives open source 2025 2026 awesome-selfhosted", "dimension": "自托管替代方案", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "open source ERP CRM enterprise github stars 2025 2026 erpnext twenty odoo", "dimension": "企业应用", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "open source project management tool github 2025 2026 plane leantime focustower", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-3"},
-
-    {"id": 20, "query": "open source data tools ETL BI visualization github 2025 2026 metabase superset", "dimension": "数据工具", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 21, "query": "open source security tools github stars 2025 2026 Wazuh Trivy security", "dimension": "安全工具", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 22, "query": "open source customer support helpdesk chatbot github 2025 2026 chatwoot papercups", "dimension": "企业应用", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 23, "query": "open source knowledge management notes github 2025 2026 obsidian affine joplin", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 24, "query": "open source automation integration platform github 2025 2026 activepieces n8n temporal", "dimension": "开发者工具", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 25, "query": "open source form builder survey github 2025 2026 fillout formbricks", "dimension": "企业应用", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 26, "query": "open source analytics platform github 2025 2026 plausible posthog umami", "dimension": "数据工具", "priority": "medium", "assigned_to": "searcher-4"},
-
-    {"id": 27, "query": "open source license types commercial use MIT Apache AGPL BSL comparison", "dimension": "商业化分析", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 28, "query": "open core business model SaaS hosting enterprise edition revenue 2025 2026", "dimension": "商业化分析", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 29, "query": "中国开源软件商业化 2025 2026 国内开源项目融资", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 30, "query": "one person company open source business model indie hacker SaaS 2025 2026", "dimension": "商业化趋势", "priority": "high", "assigned_to": "searcher-1"}
+    {"id": 1, "query": "OpenAI deep research technical architecture 2025 2026", "dimension": "产品对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Google Gemini deep research vs Perplexity deep research comparison", "dimension": "产品对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Anthropic Claude research tool Grok deep research 2025 2026", "dimension": "产品对比", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "gpt-researcher open source deep research framework github", "dimension": "开源方案", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 5, "query": "Stanford STORM research assistant architecture wiki style", "dimension": "开源方案", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 6, "query": "open source deep research multi-agent framework 2025 2026 github", "dimension": "开源方案", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "multi-agent research architecture best practices 2025 2026", "dimension": "多Agent协作", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 8, "query": "CrewAI vs AutoGen vs LangGraph research agent comparison", "dimension": "多Agent协作", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 9, "query": "AI agent orchestration parallel search vs sequential research", "dimension": "多Agent协作", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 10, "query": "best search API for AI agents Tavily Brave SearXNG 2025", "dimension": "搜索工具链", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 11, "query": "web scraping content extraction AI agent anti-bot 2025", "dimension": "搜索工具链", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 12, "query": "AI research fact checking citation verification hallucination prevention", "dimension": "质量提升", "priority": "high", "assigned_to": "searcher-4"}
   ],
   "searcher_assignments": {
-    "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6, 27, 28, 29, 30],
-      "focus": "GitHub综合扫描+商业化趋势+VC投资+许可证分析"
-    },
-    "searcher-2": {
-      "queries": [7, 8, 9, 10, 11, 12, 13],
-      "focus": "AI/LLM工具链（Agent框架、推理框架、RAG、向量数据库、AI编码、TTS、图像、工作流）"
-    },
-    "searcher-3": {
-      "queries": [14, 15, 16, 17, 18, 19],
-      "focus": "开发者工具+企业应用（低代码、API管理、监控、自托管、ERP/CRM、项目管理）"
-    },
-    "searcher-4": {
-      "queries": [20, 21, 22, 23, 24, 25, 26],
-      "focus": "数据工具+安全工具+企业应用（ETL/BI、安全、客服、知识管理、自动化、分析）"
-    }
+    "searcher-1": {"queries": [1, 2, 3], "focus": "主流大厂Deep Research产品对比"},
+    "searcher-2": {"queries": [4, 5, 6], "focus": "开源Deep Research方案"},
+    "searcher-3": {"queries": [7, 8, 9], "focus": "多Agent协作最佳实践"},
+    "searcher-4": {"queries": [10, 11, 12], "focus": "搜索工具链与研究质量提升"}
   },
   "searcher_count": 4,
   "review_rounds": 1,
-  "report_id": "R-101",
-  "category": "01-AI行业研究"
+  "report_id": "R-102",
+  "category": "02-AI技术调研"
 }
