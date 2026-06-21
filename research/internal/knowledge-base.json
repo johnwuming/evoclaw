@@ -1,127 +1,17 @@
 {
-  "topic": "可商业化开源软件深度调研",
-  "report_id": "R-101",
-  "category": "01-AI行业研究",
-  "status": "completed",
-  "completion_date": "2026-06-22",
-  "total_findings": 55,
-  "projects_covered": 35,
-  "top_projects": [
-    {
-      "name": "Supabase",
-      "stars": "80K+",
-      "license": "Apache 2.0",
-      "valuation": "$105 亿",
-      "arr": "$70M (2025.09)",
-      "funding_total": "$500M+",
-      "key_investors": ["GIC", "Accel", "Peak XV", "YC", "Coatue", "Figma"]
-    },
-    {
-      "name": "n8n",
-      "stars": "46K+",
-      "license": "Sustainable Use License",
-      "valuation": "$52 亿",
-      "funding_total": "$253.5M",
-      "key_investors": ["SAP", "Accel", "Sequoia", "NVIDIA", "Highland Europe"]
-    },
-    {
-      "name": "Dify",
-      "stars": "131K-144K",
-      "license": "Apache 2.0",
-      "valuation": "未披露",
-      "funding_total": "$30M+",
-      "key_investors": ["HSG(红杉中国)", "GL Ventures", "5Y Capital", "Mizuho"]
-    },
-    {
-      "name": "Ollama",
-      "stars": "174K",
-      "license": "MIT",
-      "cloud_pricing": "Pro $20/月, Max $100/月"
-    },
-    {
-      "name": "Twenty CRM",
-      "stars": "50.6K",
-      "license": "AGPL-3.0",
-      "yc_batch": "S23"
-    },
-    {
-      "name": "PostHog",
-      "stars": "21K+",
-      "license": "MIT",
-      "valuation": "$9.2 亿",
-      "funding_total": "$119M",
-      "customers": "190,000+"
-    },
-    {
-      "name": "AFFiNE",
-      "stars": "67.9K",
-      "license": "MPL-2.0"
-    },
-    {
-      "name": "LangChain",
-      "stars": "122.8K",
-      "license": "MIT"
-    },
-    {
-      "name": "vLLM",
-      "stars": "83.4K",
-      "license": "Apache 2.0",
-      "sponsor": "a16z"
-    },
-    {
-      "name": "Formbricks",
-      "stars": "12.4K",
-      "license": "AGPLv3 + Enterprise",
-      "investor": "OSS Capital"
-    },
-    {
-      "name": "Wazuh",
-      "stars": "15.9K",
-      "license": "GPLv2",
-      "funding": "无外部融资"
-    },
-    {
-      "name": "Plausible",
-      "stars": "27K",
-      "license": "AGPL-3.0"
-    },
-    {
-      "name": "Umami",
-      "stars": "35.6K",
-      "license": "MIT"
-    },
-    {
-      "name": "Aider",
-      "stars": "45.9K",
-      "license": "Apache 2.0",
-      "funding": "Bootstrapped"
-    },
-    {
-      "name": "Plane",
-      "stars": "~35K+",
-      "license": "AGPL-3.0",
-      "funding": "$4M Seed (OSS Capital)"
-    }
-  ],
-  "search_queries_executed": [
-    "open source startup funding 2025 2026 VC investment",
-    "open core business model SaaS revenue 2025 2026",
-    "github Dify LangChain CrewAI stars 2025 2026",
-    "github vllm ollama stars 2025 2026 LLM inference",
-    "github n8n PostHog Chatwoot stars 2025 2026",
-    "github Appsmith Plane Twenty CRM Supabase AFFiNE stars 2025 2026",
-    "github Metabase Grafana Uptime Kuma Wazuh Formbricks stars 2025 2026",
-    "Papermark Supabase SaaS ARR revenue funding 2025 2026",
-    "github Plane Twenty CRM Appsmith Formbricks stars 2025 2026",
-    "Supabase funding valuation ARR 2025 2026",
-    "github Dify stars 2026 AI agent platform",
-    "github n8n funding ARR 2025 2026"
-  ],
-  "subagent_results": {
-    "successful": 3,
-    "failed": 11,
-    "failure_reasons": ["context_overflow", "api_rate_limit"]
-  },
-  "source_count": 30,
-  "data_freshness": "2026-05 to 2026-06"
+  "topic": "Deep Research AI 最新成果与实践调研",
+  "report_id": "R-102",
+  "updated": "2026-06-22",
+  "findings": [
+    {"claim": "OpenAI Deep Research基于o3模型RL训练，HLE首发26.6%", "source": "lastexam.ai / scale.com", "confidence": "high", "dimension": "产品"},
+    {"claim": "Stanford STORM采用两阶段架构：多视角预研究+大纲合成，支持9种搜索引擎", "source": "arxiv.org/abs/2402.14207 / storm.genie.stanford.edu", "confidence": "high", "dimension": "开源"},
+    {"claim": "LangGraph占47M PyPI下载，90K+ GitHub Stars，生产部署最成熟", "source": "agentmarketcap.ai", "confidence": "high", "dimension": "框架"},
+    {"claim": "Exa搜索API评分8.7领跑，Tavily 8.6紧随", "source": "rhumb.dev", "confidence": "high", "dimension": "搜索"},
+    {"claim": "OpenAI o3幻觉率33%较o1的16%翻倍，深度推理加剧幻觉", "source": "seekr.com / OpenAI system card", "confidence": "high", "dimension": "质量"},
+    {"claim": "ParallelSearch使用RL训练LLM自动分解查询并并行搜索", "source": "arxiv.org/pdf/2508.09303", "confidence": "high", "dimension": "架构"},
+    {"claim": "混合架构（并行+串行）在生产环境中优于纯并行或纯串行", "source": "blogs.optimumdataanalytics.com", "confidence": "medium", "dimension": "架构"},
+    {"claim": "Tavily Research Pro单次调用最高消耗250 credits（约$2 PAYG）", "source": "codenote.net / docs.tavily.com", "confidence": "high", "dimension": "成本"},
+    {"claim": "CrewAI是最快增长的多Agent框架，Fortune 500 60%探索", "source": "devops.gheware.com", "confidence": "medium", "dimension": "框架"},
+    {"claim": "HLE 2026.6最高分64.5%（Claude Mythos 5），从2025初~10%大幅提升", "source": "benchlm.ai", "confidence": "high", "dimension": "基准"}
+  ]
 }
