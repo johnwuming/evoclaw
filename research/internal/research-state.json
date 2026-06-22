@@ -1,30 +1,8 @@
 {
   "task": "闲鱼信息差套利工具与实战选品指南",
   "report_id": "R-104",
-  "phase": "searching",
-  "findings": [
-    {"id": "F001", "content": "闲鱼1688一件代发主流模式：1688选品→闲鱼上架→买家下单→1688发货，建议采购价×1.5~2倍定价", "sources": ["https://zhuanlan.zhihu.com/p/532736014"], "confidence": "high", "dimension": "采购"},
-    {"id": "F002", "content": "1688部分卖家已开通闲鱼直发功能；第三方工具铺货精灵、店小秘支持批量抓取但需谨慎", "sources": ["https://bk.taobao.com/k/taobaozatan_19107/d7530b1b558f71bcff21d707e094a226.html"], "confidence": "medium", "dimension": "工具"},
-    {"id": "F003", "content": "BigSeller/妙手插件支持拼多多及多平台采集到闲鱼，但主要面向跨境电商", "sources": ["https://help.bigseller.com/zh_CN/detailPage/2/1/3253/content"], "confidence": "medium", "dimension": "工具"},
-    {"id": "F004", "content": "闲鱼2024年9月起收软件服务费0.6%/笔封顶60元；月>10笔且>1万元加收1%；手机类年超6笔每单加收1%", "sources": ["https://www.php.cn/faq/2181731.html"], "confidence": "high", "dimension": "费用"},
-    {"id": "F005", "content": "利润核心在选品定价：100元采购→150-200元售价→到手利润50-100元（扣0.6%约1元）", "sources": ["https://www.sohu.com/a/910327599_122462628"], "confidence": "medium", "dimension": "利润"},
-    {"id": "F006", "content": "义乌Chinagoods+义采宝8万商户500万商品一站式采购；广州十三行5件起25元毛衣", "sources": ["https://www.chinagoods.com/"], "confidence": "high", "dimension": "货源"},
-    {"id": "F007", "content": "广州5大服装批发市场：十三行(5件起)、沙河(可零售)、庆丰(尾货个位数)、名冠(零售)、天马(中高端)", "sources": ["https://news.qq.com/rain/a/20260125A05UFZ00"], "confidence": "medium", "dimension": "货源"},
-    {"id": "F008", "content": "零库存启动建议：养号3-5天→上架50个商品→稳定月入3000+，每日1-2小时维护", "sources": ["https://www.toutiao.com/article/7642546631308575266"], "confidence": "medium", "dimension": "实操"},
-    {"id": "F009", "content": "虚拟商品零成本：百度网盘存资料+阿福自动发货工具→被动收入，聚焦学生和职场人需求", "sources": ["https://blog.csdn.net/weixin_51230027/article/details/147501140"], "confidence": "medium", "dimension": "虚拟"},
-    {"id": "F010", "content": "2025闲鱼严打无货源违规：AI检测+人工审核，虚拟商品违规率92%，禁售盗版/高仿/医疗器械", "sources": ["https://www.10100.com/article/30796965"], "confidence": "high", "dimension": "风险"},
-    {"id": "F011", "content": "闲鱼禁止站外导流：AI检测关键词，首次限流7天→二次冻结15-30天→三次永久封禁", "sources": ["https://bk.taobao.com/k/taobaomaijia_435/93dacbd407b93fc0ada4238097717f35.html"], "confidence": "high", "dimension": "风险"},
-    {"id": "F012", "content": "闲鱼禁止空挂/虚假发货/重复铺货/代挂服务，合规要求一件代发真实可发货", "sources": ["https://blog.csdn.net/wykqh/article/details/151891462"], "confidence": "high", "dimension": "风险"},
-    {"id": "F013", "content": "蓝海选品法：字根辐射法找到低竞争品类，如相机遮光罩(成本20卖80)、钻戒改圈、复古相机盒(80-150元)", "sources": ["https://www.10100.com/article/37882540"], "confidence": "medium", "dimension": "选品"},
-    {"id": "F014", "content": "蓝海虚拟资料客单价300-500元最高1000元，零边际成本，但选品难度高需深耕垂直领域", "sources": ["https://zhuanlan.zhihu.com/p/2034764444652267094"], "confidence": "medium", "dimension": "选品"},
-    {"id": "F015", "content": "小众人群蓝海：宠物(高端湿巾/进口尿布)、哺乳妈妈(哺乳枕)、办公族(工学坐垫/理线器)、旧物改造(零成本)", "sources": ["https://bk.taobao.com/k/taobaozatan_19107/876fda284ae4f5d86fdded6127dce3cb.html"], "confidence": "medium", "dimension": "选品"},
-    {"id": "F016", "content": "虚拟商品案例：公考资料日均100+单净赚8000+；Excel技巧19.9元月销800+单；定价9.9引流+29.9组合+59.9年度", "sources": ["https://www.10100.com/article/1241009"], "confidence": "medium", "dimension": "虚拟"},
-    {"id": "F017", "content": "虚拟四大类目：考证学习(9.9-19.9)、办公提效(PPT模板15元)、技能教程(几元量大)、会员充值", "sources": ["https://zhuanqiana.com/"], "confidence": "medium", "dimension": "虚拟"},
-    {"id": "F018", "content": "虚拟商品违规率92%最高，版权侵权可被判赔8万+，需避开品牌商标/软件名/注册著作权内容", "sources": ["https://lusongsong.com/reed/17224.html"], "confidence": "high", "dimension": "风险"},
-    {"id": "F019", "content": "虚拟自动化：鱼小秘/阿福自动发货+鱼小铺500商品+网盘只读链接+多店矩阵运营", "sources": ["https://zhuanlan.zhihu.com/p/1896253805999399388"], "confidence": "medium", "dimension": "工具"}
-  ],
-  "pending_searchers": ["searcher-tools-a", "searcher-tools-b", "searcher-products-a"],
-  "completed_searchers": ["searcher-sourcing", "searcher-products-b"],
-  "gaps": [],
-  "updated": "2026-06-22T10:05"
+  "phase": "reporting",
+  "findings_summary": "4 searchers completed: searcher-sourcing(12 findings), searcher-products-a(8 findings), searcher-products-b(7 findings), searcher-tools-a(8 findings), searcher-tools-b(11 findings). Total 46 findings across tools/products/sourcing/risk dimensions.",
+  "completed_searchers": ["searcher-sourcing", "searcher-products-a", "searcher-products-b", "searcher-tools-a", "searcher-tools-b"],
+  "updated": "2026-06-22T10:08"
 }
