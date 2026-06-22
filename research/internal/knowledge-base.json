@@ -1,17 +1,15 @@
 {
-  "topic": "Deep Research AI 最新成果与实践调研",
-  "report_id": "R-102",
+  "topic": "闲鱼信息差套利工具与实战选品指南",
+  "report_id": "R-104",
   "updated": "2026-06-22",
   "findings": [
-    {"claim": "OpenAI Deep Research基于o3模型RL训练，HLE首发26.6%", "source": "lastexam.ai / scale.com", "confidence": "high", "dimension": "产品"},
-    {"claim": "Stanford STORM采用两阶段架构：多视角预研究+大纲合成，支持9种搜索引擎", "source": "arxiv.org/abs/2402.14207 / storm.genie.stanford.edu", "confidence": "high", "dimension": "开源"},
-    {"claim": "LangGraph占47M PyPI下载，90K+ GitHub Stars，生产部署最成熟", "source": "agentmarketcap.ai", "confidence": "high", "dimension": "框架"},
-    {"claim": "Exa搜索API评分8.7领跑，Tavily 8.6紧随", "source": "rhumb.dev", "confidence": "high", "dimension": "搜索"},
-    {"claim": "OpenAI o3幻觉率33%较o1的16%翻倍，深度推理加剧幻觉", "source": "seekr.com / OpenAI system card", "confidence": "high", "dimension": "质量"},
-    {"claim": "ParallelSearch使用RL训练LLM自动分解查询并并行搜索", "source": "arxiv.org/pdf/2508.09303", "confidence": "high", "dimension": "架构"},
-    {"claim": "混合架构（并行+串行）在生产环境中优于纯并行或纯串行", "source": "blogs.optimumdataanalytics.com", "confidence": "medium", "dimension": "架构"},
-    {"claim": "Tavily Research Pro单次调用最高消耗250 credits（约$2 PAYG）", "source": "codenote.net / docs.tavily.com", "confidence": "high", "dimension": "成本"},
-    {"claim": "CrewAI是最快增长的多Agent框架，Fortune 500 60%探索", "source": "devops.gheware.com", "confidence": "medium", "dimension": "框架"},
-    {"claim": "HLE 2026.6最高分64.5%（Claude Mythos 5），从2025初~10%大幅提升", "source": "benchlm.ai", "confidence": "high", "dimension": "基准"}
+    {"claim": "闲鱼没有成熟第三方数据SaaS平台，灰豚/蝉妈妈/飞瓜均不支持闲鱼", "confidence": "high", "dimension": "工具"},
+    {"claim": "闲鱼官方'搜索行情'是唯一数据入口（2023.8上线），覆盖手机/数码/户外等类目", "confidence": "high", "dimension": "工具"},
+    {"claim": "5118.com可间接查闲鱼关键词数据（流量趋势/需求图谱/相关热词）", "confidence": "medium", "dimension": "工具"},
+    {"claim": "XianyuAutoAgent(8k stars)是最活跃的闲鱼AI客服开源项目", "confidence": "high", "dimension": "工具"},
+    {"claim": "闲鱼2024.9起收0.6%软件服务费，高频卖家叠加最高1.6%", "confidence": "high", "dimension": "费用"},
+    {"claim": "轻户外装备需求+284%、二次元手办+271%是2025-2026最热品类", "confidence": "medium", "dimension": "品类"},
+    {"claim": "字根辐射法可找到蓝海品：遮光罩(20→80)、钻戒改圈、耳机清洁", "confidence": "medium", "dimension": "选品"},
+    {"claim": "虚拟商品违规率92%最高，版权侵权赔偿可达8万+", "confidence": "high", "dimension": "风险"}
   ]
 }
