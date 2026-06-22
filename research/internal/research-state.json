@@ -1,29 +1,29 @@
 {
   "task": "海外AI套壳创业机会深度调研",
-  "phase": "searching-round2",
+  "phase": "searching-round2-collecting",
   "partial_findings": [
     {"id": "PF001", "content": "Vercel chatbot模板(vercel/chatbot) 20.5k stars, 6.7k forks, Next.js AI chatbot完整模板", "sources": ["https://github.com/vercel/chatbot"], "confidence": "high"},
-    {"id": "PF002", "content": "Looka AI logo设计工具 2024年收入$8M ARR, 500万客户, 平均ACV $2, 团队11人, 成立2016年", "sources": ["https://getlatka.com/companies/looka"], "confidence": "high"},
-    {"id": "PF003", "content": "Jasper AI定价$49/user/mo(Creator), $69/user/mo(Pro), 替代品Rytr仅$7.50/mo, Copy.ai有免费版", "sources": ["https://planetarylabour.com/articles/jasper-ai-alternatives"], "confidence": "high"},
-    {"id": "PF004", "content": "RevenueCat: 1.7%下载量在30天内转为付费用户, 北美LTV $0.35/download(全球4倍), 12个月后保留率降14%", "sources": ["https://www.revenuecat.com/state-of-subscription-apps-2024/"], "confidence": "high"},
-    {"id": "PF005", "content": "G2上AI Writing Assistant类别有1179个产品列表", "sources": ["https://www.g2.com/categories/ai-writing-assistant"], "confidence": "high"},
-    {"id": "PF006", "content": "内容营销AI市场预计2026年$107B, 88%营销人员每天使用AI工具, AI营销平均ROI 300%", "sources": ["https://planetarylabour.com/articles/jasper-ai-alternatives"], "confidence": "medium"}
+    {"id": "PF002", "content": "Looka AI logo设计工具 2024年收入$8M ARR, 500万客户, 平均ACV $2, 团队11人", "sources": ["https://getlatka.com/companies/looka"], "confidence": "high"},
+    {"id": "PF003", "content": "Jasper AI定价$49/user/mo, 替代品Rytr仅$7.50/mo, 内容营销AI市场预计2026年$107B", "sources": ["https://planetarylabour.com/articles/jasper-ai-alternatives"], "confidence": "high"},
+    {"id": "PF004", "content": "RevenueCat: 1.7%下载量30天内转付费, 北美LTV $0.35/download(全球4倍), 12个月保留率降14%", "sources": ["https://www.revenuecat.com/state-of-subscription-apps-2024/"], "confidence": "high"},
+    {"id": "PF005", "content": "G2上AI Writing Assistant类别有1179个产品", "sources": ["https://www.g2.com/categories/ai-writing-assistant"], "confidence": "high"},
+    {"id": "PF006", "content": "Co-Star 3000万账户/100万DAU/月收约$400K; The Pattern 1000万下载/800万月活; Sanctuary 700万下载/300万月活; Nebula 1200万下载/年收$7M+", "sources": ["https://ts2.tech/en/astrology-just-got-an-ai-upgrade-inside-the-rise-of-ai-powered-horoscopes"], "confidence": "high"},
+    {"id": "PF007", "content": "r/relationship_advice 1580万订阅, r/astrology 210万, r/tarot 61万(年增21.7%), r/Dreams 57万, r/Psychic 30万, r/spirituality 57.6万", "sources": ["https://redditli.st/subreddit/astrology"], "confidence": "high"},
+    {"id": "PF008", "content": "tarot.com月访问240万, cafeastrology.com 1074万, labyrinthos.co 234万; Character.ai月访问1.8-1.9亿, 年收$3220万", "sources": ["https://www.similarweb.com/website/tarot.com/"], "confidence": "high"},
+    {"id": "PF009", "content": "2024年全球AI应用市场收入$33亿(+51%), ChatGPT 1-8月$230M收入, Remini 1.2亿下载/$200M+ IAP收入", "sources": ["https://sensortower.com/blog/state-of-ai-apps-2024"], "confidence": "high"},
+    {"id": "PF010", "content": "占星应用市场2025年$50亿, 预计2035年$457亿(CAGR 24.76%); 全球占星市场2024年$39.4亿, 移动应用占60%+", "sources": ["https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903"], "confidence": "medium"},
+    {"id": "PF011", "content": "AstroTalk(印度) 4000万用户/2024年收入$138M/15000+占星师; 印度市场2024年$163M→2030年$1.8B", "sources": ["https://ts2.tech/en/astrology-just-got-an-ai-upgrade-inside-the-rise-of-ai-powered-horoscopes"], "confidence": "medium"},
+    {"id": "PF012", "content": "2024年Q4全球IAP收入$394亿(+13.5%), 非游戏应用IAP $192亿(+28.2%), 订阅模式强劲增长", "sources": ["https://investgame.net"], "confidence": "high"}
   ],
   "gaps": [
-    "GitHub AI wrapper/SaaS boilerplate完整盘点（stars/许可证/功能）",
-    "Indie Hackers AI产品MRR收入案例",
+    "GitHub AI wrapper/SaaS boilerplate完整盘点",
+    "Indie Hackers AI产品MRR收入案例（s2失败）",
     "Product Hunt 2024-2025 AI产品现状",
-    "Google Trends多赛道对比数据",
-    "Reddit子版订阅数数据",
-    "SimilarWeb流量数据",
-    "App Store AI应用收入估算",
-    "各蓝海赛道竞争分析",
+    "各蓝海赛道竞争分析（心理健康/法律/约会/健身/语言学习）",
     "API成本具体定价",
     "GDPR/CCPA合规要求",
     "Paddle/Stripe支付方案"
   ],
-  "next_actions": [
-    "拆成6个小搜索员重试，每个3-4个查询",
-    "已提取6条部分发现"
-  ]
+  "searchers_pending": ["s1-github-infra", "s4-blueocean-1", "s5-blueocean-2", "s6-compliance-payment"],
+  "searchers_done": ["s3-demand-data"]
 }
