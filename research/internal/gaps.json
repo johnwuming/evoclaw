@@ -1,45 +1,17 @@
 {
-  "topic": "可商业化开源软件深度调研",
-  "report_id": "R-101",
+  "topic": "闲鱼信息差套利工具与实战选品指南",
+  "report_id": "R-104",
   "iterations": [
-    {
-      "round": 1,
-      "searcher_spawned": 4,
-      "searcher_succeeded": 0,
-      "failure_reason": "GLM-5.2 context overflow on all 4 agents",
-      "action": "respawn with smaller tasks"
-    },
-    {
-      "round": 2,
-      "searcher_spawned": 7,
-      "searcher_succeeded": 0,
-      "failure_reason": "GLM-5.2 context overflow + API rate limit",
-      "action": "respawn with micro tasks (2 queries each)"
-    },
-    {
-      "round": 3,
-      "searcher_spawned": 4,
-      "searcher_succeeded": 3,
-      "failure_reason": "1 API rate limit failure",
-      "action": "Lead fallback for remaining gaps"
-    },
-    {
-      "round": 4,
-      "lead_fallback_searches": 12,
-      "status": "completed",
-      "total_sources": 30,
-      "total_projects": 35
-    }
+    {"round": 1, "searcher_spawned": 3, "searcher_succeeded": 1, "failure_reason": "2个context overflow/API rate limit", "action": "拆分为更小搜索员"},
+    {"round": 2, "searcher_spawned": 4, "searcher_succeeded": 4, "failure_reason": "none", "action": "全部成功，直接撰写报告"}
   ],
   "unresolved_gaps": [
-    "Chatwoot 精确 Stars 数",
-    "n8n Series C 金额分歧 ($60M vs $180M)",
-    "AFFiNE 融资规模未公开",
-    "LangChain/LangSmith 具体融资轮次",
-    "中国国内开源项目覆盖不足",
-    "多数项目 ARR 不公开"
+    "闲鱼官方GMV和类目占比未公开",
+    "卖家平均月收入缺乏权威统计",
+    "搜索词搜索量无官方API",
+    "利润数据多为博主自述需验证",
+    "闲鱼开放平台ISV API普通卖家无法使用"
   ],
   "report_status": "completed",
-  "report_path": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-101-可商业化开源软件深度调研.md",
-  "note": "Report split into 2 files due to write size limits. Part 1: main analysis. Part 2: Tier 3 + one-person company + China market + conclusions."
+  "report_path": "/root/.openclaw/workspace/shared/results/07-其他/R-104-闲鱼信息差套利工具与实战选品指南.md"
 }
