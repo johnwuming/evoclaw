@@ -1,88 +1,28 @@
 {
   "task": "AI塔罗占卜海外独立站出海策略",
-  "phase": "searching",
+  "phase": "convergence",
   "round": 1,
   "report_id": "R-106",
-  "searchers_completed": ["searcher-2b-japan-korea"],
-  "searchers_running": ["searcher-1a-retry", "searcher-3a-platforms", "searcher-4a-tech-seo", "searcher-4b-compliance"],
-  "searchers_failed": [
-    "searcher-1a-us-market(context overflow)", "searcher-1b-trends-uk(rate limit)",
-    "searcher-2-emerging-markets(context overflow)", "searcher-2a-latam(rate limit)",
-    "searcher-2c-india-sea(rate limit)", "searcher-3-payment-solutions(context overflow)",
-    "searcher-3b-china-dev(rate limit)", "searcher-3c-tax-wallets(rate limit)",
-    "searcher-4-tech-compliance(context overflow)"
-  ],
   "findings": [
-    {
-      "id": "F001",
-      "content": "日本占い市場2023年度6市場合算997億円(≈$6.6M)，広義約1兆円。ユーザー90%女性、30-50代80%、85%恋愛目的。Z世代33.9%週1回以上利用。",
-      "sources": ["https://www.yano.co.jp/press-release/show/press_id/3662"],
-      "confidence": "high",
-      "dimension": "日本市場",
-      "verified_by": ["searcher-2b"]
-    },
-    {
-      "id": "F002",
-      "content": "日本タロットカード物理商品市場2024年$41.87M、2033年$56.91M予測(CAGR 3.47%)。占いサービスはデジタルシフト進行中、電話/チャット占いが数百億円規模に成長。",
-      "sources": ["https://deepmarketinsights.com/vista/insights/tarot-cards-market/japan", "https://uranai-media.net/blog/culture-japan-market"],
-      "confidence": "medium",
-      "dimension": "日本市場",
-      "verified_by": ["searcher-2b"]
-    },
-    {
-      "id": "F003",
-      "content": "韓国占い(사주/타ロ)産業年間約$3.7B(1.4兆ウォン)。Jeomsin(점신)1700万累計DL、Posteller(포스텔러)860万登録。66-70%韓国人が年1回以上占い利用。",
-      "sources": ["https://www.seoulz.com/korea-superstition-economy/"],
-      "confidence": "high",
-      "dimension": "韓国市場",
-      "verified_by": ["searcher-2b"]
-    },
-    {
-      "id": "F004",
-      "content": "TechLabs(Jeomsin運営)2024年売上978億ウォン(≈$71M)、営業利益120億ウォン。IPO準備中。広告モデル中心(5-7秒強制広告視聴)。Posteller年間売上100億ウォン越え、Kakao系VCから85億ウォン調達。",
-      "sources": ["https://www.seoulz.com/korea-saju-industry/"],
-      "confidence": "high",
-      "dimension": "韓国競合",
-      "verified_by": ["searcher-2b"]
-    },
-    {
-      "id": "F005",
-      "content": "Kakao Pay 4650万ユーザー(Q4 2024取引額167.3兆KRW)、Naver Pay 3000万ユーザー超。韓国モバイル決済4強体制(Kakao Pay/Naver Pay/Samsung Pay/Toss)。海外決済2022-2024年443%増(6403億ウォン)。",
-      "sources": ["https://digitalinasia.com/naver-vs-kakao/", "https://pulse.mk.co.kr/news/english/11248583"],
-      "confidence": "high",
-      "dimension": "韓国決済",
-      "verified_by": ["searcher-2b"]
-    },
-    {
-      "id": "F006",
-      "content": "韓国AI占い統合進行中：Kakao i・Naver Clovaに音声사주機能統合済み。SajuGPTは4言語対応(韓/英/日/中)。사주は'Korean MBTI'として外国人観光客に人気。",
-      "sources": ["https://www.hankyung.com/article/2026021070881"],
-      "confidence": "medium",
-      "dimension": "韓国AI動向",
-      "verified_by": ["searcher-2b"]
-    }
+    {"id":"F001","content":"全球塔罗卡牌市场2026年$1.48B，CAGR 8.7%(2020-2026)。数字塔罗占总收入28%，CAGR 15.2%。美国38%全球份额，英国12%，德国7%，巴西6%。","sources":["https://deckaura.com/pages/tarot-industry-report-2026"],"confidence":"medium","dimension":"全球市场"},
+    {"id":"F002","content":"美国Psychic Services行业2022年收入$2.2B。美国塔罗卡市场2025年$348.1M。全球超过1200万副塔罗牌2024年售出。","sources":["https://www.accio.com/business/current-trends-in-the-tarot-market-2024","https://www.marketresearch.com/Global-Industry-Analysts-v1039/Tarot-Cards-42948463/"],"confidence":"medium","dimension":"美国市场"},
+    {"id":"F003","content":"Co-Star: 3000万注册用户，月收入$400K，Pro订阅$8.99/月。The Pattern: 1500万用户,$10M+年收入。Sanctuary: 月$1.5M。行业付费转化率8-12%。","sources":["https://www.statista.com/statistics/1451972/","https://app.sensortower.com/overview/1264782561"],"confidence":"high","dimension":"竞争格局"},
+    {"id":"F004","content":"全球灵性服务市场2024年$376B，预计2035年$787.4B(CAGR 7%)。灵性产品市场2025年$11.3B(CAGR 12.2%)。占星市场2024年$14.7B。","sources":["https://www.einpresswire.com/article/847800404/","https://m2squareconsultancy.com/reports/spiritual-and-wellness-products-market","https://www.actualmarketresearch.com/product/global-astrology-market-overview"],"confidence":"medium","dimension":"行业背景"},
+    {"id":"F005","content":"日本占い市场2023年度6市场合算997億円(≈$6.6B JPY)。用户90%女性、30-50代80%、85%恋爱目的。Z世代33.9%週1回以上利用。","sources":["https://www.yano.co.jp/press-release/show/press_id/3662"],"confidence":"high","dimension":"日本市场"},
+    {"id":"F006","content":"韩国占い(사주/타로)産業年間$3.7B。Jeomsin 1700万DL，TechLabs 2024年营收978億ウォン($71M)。Posteller 860万用户。66-70%韩国人年1回以上利用。","sources":["https://www.seoulz.com/korea-superstition-economy/","https://www.seoulz.com/korea-saju-industry/"],"confidence":"high","dimension":"韩国市场"},
+    {"id":"F007","content":"韩国Kakao Pay 4650万用户(91%渗透率)，Naver Pay 3000万+。海外支付2022-2024年443%增。Kakao i/Naver Clova已集成AI占卜。","sources":["https://digitalinasia.com/naver-vs-kakao/","https://pulse.mk.co.kr/news/english/11248583"],"confidence":"high","dimension":"韩国支付"},
+    {"id":"F008","content":"支付平台对比: Stripe 2.9%+30¢(你处理税务)/Paddle 5%+50¢(MoR)/LemonSqueezy 5%+50¢(MoR,2024被Stripe收购)/Gumroad 10%+50¢(MoR)。Dodo Payments 4%+40¢(beta)。","sources":["https://www.globalsolo.global/blog/stripe-vs-paddle-vs-lemon-squeezy-2026","https://www.rebounce.dev/blog/stripe-vs-lemon-squeezy-vs-paddle","https://www.swell.is/content/lemon-squeezy-alternatives"],"confidence":"high","dimension":"支付方案"},
+    {"id":"F009","content":"中国开发者海外收款2026方案: 注册美国LLC(Wyoming/Delaware)→EIN税号→Mercury银行→Stripe企业账号。年维护成本$300-1500。ITIN个人注册Stripe也可行(2025新政)。","sources":["https://dongguixishi.com/zh-CN/fuyeshuo/zhuge-haiwaigongsi","https://www.ingstart.com/blog/32123.html"],"confidence":"high","dimension":"中国开发者"},
+    {"id":"F010","content":"Apple 2026年6月更新4.3政策: fortune telling类目已被明确列为饱和类目，新提交必须'meaningfully different'。需娱乐免责声明。分类归为Entertainment。","sources":["https://www.iphoneincanada.ca/2026/06/10/apple-updates-app-store-guidelines"],"confidence":"high","dimension":"合规风险"},
+    {"id":"F011","content":"LemonSqueezy额外费用: 国际卡+1.5%、PayPal支付+1.5%。Paddle单一费率5%+50¢全包。Dodo Payments支持UPI和SEPA。","sources":["https://www.swell.is/content/lemon-squeezy-alternatives"],"confidence":"high","dimension":"支付方案"},
+    {"id":"F012","content":"Paddle 200+支付方式覆盖全球，Lemon Squeezy仅21种。Paddle更适合非信用卡为主的地区(拉美/东南亚)。","sources":["https://www.swell.is/content/lemon-squeezy-alternatives","https://contracollective.com/blog/paddle-vs-lemon-squeezy-merchant-of-record-digital-commerce-2026"],"confidence":"high","dimension":"支付方案"}
   ],
   "gaps": [
-    "美国塔罗市场规模数据(searcher-1a retry中)",
-    "拉美(巴西/墨西哥)塔罗市场+Pix支付",
-    "印度/菲律宾/印尼占卜市场",
-    "Google Trends各国搜索量对比",
-    "英国市场数据",
-    "支付平台对比(Stripe/Paddle/LemonSqueezy/Creem)",
-    "中国开发者海外收款实操",
-    "Stripe/PayPal对占卜类目政策",
-    "VAT/GST MoR税务处理",
-    "东南亚钱包(GCash/Dana/GoPay)跨境外商户接入",
-    "UPI跨境商户接入",
-    "Shopify vs WooCommerce数字产品对比",
-    "塔罗SEO关键词搜索量",
-    "App Store/Google Play占卜类政策",
-    "各国占卜法律限制"
-  ],
-  "next_actions": [
-    "等待searcher-1a/3a/4a/4b完成",
-    "重试支付方案(3b/3c)",
-    "重试拉美/东南亚/印度市场(2a/2c)",
-    "重试Google Trends+英国(1b)"
+    "拉美(巴西/墨西哥)具体市场数据缺失(仅知巴西占全球6%)",
+    "印度/菲律宾/印尼占卜市场无具体数字",
+    "Stripe/PayPal对fortune telling类目的限制政策未确认",
+    "各国占卜法律限制(伊斯兰国家/欧洲)缺失",
+    "Google Trends各国搜索量对比缺失",
+    "Shopify vs WooCommerce对比缺失"
   ]
 }
