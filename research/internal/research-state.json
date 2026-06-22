@@ -1,28 +1,29 @@
 {
-  "task": "AI塔罗占卜海外独立站出海策略",
-  "phase": "convergence",
-  "round": 1,
-  "report_id": "R-106",
-  "findings": [
-    {"id":"F001","content":"全球塔罗卡牌市场2026年$1.48B，CAGR 8.7%(2020-2026)。数字塔罗占总收入28%，CAGR 15.2%。美国38%全球份额，英国12%，德国7%，巴西6%。","sources":["https://deckaura.com/pages/tarot-industry-report-2026"],"confidence":"medium","dimension":"全球市场"},
-    {"id":"F002","content":"美国Psychic Services行业2022年收入$2.2B。美国塔罗卡市场2025年$348.1M。全球超过1200万副塔罗牌2024年售出。","sources":["https://www.accio.com/business/current-trends-in-the-tarot-market-2024","https://www.marketresearch.com/Global-Industry-Analysts-v1039/Tarot-Cards-42948463/"],"confidence":"medium","dimension":"美国市场"},
-    {"id":"F003","content":"Co-Star: 3000万注册用户，月收入$400K，Pro订阅$8.99/月。The Pattern: 1500万用户,$10M+年收入。Sanctuary: 月$1.5M。行业付费转化率8-12%。","sources":["https://www.statista.com/statistics/1451972/","https://app.sensortower.com/overview/1264782561"],"confidence":"high","dimension":"竞争格局"},
-    {"id":"F004","content":"全球灵性服务市场2024年$376B，预计2035年$787.4B(CAGR 7%)。灵性产品市场2025年$11.3B(CAGR 12.2%)。占星市场2024年$14.7B。","sources":["https://www.einpresswire.com/article/847800404/","https://m2squareconsultancy.com/reports/spiritual-and-wellness-products-market","https://www.actualmarketresearch.com/product/global-astrology-market-overview"],"confidence":"medium","dimension":"行业背景"},
-    {"id":"F005","content":"日本占い市场2023年度6市场合算997億円(≈$6.6B JPY)。用户90%女性、30-50代80%、85%恋爱目的。Z世代33.9%週1回以上利用。","sources":["https://www.yano.co.jp/press-release/show/press_id/3662"],"confidence":"high","dimension":"日本市场"},
-    {"id":"F006","content":"韩国占い(사주/타로)産業年間$3.7B。Jeomsin 1700万DL，TechLabs 2024年营收978億ウォン($71M)。Posteller 860万用户。66-70%韩国人年1回以上利用。","sources":["https://www.seoulz.com/korea-superstition-economy/","https://www.seoulz.com/korea-saju-industry/"],"confidence":"high","dimension":"韩国市场"},
-    {"id":"F007","content":"韩国Kakao Pay 4650万用户(91%渗透率)，Naver Pay 3000万+。海外支付2022-2024年443%增。Kakao i/Naver Clova已集成AI占卜。","sources":["https://digitalinasia.com/naver-vs-kakao/","https://pulse.mk.co.kr/news/english/11248583"],"confidence":"high","dimension":"韩国支付"},
-    {"id":"F008","content":"支付平台对比: Stripe 2.9%+30¢(你处理税务)/Paddle 5%+50¢(MoR)/LemonSqueezy 5%+50¢(MoR,2024被Stripe收购)/Gumroad 10%+50¢(MoR)。Dodo Payments 4%+40¢(beta)。","sources":["https://www.globalsolo.global/blog/stripe-vs-paddle-vs-lemon-squeezy-2026","https://www.rebounce.dev/blog/stripe-vs-lemon-squeezy-vs-paddle","https://www.swell.is/content/lemon-squeezy-alternatives"],"confidence":"high","dimension":"支付方案"},
-    {"id":"F009","content":"中国开发者海外收款2026方案: 注册美国LLC(Wyoming/Delaware)→EIN税号→Mercury银行→Stripe企业账号。年维护成本$300-1500。ITIN个人注册Stripe也可行(2025新政)。","sources":["https://dongguixishi.com/zh-CN/fuyeshuo/zhuge-haiwaigongsi","https://www.ingstart.com/blog/32123.html"],"confidence":"high","dimension":"中国开发者"},
-    {"id":"F010","content":"Apple 2026年6月更新4.3政策: fortune telling类目已被明确列为饱和类目，新提交必须'meaningfully different'。需娱乐免责声明。分类归为Entertainment。","sources":["https://www.iphoneincanada.ca/2026/06/10/apple-updates-app-store-guidelines"],"confidence":"high","dimension":"合规风险"},
-    {"id":"F011","content":"LemonSqueezy额外费用: 国际卡+1.5%、PayPal支付+1.5%。Paddle单一费率5%+50¢全包。Dodo Payments支持UPI和SEPA。","sources":["https://www.swell.is/content/lemon-squeezy-alternatives"],"confidence":"high","dimension":"支付方案"},
-    {"id":"F012","content":"Paddle 200+支付方式覆盖全球，Lemon Squeezy仅21种。Paddle更适合非信用卡为主的地区(拉美/东南亚)。","sources":["https://www.swell.is/content/lemon-squeezy-alternatives","https://contracollective.com/blog/paddle-vs-lemon-squeezy-merchant-of-record-digital-commerce-2026"],"confidence":"high","dimension":"支付方案"}
+  "task": "海外AI套壳创业机会深度调研",
+  "phase": "searching-round2",
+  "partial_findings": [
+    {"id": "PF001", "content": "Vercel chatbot模板(vercel/chatbot) 20.5k stars, 6.7k forks, Next.js AI chatbot完整模板", "sources": ["https://github.com/vercel/chatbot"], "confidence": "high"},
+    {"id": "PF002", "content": "Looka AI logo设计工具 2024年收入$8M ARR, 500万客户, 平均ACV $2, 团队11人, 成立2016年", "sources": ["https://getlatka.com/companies/looka"], "confidence": "high"},
+    {"id": "PF003", "content": "Jasper AI定价$49/user/mo(Creator), $69/user/mo(Pro), 替代品Rytr仅$7.50/mo, Copy.ai有免费版", "sources": ["https://planetarylabour.com/articles/jasper-ai-alternatives"], "confidence": "high"},
+    {"id": "PF004", "content": "RevenueCat: 1.7%下载量在30天内转为付费用户, 北美LTV $0.35/download(全球4倍), 12个月后保留率降14%", "sources": ["https://www.revenuecat.com/state-of-subscription-apps-2024/"], "confidence": "high"},
+    {"id": "PF005", "content": "G2上AI Writing Assistant类别有1179个产品列表", "sources": ["https://www.g2.com/categories/ai-writing-assistant"], "confidence": "high"},
+    {"id": "PF006", "content": "内容营销AI市场预计2026年$107B, 88%营销人员每天使用AI工具, AI营销平均ROI 300%", "sources": ["https://planetarylabour.com/articles/jasper-ai-alternatives"], "confidence": "medium"}
   ],
   "gaps": [
-    "拉美(巴西/墨西哥)具体市场数据缺失(仅知巴西占全球6%)",
-    "印度/菲律宾/印尼占卜市场无具体数字",
-    "Stripe/PayPal对fortune telling类目的限制政策未确认",
-    "各国占卜法律限制(伊斯兰国家/欧洲)缺失",
-    "Google Trends各国搜索量对比缺失",
-    "Shopify vs WooCommerce对比缺失"
+    "GitHub AI wrapper/SaaS boilerplate完整盘点（stars/许可证/功能）",
+    "Indie Hackers AI产品MRR收入案例",
+    "Product Hunt 2024-2025 AI产品现状",
+    "Google Trends多赛道对比数据",
+    "Reddit子版订阅数数据",
+    "SimilarWeb流量数据",
+    "App Store AI应用收入估算",
+    "各蓝海赛道竞争分析",
+    "API成本具体定价",
+    "GDPR/CCPA合规要求",
+    "Paddle/Stripe支付方案"
+  ],
+  "next_actions": [
+    "拆成6个小搜索员重试，每个3-4个查询",
+    "已提取6条部分发现"
   ]
 }
