@@ -1,8 +1,37 @@
 {
-  "task": "闲鱼信息差套利工具与实战选品指南",
-  "report_id": "R-104",
-  "phase": "reporting",
-  "findings_summary": "4 searchers completed: searcher-sourcing(12 findings), searcher-products-a(8 findings), searcher-products-b(7 findings), searcher-tools-a(8 findings), searcher-tools-b(11 findings). Total 46 findings across tools/products/sourcing/risk dimensions.",
-  "completed_searchers": ["searcher-sourcing", "searcher-products-a", "searcher-products-b", "searcher-tools-a", "searcher-tools-b"],
-  "updated": "2026-06-22T10:08"
+  "task": "口红经济定价框架",
+  "phase": "reviewing",
+  "report_id": "R-105",
+  "queries_executed": 28,
+  "findings": [
+    {"id": "F001", "content": "大萧条时期口红效应起源：化妆品销售allegedly +25%，口红定价10美分。Leonard Lauder 2001年提出lipstick index概念", "sources": ["Economist 2009", "s1-us-depression"], "confidence": "medium", "verified_by": []},
+    {"id": "F002", "content": "2008金融危机：BLS数据显示个人护理+4.8%、食品+5.1%、娱乐+5.1%；服装-4.3%。Dollar General SSS+9.5%，Netflix+22%，Amazon+28%，宠物食品+11.1%，游戏软件+35%，酒类+9%", "sources": ["BLS", "NPD"], "confidence": "high", "verified_by": []},
+    {"id": "F003", "content": "MacDonald & Dildar (2020)使用BLS微观数据验证口红效应：大衰退期间18-40岁女性化妆品支出显著增加，服装支出减少，存在替代效应。首次全国代表性微观验证", "sources": ["Journal of Behavioral and Experimental Economics"], "confidence": "high", "verified_by": []},
+    {"id": "F004", "content": "2020新冠：McKinsey估计全球美容行业收入下降20-30%，但消费者削减美容支出意愿低于鞋服。中国美容2月销售-80%，3月仅-20%快速反弹。2008年美容仅小幅下滑且2010年完全恢复", "sources": ["McKinsey 2020"], "confidence": "high", "verified_by": []},
+    {"id": "F005", "content": "2020新冠独特性：口罩令使口红使用率-40%（Kantar），但护肤/护发逆势增长。英国prestige beauty线上+38%，理发器+166%，染发剂+23%", "sources": ["Kantar Worldpanel", "MBS Group"], "confidence": "high", "verified_by": []},
+    {"id": "F006", "content": "真正防御性品类（2008和2020均不超5%降幅）：居家食品、家庭用品、宠物用品。居家食品2008-09仅-3.8%但2020+6.6%；宠物用品2008-09-6.8%但2020+9.3%", "sources": ["BEA PCE", "Eightx"], "confidence": "high", "verified_by": []},
+    {"id": "F007", "content": "2008 vs 2020衰退模式相反：信用衰退(2008)打击耐用品（家具-15.9%），行为衰退(2020)打击服务（餐饮-38.6%）。2026若无大规模刺激更类似2008", "sources": ["BEA PCE via FRED"], "confidence": "high", "verified_by": []},
+    {"id": "F008", "content": "游戏行业2008年销售实际增长，被称为'virtually recession-proof'。免费游玩+内购模式提供更好衰退保护。2022年行业收入-5.1%至$1829B", "sources": ["Games Learning Society", "Newzoo"], "confidence": "medium", "verified_by": []},
+    {"id": "F009", "content": "优衣库在日本衰退1990s爆发增长：1994年100店，1998年300+店，2000年433店销售额¥2290亿。1998年¥1900抓绒首年200万件→次年850万件→2000年2000万件，1/3日本人购买", "sources": ["Fast Retailing 2000 Annual Report"], "confidence": "high", "verified_by": []},
+    {"id": "F010", "content": "优衣库SPA模式+中国外包=成本革命。柳井正模仿Gap，1993年全生产转中国，仓储式大卖场+低价基本款，聚焦郊区。通缩环境下极具竞争力", "sources": ["Business of Business"], "confidence": "high", "verified_by": []},
+    {"id": "F011", "content": "日本百元店在失去的十年中蓬勃发展。2013年约6000家→2023年约8900家，市场规模¥1.2万亿。Daiso 2016年日本约2900店+全球1400店", "sources": ["City-Cost", "Teikoku Databank"], "confidence": "high", "verified_by": []},
+    {"id": "F012", "content": "韩国1997危机：化妆品1998年产值-13%，大量中小企业倒闭。但1998-2010 CAGR约8%。危机后M型分化：高端和低价两极", "sources": ["知乎券商研报"], "confidence": "medium", "verified_by": []},
+    {"id": "F013", "content": "金大中政府将文化产业和化妆品出口作为国家复兴战略，建立KOCCA。韩国化妆品出口2025年突破$100亿，全球前三", "sources": ["Georgetown Journal of International Affairs"], "confidence": "high", "verified_by": []},
+    {"id": "F014", "content": "韩国Daiso 1997年开业，2023年销售额₩3.46万亿(+17%)，营业利润率7.56%（三大超市仅约1%）", "sources": ["Asia Business Daily"], "confidence": "high", "verified_by": []},
+    {"id": "F015", "content": "中国2025年人均可支配收入43377元(+5.0%)，消费支出29476元(+4.4%)。2026 Q1社零+2.4%但5月转负-0.6%", "sources": ["国家统计局"], "confidence": "high", "verified_by": []},
+    {"id": "F016", "content": "中国2026消费分化：食品饮料+8-9.5%，汽车-9.1%，奢侈品-23%。折扣店客流+34%，9.9元订单+126%，二手交易+62%，彩票销售5800亿+36.5%", "sources": ["国家统计局", "行业报告"], "confidence": "high", "verified_by": []},
+    {"id": "F017", "content": "消费者信心指数约90（悲观区间），历史均值108.56。Z世代：9.9-39.9元是小确幸最佳价格区间，>79元需'宿舍众筹'", "sources": ["国家统计局", "消费者信心指数"], "confidence": "medium", "verified_by": []},
+    {"id": "F018", "content": "泡泡玛特2025营收371.2亿(+184.7%)，盲盒定价59-99元。蜜雪冰城2-8元价格带。57.2%消费者选择平替产品", "sources": ["公司财报", "行业报告"], "confidence": "high", "verified_by": []},
+    {"id": "F019", "content": "Mandel et al.(2017)补偿性消费理论：经济威胁激活身份补偿机制，消费者通过 accessible luxury goods 恢复控制感", "sources": ["Journal of Consumer Psychology", "s4b-psychology"], "confidence": "high", "verified_by": []},
+    {"id": "F020", "content": "McKinsey：衰退期韧性零售商TRS 21% vs 其他-4%。定价原则：价值导向、主动性、利润优先。DTC策略：affordable luxury定位+分层入口产品", "sources": ["McKinsey", "s4b-psychology"], "confidence": "high", "verified_by": []},
+    {"id": "F021", "content": "Ralph Lauren客户旅程模型：$30入口产品→$3000高端。'Treatonomics'/'Micro indulgences'是2025-2026趋势", "sources": ["s4b-psychology"], "confidence": "medium", "verified_by": []},
+    {"id": "F022", "content": "2008衰退盈利公司：P&G净利+12.7%，Nestlé+18.8%，McDonald's+22.8%，Walmart+11.0%，Microsoft+18.8%。共性：必需品+强品牌+稳定现金流", "sources": ["TIKR/company filings"], "confidence": "medium", "verified_by": []}
+  ],
+  "gaps": [
+    "缺乏日本1990年代百元店具体逐年数据",
+    "韩国化妆品危机后细分品类恢复时序不够详细",
+    "流媒体(Netflix/Disney+)2020具体订阅增长数据未深度抓取",
+    "零食行业衰退期具体逆势增长数据有限"
+  ],
+  "next_actions": ["进入Review和报告撰写"]
 }
