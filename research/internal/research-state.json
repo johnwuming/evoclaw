@@ -14,10 +14,17 @@
     {"id": "F009", "content": "虚拟商品零成本：百度网盘存资料+阿福自动发货工具→被动收入，聚焦学生和职场人需求", "sources": ["https://blog.csdn.net/weixin_51230027/article/details/147501140"], "confidence": "medium", "dimension": "虚拟"},
     {"id": "F010", "content": "2025闲鱼严打无货源违规：AI检测+人工审核，虚拟商品违规率92%，禁售盗版/高仿/医疗器械", "sources": ["https://www.10100.com/article/30796965"], "confidence": "high", "dimension": "风险"},
     {"id": "F011", "content": "闲鱼禁止站外导流：AI检测关键词，首次限流7天→二次冻结15-30天→三次永久封禁", "sources": ["https://bk.taobao.com/k/taobaomaijia_435/93dacbd407b93fc0ada4238097717f35.html"], "confidence": "high", "dimension": "风险"},
-    {"id": "F012", "content": "闲鱼禁止空挂/虚假发货/重复铺货/代挂服务，合规要求一件代发真实可发货", "sources": ["https://blog.csdn.net/wykqh/article/details/151891462"], "confidence": "high", "dimension": "风险"}
+    {"id": "F012", "content": "闲鱼禁止空挂/虚假发货/重复铺货/代挂服务，合规要求一件代发真实可发货", "sources": ["https://blog.csdn.net/wykqh/article/details/151891462"], "confidence": "high", "dimension": "风险"},
+    {"id": "F013", "content": "蓝海选品法：字根辐射法找到低竞争品类，如相机遮光罩(成本20卖80)、钻戒改圈、复古相机盒(80-150元)", "sources": ["https://www.10100.com/article/37882540"], "confidence": "medium", "dimension": "选品"},
+    {"id": "F014", "content": "蓝海虚拟资料客单价300-500元最高1000元，零边际成本，但选品难度高需深耕垂直领域", "sources": ["https://zhuanlan.zhihu.com/p/2034764444652267094"], "confidence": "medium", "dimension": "选品"},
+    {"id": "F015", "content": "小众人群蓝海：宠物(高端湿巾/进口尿布)、哺乳妈妈(哺乳枕)、办公族(工学坐垫/理线器)、旧物改造(零成本)", "sources": ["https://bk.taobao.com/k/taobaozatan_19107/876fda284ae4f5d86fdded6127dce3cb.html"], "confidence": "medium", "dimension": "选品"},
+    {"id": "F016", "content": "虚拟商品案例：公考资料日均100+单净赚8000+；Excel技巧19.9元月销800+单；定价9.9引流+29.9组合+59.9年度", "sources": ["https://www.10100.com/article/1241009"], "confidence": "medium", "dimension": "虚拟"},
+    {"id": "F017", "content": "虚拟四大类目：考证学习(9.9-19.9)、办公提效(PPT模板15元)、技能教程(几元量大)、会员充值", "sources": ["https://zhuanqiana.com/"], "confidence": "medium", "dimension": "虚拟"},
+    {"id": "F018", "content": "虚拟商品违规率92%最高，版权侵权可被判赔8万+，需避开品牌商标/软件名/注册著作权内容", "sources": ["https://lusongsong.com/reed/17224.html"], "confidence": "high", "dimension": "风险"},
+    {"id": "F019", "content": "虚拟自动化：鱼小秘/阿福自动发货+鱼小铺500商品+网盘只读链接+多店矩阵运营", "sources": ["https://zhuanlan.zhihu.com/p/1896253805999399388"], "confidence": "medium", "dimension": "工具"}
   ],
-  "pending_searchers": ["searcher-tools-a", "searcher-tools-b", "searcher-products-a", "searcher-products-b"],
-  "completed_searchers": ["searcher-sourcing"],
+  "pending_searchers": ["searcher-tools-a", "searcher-tools-b", "searcher-products-a"],
+  "completed_searchers": ["searcher-sourcing", "searcher-products-b"],
   "gaps": [],
-  "updated": "2026-06-22T10:03"
+  "updated": "2026-06-22T10:05"
 }
