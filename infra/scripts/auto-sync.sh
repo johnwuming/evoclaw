@@ -32,6 +32,10 @@ map_dest() {
     local dest=""
     if [[ "$src" == "$RESULTS_DIR"/R-*.md || "$src" == "$RESULTS_DIR"/M-*.md ]]; then
         dest="$REPO_DIR/research/$(basename "$src")"
+    elif [[ "$src" == "$RESULTS_DIR"/*/* ]]; then
+        # 分类子目录文件（如 01-AI行业研究/R-001-xxx.md）
+        local rel="${src#$RESULTS_DIR/}"
+        dest="$REPO_DIR/research/$rel"
     elif [[ "$src" == "$DEV_PROJECTS_DIR"/* ]]; then
         local rel="${src#$DEV_PROJECTS_DIR/}"
         dest="$REPO_DIR/dev/$rel"
@@ -173,7 +177,7 @@ update_results_readme() {
 
 if [ "$1" = "--all" ]; then
     if [ -d "$RESULTS_DIR" ]; then
-        rsync -a --delete --exclude="$EXCLUDE_PATTERN" "$RESULTS_DIR/" "$REPO_DIR/research/" 2>/dev/null
+        rsync -a --exclude="$EXCLUDE_PATTERN" "$RESULTS_DIR/" "$REPO_DIR/research/" 2>/dev/null
     fi
     for f in $(find "$DEV_PROJECTS_DIR" -type f 2>/dev/null); do
         sync_file "$f"
@@ -206,8 +210,9 @@ if [ -n "$(git status --porcelain)" ]; then
     # 在 commit 前更新 README.md
     update_results_readme
 
-    # README.md 更新后也 stage 进去
+    # README.md 更新后也同步到 repo 并 stage
     if [ -f "$RESULTS_DIR/README.md" ]; then
+        cp "$RESULTS_DIR/README.md" "$REPO_DIR/research/README.md"
         git add "research/README.md" 2>/dev/null
     fi
 
