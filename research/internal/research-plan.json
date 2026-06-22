@@ -1,36 +1,37 @@
 {
-  "topic": "深度研究AI最新成果与实践调研 (Deep Research AI 2025-2026)",
+  "topic": "闲鱼信息差套利工具与实战选品指南",
   "complexity": "中等",
-  "complexity_reason": "5个调研维度需要覆盖，每个维度需要2-3次搜索，但不需要迭代多轮验证",
+  "complexity_reason": "工具调研需要覆盖官方/第三方/开源多个维度，实操信息需要真实数据和价格对比，但不需要迭代多轮深度验证",
   "dimensions": [
-    "主流大厂Deep Research产品对比",
-    "开源Deep Research方案",
-    "多Agent协作最佳实践",
-    "搜索工具链方案对比",
-    "研究质量提升技术"
+    "闲鱼数据工具（官方+第三方+开源）",
+    "闲鱼热搜/热销品类与实操数据",
+    "采购源头与利润估算",
+    "零库存变现路径与启动指南"
   ],
   "search_queries": [
-    {"id": 1, "query": "OpenAI deep research technical architecture 2025 2026", "dimension": "产品对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Google Gemini deep research vs Perplexity deep research comparison", "dimension": "产品对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Anthropic Claude research tool Grok deep research 2025 2026", "dimension": "产品对比", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "gpt-researcher open source deep research framework github", "dimension": "开源方案", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 5, "query": "Stanford STORM research assistant architecture wiki style", "dimension": "开源方案", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 6, "query": "open source deep research multi-agent framework 2025 2026 github", "dimension": "开源方案", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "multi-agent research architecture best practices 2025 2026", "dimension": "多Agent协作", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 8, "query": "CrewAI vs AutoGen vs LangGraph research agent comparison", "dimension": "多Agent协作", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 9, "query": "AI agent orchestration parallel search vs sequential research", "dimension": "多Agent协作", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 10, "query": "best search API for AI agents Tavily Brave SearXNG 2025", "dimension": "搜索工具链", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 11, "query": "web scraping content extraction AI agent anti-bot 2025", "dimension": "搜索工具链", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 12, "query": "AI research fact checking citation verification hallucination prevention", "dimension": "质量提升", "priority": "high", "assigned_to": "searcher-4"}
+    {"id": 1, "query": "闲鱼选品工具 数据分析平台 2025 2026 推荐", "dimension": "工具调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "闲鱼指数 官方数据 搜索词排行 热搜词 查询方法", "dimension": "工具调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "灰豚数据 蝉妈妈 飞瓜 闲鱼模块 数据工具对比", "dimension": "工具调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "闲鱼爬虫 GitHub 开源 API 数据获取 闲鱼搜索", "dimension": "工具调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "闲鱼浏览器插件 选品助手 微信小程序 闲鱼工具", "dimension": "工具调研", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "闲鱼热搜词 2025 2026 热销产品 高利润品类", "dimension": "实操数据", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "闲鱼卖什么赚钱 信息差套利 实战案例 2025 2026", "dimension": "实操数据", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "闲鱼客单价50-500元 好卖品类 蓝海产品 低竞争", "dimension": "实操数据", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "闲鱼一件代发 1688 货源 对接 拼多多采集", "dimension": "采购与利润", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 10, "query": "闲鱼利润率 卖家利润 佣金 交易手续费 2025", "dimension": "采购与利润", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 11, "query": "义乌小商品 广州十三行 白沟 货源 闲鱼卖货 采购源头", "dimension": "采购与利润", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "闲鱼新手开店 启动成本 零库存变现 月收入 经验分享 2025", "dimension": "变现路径", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "闲鱼虚拟商品 电子资料 课程资料 信息差高利润", "dimension": "实操数据", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "闲鱼商家 千牛 生意参谋 闲鱼店铺数据分析", "dimension": "工具调研", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 15, "query": "闲鱼无货源模式 优缺点 风险 封号 规则 2025", "dimension": "变现路径", "priority": "medium", "assigned_to": "searcher-3"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3], "focus": "主流大厂Deep Research产品对比"},
-    "searcher-2": {"queries": [4, 5, 6], "focus": "开源Deep Research方案"},
-    "searcher-3": {"queries": [7, 8, 9], "focus": "多Agent协作最佳实践"},
-    "searcher-4": {"queries": [10, 11, 12], "focus": "搜索工具链与研究质量提升"}
+    "searcher-1": {"queries": [1, 2, 3, 4, 5, 14], "focus": "闲鱼数据工具全景调研（官方/第三方/开源/插件）"},
+    "searcher-2": {"queries": [6, 7, 8, 13], "focus": "闲鱼热搜词/热销品类/高利润品类/虚拟商品"},
+    "searcher-3": {"queries": [9, 10, 11, 12, 15], "focus": "采购源头/利润估算/变现路径/风险提示"}
   },
-  "searcher_count": 4,
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-102",
-  "category": "02-AI技术调研"
+  "report_id": "R-104",
+  "category": "07-其他"
 }
