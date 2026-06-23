@@ -1,29 +1,87 @@
 {
-  "task": "海外AI套壳创业机会深度调研",
-  "phase": "searching-round2-collecting",
-  "partial_findings": [
-    {"id": "PF001", "content": "Vercel chatbot模板(vercel/chatbot) 20.5k stars, 6.7k forks, Next.js AI chatbot完整模板", "sources": ["https://github.com/vercel/chatbot"], "confidence": "high"},
-    {"id": "PF002", "content": "Looka AI logo设计工具 2024年收入$8M ARR, 500万客户, 平均ACV $2, 团队11人", "sources": ["https://getlatka.com/companies/looka"], "confidence": "high"},
-    {"id": "PF003", "content": "Jasper AI定价$49/user/mo, 替代品Rytr仅$7.50/mo, 内容营销AI市场预计2026年$107B", "sources": ["https://planetarylabour.com/articles/jasper-ai-alternatives"], "confidence": "high"},
-    {"id": "PF004", "content": "RevenueCat: 1.7%下载量30天内转付费, 北美LTV $0.35/download(全球4倍), 12个月保留率降14%", "sources": ["https://www.revenuecat.com/state-of-subscription-apps-2024/"], "confidence": "high"},
-    {"id": "PF005", "content": "G2上AI Writing Assistant类别有1179个产品", "sources": ["https://www.g2.com/categories/ai-writing-assistant"], "confidence": "high"},
-    {"id": "PF006", "content": "Co-Star 3000万账户/100万DAU/月收约$400K; The Pattern 1000万下载/800万月活; Sanctuary 700万下载/300万月活; Nebula 1200万下载/年收$7M+", "sources": ["https://ts2.tech/en/astrology-just-got-an-ai-upgrade-inside-the-rise-of-ai-powered-horoscopes"], "confidence": "high"},
-    {"id": "PF007", "content": "r/relationship_advice 1580万订阅, r/astrology 210万, r/tarot 61万(年增21.7%), r/Dreams 57万, r/Psychic 30万, r/spirituality 57.6万", "sources": ["https://redditli.st/subreddit/astrology"], "confidence": "high"},
-    {"id": "PF008", "content": "tarot.com月访问240万, cafeastrology.com 1074万, labyrinthos.co 234万; Character.ai月访问1.8-1.9亿, 年收$3220万", "sources": ["https://www.similarweb.com/website/tarot.com/"], "confidence": "high"},
-    {"id": "PF009", "content": "2024年全球AI应用市场收入$33亿(+51%), ChatGPT 1-8月$230M收入, Remini 1.2亿下载/$200M+ IAP收入", "sources": ["https://sensortower.com/blog/state-of-ai-apps-2024"], "confidence": "high"},
-    {"id": "PF010", "content": "占星应用市场2025年$50亿, 预计2035年$457亿(CAGR 24.76%); 全球占星市场2024年$39.4亿, 移动应用占60%+", "sources": ["https://www.globalgrowthinsights.com/market-reports/astrology-app-market-114903"], "confidence": "medium"},
-    {"id": "PF011", "content": "AstroTalk(印度) 4000万用户/2024年收入$138M/15000+占星师; 印度市场2024年$163M→2030年$1.8B", "sources": ["https://ts2.tech/en/astrology-just-got-an-ai-upgrade-inside-the-rise-of-ai-powered-horoscopes"], "confidence": "medium"},
-    {"id": "PF012", "content": "2024年Q4全球IAP收入$394亿(+13.5%), 非游戏应用IAP $192亿(+28.2%), 订阅模式强劲增长", "sources": ["https://investgame.net"], "confidence": "high"}
+  "task": "中国玄学元素在海外市场的兴趣度与商业机会调研",
+  "phase": "searching",
+  "searcher_a_findings": [
+    {
+      "id": "F001",
+      "content": "全球占星/灵性App市场2024年估值10.5-32亿美元，预计2030年达90亿美元，CAGR 11-15%。北美占全球用户34%，收入领先。",
+      "sources": ["QY Research", "MarketMind Partners", "MarkNtel Advisors"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F002",
+      "content": "Co-Star占星App月下载20万次、月收入40万美元，IAP定价$2.99-$11.99。美区Lifestyle类免费榜第68。",
+      "sources": ["Sensor Tower"],
+      "confidence": "high"
+    },
+    {
+      "id": "F003",
+      "content": "风水在美国有较高认知度但缺乏头部专业App。Reddit r/FengShui 34K订阅者，高活跃度。App Store风水App多为小型开发者。",
+      "sources": ["GummySearch / Reddit"],
+      "confidence": "high"
+    },
+    {
+      "id": "F004",
+      "content": "83%千禧一代和62% Z世代自认占星信仰者，56%千禧一代约会前查星座。29%美国人月付占星服务费。",
+      "sources": ["Harris Poll / EduBirdie"],
+      "confidence": "high"
+    },
+    {
+      "id": "F005",
+      "content": "易经在西方有认知基础但App市场空白：GitHub仅15个开源项目，多为工具类。Reddit r/iching 10,188订阅者，月增1.79%排前2%。",
+      "sources": ["GitHub", "RedditList"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F006",
+      "content": "中国生肖搜索热度增长：'Chinese zodiac compatibility'自2021年增长217%，超过西方占星查询3:1。",
+      "sources": ["Zodia Blog (引用MarketWatch)"],
+      "confidence": "low"
+    },
+    {
+      "id": "F007",
+      "content": "八字(Bazi)英文搜索上升：'bazi vs horoscope'等对比查询增加，DeepOracle等英文八字平台出现。",
+      "sources": ["DeepOracle"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F008",
+      "content": "紫微斗数西方几乎无消费者App。App Store中Zi Wei Dou Shu Astrology $29.99仅1评分1.0星，总下载62次。但已有API服务搭建。",
+      "sources": ["Apple App Store", "CNET", "astrology-api.io"],
+      "confidence": "high"
+    },
+    {
+      "id": "F009",
+      "content": "TikTok #fengshui播放量34亿次，#crystals 120亿次。海外用户对东方风水命理从猎奇转为追捧。",
+      "sources": ["搜狐 / TikTok数据"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F010",
+      "content": "北美灵性健康App市场2024年估值21.6亿美元(占全球40%)，2030年预计48.4亿美元，CAGR 14.6%。Android占47.8%收入份额。",
+      "sources": ["BusinessWire / ResearchAndMarkets"],
+      "confidence": "high"
+    },
+    {
+      "id": "F011",
+      "content": "McKinsey 2025：近30% Z世代和千禧一代比一年前更重视健康，全球健康产业2万亿美元。",
+      "sources": ["McKinsey"],
+      "confidence": "high"
+    },
+    {
+      "id": "F012",
+      "content": "#AstroTok在TikTok数十亿浏览量，VC对占星平台投资增长30%。Co-Star新增AI功能42%用户首月采用。",
+      "sources": ["PR Newswire / MarkNtel Advisors"],
+      "confidence": "medium"
+    },
+    {
+      "id": "F013",
+      "content": "亚太区占星App市场占全球31%，43%用户偏好吠陀或中国占星App。44%用免费功能，26%转付费。",
+      "sources": ["GlobalGrowthInsights"],
+      "confidence": "medium"
+    }
   ],
-  "gaps": [
-    "GitHub AI wrapper/SaaS boilerplate完整盘点",
-    "Indie Hackers AI产品MRR收入案例（s2失败）",
-    "Product Hunt 2024-2025 AI产品现状",
-    "各蓝海赛道竞争分析（心理健康/法律/约会/健身/语言学习）",
-    "API成本具体定价",
-    "GDPR/CCPA合规要求",
-    "Paddle/Stripe支付方案"
-  ],
-  "searchers_pending": ["s1-github-infra", "s4-blueocean-1", "s5-blueocean-2", "s6-compliance-payment"],
-  "searchers_done": ["s3-demand-data"]
+  "searcher_b_status": "pending",
+  "gaps": [],
+  "next_actions": ["等待searcher-b返回竞品数据"]
 }
