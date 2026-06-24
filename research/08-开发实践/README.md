@@ -10,3 +10,4 @@ R-074-OpenClaw控制ClaudeCode进行AgentWebCoding
 R-082-GO3S周末露营Vlog拍摄脚本-附录
 R-084-ch11-remainder
 R-113-AI驱动独立站设计最佳方案
+R-115-群晖NAS视频内容识别与素材索引开源方案
