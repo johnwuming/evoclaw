@@ -1,66 +1,39 @@
 {
-  "topic": "群晖NAS部署开源大模型实现视频内容识别与素材索引",
-  "complexity": "深度",
-  "complexity_reason": "跨越硬件可行性、多个AI模型类别（VLM/CLIP/OCR/ASR）、向量检索、自动化工作流、以及三档方案设计，需要25+个具体查询覆盖5个维度",
+  "topic": "Deep Research 大厂与开源方案增量更新（2026年6月下旬）",
+  "complexity": "中等",
+  "complexity_reason": "增量更新调研，已有R-057/R-102/R-103基础，只需覆盖最近1个月新变化。需要多维度但不需要全量调研。",
   "dimensions": [
-    "群晖硬件可行性",
-    "视频内容识别开源方案",
-    "素材管理与检索系统",
-    "自动化剪辑辅助",
-    "完整方案推荐与成本"
+    "大厂产品更新",
+    "开源方案更新",
+    "架构最佳实践",
+    "行业趋势"
   ],
   "search_queries": [
-    {"id": 1, "query": "Synology NAS GPU models intel j4125 n40l rtd1296 j4125 GPU acceleration Docker AI", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "群晖NAS Docker 部署大模型 Ollama llama.cpp 可行性 内存限制", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Synology DS923+ DS1522+ DS224+ CPU RAM specs AI model deployment", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "群晖 外接GPU eGPU NVIDIA 显卡加速 AI推理 可行性", "dimension": "群晖硬件可行性", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Synology Container Manager Docker GPU passthrough intel UHD quick sync", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "ffmpeg keyframe extraction strategy video scene detection batch processing", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "LLaVA CogVLM Qwen-VL visual language model local deployment CPU inference 2025", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "CLIP BLIP image tagging automation open source video frame labeling", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "YOLO DETR object detection video frame real-time lightweight 2025", "dimension": "视频内容识别", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "whisper.cpp SenseVoice speech to text self-hosted CPU transcription 2025", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "PaddleOCR Tesseract OCR video frame text extraction Chinese", "dimension": "视频内容识别", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "Video-LLaVA VideoChat video understanding model lightweight NAS deployment", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "vector database video search Milvus Qdrant ChromaDB video content retrieval", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "natural language video search open source self-hosted CLIP vector embedding", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "Plex Jellyfin Emby metadata AI tagging plugin automation 2025", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "open source DAM digital asset management video self-hosted 2025", "dimension": "素材管理与检索", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "immich photoprism self-hosted media management AI tagging facial recognition", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "face recognition open source self-hosted video frame DeepFace InsightFace", "dimension": "素材管理与检索", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "automatic video highlight detection open source sports highlights AI", "dimension": "自动化剪辑", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 20, "query": "AI video auto editing tag-based clip extraction open source 2025", "dimension": "自动化剪辑", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 21, "query": "EDL XML FCPXML Premiere DaVinci auto generate open source pipeline", "dimension": "自动化剪辑", "priority": "medium", "assigned_to": "searcher-4"},
-    {"id": 22, "query": "MHL shotput AI logging tool video content analysis post-production", "dimension": "自动化剪辑", "priority": "low", "assigned_to": "searcher-4"},
-    {"id": 23, "query": "自动视频标签 开源 AI 视频内容识别 中文", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 24, "query": "群晖 Docker AI 模型 部署教程 Ollama 2024 2025", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-4"},
-    {"id": 25, "query": "Synology NAS Ollama Docker GPU intel quick sync acceleration guide", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 26, "query": "video content understanding pipeline frame extraction embedding indexing open source", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 27, "query": "LANE rayuela ActionAE action recognition temporal localization video self-hosted", "dimension": "自动化剪辑", "priority": "low", "assigned_to": "searcher-4"},
-    {"id": 28, "query": "ollama vision model qwen-vl llama-vision synology ARM x86 CPU benchmark", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 29, "query": "deforum stable diffusion video preprocessing frame analysis pipeline", "dimension": "自动化剪辑", "priority": "low", "assigned_to": "searcher-4"},
-    {"id": 30, "query": "summarize.tech video summarization AI tool alternatives self-hosted 2025", "dimension": "视频内容识别", "priority": "medium", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "OpenAI Deep Research update June 2026 new features", "dimension": "大厂产品更新", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Google Gemini Deep Research update June 2026", "dimension": "大厂产品更新", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Perplexity Deep Research update June 2026 new features", "dimension": "大厂产品更新", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Anthropic Claude research features June 2026", "dimension": "大厂产品更新", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "xAI Grok Deep Research features June 2026", "dimension": "大厂产品更新", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Kimi MiniMax Deep Research 深度研究 2026年6月 更新", "dimension": "大厂产品更新", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "字节跳动 豆包 Deep Research 深度搜索 2026年6月", "dimension": "大厂产品更新", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "百度 阿里 通义 腾讯 Deep Research 深度研究 2026年6月", "dimension": "大厂产品更新", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "Stanford STORM deep research open source June 2026 update", "dimension": "开源方案更新", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 10, "query": "gpt-researcher open source update 2026", "dimension": "开源方案更新", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 11, "query": "LangChain open_deep_research update 2026", "dimension": "开源方案更新", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "new open source deep research framework 2026 GitHub", "dimension": "开源方案更新", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "multi-agent deep research architecture paper 2026 arxiv", "dimension": "架构最佳实践", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 14, "query": "deep research agent context management evaluation 2026", "dimension": "架构最佳实践", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 15, "query": "AI deep research market trend 2026 industry analysis", "dimension": "行业趋势", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 16, "query": "deep research quality benchmark evaluation 2026", "dimension": "架构最佳实践", "priority": "medium", "assigned_to": "searcher-4"}
   ],
   "searcher_assignments": {
-    "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 24, 25],
-      "focus": "群晖NAS硬件可行性、GPU加速、Docker部署大模型"
-    },
-    "searcher-2": {
-      "queries": [6, 7, 8, 9, 10, 11, 12, 28, 30],
-      "focus": "视频内容识别开源方案（VLM/CLIP/OCR/ASR/视频理解）"
-    },
-    "searcher-3": {
-      "queries": [13, 14, 15, 16, 17, 18, 26],
-      "focus": "素材管理与检索系统（向量数据库/Plex集成/DAM）"
-    },
-    "searcher-4": {
-      "queries": [19, 20, 21, 22, 23, 27, 29],
-      "focus": "自动化剪辑辅助与中文资源"
-    }
+    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "海外大厂Deep Research产品更新"},
+    "searcher-2": {"queries": [6, 7, 8], "focus": "国内大厂Deep Research产品更新"},
+    "searcher-3": {"queries": [9, 10, 11, 12], "focus": "开源Deep Research方案更新"},
+    "searcher-4": {"queries": [13, 14, 15, 16], "focus": "架构最佳实践与行业趋势"}
   },
   "searcher_count": 4,
   "review_rounds": 1,
-  "report_id": "R-115",
-  "category": "08-开发实践"
+  "report_id": "R-114",
+  "category": "01-AI行业研究"
 }
