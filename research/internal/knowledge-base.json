@@ -1,15 +1,21 @@
 {
-  "topic": "闲鱼信息差套利工具与实战选品指南",
-  "report_id": "R-104",
-  "updated": "2026-06-22",
-  "findings": [
-    {"claim": "闲鱼没有成熟第三方数据SaaS平台，灰豚/蝉妈妈/飞瓜均不支持闲鱼", "confidence": "high", "dimension": "工具"},
-    {"claim": "闲鱼官方'搜索行情'是唯一数据入口（2023.8上线），覆盖手机/数码/户外等类目", "confidence": "high", "dimension": "工具"},
-    {"claim": "5118.com可间接查闲鱼关键词数据（流量趋势/需求图谱/相关热词）", "confidence": "medium", "dimension": "工具"},
-    {"claim": "XianyuAutoAgent(8k stars)是最活跃的闲鱼AI客服开源项目", "confidence": "high", "dimension": "工具"},
-    {"claim": "闲鱼2024.9起收0.6%软件服务费，高频卖家叠加最高1.6%", "confidence": "high", "dimension": "费用"},
-    {"claim": "轻户外装备需求+284%、二次元手办+271%是2025-2026最热品类", "confidence": "medium", "dimension": "品类"},
-    {"claim": "字根辐射法可找到蓝海品：遮光罩(20→80)、钻戒改圈、耳机清洁", "confidence": "medium", "dimension": "选品"},
-    {"claim": "虚拟商品违规率92%最高，版权侵权赔偿可达8万+", "confidence": "high", "dimension": "风险"}
-  ]
+  "last_updated": "2026-06-25",
+  "reports": {
+    "R-115": {
+      "title": "群晖NAS部署开源大模型实现视频内容识别与素材索引",
+      "category": "08-开发实践",
+      "date": "2026-06-25",
+      "key_findings": [
+        "群晖x23/x25系列（AMD R1600）无iGPU，AI推理能力极弱",
+        "Intel J4125平台（DS920+/DS424+）支持QuickSync，AI能力有限",
+        "群晖不支持外接GPU（无Thunderbolt）",
+        "ffmpeg场景检测+CLIP+whisper.cpp是NAS友好的技术栈",
+        "Immich（55k stars）和PhotoPrism（36k stars）是最佳自托管媒体管理方案",
+        "Qdrant是最适合NAS部署的向量数据库（单二进制，30K-80K QPS）",
+        "Ollama视觉模型在NAS CPU上约3-6 t/s，不实用",
+        "推荐三档方案：轻量(¥0)→中量(¥1500 mini PC)→重量(¥5000+ GPU)"
+      ],
+      "path": "shared/results/08-开发实践/R-115-群晖NAS视频内容识别与素材索引开源方案.md"
+    }
+  }
 }
