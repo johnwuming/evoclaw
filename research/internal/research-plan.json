@@ -1,48 +1,66 @@
 {
-  "topic": "AI驱动独立站设计最佳方案（塔罗/易学灵性主题）",
+  "topic": "群晖NAS部署开源大模型实现视频内容识别与素材索引",
   "complexity": "深度",
-  "complexity_reason": "需要横向对比10+ AI建站工具、设计工作流、主题设计指南三大板块，覆盖工具测评、价格、配色、字体、案例等多个具体维度，至少30个具体查询",
-  "dimensions": ["AI建站工具对比", "AI设计工作流", "灵性/神秘学主题设计", "实操建议"],
+  "complexity_reason": "跨越硬件可行性、多个AI模型类别（VLM/CLIP/OCR/ASR）、向量检索、自动化工作流、以及三档方案设计，需要25+个具体查询覆盖5个维度",
+  "dimensions": [
+    "群晖硬件可行性",
+    "视频内容识别开源方案",
+    "素材管理与检索系统",
+    "自动化剪辑辅助",
+    "完整方案推荐与成本"
+  ],
   "search_queries": [
-    {"id": 1, "query": "v0.dev Vercel AI website builder 2025 2026 features pricing review", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-A"},
-    {"id": 2, "query": "Bolt.new StackBlitz AI code generator website builder 2025 review pricing", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-A"},
-    {"id": 3, "query": "Lovable.dev AI website builder 2025 review features pricing", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-A"},
-    {"id": 4, "query": "Framer AI website builder 2025 review generate from prompt", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-A"},
-    {"id": 5, "query": "Relume AI website builder wireframe generator 2025 review", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-A"},
-    {"id": 6, "query": "Webflow AI features 2025 AI website generation review", "dimension": "AI建站工具对比", "priority": "medium", "assigned_to": "searcher-A"},
-    {"id": 7, "query": "Dora.run AI 3D website builder 2025 review", "dimension": "AI建站工具对比", "priority": "medium", "assigned_to": "searcher-A"},
-    {"id": 8, "query": "AI website builder comparison 2025 2026 v0 bolt lovable framer best", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-B"},
-    {"id": 9, "query": "Wix ADI Hostinger AI website builder 2025 features comparison", "dimension": "AI建站工具对比", "priority": "medium", "assigned_to": "searcher-B"},
-    {"id": 10, "query": "Cursor AI v0 Bolt best AI tools build landing page solo founder 2025", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-B"},
-    {"id": 11, "query": "AI prompt engineering for website design landing page generation tips", "dimension": "AI设计工作流", "priority": "high", "assigned_to": "searcher-B"},
-    {"id": 12, "query": "Midjourney prompt tarot card mystical dark theme website design", "dimension": "AI设计工作流", "priority": "high", "assigned_to": "searcher-C"},
-    {"id": 13, "query": "AI design system generator color palette font spacing website", "dimension": "AI设计工作流", "priority": "medium", "assigned_to": "searcher-C"},
-    {"id": 14, "query": "v0.dev prompt template best practices generate beautiful landing page", "dimension": "AI设计工作流", "priority": "high", "assigned_to": "searcher-B"},
-    {"id": 15, "query": "AI generated website to production deployment workflow 2025", "dimension": "AI设计工作流", "priority": "medium", "assigned_to": "searcher-B"},
-    {"id": 16, "query": "tarot reading website design inspiration examples dark theme 2024 2025", "dimension": "灵性/神秘学主题设计", "priority": "high", "assigned_to": "searcher-C"},
-    {"id": 17, "query": "astrology spirituality website design UI UX best practices", "dimension": "灵性/神秘学主题设计", "priority": "high", "assigned_to": "searcher-C"},
-    {"id": 18, "query": "mystical esoteric website color palette dark purple gold stars design", "dimension": "灵性/神秘学主题设计", "priority": "high", "assigned_to": "searcher-C"},
-    {"id": 19, "query": "tarot card reading website UI design case study award winning", "dimension": "灵性/神秘学主题设计", "priority": "medium", "assigned_to": "searcher-C"},
-    {"id": 20, "query": "spiritual wellness website design trends 2025 dark mode premium feel", "dimension": "灵性/神秘学主题设计", "priority": "medium", "assigned_to": "searcher-C"},
-    {"id": 21, "query": "Google Fonts best fonts for mystical spiritual website serif display", "dimension": "灵性/神秘学主题设计", "priority": "medium", "assigned_to": "searcher-C"},
-    {"id": 22, "query": "占卜网站设计 塔罗网站案例 深色主题 网页设计", "dimension": "灵性/神秘学主题设计", "priority": "high", "assigned_to": "searcher-D"},
-    {"id": 23, "query": "AI建站工具 一人公司 独立站 最佳方案 2025", "dimension": "实操建议", "priority": "high", "assigned_to": "searcher-D"},
-    {"id": 24, "query": "Coze AI Agent website tarot reading chatbot integration 2025", "dimension": "实操建议", "priority": "medium", "assigned_to": "searcher-D"},
-    {"id": 25, "query": "solo founder build website AI tools cheapest fastest 2025 indie hacker", "dimension": "实操建议", "priority": "high", "assigned_to": "searcher-D"},
-    {"id": 26, "query": "Astrology.com Kasamba Co-Star app website design analysis", "dimension": "灵性/神秘学主题设计", "priority": "medium", "assigned_to": "searcher-C"},
-    {"id": 27, "query": "payment integration stripe lemon squeezy for digital tarot reading website", "dimension": "实操建议", "priority": "medium", "assigned_to": "searcher-D"},
-    {"id": 28, "query": "Cursor AI build landing page from design Figma to code 2025 workflow", "dimension": "AI设计工作流", "priority": "medium", "assigned_to": "searcher-B"},
-    {"id": 29, "query": "Vercel Next.js deployment AI generated website production ready", "dimension": "实操建议", "priority": "medium", "assigned_to": "searcher-D"},
-    {"id": 30, "query": "AI website builder code export clean code maintainability comparison 2025", "dimension": "AI建站工具对比", "priority": "high", "assigned_to": "searcher-B"}
+    {"id": 1, "query": "Synology NAS GPU models intel j4125 n40l rtd1296 j4125 GPU acceleration Docker AI", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "群晖NAS Docker 部署大模型 Ollama llama.cpp 可行性 内存限制", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Synology DS923+ DS1522+ DS224+ CPU RAM specs AI model deployment", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "群晖 外接GPU eGPU NVIDIA 显卡加速 AI推理 可行性", "dimension": "群晖硬件可行性", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Synology Container Manager Docker GPU passthrough intel UHD quick sync", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "ffmpeg keyframe extraction strategy video scene detection batch processing", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "LLaVA CogVLM Qwen-VL visual language model local deployment CPU inference 2025", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "CLIP BLIP image tagging automation open source video frame labeling", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "YOLO DETR object detection video frame real-time lightweight 2025", "dimension": "视频内容识别", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "whisper.cpp SenseVoice speech to text self-hosted CPU transcription 2025", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "PaddleOCR Tesseract OCR video frame text extraction Chinese", "dimension": "视频内容识别", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "Video-LLaVA VideoChat video understanding model lightweight NAS deployment", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "vector database video search Milvus Qdrant ChromaDB video content retrieval", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "natural language video search open source self-hosted CLIP vector embedding", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "Plex Jellyfin Emby metadata AI tagging plugin automation 2025", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "open source DAM digital asset management video self-hosted 2025", "dimension": "素材管理与检索", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "immich photoprism self-hosted media management AI tagging facial recognition", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "face recognition open source self-hosted video frame DeepFace InsightFace", "dimension": "素材管理与检索", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 19, "query": "automatic video highlight detection open source sports highlights AI", "dimension": "自动化剪辑", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 20, "query": "AI video auto editing tag-based clip extraction open source 2025", "dimension": "自动化剪辑", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 21, "query": "EDL XML FCPXML Premiere DaVinci auto generate open source pipeline", "dimension": "自动化剪辑", "priority": "medium", "assigned_to": "searcher-4"},
+    {"id": 22, "query": "MHL shotput AI logging tool video content analysis post-production", "dimension": "自动化剪辑", "priority": "low", "assigned_to": "searcher-4"},
+    {"id": 23, "query": "自动视频标签 开源 AI 视频内容识别 中文", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 24, "query": "群晖 Docker AI 模型 部署教程 Ollama 2024 2025", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-4"},
+    {"id": 25, "query": "Synology NAS Ollama Docker GPU intel quick sync acceleration guide", "dimension": "群晖硬件可行性", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 26, "query": "video content understanding pipeline frame extraction embedding indexing open source", "dimension": "素材管理与检索", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 27, "query": "LANE rayuela ActionAE action recognition temporal localization video self-hosted", "dimension": "自动化剪辑", "priority": "low", "assigned_to": "searcher-4"},
+    {"id": 28, "query": "ollama vision model qwen-vl llama-vision synology ARM x86 CPU benchmark", "dimension": "视频内容识别", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 29, "query": "deforum stable diffusion video preprocessing frame analysis pipeline", "dimension": "自动化剪辑", "priority": "low", "assigned_to": "searcher-4"},
+    {"id": 30, "query": "summarize.tech video summarization AI tool alternatives self-hosted 2025", "dimension": "视频内容识别", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-A": {"queries": [1, 2, 3, 4, 5, 6, 7], "focus": "主流AI建站工具逐个评测"},
-    "searcher-B": {"queries": [8, 9, 10, 11, 14, 15, 28, 30], "focus": "AI工具横向对比+设计工作流"},
-    "searcher-C": {"queries": [12, 13, 16, 17, 18, 19, 20, 21, 26], "focus": "灵性/神秘学主题设计指南"},
-    "searcher-D": {"queries": [22, 23, 24, 25, 27, 29], "focus": "中文视角+实操建议"}
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 24, 25],
+      "focus": "群晖NAS硬件可行性、GPU加速、Docker部署大模型"
+    },
+    "searcher-2": {
+      "queries": [6, 7, 8, 9, 10, 11, 12, 28, 30],
+      "focus": "视频内容识别开源方案（VLM/CLIP/OCR/ASR/视频理解）"
+    },
+    "searcher-3": {
+      "queries": [13, 14, 15, 16, 17, 18, 26],
+      "focus": "素材管理与检索系统（向量数据库/Plex集成/DAM）"
+    },
+    "searcher-4": {
+      "queries": [19, 20, 21, 22, 23, 27, 29],
+      "focus": "自动化剪辑辅助与中文资源"
+    }
   },
   "searcher_count": 4,
   "review_rounds": 1,
-  "report_id": "R-112",
-  "category": "06-开发实践"
+  "report_id": "R-115",
+  "category": "08-开发实践"
 }
