@@ -1,87 +1,112 @@
 {
-  "task": "中国玄学元素在海外市场的兴趣度与商业机会调研",
-  "phase": "searching",
-  "searcher_a_findings": [
+  "task": "群晖NAS部署开源大模型实现视频内容识别与素材索引",
+  "phase": "reporting",
+  "queries_executed": [
+    "Synology NAS Docker GPU passthrough AI model deployment Ollama",
+    "Synology DS923+ DS1522+ DS224+ CPU specs GPU acceleration",
+    "ffmpeg keyframe extraction scene detection video analysis",
+    "CLIP BLIP image tagging video frame labeling open source",
+    "whisper.cpp speech to text CPU performance benchmark",
+    "Immich PhotoPrism self-hosted AI tagging facial recognition",
+    "vector database video search CLIP embedding Qdrant ChromaDB",
+    "Synology Intel QuickSync Docker GPU passthrough",
+    "Ollama vision model CPU inference tokens per second benchmark"
+  ],
+  "findings": [
     {
       "id": "F001",
-      "content": "全球占星/灵性App市场2024年估值10.5-32亿美元，预计2030年达90亿美元，CAGR 11-15%。北美占全球用户34%，收入领先。",
-      "sources": ["QY Research", "MarketMind Partners", "MarkNtel Advisors"],
-      "confidence": "medium"
+      "content": "群晖x23系列（DS923+/DS1522+）使用AMD Ryzen R1600双核CPU，无集成GPU，不支持Intel QuickSync，对硬件转码和GPU加速AI推理非常不利",
+      "sources": ["nascompares.com", "techpowerup.com", "blackvoid.club"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F002",
-      "content": "Co-Star占星App月下载20万次、月收入40万美元，IAP定价$2.99-$11.99。美区Lifestyle类免费榜第68。",
-      "sources": ["Sensor Tower"],
-      "confidence": "high"
+      "content": "群晖DS925+（2025新品）仍无10GbE选项，DS923+支持10GbE扩展但无iGPU。老款DS920+/DS918+使用Intel Celeron J4125带Intel UHD Graphics 600，支持QuickSync",
+      "sources": ["dongknows.com"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F003",
-      "content": "风水在美国有较高认知度但缺乏头部专业App。Reddit r/FengShui 34K订阅者，高活跃度。App Store风水App多为小型开发者。",
-      "sources": ["GummySearch / Reddit"],
-      "confidence": "high"
+      "content": "DSM 7.2 Container Manager支持Docker GPU透传，但仅限Intel iGPU（通过/dev/dri/renderD128设备映射），不支持外接NVIDIA GPU。群晖无Thunderbolt接口，无法eGPU",
+      "sources": ["community.synology.com", "gist.github.com/packerdl"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F004",
-      "content": "83%千禧一代和62% Z世代自认占星信仰者，56%千禧一代约会前查星座。29%美国人月付占星服务费。",
-      "sources": ["Harris Poll / EduBirdie"],
-      "confidence": "high"
+      "content": "ffmpeg关键帧提取两种策略：I-frame提取（-skip_frame nokey）和场景切换检测（-vf select='gt(scene,0.3)'）。scene阈值0.3-0.4适合大多数视频，处理速度快且无需额外依赖",
+      "sources": ["seekingvega.github.io", "jdhao.github.io", "stackoverflow.com"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F005",
-      "content": "易经在西方有认知基础但App市场空白：GitHub仅15个开源项目，多为工具类。Reddit r/iching 10,188订阅者，月增1.79%排前2%。",
-      "sources": ["GitHub", "RedditList"],
-      "confidence": "medium"
+      "content": "OpenCLIP（mlfoundations/open_clip）是OpenAI CLIP的开源实现，GitHub 33.8k stars（原版CLIP），支持ViT-B/32到ViT-H/14多种模型，可用于图像-文本相似度匹配和视频帧标注",
+      "sources": ["github.com/openai/CLIP", "github.com/mlfoundations/open_clip"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F006",
-      "content": "中国生肖搜索热度增长：'Chinese zodiac compatibility'自2021年增长217%，超过西方占星查询3:1。",
-      "sources": ["Zodia Blog (引用MarketWatch)"],
-      "confidence": "low"
+      "content": "BLIP+CLIP+KeyBERT组合可实现零样本图像标注pipeline：BLIP生成描述→KeyBERT提取关键词→CLIP过滤视觉相关标签，全部开源",
+      "sources": ["github.com/hemu-08/ai_powered_image_taggling"],
+      "confidence": "medium",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F007",
-      "content": "八字(Bazi)英文搜索上升：'bazi vs horoscope'等对比查询增加，DeepOracle等英文八字平台出现。",
-      "sources": ["DeepOracle"],
-      "confidence": "medium"
+      "content": "whisper.cpp在CPU上性能：base.en模型在现代x86 CPU上约50-100秒处理10分钟音频（base模型）。AMD Ryzen R1600（群晖DS923+）预计需要更长时间。small模型约需3-4倍时间",
+      "sources": ["openbenchmarking.org", "builderai.tools"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F008",
-      "content": "紫微斗数西方几乎无消费者App。App Store中Zi Wei Dou Shu Astrology $29.99仅1评分1.0星，总下载62次。但已有API服务搭建。",
-      "sources": ["Apple App Store", "CNET", "astrology-api.io"],
-      "confidence": "high"
+      "content": "Immich（55k+ GitHub stars）是自托管照片/视频管理平台，内置CLIP语义搜索和人脸识别，支持视频转码，Docker部署，但导入时会改变文件夹结构。PhotoPrism（36k+ stars）支持原位文件夹管理，TensorFlow标签识别",
+      "sources": ["pistack.xyz", "immich.app", "photoprism.app"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F009",
-      "content": "TikTok #fengshui播放量34亿次，#crystals 120亿次。海外用户对东方风水命理从猎奇转为追捧。",
-      "sources": ["搜狐 / TikTok数据"],
-      "confidence": "medium"
+      "content": "向量数据库选择：Qdrant单二进制部署，30K-80K QPS，适合自托管NAS环境；ChromaDB最简原型；pgvector如果已有PostgreSQL。Qdrant支持向量量化压缩75%内存",
+      "sources": ["sysdebug.com", "callsphere.ai", "dasroot.net"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F010",
-      "content": "北美灵性健康App市场2024年估值21.6亿美元(占全球40%)，2030年预计48.4亿美元，CAGR 14.6%。Android占47.8%收入份额。",
-      "sources": ["BusinessWire / ResearchAndMarkets"],
-      "confidence": "high"
+      "content": "Ollama CPU推理速度：PHI-3 3B模型在Intel i7-1355U上约7.5 t/s，AMD 4600G六核约12.3 t/s。7B模型在Ryzen 9 CPU上约5-15 t/s。群晖AMD R1600双核预计3-6 t/s（7B Q4模型）",
+      "sources": ["medium.com/@ttio2tech_28094", "ai-ollama.github.io", "computingforgeeks.com"],
+      "confidence": "high",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F011",
-      "content": "McKinsey 2025：近30% Z世代和千禧一代比一年前更重视健康，全球健康产业2万亿美元。",
-      "sources": ["McKinsey"],
-      "confidence": "high"
+      "content": "Ollama支持视觉模型（llava, minicpm-v, llama-vision），通过API或CLI传入图片路径运行。视觉模型比纯文本模型慢2-5x，因为需要额外的视觉编码器",
+      "sources": ["computingforgeeks.com"],
+      "confidence": "medium",
+      "verified_by": ["manual-search"]
     },
     {
       "id": "F012",
-      "content": "#AstroTok在TikTok数十亿浏览量，VC对占星平台投资增长30%。Co-Star新增AI功能42%用户首月采用。",
-      "sources": ["PR Newswire / MarkNtel Advisors"],
-      "confidence": "medium"
-    },
-    {
-      "id": "F013",
-      "content": "亚太区占星App市场占全球31%，43%用户偏好吠陀或中国占星App。44%用免费功能，26%转付费。",
-      "sources": ["GlobalGrowthInsights"],
-      "confidence": "medium"
+      "content": "TwelveLabs与Qdrant集成提供语义视频搜索工作流，生成多模态嵌入向量存入Qdrant实现精确视频搜索",
+      "sources": ["docs.twelvelabs.io"],
+      "confidence": "medium",
+      "verified_by": ["manual-search"]
     }
   ],
-  "searcher_b_status": "pending",
-  "gaps": [],
-  "next_actions": ["等待searcher-b返回竞品数据"]
+  "gaps": [
+    "群晖ARM型号（如DS220+等Realtek RTD1296平台）的具体AI推理性能数据缺失",
+    "自动化剪辑（EDL/XML生成、高光检测）开源方案数据不足",
+    "PaddleOCR在视频帧上的具体性能数据缺失",
+    "SenseVoice与whisper.cpp的中文识别对比数据缺失"
+  ],
+  "next_actions": [
+    "基于已有findings撰写完整报告",
+    "在报告中标注gaps",
+    "给出三档方案推荐（轻量/中量/重量）"
+  ]
 }
