@@ -1,112 +1,20 @@
 {
-  "task": "群晖NAS部署开源大模型实现视频内容识别与素材索引",
+  "task": "Agent 记忆框架行业全景 + OpenClaw 升级可行性评估",
   "phase": "reporting",
-  "queries_executed": [
-    "Synology NAS Docker GPU passthrough AI model deployment Ollama",
-    "Synology DS923+ DS1522+ DS224+ CPU specs GPU acceleration",
-    "ffmpeg keyframe extraction scene detection video analysis",
-    "CLIP BLIP image tagging video frame labeling open source",
-    "whisper.cpp speech to text CPU performance benchmark",
-    "Immich PhotoPrism self-hosted AI tagging facial recognition",
-    "vector database video search CLIP embedding Qdrant ChromaDB",
-    "Synology Intel QuickSync Docker GPU passthrough",
-    "Ollama vision model CPU inference tokens per second benchmark"
-  ],
+  "queries_executed": ["Mem0 architecture", "Mem0 auto extraction", "Mem0 self-hosted", "MemGPT/Letta architecture", "Zep/Graphiti temporal KG", "Cognee ECL pipeline", "OpenAI ChatGPT memory", "Claude memory tool", "MCP server memory", "LanceDB/sqlite-vec", "LangChain/LangGraph memory"],
   "findings": [
-    {
-      "id": "F001",
-      "content": "群晖x23系列（DS923+/DS1522+）使用AMD Ryzen R1600双核CPU，无集成GPU，不支持Intel QuickSync，对硬件转码和GPU加速AI推理非常不利",
-      "sources": ["nascompares.com", "techpowerup.com", "blackvoid.club"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F002",
-      "content": "群晖DS925+（2025新品）仍无10GbE选项，DS923+支持10GbE扩展但无iGPU。老款DS920+/DS918+使用Intel Celeron J4125带Intel UHD Graphics 600，支持QuickSync",
-      "sources": ["dongknows.com"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F003",
-      "content": "DSM 7.2 Container Manager支持Docker GPU透传，但仅限Intel iGPU（通过/dev/dri/renderD128设备映射），不支持外接NVIDIA GPU。群晖无Thunderbolt接口，无法eGPU",
-      "sources": ["community.synology.com", "gist.github.com/packerdl"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F004",
-      "content": "ffmpeg关键帧提取两种策略：I-frame提取（-skip_frame nokey）和场景切换检测（-vf select='gt(scene,0.3)'）。scene阈值0.3-0.4适合大多数视频，处理速度快且无需额外依赖",
-      "sources": ["seekingvega.github.io", "jdhao.github.io", "stackoverflow.com"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F005",
-      "content": "OpenCLIP（mlfoundations/open_clip）是OpenAI CLIP的开源实现，GitHub 33.8k stars（原版CLIP），支持ViT-B/32到ViT-H/14多种模型，可用于图像-文本相似度匹配和视频帧标注",
-      "sources": ["github.com/openai/CLIP", "github.com/mlfoundations/open_clip"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F006",
-      "content": "BLIP+CLIP+KeyBERT组合可实现零样本图像标注pipeline：BLIP生成描述→KeyBERT提取关键词→CLIP过滤视觉相关标签，全部开源",
-      "sources": ["github.com/hemu-08/ai_powered_image_taggling"],
-      "confidence": "medium",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F007",
-      "content": "whisper.cpp在CPU上性能：base.en模型在现代x86 CPU上约50-100秒处理10分钟音频（base模型）。AMD Ryzen R1600（群晖DS923+）预计需要更长时间。small模型约需3-4倍时间",
-      "sources": ["openbenchmarking.org", "builderai.tools"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F008",
-      "content": "Immich（55k+ GitHub stars）是自托管照片/视频管理平台，内置CLIP语义搜索和人脸识别，支持视频转码，Docker部署，但导入时会改变文件夹结构。PhotoPrism（36k+ stars）支持原位文件夹管理，TensorFlow标签识别",
-      "sources": ["pistack.xyz", "immich.app", "photoprism.app"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F009",
-      "content": "向量数据库选择：Qdrant单二进制部署，30K-80K QPS，适合自托管NAS环境；ChromaDB最简原型；pgvector如果已有PostgreSQL。Qdrant支持向量量化压缩75%内存",
-      "sources": ["sysdebug.com", "callsphere.ai", "dasroot.net"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F010",
-      "content": "Ollama CPU推理速度：PHI-3 3B模型在Intel i7-1355U上约7.5 t/s，AMD 4600G六核约12.3 t/s。7B模型在Ryzen 9 CPU上约5-15 t/s。群晖AMD R1600双核预计3-6 t/s（7B Q4模型）",
-      "sources": ["medium.com/@ttio2tech_28094", "ai-ollama.github.io", "computingforgeeks.com"],
-      "confidence": "high",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F011",
-      "content": "Ollama支持视觉模型（llava, minicpm-v, llama-vision），通过API或CLI传入图片路径运行。视觉模型比纯文本模型慢2-5x，因为需要额外的视觉编码器",
-      "sources": ["computingforgeeks.com"],
-      "confidence": "medium",
-      "verified_by": ["manual-search"]
-    },
-    {
-      "id": "F012",
-      "content": "TwelveLabs与Qdrant集成提供语义视频搜索工作流，生成多模态嵌入向量存入Qdrant实现精确视频搜索",
-      "sources": ["docs.twelvelabs.io"],
-      "confidence": "medium",
-      "verified_by": ["manual-search"]
-    }
+    {"id": "F001", "content": "Mem0: 59K+ stars, 三阶段管线(提取/合并/检索), LLM自动提取记忆, add/search API, Docker自托管(FastAPI+PG+Neo4j)", "confidence": "high"},
+    {"id": "F002", "content": "Mem0 自动记忆机制: LLM judge 从对话提取原子事实, 向量DB存储, hybrid search检索(v3 ~150ms), 支持 Ollama 离线", "confidence": "high"},
+    {"id": "F003", "content": "Letta/MemGPT: 23.3K stars, 三层记忆(Core/Recall/Archival), LLM自主决定读写, Block-based memory, $10M种子轮", "confidence": "high"},
+    {"id": "F004", "content": "Zep: 时间感知知识图谱(Graphiti引擎), DMR基准94.8%超MemGPT, LongMemEval提升18.5%, 延迟降90%, Neo4j后端", "confidence": "high"},
+    {"id": "F005", "content": "Cognee: 19.3K stars, ECL(Extract/Cognify/Load)管线, 知识图谱+向量双存储, 92.5%准确率, 已有OpenClaw插件@cognee/cognee-openclaw", "confidence": "high"},
+    {"id": "F006", "content": "OpenAI ChatGPT Memory: 四层架构, 自动记忆+手动记忆, 非RAG(无向量DB), 参考过去对话, Memory Summary可编辑", "confidence": "high"},
+    {"id": "F007", "content": "Claude Memory Tool: 文件系统记忆(/memories目录), client-side存储, 自动检查+CRUD, 配合context editing节省84% token", "confidence": "high"},
+    {"id": "F008", "content": "MCP Memory Server: @modelcontextprotocol/server-memory, NPX安装, 基于知识图谱, Docker可用", "confidence": "high"},
+    {"id": "F009", "content": "sqlite-vec: SQLite向量搜索扩展, Node.js/Deno/Bun支持, 纯SQL操作, MIT/Apache协议", "confidence": "high"},
+    {"id": "F010", "content": "LanceDB: 无服务器向量DB, 原生TypeScript SDK, 列式存储(Lance格式), 毫秒级搜索", "confidence": "high"},
+    {"id": "F011", "content": "Mem0 REST API: CRUD端点, JWT/API Key认证, user_id多租户隔离, /docs OpenAPI文档, 可替换Ollama完全离线", "confidence": "high"}
   ],
-  "gaps": [
-    "群晖ARM型号（如DS220+等Realtek RTD1296平台）的具体AI推理性能数据缺失",
-    "自动化剪辑（EDL/XML生成、高光检测）开源方案数据不足",
-    "PaddleOCR在视频帧上的具体性能数据缺失",
-    "SenseVoice与whisper.cpp的中文识别对比数据缺失"
-  ],
-  "next_actions": [
-    "基于已有findings撰写完整报告",
-    "在报告中标注gaps",
-    "给出三档方案推荐（轻量/中量/重量）"
-  ]
+  "gaps": ["LangChain/LangGraph最新memory checkpoint细节", "A-MEM/MemoriPy具体活跃度", "Google Gemini memory具体实现"],
+  "next_actions": ["直接写报告"]
 }
