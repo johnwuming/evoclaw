@@ -1,204 +1,142 @@
 {
-  "task": "7×24小时自主编程与长程任务执行最佳实践",
-  "report_id": "R-117",
+  "task": "AI Agent 长程任务可视化管理系统调研与设计",
   "phase": "searching",
   "queries_executed": [
-    "Claude Code loop mode long running tasks",
-    "Claude Code headless mode autonomous development",
-    "LLM agent context window management",
-    "Claude Code error recovery retry checkpoint",
-    "Claude Code subagent session spawning",
-    "LLM coding agent cost control model selection",
-    "OpenClaw cron subagent heartbeat",
-    "OpenClaw taskflow detached task state management",
-    "AI coding agent OOM API rate limit recovery",
-    "One person company AI automation server",
-    "Coding agent task queue redis celery",
-    "SWE-bench benchmark results 2025 2026"
+    "OpenClaw gateway API session list subagent status",
+    "OpenClaw control panel UI dashboard features",
+    "OpenClaw sessions_spawn subagent lifecycle",
+    "lightweight dashboard Node.js Python SQLite VPS",
+    "Express vs Fastify performance"
   ],
   "findings": [
     {
       "id": "F001",
-      "content": "Anthropic 官方提出长程Agent两阶段架构：初始化Agent + 增量编码Agent，通过 claude-progress.txt 和 git 历史在 context window 间传递状态。强制每次只做一个feature，留下clean state。",
-      "sources": ["https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"],
+      "content": "OpenClaw Gateway 暴露 HTTP POST /tools/invoke 端点，支持直接调用 sessions_list 等工具，提供程序化查询 session 状态的 API 基础",
+      "sources": ["https://docs.openclaw.ai/gateway/tools-invoke-http-api"],
       "confidence": "high",
-      "category": "Claude Code长程任务"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F002",
-      "content": "Claude Code --continue 和 --resume 支持跨session恢复完整对话上下文。--continue恢复最近session，--resume按名称/ID选择。适合多分支并行开发。",
-      "sources": ["https://pasqualepillitteri.it/en/news/366/claude-code-continue-resume-guide"],
+      "content": "OpenClaw CLI 提供 openclaw sessions --json --active --all-agents 命令，还有 sessions tail --follow 实时追踪 trajectory 事件。session 数据存储于 ~/.openclaw/agents/<agentId>/sessions/sessions.json",
+      "sources": ["https://docs.openclaw.ai/cli/sessions"],
       "confidence": "high",
-      "category": "Claude Code长程任务"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F003",
-      "content": "Claude Code headless模式支持 --max-turns 限制循环、--max-budget-usd 限制成本、--allowedTools 限制权限。JSON输出包含session_id、num_turns、total_cost_usd、subtype(success/error_max_turns/error_budget)。",
-      "sources": ["https://docs.bswen.com/blog/2026-03-13-claude-code-headless-mode"],
+      "content": "OpenClaw 内置 Control UI（Vite+Lit SPA），在 Gateway 端口提供 Chat/Sessions/Config/Nodes/Logs/Skills 六大页面。2026.3.12 升级为 dashboard-v2，新增 command palette 和 mobile-first 导航",
+      "sources": ["https://docs.openclaw.ai/web/control-ui", "https://www.clawbot.blog/blog/openclaw-2026312-release-new-dashboard-and-agent-security-features"],
       "confidence": "high",
-      "category": "Claude Code长程任务"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F004",
-      "content": "Anthropic定义Context Engineering为Prompt Engineering的进化：管理LLM推理时所有token。核心原则是找到最小高信号token集合。四大策略：系统提示Goldilocks区间、compaction、token-efficient tools、just-in-time环境探索。",
-      "sources": ["https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"],
+      "content": "Control UI 支持 19 种语言（含中文），通过 WebSocket 直连 Gateway，支持 Tailscale Serve 远程访问，token 存于 sessionStorage",
+      "sources": ["https://docs.openclaw.ai/web/control-ui"],
       "confidence": "high",
-      "category": "上下文管理"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F005",
-      "content": "LLM Context Window溢出导致三种退化：Hard Truncation、Semantic Compression、Attention Collapse。防护：RAG检索增强、分层上下文、context compaction、agent memory系统。",
-      "sources": ["https://aiagentmemory.org/articles/llm-context-window-overflow/"],
-      "confidence": "medium",
-      "category": "上下文管理"
+      "content": "sessions_spawn 创建独立子 agent session，push-based 完成事件回传，需等待结果的 agent 应调用 sessions_yield",
+      "sources": ["https://docs.openclaw.ai/tools/subagents"],
+      "confidence": "high",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F006",
-      "content": "Claude Code自恢复率99%：55.2%通过重试、27.5%通过调查、14.1%通过修复代码。但61.9%的重试会循环3次以上(thrashing)，是需要外部干预的主要信号。Bash错误retry占77.6%，Edit错误investigate占71.2%。",
-      "sources": ["https://github.com/yurukasa/cc-recovery"],
+      "content": "sub-agent 生命周期存在已知问题：zombie sessions、timeout 语义模糊、缺乏 audit trail。maxConcurrentSessions 默认 6 个",
+      "sources": ["https://github.com/lanyasheng/openclaw-multiagent-framework"],
       "confidence": "medium",
-      "category": "错误恢复"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F007",
-      "content": "claude-waypoint项目实现前向恢复检查点：PreToolUse tripwire确保任意时刻最多一个未提交步骤，崩溃时只丢失当前进行中的步骤。31个测试通过。",
-      "sources": ["https://github.com/tonychen15/claude-waypoint"],
-      "confidence": "medium",
-      "category": "错误恢复"
+      "content": "session 维护支持 pruneAfter/maxEntries 自动清理，session.maintenance.mode 支持 enforce/warn。含 sessionStartedAt/lastInteractionAt/updatedAt 三个生命周期时间戳",
+      "sources": ["https://docs.openclaw.ai/concepts/session"],
+      "confidence": "high",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F008",
-      "content": "Claude Code /rewind命令提供内置检查点回滚，支持仅回滚代码或同时回滚代码+对话状态。自动在文件修改前创建检查点（shadow git分支）。",
-      "sources": ["https://claudelog.com/faqs/how-to-use-checkpoints-in-claude-code"],
-      "confidence": "high",
-      "category": "错误恢复"
+      "content": "Othoni：轻量 VPS 监控 dashboard，React+Express+SQLite 单进程，无 agent/Prometheus 依赖，支持 CPU/RAM/磁盘/网络/Docker/systemd 实时监控",
+      "sources": ["https://github.com/syedhashmi-bit/Othoni"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F009",
-      "content": "Claude Code Task工具支持三类subagent：Explore(只读快速)、Plan(只读架构规划)、General-purpose(完整工具集)。Parent agent只看到最终结果，保持context清洁。",
-      "sources": ["https://samanvya.dev/blog/claude-code-subagents-parallel"],
-      "confidence": "high",
-      "category": "Subagent机制"
+      "content": "Dashy（25.4k GitHub Stars）：自托管 dashboard，50+ widget、多主题、状态指示器、SSO，16.9M Docker 下载，适合统一入口面板",
+      "sources": ["https://dashy.to/"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F010",
-      "content": "多Agent分解关键阈值：推荐上限4-5个worker。Over-decomposition反模式：Microsoft Azure SRE从100+ tools/50+ sub-agents精简到5 tools+少量通用agent后可靠性反升。五层模型从Tier1-2(单agent)到Tier5(递归自修改)。",
-      "sources": ["https://rahuprotocol.substack.com/p/agent-task-decomposition-and-scaling"],
-      "confidence": "high",
-      "category": "Subagent机制"
+      "content": "Python 仪表板三框架：Streamlit（快速原型）、Dash by Plotly（企业级）、Gradio（AI demo）。低资源 VPS 可用 Flask+SQLite+SQLAlchemy",
+      "sources": ["https://www.usedatabrain.com/how-to/create-python-dashboard"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F011",
-      "content": "Claude Code四层记忆架构：CLAUDE.md(人工编写,每次加载) → MEMORY.md(自动学习,前200行) → Memory Tool(按需存取) → Subagent Memory(v2.1.33+独立持久记忆)。新鲜session启动就消耗约20,000 tokens。",
-      "sources": ["https://orchestrator.dev/blog/2026-04-06--claude-code-agent-memory-2026/"],
+      "content": "Fastify 性能约为 Express 的 3-4 倍（42,257 vs 26,742 req/sec），采用 radix-tree 路由和 fast-json-stringify 序列化",
+      "sources": ["https://fastify.dev/benchmarks"],
       "confidence": "high",
-      "category": "上下文管理"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F012",
-      "content": "Claude模型分层定价(2026.3)：Opus 4.6 $5/$25 per 1M, Sonnet 4.6 $3/$15, Haiku 4.5 $1/$5。Haiku比Opus便宜80%，cached input享90%折扣，Batch API享50%折扣。",
-      "sources": ["https://www.tldl.io/resources/anthropic-api-pricing"],
+      "content": "Express 5 和 Fastify 5 均已稳定。Fastify 内置 TypeScript/JSON Schema 验证/pino 日志，Express 生态更庞大但开发放缓",
+      "sources": ["https://www.aimadetools.com/blog/express-vs-fastify"],
       "confidence": "high",
-      "category": "成本控制"
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F013",
-      "content": "OpenClaw TaskFlow是流程编排层，管理持久多步骤流程，有状态、修订跟踪和同步语义，网关重启后保持进度。状态持久化用SQLite带WAL。CLI: openclaw tasks flow list/show/cancel。取消意图具有粘性，重启后保持。",
-      "sources": ["https://docs.openclaw.ai/automation/taskflow"],
+      "content": "OpenClaw Gateway 监听端口 12145，Dashboard URL 含 token 路径段（/df0s6p/），提供 Control UI SPA",
+      "sources": ["exec: openclaw gateway status"],
       "confidence": "high",
-      "category": "OpenClaw策略"
+      "verified_by": ["research-lead"]
     },
     {
       "id": "F014",
-      "content": "OpenClaw推荐4层定时工作流：Cron(定时) + 持久cron session(上下文) + Lobster(确定性步骤) + TaskFlow(跨子任务追踪)。可靠性检查应置于LLM汇总步骤之前。",
-      "sources": ["https://github.com/openclaw/openclaw/blob/main/docs/automation/taskflow.md"],
+      "content": "session.json 结构包含 sessionId, updatedAt, spawnDepth, model, modelProvider, spawnedBy, spawnedWorkspaceDir, deliveryContext, channel, label 等字段",
+      "sources": ["exec: cat sessions.json"],
       "confidence": "high",
-      "category": "OpenClaw策略"
+      "verified_by": ["research-lead"]
     },
     {
       "id": "F015",
-      "content": "AI agent错误处理分层防御：带抖动的指数退避(减少60-80%重试风暴)、断路器、输出验证、状态检查点。LLM API生产建议：基础延迟1-2秒，最大重试5-7次。",
-      "sources": ["https://fast.io/resources/ai-agent-error-handling"],
+      "content": "现有 task-monitor.sh 脚本通过 cron 每 10 分钟检查 HEARTBEAT.md 中的超时任务，写入 .task-alerts.md",
+      "sources": ["exec: cat task-monitor.sh"],
       "confidence": "high",
-      "category": "故障恢复"
+      "verified_by": ["research-lead"]
     },
     {
       "id": "F016",
-      "content": "Claude API 429处理：遵循Retry-After头部，指数退避备选，添加抖动。5种修复模式：Batch API(50%折扣,独立池)、简单任务路由Haiku、prompt caching、token感知队列、tier提升。并发限制为20可减少约90%的429错误。",
-      "sources": ["https://claude-api-cookbook.vercel.app/claude-api-429-rate-limit-handling/"],
+      "content": "Nginx 反代已配置多个 location（/api/, /tarot/, /oracle/, /styles/），监听 8052 端口",
+      "sources": ["exec: cat nginx sites-enabled"],
       "confidence": "high",
-      "category": "故障恢复"
+      "verified_by": ["research-lead"]
     },
     {
       "id": "F017",
-      "content": "多步骤AI agent流水线复合故障风险：10步流水线每步85%可靠性→端到端仅20%成功率。需断路器和监督树模式(Erlang/OTP启发)。并发LLM调用信号量限制20。",
-      "sources": ["https://zylos.ai/research/2026-05-06-agent-self-healing-failure-recovery/"],
+      "content": "系统已有 12 个 agent 目录（claude/codex/dev-coder/dev-designer/dev-init/dev-lead/dev-qa/main/research-citation/research-lead/research-reviewer/research-searcher），每个 agent 有 sessions/ 目录存储 session JSONL 文件",
+      "sources": ["exec: ls agents/"],
       "confidence": "high",
-      "category": "故障恢复"
-    },
-    {
-      "id": "F018",
-      "content": "$150 Intel N100迷你PC + Proxmox 可运行24/7 AI agent舰队：Ollama本地LLM + n8n编排 + Open WebUI。功耗低于LED灯泡。替代每年$2000 SaaS订阅。M4 Mac Mini为升级路径。",
-      "sources": ["https://mahdigit.com/blog/proxmox-ai-server"],
-      "confidence": "medium",
-      "category": "部署案例"
-    },
-    {
-      "id": "F019",
-      "content": "开发者Pedro Alonso构建RTX 4090 AI home lab：Pop!_OS + Docker + Claude Code + tmux + git worktrees作为远程AI开发工作站。推荐从RTX 3060 12GB + 32GB起步。",
-      "sources": ["https://www.pedroalonso.net/blog/ai-home-lab-setup"],
-      "confidence": "medium",
-      "category": "部署案例"
-    },
-    {
-      "id": "F020",
-      "content": "全天候运行Claude Code需要：GitHub webhook触发器、自动context压缩、强大错误处理、资源监控。关键区别：自主决策、数据安全风险、API使用监控、输出质量监控。",
-      "sources": ["https://www.howdoiuseai.com/blog/2026-02-13-running-claude-code-24-7-gives-you-an-autonomous-c"],
-      "confidence": "medium",
-      "category": "部署案例"
-    },
-    {
-      "id": "F021",
-      "content": "Celery+Redis生产AI agent任务队列推荐：分离broker/backend、prefetch_multiplier=1、ACKS_LATE=True、队列深度监控(HPA阈值>200)。p95等待时间从8.7s降至2.1s。",
-      "sources": ["https://markaicode.com/architecture/agent-architecture-with-celery"],
-      "confidence": "high",
-      "category": "任务队列"
-    },
-    {
-      "id": "F022",
-      "content": "SWE-bench Verified排行榜(2026.6)：Claude Mythos 5以95.5%领跑，Claude Fable 5(95%)，Claude Opus 4.8(88.6%)。开源领先：DeepSeek V4 Pro Max(80.6%)、GLM 5(77.8%)。共102个模型评估。",
-      "sources": ["https://benchlm.ai/benchmarks/sweVerified"],
-      "confidence": "high",
-      "category": "Benchmark"
-    },
-    {
-      "id": "F023",
-      "content": "SWE-bench分数从2024初13%攀升至2026.5月78% SOTA，趋于饱和。实际PR合并率35-50%，明显低于基准。原因：隐性约定和审查者期望。开源权重agent落后闭源25-40%。",
-      "sources": ["https://presenc.ai/research/coding-agent-benchmarks-2026"],
-      "confidence": "high",
-      "category": "Benchmark"
-    },
-    {
-      "id": "F024",
-      "content": "SWE-bench中脚手架与LLM同等重要：相同模型不同框架分数波动15-20个百分点。mini-SWE-agent仅100行Python达65%。Claude Code(Opus 4.7)~77%，Codex ~72%，Cursor ~71%，Devin ~65-70%。",
-      "sources": ["https://www.codesota.com/tasks/swe-bench"],
-      "confidence": "high",
-      "category": "Benchmark"
+      "verified_by": ["research-lead"]
     }
   ],
   "gaps": [
-    "OpenHands最新架构细节和GitHub stars",
-    "SWE-agent最新版本特性",
-    "Aider loop/watch模式详情",
-    "AutoCodeRover架构和性能",
-    "Devin技术架构详情",
-    "学术论文：长程任务执行综述",
-    "学术论文：self-healing机制",
-    "AI agent失败模式实证分析"
+    "LangSmith/AgentOps/Phoenix/Helicone 竞品详情（搜索员 1a/1b 处理中）",
+    "LangGraph Studio/CrewAI/AutoGen Studio 多agent UI详情（搜索员 3a 处理中）",
+    "LiteLLM/任务队列方案（搜索员 3b 处理中）"
   ],
   "next_actions": [
-    "等待重试搜索员(1a, 1b, 3a, 3b)返回",
-    "收集开源项目信息后更新报告",
-    "补充论文研究发现"
+    "等待 4 个重试搜索员返回",
+    "收集竞品信息后撰写对比表",
+    "设计推荐架构"
   ]
 }
