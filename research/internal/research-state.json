@@ -1,23 +1,13 @@
 {
-  "task": "AI Agent 长程任务可视化管理系统调研与设计",
-  "phase": "baseline_report",
-  "findings_count": 38,
-  "searchers_completed": ["searcher-2", "searcher-1a", "searcher-3b"],
-  "searchers_pending": ["searcher-1b (Helicone)", "searcher-3a (LangGraph/CrewAI/AutoGen)"],
-  "key_competitor_data": {
-    "LangSmith": {"type": "commercial", "self_host": "enterprise_only", "pricing": "free_developer + $39/seat/mo", "stars": "n/a", "key_feature": "nested agent trace visualization"},
-    "AgentOps": {"type": "mit_open_source", "self_host": "yes (app dir)", "pricing": "free_basic + $40/mo_pro", "stars": "3-5.6K", "key_feature": "session replay, time-travel debugging"},
-    "Arize_Phoenix": {"type": "elastic_2.0_open", "self_host": "yes (free, no limits)", "pricing": "free", "stars": "10K+", "key_feature": "OpenTelemetry-based tracing"},
-    "LiteLLM": {"type": "mit_open_source", "self_host": "yes (Docker+Postgres)", "pricing": "free", "key_feature": "100+ LLM providers, cost tracking, fallback routing"},
-    "OpenClaw_Control_UI": {"type": "built_in", "self_host": "yes", "pricing": "free", "key_feature": "Chat/Sessions/Config/Nodes/Logs/Skills, 6 pages"},
-    "Cronicle": {"type": "mit", "self_host": "yes (JSON storage)", "stars": "5.7K", "key_feature": "distributed task scheduler with Web UI"},
-    "BullMQ": {"type": "mit", "self_host": "yes (Redis)", "stars": "8.9K", "key_feature": "production queue with retry/DLQ/Dashboard"},
-    "Dagu": {"type": "open", "self_host": "yes (YAML, no DB)", "key_feature": "cron replacement with step dependency graph"}
+  "task": "AI辅助项目立项评估方法论——硅谷VC框架与可执行方案",
+  "phase": "searching",
+  "report_id": "R-119",
+  "searcher_status": {
+    "searcher-1": "failed - context overflow",
+    "searcher-2": "running",
+    "searcher-3": "running"
   },
-  "tech_selection": {
-    "realtime": "SSE recommended over WebSocket for dashboard (simpler, HTTP-compatible, auto-reconnect)",
-    "backend": "Fastify 3-4x faster than Express, built-in validation/logging",
-    "storage": "SQLite for lightweight VPS, Postgres for scale",
-    "frontend": "Lit (like OpenClaw Control UI) or vanilla SPA"
-  }
+  "findings": [],
+  "gaps": ["searcher-1 failed - need to re-spawn for VC evaluation framework queries"],
+  "next_actions": ["Wait for searcher-2 and searcher-3", "Re-spawn searcher-1 with smaller task"]
 }
