@@ -1,53 +1,23 @@
 {
   "task": "AI Agent 长程任务可视化管理系统调研与设计",
-  "phase": "searching",
-  "queries_executed": [
-    "OpenClaw gateway API session list subagent status",
-    "OpenClaw control panel UI dashboard features",
-    "OpenClaw sessions_spawn subagent lifecycle",
-    "lightweight dashboard Node.js Python SQLite VPS",
-    "Express vs Fastify performance",
-    "LangSmith observability dashboard features pricing",
-    "AgentOps AI agent monitoring open source GitHub",
-    "Arize Phoenix LLM observability self-hosted"
-  ],
-  "findings": [
-    {"id": "F001", "content": "OpenClaw Gateway 暴露 HTTP POST /tools/invoke 端点，支持直接调用 sessions_list 等工具", "sources": ["docs.openclaw.ai/gateway/tools-invoke-http-api"], "confidence": "high"},
-    {"id": "F002", "content": "OpenClaw CLI 提供 openclaw sessions --json --active --all-agents，还有 sessions tail --follow 实时追踪", "sources": ["docs.openclaw.ai/cli/sessions"], "confidence": "high"},
-    {"id": "F003", "content": "OpenClaw 内置 Control UI（Vite+Lit SPA），提供 Chat/Sessions/Config/Nodes/Logs/Skills 六大页面", "sources": ["docs.openclaw.ai/web/control-ui"], "confidence": "high"},
-    {"id": "F004", "content": "Control UI 支持19种语言含中文，WebSocket直连Gateway，支持Tailscale Serve远程访问", "sources": ["docs.openclaw.ai/web/control-ui"], "confidence": "high"},
-    {"id": "F005", "content": "sessions_spawn创建独立子agent session，push-based完成事件回传", "sources": ["docs.openclaw.ai/tools/subagents"], "confidence": "high"},
-    {"id": "F006", "content": "sub-agent生命周期已知问题：zombie sessions、timeout语义模糊、maxConcurrentSessions默认6", "sources": ["github.com/lanyasheng/openclaw-multiagent-framework"], "confidence": "medium"},
-    {"id": "F007", "content": "session维护支持pruneAfter/maxEntries自动清理，含sessionStartedAt/lastInteractionAt/updatedAt时间戳", "sources": ["docs.openclaw.ai/concepts/session"], "confidence": "high"},
-    {"id": "F008", "content": "Othoni：轻量VPS监控dashboard，React+Express+SQLite单进程", "sources": ["github.com/syedhashmi-bit/Othoni"], "confidence": "medium"},
-    {"id": "F009", "content": "Dashy（25.4k Stars）：自托管dashboard，50+ widget、状态指示器、SSO", "sources": ["dashy.to"], "confidence": "medium"},
-    {"id": "F010", "content": "Python仪表板：Streamlit（快速原型）、Dash（企业级）、Gradio（AI demo）", "sources": ["usedatabrain.com"], "confidence": "medium"},
-    {"id": "F011", "content": "Fastify性能约为Express 3-4倍（42,257 vs 26,742 req/sec）", "sources": ["fastify.dev/benchmarks"], "confidence": "high"},
-    {"id": "F012", "content": "Express 5和Fastify 5均稳定。Fastify内置TS/JSON Schema验证/pino日志", "sources": ["aimadetools.com"], "confidence": "high"},
-    {"id": "F013", "content": "OpenClaw Gateway端口12145，Dashboard URL含token路径段（/df0s6p/）", "sources": ["exec: openclaw gateway status"], "confidence": "high"},
-    {"id": "F014", "content": "session.json含sessionId/updated/spawnDepth/model/spawnedBy/spawnedWorkspaceDir/deliveryContext/channel/label", "sources": ["exec: cat sessions.json"], "confidence": "high"},
-    {"id": "F015", "content": "task-monitor.sh通过cron每10分钟检查HEARTBEAT.md中超时任务", "sources": ["exec: cat task-monitor.sh"], "confidence": "high"},
-    {"id": "F016", "content": "Nginx反代已配置多location（/api/,/tarot/,/oracle/,/styles/），监听8052", "sources": ["exec: cat nginx"], "confidence": "high"},
-    {"id": "F017", "content": "12个agent目录，每个有sessions/目录存储JSONL文件", "sources": ["exec: ls agents/"], "confidence": "high"},
-    {"id": "F018", "content": "LangSmith是LangChain的AI Agent可观测性平台，提供嵌套多步agent执行图可视化、Playground回放、成本/延迟/错误监控dashboard", "sources": ["langchain.com/langsmith/observability"], "confidence": "high"},
-    {"id": "F019", "content": "LangSmith定价：Developer免费(5K traces/14天)、Plus $39/seat/月(10K traces)、Enterprise定制(含self-hosting)", "sources": ["langchain.com/pricing"], "confidence": "high"},
-    {"id": "F020", "content": "LangSmith非开源，self-hosting仅限Enterprise客户（K8s on AWS/GCP/Azure）", "sources": ["inference.net/content/langsmith-pricing"], "confidence": "high"},
-    {"id": "F021", "content": "AgentOps是MIT开源AI Agent监控SDK，约3-5.6K GitHub stars，两行代码集成，支持session replay/time-travel debugging/成本追踪(400+ LLMs)", "sources": ["github.com/AgentOps-AI/agentops"], "confidence": "high"},
-    {"id": "F022", "content": "AgentOps定价：Basic免费(5K events/月)、Pro $40/月、Enterprise定制(含on-premise部署)", "sources": ["marketplace.agen.cy/agents/agentops"], "confidence": "high"},
-    {"id": "F023", "content": "AgentOps支持self-hosting，app目录（Dashboard+API backend）开源可自行部署", "sources": ["github.com/AgentOps-AI/agentops"], "confidence": "medium"},
-    {"id": "F024", "content": "Arize Phoenix开源AI可观测性平台，GitHub 10K+ stars，月下载3M+，License为Elastic License 2.0", "sources": ["github.com/Arize-ai/phoenix"], "confidence": "high"},
-    {"id": "F025", "content": "Phoenix完全免费self-host无功能限制，支持Docker/K8s/Helm/pip部署，SQLite和PostgreSQL后端", "sources": ["arize.com/docs/phoenix/self-hosting"], "confidence": "high"},
-    {"id": "F026", "content": "Phoenix基于OpenTelemetry和OpenInference构建，框架无关，支持LlamaIndex/LangChain/DSPy等+OpenAI/Bedrock/Anthropic等", "sources": ["arize.com/docs/phoenix"], "confidence": "high"}
-  ],
-  "gaps": [
-    "Helicone详情（搜索员1b处理中）",
-    "LangGraph Studio/CrewAI/AutoGen Studio（搜索员3a处理中）",
-    "LiteLLM/任务队列/实时监控技术（搜索员3b处理中）",
-    "Phoenix具体资源占用数据",
-    "各竞品在低资源VPS上的表现对比"
-  ],
-  "next_actions": [
-    "等待3个重试搜索员返回",
-    "收集后撰写竞品对比表和架构设计"
-  ]
+  "phase": "baseline_report",
+  "findings_count": 38,
+  "searchers_completed": ["searcher-2", "searcher-1a", "searcher-3b"],
+  "searchers_pending": ["searcher-1b (Helicone)", "searcher-3a (LangGraph/CrewAI/AutoGen)"],
+  "key_competitor_data": {
+    "LangSmith": {"type": "commercial", "self_host": "enterprise_only", "pricing": "free_developer + $39/seat/mo", "stars": "n/a", "key_feature": "nested agent trace visualization"},
+    "AgentOps": {"type": "mit_open_source", "self_host": "yes (app dir)", "pricing": "free_basic + $40/mo_pro", "stars": "3-5.6K", "key_feature": "session replay, time-travel debugging"},
+    "Arize_Phoenix": {"type": "elastic_2.0_open", "self_host": "yes (free, no limits)", "pricing": "free", "stars": "10K+", "key_feature": "OpenTelemetry-based tracing"},
+    "LiteLLM": {"type": "mit_open_source", "self_host": "yes (Docker+Postgres)", "pricing": "free", "key_feature": "100+ LLM providers, cost tracking, fallback routing"},
+    "OpenClaw_Control_UI": {"type": "built_in", "self_host": "yes", "pricing": "free", "key_feature": "Chat/Sessions/Config/Nodes/Logs/Skills, 6 pages"},
+    "Cronicle": {"type": "mit", "self_host": "yes (JSON storage)", "stars": "5.7K", "key_feature": "distributed task scheduler with Web UI"},
+    "BullMQ": {"type": "mit", "self_host": "yes (Redis)", "stars": "8.9K", "key_feature": "production queue with retry/DLQ/Dashboard"},
+    "Dagu": {"type": "open", "self_host": "yes (YAML, no DB)", "key_feature": "cron replacement with step dependency graph"}
+  },
+  "tech_selection": {
+    "realtime": "SSE recommended over WebSocket for dashboard (simpler, HTTP-compatible, auto-reconnect)",
+    "backend": "Fastify 3-4x faster than Express, built-in validation/logging",
+    "storage": "SQLite for lightweight VPS, Postgres for scale",
+    "frontend": "Lit (like OpenClaw Control UI) or vanilla SPA"
+  }
 }
