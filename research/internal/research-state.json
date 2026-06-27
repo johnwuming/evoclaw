@@ -1,20 +1,204 @@
 {
-  "task": "Agent 记忆框架行业全景 + OpenClaw 升级可行性评估",
-  "phase": "reporting",
-  "queries_executed": ["Mem0 architecture", "Mem0 auto extraction", "Mem0 self-hosted", "MemGPT/Letta architecture", "Zep/Graphiti temporal KG", "Cognee ECL pipeline", "OpenAI ChatGPT memory", "Claude memory tool", "MCP server memory", "LanceDB/sqlite-vec", "LangChain/LangGraph memory"],
-  "findings": [
-    {"id": "F001", "content": "Mem0: 59K+ stars, 三阶段管线(提取/合并/检索), LLM自动提取记忆, add/search API, Docker自托管(FastAPI+PG+Neo4j)", "confidence": "high"},
-    {"id": "F002", "content": "Mem0 自动记忆机制: LLM judge 从对话提取原子事实, 向量DB存储, hybrid search检索(v3 ~150ms), 支持 Ollama 离线", "confidence": "high"},
-    {"id": "F003", "content": "Letta/MemGPT: 23.3K stars, 三层记忆(Core/Recall/Archival), LLM自主决定读写, Block-based memory, $10M种子轮", "confidence": "high"},
-    {"id": "F004", "content": "Zep: 时间感知知识图谱(Graphiti引擎), DMR基准94.8%超MemGPT, LongMemEval提升18.5%, 延迟降90%, Neo4j后端", "confidence": "high"},
-    {"id": "F005", "content": "Cognee: 19.3K stars, ECL(Extract/Cognify/Load)管线, 知识图谱+向量双存储, 92.5%准确率, 已有OpenClaw插件@cognee/cognee-openclaw", "confidence": "high"},
-    {"id": "F006", "content": "OpenAI ChatGPT Memory: 四层架构, 自动记忆+手动记忆, 非RAG(无向量DB), 参考过去对话, Memory Summary可编辑", "confidence": "high"},
-    {"id": "F007", "content": "Claude Memory Tool: 文件系统记忆(/memories目录), client-side存储, 自动检查+CRUD, 配合context editing节省84% token", "confidence": "high"},
-    {"id": "F008", "content": "MCP Memory Server: @modelcontextprotocol/server-memory, NPX安装, 基于知识图谱, Docker可用", "confidence": "high"},
-    {"id": "F009", "content": "sqlite-vec: SQLite向量搜索扩展, Node.js/Deno/Bun支持, 纯SQL操作, MIT/Apache协议", "confidence": "high"},
-    {"id": "F010", "content": "LanceDB: 无服务器向量DB, 原生TypeScript SDK, 列式存储(Lance格式), 毫秒级搜索", "confidence": "high"},
-    {"id": "F011", "content": "Mem0 REST API: CRUD端点, JWT/API Key认证, user_id多租户隔离, /docs OpenAPI文档, 可替换Ollama完全离线", "confidence": "high"}
+  "task": "7×24小时自主编程与长程任务执行最佳实践",
+  "report_id": "R-117",
+  "phase": "searching",
+  "queries_executed": [
+    "Claude Code loop mode long running tasks",
+    "Claude Code headless mode autonomous development",
+    "LLM agent context window management",
+    "Claude Code error recovery retry checkpoint",
+    "Claude Code subagent session spawning",
+    "LLM coding agent cost control model selection",
+    "OpenClaw cron subagent heartbeat",
+    "OpenClaw taskflow detached task state management",
+    "AI coding agent OOM API rate limit recovery",
+    "One person company AI automation server",
+    "Coding agent task queue redis celery",
+    "SWE-bench benchmark results 2025 2026"
   ],
-  "gaps": ["LangChain/LangGraph最新memory checkpoint细节", "A-MEM/MemoriPy具体活跃度", "Google Gemini memory具体实现"],
-  "next_actions": ["直接写报告"]
+  "findings": [
+    {
+      "id": "F001",
+      "content": "Anthropic 官方提出长程Agent两阶段架构：初始化Agent + 增量编码Agent，通过 claude-progress.txt 和 git 历史在 context window 间传递状态。强制每次只做一个feature，留下clean state。",
+      "sources": ["https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"],
+      "confidence": "high",
+      "category": "Claude Code长程任务"
+    },
+    {
+      "id": "F002",
+      "content": "Claude Code --continue 和 --resume 支持跨session恢复完整对话上下文。--continue恢复最近session，--resume按名称/ID选择。适合多分支并行开发。",
+      "sources": ["https://pasqualepillitteri.it/en/news/366/claude-code-continue-resume-guide"],
+      "confidence": "high",
+      "category": "Claude Code长程任务"
+    },
+    {
+      "id": "F003",
+      "content": "Claude Code headless模式支持 --max-turns 限制循环、--max-budget-usd 限制成本、--allowedTools 限制权限。JSON输出包含session_id、num_turns、total_cost_usd、subtype(success/error_max_turns/error_budget)。",
+      "sources": ["https://docs.bswen.com/blog/2026-03-13-claude-code-headless-mode"],
+      "confidence": "high",
+      "category": "Claude Code长程任务"
+    },
+    {
+      "id": "F004",
+      "content": "Anthropic定义Context Engineering为Prompt Engineering的进化：管理LLM推理时所有token。核心原则是找到最小高信号token集合。四大策略：系统提示Goldilocks区间、compaction、token-efficient tools、just-in-time环境探索。",
+      "sources": ["https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"],
+      "confidence": "high",
+      "category": "上下文管理"
+    },
+    {
+      "id": "F005",
+      "content": "LLM Context Window溢出导致三种退化：Hard Truncation、Semantic Compression、Attention Collapse。防护：RAG检索增强、分层上下文、context compaction、agent memory系统。",
+      "sources": ["https://aiagentmemory.org/articles/llm-context-window-overflow/"],
+      "confidence": "medium",
+      "category": "上下文管理"
+    },
+    {
+      "id": "F006",
+      "content": "Claude Code自恢复率99%：55.2%通过重试、27.5%通过调查、14.1%通过修复代码。但61.9%的重试会循环3次以上(thrashing)，是需要外部干预的主要信号。Bash错误retry占77.6%，Edit错误investigate占71.2%。",
+      "sources": ["https://github.com/yurukasa/cc-recovery"],
+      "confidence": "medium",
+      "category": "错误恢复"
+    },
+    {
+      "id": "F007",
+      "content": "claude-waypoint项目实现前向恢复检查点：PreToolUse tripwire确保任意时刻最多一个未提交步骤，崩溃时只丢失当前进行中的步骤。31个测试通过。",
+      "sources": ["https://github.com/tonychen15/claude-waypoint"],
+      "confidence": "medium",
+      "category": "错误恢复"
+    },
+    {
+      "id": "F008",
+      "content": "Claude Code /rewind命令提供内置检查点回滚，支持仅回滚代码或同时回滚代码+对话状态。自动在文件修改前创建检查点（shadow git分支）。",
+      "sources": ["https://claudelog.com/faqs/how-to-use-checkpoints-in-claude-code"],
+      "confidence": "high",
+      "category": "错误恢复"
+    },
+    {
+      "id": "F009",
+      "content": "Claude Code Task工具支持三类subagent：Explore(只读快速)、Plan(只读架构规划)、General-purpose(完整工具集)。Parent agent只看到最终结果，保持context清洁。",
+      "sources": ["https://samanvya.dev/blog/claude-code-subagents-parallel"],
+      "confidence": "high",
+      "category": "Subagent机制"
+    },
+    {
+      "id": "F010",
+      "content": "多Agent分解关键阈值：推荐上限4-5个worker。Over-decomposition反模式：Microsoft Azure SRE从100+ tools/50+ sub-agents精简到5 tools+少量通用agent后可靠性反升。五层模型从Tier1-2(单agent)到Tier5(递归自修改)。",
+      "sources": ["https://rahuprotocol.substack.com/p/agent-task-decomposition-and-scaling"],
+      "confidence": "high",
+      "category": "Subagent机制"
+    },
+    {
+      "id": "F011",
+      "content": "Claude Code四层记忆架构：CLAUDE.md(人工编写,每次加载) → MEMORY.md(自动学习,前200行) → Memory Tool(按需存取) → Subagent Memory(v2.1.33+独立持久记忆)。新鲜session启动就消耗约20,000 tokens。",
+      "sources": ["https://orchestrator.dev/blog/2026-04-06--claude-code-agent-memory-2026/"],
+      "confidence": "high",
+      "category": "上下文管理"
+    },
+    {
+      "id": "F012",
+      "content": "Claude模型分层定价(2026.3)：Opus 4.6 $5/$25 per 1M, Sonnet 4.6 $3/$15, Haiku 4.5 $1/$5。Haiku比Opus便宜80%，cached input享90%折扣，Batch API享50%折扣。",
+      "sources": ["https://www.tldl.io/resources/anthropic-api-pricing"],
+      "confidence": "high",
+      "category": "成本控制"
+    },
+    {
+      "id": "F013",
+      "content": "OpenClaw TaskFlow是流程编排层，管理持久多步骤流程，有状态、修订跟踪和同步语义，网关重启后保持进度。状态持久化用SQLite带WAL。CLI: openclaw tasks flow list/show/cancel。取消意图具有粘性，重启后保持。",
+      "sources": ["https://docs.openclaw.ai/automation/taskflow"],
+      "confidence": "high",
+      "category": "OpenClaw策略"
+    },
+    {
+      "id": "F014",
+      "content": "OpenClaw推荐4层定时工作流：Cron(定时) + 持久cron session(上下文) + Lobster(确定性步骤) + TaskFlow(跨子任务追踪)。可靠性检查应置于LLM汇总步骤之前。",
+      "sources": ["https://github.com/openclaw/openclaw/blob/main/docs/automation/taskflow.md"],
+      "confidence": "high",
+      "category": "OpenClaw策略"
+    },
+    {
+      "id": "F015",
+      "content": "AI agent错误处理分层防御：带抖动的指数退避(减少60-80%重试风暴)、断路器、输出验证、状态检查点。LLM API生产建议：基础延迟1-2秒，最大重试5-7次。",
+      "sources": ["https://fast.io/resources/ai-agent-error-handling"],
+      "confidence": "high",
+      "category": "故障恢复"
+    },
+    {
+      "id": "F016",
+      "content": "Claude API 429处理：遵循Retry-After头部，指数退避备选，添加抖动。5种修复模式：Batch API(50%折扣,独立池)、简单任务路由Haiku、prompt caching、token感知队列、tier提升。并发限制为20可减少约90%的429错误。",
+      "sources": ["https://claude-api-cookbook.vercel.app/claude-api-429-rate-limit-handling/"],
+      "confidence": "high",
+      "category": "故障恢复"
+    },
+    {
+      "id": "F017",
+      "content": "多步骤AI agent流水线复合故障风险：10步流水线每步85%可靠性→端到端仅20%成功率。需断路器和监督树模式(Erlang/OTP启发)。并发LLM调用信号量限制20。",
+      "sources": ["https://zylos.ai/research/2026-05-06-agent-self-healing-failure-recovery/"],
+      "confidence": "high",
+      "category": "故障恢复"
+    },
+    {
+      "id": "F018",
+      "content": "$150 Intel N100迷你PC + Proxmox 可运行24/7 AI agent舰队：Ollama本地LLM + n8n编排 + Open WebUI。功耗低于LED灯泡。替代每年$2000 SaaS订阅。M4 Mac Mini为升级路径。",
+      "sources": ["https://mahdigit.com/blog/proxmox-ai-server"],
+      "confidence": "medium",
+      "category": "部署案例"
+    },
+    {
+      "id": "F019",
+      "content": "开发者Pedro Alonso构建RTX 4090 AI home lab：Pop!_OS + Docker + Claude Code + tmux + git worktrees作为远程AI开发工作站。推荐从RTX 3060 12GB + 32GB起步。",
+      "sources": ["https://www.pedroalonso.net/blog/ai-home-lab-setup"],
+      "confidence": "medium",
+      "category": "部署案例"
+    },
+    {
+      "id": "F020",
+      "content": "全天候运行Claude Code需要：GitHub webhook触发器、自动context压缩、强大错误处理、资源监控。关键区别：自主决策、数据安全风险、API使用监控、输出质量监控。",
+      "sources": ["https://www.howdoiuseai.com/blog/2026-02-13-running-claude-code-24-7-gives-you-an-autonomous-c"],
+      "confidence": "medium",
+      "category": "部署案例"
+    },
+    {
+      "id": "F021",
+      "content": "Celery+Redis生产AI agent任务队列推荐：分离broker/backend、prefetch_multiplier=1、ACKS_LATE=True、队列深度监控(HPA阈值>200)。p95等待时间从8.7s降至2.1s。",
+      "sources": ["https://markaicode.com/architecture/agent-architecture-with-celery"],
+      "confidence": "high",
+      "category": "任务队列"
+    },
+    {
+      "id": "F022",
+      "content": "SWE-bench Verified排行榜(2026.6)：Claude Mythos 5以95.5%领跑，Claude Fable 5(95%)，Claude Opus 4.8(88.6%)。开源领先：DeepSeek V4 Pro Max(80.6%)、GLM 5(77.8%)。共102个模型评估。",
+      "sources": ["https://benchlm.ai/benchmarks/sweVerified"],
+      "confidence": "high",
+      "category": "Benchmark"
+    },
+    {
+      "id": "F023",
+      "content": "SWE-bench分数从2024初13%攀升至2026.5月78% SOTA，趋于饱和。实际PR合并率35-50%，明显低于基准。原因：隐性约定和审查者期望。开源权重agent落后闭源25-40%。",
+      "sources": ["https://presenc.ai/research/coding-agent-benchmarks-2026"],
+      "confidence": "high",
+      "category": "Benchmark"
+    },
+    {
+      "id": "F024",
+      "content": "SWE-bench中脚手架与LLM同等重要：相同模型不同框架分数波动15-20个百分点。mini-SWE-agent仅100行Python达65%。Claude Code(Opus 4.7)~77%，Codex ~72%，Cursor ~71%，Devin ~65-70%。",
+      "sources": ["https://www.codesota.com/tasks/swe-bench"],
+      "confidence": "high",
+      "category": "Benchmark"
+    }
+  ],
+  "gaps": [
+    "OpenHands最新架构细节和GitHub stars",
+    "SWE-agent最新版本特性",
+    "Aider loop/watch模式详情",
+    "AutoCodeRover架构和性能",
+    "Devin技术架构详情",
+    "学术论文：长程任务执行综述",
+    "学术论文：self-healing机制",
+    "AI agent失败模式实证分析"
+  ],
+  "next_actions": [
+    "等待重试搜索员(1a, 1b, 3a, 3b)返回",
+    "收集开源项目信息后更新报告",
+    "补充论文研究发现"
+  ]
 }
