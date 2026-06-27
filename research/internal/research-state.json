@@ -6,137 +6,48 @@
     "OpenClaw control panel UI dashboard features",
     "OpenClaw sessions_spawn subagent lifecycle",
     "lightweight dashboard Node.js Python SQLite VPS",
-    "Express vs Fastify performance"
+    "Express vs Fastify performance",
+    "LangSmith observability dashboard features pricing",
+    "AgentOps AI agent monitoring open source GitHub",
+    "Arize Phoenix LLM observability self-hosted"
   ],
   "findings": [
-    {
-      "id": "F001",
-      "content": "OpenClaw Gateway 暴露 HTTP POST /tools/invoke 端点，支持直接调用 sessions_list 等工具，提供程序化查询 session 状态的 API 基础",
-      "sources": ["https://docs.openclaw.ai/gateway/tools-invoke-http-api"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F002",
-      "content": "OpenClaw CLI 提供 openclaw sessions --json --active --all-agents 命令，还有 sessions tail --follow 实时追踪 trajectory 事件。session 数据存储于 ~/.openclaw/agents/<agentId>/sessions/sessions.json",
-      "sources": ["https://docs.openclaw.ai/cli/sessions"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F003",
-      "content": "OpenClaw 内置 Control UI（Vite+Lit SPA），在 Gateway 端口提供 Chat/Sessions/Config/Nodes/Logs/Skills 六大页面。2026.3.12 升级为 dashboard-v2，新增 command palette 和 mobile-first 导航",
-      "sources": ["https://docs.openclaw.ai/web/control-ui", "https://www.clawbot.blog/blog/openclaw-2026312-release-new-dashboard-and-agent-security-features"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F004",
-      "content": "Control UI 支持 19 种语言（含中文），通过 WebSocket 直连 Gateway，支持 Tailscale Serve 远程访问，token 存于 sessionStorage",
-      "sources": ["https://docs.openclaw.ai/web/control-ui"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F005",
-      "content": "sessions_spawn 创建独立子 agent session，push-based 完成事件回传，需等待结果的 agent 应调用 sessions_yield",
-      "sources": ["https://docs.openclaw.ai/tools/subagents"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F006",
-      "content": "sub-agent 生命周期存在已知问题：zombie sessions、timeout 语义模糊、缺乏 audit trail。maxConcurrentSessions 默认 6 个",
-      "sources": ["https://github.com/lanyasheng/openclaw-multiagent-framework"],
-      "confidence": "medium",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F007",
-      "content": "session 维护支持 pruneAfter/maxEntries 自动清理，session.maintenance.mode 支持 enforce/warn。含 sessionStartedAt/lastInteractionAt/updatedAt 三个生命周期时间戳",
-      "sources": ["https://docs.openclaw.ai/concepts/session"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F008",
-      "content": "Othoni：轻量 VPS 监控 dashboard，React+Express+SQLite 单进程，无 agent/Prometheus 依赖，支持 CPU/RAM/磁盘/网络/Docker/systemd 实时监控",
-      "sources": ["https://github.com/syedhashmi-bit/Othoni"],
-      "confidence": "medium",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F009",
-      "content": "Dashy（25.4k GitHub Stars）：自托管 dashboard，50+ widget、多主题、状态指示器、SSO，16.9M Docker 下载，适合统一入口面板",
-      "sources": ["https://dashy.to/"],
-      "confidence": "medium",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F010",
-      "content": "Python 仪表板三框架：Streamlit（快速原型）、Dash by Plotly（企业级）、Gradio（AI demo）。低资源 VPS 可用 Flask+SQLite+SQLAlchemy",
-      "sources": ["https://www.usedatabrain.com/how-to/create-python-dashboard"],
-      "confidence": "medium",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F011",
-      "content": "Fastify 性能约为 Express 的 3-4 倍（42,257 vs 26,742 req/sec），采用 radix-tree 路由和 fast-json-stringify 序列化",
-      "sources": ["https://fastify.dev/benchmarks"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F012",
-      "content": "Express 5 和 Fastify 5 均已稳定。Fastify 内置 TypeScript/JSON Schema 验证/pino 日志，Express 生态更庞大但开发放缓",
-      "sources": ["https://www.aimadetools.com/blog/express-vs-fastify"],
-      "confidence": "high",
-      "verified_by": ["searcher-2"]
-    },
-    {
-      "id": "F013",
-      "content": "OpenClaw Gateway 监听端口 12145，Dashboard URL 含 token 路径段（/df0s6p/），提供 Control UI SPA",
-      "sources": ["exec: openclaw gateway status"],
-      "confidence": "high",
-      "verified_by": ["research-lead"]
-    },
-    {
-      "id": "F014",
-      "content": "session.json 结构包含 sessionId, updatedAt, spawnDepth, model, modelProvider, spawnedBy, spawnedWorkspaceDir, deliveryContext, channel, label 等字段",
-      "sources": ["exec: cat sessions.json"],
-      "confidence": "high",
-      "verified_by": ["research-lead"]
-    },
-    {
-      "id": "F015",
-      "content": "现有 task-monitor.sh 脚本通过 cron 每 10 分钟检查 HEARTBEAT.md 中的超时任务，写入 .task-alerts.md",
-      "sources": ["exec: cat task-monitor.sh"],
-      "confidence": "high",
-      "verified_by": ["research-lead"]
-    },
-    {
-      "id": "F016",
-      "content": "Nginx 反代已配置多个 location（/api/, /tarot/, /oracle/, /styles/），监听 8052 端口",
-      "sources": ["exec: cat nginx sites-enabled"],
-      "confidence": "high",
-      "verified_by": ["research-lead"]
-    },
-    {
-      "id": "F017",
-      "content": "系统已有 12 个 agent 目录（claude/codex/dev-coder/dev-designer/dev-init/dev-lead/dev-qa/main/research-citation/research-lead/research-reviewer/research-searcher），每个 agent 有 sessions/ 目录存储 session JSONL 文件",
-      "sources": ["exec: ls agents/"],
-      "confidence": "high",
-      "verified_by": ["research-lead"]
-    }
+    {"id": "F001", "content": "OpenClaw Gateway 暴露 HTTP POST /tools/invoke 端点，支持直接调用 sessions_list 等工具", "sources": ["docs.openclaw.ai/gateway/tools-invoke-http-api"], "confidence": "high"},
+    {"id": "F002", "content": "OpenClaw CLI 提供 openclaw sessions --json --active --all-agents，还有 sessions tail --follow 实时追踪", "sources": ["docs.openclaw.ai/cli/sessions"], "confidence": "high"},
+    {"id": "F003", "content": "OpenClaw 内置 Control UI（Vite+Lit SPA），提供 Chat/Sessions/Config/Nodes/Logs/Skills 六大页面", "sources": ["docs.openclaw.ai/web/control-ui"], "confidence": "high"},
+    {"id": "F004", "content": "Control UI 支持19种语言含中文，WebSocket直连Gateway，支持Tailscale Serve远程访问", "sources": ["docs.openclaw.ai/web/control-ui"], "confidence": "high"},
+    {"id": "F005", "content": "sessions_spawn创建独立子agent session，push-based完成事件回传", "sources": ["docs.openclaw.ai/tools/subagents"], "confidence": "high"},
+    {"id": "F006", "content": "sub-agent生命周期已知问题：zombie sessions、timeout语义模糊、maxConcurrentSessions默认6", "sources": ["github.com/lanyasheng/openclaw-multiagent-framework"], "confidence": "medium"},
+    {"id": "F007", "content": "session维护支持pruneAfter/maxEntries自动清理，含sessionStartedAt/lastInteractionAt/updatedAt时间戳", "sources": ["docs.openclaw.ai/concepts/session"], "confidence": "high"},
+    {"id": "F008", "content": "Othoni：轻量VPS监控dashboard，React+Express+SQLite单进程", "sources": ["github.com/syedhashmi-bit/Othoni"], "confidence": "medium"},
+    {"id": "F009", "content": "Dashy（25.4k Stars）：自托管dashboard，50+ widget、状态指示器、SSO", "sources": ["dashy.to"], "confidence": "medium"},
+    {"id": "F010", "content": "Python仪表板：Streamlit（快速原型）、Dash（企业级）、Gradio（AI demo）", "sources": ["usedatabrain.com"], "confidence": "medium"},
+    {"id": "F011", "content": "Fastify性能约为Express 3-4倍（42,257 vs 26,742 req/sec）", "sources": ["fastify.dev/benchmarks"], "confidence": "high"},
+    {"id": "F012", "content": "Express 5和Fastify 5均稳定。Fastify内置TS/JSON Schema验证/pino日志", "sources": ["aimadetools.com"], "confidence": "high"},
+    {"id": "F013", "content": "OpenClaw Gateway端口12145，Dashboard URL含token路径段（/df0s6p/）", "sources": ["exec: openclaw gateway status"], "confidence": "high"},
+    {"id": "F014", "content": "session.json含sessionId/updated/spawnDepth/model/spawnedBy/spawnedWorkspaceDir/deliveryContext/channel/label", "sources": ["exec: cat sessions.json"], "confidence": "high"},
+    {"id": "F015", "content": "task-monitor.sh通过cron每10分钟检查HEARTBEAT.md中超时任务", "sources": ["exec: cat task-monitor.sh"], "confidence": "high"},
+    {"id": "F016", "content": "Nginx反代已配置多location（/api/,/tarot/,/oracle/,/styles/），监听8052", "sources": ["exec: cat nginx"], "confidence": "high"},
+    {"id": "F017", "content": "12个agent目录，每个有sessions/目录存储JSONL文件", "sources": ["exec: ls agents/"], "confidence": "high"},
+    {"id": "F018", "content": "LangSmith是LangChain的AI Agent可观测性平台，提供嵌套多步agent执行图可视化、Playground回放、成本/延迟/错误监控dashboard", "sources": ["langchain.com/langsmith/observability"], "confidence": "high"},
+    {"id": "F019", "content": "LangSmith定价：Developer免费(5K traces/14天)、Plus $39/seat/月(10K traces)、Enterprise定制(含self-hosting)", "sources": ["langchain.com/pricing"], "confidence": "high"},
+    {"id": "F020", "content": "LangSmith非开源，self-hosting仅限Enterprise客户（K8s on AWS/GCP/Azure）", "sources": ["inference.net/content/langsmith-pricing"], "confidence": "high"},
+    {"id": "F021", "content": "AgentOps是MIT开源AI Agent监控SDK，约3-5.6K GitHub stars，两行代码集成，支持session replay/time-travel debugging/成本追踪(400+ LLMs)", "sources": ["github.com/AgentOps-AI/agentops"], "confidence": "high"},
+    {"id": "F022", "content": "AgentOps定价：Basic免费(5K events/月)、Pro $40/月、Enterprise定制(含on-premise部署)", "sources": ["marketplace.agen.cy/agents/agentops"], "confidence": "high"},
+    {"id": "F023", "content": "AgentOps支持self-hosting，app目录（Dashboard+API backend）开源可自行部署", "sources": ["github.com/AgentOps-AI/agentops"], "confidence": "medium"},
+    {"id": "F024", "content": "Arize Phoenix开源AI可观测性平台，GitHub 10K+ stars，月下载3M+，License为Elastic License 2.0", "sources": ["github.com/Arize-ai/phoenix"], "confidence": "high"},
+    {"id": "F025", "content": "Phoenix完全免费self-host无功能限制，支持Docker/K8s/Helm/pip部署，SQLite和PostgreSQL后端", "sources": ["arize.com/docs/phoenix/self-hosting"], "confidence": "high"},
+    {"id": "F026", "content": "Phoenix基于OpenTelemetry和OpenInference构建，框架无关，支持LlamaIndex/LangChain/DSPy等+OpenAI/Bedrock/Anthropic等", "sources": ["arize.com/docs/phoenix"], "confidence": "high"}
   ],
   "gaps": [
-    "LangSmith/AgentOps/Phoenix/Helicone 竞品详情（搜索员 1a/1b 处理中）",
-    "LangGraph Studio/CrewAI/AutoGen Studio 多agent UI详情（搜索员 3a 处理中）",
-    "LiteLLM/任务队列方案（搜索员 3b 处理中）"
+    "Helicone详情（搜索员1b处理中）",
+    "LangGraph Studio/CrewAI/AutoGen Studio（搜索员3a处理中）",
+    "LiteLLM/任务队列/实时监控技术（搜索员3b处理中）",
+    "Phoenix具体资源占用数据",
+    "各竞品在低资源VPS上的表现对比"
   ],
   "next_actions": [
-    "等待 4 个重试搜索员返回",
-    "收集竞品信息后撰写对比表",
-    "设计推荐架构"
+    "等待3个重试搜索员返回",
+    "收集后撰写竞品对比表和架构设计"
   ]
 }
