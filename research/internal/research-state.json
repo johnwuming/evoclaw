@@ -3,11 +3,31 @@
   "phase": "searching",
   "report_id": "R-119",
   "searcher_status": {
-    "searcher-1": "failed - context overflow",
+    "searcher-1": "failed - context overflow, key queries to re-spawn: YC/a16z/Sequoia evaluation criteria, TAM/SAM/SOM methodology, deal memo template",
     "searcher-2": "running",
-    "searcher-3": "running"
+    "searcher-3": "completed - 12+ findings covering Lean Canvas, founder-market fit, investment criteria matrix, Sequoia template, CB Insights failure data, Indie Hackers validation"
   },
-  "findings": [],
-  "gaps": ["searcher-1 failed - need to re-spawn for VC evaluation framework queries"],
-  "next_actions": ["Wait for searcher-2 and searcher-3", "Re-spawn searcher-1 with smaller task"]
+  "findings": [
+    {"id": "F001", "content": "Lean Canvas是Ash Maurya创建的一页式商业模式模板，9模块：Problem/Solution/UVP/Unfair Advantage/Customer Segments/Channels/Revenue/Cost/Key Metrics，适合零到一阶段", "sources": ["https://leanstack.com/leancanvas"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F002", "content": "NFX的founder-market fit四维度：Obsession/Founder Story/Personality/Experience，VC在前10分钟内形成判断", "sources": ["https://www.venturemage.com/founder-market-fit"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F003", "content": "早期投资评估权重：Team 40%、Market 25%、Product&Traction 25%、Business Model 10%", "sources": ["https://www.startupcfo.ai/resources/how-investors-evaluate-startups"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F004", "content": "Founder-market fit自评5问（3个否=弱）：能说出10个客户名字？行业5年+经验？50+客户关系？有分发渠道？理解购买流程？", "sources": ["https://startupskill.me/blog/founder-market-fit"], "confidence": "medium", "verified_by": ["searcher-3"]},
+    {"id": "F005", "content": "Investment Criteria Matrix量化评分：Founder(0-10)/Product(0-5)/Traction(0-5)/Business Model(0-5)/Market(0-5)，归一化为0-100分，映射投资额等级", "sources": ["https://sustainableinnovationcouncil.org/investment-matrix"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F006", "content": "Fifth Star Funds评估10维度：问题理解/市场规模/单元经济/方案验证/适应性/产品优先级/足智多谋/资金使用计划/毅力", "sources": ["https://www.fifthstarfunds.com/rubric"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F007", "content": "Indie Hackers 48h验证手册：定义假设→挖掘痛点信号→评分排序→客户访谈→测试付费意愿→build/pivot二元决策", "sources": ["https://www.painbase.space/blog/indie-hackers-playbook-validate-saas-idea-48-hours"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F008", "content": "Sequoia商业模式模板10板块：Company Purpose/Problem/Solution/Why Now/Market Size/Competition/Product/Business Model/Team/Financials", "sources": ["https://mypitchdecks.com/case-studies/sequoia-pitch-deck-template"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F009", "content": "CB Insights 2026年431家倒闭公司分析：70%资金耗尽（最终死因），43% PMF不足（根本原因），29%时机不对，19% unit economics不可持续", "sources": ["https://www.cbinsights.com/research/report/startup-failure-reasons-top"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F010", "content": "CB Insights历史失败原因：No market need 42%、Ran out of cash 29%、Wrong team 23%、Outcompeted 19%、Pricing/cost issues 18%", "sources": ["https://www.cbinsights.com/research/report/startup-failure-reasons-top"], "confidence": "high", "verified_by": ["searcher-3"]}
+  ],
+  "gaps": [
+    "YC具体申请评分标准（需重新搜索）",
+    "a16z投资评估框架细节（需重新搜索）",
+    "TAM/SAM/SOM具体计算方法论（需重新搜索）",
+    "VC deal memo标准模板（需重新搜索）"
+  ],
+  "next_actions": [
+    "等待searcher-2返回AI投资分析工具数据",
+    "重新spawn一个小搜索员补充YC/a16z/Sequoia评估标准和TAM/SAM/SOM方法",
+    "达到70%覆盖率后进入Phase 4/6"
+  ]
 }
