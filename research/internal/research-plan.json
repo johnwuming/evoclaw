@@ -1,48 +1,52 @@
 {
-  "topic": "AI Agent 长程任务可视化管理系统调研与设计",
-  "complexity": "深度",
-  "complexity_reason": "涉及市面上多个AI Agent工具的调研对比、技术架构设计、数据模型设计、以及与OpenClaw的结合方案，需要多维度覆盖",
-  "dimensions": ["现有方案调研", "核心功能需求", "技术方案设计", "OpenClaw结合方案"],
+  "topic": "AI辅助项目立项评估方法论——硅谷VC框架与可执行方案",
+  "complexity": "中等",
+  "complexity_reason": "主题明确，硅谷VC评估方法论有大量公开资料，不需要过多迭代搜索。核心是将公开框架收集、整理、转化为可执行模板，中等深度即可覆盖。",
+  "dimensions": [
+    "硅谷VC评估框架（YC/a16z/Sequoia/Benchmark）",
+    "市场规模评估方法（TAM/SAM/SOM）",
+    "团队与商业模式评估",
+    "AI在投资分析中的应用",
+    "可执行评估框架设计"
+  ],
   "search_queries": [
-    {"id": 1, "query": "LangGraph Studio features task monitoring visualization 2024 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "CrewAI task management dashboard monitoring agent workflow 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "AutoGen Studio multi-agent visualization monitoring 2024 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Dify workflow monitoring task management features 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Coze agent task management observability monitoring 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "LangSmith LangFuse agent tracing observability token cost tracking 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "AI agent observability tools comparison Arize Phoenix Helicone 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "long-running agent task checkpoint resume pause terminate mechanism", "dimension": "核心功能需求", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "multi-agent collaboration visualization DAG workflow orchestration 2025", "dimension": "核心功能需求", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "AI agent token cost tracking billing monitoring open source", "dimension": "核心功能需求", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "agent workflow visualization architecture frontend backend data model design", "dimension": "技术方案设计", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "temporal.io prefect dagster long-running workflow orchestration architecture", "dimension": "技术方案设计", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "OpenTelemetry for AI agent tracing observability integration", "dimension": "技术方案设计", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "agent event sourcing state persistence checkpoint pattern design", "dimension": "技术方案设计", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "real-time task progress monitoring websocket SSE architecture design", "dimension": "技术方案设计", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "agent evaluation monitoring quality metrics human-in-the-loop 2025", "dimension": "核心功能需求", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 17, "query": "AGNTCY AI agent observability standard specification 2025", "dimension": "现有方案调研", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 18, "query": "smolagents magentic-one agent task monitoring state management", "dimension": "现有方案调研", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 19, "query": "AI agent error recovery retry mechanism long-running task", "dimension": "核心功能需求", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 20, "query": "agent observability Gantt chart timeline visualization task duration", "dimension": "技术方案设计", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 21, "query": "AgentOps AI agent testing monitoring deployment platform 2025", "dimension": "现有方案调研", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 22, "query": "OpenClaw agent architecture multi-agent session management", "dimension": "OpenClaw结合方案", "priority": "high", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "YC Y Combinator startup evaluation criteria application scoring rubric 2024 2025", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "a16z Andreessen Horowitz investment thesis evaluation framework criteria", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Sequoia Capital startup evaluation framework team market product", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Benchmark Capital investment philosophy evaluation approach", "dimension": "硅谷VC评估框架", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Paul Graham essays startup evaluation what we look for YC", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "TAM SAM SOM calculation methodology startup market size estimation best practices", "dimension": "市场规模评估", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "VC deal memo template structure investment analysis document format", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "VC due diligence checklist startup investment analysis framework 2024 2025", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "AI tools venture capital investment analysis startup screening 2024 2025", "dimension": "AI投资分析应用", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "AI powered market research competitive analysis tools for startups VCs", "dimension": "AI投资分析应用", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "startup scoring matrix rubric quantitative evaluation model", "dimension": "可执行评估框架", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "AI startup due diligence automation tools platforms 2025", "dimension": "AI投资分析应用", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "venture capital AI investment decision making machine learning startup prediction", "dimension": "AI投资分析应用", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "business model canvas startup viability assessment framework lean startup", "dimension": "商业模式评估", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "startup team evaluation criteria founder assessment VC what makes great founder", "dimension": "团队评估", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "project scoring matrix template AI automated evaluation checklist", "dimension": "可执行评估框架", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "solo founder small team project validation framework lean validation", "dimension": "可执行评估框架", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "Sequoia Capital business plan template pitch deck framework", "dimension": "硅谷VC评估框架", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 19, "query": "startup failure reasons postmortem data statistics 2024", "dimension": "风险评估", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 20, "query": "YC startup school curriculum project evaluation validation methodology", "dimension": "可执行评估框架", "priority": "medium", "assigned_to": "searcher-3"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 16, 18],
-      "focus": "现有AI Agent工具/平台的任务管理与可视化能力调研"
+      "queries": [1, 2, 3, 4, 5, 6, 7],
+      "focus": "硅谷顶级VC（YC/a16z/Sequoia/Benchmark）的评估标准、方法论、deal memo格式"
     },
     "searcher-2": {
-      "queries": [6, 7, 8, 9, 10, 17, 21],
-      "focus": "Agent可观测性工具、成本追踪、多agent协作可视化"
+      "queries": [8, 9, 10, 11, 12, 13],
+      "focus": "AI在VC投资分析中的应用、工具平台、量化评估模型"
     },
     "searcher-3": {
-      "queries": [11, 12, 13, 14, 15, 19, 20, 22],
-      "focus": "技术架构设计、工作流编排、状态持久化、OpenClaw结合"
+      "queries": [14, 15, 16, 17, 18, 19, 20],
+      "focus": "团队评估、商业模式、可执行评估框架、小团队适配"
     }
   },
   "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-118",
+  "report_id": "R-119",
   "category": "01-AI行业研究"
 }
