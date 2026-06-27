@@ -1,38 +1,45 @@
 {
   "topic": "AI Agent 长程任务可视化管理系统调研与设计",
-  "complexity": "中等偏深",
-  "complexity_reason": "需要调研竞品（LangSmith/AgentOps/Helicone/Phoenix等）、设计架构、给出技术选型。涉及产品+技术+集成三维度，但范围明确，不需要25+查询的全面深度研究。",
-  "dimensions": [
-    "竞品调研（开源/商业AI agent管理工具）",
-    "OpenClaw集成能力（API/session/state）",
-    "前端技术选型（轻量VPS友好）",
-    "任务队列与批处理（夜间模式）",
-    "架构设计与数据流"
-  ],
+  "complexity": "深度",
+  "complexity_reason": "涉及市面上多个AI Agent工具的调研对比、技术架构设计、数据模型设计、以及与OpenClaw的结合方案，需要多维度覆盖",
+  "dimensions": ["现有方案调研", "核心功能需求", "技术方案设计", "OpenClaw结合方案"],
   "search_queries": [
-    {"id": 1, "query": "LangSmith LangChain agent observability monitoring dashboard features 2025 2026", "dimension": "竞品调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "AgentOps AI agent monitoring platform features pricing open source 2025 2026", "dimension": "竞品调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Arize Phoenix LLM observability open source self-hosted features 2025 2026", "dimension": "竞品调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Helicone LLM monitoring proxy dashboard self-hosted features GitHub 2025 2026", "dimension": "竞品调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Bull Board Redis queue monitoring UI task management dashboard 2025", "dimension": "任务队列", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "open source AI agent task management dashboard kanban board self-hosted 2025 2026", "dimension": "竞品调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "OpenClaw gateway API session list subagent status monitoring", "dimension": "OpenClaw集成", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "OpenClaw control panel UI web dashboard built-in features 2025 2026", "dimension": "OpenClaw集成", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "OpenClaw sessions_spawn subagent lifecycle management API status", "dimension": "OpenClaw集成", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "lightweight self-hosted dashboard Node.js Python SQLite low resource VPS 2025", "dimension": "前端技术选型", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "Express.js Fastify lightweight backend dashboard 2GB RAM VPS performance", "dimension": "前端技术选型", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "LangGraph Studio agent workflow visualization multi-agent orchestration UI 2025 2026", "dimension": "竞品调研", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "CrewAI agent monitoring dashboard task delegation tracking 2025 2026", "dimension": "竞品调研", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "AutoGen Studio Microsoft multi-agent monitoring task status UI 2025 2026", "dimension": "竞品调研", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "real-time task queue monitoring WebSocket SSE Server-Sent Events dashboard lightweight", "dimension": "技术选型", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "cron job batch processing queue management UI open source lightweight 2025", "dimension": "任务队列", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "AI agent observability token usage cost tracking dashboard open source 2025 2026", "dimension": "竞品调研", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 18, "query": "LiteLLM proxy server dashboard token tracking model routing self-hosted 2025 2026", "dimension": "竞品调研", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "LangGraph Studio features task monitoring visualization 2024 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "CrewAI task management dashboard monitoring agent workflow 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "AutoGen Studio multi-agent visualization monitoring 2024 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Dify workflow monitoring task management features 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Coze agent task management observability monitoring 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "LangSmith LangFuse agent tracing observability token cost tracking 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "AI agent observability tools comparison Arize Phoenix Helicone 2025", "dimension": "现有方案调研", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "long-running agent task checkpoint resume pause terminate mechanism", "dimension": "核心功能需求", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "multi-agent collaboration visualization DAG workflow orchestration 2025", "dimension": "核心功能需求", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "AI agent token cost tracking billing monitoring open source", "dimension": "核心功能需求", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "agent workflow visualization architecture frontend backend data model design", "dimension": "技术方案设计", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "temporal.io prefect dagster long-running workflow orchestration architecture", "dimension": "技术方案设计", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "OpenTelemetry for AI agent tracing observability integration", "dimension": "技术方案设计", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "agent event sourcing state persistence checkpoint pattern design", "dimension": "技术方案设计", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "real-time task progress monitoring websocket SSE architecture design", "dimension": "技术方案设计", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "agent evaluation monitoring quality metrics human-in-the-loop 2025", "dimension": "核心功能需求", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 17, "query": "AGNTCY AI agent observability standard specification 2025", "dimension": "现有方案调研", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 18, "query": "smolagents magentic-one agent task monitoring state management", "dimension": "现有方案调研", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 19, "query": "AI agent error recovery retry mechanism long-running task", "dimension": "核心功能需求", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 20, "query": "agent observability Gantt chart timeline visualization task duration", "dimension": "技术方案设计", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 21, "query": "AgentOps AI agent testing monitoring deployment platform 2025", "dimension": "现有方案调研", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 22, "query": "OpenClaw agent architecture multi-agent session management", "dimension": "OpenClaw结合方案", "priority": "high", "assigned_to": "searcher-3"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5, 6, 17], "focus": "AI Agent监控/observability竞品全览：LangSmith/AgentOps/Phoenix/Helicone + 开源看板"},
-    "searcher-2": {"queries": [7, 8, 9, 10, 11], "focus": "OpenClaw API能力 + 轻量前端技术选型"},
-    "searcher-3": {"queries": [12, 13, 14, 15, 16, 18], "focus": "多Agent编排UI竞品 + 任务队列 + 实时监控技术"}
+    "searcher-1": {
+      "queries": [1, 2, 3, 4, 5, 16, 18],
+      "focus": "现有AI Agent工具/平台的任务管理与可视化能力调研"
+    },
+    "searcher-2": {
+      "queries": [6, 7, 8, 9, 10, 17, 21],
+      "focus": "Agent可观测性工具、成本追踪、多agent协作可视化"
+    },
+    "searcher-3": {
+      "queries": [11, 12, 13, 14, 15, 19, 20, 22],
+      "focus": "技术架构设计、工作流编排、状态持久化、OpenClaw结合"
+    }
   },
   "searcher_count": 3,
   "review_rounds": 1,
