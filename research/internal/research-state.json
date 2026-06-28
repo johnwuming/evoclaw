@@ -180,16 +180,62 @@
       "sources": ["https://testkube.io/blog/testing-ai-generated-code"],
       "confidence": "medium",
       "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F025",
+      "content": "Claude Code 在 SWE-bench Verified 上显著领先 Cursor，Opus 4.5 达 80.9%。盲测36项任务中 Claude Code 输出 67% 需更少手动修改。Cursor 在小任务速度和 tab 补全上更快，但 Claude Code 在多文件重构、CI/CD 创建、复杂调试上优势明显。",
+      "sources": ["https://neuronad.com/claude-code-vs-cursor"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2b"]
+    },
+    {
+      "id": "F026",
+      "content": "Claude Code 是执行优先的终端 AI（CLI-first），Cursor 是编辑器优先的 AI 原生 IDE（VS Code fork）。Claude Code 在多文件推理和大规模重构上胜出（200k 可靠上下文），Cursor 在快速迭代和逐行编写上更强。成熟团队应视为互补。",
+      "sources": ["https://emergent.sh/learn/claude-code-vs-cursor"],
+      "confidence": "high",
+      "verified_by": ["searcher-2b"]
+    },
+    {
+      "id": "F027",
+      "content": "2026年 Claude Code 与 Cursor 的差异已从代码质量转向治理层面：权限边界、可审计性、分支隔离和支出控制。高产出团队中两者通常是互补关系。",
+      "sources": ["https://expertbeacon.com/claude-vs-cursor-for-engineering-teams-in-2026"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2b"]
+    },
+    {
+      "id": "F028",
+      "content": "GitHub Copilot Agent Mode 2026 已具备自主多文件编辑、终端命令执行和自我纠错循环，但受限于 VS Code 环境。Claude Code 在终端原生运行可跨项目/服务器/容器，1M token 上下文支持跨数百文件变更。",
+      "sources": ["https://getbeam.dev/blog/github-copilot-agent-mode-review-2026.html", "https://codegen.com/claude-code-vs-github-copilot/"],
+      "confidence": "high",
+      "verified_by": ["searcher-2b"]
+    },
+    {
+      "id": "F029",
+      "content": "Claude Code 订阅制（Max $100/月无限使用）对重度 agentic 工作负载更划算；API 直连在响应一致性、精度和多模型访问上占优。API 支持数千并发，Code 仅支持单会话。简单修复<30秒但有10-20%功能性问题率。",
+      "sources": ["https://gofranz.com/blog/claude-code-vs-claude-api/", "https://apidog.com/blog/claude-code-vs-claude-api/"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2b"]
+    },
+    {
+      "id": "F030",
+      "content": "ACP（Agent Communication Protocol）已于2025年8月并入A2A协议（Linux Foundation管理）。MCP连接agent与工具（JSON-RPC），A2A连接agent与agent。推荐策略：默认用MCP做工具集成，单agent架构遇瓶颈时采用A2A做多agent编排。",
+      "sources": ["https://www.techaheadcorp.com/blog/mcp-vs-a2a-vs-acp-ai-agent-interoperability-standards/", "https://openagora.io/blog/mcp-vs-a2a-agent-protocols"],
+      "confidence": "high",
+      "verified_by": ["searcher-2b"]
+    },
+    {
+      "id": "F031",
+      "content": "多agent编排主要模式：Supervisor（监督者，适合复杂工作流但有单点故障）、Hierarchical（层级，适合20+agent企业）、P2P（容错但共识慢）、Swarm（群智）。72%企业AI项目使用多agent系统。未解决冲突导致30%性能下降。",
+      "sources": ["https://zylos.ai/research/multi-agent-orchestration-2025", "https://aiworkflowlab.dev/article/building-multi-agent-ai-systems-2026"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2b"]
     }
   ],
   "gaps": [
-    "Claude Code vs Cursor 直接对比数据",
-    "Claude Code vs GitHub Copilot agent mode 对比",
-    "Claude Code vs 直接 API 调用的优劣分析",
-    "多 agent 编排模式的业界评价",
-    "Claude Code 社区评价（Reddit/HN）和成功案例",
-    "hooks/pre-commit guardrails 具体实现",
-    "CLAUDE.md 约束规则对质量的量化影响"
+    "Claude Code 社区评价（Reddit/HN）和成功案例深度不足",
+    "hooks/pre-commit guardrails 具体实现细节",
+    "CLAUDE.md 约束规则对质量的量化影响研究",
+    "ACP harness 架构下 Claude Code 质量的实证对比数据"
   ],
   "next_actions": [
     "等待 searcher-2b 返回竞品对比数据",
