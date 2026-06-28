@@ -1,52 +1,53 @@
 {
-  "topic": "AI辅助项目立项评估方法论——硅谷VC框架与可执行方案",
+  "topic": "Claude Code 在 ACP harness 多 agent 架构下的代码生成质量研究",
   "complexity": "中等",
-  "complexity_reason": "主题明确，硅谷VC评估方法论有大量公开资料，不需要过多迭代搜索。核心是将公开框架收集、整理、转化为可执行模板，中等深度即可覆盖。",
+  "complexity_reason": "Claude Code 是主流工具，社区评测和基准测试资料丰富。核心问题是将其能力与我们特定的 ACP 多 agent 架构关联，需要覆盖代码质量、非交互模式、社区评价、竞品对比和质量提升策略5个维度，中等深度即可覆盖。",
   "dimensions": [
-    "硅谷VC评估框架（YC/a16z/Sequoia/Benchmark）",
-    "市场规模评估方法（TAM/SAM/SOM）",
-    "团队与商业模式评估",
-    "AI在投资分析中的应用",
-    "可执行评估框架设计"
+    "Claude Code 代码生成质量与已知局限",
+    "非交互式/Prompt 驱动模式下的表现",
+    "社区评价与最佳实践",
+    "竞品对比（Cursor、直接 API、Copilot）",
+    "方案质量提升策略"
   ],
   "search_queries": [
-    {"id": 1, "query": "YC Y Combinator startup evaluation criteria application scoring rubric 2024 2025", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "a16z Andreessen Horowitz investment thesis evaluation framework criteria", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Sequoia Capital startup evaluation framework team market product", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Benchmark Capital investment philosophy evaluation approach", "dimension": "硅谷VC评估框架", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "Paul Graham essays startup evaluation what we look for YC", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "TAM SAM SOM calculation methodology startup market size estimation best practices", "dimension": "市场规模评估", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "VC deal memo template structure investment analysis document format", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "VC due diligence checklist startup investment analysis framework 2024 2025", "dimension": "硅谷VC评估框架", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "AI tools venture capital investment analysis startup screening 2024 2025", "dimension": "AI投资分析应用", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "AI powered market research competitive analysis tools for startups VCs", "dimension": "AI投资分析应用", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "startup scoring matrix rubric quantitative evaluation model", "dimension": "可执行评估框架", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "AI startup due diligence automation tools platforms 2025", "dimension": "AI投资分析应用", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "venture capital AI investment decision making machine learning startup prediction", "dimension": "AI投资分析应用", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "business model canvas startup viability assessment framework lean startup", "dimension": "商业模式评估", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "startup team evaluation criteria founder assessment VC what makes great founder", "dimension": "团队评估", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "project scoring matrix template AI automated evaluation checklist", "dimension": "可执行评估框架", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "solo founder small team project validation framework lean validation", "dimension": "可执行评估框架", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "Sequoia Capital business plan template pitch deck framework", "dimension": "硅谷VC评估框架", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "startup failure reasons postmortem data statistics 2024", "dimension": "风险评估", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 20, "query": "YC startup school curriculum project evaluation validation methodology", "dimension": "可执行评估框架", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "Claude Code Claude 4 Sonnet Opus code generation quality benchmark SWE-bench 2025 2026", "dimension": "代码生成质量", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "Claude Code ACP agent control protocol integration autonomous coding", "dimension": "代码生成质量", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Claude Code known limitations bugs issues autonomous coding agent", "dimension": "代码生成质量", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Claude Code SWE-bench verified score pass rate comparison 2025", "dimension": "代码生成质量", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Claude Code headless non-interactive mode --print programmatic usage CLI", "dimension": "非交互模式", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Claude Code prompt-driven development workflow quality vs interactive REPL session", "dimension": "非交互模式", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "Claude Code autonomous agent mode failure modes context loss hallucination", "dimension": "非交互模式", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "Claude Code developer review experience 2025 2026 reddit hackernews", "dimension": "社区评价", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "Claude Code production success stories case studies real world projects", "dimension": "社区评价", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "Claude Code best practices prompt engineering coding tasks systematic", "dimension": "社区评价", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "Claude Code vs Cursor comparison coding quality 2025 2026", "dimension": "竞品对比", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "Claude Code vs GitHub Copilot agent mode comparison autonomous coding", "dimension": "竞品对比", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "Claude Code vs direct Anthropic API coding tasks trade-offs control", "dimension": "竞品对比", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "ACP agent control protocol vs MCP model context protocol coding agents comparison", "dimension": "竞品对比", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 15, "query": "multi-agent coding orchestration Claude Code dev-lead architecture pattern", "dimension": "社区评价", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 16, "query": "AI coding agent bug reduction strategies guardrails testing validation", "dimension": "质量提升", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 17, "query": "prompt engineering constraints for AI code generation quality improvement", "dimension": "质量提升", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "multi-stage code review verification AI generated code QA pipeline", "dimension": "质量提升", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 19, "query": "Claude Code system prompt CLAUDE.md project instructions code quality impact", "dimension": "质量提升", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 20, "query": "AI coding agent design pattern architecture document output quality", "dimension": "质量提升", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 21, "query": "Claude Code OpenClaw ACP integration coding workflow 2025 2026", "dimension": "代码生成质量", "priority": "medium", "assigned_to": "searcher-1"}
   ],
   "searcher_assignments": {
     "searcher-1": {
-      "queries": [1, 2, 3, 4, 5, 6, 7],
-      "focus": "硅谷顶级VC（YC/a16z/Sequoia/Benchmark）的评估标准、方法论、deal memo格式"
+      "queries": [1, 2, 3, 4, 5, 6, 7, 21],
+      "focus": "Claude Code 代码生成质量、基准测试、非交互模式表现、已知局限"
     },
     "searcher-2": {
-      "queries": [8, 9, 10, 11, 12, 13],
-      "focus": "AI在VC投资分析中的应用、工具平台、量化评估模型"
+      "queries": [8, 9, 10, 11, 12, 13, 14, 15],
+      "focus": "社区评价、竞品对比（Cursor/Copilot/直接API）、多agent编排"
     },
     "searcher-3": {
-      "queries": [14, 15, 16, 17, 18, 19, 20],
-      "focus": "团队评估、商业模式、可执行评估框架、小团队适配"
+      "queries": [16, 17, 18, 19, 20],
+      "focus": "质量提升策略：prompt工程、分阶段验证、QA流程、系统提示"
     }
   },
   "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-119",
-  "category": "01-AI行业研究"
+  "report_id": "R-120",
+  "category": "06-开发实践"
 }
