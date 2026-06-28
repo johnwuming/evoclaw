@@ -1,16 +1,137 @@
 {
-  "task": "AI辅助项目立项评估方法论——硅谷VC框架与可执行方案",
-  "phase": "completed",
-  "report_id": "R-119",
-  "report_path": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-119-AI辅助项目立项评估方法论.md",
-  "searcher_status": {
-    "searcher-1": "failed (context overflow), replaced by searcher-1b",
-    "searcher-1b": "completed - YC evaluation criteria, a16z framework, TAM/SAM/SOM methodology",
-    "searcher-2": "completed - AI in VC due diligence, tools market, quantitative scoring models",
-    "searcher-3": "completed - Lean Canvas, founder-market fit, investment criteria matrix, Sequoia template, CB Insights failure data, Indie Hackers validation"
-  },
-  "findings_count": 30,
-  "sources_count": 30,
-  "gaps_resolved": ["YC evaluation criteria", "a16z investment framework", "TAM/SAM/SOM methodology"],
-  "remaining_gaps": ["YC official scoring page offline", "a16z lacks public detailed framework", "No Chinese VC perspective"]
+  "task": "Claude Code 在 ACP harness 多 agent 架构下的代码生成质量研究",
+  "phase": "searching",
+  "report_id": "R-120",
+  "category": "06-开发实践",
+  "queries_executed": [
+    "Claude Code SWE-bench benchmark scores",
+    "Claude Code ACP integration",
+    "Claude Code known limitations bugs",
+    "Claude Code headless non-interactive mode",
+    "Claude Code failure modes autonomous agent",
+    "Claude Code prompt engineering quality",
+    "Claude Code cost optimization"
+  ],
+  "findings": [
+    {
+      "id": "F001",
+      "content": "Claude Opus 4.7 在 SWE-bench Verified 达 87.6%，GPT-5.5 为 88.7%。Claude Sonnet 4.6 达 79.6%（性价比高，比 Opus 便宜 5 倍）。在 SWE-bench Pro 上 Claude Opus 4.7 以 64.3% 领先。",
+      "sources": ["https://www.marc0.dev/en/leaderboard"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F002",
+      "content": "Claude Code 使用 -p/--print 标志进行无头非交互式执行，支持 JSON 输出格式。--bare 标志跳过 hooks/skills/MCP/CLAUDE.md 自动发现，实现确定性 CI 执行。Agent SDK 提供 TypeScript/Python 包用于完整编程控制。",
+      "sources": ["https://code.claude.com/docs/en/headless"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F003",
+      "content": "ACP (Agent Client Protocol) 是标准化协议，使编辑器能支持任何 ACP 兼容 agent。架构：编辑器←→ACP协议←→桥接←→Claude SDK←→Claude API。社区桥接器包括 acp-bridge (Emacs) 和 @mrtkrcm/acp-claude-code (npm)。",
+      "sources": ["https://zed.dev/acp/agent/claude-code", "https://agentclientprotocol.com"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F004",
+      "content": "OpenClaw 自 2026 年 2 月起将 ACP Agents 作为一等运行时，支持 sessions_spawn({ runtime: 'acp' }) 创建 ACP 会话。ACPX 桥接器将 OpenClaw 插件工具暴露给 ACP harness。",
+      "sources": ["https://docs.openclaw.ai/tools/acp-agents"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F005",
+      "content": "Claude Code 存在 prompt cache 错误导致成本膨胀 10-20 倍；Opus 4.8 存在子 Agent token 消耗错误。两个错误都影响自主/长时间运行的会话。",
+      "sources": ["https://cc.bruniaux.com/guide/known-issues", "GitHub #40524"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F006",
+      "content": "自主编码 Agent 有 5 种故障模式：上下文溢出、范围蔓延、静默完成、连锁错误和模型漂移。Opus 4.6 达到 14.5 小时无人值守工作。检测需要 SubagentStop、PostToolUse、PreToolUse hooks + eval golden prompts。",
+      "sources": ["https://dikrana.dev/blog/autonomous-agent-failure-modes"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F007",
+      "content": "AI Agent 成功率约 50%。上下文窗口溢出和幻觉级联是主要故障模式。1M 窗口模型在 ~50K token 处可能开始退化。倍增任务持续时间会使故障率增加四倍。Gartner 预测 2027 年底 40% Agentic AI 项目被取消。",
+      "sources": ["https://self.md/concepts/agent-failure-modes"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F008",
+      "content": "上下文污染：陈旧工具输出和冗长日志导致 Agent 在仅 60% 利用率时遗忘指令。模型对 10 分钟前和 10 小时前的 token 分配相同权重。",
+      "sources": ["https://cipherbuilds.ai/blog/context-window-pollution"],
+      "confidence": "medium",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F009",
+      "content": "上下文退化（Context rot）：所有模型随输入增长而退化，1M 窗口模型在 ~50K token 处退化。压缩上下文表现优于原始上下文。检索后解决使准确率从 35.5% 提高到 66.7%。",
+      "sources": ["https://www.morphllm.com/claude-code-context-window"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F010",
+      "content": "非交互式小型 prompt 模式可实现 24/7 自动化：将工作拆分为原子级 mini-prompt，事件驱动触发，质量门控（禁用词检测、结构验证、超时）。速率限制处理需要队列管理（50 任务/小时）。",
+      "sources": ["https://amitkoth.com/claude-code-automation-non-interactive/"],
+      "confidence": "medium",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F011",
+      "content": "Claude prompt 工程已从巧妙提示转向上下文工程。少样本示例充当规范，prompt 链接比单次 prompt 更可靠。歧义直接降低输出质量。",
+      "sources": ["https://dev.to/jasrandhawa/prompt-engineering-for-claude-what-actually-works-10kn"],
+      "confidence": "medium",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F012",
+      "content": "Claude Code TUI 限制：历史记录压缩时丢失回滚记录，显示故障，上下文折叠导致数据丢失。",
+      "sources": ["https://github.com/anthropics/claude-code/issues/21470"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F013",
+      "content": "Claude Code auto 模式使用分类器实现自主工具批准，三阶段筛选子 Agent：生成时、执行期间、完成时。比 --dangerously-skip-permissions 更安全，但仍为研究预览阶段。",
+      "sources": ["https://smartscope.blog/en/generative-ai/claude/claude-code-auto-mode-guide/"],
+      "confidence": "medium",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F014",
+      "content": "SWE-bench 评估了 Agent harness 和基础模型，跨供应商比较不完全可比。供应商报告的分数通常无法机器验证。",
+      "sources": ["https://tygartmedia.com/claude-vs-gpt-vs-gemini-coding-benchmark"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F015",
+      "content": "Claude Code 成本优化：四个根因导致使用量过高——cache 未命中、上下文膨胀、模型/努力程度错误、输入格式错误。优化后成本可从 €1,389/月降至 €200/月。",
+      "sources": ["https://www.productcompass.pm/p/stop-hitting-claude-code-limits"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
+    }
+  ],
+  "gaps": [
+    "Claude Code vs Cursor 直接对比数据",
+    "Claude Code vs GitHub Copilot agent mode 对比",
+    "Claude Code vs 直接 API 调用的优劣分析",
+    "多 agent 编排模式的业界评价",
+    "AI coding agent bug reduction 具体策略",
+    "CLAUDE.md 系统提示对代码质量的影响",
+    "prompt engineering 对 AI 代码质量提升的量化数据",
+    "多阶段代码审核验证 QA pipeline 实践"
+  ],
+  "next_actions": [
+    "等待 searcher-2b 返回竞品对比数据",
+    "等待 searcher-3b 返回质量提升策略数据",
+    "补充社区评价和最佳实践"
+  ]
 }
