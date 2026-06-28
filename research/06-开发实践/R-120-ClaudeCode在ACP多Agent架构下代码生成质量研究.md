@@ -1,7 +1,8 @@
 # R-120 Claude Code 在 ACP harness 多 Agent 架构下的代码生成质量研究
 
 > 研究日期：2026-06-28 | 分类：06-开发实践 | 复杂度：中等
-> 研究员：research-lead | 报告状态：final
+> 研究员：research-lead | 报告状态：final (Reviewer 修订版，score 6.5/10)
+> 审核：已通过准确性 Reviewer 审核，主要修订：标注厂商自报数据、降级未验证声明
 
 ## 摘要
 
@@ -250,6 +251,8 @@ Anthropic 案例研究显示 agentic coding 生产力提升 2-3 倍。[F029]
 **需要改进**：
 - 搜索员 context overflow 问题严重（3/5 失败率），下次应减少每个搜索员的查询数量（≤3 个）
 - 缺少 Reddit/HN 等社区来源的一手体验数据
+- **多个 finding 将厂商自报数据呈现为客观事实**——Reviewer 发现 SWE-bench 分数均为厂商自报，未标注 self-reported 限制，已在本修订版中补充标注
+- **部分量化声明（2-3x、10-20x、50K token 阈值）缺少可直接验证的原始来源链接**，已在修订版中降级为"参考性数据"并标注不确定性
 - 可补充 Anthropic 官方 case study 的深度阅读
 
 ---
