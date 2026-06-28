@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-25",
+  "last_updated": "2026-06-28",
   "reports": {
     "R-115": {
       "title": "群晖NAS部署开源大模型实现视频内容识别与素材索引",
@@ -16,6 +16,22 @@
         "推荐三档方案：轻量(¥0)→中量(¥1500 mini PC)→重量(¥5000+ GPU)"
       ],
       "path": "shared/results/08-开发实践/R-115-群晖NAS视频内容识别与素材索引开源方案.md"
+    },
+    "R-120": {
+      "title": "Claude Code 在 ACP harness 多 Agent 架构下的代码生成质量研究",
+      "category": "06-开发实践",
+      "date": "2026-06-28",
+      "key_findings": [
+        "Claude Code SWE-bench Verified 处于第一梯队（Opus 87.6%，但为厂商自报）",
+        "AI 生成代码 bug 率约人工 1.7 倍（CodeRabbit 报告）",
+        "自主 Agent 成功率约 50%，5种故障模式：上下文溢出/范围蔓延/静默完成/连锁错误/模型漂移",
+        "上下文退化在 ~50K token 处开始，压缩上下文优于原始",
+        "CLAUDE.md 是最高 ROI 质量提升手段，自检循环 reportedly 2-3x 提升",
+        "ACP 已于2025年8月并入A2A协议（Linux Foundation管理）",
+        "Claude Code vs Cursor：Claude 擅长多文件重构，Cursor 擅长快速迭代，高产出团队互补使用",
+        "对多 agent 架构建议：P0=编写CLAUDE.md+嵌入自检循环+强制dev-qa验证"
+      ],
+      "path": "shared/results/06-开发实践/R-120-ClaudeCode在ACP多Agent架构下代码生成质量研究.md"
     }
   }
 }
