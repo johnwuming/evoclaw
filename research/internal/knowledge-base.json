@@ -32,6 +32,26 @@
         "对多 agent 架构建议：P0=编写CLAUDE.md+嵌入自检循环+强制dev-qa验证"
       ],
       "path": "shared/results/06-开发实践/R-120-ClaudeCode在ACP多Agent架构下代码生成质量研究.md"
+    },
+    "R-122": {
+      "title": "高转化率占卜玄学独立站设计风格与开发技能匹配研究",
+      "category": "07-产品调研",
+      "date": "2026-06-28",
+      "key_findings": [
+        "两大设计流派：暗黑神秘风（Co-Star/Sanctuary，深蓝金色）vs 温柔粉紫风（Pocket Tarot，粉紫渐变）",
+        "配色方案：暗色系 #0A0A1A背景 + #D4AF37金色CTA + #7C3AED紫色高亮",
+        “字体推荐：Cinzel/Cormorant Garamond标题 + Inter正文",
+        “落地页中位转化率4.02%，Top25%达11.45%+，3字段表单=10.1%转化 vs 9字段=3.6%",
+        “Sanctuary的$1/min首单优惠是核心转化约，几乎消除决策摩擦",
+        “反直觉发现：15分钟长onboarding比5分钟短流程转化率更高（43%案例）",
+        “付费墙A/B测试可提升180%转化，国家本地化付费墙显著提升trial启动率",
+        “技术栈推荐：Next.js + Tailwind CSS + shadcn/ui/Flowbite React + Framer Motion",
+        “Webflow有现成塔罗/占星模板（Astrica），WordPress有Synastry/Augury/Taroti（$49-$79）",
+        “Framer目前无专门占星模板分类，需从零搭建",
+        “Tailwind v4组件库Top5：Ninna UI(69组件)/shadcn/ui/Flowbite React/DaisyUI/Preline UI",
+        “Fasky Software占星App全漏斗优化方法论：onboarding→trial→paywall + RevenueCat + Mixpanel"
+      ],
+      "path": "shared/results/07-产品调研/R-122-高转化占卜玄学独立站设计风格与开发技能匹配.md"
     }
   }
 }
