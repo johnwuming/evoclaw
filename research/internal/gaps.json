@@ -1,17 +1,15 @@
 {
-  "topic": "闲鱼信息差套利工具与实战选品指南",
-  "report_id": "R-104",
+  "topic": "Claude Code 在 ACP harness 多 agent 架构下的代码生成质量研究",
+  "report_id": "R-120",
   "iterations": [
-    {"round": 1, "searcher_spawned": 3, "searcher_succeeded": 1, "failure_reason": "2个context overflow/API rate limit", "action": "拆分为更小搜索员"},
-    {"round": 2, "searcher_spawned": 4, "searcher_succeeded": 4, "failure_reason": "none", "action": "全部成功，直接撰写报告"}
+    {"round": 1, "searcher_spawned": 5, "searcher_succeeded": 3, "failure_reason": "2个context overflow（原始 searcher-2 和 searcher-3）", "action": "spawn精简版替代，全部成功返回"}
   ],
   "unresolved_gaps": [
-    "闲鱼官方GMV和类目占比未公开",
-    "卖家平均月收入缺乏权威统计",
-    "搜索词搜索量无官方API",
-    "利润数据多为博主自述需验证",
-    "闲鱼开放平台ISV API普通卖家无法使用"
+    "ACP harness 架构下 Claude Code 质量的实证对比数据（无公开基准）",
+    "Reddit/HN 社区深度使用体验数据有限",
+    "CLAUDE.md 约束规则对 bug 率的量化影响（无对照实验）",
+    "hooks 自动化检测的具体实现代码示例"
   ],
-  "report_status": "completed",
-  "report_path": "/root/.openclaw/workspace/shared/results/07-其他/R-104-闲鱼信息差套利工具与实战选品指南.md"
+  "report_status": "baseline_complete",
+  "report_path": "/root/.openclaw/workspace/shared/results/06-开发实践/R-120-ClaudeCode在ACP多Agent架构下代码生成质量研究.md"
 }
