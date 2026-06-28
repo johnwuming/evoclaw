@@ -117,6 +117,69 @@
       "sources": ["https://www.productcompass.pm/p/stop-hitting-claude-code-limits"],
       "confidence": "high",
       "verified_by": ["searcher-1"]
+    },
+    {
+      "id": "F016",
+      "content": "AI 生成代码的 bug 率约为人工代码的 1.7 倍。CodeRabbit 分析了 320 个 AI 参与的 PR vs 150 个人工 PR，AI 代码在各类缺陷上均高于人工。",
+      "sources": ["https://www.businesswire.com/news/home/20251217666881/en/CodeRabbits-State-of-AI-vs-Human-Code-Generation-Report-Finds-That-AI-Written-Code-Produces-1.7x-More-Issues-Than-Human-Code"],
+      "confidence": "high",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F017",
+      "content": "AI 生成代码通过单元测试但在基础设施层失败（RBAC、资源限制），需要系统级测试而非仅 mock 测试。",
+      "sources": ["https://testkube.io/blog/system-level-testing-ai-generated-code"],
+      "confidence": "medium",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F018",
+      "content": "CLAUDE.md 最佳实践：保持 <200 行，以构建/测试命令开头，不要复制 linter 规则，使用 file:line 引用而非粘贴代码，标注禁止目录。CLAUDE.md 指令覆盖 Claude Code 默认行为（最高优先级）。",
+      "sources": ["https://maketocreate.com/claude-md-best-practices-the-complete-2026-guide/", "https://skillsplayground.com/guides/claude-code-system-prompt/"],
+      "confidence": "high",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F019",
+      "content": "编写 CLAUDE.md 是提升 Claude Code 质量的最高 ROI 单步操作。一个 6 项目的生产实践者发现 10 分钟创建 CLAUDE.md 后每个会话效率显著提升。",
+      "sources": ["https://aiorg.dev/blog/claude-code-best-practices"],
+      "confidence": "medium",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F020",
+      "content": "给 Claude Code 自检反馈循环（运行测试→修复失败）可带来 2-3 倍质量提升。这是 Boris Cherny（Claude Code 创建者）推荐的核心实践。",
+      "sources": ["https://www.builder.io/blog/claude-code-tips-best-practices"],
+      "confidence": "medium",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F021",
+      "content": "少样本提示可将 AI 代码生成准确率从 0% 提升至 90%。Outcome-first 提示（定义目标、成功标准、约束和停止规则）优于逐步指令。",
+      "sources": ["https://margabagus.com/prompt-engineering-clean-code", "https://developers.openai.com/api/docs/guides/prompt-guidance"],
+      "confidence": "high",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F022",
+      "content": "正面指令框架（"写简洁的摘要"）优于负面指令（"不要写太多细节"）。KAIST 研究发现大模型在否定提示上表现更差。",
+      "sources": ["https://www.digitalocean.com/resources/articles/prompt-engineering-best-practices"],
+      "confidence": "medium",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F023",
+      "content": "AI 编程最佳实践：逐行审查 AI 代码后再提交，有疑问时立即测试，保持增量变更。大块未测试的粘贴代码会导致依赖断裂和边界遗漏。",
+      "sources": ["https://dev.to/ranndy360/ai-coding-best-practices-in-2025-4eel"],
+      "confidence": "medium",
+      "verified_by": ["searcher-3b"]
+    },
+    {
+      "id": "F024",
+      "content": "应对 AI 代码的策略：在 PR 中标注 [AI-Generated] 标签以触发更严格审查，维护 AI 错误活手册，在合并到共享工具前扩展集成测试覆盖。",
+      "sources": ["https://testkube.io/blog/testing-ai-generated-code"],
+      "confidence": "medium",
+      "verified_by": ["searcher-3b"]
     }
   ],
   "gaps": [
@@ -124,14 +187,13 @@
     "Claude Code vs GitHub Copilot agent mode 对比",
     "Claude Code vs 直接 API 调用的优劣分析",
     "多 agent 编排模式的业界评价",
-    "AI coding agent bug reduction 具体策略",
-    "CLAUDE.md 系统提示对代码质量的影响",
-    "prompt engineering 对 AI 代码质量提升的量化数据",
-    "多阶段代码审核验证 QA pipeline 实践"
+    "Claude Code 社区评价（Reddit/HN）和成功案例",
+    "hooks/pre-commit guardrails 具体实现",
+    "CLAUDE.md 约束规则对质量的量化影响"
   ],
   "next_actions": [
     "等待 searcher-2b 返回竞品对比数据",
-    "等待 searcher-3b 返回质量提升策略数据",
-    "补充社区评价和最佳实践"
+    "已有足够数据撰写 baseline 报告",
+    "Phase 6 前置：立即写 baseline 报告"
   ]
 }
