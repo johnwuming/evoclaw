@@ -369,6 +369,9 @@ FateTell 的 $39.99 单次定价已被市场验证：
 | 东西方融合需求验证 | 高 | MVP 上线后 A/B 测试 |
 | Co-Star 2025-2026 AI 整合计划 | 中 | 持续关注产品更新 |
 | 美国 Gen Z 对八字/易经的接受度 | 高 | Reddit r/Bazi, r/iching 定性调研 |
+| DeepOracle 实际产品状态 | 低 | GitHub 返回 0 结果，可能不存在 |
+| Tarotia 转化率/付费数据 | 中 | 需后续关注其增长 |
+| IChingQuest 用户量级 | 低 | 流量很小，暂不构成威胁 |
 
 ---
 
@@ -392,9 +395,13 @@ FateTell 的 $39.99 单次定价已被市场验证：
 | 14 | The Market Intelligence | themarketintelligence.com | 市场规模数据 |
 | 15 | QYResearch | reports.valuates.com | AI 占星细分市场 |
 | 16 | 知乎 | zhuanlan.zhihu.com/p/1969076952527774509 | FateTell 用户分析 |
-| 17 | R-110 报告 | 内部 | 竞品基础数据 |
-| 18 | R-111 报告 | 内部 | 中国玄学出海数据 |
-| 19 | R-112 报告 | 内部 | MysticMirror PRD |
+| 17 | IChingQuest（玄机堂） | ichingquest.com/en | AI 易经+八字平台 |
+| 18 | Tarotia | tarotia.app | AI 塔罗平台（83K 用户） |
+| 19 | GitHub Repository Search | github.com/search | 东西方融合开源项目 |
+| 20 | 天机阁 | ai-tianji.com | 中国 AI 国学平台 |
+| 21 | R-110 报告 | 内部 | 竞品基础数据 |
+| 22 | R-111 报告 | 内部 | 中国玄学出海数据 |
+| 23 | R-112 报告 | 内部 | MysticMirror PRD |
 
 ---
 
