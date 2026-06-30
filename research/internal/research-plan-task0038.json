@@ -1,0 +1,34 @@
+{
+  "topic": "MysticMirror竞品差异化调研",
+  "task_id": "task-0038",
+  "complexity": "中等",
+  "complexity_reason": "已有R-110/R-111/R-112三份相关调研作为基础，需补充FateTell深度数据、约会场景竞品、东西方融合竞品空白分析，以及最新定价基准",
+  "dimensions": ["直接竞品", "间接竞品(约会场景)", "市场数据", "差异化机会", "定价模式"],
+  "existing_research": ["R-110", "R-111", "R-112"],
+  "search_queries": [
+    {"id": 1, "query": "FateTell AI tarot reading app pricing features user reviews repurchase rate", "dimension": "直接竞品", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "AI divination fortune telling app new launches 2025 2026", "dimension": "直接竞品", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Sanctuary World app latest features pricing 2025 2026", "dimension": "直接竞品", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Co-Star app AI integration features revenue 2025", "dimension": "直接竞品", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "Labyrinthos tarot app pricing features user growth", "dimension": "直接竞品", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "astrology dating app horoscope compatibility dating", "dimension": "间接竞品", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "NUiT Stars Align astrology dating app features users", "dimension": "间接竞品", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "horoscope relationship compatibility app spirituality dating", "dimension": "间接竞品", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "tarot reading app for love relationship dating advice", "dimension": "间接竞品", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "astrology app for couples relationship horoscope", "dimension": "间接竞品", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "AI spirituality divination app market size revenue 2025 2026", "dimension": "市场数据", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "astrology app pricing model subscription vs single purchase freemium", "dimension": "定价模式", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "East West fusion divination product I Ching tarot combined", "dimension": "差异化机会", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "Chinese astrology Bazi app English western market competitors", "dimension": "差异化机会", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "DeepOracle Bazi I Ching AI reading app features pricing", "dimension": "差异化机会", "priority": "high", "assigned_to": "searcher-3"}
+  ],
+  "searcher_assignments": {
+    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "直接竞品深度分析(AI占卜+传统占星App)"},
+    "searcher-2": {"queries": [6, 7, 8, 9, 10], "focus": "约会/恋爱场景间接竞品"},
+    "searcher-3": {"queries": [11, 12, 13, 14, 15], "focus": "市场数据+东西方融合差异化分析"}
+  },
+  "searcher_count": 3,
+  "review_rounds": 1,
+  "report_id": "R-123",
+  "category": "01-AI行业研究"
+}
