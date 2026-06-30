@@ -1,33 +1,42 @@
 {
-  "topic": "高转化率占卜玄学独立站设计风格调研与开发技能匹配",
+  "topic": "MysticMirror 竞品差异化分析：美国AI灵性占卜市场",
   "complexity": "中等",
-  "complexity_reason": "需要调研多个竞品网站的设计风格（视觉/交互/转化策略），并匹配可用开发技能/模板，但不需要深度定量分析",
-  "dimensions": ["视觉设计风格", "色彩与排版", "转化率优化策略", "交互与动效", "竞品案例分析", "开发技能/模板匹配"],
+  "complexity_reason": "需要深入分析多个竞品App的功能/用户量/收入/定价，分析约会场景缺口，调研东西方融合情况，以及用户需求信号。已有部分先前研究(R-110/R-111/R-112/R-122)可参考，但需要最新数据和更深度的竞品对比。",
+  "dimensions": [
+    "核心竞品分析(星座App)",
+    "核心竞品分析(塔罗App)",
+    "恋爱/约会场景功能",
+    "东西方融合产品",
+    "用户需求信号(Reddit/TikTok)",
+    "市场数据(TAM/用户消费)"
+  ],
   "search_queries": [
-    {"id": 1, "query": "high conversion tarot astrology website design examples 2024 2025", "dimension": "竞品案例", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "tarot website UI design trends dark mystical aesthetic", "dimension": "视觉设计", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "astrology website landing page design best practices conversion", "dimension": "转化优化", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Co-Star app website design analysis aesthetic", "dimension": "竞品案例", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "psychic reading website design templates high converting", "dimension": "竞品案例", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "mystical spiritual website color palette typography design", "dimension": "色彩排版", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "esoteric occult web design trends gold dark theme", "dimension": "视觉设计", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "divination fortune telling website UX conversion funnel", "dimension": "转化优化", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "塔罗牌占卜网站设计风格 高级感 神秘感", "dimension": "视觉设计", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "spiritual wellness website animation micro-interaction design", "dimension": "交互动效", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "Sacred Symbols Tarot app website design case study", "dimension": "竞品案例", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "The Pattern app website design aesthetic analysis", "dimension": "竞品案例", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "astrology mobile web app onboarding flow conversion optimization", "dimension": "转化优化", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "tarot card reading website framer webflow template", "dimension": "开发技能匹配", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "mystical dark theme CSS Tailwind component library spiritual", "dimension": "开发技能匹配", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "premium subscription conversion tactics spiritual astrology apps 2025", "dimension": "转化优化", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "Co-Star app 2025 users revenue downloads MAU", "dimension": "核心竞品分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "The Pattern app 2025 users revenue features business model", "dimension": "核心竞品分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "Sanctuary World astrology app 2025 revenue pricing subscription", "dimension": "核心竞品分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Costar astrology app pricing premium features 2024 2025", "dimension": "核心竞品分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "astrology app market share top apps 2025 Sensor Tower data.ai", "dimension": "核心竞品分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "tarot card app popular 2025 Luminosity Tarot Daily Tarot features revenue", "dimension": "核心竞品分析", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "astrology app relationship compatibility dating features love horoscope", "dimension": "恋爱/约会场景", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "Co-Star compatibility relationship feature couples astrology", "dimension": "恋爱/约会场景", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "dating app astrology integration Bumble Hinge zodiac compatibility 2025", "dimension": "恋爱/约会场景", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "I Ching app western market popularity English language 2024 2025", "dimension": "东西方融合", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "eastern mysticism western market trend I Ching BaZi feng shui app", "dimension": "东西方融合", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "Reddit astrology dating before date check horoscope compatibility r/astrology", "dimension": "用户需求信号", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "TikTok astrology dating trend check zodiac before date viral 2025", "dimension": "用户需求信号", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "astrology tarot app market size TAM 2025 spiritual wellness app market", "dimension": "市场数据", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "young women 18-35 astrology spending survey Gen Z millennial spiritual", "dimension": "市场数据", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 16, "query": "astrology app revenue top grossing lifestyle charts App Store 2025", "dimension": "市场数据", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 17, "query": "Reddit I Ching western users interest experience r/IChing r/divination", "dimension": "用户需求信号", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 18, "query": "astrology app gap opportunity before dating quick check love forecast", "dimension": "恋爱/约会场景", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "竞品案例与转化最佳实践"},
-    "searcher-2": {"queries": [6, 7, 8, 9, 10], "focus": "视觉设计风格与色彩排版"},
-    "searcher-3": {"queries": [11, 12, 13, 14, 15, 16], "focus": "竞品深度分析与开发模板匹配"}
+    "searcher-1": {"queries": [1, 2, 3, 4, 5, 16], "focus": "头部星座App竞品数据（用户/收入/定价/功能）"},
+    "searcher-2": {"queries": [6, 7, 8, 9, 10, 18], "focus": "塔罗App + 恋爱/约会场景功能分析 + 东西方融合"},
+    "searcher-3": {"queries": [11, 12, 13, 14, 15, 17], "focus": "用户需求信号 + 市场数据 + 东方神秘学接受度"}
   },
   "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-122",
-  "category": "07-产品调研"
+  "report_id": "R-123",
+  "category": "01-AI行业研究"
 }
