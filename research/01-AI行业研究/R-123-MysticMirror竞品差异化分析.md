@@ -615,7 +615,7 @@ Golden Thread 证明了一个重要模式：**数字化+实体产品组合**
 | **机会 (O)** | AI 占星市场 CAGR 26.4%；免费 AI 塔罗验证需求旺盛；主流约会 App 未整合占星；TikTok 灵性内容流量巨大；Gen Z 对多元文化的高接受度 |
 | **威胁 (T)** | FateTell 可能扩展至西方占卜；Co-Star/Sanctuary 可能加入东方元素；免费平台（Tarotap）挤压纯塔罗空间；真人占卜平台（MysticSense）建立信任壁垒 |
 
-### 7.3 与 FateTell 的错位竞争策略
+### 8.4 与 FateTell 的错位竞争策略（更新）
 
 **不要与 FateTell 正面竞争八字命理深度。** FateTell 已投入 3 万+命盘训练和真人命理师对齐，在一人开发条件下不可能超越。
 
