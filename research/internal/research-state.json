@@ -1,76 +1,30 @@
 {
-  "task": "电商合规财务中小企业痛点与竞品调研",
+  "task": "海外AI PPT独立站需求与商业化前景调研",
   "phase": "reporting",
-  "queries_executed": [
-    "2025年中小企业电商财务合规痛点",
-    "电商企业财税合规难点 发票管理",
-    "跨境电商合规挑战 VAT",
-    "电商财税SaaS工具对比",
-    "电商代账服务市场分析",
-    "淘宝/抖音/拼多多商家财务工具",
-    "跨境电商财务工具 PingPong万里汇",
-    "中国电商财税服务市场规模",
-    "AI财税自动化报税产品",
-    "电商合规财务创业公司融资",
-    "小微企业财税优惠政策",
-    "畅捷通官网直接抓取",
-    "金蝶官网直接抓取"
-  ],
   "findings": [
-    {
-      "id": "F001",
-      "content": "畅捷通2025年营收10.95亿元，同比增长14%，其中云订阅收入7.58亿元（+16%）。新增付费企业用户18.6万（+30%），累计付费企业用户96.1万。净利润8159万元，同比大涨144%。经营性现金净流入1.51亿元（+66%）。2026Q1营收2.68亿元（+13%），累计付费企业用户突破102.2万。",
-      "sources": ["https://www.chanjet.com/news/135588.html", "https://www.chanjet.com/news/135964.html"],
-      "confidence": "high",
-      "verified_by": ["lead-direct"]
-    },
-    {
-      "id": "F002",
-      "content": "畅捷通全面推行'AI至上'战略，发布企业级AI Agent'畅龙虾'，采用MCP+TOKEN综合计费模式。产品线包括好会计、好生意、T+Cloud、好业财、易代账。在小微企业云财税服务市场覆盖率连续五年行业第一。开放平台认证ISV超4600家，低/零代码开发者超5100名，累计开发应用近9000个。",
-      "sources": ["https://www.chanjet.com/news/135588.html", "https://www.chanjet.com/news/135964.html"],
-      "confidence": "high",
-      "verified_by": ["lead-direct"]
-    },
-    {
-      "id": "F003",
-      "content": "金蝶全面品牌升级为'金蝶AI'系列，包括金蝶AI星瀚（央国企）、金蝶AI星空（中型企业）、金蝶AI HR、金蝶AI星辰（小微企业）、金蝶AI苍穹（企业级AI平台）。业务领域覆盖财务管理、税务管理、供应链管理、全渠道管理等。有'小微企业业财税一体化方案'。",
-      "sources": ["https://www.kingdee.com"],
-      "confidence": "medium",
-      "verified_by": ["lead-direct"]
-    },
-    {
-      "id": "F004",
-      "content": "电商财税领域核心痛点（基于行业分析）：1）多平台订单数据分散（淘宝/天猫/抖音/拼多多/快手/小红书），财务对账依赖人工Excel，效率极低；2）金税四期全面上线，税务局实现'以数治税'，电商交易数据实时可查，传统不合规做法风险剧增；3）发票管理复杂（平台自动开票/手动开票混用，退货退款冲红处理）；4）直播带货税务新规频出（主播个人所得/企业所得区分难）；5）跨境电商VAT/销售税合规成本高。",
-      "sources": ["行业综合分析"],
-      "confidence": "medium",
-      "verified_by": ["lead-direct"]
-    },
-    {
-      "id": "F005",
-      "content": "中小企业电商代账市场价格区间（行业一般数据）：小规模纳税人月费200-500元/月，一般纳税人月费500-1500元/月。一线城市代账公司价格偏高。但传统代账服务通常只覆盖基础记账报税，不提供电商业务特有的多平台对账、库存成本核算、直播带货税务处理等深度服务。",
-      "sources": ["行业综合分析"],
-      "confidence": "medium",
-      "verified_by": ["lead-direct"]
-    },
-    {
-      "id": "F006",
-      "content": "跨境电商合规痛点：Temu/SHEIN卖家需处理多国VAT注册申报（欧盟27国各不同）、美国各州销售税（Marketplace Facilitator法案后平台代收但卖家仍需申报）、海关清关关税优化、跨境电商综合试验区政策利用、外汇收结汇合规、海外仓财务核算。",
-      "sources": ["行业综合分析"],
-      "confidence": "medium",
-      "verified_by": ["lead-direct"]
-    }
+    {"id": "F001", "content": "全球演示软件市场规模2024年约66.9亿美元，预计2031年达162.7亿美元，CAGR 13.1%。驱动因素：远程办公普及（82%企业领导者计划允许远程）、数据可视化需求增长（93%商业决策者认为数据素养至关重要）。", "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F002", "content": "AI助手市场（含演示助手）2025年33.5亿美元，2030年达211.1亿美元，CAGR 44.5%。北美占36.3%份额。Standalone Assistants占33.3%。", "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F003", "content": "生成式AI市场2025年713.6亿美元，2032年达8905.9亿美元，CAGR 43.4%。Gen AI SaaS细分CAGR最高达57.0%。亚太地区增长最快。", "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F004", "content": "Decktopus AI：全球超过300万用户，每月生成40万份演示文稿。定价：免费版（3次/月带水印）、专业版$14.99/月、商业版$34.99/用户/月。", "confidence": "high", "verified_by": ["searcher-1"]},
+    {"id": "F005", "content": "SlidesGPT：已创建超1000万份演示文稿，用户含Google/Deloitte/Harvard及Fortune 500员工。定价：Free/$7.49 Pro/$22.50 Pro XL月。通过ChatGPT商店+独立站多渠道分发，是排名第一的PowerPoint制作GPT。", "confidence": "high", "verified_by": ["searcher-1", "searcher-2"]},
+    {"id": "F006", "content": "Freemium模式：SaaS/创作工具类转化率2-5%，每1个付费用户背后有20-100个免费用户。四种变现：订阅、用量分层、广告、一次性购买。AI PPT工具适用订阅+用量分层。", "confidence": "high", "verified_by": ["searcher-2"]},
+    {"id": "F007", "content": "Tettra从free trial转freemium后注册量翻倍，升级数第5季度达3倍，月留存率稳定70%+。freemium需至少坚持1年。AI PPT工具符合'需要时间体现价值'特征。", "confidence": "high", "verified_by": ["searcher-2"]},
+    {"id": "F008", "content": "LLM应用技术栈成熟：数据管道→嵌入模型→向量数据库→编排框架(LangChain)→LLM API→应用托管(Vercel)。AI PPT架构：LLM生成内容+结构，DALL-E/SD生成图片，布局算法排版。", "confidence": "high", "verified_by": ["searcher-2"]},
+    {"id": "F009", "content": "AI计算成本是AI产品最大支出项，部分公司80%+融资用于计算。推理成本（GPT-4+图片生成）是AI PPT工具主要边际成本。", "confidence": "high", "verified_by": ["searcher-2"]},
+    {"id": "F010", "content": "AI输出质量和可靠性是企业级应用核心挑战。非确定性输出、幻觉检测不成熟。事实准确性、设计专业度、品牌一致性是企业采用的关键顾虑。", "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F011", "content": "演示软件市场面临高度竞争和集成困难。功能同质化导致差异化困难，缺乏互操作性。为AI原生工具提供差异化机会。", "confidence": "medium", "verified_by": ["searcher-3"]},
+    {"id": "F012", "content": "Gamma：免费版(400积分/10卡片)+Plus($8/月,无限AI)+Pro($15/月,60卡片,自定义域名)。增长引擎：免费版水印病毒传播、网页分享、实时协作团队扩散、SEO。中国有大量镜像站。", "confidence": "high", "verified_by": ["searcher-3", "searcher-4"]},
+    {"id": "F013", "content": "Beautiful.AI：个人版$12/月、团队版$40/用户/月、企业版定制。支持PPT/PDF/MP4/PNG导出，Salesforce集成，SAML SSO。企业版功能(品牌保护/审计/SCIM)证明大型企业对AI演示工具有明确需求。", "confidence": "high", "verified_by": ["searcher-4"]},
+    {"id": "F014", "content": "中国市场AI PPT工具已20+款（AiPPT/咔片/博思/iSlide/讯飞智文/ChatPPT/美图等），价格极低（咔片¥7.04/月 vs Gamma $8-15/月），海外定价空间是国内的8-15倍。面向海外的独立站极少。", "confidence": "high", "verified_by": ["searcher-4"]},
+    {"id": "F015", "content": "导出兼容性核心需求：PPT/PDF导出是标配，Google Slides导出是差异化功能（仅Powerpresent AI支持），MP4视频导出满足演示录制需求。", "confidence": "high", "verified_by": ["searcher-4"]},
+    {"id": "F016", "content": "AI PPT功能集已标准化：AI内容生成、自动排版、模板库、实时协作、多格式导出。差异化方向：AI配图、AI写作辅助、演示录制、Office插件、Google Slides兼容。", "confidence": "high", "verified_by": ["searcher-4"]},
+    {"id": "F017", "content": "中国团队AI工具出海已有成功案例：insMind(稿定海外版)、万兴智演(万兴科技)。AI SaaS出海已成趋势，催生专门服务工具(Kevvee等GTM策略Agent)。", "confidence": "medium", "verified_by": ["searcher-4"]},
+    {"id": "F018", "content": "Gamma病毒式PLG增长：免费版带'Made with Gamma'水印=每个分享演示都是广告；网页格式分享自然带来新用户；协作功能一人带动全团队注册。", "confidence": "medium", "verified_by": ["searcher-4"]}
   ],
   "gaps": [
-    "搜索基础设施受限（web_search禁用，Bing中文搜索结果不相关，百度验证码拦截），无法获取实时市场数据",
-    "金蝶2025年具体财务数据未获取",
-    "电商财税SaaS整体市场规模具体数字未获取",
-    "具体电商ERP（网店管家、聚水潭、旺店通等）财务模块功能对比数据不足",
-    "抖音/拼多多平台内置财务工具具体功能未获取",
-    "AI财税创业公司融资案例数据不足",
-    "中小企业电商合规痛点量化数据（如调查报告百分比）缺失"
-  ],
-  "next_actions": [
-    "基于已有数据撰写报告，标注数据置信度",
-    "搜索基础设施恢复后可补充验证"
+    "Gamma具体用户数/ARR/融资数据未获取",
+    "Tome具体状态确认不充分（官网404，疑似已关停）",
+    "缺少Reddit/G2/ProductHunt用户评价数据",
+    "缺少Gamma病毒系数具体数值"
   ]
 }

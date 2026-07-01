@@ -1,19 +1,27 @@
 {
-  "topic": "电商合规财务中小企业痛点与竞品调研",
-  "report_id": "R-124",
+  "topic": "海外AI PPT独立站需求与商业化前景调研",
+  "report_id": "R-127",
   "iterations": [
-    {"round": 1, "searcher_spawned": 3, "searcher_succeeded": 3, "failure_reason": "web_search工具不可用，严重限制搜索广度；searcher-3大部分查询未完成", "action": "Lead通过web_fetch补充畅捷通官网数据，基于已有数据直接写baseline报告"}
+    {"round": 1, "searcher_spawned": 4, "searcher_succeeded": 4, "action": "4/4搜索员成功返回，数据覆盖竞品分析/商业模式/市场规模/增长策略四个维度"}
+  ],
+  "resolved_gaps": [
+    "主要竞品定价数据已收集（Gamma/Beautiful.AI/Decktopus/SlidesGPT）",
+    "Freemium经济模型数据已获取（Stripe/HubSpot/ProductLed）",
+    "市场规模数据已获取（VMR/MarketsandMarkets，虽然单一来源）",
+    "中国团队出海案例已确认（insMind/万兴智演）",
+    "Gamma增长策略PLG模式已分析"
   ],
   "unresolved_gaps": [
-    "中国电商财税服务市场规模具体数字（艾瑞/易观报告未获取）",
-    "中小企业财税SaaS渗透率数据",
-    "AI财税其他创业公司信息（税友/亿企代账、慧算账等）",
-    "Temu/SHEIN卖家VAT合规具体操作数据",
-    "财务外包vs自建团队成本对比",
-    "网店管家/快递管家财务功能详情",
-    "小微最新财税优惠政策条文",
-    "电商卖家第一手问卷/访谈数据"
+    "Gamma具体用户数/ARR/融资数据（Crunchbase被封锁）",
+    "G2/ProductHunt/Reddit用户评价数据（Cloudflare封锁）",
+    "Microsoft Copilot对PowerPoint原生AI集成的影响评估",
+    "企业级客户AI PPT工具采购决策调研数据",
+    "Tome关停原因详细分析",
+    "市场预测数据的交叉验证（仅VMR/MarketsandMarkets单一来源）"
   ],
   "report_status": "completed",
-  "report_path": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-124-电商合规财务中小企业痛点与竞品调研.md"
+  "report_path": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-127-海外AI-PPT独立站需求与商业化前景调研.md",
+  "review_status": "completed",
+  "review_score": "6.5/10",
+  "review_notes": "数据方向合理，市场预测偏乐观需注意。SlidesGPT定价已官网验证。二级来源已标注。域名引用已修正。"
 }
