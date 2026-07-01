@@ -83,6 +83,33 @@ execSync(`openclaw cron add \
 | `--no-deliver` | ✅ | 不通知用户（用于混合方案） |
 | `--light-context` | ✅ | 轻量上下文（减少 token） |
 
+### CLI vs HTTP API 对比（2026-07-01 实测）
+
+两种调用 gateway 的路径：
+
+```
+路径 A（CLI）: dispatch.js → fork openclaw 进程 → WebSocket → gateway → 创建 cron job
+路径 B（HTTP）: dispatch.js → POST /tools/invoke → gateway → 直接 sessions_spawn
+```
+
+| 维度 | CLI cron add | HTTP API /tools/invoke |
+|------|-------------|----------------------|
+| **本质** | 创建 cron job → 调度器接管执行 | 直接调用 sessions_spawn 工具 |
+| **进程开销** | 每次 fork node 进程（~200ms） | HTTP 请求（~10ms） |
+| **参数传递** | 命令行参数（需转义特殊字符） | JSON body（无转义问题） |
+| **错误处理** | execSync exit code + stderr | HTTP status + JSON error |
+| **执行时机** | cron 调度器中转（--at now 近乎即时） | 同步即时 |
+| **中转环节** | 多一层 cron 调度 | 直达 gateway |
+| **认证** | CLI 自动读取 token | 手动传 Bearer token |
+| **gateway 挂了** | 同样失败 | 同样失败 |
+| **实测连通性** | ✅ 已验证 | ✅ 已验证（sessions_list 正常返回） |
+
+**结论**：HTTP API 更轻量直接（少一层 cron 调度中转），但 CLI 更简单（不用管 token 和 HTTP）。对 dispatch.js（每2分钟跑一次的脚本）来说，两者都可行。建议用 HTTP API（路径 B），因为：
+1. 无进程 fork 开销
+2. JSON body 避免 shell 转义地狱（prompt 中的引号/换行）
+3. 错误信息更精确（JSON vs stderr）
+4. gateway token 已知（openclaw.json 中 `7349ea95da4fa0e07b89f5ef44a951bd26478778ef6a95d7`）
+
 ### 优点
 - **派发即时**：不等心跳，dispatch.js 直接触发
 - **主 agent 解放**：不再需要 spawn 和 yield
