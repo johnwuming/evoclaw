@@ -408,7 +408,7 @@ GitHub 搜索 `DeepOracle astrology` 返回 **0 结果**，表明 DeepOracle 要
 | **按分钟付费** | Kasamba, Sanctuary 真人 | $1.99-39.99/分钟 | 高 ARPU | 依赖人力，不可规模化 |
 | **完全免费** | Tarotap, WaytoTarot, Golden Thread | $0 | 用户增长快 | 变现困难 |
 
-### 6.2 FateTell 定价验证
+### 6.5 FateTell 定价验证
 
 FateTell 的 $39.99 单次定价已被市场验证：
 - 30% 复购率说明用户认为物有所值
