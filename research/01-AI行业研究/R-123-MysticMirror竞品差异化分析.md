@@ -354,7 +354,7 @@ GitHub 搜索 `DeepOracle astrology` 返回 **0 结果**，表明 DeepOracle 要
 | **文化风险** | ⭐⭐⭐ | 文化挪用风险存在，但通过尊重叙事可控 |
 | **教育成本** | ⭐⭐⭐ | AI "文化翻译"可降低门槛，渐进式引入策略有效 |
 
-### 5.4 FateTell vs MysticMirror 战略对比
+### 5.6 FateTell vs MysticMirror 战略对比
 
 | 维度 | FateTell | MysticMirror | 分析 |
 |------|----------|-------------|------|
