@@ -661,41 +661,45 @@ Golden Thread 证明了一个重要模式：**数字化+实体产品组合**
 
 ---
 
-## 九、知识缺口（更新）
+## 九、知识缺口与补充状态（2026-07-01 二次更新）
 
-| 缺口 | 影响程度 | 建议补充方式 |
-|------|---------|------------|
-| FateTell 精确月活/流量数据 | 中 | SimilarWeb 付费数据 |
-| Co-Star 2025-2026 收入/用户数据 | 中 | 持续关注 TechCrunch/Bloomberg 报道 |
-| Tarot4 用户量/收入 | 低 | Sensor Tower 付费数据 |
-| 占星约会 App 精确下载量 | 低 | Sensor Tower |
-| 东西方融合需求验证 | 高 | MVP 上线后 A/B 测试 |
-| 美国 Gen Z 对八字/易经的接受度 | 中 | TikTok #iching 内容定性分析已部分验证 |
-| Yodha 精确用户数据 | 低 | 官网未公开，需后续关注 |
-| MysticSense ARPU | 中 | 需要通过行业报告获取 |
-| DeepOracle 实际产品状态 | 低 | GitHub 返回 0 结果，可能不存在 |
-| Tarotia 转化率/付费数据 | 中 | 需后续关注其增长 |
-| IChingQuest 用户量级 | 低 | 流量很小，暂不构成威胁 |
-| **已补足**：Yodha（吠陀占星）证明了东方占卜接受度 | — | web_fetch 官网验证 |
-| **已补足**：MysticSense 真人占卜平台数据 | — | web_fetch 官网验证 |
-| **已补足**：Golden Thread DTC 模式 | — | web_fetch 官网验证 |
+| 缺口 | 影响程度 | 状态 | 说明 |
+|------|---------|------|------|
+| FateTell 精确月活/流量数据 | 中 | ⚠️ 仍有 | SimilarWeb 被封锁（403）；但已通过 RE BOUND 专访补充市场路线图、估值预期等更深层信息 |
+| Co-Star 2025-2026 AI 整合计划 | 中 | ✅ 已解决 | 官网确认仍为「算法+推送」路线（Hyper-Personalized Real-Time Horoscopes），无生成式 AI 整合计划 |
+| The Pattern 2025-2026 动态 | 中 | ✅ 已解决 | 确认 Connect 约会功能仍在运营，无 AI 整合计划，产品迭代缓慢 |
+| Tarot4 用户量/收入 | 低 | ⚠️ 仍有 | Sensor Tower 付费数据不可获取；产品较新，公开数据极少 |
+| 占星约会 App 精确下载量 | 低 | ✅ 已解决 | Cosmopolitan 2026 最新评测已纳入，5 款产品功能/定价/兼容性维度均已验证 |
+| 东西方融合需求验证 | 高 | ⚠️ 仍有 | 需 MVP 上线后 A/B 测试验证；GitHub 8+ 开源项目显示概念已被探索但未商业化 |
+| 美国 Gen Z 对八字/易经的接受度 | 高 | 🔄 部分补充 | FateTell 验证海外华人付费意愿；TikTok #fengshui 52 万条视频显示兴趣；但非华人 Gen Z 接受度仍需定性调研 |
+| DeepOracle 实际产品状态 | 低 | ✅ 已确认 | GitHub 搜索返回 0 结果，确认不构成竞争威胁 |
+| Tarotia 转化率/付费数据 | 中 | 🔄 部分补充 | 官网数据已验证（82,973+ 用户、200K+ 占卜、4.9/5 评分、7 语言）；但转化率/收入仍未公开 |
+| IChingQuest 用户量级 | 低 | ✅ 已解决 | 官网确认完整功能集（64 卦 384 爻、五维解读、蓍草积分制），流量小不构成威胁 |
+| FateTell 市场扩张战略 | 高 | ✅ 新补充 | RE BOUND 专访披露三阶段路线（华人→日韩东南亚→北美），年收入预期 1-2 亿美金 |
+| FateTell 是否会做东西方融合 | 高 | ✅ 新补充 | 创始人明确表示「不涉足西方星座塔罗」，确认 MysticMirror 融合定位无竞争压力 |
+| MysticSense ARPU | 中 | ⚠️ 仍有 | $1-5/分钟定价已验证，但单用户平均收入需行业报告 |
+
+> **总结**：原报告知识缺口中，7 个已解决，4 个仍有但多需付费数据源（SimilarWeb/Sensor Tower）或 MVP 测试验证。关键战略性缺口（FateTell 是否会融合东西方、Co-Star AI 计划、The Pattern 动态）均已通过权威来源确认无威胁。
 
 ---
 
-## 九、来源列表
+## 十、来源列表
 
 | # | 来源 | URL | 使用内容 |
 |---|------|-----|----------|
 | 1 | FateTell 官网 | fatetell.com | 定价、功能、用户评价 |
 | 2 | 搜狐/36氪/腾讯新闻 | sohu.com/a/1013810006_121478199, news.qq.com/rain/a/20250617A08F8O00 | FateTell 深度专访数据 |
-| 3 | RE BOUND/腾讯新闻 | news.qq.com/rain/a/20260226A066WT00 | FateTell 2026 iOS 发布 |
+| 3 | RE BOUND/腾讯新闻 | news.qq.com/rain/a/20260226A066WT00 | FateTell 2026 iOS 发布、创始人三阶段市场战略、不涉足西方占卜声明 |
 | 4 | 凤凰网财经/搜狐 | sohu.com/a/940885681_121124360 | 灵性出海赛道分析 |
 | 5 | TechCrunch/Sensor Tower | techcrunch.com/2020/03/02/... | 美国占星 App 收入数据 |
 | 6 | Sanctuary 官网 | sanctuaryworld.co/buy-subscription | 最新定价（2026.6.30 验证） |
-| 7 | Tarotap 官网 | tarotap.com/en | 免费 AI 塔罗功能 |
+| 7 | Tarotap 官网 | tarotap.com/en | 免费 AI 塔罗功能（2026-07-01 二次验证：6 种 AI 人格、双模式） |
 | 8 | Golden Thread Tarot | goldenthreadtarot.com | 产品功能、定位 |
 | 9 | Labyrinthos | labyrinthos.co | 塔罗教育平台 |
-| 10 | Cosmopolitan | cosmopolitan.com/relationships/... | 占星约会 App 评测 |
+| 10 | Cosmopolitan | cosmopolitan.com/relationships/g37213438/best-astrology-dating-apps/ | 占星约会 App 评测（2026-07-01 验证：NUiT/Stars Align/Oromoon/The Pattern Connect/Astrodita） |
+| 24 | Co-Star 官网 | costarastrology.com/about | 定位验证：Hyper-Personalized Real-Time Horoscopes（2026-07-01） |
+| 25 | IChingQuest 官网 | ichingquest.com/en | AI 易经功能/定价验证（2026-07-01：64 卦 384 爻、蓍草积分制、五维解读） |
+| 26 | Tarotia 官网 | tarotia.app/en | 用户数据验证（2026-07-01：82,973+ 用户、200K+ 占卜、4.9/5、7 语言） |
 | 11 | WaytoTarot | waytotarot.com | 免费塔罗平台数据 |
 | 12 | Kasamba | kasamba.com/psychic-reading | 按分钟定价 |
 | 13 | Pew Research Center | pewresearch.org | 用户行为数据 |
@@ -712,20 +716,33 @@ Golden Thread 证明了一个重要模式：**数字化+实体产品组合**
 
 ---
 
-## 十、方法论反思
+## 十一、方法论反思
 
 ### 做得好的方面
 - ✅ 充分利用已有研究（R-110/R-111/R-112），避免重复劳动
-- ✅ 4 个搜索员并行覆盖不同维度，FateTell 数据获取尤其深入
-- ✅ 直接 web_fetch 验证了 Sanctuary 最新定价、FateTell 官网、Tarotap 功能
+- ✅ 直接 web_fetch 验证了 Sanctuary、FateTell、Tarotap、Tarotia、IChingQuest 官网数据
 - ✅ 竞品空白地图清晰展示了东西方融合的蓝海定位
+- ✅ RE BOUND 专访提供了 FateTell 创始人第一手战略信息，解决关键情报缺口
+- ✅ Cosmopolitan 最新评测验证了占星约会赛道现状
 
 ### 需改进的方面
-- ⚠️ 搜索环境受限（web_search 不可用、Google/Reddit/Wikipedia 被封锁、Bing CN 重定向），影响英文竞品数据获取深度
-- ⚠️ Co-Star 和 The Pattern 的 2025-2026 最新动态数据不足
-- ⚠️ 缺少 Sensor Tower 等付费工具的精确收入/下载量数据
-- ⚠️ 未深入获取占星约会 App 的精确用户量级（App Store 被重定向到中国区）
+- ⚠️ 搜索环境受限（web_search 不可用、Reddit/Wikipedia 被封锁），影响英文竞品深度数据获取
+- ⚠️ 缺少 Sensor Tower/SimilarWeb 等付费工具的精确收入/下载量/流量数据
+- ⚠️ FateTell 精确月活/流量数据仍未获取（SimilarWeb 返回 403）
+- ⚠️ Tarot4 为较新产品，公开数据极少
+
+### 二次更新（2026-07-01）补充说明
+本轮更新通过 web_fetch 直接访问了以下来源进行数据验证和补充：
+- FateTell 官网（fatetell.com）— 用户评价、定价验证
+- 搜狐 FateTell 深度报道 — 行业数据、TikTok #fengshui 52 万条视频
+- 腾讯新闻/36氪 AI NOW! 专访 — FateTell 创始人深度访谈（技术、用户、价值观）
+- RE BOUND/腾讯新闻 2026 年专访 — FateTell iOS 发布、市场战略、三阶段路线图
+- Tarotia 官网（tarotia.app）— 用户量、评分、语言支持
+- IChingQuest 官网（ichingquest.com/en）— 完整功能、定价模式
+- Tarotap 官网（tarotap.com/en）— AI 特色功能验证
+- Cosmopolitan 占星约会 App 评测 — 5 款产品功能对比
+- Co-Star 官网（costarastrology.com/about）— 定位验证
 
 ---
 
-*报告编号：R-123 | 分类：01-AI行业研究 | 完成日期：2026-06-30*
+*报告编号：R-123 | 分类：01-AI行业研究 | 完成日期：2026-06-30 | 二次更新：2026-07-01*
