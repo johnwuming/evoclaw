@@ -1,26 +1,34 @@
 {
   "task": "电商合规财务中小企业痛点与竞品调研",
-  "phase": "searching",
-  "queries_executed": ["Q6-Q8,Q10-Q11,Q20-Q21"],
+  "phase": "writing",
+  "queries_executed": ["Q1-Q5,Q8-Q11,Q16-Q21,Q26 (searcher-2成功), Q1-Q8 (searcher-3部分成功), 补充web_fetch (畅捷通官网)"],
   "findings": [
-    {"id": "F001", "content": "畅捷通是中小企业财税SaaS市场头部玩家，2025年营收超10亿元，净利润大涨144%，云付费企业用户突破百万。产品线覆盖好会计、好生意、T+Cloud、好业财、易代账。", "sources": ["https://www.chanjet.com/news/135588.html"], "confidence": "high", "verified_by": ["searcher-2"]},
-    {"id": "F002", "content": "畅捷通好会计定价约498元起/年，支持电商多平台数据对接和自动化账务处理。T+Cloud电商ERP财务税务498元起，用户数300-1000元/用户。", "sources": ["https://www.chanjet.com/l/article-2025-02-24"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F003", "content": "金蝶精斗云面向小微企业，提供云会计和云进销存，功能包括总账、资金、资产、工资、税务管理，兼容主流财务软件数据导入。", "sources": ["https://www.ruanfujia.com/v/金蝶精斗云和畅捷通T+区别"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F004", "content": "电商代账服务价格：小规模纳税人200-500元/月，一般纳税人500-1000元/月。增值服务：财务咨询500元/次起，审计/税务筹划几千到数万元。", "sources": ["https://www.sohu.com/a/2025-01-16"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F005", "content": "淘宝卖家通过"账房"功能管理财务，提供收支查询和发票管理。个人店铺勾选开发票选项则必须开票。", "sources": ["https://www.maijia.com/a/article-2022-05-31"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F006", "content": "抖音抖店发票管理分"商家开票"（给平台开票）和"平台开票"（给消费者开票）两种。平台每月为商家出具应开票账单。", "sources": ["https://zhuanlan.zhihu.com/p/抖音小店发票怎么开"], "confidence": "medium", "verified_by": ["searcher-2"]},
+    {"id": "F001", "content": "畅捷通是中小企业财税SaaS市场头部玩家，2025年营收10.95亿元（+14%），净利润8159万元（+144%），云订阅收入7.58亿元（+16%），累计付费企业用户96.1万。连续五年小微云财税市占率第一。", "sources": ["https://www.chanjet.com/news/135588.html"], "confidence": "high", "verified_by": ["searcher-2", "lead-webfetch"]},
+    {"id": "F002", "content": "畅捷通2026Q1营收2.68亿元（+13%），云订阅收入2.01亿元（+17%，占75%），累计付费企业用户突破102.2万。发布AI Agent'畅龙虾'，采用MCP+TOKEN计费模式。", "sources": ["https://www.chanjet.com/news/135964.html"], "confidence": "high", "verified_by": ["lead-webfetch"]},
+    {"id": "F003", "content": "畅捷通产品线：好会计（智能云财务）、好生意（进销存）、T+Cloud（电商ERP）、好业财（商贸）、易代账（代账公司）。开放平台认证ISV超4600家，开发者超5100名，累计开发应用近9000个。", "sources": ["https://www.chanjet.com/news/135588.html", "https://www.chanjet.com/news/135964.html"], "confidence": "high", "verified_by": ["lead-webfetch"]},
+    {"id": "F004", "content": "畅捷通'易报税'AI产品已实现记账智能化、报税自动化、合规智能化、盈利挖掘智能化。代账行业人均服务能力从百余账套跃升至千余账套。入选2026中小微企业AI服务商TOP100。", "sources": ["https://www.chanjet.com/news/136100.html"], "confidence": "high", "verified_by": ["lead-webfetch"]},
+    {"id": "F005", "content": "电商代账服务价格：小规模纳税人200-500元/月，一般纳税人500-1000元/月。增值服务：财务咨询500元/次起，审计/税务筹划几千到数万元。", "sources": ["https://www.sohu.com/a/2025-01-16"], "confidence": "medium", "verified_by": ["searcher-2"]},
+    {"id": "F006", "content": "淘宝卖家通过'账房'功能管理财务，提供收支查询和发票管理。抖音抖店发票分'商家开票'和'平台开票'两种。拼多多商家后台含开票管理和对账管理模块。", "sources": ["https://zhuanlan.zhihu.com/p/抖音小店发票怎么开"], "confidence": "medium", "verified_by": ["searcher-2"]},
     {"id": "F007", "content": "抖音电商财税挑战：交易高频、数据分散、政策多变。畅捷通好会计已提供抖音电商报税申报系统对接方案。", "sources": ["https://h.chanjet.com/article/2026-05-16"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F008", "content": "拼多多商家后台财务管理模块含开管管理和对账管理，支持电子发票开具，对账涉及订单/售后/支付宝/推广/保证金明细。", "sources": ["https://business.sohu.com/a/拼多多发票管理规范"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F009", "content": "跨境电商收款主要玩家：万里汇（蚂蚁集团收购）、连连支付、PingPong、空中云汇。PingPong提供VAT缴纳、出口退税等增值服务。", "sources": ["https://www.pingpongx.com/zh/跨境收款", "https://zhuanlan.zhihu.com/p/跨境电商收款平台对比"], "confidence": "medium", "verified_by": ["searcher-2"]},
-    {"id": "F010", "content": "生意参谋是淘宝天猫官方运营数据分析工具（流量、搜索、商品分析），不直接提供财务/会计功能。", "sources": [], "confidence": "medium", "verified_by": ["searcher-2"]}
+    {"id": "F008", "content": "跨境电商收款主要玩家：万里汇（蚂蚁集团收购）、连连支付、PingPong、空中云汇。PingPong提供VAT缴纳、出口退税等增值服务。", "sources": ["https://www.pingpongx.com/zh/跨境收款"], "confidence": "medium", "verified_by": ["searcher-2"]},
+    {"id": "F009", "content": "金蝶AI星辰面向小微企业，金蝶AI星空面向中型企业。金蝶精斗云提供云会计和云进销存。金蝶产品线覆盖财务管理、税务管理、供应链管理。", "sources": ["https://www.kingdee.com/products/jingdou"], "confidence": "medium", "verified_by": ["searcher-2", "lead-webfetch"]},
+    {"id": "F010", "content": "全面数字化电子发票（数电票）和乐企平台已成为税务数字化基础设施。'交易即开票'模式2026年11月全国推广，实现开票自动化智能化，无需人工录入审核。", "sources": ["https://www.chinatax.gov.cn/chinatax/n810219/n810780/c5250416/content.html"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F011", "content": "全国八部门常态化联合打击涉税违法犯罪，一季度全国违规开票企业户数和金额双下降。税务监管趋严，企业合规压力加大。", "sources": ["https://www.chinatax.gov.cn/chinatax/n810724/c5249119/content.html"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F012", "content": "上海创新'税治+自治+共治'模式督促电商平台设发票专线。广西探索'简易零申报'微改革为小微企业解决逾期申报处罚痛点。", "sources": ["https://www.chinatax.gov.cn/chinatax/n810219/n810780/c5250522/content.html"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F013", "content": "增值税法2026年1月1日起施行，立法清晰界定免税适用范围。税务部门建立税费服务诉求分析机制，三年解决3512项热点难点诉求。", "sources": ["https://www.chinatax.gov.cn/chinatax/n810219/n810780/c5249411/content.html"], "confidence": "high", "verified_by": ["searcher-3"]},
+    {"id": "F014", "content": "畅捷通'畅龙虾'AI Agent已与T+Cloud/好业财/好生意/好会计全线产品打通。核心能力：自动对账、经营数据查询、营销素材生成、供应链分析。沙箱隔离运行，敏感操作强制人工确认。", "sources": ["https://www.chanjet.com/news/136058.html"], "confidence": "high", "verified_by": ["lead-webfetch"]},
+    {"id": "F015", "content": "生意参谋是淘宝天猫官方运营数据分析工具（流量、搜索、商品分析），不直接提供财务/会计功能。电商数据分析工具与财务SaaS是两个不同品类。", "sources": [], "confidence": "medium", "verified_by": ["searcher-2"]}
   ],
   "gaps": [
-    "网店管家具体功能和定价信息缺失",
-    "电商代账一线城市vs二三线城市具体价格差异数据缺失",
-    "快递管家、店透视等电商数据分析工具的财务功能详情缺失",
-    "亿企代账（税友）的产品功能和定价信息缺失",
-    "金蝶精斗云和畅捷通好会计的具体月费/年费定价数字需进一步确认",
-    "跨境电商工具的费率对比（提现费率、汇率差等）具体数据缺失"
+    "中国电商财税服务市场规模具体数字缺失（web_search不可用，艾瑞/易观报告未获取到）",
+    "中小企业财税SaaS渗透率数据缺失",
+    "AI财税领域其他创业公司融资信息缺失（如税友/亿企代账、慧算账等）",
+    "跨境电商Temu/SHEIN卖家VAT合规具体挑战数据缺失",
+    "财务外包vs自建团队成本对比详细数据缺失",
+    "网店管家/快递管家/店透视等产品财务功能详情缺失",
+    "亿企代账（税友集团）产品功能和定价信息缺失",
+    "跨境电商收款工具费率对比数据缺失",
+    "小微最新财税优惠政策具体条文缺失（searcher-3获取的是医美相关而非小微企业普惠政策）"
   ],
-  "next_actions": ["等待searcher-1和searcher-3返回结果", "补充网店管家/亿企代账功能对比", "补充跨境电商工具费率对比数据"]
+  "next_actions": ["基于已有findings写baseline报告", "标注数据缺口"]
 }
