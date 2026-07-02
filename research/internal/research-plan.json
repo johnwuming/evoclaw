@@ -1,4 +1,13 @@
 {
+  "current_task": {
+    "topic": "DateFate产品页面设计：粉紫温柔风塔罗星座独立站首页+应用页",
+    "report_id": "R-128",
+    "category": "01-AI行业研究",
+    "complexity": "中等",
+    "searcher_count": 2,
+    "focus": "竞品UI研究 + 塔罗/星座专业知识"
+  },
+  "_previous_task": {
   "topic": "海外AI PPT独立站需求与商业化前景调研",
   "complexity": "中等",
   "complexity_reason": "需要调研海外AI PPT生成工具（独立站形态）的市场需求、竞品格局、商业模式、用户痛点和增长策略。涉及多个维度但赛道明确、产品形态清晰，可通过20+查询在1-2轮内覆盖。不需要深度研究的50个查询规模，但比简单事实查找复杂，需要竞品对比、定价分析、商业模式评估。",
