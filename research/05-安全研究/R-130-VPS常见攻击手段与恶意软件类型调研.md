@@ -269,4 +269,267 @@
 
 | 项目 | 详情 |
 |------|------|
-| **技术** | ①`
+| **技术** | ①`history -c && rm -f ~/.bash_history`（清除当前会话历史并删除文件）；②`export HISTFILE=/dev/null`（重定向历史到空设备）；③`export HISTSIZE=0`（设置历史记录条数为0）；④`export HISTCONTROL=ignorespace`（命令前加空格则不记录）；⑤`shred -f -z -u ~/.bash_history`（安全删除，无法恢复）。 |
+| **检测方法** | ①auditd: `-w /home/*/.bash_history -p wa -k hist_modification`；②检查HISTFILE和HISTSIZE环境变量异常设置；③使用远程日志服务器记录操作审计。 |
+| **MITRE ATT&CK** | T1070.003 Clear Command History |
+
+### 4.2 系统日志清除
+
+| 项目 | 详情 |
+|------|------|
+| **技术** | ①`cat /dev/null > /var/log/syslog`（清空系统日志）；②`cat /dev/null > /var/log/auth.log`（清空认证日志）；③`rm /var/log/wtmp /var/log/btmp`（删除登录记录）；④`> /var/log/lastlog`（清除最后登录记录）；⑤篡改logrotate配置干扰日志轮转。 |
+| **检测方法** | ①监控 `/var/log/` 目录文件大小突然归零；②检查wtmp/btmp/lastlog文件是否被截断：`ls -la /var/log/wtmp /var/log/btmp /var/log/lastlog`；③部署远程syslog服务器防止本地日志被篡改；④使用inotify监控关键日志文件。 |
+| **MITRE ATT&CK** | T1070.002 Clear Linux or Mac System Logs |
+
+### 4.3 隐藏文件与目录
+
+| 项目 | 详情 |
+|------|------|
+| **技术** | ①以点(.)开头的文件/目录对默认 `ls` 不可见（如 `/tmp/.hidden_dir/`）；②伪装系统文件名（如 `/usr/sbin/sshd-backdoor`）；③`chattr +i` 设置不可变属性防止删除；④深层目录投放（如 `/usr/local/lib/.hidden/`）。 |
+| **常见隐藏位置** | `/tmp/.*`、`/dev/shm/.*`、`/var/tmp/.*`、`/usr/local/lib/.*`。 |
+| **实际案例** | COATHANGER创建隐藏安装目录；FIN13在 `/tmp` 创建隐藏目录；CoinTicker在 `/tmp` 投放 `.info.enc`、`.info.py` 等隐藏文件。 |
+| **检测方法** | ①`ls -laR /tmp /dev/shm /var/tmp` 定期扫描临时目录；②`find / -name '.*' -type f` 搜索所有隐藏文件；③使用AIDE/Tripwire文件完整性监控；④检查 `/dev/shm` 中的可疑文件（正常应为空）；⑤监控 `chattr` 命令使用。 |
+| **MITRE ATT&CK** | T1564.001 Hidden Files and Directories |
+
+### 4.4 Rootkit 级隐藏
+
+| 项目 | 详情 |
+|------|------|
+| **内核态隐藏** | Hook `sys_call_table`，拦截 `readdir`/`readdir64` 隐藏指定文件/进程/网络连接。Diamorphine通过魔法kill信号隐藏进程。Skidmap伪造CPU和网络统计数据，使top/vmstat显示正常值。 |
+| **用户态隐藏** | LD_PRELOAD hook libc函数（readdir/execve/ptrace），使 `ls`、`ps`、`netstat` 等命令过滤恶意条目。Ebury hook SSH函数窃取凭证。 |
+| **检测方法** | ①内存取证分析（Volatility框架）；②对比 `/proc/modules` 与 `lsmod` 输出；③从内存dump分析 `sys_call_table` 完整性；④使用 `strace` 分析函数调用差异；⑤部署文件完整性监控（AIDE/Tripwire）。 |
+| **MITRE ATT&CK** | T1014 Rootkit |
+
+---
+
+## 5. 近年实际案例（2023-2026）
+
+### 5.1 TeamTNT — Docker/K8s 蠕虫式挖矿攻击
+
+| 项目 | 详情 |
+|------|------|
+| **时间** | 2021-2024年持续活跃 |
+| **攻击链** | ①通过Docker Hub发布6个恶意容器镜像（wescopwn、tornadopwn、jaganod、awspwner等）；②扫描配置错误的Docker daemon（端口2375/2376）；③利用Kubeflow仪表板和Weave Scope入侵；④运行恶意容器→部署挖矿木马+蠕虫+后门；⑤窃取AWS凭证→扫描下一个受害者。 |
+| **C2基础设施** | `45[.]9[.]148[.]85`、`borg[.]wtf`。 |
+| **IOC** | Docker镜像名：wescopwn/tornadopwn/jaganod/awspwner；目标端口：Docker 2375/2376、Kubelet 10250。 |
+| **来源** | Aqua Security详细分析 |
+
+### 5.2 8220 挖矿团伙 — 全链路攻击 + 专门规避国内云安全
+
+| 项目 | 详情 |
+|------|------|
+| **时间** | 2022-2024年持续活跃 |
+| **初始入侵** | 利用CVE-2022-26134（Confluence RCE）和配置错误的Docker daemon。 |
+| **持久化** | 创建多个cron job确保重启后执行，含备份机制（atd/infinite loop）。 |
+| **防御规避（专门针对国内云）** | ①关闭阿里云、百度云、GCP安全工具；②禁用UFW防火墙；③`setenforce 0` 将SELinux设为permissive；④删除 `/etc/ld.so.preload` 阻止安全库预加载；⑤恶意文件放在 `/tmp` 目录（部分无代理安全方案盲区）；⑥清除cron日志、wtmp、secure日志、`/var/spool/mail/root`。 |
+| **横向移动** | ①masscan扫描内网（10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）SSH端口；②使用spirit/spirit-pro工具暴力破解；③窃取 `known_hosts` 文件和SSH密钥，枚举所有密钥/主机/用户组合，设置 `StrictHostKeyChecking=no` 实现免密登录传播。 |
+| **载荷** | cryptominer(dbused) + Tsunami后门(IRC bot)，启用HugePages加速挖矿20-30%。 |
+| **关键启示** | **攻击者对中国云服务商安全产品有深入研究**，专门编写脚本关闭国内云安全工具。 |
+| **来源** | Aqua Security详细分析 |
+
+### 5.3 Kinsing — Openfire 漏洞挖矿攻击
+
+| 项目 | 详情 |
+|------|------|
+| **时间** | 2023年5月CVE披露，7月开始大规模利用，持续到2024年 |
+| **攻击链** | ①扫描互联网发现Openfire服务器；②利用CVE-2023-32315（路径遍历）创建管理员用户；③上传恶意Metasploit插件；④部署web shell；⑤下载Kinsing主payload和cryptominer。 |
+| **影响规模** | Shodan发现**6419个公网Openfire实例**，其中**19.5%（984个）存在漏洞**。蜜罐在不到2个月内记录超过**1000次攻击**，**91%归因于Kinsing**。 |
+| **受影响地区** | 美国、中国、巴西最严重。 |
+| **来源** | Aqua Security详细分析 |
+
+### 5.4 CrowdStrike 2026 全球威胁统计
+
+| 指标 | 数据 |
+|------|------|
+| 最快eCrime突破时间 | **27秒**（同比提升65%） |
+| AI赋能攻击增长 | **89%** |
+| 无恶意软件攻击占比 | **82%**（living-off-the-land） |
+| 中国关联对手边缘设备漏洞利用 | **40%** |
+| 国家级云意识入侵增长 | **266%** |
+
+### 5.5 腾讯云安全违规处置机制揭示的常见被入侵表现
+
+根据腾讯云官方文档，VPS被入侵后最常见的表现：
+
+1. **设备外发流量异常突增**（非正常业务流量）→ 已沦为DDoS僵尸节点或C2中转
+2. **CPU被异常程序大量占用** → 挖矿木马感染
+3. **文件被加密删除并留有勒索信息** → 勒索软件攻击
+4. **被植入木马后门对外攻击** → 已成为攻击跳板
+5. **被搭建网络代理服务**（frp、HAProxy等） → 作为攻击基础设施
+
+> 腾讯云数据显示，**封禁或挖矿相关违规**是最高频的处置类型，说明挖矿木马是国内云服务器最常见安全威胁。
+
+---
+
+## 6. VPS安全自查清单
+
+以下清单供运维人员对照检查，覆盖攻击面、持久化、隐藏手段三大维度。
+
+### 🔴 SSH 安全
+
+- [ ] SSH已禁用密码登录，仅使用密钥认证（`PasswordAuthentication no`）
+- [ ] SSH默认端口22已修改为非标准端口
+- [ ] root登录已禁用或限制（`PermitRootLogin no` 或 `prohibit-password`）
+- [ ] 已部署 fail2ban 并配置合理的封禁策略
+- [ ] `MaxAuthTries` 设为3-5次
+- [ ] `LoginGraceTime` 设为30-60秒
+- [ ] 检查 `~/.ssh/authorized_keys` 中无未知公钥
+- [ ] SSH使用IP白名单限制（安全组/iptables/hosts.allow）
+
+### 🔴 端口与服务暴露
+
+- [ ] 数据库端口（3306/6379/27017/9200/5432）未对公网开放
+- [ ] Redis已配置 `bind 127.0.0.1` + `requirepass`
+- [ ] MongoDB已启用 `--auth`
+- [ ] Docker API（2375/2376）未暴露公网或已启用TLS
+- [ ] Kubelet API（10250）未暴露公网
+- [ ] Telnet服务已关闭
+- [ ] 使用 `ss -tlnp` 确认无意外监听端口
+- [ ] 安全组规则遵循最小暴露原则
+
+### 🔴 持久化排查
+
+#### systemd
+- [ ] `systemctl list-unit-files --state=enabled` 无未知服务
+- [ ] `systemctl list-timers --all` 无未知定时器
+- [ ] `/etc/systemd/system/` 下无可疑 `.service`/`.timer` 文件
+- [ ] `/etc/systemd/system-generators/` 下无未知generator
+
+#### cron
+- [ ] `crontab -l -u root` 及各用户cron无未知任务
+- [ ] `/etc/crontab` 无可疑条目
+- [ ] `/etc/cron.d/`、`/etc/cron.hourly/` 等目录无可疑脚本
+- [ ] `/var/spool/cron/` 无异常变化
+
+#### 启动脚本
+- [ ] `/etc/rc.local` 不存在或内容正常
+- [ ] `systemctl status rc-local` 未激活或内容正常
+- [ ] `/etc/init.d/` 下无未知脚本
+
+#### Shell配置
+- [ ] `/etc/profile`、`/etc/profile.d/` 无可疑命令
+- [ ] `~/.bashrc`、`~/.bash_profile`、`~/.profile` 无可疑命令
+- [ ] `/etc/update-motd.d/` 下脚本无篡改
+
+#### SSH密钥
+- [ ] `~/.ssh/authorized_keys` 中无未知公钥
+- [ ] `sshd_config` 未被异常修改（特别是PermitRootLogin/PubkeyAuthentication）
+
+#### 内核模块
+- [ ] `lsmod` 无未知模块
+- [ ] `/etc/modules` 和 `/etc/modules-load.d/` 无异常条目
+- [ ] `/proc/modules` 与 `lsmod` 输出一致
+
+#### LD_PRELOAD
+- [ ] `/etc/ld.so.preload` 文件不存在或内容正常
+- [ ] `env | grep LD_PRELOAD` 无异常设置
+
+### 🔴 隐藏与日志检查
+
+- [ ] `ls -la /tmp/ /dev/shm/ /var/tmp/` 无可疑隐藏文件（以.开头）
+- [ ] `/var/log/wtmp`、`/var/log/btmp`、`/var/log/lastlog` 文件大小正常（未被截断）
+- [ ] `/var/log/auth.log` 中无异常清除痕迹
+- [ ] `find / -name '.*' -type f -executable 2>/dev/null` 无可疑结果
+- [ ] 使用 `rkhunter --check` 或 `chkrootkit` 扫描无异常
+- [ ] `chattr` 属性检查无异常不可变文件
+
+### 🔴 进程与网络
+
+- [ ] `ps aux --sort=-%cpu | head -20` 无可疑高CPU进程（排除已知服务）
+- [ ] `netstat -antp` 或 `ss -antp` 无异常出站连接
+- [ ] 无未知进程连接IRC端口（6667等）或异常C2端口
+- [ ] `lsof -i` 无可疑网络连接
+
+### 🔴 账户与权限
+
+- [ ] `/etc/passwd` 中无未知用户账户
+- [ ] 检查UID为0的用户只有root
+- [ ] sudo权限配置合理（`visudo` 检查）
+- [ ] 应用服务不以root运行
+
+### 🔴 系统更新与加固
+
+- [ ] 系统补丁已更新至最新
+- [ ] 已参照CIS Benchmarks进行基线加固
+- [ ] auditd已部署并配置关键文件监控规则
+- [ ] 已部署HIDS（OSSEC/Wazuh/腾讯云主机安全/阿里云安骑士）
+- [ ] 已配置远程syslog服务器
+- [ ] 已配置文件完整性监控（AIDE/Tripwire）
+
+### 🟡 容器安全（如使用Docker/K8s）
+
+- [ ] 无容器以 `--privileged` 模式运行
+- [ ] Docker socket未挂载到容器内
+- [ ] 容器以非root用户运行
+- [ ] capabilities已最小化（`--cap-drop ALL`）
+- [ ] 容器镜像来源可信，已扫描漏洞（Trivy/Clair）
+- [ ] 已部署容器运行时安全监控（Falco/Tracee）
+
+---
+
+## 7. 来源列表
+
+| # | 来源 | URL |
+|---|------|-----|
+| 1 | MITRE ATT&CK — Brute Force (T1110) | https://attack.mitre.org/techniques/T1110/ |
+| 2 | MITRE ATT&CK — Exploit Public-Facing Application (T1190) | https://attack.mitre.org/techniques/T1190/ |
+| 3 | MITRE ATT&CK — Unix Shell (T1059.004) | https://attack.mitre.org/techniques/T1059/004/ |
+| 4 | MITRE ATT&CK — Rootkit (T1014) | https://attack.mitre.org/techniques/T1014/ |
+| 5 | MITRE ATT&CK — Kernel Modules (T1547.006) | https://attack.mitre.org/techniques/T1547/006/ |
+| 6 | MITRE ATT&CK — Dynamic Linker Hijacking (T1574.006) | https://attack.mitre.org/techniques/T1574/006/ |
+| 7 | MITRE ATT&CK — System Services (T1543.002) | https://attack.mitre.org/techniques/T1543/002/ |
+| 8 | MITRE ATT&CK — Cron (T1053.003) | https://attack.mitre.org/techniques/T1053/003/ |
+| 9 | MITRE ATT&CK — SSH Authorized Keys (T1098.004) | https://attack.mitre.org/techniques/T1098/004/ |
+| 10 | MITRE ATT&CK — Clear Command History (T1070.003) | https://attack.mitre.org/techniques/T1070/003/ |
+| 11 | MITRE ATT&CK — Hidden Files and Directories (T1564.001) | https://attack.mitre.org/techniques/T1564.001/ |
+| 12 | MITRE ATT&CK — Kinsing (S0599) | https://attack.mitre.org/software/S0599/ |
+| 13 | MITRE ATT&CK — Hildegard (S0601) | https://attack.mitre.org/software/S0601/ |
+| 14 | MITRE ATT&CK — Skidmap (S0468) | https://attack.mitre.org/software/S0468/ |
+| 15 | MITRE ATT&CK — Drovorub (S0502) | https://attack.mitre.org/software/S0502/ |
+| 16 | MITRE ATT&CK — BPFDoor (S1161) | https://attack.mitre.org/software/S1161/ |
+| 17 | MITRE ATT&CK — COATHANGER (S1105) | https://attack.mitre.org/software/S1105/ |
+| 18 | MITRE ATT&CK — Chaos (S0220) | https://attack.mitre.org/software/S0220/ |
+| 19 | MITRE ATT&CK — Akira (S1129) | https://attack.mitre.org/software/S1129/ |
+| 20 | MITRE ATT&CK — AcidRain (S1125) | https://attack.mitre.org/software/S1125/ |
+| 21 | MITRE ATT&CK — AcidPour (S1167) | https://attack.mitre.org/software/S1167/ |
+| 22 | MITRE ATT&CK — REPTILE (S1219) | https://attack.mitre.org/software/S1219/ |
+| 23 | MITRE ATT&CK — Linux Rabbit (S0362) | https://attack.mitre.org/software/S0362/ |
+| 24 | MITRE ATT&CK — NKAbuse (S1107) | https://attack.mitre.org/software/S1107/ |
+| 25 | MITRE ATT&CK — KV Botnet (C0035) | https://attack.mitre.org/campaigns/C0035/ |
+| 26 | CrowdStrike 2026 Global Threat Report | https://www.crowdstrike.com/en-us/global-threat-report/ |
+| 27 | OWASP Top 10:2025 | https://owasp.org/Top.10/2025/ |
+| 28 | IBM — Brute Force Attack | https://www.ibm.com/think/topics/brute-force-attack |
+| 29 | Imperva — Brute Force Attack | https://www.imperva.com/learn/application-security/brute-force-attack/ |
+| 30 | IBM — Container Security | https://www.ibm.com/think/topics/container-security |
+| 31 | NVD (National Vulnerability Database) | https://nvd.nist.gov/vuln/data-feeds |
+| 32 | Aqua Security — TeamTNT Campaign | https://www.aquasec.com/blog/teamtnt-campaign-against-docker-kubernetes-environment/ |
+| 33 | Aqua Security — 8220 Gang CVE-2022-26134 | https://www.aquasec.com/blog/8220-gang-confluence-vulnerability-cve-2022-26134/ |
+| 34 | Aqua Security — Kinsing Openfire Exploit | https://www.aquasec.com/blog/kinsing-malware-exploits-novel-openfire-vulnerability/ |
+| 35 | Aqua Security — Container Threats in MITRE | https://www.aquasec.com/news/container-security-threats-added-to-mitre-attack-framework/ |
+| 36 | 腾讯云 — Linux入侵排查指南 | https://cloud.tencent.com/document/product/296/9604 |
+| 37 | 腾讯云 — 安全违规处置机制 | https://cloud.tencent.com/document/product/301/9610 |
+| 38 | CIS Benchmarks | https://www.cisecurity.org/cis-benchmarks |
+| 39 | MongoDB — Security Manual | https://www.mongodb.com/docs/manual/security/ |
+| 40 | Kaspersky — Dark Web Predictions 2025 | https://securelist.com/ksb-dark-web-predictions-2025/114966/ |
+| 41 | pberba — Linux Threat Hunting: Persistence | https://pberba.github.io/security/2022/01/30/linux-threat-hunting-for-persistence-systemd-timers-cron/ |
+| 42 | pberba — Linux Threat Hunting: Shell Config | https://pberba.github.io/security/2022/02/06/linux-threat-hunting-for-persistence-initialization-scripts-and-shell-configuration/ |
+| 43 | pberba — Linux Threat Hunting: Systemd Generators | https://pberba.github.io/security/2022/02/07/linux-threat-hunting-for-persistence-systemd-generators/ |
+
+---
+
+## 8. 方法论反思
+
+### 做得好的方面
+- 覆盖了5大攻击入口、5大类恶意软件、10种持久化机制、4类隐藏手段，结构完整
+- 以MITRE ATT&CK框架为骨架，技术分类权威
+- 重点纳入了腾讯云/阿里云环境下的实际攻击模式（8220团伙专门规避国内云安全产品）
+- 提供了实用的VPS安全自查清单，可直接用于运维
+
+### 知识缺口
+- 部分2025年最新恶意软件变种的技术细节有限（主要安全报告通常在年中发布）
+- 国内云服务商（腾讯云/阿里云）的官方安全年报数据未完全公开获取
+- 未深入覆盖容器编排平台（Kubernetes）的特定攻击场景
+
+---
+
+> **免责声明**：本报告基于公开来源调研，供安全防御参考。具体防护措施应结合业务场景和合规要求实施。恶意软件 IOC 可能随时间失效，建议结合实时威胁情报使用。
