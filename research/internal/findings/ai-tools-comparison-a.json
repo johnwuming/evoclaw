@@ -1,0 +1,236 @@
+{
+  "task_name": "ai-tools-comparison-a",
+  "findings": [
+    {
+      "id": "F001",
+      "query_id": 1,
+      "content": "v0.dev（v0 by Vercel）定价体系（2025-2026）：Free $0/月（含$5月度信用额度，7条消息/天限制，可部署到Vercel，Design Mode可视化编辑，GitHub同步）；Team $30/用户/月（$30月度信用额度+每天$2登录信用，团队共享信用池，集中计费，协作聊天）；Business $100/用户/月（$30月度信用额度，默认训练退出）；Enterprise 定制（数据不用于训练，SAML SSO，RBAC，优先性能，SLA保障）。模型按token计费，4个层级：速度快档（Input $1/1M，Output $5/1M）、平衡档（Input $3/1M，Output $15/1M）、最大智能档（Input $5/1M，Output $25/1M）、极速输出档（Input $10/1M，Output $50/1M）。",
+      "sources": ["https://v0.dev/pricing"],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "v0.dev",
+        "pricing": "Free $0, Team $30/user/mo, Business $100/user/mo, Enterprise custom",
+        "features": [
+          "Full-stack app generation from prompts",
+          "Design Mode (visual editing + live preview)",
+          "GitHub sync (push code to repo)",
+          "One-click deploy to Vercel",
+          "Create design systems (colors, typography, styles across projects)",
+          "Templates and ready-made components",
+          "Agentic by default (plans, creates tasks, connects databases)",
+          "iOS app for mobile building",
+          "Database and API integration"
+        ],
+        "api": "Platform API available (v0-sdk, npm: v0-sdk). Requires API key + Premium/Team plan. Includes chat/conversation management, code parsing & file generation, browser app execution, project & deployment tools.",
+        "code_export": "React/Next.js code, GitHub sync, deploy to Vercel"
+      }
+    },
+    {
+      "id": "F002",
+      "query_id": 1,
+      "content": "v0.dev 核心能力：Prompt→Build→Publish 全流程，可生成全栈应用并秒级发布为live网站。核心特性包括：(1) Agentic by default — 自动规划、创建任务、连接数据库构建全栈应用（Web→Plan→DB→API→Deploy→LLM全链路）；(2) Design Mode — 可视化控件+实时预览精细调整；(3) Design Systems — 定义颜色、排版、样式跨项目复用；(4) GitHub repo同步；(5) 一键部署Vercel；(6) 模板系统加速启动；(7) iOS移动端构建。Platform API支持聊天管理、代码生成、浏览器执行、项目管理。",
+      "sources": ["https://v0.dev", "https://v0.dev/docs/api"],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "v0.dev",
+        "pricing": "Free $0 / Team $30 / Business $100 / Enterprise",
+        "features": ["Agentic full-stack building", "Design Mode", "Design Systems", "GitHub sync", "Vercel deploy", "Templates", "iOS app"],
+        "api": "v0-sdk, Platform API (chat, code gen, browser exec, project mgmt)",
+        "code_export": "React/Next.js, GitHub push, Vercel deploy"
+      }
+    },
+    {
+      "id": "F003",
+      "query_id": 2,
+      "content": "Bolt.new（StackBlitz）定价体系（2025-2026）：Free $0（300K日token限制，1M月token，公私项目，Bolt品牌水印，10MB上传限制，网站托管333K请求，无限数据库）；Pro $25/月（无日token限制，10M月token起，无水印，私密分享，100MB上传，1M请求，token滚动，自定义域名，SEO，AI图片编辑）；Teams $30/月/成员（含Pro全部+集中计费，团队级访问管理，精细管理控制，私有NPM注册表支持，Design System知识per-package提示）；Enterprise 定制（SSO/审计日志/合规，24/7支持，专属客户经理）。年付最多省28%。",
+      "sources": ["https://bolt.new/pricing"],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Bolt.new",
+        "pricing": "Free $0, Pro $25/mo, Teams $30/mo/member, Enterprise custom",
+        "features": [
+          "Public/private projects",
+          "Website hosting with web requests",
+          "Unlimited databases",
+          "AI image editing (Pro+)",
+          "Custom domain support (Pro+)",
+          "Token rollover (Pro+)",
+          "SEO boosting (Pro+)",
+          "Team centralized billing & admin",
+          "Private NPM registries (Teams+)",
+          "Design System knowledge with per-package prompts (Teams+)",
+          "Enterprise: SSO, audit logs, compliance, 24/7 support"
+        ],
+        "api": "No public API documented; primarily browser-based platform",
+        "code_export": "Full web app code export, GitHub integration, website hosting"
+      }
+    },
+    {
+      "id": "F004",
+      "query_id": 2,
+      "content": "Bolt.new Design System 功能：将团队的repo、NPM包、文档转化为可构建生产级原型的设计系统智能体。支持从GitHub、私有NPM注册表、Storybook导入设计系统。预加载设计系统（如AWS Cloudscape）可直接试用。Teams计划及以上可添加自定义设计系统，通过sync机制同步最新版本。Design System让Bolt从真实组件而非占位代码生成UI，确保输出一致且可交付。",
+      "sources": ["https://bolt.new/enterprise", "https://support.bolt.new/building/design-system/introduction"],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Bolt.new",
+        "pricing": "Teams $30/mo/member for Design System feature",
+        "features": ["Import design systems from GitHub/NPM/Storybook", "Pre-loaded design systems (AWS Cloudscape etc.)", "Design System sync", "Per-package prompts", "Production-ready component output"],
+        "api": "Browser-based, no public API",
+        "code_export": "Full app code with custom design system components"
+      }
+    },
+    {
+      "id": "F005",
+      "query_id": 3,
+      "content": "Lovable 定价与信用体系（2025-2026）：采用credit-based体系，统一覆盖build usage（发消息生成/编辑应用）、cloud usage（托管运行）和AI gateway usage（部署应用AI调用）。Free：5 daily build credits（月上限30）+20 cloud credits+4 AI credits。Pro：$25/月起（100 monthly credits）， tiers从100到10000 credits（$25-$2250/月），年付有折扣。Business：更高级别（SSO, RBAC, 安全中心）。Enterprise：定制（SCIM, 审计日志, 定期安全扫描, 设计系统, 自定义连接器）。所有付费计划含代码编辑器、自定义域名、去水印。",
+      "sources": [
+        "https://docs.lovable.dev/introduction/subscription-plans",
+        "https://docs.lovable.dev/introduction/credits-and-usage"
+      ],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Lovable",
+        "pricing": "Free $0 / Pro from $25/mo (100 credits) to $2250/mo (10000 credits) / Business / Enterprise custom",
+        "features": [
+          "Full-stack app building via natural language chat",
+          "Code editor (Pro+)",
+          "Custom domains (Pro+)",
+          "Collaboration with roles & permissions (Pro+)",
+          "Lovable Cloud hosting",
+          "AI gateway for deployed apps",
+          "Design guidance (3 design previews before build)",
+          "Design templates (Business+)",
+          "Design systems (Enterprise)",
+          "Cross-project referencing",
+          "Browser testing",
+          "SSO (Business+)",
+          "SCIM, audit logs (Enterprise)"
+        ],
+        "api": "No public developer API documented; platform-based interaction",
+        "code_export": "React-based code editor, GitHub sync, Lovable Cloud deploy"
+      }
+    },
+    {
+      "id": "F006",
+      "query_id": 3,
+      "content": "Lovable 设计能力深度：(1) Design Guidance — 构建前生成3个轻量HTML+Tailwind预览方向供比较选择，支持排版/颜色/布局引导，最多6次迭代细化。(2) Design Systems — Enterprise功能，将React组件库标准化复用于跨项目。设计系统作为独立Lovable项目创建，支持版本管理（每次release版本号递增），可从外部NPM包包装。连接项目会自动接收更新。(3) Design Templates（Business+）— 复用整个项目codebase作为模板。(4) Cross-project referencing — 跨项目复用代码、资源、聊天历史。",
+      "sources": [
+        "https://docs.lovable.dev/features/design-guidance.md",
+        "https://docs.lovable.dev/features/design-systems.md"
+      ],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Lovable",
+        "pricing": "Design Guidance: all plans; Design Templates: Business+; Design Systems: Enterprise",
+        "features": ["3 design direction previews (HTML+Tailwind)", "Design questions for typography/color/layout", "Versioned design systems with React component libraries", "NPM package wrapping", "Cross-project referencing", "Design templates"],
+        "api": "N/A",
+        "code_export": "React-based, code editor, GitHub"
+      }
+    },
+    {
+      "id": "F007",
+      "query_id": 4,
+      "content": "Cursor（AI Code Editor）定价体系（2025-2026）：Hobby Free（无需信用卡，有限Agent请求，有限Tab补全）；Individual $20/月（含Hobby全部+扩展Agent限制，前沿模型访问，MCPs/skills/hooks，Cloud agents，Bugbot用量计费，含Pro/Pro+/Ultra子档）；Teams $40/用户/月（含Individual全部+集中计费管理，团队marketplace内部规则/技能/插件，Bugbot代码审查，共享团队上下文的Cloud agents，使用分析，团队隐私模式，SAML/OIDC SSO，含Standard/Premium子档）；Enterprise 定制（ pooled usage，发票/PO计费，SCIM，仓库/模型/MCP访问控制，审计日志，AI代码跟踪API，优先支持）。被Fortune 500半数以上企业信任，NVIDIA 40000工程师全员使用。支持多模型（OpenAI/Anthropic/Gemini/xAI/Cursor自研）。",
+      "sources": ["https://cursor.com/pricing", "https://cursor.com"],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Cursor",
+        "pricing": "Hobby Free / Individual $20/mo / Teams $40/user/mo / Enterprise custom",
+        "features": [
+          "Autonomous agents running in parallel on own computers",
+          "Terminal, Slack, GitHub PR review integration",
+          "Multi-model support (OpenAI, Anthropic, Gemini, xAI, Cursor)",
+          "Complete codebase understanding at scale",
+          "Tab completion, Cmd+K targeted edits, full autonomy agent",
+          "Cloud agents",
+          "Bugbot agentic code reviews",
+          "Team marketplace (internal rules, skills, plugins)",
+          "MCPs, skills, hooks",
+          "SAML/OIDC SSO (Teams+)",
+          "AI code tracking API (Enterprise)"
+        ],
+        "api": "AI code tracking API (Enterprise); CLI install: curl https://cursor.com/install",
+        "code_export": "Works directly in your codebase/IDE, terminal, GitHub"
+      }
+    },
+    {
+      "id": "F008",
+      "query_id": 5,
+      "content": "组件库与设计系统支持对比（shadcn等）：(1) v0.dev — 原生支持shadcn/ui组件体系（Vercel生态深度整合），内置Design Systems功能定义颜色/排版/样式跨项目复用，模板含ready-made组件。(2) Bolt.new — Teams计划支持Design System知识，可从GitHub/私有NPM/Storybook导入自定义组件库，per-package提示确保生成代码使用真实组件，预加载AWS Cloudscape等设计系统。(3) Lovable — Enterprise计划支持Design Systems（React组件库标准化），可包装外部NPM包，版本管理，Business+支持Design Templates复用全项目codebase。(4) Cursor — 直接在IDE中操作任何已有组件库/shadcn项目，代码级深度集成，但无内置设计系统管理功能。总结：v0.dev对shadcn支持最原生；Bolt.new的Design System导入最灵活（支持Storybook）；Lovable企业级版本管理最强；Cursor代码级灵活度最高。",
+      "sources": [
+        "https://v0.dev",
+        "https://support.bolt.new/building/design-system/introduction",
+        "https://docs.lovable.dev/features/design-systems.md",
+        "https://cursor.com"
+      ],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Cross-tool: Component Library Support",
+        "pricing": "varies by tool",
+        "features": [
+          "v0.dev: native shadcn/ui + Design Systems + templates",
+          "Bolt.new: import from GitHub/NPM/Storybook, per-package prompts (Teams+)",
+          "Lovable: React design systems with versioning, NPM wrapping (Enterprise)",
+          "Cursor: direct IDE integration with any component library"
+        ],
+        "api": "N/A",
+        "code_export": "All export React-based code (except Cursor which works in-repo)"
+      }
+    },
+    {
+      "id": "F009",
+      "query_id": 4,
+      "content": "Cursor 的设计转代码能力定位：Cursor本质上不是「设计生成」工具，而是AI代码编辑器/Agent。其设计转代码能力体现在：(1) 可直接读取Figma等设计文件（通过MCP集成或截图）并在代码库中实现；(2) Agent可端到端构建、测试、演示功能特性；(3) 在终端、Slack、GitHub PR中协作；(4) Tab补全+Cmd+K精确编辑+全自主Agent三档自由度。与v0/Bolt/Lovable不同，Cursor不生成设计而是将已有设计/需求转化为代码实现。支持前端任何框架。多Agent研发团队适配：Cloud agents并行运行，共享团队上下文，Bugbot自动代码审查。",
+      "sources": ["https://cursor.com", "https://cursor.com/pricing"],
+      "confidence": "high",
+      "tool_comparison": {
+        "name": "Cursor",
+        "pricing": "Free / $20 Individual / $40 Teams / Enterprise",
+        "features": ["Not a design generator but AI code agent", "Figma→code via MCP/screenshots", "Multi-model support", "Cloud agents parallel", "Bugbot code review", "IDE-native experience"],
+        "api": "AI code tracking API (Enterprise)",
+        "code_export": "Works directly in your codebase, any framework"
+      }
+    }
+  ],
+  "visited_urls": [
+    "https://v0.dev/pricing",
+    "https://v0.dev",
+    "https://v0.dev/docs/api",
+    "https://bolt.new/pricing",
+    "https://bolt.new/enterprise",
+    "https://support.bolt.new/building/design-system/introduction",
+    "https://lovable.dev/pricing",
+    "https://lovable.dev",
+    "https://docs.lovable.dev/introduction/plans-and-credits",
+    "https://docs.lovable.dev/introduction/subscription-plans",
+    "https://docs.lovable.dev/features/design-systems.md",
+    "https://docs.lovable.dev/features/design-guidance.md",
+    "https://docs.lovable.dev/llms.txt",
+    "https://cursor.com/pricing",
+    "https://cursor.com"
+  ],
+  "used_queries": [
+    "v0.dev pricing page fetch",
+    "v0.dev homepage features",
+    "v0.dev API docs",
+    "Bolt.new pricing page",
+    "Bolt.new enterprise page",
+    "Bolt.new design system docs",
+    "Lovable pricing page",
+    "Lovable docs (credits, plans, design systems, design guidance)",
+    "Cursor pricing page",
+    "Cursor homepage"
+  ],
+  "gaps_found": [
+    "Bolt.new 无公开API文档确认（可能仅浏览器平台），需要进一步验证是否有CLI或API",
+    "Lovable 具体Business层级定价未完整获取（页面被截断），需确认Business起价",
+    "各工具对Figma直接导入的支持程度需进一步调研",
+    "v0.dev shadcn/ui原生集成程度虽高，但未找到官方明确声明文档"
+  ],
+  "agent_metadata": {
+    "tool_calls_used": 16,
+    "searches_made": 0,
+    "pages_fetched": 15,
+    "blocked_sources": ["web_search unavailable - all queries failed"]
+  }
+}
