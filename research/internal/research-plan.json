@@ -1,49 +1,31 @@
 {
-  "current_task": {
-    "topic": "海外VPS选型调研：DateFate独立站部署用，面向美国用户",
-    "report_id": "R-129",
-    "category": "01-AI行业研究",
-    "complexity": "中等",
-    "complexity_reason": "需要对比5+家VPS提供商和3+家Serverless/PaaS方案，维度明确（价格/配置/机房/带宽/支付方式），信息公开可查。中等复杂度，2-3搜索员1轮可覆盖。",
-    "searcher_count": 3,
-    "focus": "传统VPS对比 + PaaS/Serverless对比 + 预算优化与支付方式"
-  },
-  "dimensions": [
-    "传统VPS提供商对比",
-    "PaaS/Serverless方案对比",
-    "预算优化与支付方式",
-    "Stripe支付与HTTPS技术要求",
-    "DDoS防护与安全性"
-  ],
+  "topic": "DateFate产品页面设计：粉紫温柔风塔罗星座独立站首页+应用页",
+  "complexity": "中等",
+  "complexity_reason": "这是一个产品设计任务，需要竞品调研+UX/UI最佳实践+文案指南。不需要深度多轮搜索，但需要2个搜索员覆盖设计趋势和转化策略两个维度",
+  "dimensions": ["竞品设计分析", "UI/UX设计趋势", "配色与字体方案", "付费转化设计", "文案风格指南", "塔罗牌阵选择逻辑"],
   "search_queries": [
-    {"id": 1, "query": "DigitalOcean droplet pricing 2025 cheapest plan $5 $6 US data center specs", "dimension": "传统VPS", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "Vultr cloud compute pricing 2025 US locations cheapest plan specs bandwidth", "dimension": "传统VPS", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "Linode Akamai cloud pricing 2025 US data centers cheapest plan Nanode", "dimension": "传统VPS", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Hetzner cloud pricing 2025 US location Ashburn Hillsboro cx22 cx32 specs", "dimension": "传统VPS", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "DigitalOcean vs Vultr vs Linode vs Hetzner 2025 comparison price performance US", "dimension": "传统VPS", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "BandwagonHost BBN VPS pricing 2025 US CN2 GIA cheap plan Alipay payment", "dimension": "传统VPS", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "Railway app pricing 2025 deployment Node.js free tier hobby plan", "dimension": "PaaS/Serverless", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "Render com pricing 2025 web service free tier Node.js deployment", "dimension": "PaaS/Serverless", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "Vercel pricing 2025 hobby pro plan Node.js Next.js deployment limits", "dimension": "PaaS/Serverless", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "Netlify pricing 2025 free tier Node.js functions deployment limits", "dimension": "PaaS/Serverless", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "Cloudflare Pages pricing 2025 free tier Workers Pages Node.js deployment", "dimension": "PaaS/Serverless", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "Vercel vs Netlify vs Cloudflare Pages 2025 comparison free tier limits Node.js", "dimension": "PaaS/Serverless", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "RackNerd VPS cheap deals 2025 US data center pricing low cost", "dimension": "预算优化", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "VPS providers accept Alipay WeChat Pay Chinese users 2025 overseas", "dimension": "支付方式", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "Stripe payment integration Node.js HTTPS SSL certificate requirement VPS setup", "dimension": "技术要求", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 16, "query": "free SSL certificate Let's Encrypt Certbot Node.js VPS setup guide 2025", "dimension": "技术要求", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 17, "query": "Cloudflare free plan DDoS protection CDN custom domain setup VPS", "dimension": "安全性", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 18, "query": "cheapest way to host Node.js app US users 2025 VPS vs serverless cost comparison", "dimension": "预算优化", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 19, "query": "Vultr Hetzner DigitalOcean payment methods PayPal Alipay credit card 2025", "dimension": "支付方式", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 20, "query": "small independent site deployment best practice Node.js Stripe 2025 recommendation", "dimension": "最佳实践", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "tarot card reading app website design 2024 2025 UI UX", "dimension": "竞品设计分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "astrology app landing page design purple pink aesthetic", "dimension": "竞品设计分析", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "horoscope app freemium conversion design patterns", "dimension": "付费转化设计", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "tarot card spread selection UI design web app", "dimension": "UI/UX设计趋势", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "mystical spiritual app design trends colors fonts 2025", "dimension": "UI/UX设计趋势", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "Co-Star Sanctuary The Pattern app design analysis", "dimension": "竞品设计分析", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 7, "query": "astrology dating relationship compatibility app design", "dimension": "竞品设计分析", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 8, "query": "pink purple gradient web design CSS color palette mystical", "dimension": "配色与字体方案", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 9, "query": "SaaS landing page conversion optimization 2025 best practices", "dimension": "付费转化设计", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "freemium paywall design patterns mobile web app 2024 2025", "dimension": "付费转化设计", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "feminine app design trends 2025 typography color palette", "dimension": "配色与字体方案", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 12, "query": "micro-payment digital product pricing page design", "dimension": "付费转化设计", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 13, "query": "AI reading personalization app UI design patterns", "dimension": "UI/UX设计趋势", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 14, "query": "western astrology tarot English copywriting brand voice", "dimension": "文案风格指南", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 15, "query": "soft rounded card shadow CSS design system border radius", "dimension": "配色与字体方案", "priority": "medium", "assigned_to": "searcher-2"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5, 6, 19], "focus": "传统VPS提供商：DigitalOcean/Vultr/Linode/Hetzner/BandwagonHost 价格、配置、机房、带宽、支付方式"},
-    "searcher-2": {"queries": [7, 8, 9, 10, 11, 12], "focus": "PaaS/Serverless方案：Railway/Render/Vercel/Netlify/Cloudflare Pages 价格、免费额度、Node.js支持"},
-    "searcher-3": {"queries": [13, 14, 15, 16, 17, 18, 20], "focus": "预算优化、支付方式、Stripe/SSL技术要求、DDoS防护、最佳实践"}
+    "searcher-1": {"queries": [1,2,3,4,5,6,7,8], "focus": "塔罗星座应用设计趋势与竞品分析"},
+    "searcher-2": {"queries": [9,10,11,12,13,14,15], "focus": "落地页转化与文案风格设计"}
   },
-  "searcher_count": 3,
+  "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-129",
+  "report_id": "R-128",
   "category": "01-AI行业研究"
 }
