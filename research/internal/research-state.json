@@ -1,32 +1,45 @@
 {
-  "task": "DateFate产品页面设计",
-  "phase": "completed",
+  "task": "VPS常见攻击手段与恶意软件类型调研",
+  "phase": "collecting",
   "queries_executed": [
-    "SaaS landing page conversion optimization",
-    "freemium paywall design patterns",
-    "pink purple aesthetic web design",
-    "feminine app design trends",
-    "micro-payment pricing page design",
-    "AI reading personalization UI",
-    "western astrology tarot copywriting",
-    "soft rounded card shadow CSS",
-    "user onboarding flow spiritual wellness",
-    "premium upsell after free reading psychology"
+    "SSH暴力破解", "凭证填充", "Web应用RCE", "AI增强攻击", "容器逃逸",
+    "供应链攻击", "数据库弱密码", "漏洞统计趋势",
+    "systemd持久化", "systemd timer", "cron持久化", "SSH authorized_keys后门",
+    "内核模块LKM持久化", "Shell配置文件后门", "rc.local/init.d持久化",
+    "LD_PRELOAD劫持", "systemd-generators持久化", "命令历史清除",
+    "隐藏文件目录", "Rootkit隐藏", "motd持久化",
+    "TeamTNT攻击案例", "8220挖矿团伙", "Kinsing恶意软件",
+    "CrowdStrike威胁统计", "腾讯云安全加固", "CIS Benchmarks"
   ],
   "findings": [
-    {"id": "F001", "content": "落地页转化率5.89%为基准，10%为优秀。1秒加载=5秒加载的3倍转化。个性化CTA提升202%。", "confidence": "high"},
-    {"id": "F002", "content": "Freemium优于免费试用，Tettra案例升级量3倍增长。付费墙应在aha moment后出现。", "confidence": "high"},
-    {"id": "F003", "content": "粉紫渐变方案：深紫#6B3FA0+玫瑰粉#FF66B2+浅薰衣草#F3E8FF。", "confidence": "medium"},
-    {"id": "F005", "content": "$4.99适合单次，$9.99适合月度。3栏定价+中间推荐=锚定效应。", "confidence": "high"},
-    {"id": "F009", "content": "3步引导Orient→Activate→Reinforce，进度条提升30-50%完成率。TTV<5分钟。", "confidence": "high"},
-    {"id": "F010", "content": "免费阅读后升级：先展示完整结果→底部自然引出付费→blur预览+锚定定价。", "confidence": "high"}
+    {"id": "F001", "source_ids": ["A001"], "content": "SSH暴力破解是最常见VPS攻击入口，攻击者使用Hydra/Ncrack等工具，IBM报告近300万IP同时攻击，微软每秒阻止4000次身份攻击", "confidence": "high"},
+    {"id": "F002", "source_ids": ["A002"], "content": "凭证填充攻击利用泄露数据库批量尝试登录，2024-2025年随数据泄露事件增多显著增长", "confidence": "high"},
+    {"id": "F003", "source_ids": ["A003"], "content": "OWASP Top 10:2025中越权访问/配置错误/注入是VPS攻击核心，CrowdStrike报告82%为malware-free攻击，云入侵增长266%", "confidence": "high"},
+    {"id": "F004", "source_ids": ["A004"], "content": "AI驱动攻击同比增长89%，最快breakout仅27秒，ChatGPT在犯罪论坛提及频率比其他模型高550%", "confidence": "high"},
+    {"id": "F005", "source_ids": ["A005"], "content": "容器逃逸通过内核漏洞/Docker socket暴露/privileged模式实现，获取宿主机完全控制权", "confidence": "high"},
+    {"id": "F006", "source_ids": ["A006"], "content": "供应链攻击列为OWASP 2025第3大风险，npm/PyPI/Docker Hub投毒，SBOM成为强制要求", "confidence": "high"},
+    {"id": "F007", "source_ids": ["A007"], "content": "暴露公网的Redis/MySQL/MongoDB默认密码或无认证是高频攻击目标，腾讯云/阿里云常见安全组配置错误", "confidence": "medium"},
+    {"id": "F008", "source_ids": ["P001","P002","P003"], "content": "持久化机制-systemd服务/timer和cron定时任务是三大经典持久化位置，攻击者创建恶意.service/.timer或写入crontab", "confidence": "high"},
+    {"id": "F009", "source_ids": ["P004"], "content": "SSH authorized_keys后门：攻击者追加公钥到~/.ssh/authorized_keys实现持久化，云环境可通过API修改", "confidence": "high"},
+    {"id": "F010", "source_ids": ["P005","P012"], "content": "内核模块LKM rootkit(Diamorphine/Reptile/Drovorub)运行在Ring 0，hook系统调用隐藏进程/文件/网络，TeamTNT使用Diamorphine", "confidence": "high"},
+    {"id": "F011", "source_ids": ["P006","P007","P013"], "content": "Shell配置文件(bashrc/profile)、rc.local/init.d、motd脚本是登录/启动触发型持久化位置", "confidence": "high"},
+    {"id": "F012", "source_ids": ["P008"], "content": "LD_PRELOAD劫持通过/etc/ld.so.preload全局注入恶意库，Ebury/Hildegard/Symbiote使用此技术hook系统函数", "confidence": "high"},
+    {"id": "F013", "source_ids": ["P009"], "content": "systemd-generators在引导最早期执行，早于安全传感器启动，可禁用auditd/sysmon等监控", "confidence": "high"},
+    {"id": "F014", "source_ids": ["P010"], "content": "攻击者通过history -c、设置HISTFILE=/dev/null、清除/var/log/*和wtmp/btmp实现反取证", "confidence": "high"},
+    {"id": "F015", "source_ids": ["P011"], "content": "隐藏文件/目录(/tmp/.xxx, /dev/shm/.xxx)和chattr +i不可变属性用于隐藏载荷", "confidence": "high"},
+    {"id": "F016", "source_ids": ["C001"], "content": "TeamTNT通过Docker Hub发布恶意镜像，利用配置错误的Docker daemon(2375/2376)入侵，蠕虫式传播+窃取AWS凭证", "confidence": "high"},
+    {"id": "F017", "source_ids": ["C002","C009"], "content": "8220团伙利用CVE-2022-26134(Confluence RCE)攻击，专门关闭阿里云/百度云/GCP安全工具，禁用UFW和SELinux", "confidence": "high"},
+    {"id": "F018", "source_ids": ["C003"], "content": "Kinsing利用CVE-2023-32315(Openfire漏洞)部署挖矿木马，蜜罐2个月记录超1000次攻击", "confidence": "high"},
+    {"id": "F019", "source_ids": ["C010"], "content": "8220团伙通过masscan扫描内网SSH+窃取known_hosts和SSH密钥实现蠕虫式横向移动", "confidence": "high"},
+    {"id": "F020", "source_ids": ["C005","C006"], "content": "腾讯云入侵排查指南：检查弱口令/异常登录/恶意进程/启动项/cron，最常见威胁为挖矿木马", "confidence": "high"},
+    {"id": "F021", "source_ids": ["C008"], "content": "CIS Benchmarks提供Linux VPS安全加固国际标准基线，覆盖Ubuntu/Debian/RHEL等发行版", "confidence": "high"}
   ],
-  "searcher_results": {
-    "landing-page-conversion-research": "succeeded, 10 findings",
-    "tarot-app-design-research": "timeout/no file produced"
-  },
-  "reference_reports": ["R-122", "R-123", "R-110", "R-112"],
-  "gaps": ["塔罗应用UI竞品截图未直接获取，依赖二手报告"],
-  "report_path": "/root/.openclaw/workspace/shared/results/01-AI行业研究/R-128-DateFate页面设计方案.md",
-  "report_status": "completed"
+  "gaps": [
+    "malware-types搜索员结果待收集（挖矿/DDoS/后门/rootkit/勒索软件详细行为特征）"
+  ],
+  "next_actions": [
+    "等待malware-types搜索员完成后补充恶意软件行为特征",
+    "写入baseline报告",
+    "Phase 4审核"
+  ]
 }
