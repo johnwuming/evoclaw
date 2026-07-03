@@ -1,0 +1,160 @@
+{
+  "findings": [
+    {
+      "claim": "v0.dev 提供完整的 Platform API 和 SDK (v0-sdk)，支持项目创建、聊天式代码生成、消息迭代、文件获取和部署，可用于构建自动化工作流和AI代理",
+      "evidence": "v0 Platform API (api.v0.dev) 提供 RESTful 接口：projects CRUD、chats create/init、messages 收发、deployments 部署。SDK 安装 `pnpm add v0-sdk`，通过 V0_API_KEY 认证。支持：1) 以编程方式创建chat并获取生成的代码文件；2) iframe嵌入demoUrl；3) 自动化CI/CD流水线集成。需Premium或Team计划。官方文档明确列出 'Automated workflows' 和 'AI agents' 为核心用例。",
+      "source_url": "https://v0.app/docs/api/platform/overview",
+      "confidence": "high",
+      "source_name": "v0 Official Docs - Platform API Overview",
+      "query_id": 1,
+      "automation_capabilities": ["api", "sdk", "deployment"]
+    },
+    {
+      "claim": "v0 SDK 支持从已有文件初始化chat、发送后续消息迭代、直接部署到Vercel基础设施",
+      "evidence": "Quickstart展示三个核心用例：1) v0.chats.create({message}) → 获取demoUrl嵌入iframe；2) chat.latestVersion.files 直接获取生成的代码文件内容；3) v0.chats.sendMessage({chatId, message}) 迭代对话。部署通过 v0.deployments.create({chatId, versionId}) 一键到Vercel。",
+      "source_url": "https://v0.app/docs/api/platform/quickstart",
+      "confidence": "high",
+      "source_name": "v0 Official Docs - Platform API Quickstart",
+      "query_id": 1,
+      "automation_capabilities": ["api", "sdk", "deployment"]
+    },
+    {
+      "claim": "Bolt.new 支持 MCP (Model Context Protocol) 连接器，可接入 Notion、Linear、GitHub 等外部工具，支持 API key 和 OAuth 认证",
+      "evidence": "Bolt 文档明确有 'Connect to an MCP server' 页面。支持内置连接器(Notion/Linear/GitHub)和自定义MCP服务器。认证方式：API key、MCP OAuth、None(公开数据)。MCP连接器让Bolt在chat中直接读取/操作外部应用数据。但Bolt目前没有公开的 REST API 或 SDK 供外部程序调用——MCP是作为消费者(client)接入，而非提供API供他人调用。",
+      "source_url": "https://support.bolt.new/building/using-bolt/connect-mcp.md",
+      "confidence": "high",
+      "source_name": "Bolt Official Docs - Connect MCP",
+      "query_id": 2,
+      "automation_capabilities": ["mcp_client"]
+    },
+    {
+      "claim": "Bolt.new 提供两种AI Agent模式：Standard（快速高效）和 Max（深度推理），但没有公开的编程式 API 或 CLI",
+      "evidence": "Bolt Agent 分 Standard 和 Max 两档。Standard适合日常开发，Max适合大型/复杂项目。Bolt支持 Design System 集成、GitHub版本控制、团队协作。但文档中未发现公开 REST API、SDK 或 CLI 工具——Bolt 是一个纯Web平台产品，自动化能力有限。支持 MCP 作为客户端消费外部数据。",
+      "source_url": "https://support.bolt.new/building/using-bolt/agents.md",
+      "confidence": "high",
+      "source_name": "Bolt Official Docs - Agents",
+      "query_id": 2,
+      "automation_capabilities": ["mcp_client"]
+    },
+    {
+      "claim": "Lovable 是企业级全栈AI开发平台，支持GitHub同步、SSO/SCIM、审计日志，提供Build Mode自主执行和Plan Mode规划，但未发现公开REST API或CLI",
+      "evidence": "Lovable 定位为full-stack AI development platform，支持shared workspaces、GitHub sync、SCIM用户配置、SSO(SAML/OIDC)。Build Mode(前Agent Mode)可自主实现变更、检查日志、迭代修复。Design Systems支持版本化React组件库。文档中未发现公开编程API、SDK或webhook——自动化主要通过GitHub sync和企业治理功能实现，而非API调用。",
+      "source_url": "https://docs.lovable.dev/introduction/welcome.md",
+      "confidence": "high",
+      "source_name": "Lovable Official Docs - Welcome",
+      "query_id": 3,
+      "automation_capabilities": ["github_sync", "enterprise_sso"]
+    },
+    {
+      "claim": "Lovable Design Guidance 功能支持在构建前生成三个设计方向预览（HTML+Tailwind），可指导排版/配色/布局",
+      "evidence": "Lovable 设计指导功能：根据prompt生成3个轻量级HTML+Tailwind预览供对比。触发方式包括用户要求'design options'/'beautiful'等。支持对现有项目特定区域(hero/navbar/pricing)生成变体。这为多Agent团队提供了设计探索的标准化流程。",
+      "source_url": "https://docs.lovable.dev/features/design-guidance.md",
+      "confidence": "high",
+      "source_name": "Lovable Official Docs - Design Guidance",
+      "query_id": 3,
+      "automation_capabilities": ["design_preview"]
+    },
+    {
+      "claim": "Figma 提供完整的 REST API，支持文件/图层/组件/变量读写、Webhook事件监听、评论管理，并有OpenAPI规范",
+      "evidence": "Figma REST API (api.figma.com) 支持：Files/Images/Versions/Users/Comments/Projects/Components/Variables/Webhooks/DevResources endpoints。认证支持 access tokens 和 OAuth2。提供完整OpenAPI规范(github.com/figma/rest-api-spec)，可自动生成多语言SDK。Webhook支持事件驱动自动化。这是目前设计工具中API最完善的。",
+      "source_url": "https://developers.figma.com/docs/rest-api/",
+      "confidence": "high",
+      "source_name": "Figma Developer Docs - REST API",
+      "query_id": 4,
+      "automation_capabilities": ["api", "webhook", "sdk", "oauth"]
+    },
+    {
+      "claim": "Figma 提供 MCP Server（远程+本地），支持AI Agent读写Canvas、从设计生成代码、提取设计上下文，兼容Claude Code/Cursor/VS Code等客户端",
+      "evidence": "Figma MCP Server功能：1) Write to canvas — Agent创建/修改frames/components/variables/auto layout；2) Generate code from frames — 设计稿转代码；3) Extract design context — 提取变量/组件/布局数据到IDE；4) Code Connect — 保持生成代码与代码库一致；5) Make resources — 从Make项目获取代码资源。远程MCP通过OAuth认证(mcp.figma.com/mcp)。支持客户端：Claude Code(有官方插件)、Codex、Cursor、VS Code、Xcode。Beta期免费。",
+      "source_url": "https://developers.figma.com/docs/figma-mcp-server/",
+      "confidence": "high",
+      "source_name": "Figma Developer Docs - MCP Server",
+      "query_id": 5,
+      "automation_capabilities": ["mcp_server", "code_generation", "canvas_write", "oauth"]
+    },
+    {
+      "claim": "Figma MCP 远程服务器安装支持 Claude Code 插件一键安装：`claude plugin install figma@claude-plugins-official`",
+      "evidence": "Figma MCP推荐使用远程服务器(无需桌面app)。Claude Code集成方式：1) 首选：`claude plugin install figma@claude-plugins-official`（含MCP配置+Agent Skills）；2) 手动：`claude mcp add --transport http figma https://mcp.figma.com/mcp`。仅MCP Catalog中列出的客户端可连接。Figma还支持Code-to-Canvas：捕获web app UI发送到Figma文件。",
+      "source_url": "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+      "confidence": "high",
+      "source_name": "Figma Developer Docs - Remote MCP Setup",
+      "query_id": 5,
+      "automation_capabilities": ["mcp_server", "plugin", "code_to_canvas"]
+    },
+    {
+      "claim": "Figma Make + MCP 集成支持从Make原型项目提取代码资源并传递给AI Agent，实现设计到生产的转化",
+      "evidence": "Make+MCP集成：Agent可通过提供Make链接获取项目文件列表，下载所需文件。工作流示例：Agent从Make获取popup组件的行为和样式，在生产代码库中实现匹配版本。利用MCP resources capability，仅在支持resources的MCP客户端可用。",
+      "source_url": "https://developers.figma.com/docs/figma-mcp-server/bringing-make-context-to-your-agent/",
+      "confidence": "high",
+      "source_name": "Figma Developer Docs - Make MCP Resources",
+      "query_id": 5,
+      "automation_capabilities": ["mcp_server", "design_to_code"]
+    },
+    {
+      "claim": "在AI设计工具中，v0.dev是唯一提供完整可编程API+SDK的纯AI代码生成平台，支持构建完全自动化的CI/CD流水线",
+      "evidence": "对比四个主要工具的可编程性：v0.dev有完整REST API(api.v0.dev)+TypeScript SDK(v0-sdk)+部署能力，明确支持'AI agents'和'Automated workflows'用例。Bolt.new仅有MCP客户端能力(消费外部数据)，无公开API供调用。Lovable无公开API/SDK，通过GitHub sync实现间接自动化。Figma有完整REST API+Webhook+MCP Server，但定位是设计工具而非代码生成。v0在'API驱动的AI代码生成+部署'领域最为成熟。",
+      "source_url": "https://v0.app/docs/api/platform/overview",
+      "confidence": "high",
+      "source_name": "Cross-reference: v0/Bolt/Lovable/Figma 官方文档",
+      "query_id": 6,
+      "automation_capabilities": ["api", "sdk", "deployment", "ci_cd"]
+    },
+    {
+      "claim": "Figma在MCP生态中角色最重：既是MCP Server(向Agent提供设计数据)也支持Code-to-Canvas(从代码反向生成设计)",
+      "evidence": "Figma MCP Server是双向的：1) Design→Code：从Figma frame生成代码、提取变量/组件；2) Code→Design：Agent写入Figma canvas、捕获live UI到Figma文件。支持Claude Code官方插件。在多Agent工作流中，Figma可作为设计系统的single source of truth，通过MCP让多个Agent读取一致的设计规范并生成对齐的代码。",
+      "source_url": "https://developers.figma.com/docs/figma-mcp-server/",
+      "confidence": "high",
+      "source_name": "Figma Developer Docs - MCP Server (综合)",
+      "query_id": 7,
+      "automation_capabilities": ["mcp_server", "bidirectional", "design_system_hub"]
+    },
+    {
+      "claim": "多Agent研发团队的设计工具链最佳实践：Figma(设计系统)+MCP(设计上下文传递)+v0 API(代码生成)+GitHub(版本控制)组成闭环",
+      "evidence": "综合分析：Figma通过REST API+Webhook+MCP Server提供设计系统管理；MCP协议让Claude Code/Cursor等Agent直接读取Figma设计数据；v0 Platform API支持程序化生成Next.js/React代码并部署到Vercel；GitHub sync连接Lovable/Bolt/v0生成的代码。关键缺口：Bolt和Lovable缺乏公开API，无法被外部Agent直接调用；跨工具的设计-代码一致性验证仍需人工介入。",
+      "source_url": "https://developers.figma.com/docs/figma-mcp-server/",
+      "confidence": "medium",
+      "source_name": "综合分析 - 多工具交叉对比",
+      "query_id": 8,
+      "automation_capabilities": ["mcp_orchestration", "api_chain", "design_to_code_pipeline"]
+    }
+  ],
+  "visited_urls": [
+    "https://v0.dev/docs",
+    "https://v0.app/docs/api",
+    "https://v0.app/docs/api/platform/overview",
+    "https://v0.app/docs/api/platform/quickstart",
+    "https://bolt.new/docs",
+    "https://support.bolt.new/llms.txt",
+    "https://support.bolt.new/building/using-bolt/connect-mcp.md",
+    "https://support.bolt.new/building/using-bolt/agents.md",
+    "https://docs.lovable.dev",
+    "https://docs.lovable.dev/llms.txt",
+    "https://docs.lovable.dev/introduction/welcome.md",
+    "https://docs.lovable.dev/features/design-systems.md",
+    "https://docs.lovable.dev/features/design-guidance.md",
+    "https://docs.lovable.dev/features/agent-mode.md",
+    "https://www.figma.com/developers/api",
+    "https://developers.figma.com/docs/figma-mcp-server/",
+    "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+    "https://developers.figma.com/docs/figma-mcp-server/bringing-make-context-to-your-agent/"
+  ],
+  "used_queries": [
+    "v0.dev API programmatic access SDK",
+    "Bolt.new API MCP CLI automation",
+    "Lovable API developer platform automation",
+    "Figma REST API MCP Server plugins",
+    "AI design tools MCP integration",
+    "design to code deployable output comparison"
+  ],
+  "gaps_found": [
+    "Bolt.new 和 Lovable 均未发现公开 REST API 或 SDK，无法被外部Agent程序化调用",
+    "未找到 Galileo AI / Uizard 等其他AI设计工具的API/自动化能力数据（web_search不可用限制了搜索范围）",
+    "v0 SDK 的 MCP 兼容性未明确——v0作为代码生成工具是否也可作为MCP server供其他Agent调用，文档中未提及",
+    "跨工具的设计一致性自动验证机制（如设计稿与生成代码的diff检查）尚未有成熟方案",
+    "Agent-driven设计-开发流水线的实际生产案例和最佳实践文档较少"
+  ],
+  "agent_metadata": {
+    "tool_calls_used": 15,
+    "blocked_reasons": ["web_search disabled — relied entirely on web_fetch of known documentation URLs"]
+  }
+}
