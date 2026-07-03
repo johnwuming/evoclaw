@@ -1,31 +1,44 @@
 {
-  "topic": "DateFate产品页面设计：粉紫温柔风塔罗星座独立站首页+应用页",
-  "complexity": "中等",
-  "complexity_reason": "这是一个产品设计任务，需要竞品调研+UX/UI最佳实践+文案指南。不需要深度多轮搜索，但需要2个搜索员覆盖设计趋势和转化策略两个维度",
-  "dimensions": ["竞品设计分析", "UI/UX设计趋势", "配色与字体方案", "付费转化设计", "文案风格指南", "塔罗牌阵选择逻辑"],
+  "topic": "VPS常见攻击手段与恶意软件类型调研",
+  "complexity": "深度",
+  "complexity_reason": "涉及5大维度（攻击入口、恶意软件类型、持久化机制、隐藏手段、实际案例），需要覆盖技术细节和近年案例，属于安全领域的系统性调研",
+  "dimensions": [
+    "攻击入口与途径",
+    "恶意软件分类与行为特征",
+    "持久化机制",
+    "日志清理与隐藏手段",
+    "近年实际案例（2023-2026，国内云环境）"
+  ],
   "search_queries": [
-    {"id": 1, "query": "tarot card reading app website design 2024 2025 UI UX", "dimension": "竞品设计分析", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "astrology app landing page design purple pink aesthetic", "dimension": "竞品设计分析", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "horoscope app freemium conversion design patterns", "dimension": "付费转化设计", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "tarot card spread selection UI design web app", "dimension": "UI/UX设计趋势", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "mystical spiritual app design trends colors fonts 2025", "dimension": "UI/UX设计趋势", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "Co-Star Sanctuary The Pattern app design analysis", "dimension": "竞品设计分析", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 7, "query": "astrology dating relationship compatibility app design", "dimension": "竞品设计分析", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 8, "query": "pink purple gradient web design CSS color palette mystical", "dimension": "配色与字体方案", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 9, "query": "SaaS landing page conversion optimization 2025 best practices", "dimension": "付费转化设计", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "freemium paywall design patterns mobile web app 2024 2025", "dimension": "付费转化设计", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "feminine app design trends 2025 typography color palette", "dimension": "配色与字体方案", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 12, "query": "micro-payment digital product pricing page design", "dimension": "付费转化设计", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 13, "query": "AI reading personalization app UI design patterns", "dimension": "UI/UX设计趋势", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 14, "query": "western astrology tarot English copywriting brand voice", "dimension": "文案风格指南", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 15, "query": "soft rounded card shadow CSS design system border radius", "dimension": "配色与字体方案", "priority": "medium", "assigned_to": "searcher-2"}
+    {"id": 1, "query": "Linux VPS SSH暴力破解攻击 2024 2025 fail2ban 防护", "dimension": "攻击入口", "priority": "high", "assigned_to": "searcher-attack"},
+    {"id": 2, "query": "Linux服务器漏洞利用 Web应用漏洞 RCE 2024 2025 典型漏洞", "dimension": "攻击入口", "priority": "high", "assigned_to": "searcher-attack"},
+    {"id": 3, "query": "容器逃逸攻击 Docker Kubernetes 2024 2025 案例", "dimension": "攻击入口", "priority": "high", "assigned_to": "searcher-attack"},
+    {"id": 4, "query": "供应链攻击 npm pip apt仓库投毒 2024 2025", "dimension": "攻击入口", "priority": "medium", "assigned_to": "searcher-attack"},
+    {"id": 5, "query": "VPS弱密码攻击 数据库 Redis MySQL 默认密码 2024 2025", "dimension": "攻击入口", "priority": "high", "assigned_to": "searcher-attack"},
+    {"id": 6, "query": "Linux挖矿木马 xmrig kdevtmpfsi kinsing 2024 2025 行为特征", "dimension": "恶意软件", "priority": "high", "assigned_to": "searcher-malware"},
+    {"id": 7, "query": "Linux DDoS木马 botnet Mirai变种 2024 2025", "dimension": "恶意软件", "priority": "high", "assigned_to": "searcher-malware"},
+    {"id": 8, "query": "Linux后门程序 reverse shell webshell Cobalt Strike 2024 2025", "dimension": "恶意软件", "priority": "high", "assigned_to": "searcher-malware"},
+    {"id": 9, "query": "Linux rootkit 内核rootkit Diamorphine 2024 2025 检测", "dimension": "恶意软件", "priority": "medium", "assigned_to": "searcher-malware"},
+    {"id": 10, "query": "Linux勒索软件 ransomware 2024 2025 案例 加密", "dimension": "恶意软件", "priority": "medium", "assigned_to": "searcher-malware"},
+    {"id": 11, "query": "Linux持久化机制 systemd service crontab 恶意利用 2024", "dimension": "持久化", "priority": "high", "assigned_to": "searcher-persist"},
+    {"id": 12, "query": "Linux SSH authorized_keys 后门 持久化 检测方法", "dimension": "持久化", "priority": "high", "assigned_to": "searcher-persist"},
+    {"id": 13, "query": "Linux内核模块LKM持久化 insmod modprobe 恶意内核模块", "dimension": "持久化", "priority": "medium", "assigned_to": "searcher-persist"},
+    {"id": 14, "query": "Linux bashrc profile 环境变量后门 LD_PRELOAD 持久化", "dimension": "持久化", "priority": "medium", "assigned_to": "searcher-persist"},
+    {"id": 15, "query": "攻击者清除Linux日志 history last logrotate 隐藏痕迹", "dimension": "隐藏手段", "priority": "high", "assigned_to": "searcher-persist"},
+    {"id": 16, "query": "腾讯云服务器被攻击 挖矿木马 2024 2025 案例", "dimension": "实际案例", "priority": "high", "assigned_to": "searcher-cases"},
+    {"id": 17, "query": "阿里云ECS安全事件 攻击案例 2024 2025 应急响应", "dimension": "实际案例", "priority": "high", "assigned_to": "searcher-cases"},
+    {"id": 18, "query": "云服务器挖矿蠕虫 Outlaw TeamTNT 8220 2024 2025 攻击链", "dimension": "实际案例", "priority": "high", "assigned_to": "searcher-cases"},
+    {"id": 19, "query": "Linux VPS安全加固 best practices checklist 2024 2025", "dimension": "防护", "priority": "medium", "assigned_to": "searcher-cases"},
+    {"id": 20, "query": "国内云服务商安全报告 腾讯云阿里云 攻击统计 2024 2025", "dimension": "实际案例", "priority": "high", "assigned_to": "searcher-cases"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1,2,3,4,5,6,7,8], "focus": "塔罗星座应用设计趋势与竞品分析"},
-    "searcher-2": {"queries": [9,10,11,12,13,14,15], "focus": "落地页转化与文案风格设计"}
+    "searcher-attack": {"queries": [1, 2, 3, 4, 5], "focus": "攻击入口与途径"},
+    "searcher-malware": {"queries": [6, 7, 8, 9, 10], "focus": "恶意软件分类与行为特征"},
+    "searcher-persist": {"queries": [11, 12, 13, 14, 15], "focus": "持久化机制与隐藏手段"},
+    "searcher-cases": {"queries": [16, 17, 18, 19, 20], "focus": "近年实际案例与防护"}
   },
-  "searcher_count": 2,
+  "searcher_count": 4,
   "review_rounds": 1,
-  "report_id": "R-128",
-  "category": "01-AI行业研究"
+  "report_id": "R-130",
+  "category": "05-安全研究"
 }
