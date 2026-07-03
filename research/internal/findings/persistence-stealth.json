@@ -1,0 +1,157 @@
+{
+  "task": "持久化机制与隐藏手段",
+  "findings": [
+    {
+      "id": "P001",
+      "category": "systemd服务持久化",
+      "content": "攻击者通过创建或修改systemd .service单元文件实现持久化。systemd是大多数Linux发行版的默认init系统，管理后台守护进程。攻击者在系统级单元文件目录中投放恶意.service文件，配置ExecStart指向恶意载荷（如反弹shell），并设置WantedBy=multi-user.target使其开机自启。也可修改已有服务的ExecStart指令，或通过User指令实现提权。攻击者还可放置符号链接使systemd从任意位置发现载荷。",
+      "technique": "服务文件路径: /etc/systemd/system/ (管理员级), /lib/systemd/system/ (包管理器级), /usr/local/lib/systemd/system/。示例恶意服务: 创建 /etc/systemd/system/bad.service，内容含 [Service] ExecStart=/opt/backdoor，[Install] WantedBy=multi-user.target。启用命令: systemctl enable bad 或手动创建符号链接 ln -s /etc/systemd/system/bad.service /etc/systemd/system/multi-user.target.wants/bad.service。systemd优先级: /etc/systemd/system 覆盖 /lib/systemd/system（同名服务）。",
+      "detection": "1) 用 systemd-analyze unit-paths 枚举所有单元文件加载路径；2) 审计新创建的.service文件，对比已知清单；3) auditd规则: -w /etc/systemd/system/ -p wa -k systemd_persist；4) sysmon监控 FileCreate 事件匹配 *.service 文件；5) 检查 systemctl list-unit-files --state=enabled 中未知服务；6) 检查 syslog 中可疑的 'Started' 消息和错误输出",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1543/002/",
+        "https://pberba.github.io/security/2022/01/30/linux-threat-hunting-for-persistence-systemd-timers-cron/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P002",
+      "category": "systemd timer持久化",
+      "content": "systemd timer是cron的现代替代方案，攻击者可创建.timer单元文件配合同名.service文件实现定时执行。timer文件位于与service相同的systemd目录，可配置为单调时间或实时日历触发。这种方式比cron更隐蔽，因为许多管理员不会检查timer列表。",
+      "technique": "创建 /etc/systemd/system/bad.timer，内容含 [Timer] OnCalendar=*:0/15（每15分钟），[Install] WantedBy=timers.target。配合同名 bad.service 触发。启用: systemctl enable --now bad.timer",
+      "detection": "1) systemctl list-timers --all 列出所有定时器；2) 检查 /etc/systemd/system/ 下的 .timer 文件；3) auditd监控 .timer 文件创建",
+      "sources": [
+        "https://pberba.github.io/security/2022/01/30/linux-threat-hunting-for-persistence-systemd-timers-cron/",
+        "https://attack.mitre.org/techniques/T1053/006/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P003",
+      "category": "cron定时任务持久化",
+      "content": "cron是Unix/Linux的时间调度工具，crontab文件存储在OS特定路径。攻击者可添加计划任务实现持久化，包括在系统启动时执行（@reboot）或定时执行。用户级crontab和系统级crontab（/etc/crontab）均可被利用。/etc/cron.d/、/etc/cron.hourly/、/etc/cron.daily/ 等目录也可投放恶意脚本。",
+      "technique": "用户级: crontab -e 添加 '*/30 * * * * /tmp/backdoor'。系统级: 写入 /etc/crontab 或 /etc/cron.d/malicious。启动时执行: @reboot /opt/payload。目录投放: 将可执行脚本放入 /etc/cron.hourly/。cron路径: /var/spool/cron/crontabs/ (用户级), /etc/cron.d/ (系统级)",
+      "detection": "1) 检查 crontab -l -u <user> 列出各用户cron；2) 检查 /etc/crontab, /etc/cron.d/*, /etc/cron.*/ 目录内容；3) auditd: -w /etc/cron.d/ -p wa -k cron_persist, -w /etc/crontab -p wa -k cron_persist；4) 检查 /var/spool/cron/ 目录变化",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1053/003/",
+        "https://pberba.github.io/security/2022/01/30/linux-threat-hunting-for-persistence-systemd-timers-cron/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P004",
+      "category": "SSH authorized_keys后门",
+      "content": "攻击者通过修改SSH authorized_keys文件添加自己的公钥实现持久化。authorized_keys位于用户家目录 ~/.ssh/authorized_keys，指定可用于登录的SSH密钥。攻击者还可修改 /etc/ssh/sshd_config 中的 PubkeyAuthentication=yes、RSAAuthentication=yes、PermitRootLogin=yes 来确保SSH密钥认证开启。在云环境中（GCP、Azure），攻击者可通过云CLI或API修改虚拟机的authorized_keys。",
+      "technique": "直接添加: echo 'ssh-rsa AAAA...攻击者公钥...' >> /root/.ssh/authorized_keys。修改sshd_config: 设置 PermitRootLogin yes, PubkeyAuthentication yes。GCP云环境: gcloud compute instances add-metadata <instance> --metadata ssh-keys=user:ssh-rsa AAAA...。Azure: 通过REST API PATCH请求更新虚拟机。网络设备: ip ssh pubkey-chain 命令",
+      "detection": "1) 监控 authorized_keys 文件修改时间戳和内容变化；2) auditd: -w /root/.ssh/authorized_keys -p wa -k ssh_key_mod, -w /home/*/.ssh/authorized_keys -p wa；3) 对比已知合法SSH密钥列表，标记未知密钥；4) 检查 sshd_config 中 PermitRootLogin 和 PubkeyAuthentication 是否被异常修改；5) 监控异常IP的SSH登录",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1098/004/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P005",
+      "category": "内核模块(LKM)持久化",
+      "content": "可加载内核模块(LKM)是在内核层(Ring 0)运行的代码，可按需加载/卸载。恶意LKM是一种内核态rootkit，以最高权限运行。常见功能：隐藏自身、选择性隐藏文件/进程/网络活动、日志篡per、提供认证后门、赋予非特权用户root权限。加载方式包括 insmod 直接加载和 modprobe（需配置 /lib/modules/<kernel>/ 目录）。自动加载可通过 /etc/modules 或 /etc/modules-load.d/ 配置。",
+      "technique": "直接加载: insmod /path/to/malicious.ko。通过modprobe: 将.ko放入 /lib/modules/$(uname -r)/ 并运行 depmod -a，然后 modprobe module_name。开机自加载: 写入 /etc/modules-load.d/backdoor.conf。持久化路径: /lib/modules/<kernel-version>/。已知开源LKM rootkit: Diamorphine (github.com/m0nad/Diamorphine), Reptile (github.com/f0rb1dd3n/Reptile)。实际恶意软件: Drovorub (GRU), Skidmap, TeamTNT使用Diamorphine",
+      "detection": "1) lsmod 列出已加载模块，对比已知清单查找未知模块；2) 检查 /proc/modules 与 /lib/modules/ 的差异；3) 检查 /etc/modules 和 /etc/modules-load.d/ 内容；4) 使用 lsmod | grep -v 来筛选；5) 内核完整性检查工具如 cpuarch-cpuid 对比；6) 监控 insmod/modprobe 命令执行: auditd -w /sbin/insmod -p x -k module_load, -w /sbin/modprobe -p x；7) 检查 /sys/module/ 目录中未知模块",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1547/006/",
+        "https://attack.mitre.org/techniques/T1014/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P006",
+      "category": "Shell配置文件后门",
+      "content": "攻击者通过修改shell配置脚本实现持久化。用户登录或打开终端时，shell会依次执行多个配置脚本。攻击者在这些脚本中插入恶意命令，每次shell启动时自动执行。系统级脚本(/etc/profile, /etc/profile.d/)需要root权限但对所有用户生效；用户级脚本(~/.bash_profile, ~/.bashrc等)只需要用户权限。系统仅执行第一个存在的文件(bash_profile > bash_login > profile)，攻击者偏好使用~/.bash_profile确保执行。",
+      "technique": "系统级: echo '/opt/backdoor &' >> /etc/profile 或 echo 'malicious' > /etc/profile.d/malicious.sh。用户级: echo '/opt/backdoor &' >> ~/.bash_profile 或 ~/.bashrc。退出时触发: 修改 ~/.bash_logout。关键文件路径: /etc/profile, /etc/profile.d/*.sh, /etc/bash.bashrc, ~/.bash_profile, ~/.bash_login, ~/.profile, ~/.bashrc, ~/.bash_logout。macOS: ~/.zshrc, ~/.zprofile, /etc/zshenv",
+      "detection": "1) 审计 /etc/profile 和 /etc/profile.d/ 的修改: auditd -w /etc/profile -p wa -k shell_config, -w /etc/profile.d/ -p wa；2) 检查所有用户家目录中的 .bashrc/.bash_profile/.profile 文件内容，查找可疑命令；3) sysmon监控 FileCreate 事件匹配 shell 配置文件路径；4) 检查文件时间戳异常变化",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1546/004/",
+        "https://pberba.github.io/security/2022/02/06/linux-threat-hunting-for-persistence-initialization-scripts-and-shell-configuration/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P007",
+      "category": "rc.local与init.d持久化",
+      "content": "rc.local和init.d脚本在系统启动时执行。虽然新版Linux已迁移到systemd，但systemd-rc-local-generator会检查/etc/rc.local是否存在且可执行，若存在则自动创建rc-local.service在启动时执行。init.d脚本位于/etc/init.d/，通过SysV兼容方式运行。这些是经典的持久化位置，至今仍然有效。",
+      "technique": "rc.local: 创建 /etc/rc.local (#!/bin/bash + 恶意命令)，chmod +x /etc/rc.local。systemd-rc-local-generator会自动检测并创建 rc-local.service。init.d: 在 /etc/init.d/ 创建脚本并 update-rc.d enable。检测生成器是否激活: systemctl status rc-local。符号链接位置: /run/systemd/generator/multi-user.target.wants/rc-local.service",
+      "detection": "1) 检查 /etc/rc.local 是否存在且可执行（新系统中通常不存在）；2) systemctl status rc-local 检查是否激活；3) 检查 /etc/init.d/ 中的脚本清单；4) auditd: -w /etc/rc.local -p wa -k rclocal, -w /etc/init.d/ -p wa -k initd；5) syslog中搜索 'rc-local.service' 或 '/etc/rc.local Compatibility'",
+      "sources": [
+        "https://pberba.github.io/security/2022/02/06/linux-threat-hunting-for-persistence-initialization-scripts-and-shell-configuration/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P008",
+      "category": "LD_PRELOAD动态链接器劫持",
+      "content": "攻击者通过LD_PRELOAD环境变量注入恶意共享库。动态链接器加载LD_PRELOAD指定路径的库，优先于系统库。恶意库中重写同名函数(hooking)，如execve、readdir等，实现进程内存访问、资源窃取和提权。攻击者可注入sshd守护进程的所有子进程，hook系统函数使ls、ldd、iptables、dmesg等命令过滤恶意文件和进程信息。可通过 /etc/ld.so.preload 文件实现全局持久化（对所有动态链接程序生效）。Ebury通过LD_PRELOAD hook SSH后门；Hildegard修改ld.so.preload hook readdir隐藏挖矿软件；Symbiote使用类似技术。",
+      "technique": "全局持久化: echo '/path/to/malicious.so' >> /etc/ld.so.preload（影响所有动态链接程序）。环境变量: export LD_PRELOAD=/path/to/malicious.so。写入 shell 配置文件实现会话级持久化: echo 'export LD_PRELOAD=/path/to/malicious.so' >> ~/.bashrc。已知恶意软件: Ebury (hook SSH), Hildegard (修改/etc/ld.so.preload hook readdir/readdir64), Rocke (hook libc隐藏挖矿), Symbiote, Pumakit",
+      "detection": "1) 检查 /etc/ld.so.preload 文件是否存在及内容（正常系统通常不存在此文件）；2) 检查环境变量: env | grep LD_PRELOAD；3) auditd: -w /etc/ld.so.preload -p wa -k ld_preload；4) 使用 ldd 检查可疑库加载；5) 检查 /etc/ld.so.preload 和 /etc/ld.so.conf.d/ 变化；6) 对比已知系统库的函数地址检测hook",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1574/006/",
+        "https://attack.mitre.org/techniques/T1014/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P009",
+      "category": "systemd-generators持久化",
+      "content": "systemd generators是小型可执行文件，在引导过程中非常早期执行——早于任何服务启动。位于 /lib/systemd/system-generators/ 等目录。攻击者可投放恶意generator，它在syslog、auditd、sysmon等安全传感器启动之前运行，能篡改服务单元文件、禁用安全监控服务。这是无需内核rootkit的最早执行点。generator还能动态创建服务文件和符号链接，覆盖合法服务配置。",
+      "technique": "投放路径: /etc/systemd/system-generators/, /usr/local/lib/systemd/system-generators/, /lib/systemd/system-generators/。示例: 创建 /usr/lib/systemd/system-generators/systemd-network-generator，它：1) 在 /run/systemd/system/ 创建恶意 networking.service 并符号链接到 multi-user.target.wants；2) 创建覆盖文件禁用 sysmon.service 和 auditbeat.service。由于generator在引导早期运行，可绕过安全传感器",
+      "detection": "1) 枚举 generator 目录: ls /lib/systemd/system-generators/ /etc/systemd/system-generators/ /usr/local/lib/systemd/system-generators/，对比已知合法generators清单；2) 检查 /run/systemd/system/ 和 /run/systemd/generator.early/ 中的运行时生成文件；3) auditd监控 generator 目录的写入操作",
+      "sources": [
+        "https://pberba.github.io/security/2022/02/07/linux-threat-hunting-for-persistence-systemd-generators/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P010",
+      "category": "命令历史清除与反取证",
+      "content": "攻击者清除命令历史和系统日志以隐藏入侵痕迹。Linux/macOS上，命令历史通过HISTFILE环境变量跟踪，登出时刷新到 ~/.bash_history。攻击者可手动清除历史(history -c)、删除历史文件(rm ~/.bash_history)、或设置 HISTFILE=/dev/null、HISTSIZE=0、HISTCONTROL=ignorespace（命令前加空格不记录）。还可清除系统日志文件(/var/log/*)、登录记录(wtmp/btmp/lastlog)。",
+      "technique": "清除bash历史: history -c && rm -f ~/.bash_history。禁用历史记录: export HISTFILE=/dev/null, export HISTSIZE=0, export HISTCONTROL=ignorespace（空格前缀命令不记录）。清除系统日志: cat /dev/null > /var/log/syslog, cat /dev/null > /var/log/auth.log, rm /var/log/wtmp, rm /var/log/btmp。清除登录记录: > /var/log/lastlog。利用 logrotate 配置篡改日志轮转。使用 shred 安全删除: shred -f -z -u ~/.bash_history",
+      "detection": "1) 监控 bash_history 文件删除: auditd -w /home/*/.bash_history -p wa -k hist_modification；2) 检查 HISTFILE 和 HISTSIZE 环境变量异常设置；3) 监控 /var/log/ 目录文件大小突然归零；4) 使用外部日志服务器（远程syslog）防止本地日志被篡改；5) 检查 wtmp/btmp/lastlog 文件是否被截断: ls -la /var/log/wtmp /var/log/btmp /var/log/lastlog；6) 使用 inotify 监控关键日志文件；7) 部署日志完整性监控工具如 auditd 和 AIDE",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1070/003/",
+        "https://attack.mitre.org/techniques/T1070/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P011",
+      "category": "隐藏文件与目录",
+      "content": "攻击者使用隐藏文件和目录隐藏恶意载荷。Linux中以点(.)开头的文件/目录对默认ls命令不可见。攻击者还可在深层目录或合法软件目录中投放恶意文件（如伪装为系统文件名）。恶意软件如COATHANGER创建隐藏安装目录；FIN13在/tmp创建隐藏目录；CoinTicker在/tmp投放 .info.enc、.info.py 等隐藏文件。",
+      "technique": "创建隐藏文件: mkdir /tmp/.hidden_dir。伪装系统文件: cp backdoor /usr/sbin/sshd-backdoor。常见隐藏位置: /tmp/.*, /dev/shm/.*, /var/tmp/.*, /usr/local/lib/.*, 以 . 开头的文件名。chattr +i 设置不可变属性防止删除",
+      "detection": "1) 使用 ls -laR 定期扫描 /tmp, /dev/shm, /var/tmp 等临时目录；2) find / -name '.*' -type f 搜索所有隐藏文件；3) 使用 AIDE/Tripwire 文件完整性监控；4) 检查 /dev/shm 中的可疑文件（正常应为空）；5) 监控 chattr 命令使用",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1564/001/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P012",
+      "category": "Rootkit隐藏技术",
+      "content": "Linux rootkit分为内核态(LKM)和用户态(LD_PRELOAD)两类。内核态rootkit(Drovorub, Skidmap, Diamorphine, Reptile)运行在Ring 0，hook系统调用隐藏进程/文件/网络连接/可执行文件，篡改日志，伪造CPU和网络统计。用户态rootkit(Ebury, Azazel)通过LD_PRELOAD hook libc函数。APT41、TeamTNT、UNC3886等APT组织在野使用了Linux rootkit。Drovorub(GRU)用内核模块隐藏进程/文件/网络；Skidmap伪造CPU负载使挖矿不被发现。",
+      "technique": "内核态: 加载LKM hook sys_call_table，hook readdir/readdir64隐藏文件，hook kill创建魔法进程后门。用户态: LD_PRELOAD注入hook execve/readdir/ptrace。开源工具: Diamorphine (进程隐藏+root提权+魔法kill), Reptile (隐藏进程/网络/文件), Azazel (用户态rootkit)。实际威胁: Drovorub, Skidmap, MEDUSA, COATHANGER, Winnti/Linux使用Azazel变种",
+      "detection": "1) 内核态: 对比 /proc/modules 与 lsmod 输出差异；使用 kernel integrity scanners (如 cpuarch-cpuid, kerncheck)；从内存转储分析 sys_call_table；检查 /sys/module/ 中的未知模块。2) 用户态: 检查 /etc/ld.so.preload 和 LD_PRELOAD 环境变量；使用 strace 分析函数调用差异；对比 ldd 输出中异常库加载。3) 部署文件完整性监控(AIDE/Tripwire)。4) 使用内存取证工具(Volatility)分析",
+      "sources": [
+        "https://attack.mitre.org/techniques/T1014/",
+        "https://attack.mitre.org/techniques/T1574/006/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "P013",
+      "category": "motd消息持久化",
+      "content": "Message of the Day(motd)脚本在用户SSH登录时执行。/etc/update-motd.d/ 目录下的脚本在每次登录时以root权限运行。攻击者可在这些脚本中插入恶意命令，实现登录触发型持久化。由于这些脚本以root运行，还可用于提权。",
+      "technique": "路径: /etc/update-motd.d/ 或 /etc/motd。在 /etc/update-motd.d/ 下现有脚本中追加恶意命令，或创建新脚本。示例: echo '/opt/backdoor &' >> /etc/update-motd.d/00-header",
+      "detection": "1) 检查 /etc/update-motd.d/ 目录下所有脚本内容；2) auditd: -w /etc/update-motd.d/ -p wa -k motd_persist；3) 检查 /etc/motd 文件内容变化",
+      "sources": [
+        "https://pberba.github.io/security/2022/02/06/linux-threat-hunting-for-persistence-initialization-scripts-and-shell-configuration/"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "summary": "总结了Linux/VPS上13种主要持久化与隐藏机制：(1)systemd服务/timer/cron定时任务，(2)SSH authorized_keys后门，(3)内核模块(LKM)rootkit，(4)Shell配置文件(bashrc/profile)后门，(5)LD_PRELOAD动态链接器劫持，(6)rc.local/init.d经典启动脚本，(7)systemd-generators引导早期执行，(8)命令历史清除与日志篡改反取证，(9)隐藏文件/目录，(10)Rootkit(内核态+用户态)隐藏，(11)motd登录触发后门。关键技术细节包括具体文件路径、命令、检测方法(auditd/sysmon)和实际恶意软件案例。数据主要来源于MITRE ATT&CK权威知识库和pberba详细技术博客系列。"
+}
