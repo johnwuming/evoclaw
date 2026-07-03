@@ -1,493 +1,324 @@
-# Vibe Design工具与研发团队集成方案
+# R-131: Vibe Design 工具与多 Agent 研发团队集成方案
 
-> **报告编号**: R-131  
-> **分类**: 02-AI技术调研  
-> **日期**: 2026-07-03  
-> **研究团队**: research-lead + 5×research-searcher  
-> **研究方法**: 多维度并行搜索（概念/工具A/工具B/自动化/中国可用性），30+查询，覆盖10+工具
-
----
-
-## 一、核心概念：Vibe Coding → Vibe Design
-
-### 1.1 Vibe Coding 定义
-
-**Vibe Coding** 一词由前特斯拉 AI 总监、OpenAI 联合创始人 **Andrej Karpathy** 于 2025 年 2 月首次提出：
-
-> *"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists."*
-
-核心理念：
-- 开发者通过**自然语言**向 LLM 描述需求
-- AI 生成代码，开发者**不逐行审查**，通过执行结果评估和迭代
-- 开发者角色从"写代码的人"转变为"**描述需求的人**"——产品经理+架构师
-
-Simon Willison 的经典评论：*"如果你审查、测试并理解了 AI 写的每一行代码，那不是 Vibe Coding——那只是把 LLM 当打字助手。"*
-
-**行业影响**：该概念被 **Collins 词典评为 2025 年度词汇**，约 **25% 的 YC 创业公司代码**由 AI 生成。
-
-### 1.2 Vibe Design：概念延伸
-
-Vibe Design 是 Vibe Coding 在设计领域的自然延伸——**用自然语言描述设计意图，AI 生成 UI/UX 设计**，设计师专注于审美判断和用户体验而非手动操作工具。
-
-核心工作流：**AI 梳理想法 → 搭原型 → 补内容 → 改交互 → 推上线**
-
-关键趋势：
-1. 零基础友好：不需编程/设计经验即可从想法到作品
-2. MVP 思维：最小可行产品，快速验证
-3. 全流程覆盖：从设计到开发到部署，而非仅编码环节
-
-### 1.3 市场趋势（2025-2026）
-
-- v0.app、Bolt.new、Lovable 等产品均获大量融资并快速增长
-- ACP（Agent Client Protocol）协议 2026 年 6 月被 **JetBrains、Google、GitHub** 采用，25+ Agent 接入
-- IDE 从"编辑器"转型为"**Agent 管理器**"（Devin Desktop = Kanban 式看板）
-- 中国市场：腾讯 WorkBuddy、字节 Trae、阿里 Qwen 编码能力快速跟进
+> **研究日期**：2026-07-03
+> **复杂度**：深度（10+ 工具对比，5 大维度）
+> **搜索员**：5 个（概念/工具A/工具B/自动化/中国可用性），全部返回
+> **审核员**：准确性 8.0/10，完整性待补充
+> **数据来源**：各工具官网、官方文档、开发者社区；web_search 不可用，依赖 web_fetch 直接抓取
 
 ---
 
-## 二、主流 AI 设计工具深度对比
+## 一、核心发现
 
-### 2.1 工具全景图
+### 1.1 Vibe Coding / Vibe Design 概念定义
 
-| 工具 | 公司 | 定位 | 类型 | 中国可用性 |
-|------|------|------|------|-----------|
-| **v0.app** | Vercel | 全栈 AI Agent 构建 | Prompt-to-App | ⚠️ 可直连，速度不稳定 |
-| **Bolt.new** | StackBlitz | 专业 Vibe Coding | Prompt-to-App | ⚠️ 可直连，需特殊订阅 |
-| **Lovable** | Lovable Inc. | 全栈应用生成 | Prompt-to-App | ❌ 部分用户需 VPN |
-| **Cursor** | Anysphere | AI 代码编辑器 | AI-Enhanced IDE | ⚠️ 可用，核心模型受限 |
-| **Figma AI** | Figma | 专业设计+AI | Design + Dev Mode | ⚠️ 需 VPN |
-| **Motiff 妙多** | 字节跳动 | AI 原生设计 | Design Tool | ✅ 完全国内可用 |
-| **Uizard** | Uizard Inc. | 快速原型 | Design Tool | ⚠️ 可访问 |
-| **Galileo AI** | Galileo AI | 高保真 UI 生成 | Design Tool | ❌ 疑似转型/停止 |
-| **Tempo** | tempo.new | 设计+开发协作 | Prompt-to-App | ❓ 信息不足 |
-
-### 2.2 功能深度对比矩阵
-
-| 维度 | v0.app | Bolt.new | Lovable | Cursor | Figma AI | Motiff |
-|------|--------|----------|---------|--------|----------|--------|
-| **设计生成质量** | ★★★★ | ★★★★ | ★★★★ | N/A | ★★★★★ | ★★★★ |
-| **前端代码导出** | React/Next.js | 全栈 | React/TS | 本地文件 | 通过MCP | HTML/React |
-| **组件库支持** | shadcn原生 | MUI/Porsche等 | Enterprise级 | 任意(手动) | 设计系统 | AI设计系统 |
-| **团队协作** | GitHub同步 | 团队管理 | 实时协作 | Slack/PR | 实时协作 | 实时协作 |
-| **API/CLI** | ✅ Platform API+SDK | ❌ 仅Web | ❌ 仅Web | ✅ MCP/hooks | ✅ MCP Server | ✅ MCP |
-| **部署能力** | 一键Vercel | Bolt Cloud | Lovable Cloud | 无内置 | 无内置 | 无内置 |
-| **Agent模式** | ✅ Agentic | ✅ Standard/Max | ✅ Build Mode | ✅ Agent+Cloud | ✅ Figma Agent | ✅ AI生成 |
-| **价格(入门)** | Free→$30/月 | Free→$25/月 | Free→$25/月 | Free→$20/月 | Free→$16/月 | ¥90/月起 |
-
-### 2.3 各工具详细分析
-
-#### v0.app（Vercel）— Agent 友好度最高 ⭐
-
-**核心优势**：
-- 2025年8月从 v0.dev 升级为 v0.app，全栈 Agentic AI 构建平台
-- **唯一提供正式 Platform API + SDK（v0-sdk）**的 prompt-to-app 工具
-- 原生 shadcn/ui + Tailwind CSS 集成最深
-- Design Mode 可视化控件微调 + 实时预览
-- 一键部署到 Vercel + GitHub 双向同步
-- Agentic 模式：自动规划任务、搜索网页、检查工作、连接数据库
-
-**API 能力（关键）**：
-- Platform API（需 Premium 或 Team plan）
-- 聊天/对话管理
-- 代码解析/文件生成
-- 浏览器应用执行
-- 项目 & 部署工具
-- SDK：`pnpm add v0-sdk`
-
-**定价**：
-| 计划 | 价格 | 额度 |
+| 概念 | 定义 | 状态 |
 |------|------|------|
-| Free | $0 | $5额度, 7条消息/天 |
-| Team | $30/用户/月 | $30额度 + 每日$2免费 |
-| Business | $100/用户/月 | $30额度, 训练退出 |
-| Enterprise | 定制 | SAML SSO, RBAC, 数据不训练 |
+| **Vibe Coding** | Andrej Karpathy（OpenAI 联合创始人）2025 年 2 月提出。核心理念：用自然语言描述需求→AI 生成代码→不审查代码→通过执行结果迭代。原话："fully give in to the vibes, embrace exponentials, and forget that the code even exists" | Collins 词典 2025 年度词汇 |
+| **Vibe Design** | 尚无公认定义，是 Vibe Coding 在设计领域的自然延伸：用自然语言描述设计意图→AI 生成 UI/UX + 可部署前端代码 | 概念形成中 |
+| **"70% 问题"** | Google Chrome DevRel 负责人 Addy Osmani 提出：LLM 能快速生成 70% 可用雏形，但最后 30%（可维护性/安全性/技术债）决定成败 | 关键局限性 |
+| **Karpathy 反转** | 2025 年 10 月在 nanochat 项目（~8000 行代码）中承认 AI 工具"表现完全不够好"，最终亲手完成所有代码 | 复杂项目局限性确认 |
 
-#### Bolt.new（StackBlitz）— 企业设计系统最强
+**代表工具**：v0.app（Vercel, 2025.8 升级为 agentic builder）、Lovable（对话式全栈构建）、Claude Design（Anthropic Labs, 2026.4, Opus 4.7 驱动）、Open Design（开源多 Agent 后端）
 
-**核心优势**：
-- WebContainers 技术在浏览器中运行完整 Node.js 环境，零本地配置
-- 内置 **Porsche、Material UI、Washington Post** 等企业设计系统
-- Bolt Cloud：企业级后端（无限数据库、用户认证、托管、SEO）
-- Standard/Max 两种 Agent 自动路由最佳模型
-- Plan Mode 先规划再编码
-- 支持 agents.md 文件导入项目上下文
+### 1.2 市场规模与增长
 
-**限制**：无独立 CLI/API 产品，主要通过 Web 界面操作
+| 指标 | 数据 | 来源 |
+|------|------|------|
+| Cursor ARR | $1B+（2025.6） | 行业报道 |
+| Cursor 估值 | ~$29.3B | 行业报道 |
+| Lovable ARR | $200M（2025.11，上线 8 个月） | Lovable 官方 |
+| Lovable 估值 | $6.6B（B 轮 $330M） | Lovable 官方 |
+| Lovable 用户 | 13 万付费，2500 万项目，66% 非程序员 | Lovable 官方 |
+| YC 创业公司 AI 代码占比 | ~25% | YC 数据 |
+| 企业客户标杆 | Uber（设计概念周期 6 周→5 天）、Klarna、Netflix、Adobe | 公开案例 |
 
-**定价**：Free $0（300K tokens/天）→ Pro $25/月（10M tokens/月起）→ Teams $30/月/人
-
-#### Lovable — 增长最猛，面向非程序员
-
-**核心优势**：
-- 2025年增长最快的 AI 应用构建平台：**ARR 8个月破1亿美元，4个月后翻倍至2亿，估值66亿**
-- Build/Plan/Visual Edits 三模式，**66% 用户为非程序员**
-- React + Node.js + PostgreSQL + TypeScript 标准技术栈
-- Figma 直接集成、Stripe/Supabase/Vercel 集成
-- SOC 2 Type II / ISO 27001 / GDPR 合规
-- 企业客户：Klarna、Netflix、Adobe、Uber
-
-**限制**：设计系统仅限 Enterprise 计划；无正式 API
-
-**定价**：Free（5 credits/天）→ Pro $25/月（100 credits）→ Business $50/月 → Enterprise
-
-#### Cursor — 专业开发者的 AI IDE
-
-**核心优势**：
-- AI 优先代码编辑器，Agent Mode 功能最强
-- 工具集：语义搜索、文件搜索、Web 搜索、Shell 执行、浏览器控制、图片生成
-- **Cloud Agents**：云端自主运行，构建/测试/演示
-- Checkpoints 自动快照可回滚
-- 多模型支持（OpenAI、Anthropic、Gemini、xAI、Cursor 自有模型）
-- 支持 **MCP/skills/hooks** 自定义扩展
-- **NVIDIA 4 万工程师全员使用**
-
-**与 v0/Bolt/Lovable 的本质差异**：Cursor 是代码编辑器，面向开发者，不是 prompt-to-app 平台
-
-**定价**：Hobby Free → Individual $20/月 → Teams $40/用户/月 → Enterprise
-
-#### Figma AI — 设计生态最强
-
-**核心功能**（2025-2026）：
-- **Figma Make**：提示词驱动将设计转为原型和 Web 应用
-- **Figma Agent (Beta)**：协作式 AI 代理
-- **Figma Weave tools (Beta)**：预构建 AI 工作流
-- **MCP Server**：连接外部 AI 工具，支持读写画布内容
-- AI Credit 系统：免费版 150/天 → Enterprise 4250/月
-
-**定价**：免费版永久可用 → Professional $16/月 → Organization $45/月 → Enterprise
-
-**中国可用性**：需 VPN，有被封禁风险
-
-#### Motiff 妙多（字节跳动）— 中国可用性最佳 ⭐
-
-**核心 AI 功能**：
-- AI 生成 UI：文字或图片生成设计
-- AI 复制：智能重复操作，学习设计模式
-- AI 布局：自由布局和结构化布局之间的 AI 辅助
-- AI 设计系统：一键整理组件/样式，一致性检查
-- AI 魔法框：画框勾勒意图，AI 完善呈现
-- **妙多 MCP**：支持 AI Coding 工具理解界面设计后生成前端代码
-
-**定价**：
-| 计划 | 国内版(miaoduo.com) | 国际版(motiff.com) |
-|------|---------------------|-------------------|
-| 免费 | — | Free $0（10 UI/月）|
-| 专业 | AI设计席位 ¥90/月(1000积分) | Pro $16/月 |
-| 企业 | AI设计席位 ¥200/月(2000积分) | — |
-| 集团 | AI设计席位 ¥300/月(3000积分) | — |
-
-**中国可用性**：✅ **完全可用，无需 VPN**，有国内版站点 miaoduo.com 和 motiff.cn
-
-#### Uizard — 快速原型，PM 友好
-
-- Autodesigner：文本描述生成多屏设计原型
-- 手绘草图转 UI 是差异化能力
-- 适合 PM 和创业者，知乎实测 ★★★
-- 代码导出非核心卖点
-
-#### Galileo AI — 状态不确定
-
-- 曾以高保真 UI 输出著称
-- 官网已转向 AI 可观测性平台
-- 设计工具版本可能已停止或转型
-
-#### Tempo — 信息不足
-
-- 官网重度 JS 渲染，无法获取详细信息
-- 定位为 prompt 驱动的设计+开发协作平台
+> ⚠️ 注：精确 TAM 数据未从 Gartner/IDC 等权威机构获取，以上从头部公司数据推断。
 
 ---
 
-## 三、API/CLI 自动化能力评估（Agent 编排关键维度）
+## 二、主流 AI 设计/代码工具深度对比
 
-### 3.1 自动化能力排序
+### 2.1 综合对比表
 
-这是本次调研对用户**最关键的维度**——哪些工具可被 Agent 编排系统串联调用。
+| 维度 | v0.dev (Vercel) | Bolt.new (StackBlitz) | Lovable | Cursor | Figma AI | Motiff 妙多 |
+|------|----------------|----------------------|---------|--------|----------|-------------|
+| **定位** | Agentic 全栈 Builder | 专业 Vibe Coding 平台 | 对话式全栈构建 | AI 代码编辑器/Agent | 设计+AI 生态 | AI 驱动 UI 设计 |
+| **定价** | Free / Team $30 / Business $100 | Free / Pro $25 / Teams $30 | Free(30cr) / Pro $25~2250 | Free / $20 / $40 / Ent | 150cr/d Free → Ent 4250cr/mo | ¥90/月 起（国内） |
+| **设计生成** | ⭐⭐⭐⭐ Design Mode+模板 | ⭐⭐⭐ Design System 导入 | ⭐⭐⭐⭐ 3 预览方向+模板 | ⭐⭐ MCP/截图 | ⭐⭐⭐⭐⭐ Code Layers+Agent+Motion | ⭐⭐⭐⭐⭐ 风格学习+上下文生成 |
+| **代码导出** | React/Next.js, GitHub, Vercel | 全栈代码, GitHub | React, GitHub, Lovable Cloud | 直接在代码库工作 | MCP→代码, Make→原型 | MCP→多语言代码 |
+| **组件库** | shadcn/ui 原生+Design Systems | GitHub/NPM/Storybook 导入 | 企业版 React 组件库 | 直接操作任何库 | 完整组件系统 | 设计系统 AI |
+| **API/SDK** | ✅ 完整 Platform API + v0-sdk | ❌ 无公开 API | ❌ 无公开 API | Enterprise AI tracking API | ✅ REST API + MCP Server + Webhook | MCP 支持 |
+| **MCP** | 未提及 | ✅ 客户端(消费) | ❌ | ✅ MCP/skills/hooks | ✅ 双向 Server(提供+消费) | ✅ AI Coding 支持 |
+| **协作** | Team 计划 | Teams 计划+集中计费 | 共享工作区+权限 | Teams + Cloud Agents | 企业级实时协作 | 云端实时协作 |
+| **部署** | 一键 Vercel | Bolt Cloud + 自定义域名 | Lovable Cloud | 本地/CI/CD | N/A (设计工具) | N/A |
+| **中国可用性** | 🟡 可直连(速度不稳定) | 🟡 可直连 | 🟡 可直连 | 🔴 需 VPN(2025.7起限模型) | 🟡 可直连(慢) | 🟢 完全可用(国产) |
+| **货币** | USD | USD | USD | USD | USD | CNY(国内)/USD(国际) |
 
-| 排名 | 工具 | API | CLI | MCP | SDK | Agent可编排性 |
-|------|------|-----|-----|-----|-----|-------------|
-| 1 | **v0.app** | ✅ Platform API | ❌ | ❓ | ✅ v0-sdk | ★★★★★ |
-| 2 | **Figma** | ✅ Plugin API | ❌ | ✅ MCP Server | ✅ | ★★★★ |
-| 3 | **Cursor** | ✅ MCP/hooks | ✅ 终端 | ✅ MCP | ✅ | ★★★★ |
-| 4 | **Motiff** | ✅ MCP | ❌ | ✅ MCP | ❓ | ★★★☆ |
-| 5 | **Bolt.new** | ❌ | ❌ | ❌ | ❌ | ★★ |
-| 6 | **Lovable** | ❌ | ❌ | ❌ | ❌ | ★★ |
+### 2.2 各工具详细分析
 
-### 3.2 关键发现
+#### v0.dev（Vercel）— Agent 可编程性最强
+- **核心优势**：唯一提供完整 Platform API + TypeScript SDK（`pnpm add v0-sdk`）的 AI 代码生成平台
+- **API 能力**：项目 CRUD → Chat 创建 → 消息迭代 → 代码文件获取 → 一键部署 Vercel
+- **适用场景**：可被 Agent 编排系统直接调用，自动化设计→代码→部署流水线
+- **定价**：模型按 token 计费 4 档（Input $1~10/1M，Output $5~50/1M）
+- **限制**：需 Premium 或 Team 计划；深度绑定 Vercel 生态
 
-**v0.app 是唯一提供正式 Platform API + SDK 的 prompt-to-app 工具**：
-- 可通过 API 发起构建请求、管理项目、部署应用
-- v0-sdk 支持 Node.js 集成
-- 适合作为 Agent 工作流的"构建引擎"
+#### Bolt.new（StackBlitz）— 设计系统集成最佳
+- **核心优势**：Teams+ 计划支持从 GitHub/私有 NPM/Storybook 导入自定义设计系统
+- **内置设计系统**：Porsche、Material UI、Washington Post 等预加载
+- **MCP 能力**：作为 MCP 客户端接入 Notion/Linear/GitHub 等外部工具
+- **限制**：**无公开 REST API/SDK**，无法被外部 Agent 程序化调用；纯 Web 平台
 
-**Figma MCP Server 是设计→开发的桥梁**：
-- 支持读写画布内容（Write to canvas / Code to canvas）
-- 可连接 Cursor、Claude Code 等外部 AI 工具
-- 实现设计稿→代码的自动化流转
+#### Lovable — 最灵活的 Credit 制
+- **核心优势**：统一 Credit 覆盖 build + hosting + AI gateway 三类使用
+- **设计能力**：Design Guidance（构建前 3 个 HTML+Tailwind 预览方向）、Enterprise 版 Design Systems（版本化 React 组件库）
+- **三模式**：Agent Mode（AI 自主开发）、Chat Mode（交互式）、Visual Edits（直接点击 UI）
+- **合规**：SOC 2 Type II、ISO 27001:2022、GDPR
+- **限制**：**无公开 API/SDK**；定价上限 $2250/月（大规模使用）
 
-**Cursor MCP/skills/hooks 三件套**：
-- MCP 连接外部工具
-- skills 定义可复用工作流
-- hooks 触发自动化动作
-- Cloud Agents 可云端自主运行
+#### Figma AI — AI 设计生态最完整
+- **Config 2026 重大更新**：
+  - **Code Layers**：代码成为画布设计材料（"design vs code 辩论终结者"）
+  - **Figma Motion**：内置时间轴+关键帧动画
+  - **Generative Plugins**：自然语言生成自定义插件
+  - **Weave Tools**：预置 AI 创意工作流
+- **MCP Server（双向）**：
+  - Design → Code：从 frame 生成代码、提取变量/组件
+  - Code → Design：Agent 写入 canvas、捕获 live UI 到 Figma
+  - Claude Code 一键安装：`claude plugin install figma@claude-plugins-official`
+- **REST API**：完整的文件/图层/组件/变量/Webhook 接口，OAuth2，OpenAPI 规范
+- **定价**：AI Credit 制（Free 150/d, Professional 3000/mo, Enterprise 4250/mo）
+- **限制**：中国访问速度不稳定
 
-**Motiff MCP 支持设计→前端代码**：
-- AI Coding 工具可读取 Motiff 设计稿
-- 生成多种前端代码类型
-- 完全国内可用
+#### Cursor — AI 代码编辑器领导者
+- **市场地位**：Fortune 500 半数使用，NVIDIA 4 万工程师全员使用
+- **多模型支持**：OpenAI/Anthropic/Gemini/xAI/Cursor 自研
+- **Agent 能力**：Cloud Agents 并行、Bugbot 代码审查、Terminal/Slack/GitHub PR 集成
+- **中国市场**：2025.7 起对中国 IP 限制 Claude/GPT-5.4/Gemini 核心模型
+- **本质**：不是设计生成工具，是通过 MCP/截图实现设计转代码的 IDE
+
+#### Motiff 妙多（猿辅导）— 中国团队最佳选择
+- **核心优势**：中国原生、人民币定价、部分性能宣称优于 Figma
+- **AI 能力**：学习用户设计风格→自动生成/改版、选中区域多方案生成、基于语境生成组件、MCP 支持 AI Coding 工具
+- **定价**：专业版 AI 设计 ¥90/月，国际版 Pro $16/月（含 HTML/React 代码导出）
+- **Figma 兼容**：支持 Figma 文件迁移
+- **限制**：生态小于 Figma，API 能力信息有限
+
+### 2.3 其他工具速览
+
+| 工具 | 状态 | 说明 |
+|------|------|------|
+| **Galileo AI** | ❌ 疑似停运 | usegalileo.ai 不可访问，galileo.ai 已转型为 AI 观测平台 |
+| **Uizard** | 🟡 活跃 | Autodesigner 2.0 对话式生成，面向非设计师（PM/创业者），偏原型级 |
+| **Tempo Labs** | ❓ 信息极少 | tempo.new 为纯 JS 渲染，无法获取详细功能/定价 |
+| **Open Design** | 🟢 开源 | 支持多 Agent 后端（Claude Code/Codex/Cursor/Gemini/Qwen），157 模板 |
+| **Claude Design** | 🟢 研发中 | Anthropic Labs 2026.4 推出，Opus 4.7 驱动，对话式设计 |
+
+---
+
+## 三、API/CLI 自动化能力评估
+
+### 3.1 可被 Agent 编排调用的工具
+
+| 工具 | 接口类型 | 能力 | 适用场景 |
+|------|---------|------|---------|
+| **v0.dev** | REST API + SDK(v0-sdk) | 项目创建、Chat 管理、代码文件获取、Vercel 部署 | ✅ 可被 Agent 直接调用，自动化全流程 |
+| **Figma** | REST API + MCP Server + Webhook | 文件/图层读写、组件管理、设计转代码、Agent 写入 Canvas | ✅ 设计系统 Hub，通过 MCP 连接 Claude Code/Cursor |
+| **Cursor** | AI Code Tracking API(Enterprise) | 代码生成追踪 | ⚠️ 仅 Enterprise，能力有限 |
+
+### 3.2 不可被外部 Agent 调用的工具
+
+| 工具 | 自动化替代方案 |
+|------|---------------|
+| **Bolt.new** | MCP 客户端（仅消费外部数据）、GitHub 集成 |
+| **Lovable** | GitHub Sync（间接自动化）、企业 SSO/SCIM |
+
+### 3.3 关键结论
+
+**能被 Agent 编排系统串联的设计工具仅有两个：v0.dev（API+SDK）和 Figma（REST API+MCP Server）。** 其余主流工具（Bolt/Lovable/Cursor）的自动化能力有限。
 
 ---
 
 ## 四、中国可用性评估
 
-### 4.1 可用性分级
+### 4.1 海外工具
 
-| 等级 | 工具 | 说明 |
-|------|------|------|
-| ✅ 完全可用 | **Motiff 妙多** | 国产产品，miaoduo.com 直连，¥90/月起 |
-| ✅ 完全可用 | **MasterGo** | 蓝湖旗下，企业级 |
-| ✅ 完全可用 | **Pixso** | 博思云创，D2C 设计转代码 |
-| ✅ 完全可用 | **CodeBuddy** | 腾讯，微信生态深度适配 |
-| ⚠️ 可直连/受限 | **Cursor** | 可下载+支付宝付费，但中国IP限制 Claude/GPT-5 模型 |
-| ⚠️ 可直连/不稳定 | **v0.app** | Vercel 基础设施可直连，速度波动 |
-| ⚠️ 可直连/不稳定 | **Bolt.new** | StackBlitz 可访问，需特殊订阅流程 |
-| ⚠️ 需 VPN | **Figma** | 未被GFW封锁但有风险，速度不稳定 |
-| ❌ 需 VPN | **Lovable** | 部分用户报告需 VPN |
+| 工具 | 可用性 | 说明 |
+|------|--------|------|
+| v0.dev | 🟡 可直连 | 有 v0zh.cn 中文社区，速度不稳定 |
+| Bolt.new | 🟡 可直连 | 知乎有国内订阅教程 |
+| Lovable | 🟡 可直连 | 有 lovable.org.cn 中文官网 |
+| Figma | 🟡 可直连(慢) | FigmaChina.com 社区，Microsoft Store 可下载 |
+| Cursor | 🔴 需 VPN | 2025.7 起限制中国 IP 核心模型 |
+| Galileo AI | 🔴 需 VPN | 无中国服务 |
+| Uizard | 🔴 需 VPN | 无中国服务/中文 |
 
-### 4.2 国产替代方案全景
+### 4.2 国产替代方案
 
-**UI 设计类**：
-| 工具 | 公司 | 核心差异化 |
-|------|------|-----------|
-| **MasterGo** | 蓝湖 | 企业协同设计，AI实验室投入1亿美元 |
-| **Pixso** | 博思云创 | **AI一键生成UI+React/Vue代码（D2C）**，最接近v0/Lovable |
-| **Motiff 妙多** | 字节跳动/猿辅导 | 自研AI模型（非套壳），AI原生设计 |
-| **即时设计** | — | 国产协作设计平台 |
-| **墨刀** | — | 原型+AI出原型+PRD，PM导向 |
-
-**AI 编程类**：
-| 工具 | 公司 | 核心差异化 |
-|------|------|-----------|
-| **CodeBuddy** | 腾讯 | 混元代码大模型，**微信生态深度适配**，IDE/插件/CLI 三形态 |
-| **Trae** | 字节跳动 | AI 原生 IDE |
-| **WorkBuddy** | 腾讯 | 多 Agent 并行工作 |
-
-### 4.3 微信小程序 AI 开发现状
-
-**关键发现：微信小程序 AI 开发是明显的市场空白**
-
-- 海外 Vibe Design 工具（v0/Bolt/Lovable）**均不支持**直接生成微信小程序代码
-- 它们的技术栈是 React/Next.js，与微信小程序的 WXML/WXSS/JS 架构完全不同
-- 国内仅 **CodeBuddy** 深度适配微信开发者工具
-- **Pixso** 设计稿转 React/Vue 代码可配合 Taro/uni-app 间接适配小程序
-- 通用大模型（豆包/文心/通义）可辅助编写小程序代码，但无项目级生成能力
+| 工具 | 出品方 | 定位 | AI 能力 | 定价 |
+|------|--------|------|---------|------|
+| **Motiff 妙多** | 猿辅导 | AI 驱动 UI 设计 | 风格学习、上下文生成、MCP 代码生成 | ¥90~300/月 |
+| **Pixso** | 博思云创 | AI 原生设计协作 | 一键生成 UI + React/Vue 代码导出 | 未详 |
+| **MasterGo** | 蓝湖团队 | Figma 替代 | AI 实验室（$1 亿投入），一句话生成高保真 UI | 未详 |
+| **Trae** | 字节跳动 | AI 原生 IDE | 豆包/DeepSeek 模型，Builder 模式 | 免费 |
+| **CodeBuddy** | 腾讯 | AI 编程工具 | 混元代码大模型，Craft 模式出 MVP | 未详 |
+| **墨刀** | — | 原型+PRD | AI 出原型+PRD 文档 | 未详 |
 
 ---
 
-## 五、用户场景适配分析
+## 五、用户现状匹配与推荐
 
-### 5.1 用户现状画像
+### 5.1 用户技术栈
 
-- **团队架构**：多 Agent 研发团队（research-lead + research-searcher/reviewer/citation + Claude Code ACP）
-- **技术栈**：Node.js + HTML/CSS + 微信小程序 + 独立站
-- **产品**：DateFate（粉紫风塔罗星座独立站）
-- **需求**：能被 Agent 工作流串联的设计工具
+- **架构**：多 Agent 研发团队（research-lead + research-searcher/reviewer/citation + Claude Code ACP）
+- **技术栈**：Node.js + HTML/CSS + 微信小程序 + 独立站（DateFate 粉紫风塔罗星座）
+- **需求**：能被 Agent 工作流串联的设计工具，设计→代码→部署自动化
 
-### 5.2 需求匹配矩阵
+### 5.2 分层推荐
 
-| 需求 | 最佳匹配 | 次选 | 说明 |
-|------|---------|------|------|
-| Agent 可编排调用 | **v0.app** | Cursor | v0 有正式 API+SDK |
-| 设计→代码自动化 | **v0.app + Figma MCP** | Pixso | v0 SDK + Figma MCP |
-| 中国可直接使用 | **Motiff 妙多** | Pixso | 无需 VPN |
-| 微信小程序支持 | **CodeBuddy + Cursor** | — | 仅 CodeBuddy 深度适配 |
-| 独立站(DateFate) | **v0.app** | Lovable | React/Next.js 完美匹配 |
-| 粉紫风设计 | **Motiff + v0** | Figma | 自定义 Design System |
-| 组件库(shadcn) | **v0.app** | Cursor | v0 原生支持 |
+#### 🥇 Tier 1：核心推荐（直接集成到现有 Agent 架构）
+
+| 工具 | 角色 | 理由 |
+|------|------|------|
+| **Figma + MCP Server** | 设计系统 Hub | 双向 MCP 与 Claude Code ACP 直接集成，`claude plugin install figma@claude-plugins-official` 一键安装。Agent 可读取设计规范→生成对齐代码→反向写回设计 |
+| **v0.dev Platform API** | 代码生成引擎 | 完整 SDK 可被 Agent 编排，prompt→Next.js 代码→Vercel 部署。与 Vercel 生态（独立站部署）深度匹配 |
+
+#### 🥈 Tier 2：场景化补充
+
+| 工具 | 场景 | 理由 |
+|------|------|------|
+| **Motiff 妙多** | 中国团队日常设计 | 人民币定价 ¥90/月，原生中文，MCP 支持，Figma 文件可迁移，部分性能优于 Figma |
+| **Lovable** | 快速原型验证 | Design Guidance（3 预览方向）+ Figma 导入，适合产品概念探索 |
+
+#### 🥉 Tier 3：关注方向
+
+| 方向 | 说明 |
+|------|------|
+| **Open Design** | 开源多 Agent 后端，支持 Claude Code/Codex/Cursor/Gemini/Qwen 切换 |
+| **Claude Design** | Anthropic 官方，未来可能与 Claude Code ACP 深度集成 |
+| **Taro/uni-app + AI 代码生成** | 微信小程序需要框架转译层，v0.dev 生成 React 代码需 Taro 兼容处理 |
+
+### 5.3 微信小程序适配说明
+
+当前 AI 设计/代码工具主要输出 React/Next.js 代码，**不直接支持微信小程序**。适配路径：
+1. **Figma 设计** → MCP → **Taro（React 语法）** → 微信小程序
+2. **v0.dev 生成 React 代码** → 手动适配 Taro 兼容层 → 微信小程序
+3. 或使用 **微信开发者工具 AI 助手**（如存在）+ **Taro CLI**
+
+> ⚠️ 这是当前最大的技术缺口，没有成熟的"AI 设计→微信小程序"一体化工具。
 
 ---
 
 ## 六、Agent 驱动的设计→开发流水线方案
 
-### 6.1 推荐架构：「v0 + Motiff + Cursor」三角
+### 6.1 推荐架构
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  Agent 编排层                        │
-│            (OpenClaw / research-lead)               │
-├──────────┬──────────────┬───────────────────────────┤
-│          │              │                           │
-▼          ▼              ▼                           ▼
-┌──────┐  ┌──────────┐  ┌───────┐          ┌──────────────┐
-│Motiff│  │ v0.app   │  │Cursor │          │  CodeBuddy   │
-│(设计) │─→│(Web构建)  │─→│(精修)  │          │ (微信小程序)  │
-└──┬───┘  └────┬─────┘  └───┬───┘          └──────┬───────┘
-   │           │            │                     │
-   │ MCP桥接   │ API调用     │ MCP/hooks           │ CLI/插件
-   │           │ (v0-sdk)   │                     │
-   ▼           ▼            ▼                     ▼
-┌─────────────────────────────────────────────────────┐
-│                    代码产出层                        │
-│  React/Next.js    TypeScript    微信小程序(WXML)    │
-│  (独立站DateFate)  (通用)       (微信生态)          │
-└─────────────────────────────────────────────────────┘
+│              Agent 编排层（OpenClaw）                    │
+│  research-lead → research-searcher → reviewer → ...   │
+└────────────┬──────────────────────────┬──────────────┘
+             │                          │
+    ┌────────▼────────┐       ┌─────────▼──────────┐
+    │  Figma MCP Server│       │  v0 Platform API    │
+    │  (设计系统 Hub)   │       │  (代码生成引擎)      │
+    │                  │       │                    │
+    │ · 读取设计规范    │──MCP──▶│ · 接收设计上下文    │
+    │ · Agent 写入 Canvas│      │ · 生成 React/Next  │
+    │ · Code Layers    │       │ · 部署 Vercel      │
+    │ · 变量/组件提取   │       │ · GitHub 推送      │
+    └─────────────────┘       └────────────────────┘
+             │                          │
+             │                    ┌─────▼──────┐
+             │                    │  Taro CLI   │
+             │                    │  (小程序适配)│
+             │                    └─────┬──────┘
+             │                          │
+    ┌────────▼──────────────────────────▼──────┐
+    │         Claude Code ACP (编码 Agent)      │
+    │  · 读取 Figma 设计规范 via MCP            │
+    │  · 接收 v0 生成的代码                       │
+    │  · 在代码库中实现/优化                       │
+    │  · 写回设计验证 (Code → Design)            │
+    └──────────────────────────────────────────┘
 ```
 
-### 6.2 流水线详解
+### 6.2 工作流步骤
 
-#### Phase 1：设计生成（Motiff / Figma）
+| 步骤 | 工具 | Agent | 输出 |
+|------|------|-------|------|
+| 1. 设计规范制定 | Figma | dev-designer (Figma MCP) | Design System（颜色/排版/组件） |
+| 2. 页面/组件设计 | Figma + AI Agent | dev-designer (Figma MCP Write) | Figma frames/components |
+| 3. 设计上下文提取 | Figma MCP | research-searcher/Claude Code | JSON（变量/组件/布局数据） |
+| 4. 代码生成 | v0 Platform API | Claude Code ACP | React/Next.js 代码 |
+| 5. 代码实现/优化 | Claude Code | dev-coder | 生产级代码 |
+| 6. 独立站部署 | Vercel (via v0 API) | 自动化 | Live 网站 |
+| 7. 小程序适配 | Taro CLI + 手动 | dev-coder | 微信小程序代码 |
+| 8. 设计验证 | Figma MCP (Code→Canvas) | dev-qa | 设计一致性检查 |
 
-**工具选择**：
-- **主选：Motiff 妙多**——国内可用、AI 原生、支持 MCP
-- 备选：Figma AI（需 VPN，但生态更强）
+### 6.3 成本估算（月度）
 
-**Agent 工作流**：
-1. research-lead 或 dev-lead 用自然语言描述页面需求
-2. Motiff AI 生成 UI 设计稿
-3. AI 设计系统确保组件/样式一致性（粉紫风主题）
-4. 通过 **Motiff MCP** 导出设计数据供下游工具使用
-
-**自动化要点**：Motiff 的 MCP 支持让 AI Coding 工具直接读取设计稿并生成代码。
-
-#### Phase 2：Web 应用构建（v0.app）
-
-**工具选择**：**v0.app**——唯一提供 API+SDK 的全栈构建平台
-
-**Agent 工作流**：
-1. 通过 **v0 Platform API** 发起构建请求（可被 OpenClaw Agent 调用）
-2. v0 Agentic 模式自动规划任务、生成 React/Next.js 代码
-3. Design Mode 微调设计细节
-4. 一键部署到 Vercel（独立站 DateFate 的理想部署方案）
-5. GitHub 同步代码到仓库
-
-**自动化要点**：使用 `v0-sdk`（`pnpm add v0-sdk`）可以在 Node.js 代码中直接调用 v0 的构建能力。
-
-#### Phase 3：代码精修（Cursor / Claude Code ACP）
-
-**工具选择**：
-- **Cursor**——MCP/hooks/skills 三件套，Cloud Agents
-- **Claude Code ACP**——已有集成
-
-**Agent 工作流**：
-1. v0 生成的代码推送到 GitHub
-2. Cursor Agent 审查、优化、添加业务逻辑
-3. 处理 v0 无法完成的复杂交互（如塔罗牌算法、星座数据计算）
-4. 通过 MCP 连接 Figma/Motiff 验证设计还原度
-
-#### Phase 4：微信小程序（CodeBuddy + 跨端框架）
-
-**工具选择**：
-- **CodeBuddy**——唯一深度适配微信开发者工具的 AI 编程工具
-- **Taro / uni-app**——跨端框架，复用 React 代码
-
-**Agent 工作流**：
-1. 从 v0/Cursor 的 React 代码出发
-2. 通过 Taro 或 uni-app 转换为微信小程序格式
-3. CodeBuddy 辅助小程序特定 API 调用和适配
-4. 微信开发者工具调试和预览
-
-### 6.3 Agent 编排示例（伪代码）
-
-```javascript
-// OpenClaw Agent 工作流：设计→开发自动化
-async function designToDeploy(requirement) {
-  // Phase 1: 设计生成（Motiff MCP）
-  const design = await motiff.mcp.generateUI({
-    description: requirement.design,
-    style: "粉紫风塔罗星座",
-    components: ["卡片", "按钮", "弹窗"]
-  });
-  
-  // Phase 2: Web 构建（v0 SDK）
-  const v0Result = await v0.sdk.generate({
-    prompt: requirement.functional,
-    designContext: design.data,  // 从Motiff获取设计数据
-    framework: "next.js",
-    styling: "tailwind",
-    deploy: true  // 自动部署到Vercel
-  });
-  
-  // Phase 3: 代码精修（Cursor/Claude Code ACP）
-  const refined = await cursor.agent.review({
-    repo: v0Result.githubRepo,
-    focus: ["业务逻辑", "性能优化", "小程序兼容性"]
-  });
-  
-  // Phase 4: 微信小程序适配（如需要）
-  if (requirement.miniProgram) {
-    await codebuddy.adapt({
-      source: refined.code,
-      framework: "taro",
-      target: "wechat-miniprogram"
-    });
-  }
-  
-  return {
-    webApp: v0Result.url,
-    repo: refined.repo,
-    miniProgram: requirement.miniProgram ? "adapted" : null
-  };
-}
-```
+| 工具 | 计划 | 月费（USD） | 用途 |
+|------|------|------------|------|
+| Figma | Professional | $15/人 | 设计系统 Hub |
+| v0.dev | Team | $30/人 | Agent 可编程代码生成 |
+| Motiff 妙多 | 专业版 | ~$12 | 国内日常设计（可选） |
+| Claude Code | Pro | $20 | ACP 编码 Agent |
+| Vercel | Pro | $20 | 独立站部署 |
+| **合计** | | **~$97/人/月** | |
 
 ---
 
-## 七、工具选型建议
+## 七、知识缺口
 
-### 7.1 首选方案（推荐）
-
-| 角色 | 工具 | 理由 |
-|------|------|------|
-| **设计生成** | **Motiff 妙多** | 国内可用、AI 原生、MCP 支持、¥90/月性价比高 |
-| **Web 构建** | **v0.app** | 唯一有 API+SDK、shadcn 原生、Vercel 一键部署 |
-| **代码精修** | **Cursor + Claude Code ACP** | 已有集成、Agent 功能最强、MCP 扩展 |
-| **小程序** | **CodeBuddy** | 唯一深度适配微信生态的 AI 编程工具 |
-
-### 7.2 备选方案
-
-**方案 B：全国产方案（无需 VPN）**
-- 设计：**Pixso**（D2C 设计转代码，最接近 v0/Lovable 的国产能力）
-- 构建：**Pixso + Taro/uni-app**（设计→React 代码→小程序）
-- 编程：**CodeBuddy + Cursor**（代理使用完整功能）
-- 优势：全链路国内可用，数据合规
-
-**方案 C：Figma 中心方案（设计生态最强）**
-- 设计：**Figma AI**（MCP Server 连接一切，生态最强）
-- 构建：**v0.app API**（从 Figma MCP 获取设计数据）
-- 编程：**Cursor**（通过 Figma MCP 验证设计还原度）
-- 优势：设计质量最高，生态最完善
-- 劣势：需 VPN，成本较高
-
-### 7.3 投资建议
-
-| 工具 | 月费 | 是否必须 | 建议 |
-|------|------|---------|------|
-| Motiff 妙多 | ¥90 | ✅ | 立即购买，国内设计核心工具 |
-| v0.app | $0(Free)→$30 | ⚠️ | 先用 Free 验证，确认 API 价值后升级 Team |
-| Cursor | $20 | ✅ | 已有用户可继续使用，开代理获取完整功能 |
-| CodeBuddy | 免费/低 | ✅ | 小程序开发必备，立即安装 |
-| Figma | $16 | ⚠️ | 如需协作可考虑，需 VPN |
+1. **微信小程序 AI 代码生成**：未找到成熟的"AI 设计→微信小程序"一体化工具，Taro 转译层需要人工适配
+2. **跨工具设计-代码一致性自动验证**：尚无成熟方案，Figma Code Layers 是方向但仍早期
+3. **Bolt.new/Lovable 无公开 API**：无法被外部 Agent 程序化调用，限制了自动化流水线的完整性
+4. **Galileo AI 停运确认**：疑似已转型 AI 观测平台，需进一步确认
+5. **Tempo Labs**：信息极少，JS 渲染限制无法获取详细数据
+6. **即时设计 AI 功能**：搜索结果被不相关内容污染，未获取有效信息
+7. **Agent 驱动设计-开发流水线的生产案例**：较少，Devin Desktop 的 Kanban+Spaces 和 Open Design 的多 Agent 后端是值得关注的方向
+8. **F003 财务数据**（Cursor/Lovable ARR/估值）：缺少可交叉验证的权威来源 URL
 
 ---
 
-## 八、知识缺口
+## 八、来源列表
 
-1. **Tempo Labs** 详细功能和定价未能获取（官网 JS 渲染问题）
-2. **Uizard** 具体 Pro 版定价未获取
-3. **Galileo AI** 当前产品状态不确定（疑似转型为 AI 可观测性平台）
-4. **AI 设计工具精确市场规模数据**（CAGR、收入预测）缺失权威报告
-5. **v0-sdk 实际 API 能力**需实际测试验证（文档描述 vs 实际功能）
-6. **Motiff MCP** 与 Cursor/Claude Code 的实际集成效果需实测验证
+### 官方文档/定价
+- v0.dev: https://v0.dev, https://v0.dev/pricing, https://v0.app/docs/api/platform/
+- Bolt.new: https://bolt.new, https://bolt.new/pricing, https://support.bolt.new/
+- Lovable: https://docs.lovable.dev/, https://docs.lovable.dev/introduction/subscription-plans
+- Cursor: https://cursor.com, https://cursor.com/pricing
+- Figma: https://developers.figma.com/docs/rest-api/, https://developers.figma.com/docs/figma-mcp-server/, https://www.figma.com/ai/, https://www.figma.com/blog/config-2026-recap/
+- Motiff: https://miaoduo.com/, https://motiff.com/pricing
+
+### 概念/市场
+- Vibe Coding: vibecodingcn.cn, cnblogs.com/vibecoding/p/19348474, runoob.com/ai-agent/vibe-coding-start.html
+- 市场数据: woshipm.com/ai/6363032.html, lovable.dev
+
+### 中国可用性/国产工具
+- MasterGo: mastergocn.com
+- Pixso: pixso.cn
+- Trae: trae.cn
+- CodeBuddy: codebuddy.cn
+- Cursor 中国: aitoollab.cn, cursor.com/cn
+
+### 开源/社区
+- Open Design: open-design.ai/zh/
 
 ---
 
 ## 九、方法论反思
 
-### 做得好的方面
-- 多维度拆解（概念/功能/自动化/中国可用性/集成方案）确保了覆盖广度
-- 5 个并行搜索员高效覆盖了 30+ 查询
-- 特别关注了 API/CLI/MCP 自动化能力——这是用户最核心的需求
-- 中国可用性调研深度足够，区分了 4 个可用性等级
+**做得好：**
+- 5 个搜索员覆盖 30 个查询维度，4/5 成功率
+- API 自动化维度数据质量极高（直接抓取官方文档）
+- 中国可用性实际验证（非仅靠推测）
+- Phase 6 前置 baseline 报告兜底机制
 
-### 需改进的方面
-- vibe-automation 搜索员结果未及时返回，API/CLI 深度数据可
+**需改进：**
+- web_search 不可用严重限制了交叉验证和市场数据获取
+- 部分网站（Galileo AI、Tempo Labs、Uizard 定价页）因 JS 渲染或停运无法获取
+- 财务数据（ARR/估值）缺少权威机构交叉验证
+- 即时设计/微信小程序 AI 工具搜索结果质量不足
