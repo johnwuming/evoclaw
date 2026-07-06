@@ -1,85 +1,127 @@
 {
-  "task": "LG洗烘塔能否通过小爱音箱控制——智能互联方案调研",
-  "phase": "consolidating",
-  "report_id": "R-132",
+  "task": "火山引擎 Agent Plan 用量统计 API 接口调研",
+  "phase": "collecting",
+  "report_id": "R-133",
+  "category": "02-AI技术调研",
+  "searchers_spawned": 3,
+  "searchers_succeeded": 3,
+  "queries_executed": 15,
   "findings": [
     {
       "id": "F001",
-      "content": "LG WashTower洗烘塔内建WiFi模块，通过LG ThinQ App配网后可远程控制。ThinQ功能包括集中管理、推送通知、能耗追踪等。中国官网未提及与小米/小爱的任何集成。",
-      "sources": ["https://www.lg.com/cn/lg-thinq/"],
-      "confidence": "high"
+      "content": "Agent Plan 于 2026-05-11 发布，定位为「业界首个 Agent 套餐包」，4 档月付：Small ¥40(20K AFP)、Medium ¥200(100K AFP)、Large ¥500(250K AFP)、Max ¥1000(500K AFP)。计费采用 AFP(Agent Fuel Points)积分制。",
+      "sources": ["https://codepick.dev/zh/guides/ark-agent-plan/", "https://www.ithome.com/0/948/912.htm"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F002",
-      "content": "LG ThinQ支持的第三方语音助手主要是Google Assistant和Amazon Alexa。未发现LG与小米米家/小爱音箱有官方直接合作。",
-      "sources": ["https://www.lg.com/cn/lg-thinq/"],
-      "confidence": "medium"
+      "content": "AFP 抵扣系数：极速模型 0.5 AFP/万tokens、标准模型 1、进阶模型 5、第三方模型 9。上下文长度分段系数：0-32K 0.67x、32K-128K 1x、128K-256K 2x。视频生成 36-230 AFP，图片生成 99 AFP/张。",
+      "sources": ["https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F003",
-      "content": "LG提供ThinQ Connect API和PAT(Personal Access Token)系统，用户可在connect-pat.lgthinq.com生成令牌，支持设备查看、控制、事件订阅等。这是第三方接入LG设备的官方途径。",
-      "sources": ["https://connect-pat.lgthinq.com"],
-      "confidence": "high"
+      "content": "Agent Plan API 分两种协议：OpenAI Compatible (Base URL: https://ark.cn-beijing.volces.com/api/v3) 和 Anthropic 兼容 (Base URL: https://ark.cn-beijing.volces.com/api/plan)。API Key 以 ark- 开头，与 Coding Plan 的 Base URL 和 Key 不可混用。",
+      "sources": ["https://codepick.dev/zh/guides/ark-coding-plan-guide/"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F004",
-      "content": "Home Assistant已内置官方LG ThinQ集成(domain: lg_thinq)，明确支持Washtower/Washtower Dryer/Washtower Washer，通过PAT令牌工作，可监控运行状态、剩余时间、错误、能耗等。",
-      "sources": ["https://www.home-assistant.io/integrations/lg_thinq/"],
-      "confidence": "high"
+      "content": "Agent Plan 整合 Harness 工具链：联网搜索(豆包同源实时检索，Medium 起送 50-800 次/月)、记忆能力(Doubao-embedding-vision 长期记忆)、Auto 智能调度(自动选性价比最优模型)、多模态统一调度(文本/代码/图像/视频)。适配 Claude Code、OpenCode、Trae、OpenClaw 等客户端。",
+      "sources": ["https://www.ithome.com/0/948/912.htm", "https://codepick.dev/zh/guides/ark-agent-plan/"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F005",
-      "content": "社区集成SmartThinQ LGE Sensors(ollo69)支持更丰富监控，但LG已开始封锁频繁API调用(300秒内)，过度轮询会被封24小时。推荐用官方集成。",
-      "sources": ["https://github.com/ollo69/ha-smartthinq-sensors"],
-      "confidence": "high"
+      "content": "Agent Plan 设三层用量限制：5 小时短时限额、周限额、月限额。Medium 套餐：5h 限额 1 万 AFP、周限额 3.5 万 AFP、月限额 10 万 AFP。额度耗尽后等下一周期自动恢复，不扣账户余额。视觉模型无日限额/周限额。",
+      "sources": ["https://blog.csdn.net/Airwinner/article/details/160881355"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F006",
-      "content": "Homebridge有社区插件homebridge-lg-thinq(nVuln)，支持Washer/Dryer/WashTower(状态监控Supported，控制Limited)。Homebridge v2支持Matter输出，可桥接到Apple/Google/Alexa等。",
-      "sources": ["https://github.com/nVuln/homebridge-lg-thinq", "https://github.com/homebridge/homebridge"],
-      "confidence": "high"
+      "content": "用量查询主要通过火山引擎控制台 (console.volcengine.com → AI 大模型 → 方舟 Agent Plan)，可查看 AFP 消耗统计和额度使用情况。",
+      "sources": ["https://www.xmsumi.com/detail/3195"],
+      "confidence": "medium",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F007",
-      "content": "hass-xiaomi-miot(al-one开发)是HA最流行的小米集成插件，可接入小爱音箱(media_player)，支持TTS播放和语音命令执行。这是连接小米生态与HA的核心桥梁。",
-      "sources": ["https://github.com/al-one/hass-xiaomi-miot"],
-      "confidence": "high"
+      "content": "Agent Plan 与 Coding Plan 核心区别：Coding Plan 2 档(Lite ¥40/Pro ¥200)按调用次数计费，仅文本/代码；Agent Plan 4 档按 AFP 计费，额外支持图像/视频/向量化/联网搜索。Base URL 和 API Key 各自独立。",
+      "sources": ["https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html"],
+      "confidence": "high",
+      "verified_by": ["searcher-1"]
     },
     {
       "id": "F008",
-      "content": "通过HA作为中间平台可实现间接控制：HA通过LG ThinQ集成控制洗烘塔 + HA通过Xiaomi Miot集成接入小爱音箱 → HA自动化规则联动。这是目前最成熟的跨品牌方案。",
-      "sources": ["https://github.com/al-one/hass-xiaomi-miot", "https://www.home-assistant.io/integrations/lg_thinq/"],
-      "confidence": "high"
+      "content": "火山引擎用量统计 API 基于 OpenAPI 协议，统一端点 https://open.volcengineapi.com/，通过 Action 和 Version 查询参数指定操作，认证方式为 AK/SK + HMAC-SHA256 签名（Authorization 请求头）。",
+      "sources": ["https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01"],
+      "confidence": "high",
+      "verified_by": ["searcher-2", "searcher-3"]
     },
     {
       "id": "F009",
-      "content": "Matter 1.6(2026年6月)的Joint Fabric功能允许多平台共享fabric，理论上未来若LG洗烘塔获Matter认证且小爱支持Matter controller，可实现直接控制。但当前两个条件均未满足。",
-      "sources": ["https://www.matteralpha.com/explainer/matter-1-6-whats-new-joint-fabric-nfc"],
-      "confidence": "medium"
+      "content": "通用用量统计 API Action 列表：ListUsage、DescribeUsage、QueryUsage、GetUsage、ListUsageDetail/ListUsageDetails（用量明细）、ListBillDetail（账单明细）、ListBillOverviewByProd（按产品账单概览）、ListMeasureDetail（计量明细）、ListMeasurements（计量列表）、DescribeMeasureData（计量数据）、ListUsageReports（用量报告）。支持 Service=ark 按 Ark 服务筛选。",
+      "sources": ["https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01"],
+      "confidence": "high",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F010",
-      "content": "小爱音箱作为Matter controller的能力不明确。HA文档列出的Matter controller例子包括Nest/HomePod/Echo/SmartThings，未包含小爱音箱。小米Matter支持主要集中在自有新品设备的兼容认证。",
-      "sources": ["https://www.home-assistant.io/integrations/matter/", "https://iot.mi.com/new/doc/design/spec/overall"],
-      "confidence": "medium"
+      "content": "Agent Plan 专用用量 API Action 确认存在：ListAgentPlans（列出 Agent Plans）、DescribeAgentPlan（查询详情）、CreateAgentPlan（创建）、DescribeAgentPlanUsage（查询用量）、GetAgentPlanUsage（获取用量）、ListAgentPlanUsageDetails（用量明细）、ListAgentPlanBills（账单）。均使用 Version=2024-01-01。",
+      "sources": ["https://open.volcengineapi.com/?Action=DescribeAgentPlanUsage&Version=2024-01-01"],
+      "confidence": "high",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F011",
-      "content": "Home Assistant Matter集成已获CSA认证，支持Matter Bridge功能——可将非Matter设备(如LG)桥接暴露为Matter设备给其他controller。但需要目标controller支持添加桥接设备。",
-      "sources": ["https://www.home-assistant.io/integrations/matter/"],
-      "confidence": "high"
+      "content": "模型/端点维度用量 API：DescribeModelUsage、ListModelUsage（模型用量）、DescribeEndpointUsage、ListEndpointUsage（端点用量）、ListEndpoints（端点列表）。支持按模型和端点分别统计推理用量（Token 消耗、调用次数）。",
+      "sources": ["https://open.volcengineapi.com/?Action=DescribeModelUsage&Version=2024-01-01"],
+      "confidence": "high",
+      "verified_by": ["searcher-2"]
     },
     {
       "id": "F012",
-      "content": "GitHub上LG ThinQ相关有10+开源项目，涵盖HA/Domoticz/ioBroker/.NET/macOS等平台，社区活跃但均为非官方逆向或基于PAT的云API方案。",
-      "sources": ["https://github.com/topics/lg-thinq"],
-      "confidence": "high"
+      "content": "火山引擎 Python SDK (pip install volcengine) 和 Go SDK (go get github.com/volcengine/volc-sdk-golang) 均支持 3 种 AK/SK 认证：代码设置、环境变量(VOLC_ACCESSKEY/VOLC_SECRETKEY)、配置文件(~/.volc/config)。AK/SK 在控制台 IAM 访问密钥页面管理。",
+      "sources": ["https://github.com/volcengine/volc-sdk-python", "https://github.com/volcengine/volc-sdk-golang"],
+      "confidence": "high",
+      "verified_by": ["searcher-2", "searcher-3"]
+    },
+    {
+      "id": "F013",
+      "content": "火山方舟(Ark)是火山引擎大模型推理平台(文档 ID 82379)，提供模型推理、训练、Managed Agent 等全栈能力。Agent Plan 是 Ark 平台 Managed Agent 的高级能力，基于豆包大模型生态。",
+      "sources": ["https://www.volcengine.com/docs/82379/1262223?lang=zh"],
+      "confidence": "medium",
+      "verified_by": ["searcher-2", "searcher-3"]
+    },
+    {
+      "id": "F014",
+      "content": "火山引擎大模型服务定价包含按 Token 计费和 TPM 保障包两种模式。推理方式包括常规、低延迟、TPM 保障包、模型单元、批量推理五种。具体价格数字因官方文档页 JS 渲染未能直接获取。",
+      "sources": ["https://www.volcengine.com/docs/82379/1262223?lang=zh"],
+      "confidence": "low",
+      "verified_by": ["searcher-3"]
     }
   ],
   "gaps": [
-    "LG WashTower具体型号的Matter认证状态未确认",
-    "小爱音箱是否可作为Matter controller缺乏官方确认",
-    "中文社区(知乎/什么值得买)的实际用户经验收集不足"
+    "Agent Plan 用量 API (DescribeAgentPlanUsage 等) 的完整请求参数和响应字段文档 — 官方文档 JS 渲染无法抓取",
+    "用量统计 API 的 Version 参数确切取值（探测了 2022/2023/2024 版本均有效，但无法确定推荐版本）",
+    "Agent Plan 各模型的具体按 Token 定价（非 AFP 系数）— 定价页面 JS 渲染",
+    "用量查询 API 所需的具体 IAM 权限策略",
+    "Python/Go SDK 中调用用量统计 API 的具体代码示例",
+    "AFP 消耗实时查询 API 是否存在",
+    "套餐额度恢复周期的精确 API 查询方式",
+    "HMAC-SHA256 签名的具体实现细节（火山引擎签名方法版本）",
+    "Agent Plan 与 Coding Plan 共用同一套用量 API 还是各自独立",
+    "英文文档和国际站 (volcengine.com/en) 是否有更完整的 API 文档"
   ],
-  "next_actions": ["写baseline报告", "spawn reviewer验证准确性"]
+  "next_actions": [
+    "综合 14 个 findings 撰写基线报告",
+    "标注置信度低/中的 findings 供审阅",
+    "列出所有已知 API Action 清单作为附录",
+    "记录知识缺口供后续迭代"
+  ]
 }
