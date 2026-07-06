@@ -1,127 +1,172 @@
 {
-  "task": "火山引擎 Agent Plan 用量统计 API 接口调研",
-  "phase": "collecting",
-  "report_id": "R-133",
-  "category": "02-AI技术调研",
-  "searchers_spawned": 3,
-  "searchers_succeeded": 3,
-  "queries_executed": 15,
+  "task": "多Agent工作流优化调研：强制接地与共享黑板模式评估",
+  "phase": "searching",
+  "queries_executed": 20,
+  "searchers_succeeded": 2,
+  "searchers_total": 2,
   "findings": [
     {
       "id": "F001",
-      "content": "Agent Plan 于 2026-05-11 发布，定位为「业界首个 Agent 套餐包」，4 档月付：Small ¥40(20K AFP)、Medium ¥200(100K AFP)、Large ¥500(250K AFP)、Max ¥1000(500K AFP)。计费采用 AFP(Agent Fuel Points)积分制。",
-      "sources": ["https://codepick.dev/zh/guides/ark-agent-plan/", "https://www.ithome.com/0/948/912.htm"],
+      "content": "Self-RAG通过训练模型生成反思token（Retrieve/IsRel/IsSup/IsUse）实现按需检索和自反思接地，推理阶段通过反思token控制生成行为。",
+      "sources": ["https://arxiv.org/abs/2310.11511"],
       "confidence": "high",
-      "verified_by": ["searcher-1"]
+      "category": "prompt_constraint"
     },
     {
       "id": "F002",
-      "content": "AFP 抵扣系数：极速模型 0.5 AFP/万tokens、标准模型 1、进阶模型 5、第三方模型 9。上下文长度分段系数：0-32K 0.67x、32K-128K 1x、128K-256K 2x。视频生成 36-230 AFP，图片生成 99 AFP/张。",
-      "sources": ["https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html"],
+      "content": "Chain-of-Noting为检索文档生成阅读笔记评估相关性，噪声文档场景EM提升+7.9，超出预训练知识问题拒绝率提升+10.5。",
+      "sources": ["https://arxiv.org/abs/2311.09210"],
       "confidence": "high",
-      "verified_by": ["searcher-1"]
+      "category": "hallucination_prevention"
     },
     {
       "id": "F003",
-      "content": "Agent Plan API 分两种协议：OpenAI Compatible (Base URL: https://ark.cn-beijing.volces.com/api/v3) 和 Anthropic 兼容 (Base URL: https://ark.cn-beijing.volces.com/api/plan)。API Key 以 ark- 开头，与 Coding Plan 的 Base URL 和 Key 不可混用。",
-      "sources": ["https://codepick.dev/zh/guides/ark-coding-plan-guide/"],
+      "content": "RAG范式分三阶段：Naive→Advanced→Modular。基础接地策略：将检索文档注入prompt context并指示"仅基于提供的上下文回答"。",
+      "sources": ["https://arxiv.org/abs/2312.10997", "https://www.promptingguide.ai/techniques/rag"],
       "confidence": "high",
-      "verified_by": ["searcher-1"]
+      "category": "prompt_constraint"
     },
     {
       "id": "F004",
-      "content": "Agent Plan 整合 Harness 工具链：联网搜索(豆包同源实时检索，Medium 起送 50-800 次/月)、记忆能力(Doubao-embedding-vision 长期记忆)、Auto 智能调度(自动选性价比最优模型)、多模态统一调度(文本/代码/图像/视频)。适配 Claude Code、OpenCode、Trae、OpenClaw 等客户端。",
-      "sources": ["https://www.ithome.com/0/948/912.htm", "https://codepick.dev/zh/guides/ark-agent-plan/"],
+      "content": "ChatQA两阶段指令微调强化检索接地：Llama3-ChatQA-1.5-70B在ChatRAG Bench超越GPT-4-Turbo 4.4%。",
+      "sources": ["https://arxiv.org/abs/2401.10225"],
       "confidence": "high",
-      "verified_by": ["searcher-1"]
+      "category": "case_study"
     },
     {
       "id": "F005",
-      "content": "Agent Plan 设三层用量限制：5 小时短时限额、周限额、月限额。Medium 套餐：5h 限额 1 万 AFP、周限额 3.5 万 AFP、月限额 10 万 AFP。额度耗尽后等下一周期自动恢复，不扣账户余额。视觉模型无日限额/周限额。",
-      "sources": ["https://blog.csdn.net/Airwinner/article/details/160881355"],
-      "confidence": "high",
-      "verified_by": ["searcher-1"]
+      "content": "Rewrite-Retrieve-Read通过RL查询改写优化检索，不修改retriever/reader，仅优化查询实现检索接地增强。",
+      "sources": ["https://arxiv.org/abs/2305.14283"],
+      "confidence": "medium",
+      "category": "prompt_constraint"
     },
     {
       "id": "F006",
-      "content": "用量查询主要通过火山引擎控制台 (console.volcengine.com → AI 大模型 → 方舟 Agent Plan)，可查看 AFP 消耗统计和额度使用情况。",
-      "sources": ["https://www.xmsumi.com/detail/3195"],
-      "confidence": "medium",
-      "verified_by": ["searcher-1"]
+      "content": "ReaLMistake发现GPT-4/Claude3等LLM检测自身错误召回率极低，self-consistency不能改善错误检测→多agent系统中独立验证器必要性。",
+      "sources": ["https://arxiv.org/abs/2404.03602"],
+      "confidence": "high",
+      "category": "hallucination_prevention"
     },
     {
       "id": "F007",
-      "content": "Agent Plan 与 Coding Plan 核心区别：Coding Plan 2 档(Lite ¥40/Pro ¥200)按调用次数计费，仅文本/代码；Agent Plan 4 档按 AFP 计费，额外支持图像/视频/向量化/联网搜索。Base URL 和 API Key 各自独立。",
-      "sources": ["https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html"],
-      "confidence": "high",
-      "verified_by": ["searcher-1"]
+      "content": "26条提示工程原则中多条适用于agent接地：明确输出格式、基于事实回答、使用引导词、分解子任务、要求解释而非仅给答案。",
+      "sources": ["https://arxiv.org/abs/2312.16171"],
+      "confidence": "medium",
+      "category": "prompt_constraint"
     },
     {
       "id": "F008",
-      "content": "火山引擎用量统计 API 基于 OpenAPI 协议，统一端点 https://open.volcengineapi.com/，通过 Action 和 Version 查询参数指定操作，认证方式为 AK/SK + HMAC-SHA256 签名（Authorization 请求头）。",
-      "sources": ["https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01"],
-      "confidence": "high",
-      "verified_by": ["searcher-2", "searcher-3"]
+      "content": "RAG-Fusion结合多查询变体+倒数秩融合(RRF)提高答案准确性和全面性，为多agent搜索员提供查询多样性策略。",
+      "sources": ["https://arxiv.org/abs/2402.03367"],
+      "confidence": "medium",
+      "category": "case_study"
     },
     {
       "id": "F009",
-      "content": "通用用量统计 API Action 列表：ListUsage、DescribeUsage、QueryUsage、GetUsage、ListUsageDetail/ListUsageDetails（用量明细）、ListBillDetail（账单明细）、ListBillOverviewByProd（按产品账单概览）、ListMeasureDetail（计量明细）、ListMeasurements（计量列表）、DescribeMeasureData（计量数据）、ListUsageReports（用量报告）。支持 Service=ark 按 Ark 服务筛选。",
-      "sources": ["https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01"],
+      "content": "Han&Zhang首次将经典黑板架构引入LLM多Agent：Agent通过共享黑板交换信息，动态选择执行Agent，常识推理和数学任务达SOTA且token消耗更少。",
+      "sources": ["https://arxiv.org/abs/2507.01701"],
       "confidence": "high",
-      "verified_by": ["searcher-2"]
+      "category": "architecture"
     },
     {
       "id": "F010",
-      "content": "Agent Plan 专用用量 API Action 确认存在：ListAgentPlans（列出 Agent Plans）、DescribeAgentPlan（查询详情）、CreateAgentPlan（创建）、DescribeAgentPlanUsage（查询用量）、GetAgentPlanUsage（获取用量）、ListAgentPlanUsageDetails（用量明细）、ListAgentPlanBills（账单）。均使用 Version=2024-01-01。",
-      "sources": ["https://open.volcengineapi.com/?Action=DescribeAgentPlanUsage&Version=2024-01-01"],
+      "content": "Salemi等数据科学黑板系统：中央Agent发布请求到黑板，自治子Agent自愿响应，相比master-slave端到端成功率提升13%-57%。",
+      "sources": ["https://arxiv.org/abs/2510.01285"],
       "confidence": "high",
-      "verified_by": ["searcher-2"]
+      "category": "architecture"
     },
     {
       "id": "F011",
-      "content": "模型/端点维度用量 API：DescribeModelUsage、ListModelUsage（模型用量）、DescribeEndpointUsage、ListEndpointUsage（端点用量）、ListEndpoints（端点列表）。支持按模型和端点分别统计推理用量（Token 消耗、调用次数）。",
-      "sources": ["https://open.volcengineapi.com/?Action=DescribeModelUsage&Version=2024-01-01"],
+      "content": "Token Coherence Theorem：MESI缓存一致性协议映射到多Agent上下文同步，惰性失效节省84-95%同步token，已集成LangGraph/CrewAI/AutoGen适配层。",
+      "sources": ["https://arxiv.org/abs/2603.15183"],
       "confidence": "high",
-      "verified_by": ["searcher-2"]
+      "category": "compression"
     },
     {
       "id": "F012",
-      "content": "火山引擎 Python SDK (pip install volcengine) 和 Go SDK (go get github.com/volcengine/volc-sdk-golang) 均支持 3 种 AK/SK 认证：代码设置、环境变量(VOLC_ACCESSKEY/VOLC_SECRETKEY)、配置文件(~/.volc/config)。AK/SK 在控制台 IAM 访问密钥页面管理。",
-      "sources": ["https://github.com/volcengine/volc-sdk-python", "https://github.com/volcengine/volc-sdk-golang"],
+      "content": "ACON通过自然语言空间迭代优化压缩指南实现上下文压缩，峰值token减少26-54%同时提升任务成功率，小模型性能提升46%。",
+      "sources": ["https://arxiv.org/abs/2510.00615"],
       "confidence": "high",
-      "verified_by": ["searcher-2", "searcher-3"]
+      "category": "compression"
     },
     {
       "id": "F013",
-      "content": "火山方舟(Ark)是火山引擎大模型推理平台(文档 ID 82379)，提供模型推理、训练、Managed Agent 等全栈能力。Agent Plan 是 Ark 平台 Managed Agent 的高级能力，基于豆包大模型生态。",
-      "sources": ["https://www.volcengine.com/docs/82379/1262223?lang=zh"],
-      "confidence": "medium",
-      "verified_by": ["searcher-2", "searcher-3"]
+      "content": "PAACE计划感知上下文工程：基于next-k-task相关性建模压缩，蒸馏版保留97%性能成本降低10倍。",
+      "sources": ["https://arxiv.org/abs/2512.16970"],
+      "confidence": "high",
+      "category": "compression"
     },
     {
       "id": "F014",
-      "content": "火山引擎大模型服务定价包含按 Token 计费和 TPM 保障包两种模式。推理方式包括常规、低延迟、TPM 保障包、模型单元、批量推理五种。具体价格数字因官方文档页 JS 渲染未能直接获取。",
-      "sources": ["https://www.volcengine.com/docs/82379/1262223?lang=zh"],
-      "confidence": "low",
-      "verified_by": ["searcher-3"]
+      "content": "DOVA混合协作推理：ensemble diversity + blackboard transparency + iterative refinement，六级token预算，简单任务推理成本降低40-60%。",
+      "sources": ["https://arxiv.org/abs/2603.13327"],
+      "confidence": "medium",
+      "category": "architecture"
+    },
+    {
+      "id": "F015",
+      "content": "OpenAI Swarm context_variables + Agents SDK Sandbox Agents提供轻量共享状态：handoff自动传递context_variables，Sandbox容器化文件系统持久化状态。",
+      "sources": ["https://github.com/openai/swarm", "https://github.com/openai/openai-agents-python"],
+      "confidence": "high",
+      "category": "framework"
+    },
+    {
+      "id": "F016",
+      "content": "LangGraph StateGraph：TypedDict State Schema共享状态，子图继承父图state，reducer控制更新策略。与黑板模式区别：LangGraph编译时定义schema，黑板运行时动态扩展。",
+      "sources": ["https://github.com/langchain-ai/langgraph"],
+      "confidence": "high",
+      "category": "framework"
+    },
+    {
+      "id": "F017",
+      "content": "PharmaSwarm shared memory layer：捕获验证后insights持续微调子模型，中央Evaluator基于多维度排序提案。",
+      "sources": ["https://arxiv.org/abs/2504.17967"],
+      "confidence": "medium",
+      "category": "framework"
+    },
+    {
+      "id": "F018",
+      "content": "MemMachine三层记忆：短期+长期情节+档案记忆，ground-truth-preserving设计，减少80%输入token，自适应Retrieval Agent路由查询。",
+      "sources": ["https://arxiv.org/abs/2604.04853"],
+      "confidence": "medium",
+      "category": "compression"
+    },
+    {
+      "id": "F019",
+      "content": "消息传递vs共享黑板：消息传递简单但O(n)开销+信息丢失；共享黑板一次写入多方读取+异步协作+高token效率，但需额外存储+并发控制复杂。",
+      "sources": ["https://arxiv.org/abs/2603.15183", "https://arxiv.org/abs/2507.01701", "https://arxiv.org/abs/2510.01285"],
+      "confidence": "high",
+      "category": "comparison"
+    },
+    {
+      "id": "F020",
+      "content": "当前file-based JSON（research-state.json+findings）已是黑板雏形。完整黑板升级路径：(1)字段级写入粒度；(2)增量更新；(3)版本控制+并发合并；(4)黑板轮询获取最新状态。",
+      "sources": ["https://arxiv.org/abs/2603.15183", "https://arxiv.org/abs/2510.01285"],
+      "confidence": "medium",
+      "category": "file_based"
+    },
+    {
+      "id": "F021",
+      "content": "三层上下文压缩策略可叠加：(1)底层惰性同步(84-95%节省)；(2)中层计划感知过滤；(3)上层失败分析优化压缩质量。ACON+PAACE+Token Coherence组合使用。",
+      "sources": ["https://arxiv.org/abs/2510.00615", "https://arxiv.org/abs/2512.16970", "https://arxiv.org/abs/2603.15183"],
+      "confidence": "medium",
+      "category": "compression"
     }
   ],
   "gaps": [
-    "Agent Plan 用量 API (DescribeAgentPlanUsage 等) 的完整请求参数和响应字段文档 — 官方文档 JS 渲染无法抓取",
-    "用量统计 API 的 Version 参数确切取值（探测了 2022/2023/2024 版本均有效，但无法确定推荐版本）",
-    "Agent Plan 各模型的具体按 Token 定价（非 AFP 系数）— 定价页面 JS 渲染",
-    "用量查询 API 所需的具体 IAM 权限策略",
-    "Python/Go SDK 中调用用量统计 API 的具体代码示例",
-    "AFP 消耗实时查询 API 是否存在",
-    "套餐额度恢复周期的精确 API 查询方式",
-    "HMAC-SHA256 签名的具体实现细节（火山引擎签名方法版本）",
-    "Agent Plan 与 Coding Plan 共用同一套用量 API 还是各自独立",
-    "英文文档和国际站 (volcengine.com/en) 是否有更完整的 API 文档"
+    "缺乏时间戳注入的具体实现方案（在prompt/context中注入当前日期时间的最佳实践和格式）",
+    "缺乏DeepSeek模型特有的hallucination缓解实践（R1论文关注推理而非知识时效性）",
+    "缺乏AutoGen/CrewAI框架中接地策略的官方文档或详细案例",
+    "缺乏生产环境中多agent grounding部署的详细案例研究",
+    "缺乏中文技术社区关于接地实践的具体prompt模板",
+    "缺乏OpenClaw taskflow API的具体接口文档和集成测试数据",
+    "缺乏文件共享vs共享黑板在大规模Agent场景下的实际benchmark对比"
   ],
   "next_actions": [
-    "综合 14 个 findings 撰写基线报告",
-    "标注置信度低/中的 findings 供审阅",
-    "列出所有已知 API Action 清单作为附录",
-    "记录知识缺口供后续迭代"
-  ]
+    "Reviewer A: 准确性验证（对关键论文和方法进行事实核查）",
+    "Reviewer B: 完整性评估（检查是否遗漏关键方向）",
+    "综合评审后生成落地方案"
+  ],
+  "verified_findings": [],
+  "citation_verified_findings": []
 }
