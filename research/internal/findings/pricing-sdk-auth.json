@@ -1,0 +1,134 @@
+{
+  "findings": [
+    {
+      "claim": "火山引擎 ARK 服务的用量查询 API 为 DescribeUsage，API 端点位于 open.volcengineapi.com，服务标识为 ark，版本号为 2024-01-01",
+      "evidence": "通过向 open.volcengineapi.com 发送 DescribeUsage 请求，API 返回了标准的火山引擎响应格式，确认该 Action 存在于 ARK 服务中。请求需携带 Authorization 签名头，否则返回 InvalidCredential 错误。API 基础 URL 模式为 https://open.volcengineapi.com/?Action=<Action>&Version=<Version>&Service=<Service>。",
+      "source_url": "https://open.volcengineapi.com/?Action=DescribeUsage&Version=2024-01-01&Service=ark",
+      "confidence": "high",
+      "source_name": "火山引擎 OpenAPI Gateway",
+      "query_id": 2
+    },
+    {
+      "claim": "火山引擎 SDK 支持 Python 和 Go 两种语言，通过 AK/SK 进行 HMAC 签名认证，支持三种凭证管理方式",
+      "evidence": "Python SDK 通过 pip install volcengine 安装，Go SDK 通过 go get github.com/volcengine/volc-sdk-golang 安装。三种认证方式：(1) 代码中直接设置 AK/SK，(2) 环境变量 VOLC_ACCESSKEY 和 VOLC_SECRETKEY，(3) ~/.volc/config 配置文件。AK/SK 在火山引擎控制台 IAM 访问密钥页面创建和管理。",
+      "source_url": "https://github.com/volcengine/volc-sdk-python",
+      "confidence": "high",
+      "source_name": "GitHub volcengine/volc-sdk-python",
+      "query_id": 3
+    },
+    {
+      "claim": "火山引擎 Go SDK 同样支持三种 AK/SK 认证方式，API 调用模式与 Python SDK 一致",
+      "evidence": "Go SDK 需要 Go 1.14+，安装命令为 go get -u github.com/volcengine/volc-sdk-golang。认证方式包括：iam.DefaultInstance.Client.SetAccessKey()/SetSecretKey() 直接设置、环境变量 VOLC_ACCESSKEY/VOLC_SECRETKEY、以及 ~/.volc/config 文件。",
+      "source_url": "https://github.com/volcengine/volc-sdk-golang",
+      "confidence": "high",
+      "source_name": "GitHub volcengine/volc-sdk-golang",
+      "query_id": 3
+    },
+    {
+      "claim": "火山方舟（Ark）是火山引擎的大模型推理平台，提供模型列表、模型价格、在线推理、批量推理、Managed Agent 等功能模块",
+      "evidence": "从火山引擎文档站侧边栏导航（文档 ID 1262223）可见，火山方舟文档包含：入门（产品简介、快速入门、模型列表、模型价格）、调用（文本生成、多模态理解等）、推理（在线推理常规/低延迟/TPM保障包/模型单元/批量推理）、Managed Agent（快速上手、定义Agent、配置环境、委派任务、管理上下文）、应用实验室、知识库等模块。",
+      "source_url": "https://www.volcengine.com/docs/82379/1262223?lang=zh",
+      "confidence": "medium",
+      "source_name": "火山引擎官方文档 - 火山方舟",
+      "query_id": 4
+    },
+    {
+      "claim": "火山引擎 Agent Plan 是火山方舟平台下的 Managed Agent 能力，与 Coding Plan 同属 Agent/Coding Plan 产品线",
+      "evidence": "火山引擎文档导航显示 [Agent/Coding Plan]API参考资源 分类，同时 Managed Agent 章节包含 Agent 定义、环境配置、任务委派、上下文管理等功能。SegmentFault 文章提及 'Hermes Agent + 火山引擎 Agent Plan + Harness + 飞书机器人' 的部署方案，以及 Coding Plan 作为按月付费的编程订阅套餐。",
+      "source_url": "https://www.volcengine.com/docs/82379/1262223?lang=zh",
+      "confidence": "medium",
+      "source_name": "火山引擎官方文档 + SegmentFault 搜索结果",
+      "query_id": 4
+    },
+    {
+      "claim": "火山引擎 Agent Plan 是豆包大模型生态的一部分，火山方舟平台承载豆包大模型的 API 推理服务",
+      "evidence": "SegmentFault 文章提及 '火山引擎发布豆包大模型1.8，多模态Agent能力进入全球第一梯队'，以及 '豆包大模型日均 Token 调用量已突破 180 万亿'。火山方舟作为火山引擎的大模型推理平台，提供包括豆包系列在内的多种模型的 API 接入。Agent Plan 基于豆包大模型提供 Agent 能力。",
+      "source_url": "https://segmentfault.com/search?q=火山引擎+Agent+Plan+用量",
+      "confidence": "medium",
+      "source_name": "SegmentFault 搜索结果",
+      "query_id": 4
+    },
+    {
+      "claim": "火山引擎大模型服务定价包含按 Token 计费和 TPM 保障包两种模式，具体价格需查看官方模型价格页面",
+      "evidence": "文档导航显示模型价格页面（/docs/82379/1544106）和多种推理模式：在线推理常规、在线推理低延迟、在线推理 TPM 保障包、在线推理模型单元、批量推理。SegmentFault 文章 '国内大模型推理平台选型指南' 提到火山方舟有独立的定价体系。具体价格数字因页面 JS 渲染未能获取。",
+      "source_url": "https://www.volcengine.com/docs/82379/1262223?lang=zh",
+      "confidence": "low",
+      "source_name": "火山引擎文档导航 + SegmentFault 搜索",
+      "query_id": 1
+    },
+    {
+      "claim": "火山引擎 API 鉴权使用 AK/SK 签名机制，AK/SK 在 IAM 访问控制中管理，用量查询 API 需要相应权限",
+      "evidence": "AK/SK 通过火山引擎控制台的 IAM 访问密钥页面管理（console.volcengine.com/iam/keymanage/）。API 请求需在 Authorization 头中携带 HMAC 签名，否则返回 InvalidCredential 错误（错误码 100025）。用量查询权限细节因文档 JS 渲染未能直接获取，IAM 帮助文档地址为 /docs/6291/65568。",
+      "source_url": "https://github.com/volcengine/volc-sdk-python",
+      "confidence": "high",
+      "source_name": "GitHub SDK README + OpenAPI Gateway 响应",
+      "query_id": 5
+    }
+  ],
+  "visited_urls": [
+    "https://www.volcengine.com/docs/82379/1262223?lang=zh",
+    "https://www.volcengine.com/docs/82379/1099461",
+    "https://www.volcengine.com/docs/82379/1298845",
+    "https://www.volcengine.com/docs/82379/1185862",
+    "https://www.volcengine.com/docs/82379/1099455",
+    "https://www.volcengine.com/docs/82379/1186195",
+    "https://www.volcengine.com/docs/82379/1186196",
+    "https://www.volcengine.com/docs/82379/1544106",
+    "https://www.volcengine.com/docs/82379/1330310",
+    "https://www.volcengine.com/docs/82379/93244",
+    "https://www.volcengine.com/docs/82379/1298454",
+    "https://www.volcengine.com/docs/82379/1399008",
+    "https://www.volcengine.com/docs/82379/1399009",
+    "https://www.volcengine.com/docs/82379/1399517",
+    "https://www.volcengine.com/docs/82379/1510762",
+    "https://www.volcengine.com/docs/82379/2121998",
+    "https://www.volcengine.com/docs/82379/1186190",
+    "https://www.volcengine.com/docs/82379/1186191",
+    "https://www.volcengine.com/docs/82379/1186192",
+    "https://www.volcengine.com/docs/82379/1186193",
+    "https://www.volcengine.com/docs/82379/1186194",
+    "https://www.volcengine.com/docs/82379/1186197",
+    "https://www.volcengine.com/docs/82379/1262222",
+    "https://www.volcengine.com/docs/82379/1298453",
+    "https://www.volcengine.com/docs/82379/1359352",
+    "https://www.volcengine.com/docs/6291/65568",
+    "https://www.volcengine.com/pricing",
+    "https://www.volcengine.com/theme/3771300-R-7-1",
+    "https://developer.volcengine.com/docs/82379",
+    "https://open.volcengineapi.com/?Action=DescribeUsage&Version=2024-01-01&Service=ark",
+    "https://open.volcengineapi.com/?Action=DescribeEndpoints&Version=2024-01-01&Service=ark",
+    "https://open.volcengineapi.com/?service=ark&version=2024-01-01",
+    "https://github.com/volcengine/volc-sdk-python",
+    "https://github.com/volcengine/volc-sdk-golang",
+    "https://segmentfault.com/search?q=火山引擎+Agent+Plan+用量",
+    "https://segmentfault.com/a/1190000047671311",
+    "https://segmentfault.com/a/1190000047634506",
+    "https://segmentfault.com/a/1190000047763643"
+  ],
+  "used_queries": [
+    "火山引擎 Agent Plan 定价 价格 计费方式 Token 消耗",
+    "火山引擎 大模型服务 用量查询 API DescribeUsage QueryUsage",
+    "火山引擎 volcengine SDK 用量统计 API 调用示例 Python Go",
+    "火山引擎 Agent Plan 与 豆包大模型 关系 区别",
+    "火山引擎 大模型 API 鉴权 AK SK 签名 用量查询 权限"
+  ],
+  "gaps_found": [
+    "Agent Plan 的具体定价数字（按 Token 价格）- 定价页面 (/docs/82379/1544106) 需 JS 渲染，无法获取",
+    "DescribeUsage API 的完整请求参数和响应格式 - 文档页面需 JS 渲染",
+    "用量查询 API 所需的具体 IAM 权限策略 - IAM 文档需 JS 渲染",
+    "Agent Plan 与 Coding Plan 的具体区别和各自计费模式 - 缺少可直接访问的对比文档",
+    "Python/Go SDK 中调用用量统计 API 的具体代码示例 - SDK 源码仓库中未找到 ARK 模块的 README",
+    "火山引擎 API 签名算法 (HMAC-SHA256) 的具体实现细节 - 文档需 JS 渲染"
+  ],
+  "agent_metadata": {
+    "tool_calls_used": 40,
+    "blocked_reasons": [
+      "volcengine.com/docs 全部使用客户端 JS 渲染，web_fetch 无法获取正文内容",
+      "segmentfault.com 文章页返回 468 状态码，阻止直接抓取",
+      "zhuanlan.zhihu.com 返回 403 禁止访问",
+      "web_search 工具已禁用",
+      "GitHub raw 文件多次超时",
+      "volcengine.com/api/docs 需要认证"
+    ]
+  }
+}
