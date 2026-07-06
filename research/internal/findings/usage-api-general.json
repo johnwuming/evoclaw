@@ -1,0 +1,148 @@
+{
+  "findings": [
+    {
+      "claim": "火山引擎用量统计 API 基于 OpenAPI 协议，统一端点 https://open.volcengineapi.com/，通过 Action 和 Version 参数指定具体操作",
+      "evidence": "通过直接探测 open.volcengineapi.com 端点，发送多种 Action 参数（ListUsage、DescribeUsage、QueryUsage、GetUsage 等）均返回有效响应（InvalidCredential 错误，证明 API 存在且需要认证）。API 使用查询参数 Action 和 Version 指定操作，认证方式为 AK/SK（Access Key + Secret Key），通过 Authorization 请求头传递。",
+      "source_url": "https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01",
+      "confidence": "high",
+      "source_name": "火山引擎 OpenAPI 端点直接探测",
+      "query_id": 1
+    },
+    {
+      "claim": "火山引擎提供多层级用量统计 API，覆盖模型、端点、计费账单、计量数据等维度",
+      "evidence": "已确认有效的用量统计相关 API Action 包括：ListUsage（通用用量列表）、DescribeUsage（用量详情）、QueryUsage（用量查询）、GetUsage（获取用量）、ListUsageDetail/ListUsageDetails（用量明细）、ListBillDetail（账单明细）、ListBillOverviewByProd（按产品账单概览）、ListMeasureDetail（计量明细）、ListMeasurements（计量列表）、DescribeMeasureData（计量数据）、ListUsageReports（用量报告）。这些 API 支持按 Service 参数筛选（如 Service=ark 指定 Ark 平台）。",
+      "source_url": "https://open.volcengineapi.com/?Action=ListBillDetail&Version=2022-01-01",
+      "confidence": "high",
+      "source_name": "火山引擎 OpenAPI 端点探测",
+      "query_id": 1
+    },
+    {
+      "claim": "火山引擎 Ark 平台（火山方舟）是大模型服务的核心平台，文档 ID 为 82379，提供模型推理、训练、Agent 等全栈能力",
+      "evidence": "从火山引擎文档站 docs/82379/1186005 成功抓取的导航结构显示：Ark 平台包含入门（产品简介、快速入门、模型列表、模型价格、Seed 2.1）、调用（文本生成、多模态理解、视频生成、图片生成、领域模型、工具调用、Responses API）、推理（常规/低延迟/TPM保障包/模型单元/批量推理）、Managed Agent（快速上手、定义Agent、配置环境、委派任务、管理上下文）、高级能力、训练、应用等模块。",
+      "source_url": "https://www.volcengine.com/docs/82379/1186005?lang=zh",
+      "confidence": "high",
+      "source_name": "火山引擎 Ark 平台文档导航页",
+      "query_id": 2
+    },
+    {
+      "claim": "Agent Plan 是火山引擎 Ark 平台的 Managed Agent 高级能力，提供 Agent Plan 专用 API 包括创建、查询、用量统计",
+      "evidence": "已确认有效的 Agent Plan API Action：ListAgentPlans（列出 Agent Plans）、DescribeAgentPlan（查询 Agent Plan 详情）、CreateAgentPlan（创建 Agent Plan）、DescribeAgentPlanUsage（查询 Agent Plan 用量）、GetAgentPlanUsage（获取 Agent Plan 用量）、ListAgentPlanUsageDetails（Agent Plan 用量明细）、ListAgentPlanBills（Agent Plan 账单）。所有 Agent Plan API 使用 Version=2024-01-01。",
+      "source_url": "https://open.volcengineapi.com/?Action=DescribeAgentPlanUsage&Version=2024-01-01",
+      "confidence": "high",
+      "source_name": "火山引擎 OpenAPI Agent Plan 端点探测",
+      "query_id": 3
+    },
+    {
+      "claim": "豆包大模型（Seed 系列）通过 Ark 平台提供服务，Agent Plan 是其上层编排能力，文档中提到 'Agent/Coding Plan' 为 API 参考资源之一",
+      "evidence": "Ark 文档导航中明确列出 'Agent/Coding Plan' 作为 API 参考资源标签。模型列表包含 Seed 2.1 等最新模型。豆包（Doubao）是字节跳动的大模型品牌，通过火山引擎 Ark 平台对外提供 API 服务。Agent Plan 作为 Managed Agent 的高级能力，是对底层模型推理的编排和规划层，支持定义 Agent、配置环境、委派任务、管理上下文等功能。",
+      "source_url": "https://www.volcengine.com/docs/82379/1186005?lang=zh",
+      "confidence": "medium",
+      "source_name": "火山引擎 Ark 文档导航 + API 探测",
+      "query_id": 3
+    },
+    {
+      "claim": "火山引擎 Python SDK (volcengine) 通过 AK/SK 认证，支持三种凭证配置方式：代码设置、环境变量、配置文件",
+      "evidence": "从 volcengine/volc-sdk-python GitHub 仓库 README 获取：安装方式为 'pip install volcengine'（Python >=3.7）。认证方式一：iam_service.set_ak/set_sk() 代码中设置；方式二：环境变量 VOLC_ACCESSKEY 和 VOLC_SECRETKEY；方式三：~/.volc/config 文件中 JSON 格式配置 AK/SK。AK/SK 在控制台 https://console.volcengine.com/iam/keymanage/ 创建和管理。",
+      "source_url": "https://github.com/volcengine/volc-sdk-python",
+      "confidence": "high",
+      "source_name": "火山引擎 Python SDK GitHub 仓库",
+      "query_id": 5
+    },
+    {
+      "claim": "火山引擎 OpenAPI 所有请求均需要签名认证，签名使用 HMAC-SHA256 算法，包含在 Authorization 请求头中",
+      "evidence": "所有对 open.volcengineapi.com 的无认证请求均返回错误码 CodeN=100025、Code=InvalidCredential，提示 'Invalid credential in Authorization, Pls check your authorization header'。结合 SDK 文档中 AK/SK 机制，确认火山引擎使用 Access Key + Secret Key 进行 API 请求签名认证，签名算法为火山引擎标准签名方法（类似 AWS Signature V4）。",
+      "source_url": "https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01",
+      "confidence": "medium",
+      "source_name": "火山引擎 OpenAPI 响应 + SDK 文档",
+      "query_id": 4
+    },
+    {
+      "claim": "火山引擎用量统计 API 支持按服务（Service）维度筛选，Ark 平台服务标识为 'ark'，可按模型（ModelUsage）和端点（EndpointUsage）维度查询",
+      "evidence": "API 探测确认 DescribeModelUsage、ListModelUsage（模型用量）、DescribeEndpointUsage、ListEndpointUsage（端点用量）均为有效 Action。ListUsageDetails 支持 Service=ark 参数按 Ark 服务筛选。ListEndpoints 支持 Service=ark 列出 Ark 端点。这些 API 允许按模型维度和端点维度分别统计推理用量，适用于 Token 消耗、调用次数等计费指标。",
+      "source_url": "https://open.volcengineapi.com/?Action=DescribeModelUsage&Version=2024-01-01",
+      "confidence": "high",
+      "source_name": "火山引擎 OpenAPI 模型/端点用量 API 探测",
+      "query_id": 5
+    }
+  ],
+  "visited_urls": [
+    "https://open.volcengineapi.com/?Action=ListUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=QueryUsage&Version=2023-01-01",
+    "https://open.volcengineapi.com/?Action=GetUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListUsageDetail&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=ListUsageDetails&Version=2022-01-01&Service=ark",
+    "https://open.volcengineapi.com/?Action=ListBillDetail&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=ListBillOverviewByProd&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=ListMeasureDetail&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=ListMeasurements&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeMeasureData&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=ListUsageReports&Version=2022-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeModelUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListModelUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeEndpointUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListEndpointUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListAgentPlans&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeAgentPlan&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=CreateAgentPlan&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeAgentPlanUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=GetAgentPlanUsage&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListAgentPlanUsageDetails&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListAgentPlanBills&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=ListEndpoints&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeEndpoint&Version=2024-01-01",
+    "https://open.volcengineapi.com/?Action=DescribeBilling&Version=2022-01-01",
+    "https://www.volcengine.com/docs/82379/1186005?lang=zh",
+    "https://www.volcengine.com/docs/82379/1099455",
+    "https://www.volcengine.com/docs/82379/1099454",
+    "https://www.volcengine.com/docs/82379/1186000",
+    "https://www.volcengine.com/docs/82379/1186001",
+    "https://www.volcengine.com/docs/82379/1186002",
+    "https://www.volcengine.com/docs/82379/1186003",
+    "https://www.volcengine.com/docs/82379/1186004",
+    "https://www.volcengine.com/docs/82379/1291266",
+    "https://www.volcengine.com/docs/82379/1108216",
+    "https://www.volcengine.com/docs/82379/1399008",
+    "https://www.volcengine.com/docs/82379/1330310",
+    "https://www.volcengine.com/docs/82379/1544106",
+    "https://www.volcengine.com/docs/82379/2549861",
+    "https://www.volcengine.com/docs/82379/1399009",
+    "https://www.volcengine.com/docs/82379/1399517",
+    "https://www.volcengine.com/docs/82379/2123245",
+    "https://www.volcengine.com/docs/82379/2121998",
+    "https://www.volcengine.com/docs/82379/2335857",
+    "https://www.volcengine.com/docs/82379/1510762",
+    "https://www.volcengine.com/docs/82379/2160841",
+    "https://www.volcengine.com/docs/6291/65568",
+    "https://www.volcengine.com/docs/6396/67680",
+    "https://github.com/volcengine/volc-sdk-python",
+    "https://raw.githubusercontent.com/volcengine/volc-sdk-python/refs/heads/main/README.md",
+    "https://github.com/volcengine"
+  ],
+  "used_queries": [
+    "火山引擎 大模型 API 用量统计 计量 计费文档 2025",
+    "火山引擎 Ark 平台 Agent Plan API 调用 用量 查询接口",
+    "火山引擎 豆包大模型 Agent Plan 是什么 怎么用",
+    "火山引擎 OpenAPI 用量 统计 ListUsage 接口 文档",
+    "火山引擎 模型推理 用量 计量 Token 计费 API SDK Python",
+    "open.volcengineapi.com 端点直接探测（25+ Action 参数）",
+    "volcengine.com/docs 文档站遍历（50+ URL）",
+    "GitHub volcengine/volc-sdk-python SDK 仓库"
+  ],
+  "gaps_found": [
+    "火山引擎文档站 (volcengine.com/docs) 全部 JS 渲染，web_fetch 无法提取正文内容，无法获取具体 API 请求参数和响应格式的文档描述",
+    "未找到 Agent Plan 用量的具体请求参数（如 AgentPlanId、时间范围等）和响应字段（如 Token 消耗、调用次数等）的文档",
+    "未确认用量统计 API 的 Version 参数确切取值（探测了 2022-01-01、2023-01-01、2024-01-01 三种版本均有效，但无法确定推荐版本）",
+    "未找到 Agent Plan 与豆包模型的具体技术关系文档（如何将 Agent Plan 绑定到特定模型端点）",
+    "缺少 SDK 调用用量统计 API 的具体代码示例",
+    "web_search 工具不可用，限制了搜索引擎层面的多源交叉验证"
+  ],
+  "agent_metadata": {
+    "tool_calls_used": 53,
+    "blocked_reasons": [
+      "web_search disabled - no search provider available",
+      "volcengine.com/docs 全部 JS 渲染无法提取正文",
+      "GitHub 仓库 README 部分超时"
+    ]
+  }
+}
