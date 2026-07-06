@@ -1,0 +1,115 @@
+{
+  "findings": [
+    {
+      "claim": "Agent Plan 于 2026 年 5 月 11 日正式发布，定位为「业界首个 Agent 套餐包」，在 Coding Plan 基础上扩展为多模型+多模态+Harness 工具的 Agent 订阅服务。",
+      "evidence": "2026年5月11日火山引擎正式发布 Agent Plan。四档月付价格：Small ¥40(20K AFP)、Medium ¥200(100K AFP)、Large ¥500(250K AFP)、Max ¥1000(500K AFP)。计费采用 AFP(Agent Fuel Points)积分制，按模型、上下文长度、输入/输出和工具能力折算。包含字节自研 Doubao-Seed 系列及第三方 DeepSeek-V4/V3.2、GLM-5.1、Kimi-K2.6、MiniMax-M2.7 模型。",
+      "source_url": "https://codepick.dev/zh/guides/ark-agent-plan/",
+      "confidence": "high",
+      "source_name": "CodePick - 火山方舟 Agent Plan 全解读",
+      "query_id": 1
+    },
+    {
+      "claim": "Agent Plan 首次将 Model 与 Harness 工具链深度整合，提供联网搜索、长期记忆(embedding)、Auto 智能调度、多模态统一调度四大能力。",
+      "evidence": "Harness 工具包括：联网搜索(与豆包同源的实时检索，Medium 起赠送 50-800 次/月免费额度)、记忆能力(Doubao-embedding-vision 驱动的长期记忆)、Auto 模式(智能选择性价比最高模型)、多模态(文本/代码/图像/视频统一调度)。适配 Claude Code、OpenCode、Trae、OpenClaw、Hermes Agent 等客户端。",
+      "source_url": "https://www.ithome.com/0/948/912.htm",
+      "confidence": "high",
+      "source_name": "IT之家 - 字节火山引擎 Agent Plan 发布",
+      "query_id": 1
+    },
+    {
+      "claim": "Agent Plan API 端点分为 OpenAI Compatible 和 Anthropic 兼容两种协议，Base URL 与 Coding Plan 不同，不可混用。",
+      "evidence": "Agent Plan OpenAI Compatible Base URL: https://ark.cn-beijing.volces.com/api/v3；Anthropic 兼容 Base URL: https://ark.cn-beijing.volces.com/api/plan。Coding Plan 使用 /api/coding/v3 和 /api/coding。API Key 以 ark- 开头，在控制台 API 密钥管理页面创建后仅显示一次。官方文档强调两个 Plan 的 Base URL 和 API Key 不能混用。",
+      "source_url": "https://codepick.dev/zh/guides/ark-coding-plan-guide/",
+      "confidence": "high",
+      "source_name": "CodePick - 火山方舟 Coding Plan 完整指南",
+      "query_id": 2
+    },
+    {
+      "claim": "AFP 抵扣系数按模型类别和上下文长度分级计算：极速模型 0.5 AFP/万tokens，标准模型 1，进阶模型 5，第三方模型 9，视频生成 36-230，图片生成 99 AFP/张。",
+      "evidence": "AFP 基础系数：极速模型(mini) 0.5、标准模型(lite) 1、进阶模型(code/pro/v3.2/m2.7) 5、第三方模型(glm-5.1/kimi-k2.6) 9。上下文长度分段系数：0-32K 0.67x、32K-128K 1x、128K-256K 2x。视频生成按模型和输入类型区分 36-230，图片生成 99/张。示例：doubao-seed-2.0-code 50K token 请求消耗约 25 AFP。",
+      "source_url": "https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html",
+      "confidence": "high",
+      "source_name": "威易网 - Coding Plan vs Agent Plan 对比",
+      "query_id": 3
+    },
+    {
+      "claim": "Agent Plan 设有 5 小时限额、周限额、月限额三层用量限制，视觉模型无限额直接消耗 AFP 额度。",
+      "evidence": "Medium 套餐限额：5 小时短时限额 1 万 AFP、周限额 3.5 万 AFP、月限额 10 万 AFP。额度在周期内耗尽后等待下一周期自动恢复，不扣账户余额。视觉模型(图片/视频)无日限额和周限额限制，直接从 AFP 池消耗。Small 套餐拆解为 2000 AFP/5h、7000 AFP/周、20000 AFP/月。",
+      "source_url": "https://blog.csdn.net/Airwinner/article/details/160881355",
+      "confidence": "high",
+      "source_name": "CSDN - 火山引擎 Agent Plan 初体验实测",
+      "query_id": 3
+    },
+    {
+      "claim": "用量查询主要通过火山引擎控制台进行，在方舟 Agent Plan 专属控制台可查看 AFP 消耗统计和额度使用情况。",
+      "evidence": "控制台访问路径：console.volcengine.com → 左侧导航栏 AI 大模型 → 方舟 Agent Plan。可在控制台查看套餐有效期、AFP 额度使用情况、各模型消耗统计。官方建议定期查看控制台使用统计避免额度耗尽。2026年6月活动期间部分模型有抵扣折扣(deepseek-v4-pro 4折、glm-5.2 2.5折)。",
+      "source_url": "https://www.xmsumi.com/detail/3195",
+      "confidence": "medium",
+      "source_name": "苏米客 - Agent Plan 上手指南",
+      "query_id": 5
+    },
+    {
+      "claim": "Agent Plan 与 Coding Plan 的核心区别：Coding Plan 专注纯文本/代码编程，Agent Plan 覆盖多模态+Harness 工具，两者 Base URL、API Key、计费方式均独立。",
+      "evidence": "Coding Plan 2 档(Lite ¥40/Pro ¥200)，按预估调用次数计费；Agent Plan 4 档，按 AFP 积分计费。Coding Plan 仅支持文本/代码模型，Agent Plan 额外支持图像(Doubao-Seedream-5.0-lite)、视频(Doubao-Seedance 2.0)、向量化(Doubao-embedding-vision)和联网搜索。Coding Plan Pro 赠送 ArkClaw 轻量版，Agent Plan Medium+ 更适合多模态场景。",
+      "source_url": "https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html",
+      "confidence": "high",
+      "source_name": "威易网 - Coding Plan vs Agent Plan 对比",
+      "query_id": 1
+    },
+    {
+      "claim": "未发现 Agent Plan 专用的用量统计 API 公开文档，火山引擎官方文档站为 SPA 应用，需 JS 渲染且部分内容需登录访问。",
+      "evidence": "火山引擎官方文档(volcengine.com/docs)为 JS 渲染的单页应用，通过 web_fetch 无法获取内容(返回 'Please wait...')。搜索未发现公开的 Agent Plan 用量统计 API 端点文档(如 DescribeUsage/QueryUsage 等)。用量查询目前主要通过控制台 UI 进行。计费相关 API 可能归属火山引擎计费中心(文档 ID 6499)，但同样需登录访问。",
+      "source_url": "https://www.volcengine.com/docs/82379",
+      "confidence": "medium",
+      "source_name": "火山引擎官方文档站(访问受限)",
+      "query_id": 2
+    }
+  ],
+  "visited_urls": [
+    "https://codepick.dev/zh/guides/ark-agent-plan/",
+    "https://codepick.dev/zh/guides/ark-coding-plan-guide/",
+    "https://blog.csdn.net/Airwinner/article/details/160881355",
+    "https://www.sohu.com/a/1021559631_122796069",
+    "https://www.ithome.com/0/948/912.htm",
+    "https://www.weste.net/2026/05-10/CodingPlan-AgentPlan.html",
+    "https://www.xmsumi.com/detail/3195",
+    "https://www.volcengine.com/docs/82379",
+    "https://www.volcengine.com/docs/82379/2374450",
+    "https://www.volcengine.com/docs/6499",
+    "https://api.volcengine.com/api-docs/index.html",
+    "https://cn.bing.com/search?q=%22%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E%22+%22Agent+Plan%22"
+  ],
+  "used_queries": [
+    "火山引擎 Agent Plan 产品介绍 功能 概述 2025 2026",
+    "火山引擎 Agent Plan 用量统计 API 文档 接口",
+    "火山引擎 Agent Plan 计费 用量 统计 查询",
+    "Volcano Engine Agent Plan usage statistics API documentation",
+    "火山引擎 Agent Plan 控制台 用量查询 账单",
+    "\"火山引擎\" \"Agent Plan\" (精确匹配)",
+    "火山方舟 Agent Plan 用量 统计 API",
+    "火山方舟 Coding Plan vs Agent Plan",
+    "volcengine ark api usage statistics billing query"
+  ],
+  "gaps_found": [
+    "未找到 Agent Plan 专用的用量统计/查询 API 端点文档(如 DescribeAgentPlanUsage 等 Action)",
+    "火山引擎官方文档站(volcengine.com/docs)为 SPA 应用，web_fetch 无法获取内容",
+    "计费中心 API(文档 ID 6499)的具体接口定义未公开访问",
+    "AFP 消耗的实时查询 API 是否存在不明确",
+    "控制台用量查询是否有 API 级别的替代方案未知",
+    "套餐额度恢复周期的精确 API 查询方式未发现",
+    "英文资料极为有限，Bing 搜索对 Volcano Engine + Agent Plan 的英文查询返回不相关结果"
+  ],
+  "agent_metadata": {
+    "tool_calls_used": 39,
+    "blocked_reasons": [
+      "web_search 工具不可用",
+      "volcengine.com 官方文档为 SPA 应用，web_fetch 无法渲染 JS",
+      "Bing 搜索对技术 API 查询返回大量不相关结果",
+      "Google 搜索被阻止(私有 IP)",
+      "百度搜索触发验证码",
+      "知乎搜索返回 403",
+      "DuckDuckGo 超时",
+      "GitHub volcengine SDK 仓库请求超时"
+    ]
+  }
+}
