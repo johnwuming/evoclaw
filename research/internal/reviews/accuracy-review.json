@@ -1,0 +1,204 @@
+{
+  "review_type": "accuracy",
+  "overall_score": 8.4,
+  "findings_assessed": [
+    {
+      "id": "F001",
+      "score": 9,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2310.11511 摘要确认 reflection tokens 机制与自反思生成一致"
+    },
+    {
+      "id": "F002",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2311.09210 摘要精确匹配 +7.9 EM 和 +10.5 拒绝率数据"
+    },
+    {
+      "id": "F003",
+      "score": 8,
+      "confidence_level": "Partially Supported",
+      "issues": "RAG三阶段Naive→Advanced→Modular来源确认；但'基础接地策略为仅基于提供的上下文回答'是该领域的通用实践，不是2312.10997论文的独有贡献，promptingguide.ai为补充来源未直接验证",
+      "suggestion": "标注接地策略为通用实践而非该论文独有贡献",
+      "verified": true,
+      "verification_method": "arxiv 2312.10997 摘要确认 Naive/Advanced/Modular RAG 范式分类"
+    },
+    {
+      "id": "F004",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2401.10225 摘要精确匹配两阶段指令微调、Llama3-ChatQA-1.5-70B 超越 GPT-4-Turbo 4.4%"
+    },
+    {
+      "id": "F005",
+      "score": 9,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2305.14283 摘要确认 RL 训练 rewriter、不修改 retriever/reader 的框架设计"
+    },
+    {
+      "id": "F006",
+      "score": 7,
+      "confidence_level": "Partially Supported",
+      "issues": "摘要仅提及 GPT-4 和 Llama 2 70B，未提及 Claude3；'self-consistency不能改善'的结论在摘要中未出现，需全文验证；结论'多agent系统需独立验证器'是对论文发现的合理推论但非论文直接声明",
+      "suggestion": "补充 Claude3 相关数据来源或改为仅提 GPT-4；self-consistency 结论需全文确认",
+      "verified": false,
+      "verification_method": "arxiv 2404.03602 摘要部分确认 ReaLMistake 基准存在，但 Claude3 和 self-consistency 声明超出摘要范围"
+    },
+    {
+      "id": "F007",
+      "score": 6,
+      "confidence_level": "Uncertain",
+      "issues": "2312.16171 论文主题是通用提示工程原则而非 agent 接地；'多条适用于agent接地'是主观推断，论文本身未聚焦 agent 场景",
+      "suggestion": "需明确哪些具体原则适用于 agent 接地，或标注为间接相关",
+      "verified": false,
+      "verification_method": "arxiv 2312.16171 摘要确认 26 条原则为通用提示设计，与 agent 接地的直接关联性弱"
+    },
+    {
+      "id": "F008",
+      "score": 9,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2402.03367 摘要确认 RAG-Fusion 结合多查询生成和 RRF 融合机制"
+    },
+    {
+      "id": "F009",
+      "score": 9,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2507.01701 摘要确认黑板架构引入 LLM MAS、SOTA 性能、更少 token 消耗"
+    },
+    {
+      "id": "F010",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2510.01285 摘要精确匹配 13%-57% 成功率提升和 9% F1 提升数据"
+    },
+    {
+      "id": "F011",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2603.15183 摘要确认 Token Coherence Theorem、MESI 协议映射、84-95% token 节省（V=0.05-0.50）"
+    },
+    {
+      "id": "F012",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2510.00615 摘要精确匹配 26-54% token 减少、小模型 46% 性能提升"
+    },
+    {
+      "id": "F013",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2512.16970 摘要确认蒸馏版保留 97% 性能、成本降低超一个数量级（≈10x）"
+    },
+    {
+      "id": "F014",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2603.13327 摘要精确匹配六级 token 预算、简单任务成本降低 40-60%"
+    },
+    {
+      "id": "F015",
+      "score": 6,
+      "confidence_level": "Uncertain",
+      "issues": "OpenAI Swarm 使用 context_variables 机制，但 Agents SDK Sandbox Agents 是 OpenAI 的另一个独立产品；两者被混为一谈。来源仅标注 github.com/openai，过于宽泛无法验证",
+      "suggestion": "拆分为两条：Swarm 的 context_variables 和 Agents SDK 的 Sandbox Agents，并提供具体文档链接",
+      "verified": false,
+      "verification_method": "来源 github.com/openai 过于宽泛，web_search 不可用，无法交叉验证"
+    },
+    {
+      "id": "F016",
+      "score": 9,
+      "confidence_level": "Partially Supported",
+      "issues": "LangGraph StateGraph 使用 TypedDict State Schema 和子图继承机制是广泛文档化的事实，但来源仅标注 github.com/langchain-ai/langgraph 仓库根目录，未提供具体文档路径",
+      "suggestion": "补充 LangGraph 官方文档具体 URL（如 langgraph 概念文档页面）",
+      "verified": true,
+      "verification_method": "该声明为 LangGraph 核心设计，在官方文档中有多处佐证"
+    },
+    {
+      "id": "F017",
+      "score": 9,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2504.17967 摘要确认 shared memory layer 和中央 Evaluator 多维度（biological plausibility, novelty, in silico efficacy, safety）排序"
+    },
+    {
+      "id": "F018",
+      "score": 10,
+      "confidence_level": "Supported",
+      "issues": "无",
+      "suggestion": "无",
+      "verified": true,
+      "verification_method": "arxiv 2604.04853 摘要精确匹配三层记忆（short-term, long-term episodic, profile）、80% token 减少、LoCoMo 0.9169"
+    },
+    {
+      "id": "F019",
+      "score": 6,
+      "confidence_level": "Uncertain",
+      "issues": "来源仅标注'多篇arxiv'，无具体论文 ID；消息传递 O(n) 开销和信息丢失、共享黑板异步协作等声明为分布式系统通用概念，但缺少在该研究主题下的实验证据支撑",
+      "suggestion": "需要至少 1-2 篇具体论文作为来源，或标注为概念性对比而非实验结论",
+      "verified": false,
+      "verification_method": "来源模糊，无法针对验证"
+    },
+    {
+      "id": "F020",
+      "score": 4,
+      "confidence_level": "Unsupported",
+      "issues": "完全无来源引用；'当前file-based JSON已是黑板雏形'为观察性断言，非可验证事实；升级路径（字段级写入+增量更新+版本控制+黑板轮询）为推测性设计建议，无实验或文献支撑",
+      "suggestion": "需要提供具体系统案例或论文支撑，或标注为设计建议/推测",
+      "verified": false,
+      "verification_method": "无来源，无法验证"
+    },
+    {
+      "id": "F021",
+      "score": 5,
+      "confidence_level": "Uncertain",
+      "issues": "来源仅标注'多篇arxiv'，无具体论文 ID；三层策略（惰性同步→F011, 计划感知过滤→F013, 失败分析优化→F012）各自有独立论文支撑，但'可叠加'的结论缺乏联合实验证据",
+      "suggestion": "标注为理论推测，需实验验证三层策略叠加效果；或提供具体的联合实验论文",
+      "verified": false,
+      "verification_method": "各子策略可分别溯源至 F011/F013/F012，但叠加声明无实验支撑"
+    }
+  ],
+  "key_issues": [
+    "F020 完全无来源，升级路径为推测性设计建议，不可作为研究发现",
+    "F019 和 F021 来源标注'多篇arxiv'过于模糊，无法追溯验证",
+    "F015 将 OpenAI Swarm 与 Agents SDK 两个独立产品混为一谈",
+    "F007 将通用提示工程论文过度关联到 agent 接地场景",
+    "F006 中 Claude3 和 self-consistency 结论在摘要中未出现，需全文核实"
+  ],
+  "recommendation": "整体质量良好（8.4/10），18/21 条 finding 有可验证的学术来源。建议：1) 删除或重写 F020（无来源）；2) 为 F019/F021 补充具体论文 ID；3) 拆分 F015 为两条独立 finding；4) F006 需获取全文验证 Claude3 和 self-consistency 数据；5) 建议在下一轮迭代中对关键数据点（F002 数值、F004 4.4% 超越、F010 13-57% 提升）进行第三方独立来源交叉验证，以提升置信度至 Supported 级别。",
+  "summary": "共 21 条 findings，10 条完全验证（Supported，10 分），5 条良好（Partially Supported，8-9 分），3 条需补充（Uncertain，6-7 分），2 条不可用（Unsupported，4-5 分）。主要问题集中在 F019-F021 三条综合/推测性 finding 缺乏可靠来源。"
+}
