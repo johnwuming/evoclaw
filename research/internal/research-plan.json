@@ -1,33 +1,38 @@
 {
-  "topic": "LG洗烘塔能否通过小爱音箱控制——智能互联方案调研",
+  "topic": "火山引擎 Agent Plan 用量统计 API 接口调研",
   "complexity": "中等",
-  "complexity_reason": "涉及两个特定智能家居生态（LG ThinQ × 小米米家/小爱）的互联性分析，有相对明确答案边界，需调研协议兼容性、官方合作、Matter支持和第三方桥接方案，但不需要大规模行业分析",
+  "complexity_reason": "API文档调研，需要查找官方文档、理解接口规范、了解计费模型。涉及单一产品线的技术文档查阅，维度相对集中，但需要覆盖产品概述、API端点、认证方式、响应格式、计费模型等多个方面",
   "dimensions": [
-    "LG ThinQ生态与连接协议",
-    "小米米家/小爱音箱生态与兼容性",
-    "Matter协议支持现状",
-    "第三方桥接方案（Home Assistant/HomeKit等）"
+    "产品概述（Agent Plan 是什么、定位、功能）",
+    "API 接口文档（用量统计相关 API 端点、认证方式）",
+    "计费与用量模型（计费维度、计量单位、定价）",
+    "SDK/工具链（SDK 支持、CLI 工具、控制台）",
+    "使用案例（典型用量查询场景）"
   ],
   "search_queries": [
-    {"id": 1, "query": "LG洗烘塔 WashTower ThinQ app Wi-Fi连接 智能功能 2025", "dimension": "LG ThinQ生态", "priority": "high", "assigned_to": "searcher-lg"},
-    {"id": 2, "query": "LG ThinQ 支持的智能家居平台 Google Home Alexa 合作 2025", "dimension": "LG ThinQ生态", "priority": "high", "assigned_to": "searcher-lg"},
-    {"id": 3, "query": "LG ThinQ Matter protocol support 2025 2026 home appliances", "dimension": "Matter协议", "priority": "high", "assigned_to": "searcher-lg"},
-    {"id": 4, "query": "LG ThinQ API 开放平台 开发者文档 第三方接入", "dimension": "LG ThinQ生态", "priority": "medium", "assigned_to": "searcher-lg"},
-    {"id": 5, "query": "LG洗衣机烘干机 Home Assistant integration ThinQ plugin 2025", "dimension": "第三方桥接", "priority": "high", "assigned_to": "searcher-lg"},
-    {"id": 6, "query": "小爱音箱 米家 Matter controller 支持 2025 2026", "dimension": "小米生态", "priority": "high", "assigned_to": "searcher-mi"},
-    {"id": 7, "query": "米家 LG家电 第三方设备 接入 兼容 2025", "dimension": "直接互联", "priority": "high", "assigned_to": "searcher-mi"},
-    {"id": 8, "query": "小米米家 Matter device support 兼容品牌 非米家设备 2025", "dimension": "Matter协议", "priority": "high", "assigned_to": "searcher-mi"},
-    {"id": 9, "query": "小爱音箱 控制非米家设备 第三方家电 方法 教程", "dimension": "直接互联", "priority": "high", "assigned_to": "searcher-mi"},
-    {"id": 10, "query": "Home Assistant 小爱音箱 控制方案 米家桥接 xiaomi Miot 2025", "dimension": "第三方桥接", "priority": "medium", "assigned_to": "searcher-mi"},
-    {"id": 11, "query": "LG ThinQ HomeKit HomeBridge 桥接 Apple Home", "dimension": "第三方桥接", "priority": "medium", "assigned_to": "searcher-lg"},
-    {"id": 12, "query": "LG家电 Matter认证 Thread 支持 2025 2026 CSA", "dimension": "Matter协议", "priority": "medium", "assigned_to": "searcher-lg"}
+    {"id": 1, "query": "火山引擎 Agent Plan 产品介绍 功能 概述 2025 2026", "dimension": "产品概述", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 2, "query": "火山引擎 Agent Plan 用量统计 API 文档 接口", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 3, "query": "火山引擎 Agent Plan 计费 用量 统计 查询", "dimension": "计费模型", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 4, "query": "Volcano Engine Agent Plan usage statistics API documentation", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-1"},
+    {"id": 5, "query": "火山引擎 Agent Plan 控制台 用量查询 账单", "dimension": "计费模型", "priority": "medium", "assigned_to": "searcher-1"},
+    {"id": 6, "query": "火山引擎 大模型 API 用量统计 计量 计费文档 2025", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 7, "query": "火山引擎 Ark 平台 Agent Plan API 调用 用量 查询接口", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 8, "query": "火山引擎 豆包大模型 Agent Plan 是什么 怎么用", "dimension": "产品概述", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 9, "query": "火山引擎 OpenAPI 用量 统计 ListUsage 接口 文档", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-2"},
+    {"id": 10, "query": "火山引擎 模型推理 用量 计量 Token 计费 API SDK Python", "dimension": "SDK/工具", "priority": "medium", "assigned_to": "searcher-2"},
+    {"id": 11, "query": "火山引擎 Agent Plan 定价 价格 计费方式 Token 消耗", "dimension": "计费模型", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 12, "query": "火山引擎 大模型服务 用量查询 API DescribeUsage QueryUsage", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-3"},
+    {"id": 13, "query": "火山引擎 volcengine SDK 用量统计 API 调用示例 Python Go", "dimension": "SDK/工具", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 14, "query": "火山引擎 Agent Plan 与 豆包大模型 关系 区别", "dimension": "产品概述", "priority": "medium", "assigned_to": "searcher-3"},
+    {"id": 15, "query": "火山引擎 大模型 API 鉴权 AK SK 签名 用量查询 权限", "dimension": "API 接口", "priority": "medium", "assigned_to": "searcher-3"}
   ],
   "searcher_assignments": {
-    "searcher-lg": {"queries": [1, 2, 3, 4, 5, 11, 12], "focus": "LG ThinQ生态、协议支持、第三方集成方案"},
-    "searcher-mi": {"queries": [6, 7, 8, 9, 10], "focus": "小米米家/小爱音箱兼容性、Matter支持、第三方设备接入"}
+    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "Agent Plan 产品概述、用量统计 API 核心文档、计费模型"},
+    "searcher-2": {"queries": [6, 7, 8, 9, 10], "focus": "大模型用量统计通用 API、Ark 平台、OpenAPI 接口"},
+    "searcher-3": {"queries": [11, 12, 13, 14, 15], "focus": "定价模型、SDK 示例、产品关系、鉴权机制"}
   },
-  "searcher_count": 2,
+  "searcher_count": 3,
   "review_rounds": 1,
-  "report_id": "R-132",
-  "category": "06-智能家居"
+  "report_id": "R-133",
+  "category": "02-AI技术调研"
 }
