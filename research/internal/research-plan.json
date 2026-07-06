@@ -1,38 +1,40 @@
 {
-  "topic": "火山引擎 Agent Plan 用量统计 API 接口调研",
+  "topic": "多Agent工作流优化调研：强制接地与共享黑板模式评估",
   "complexity": "中等",
-  "complexity_reason": "API文档调研，需要查找官方文档、理解接口规范、了解计费模型。涉及单一产品线的技术文档查阅，维度相对集中，但需要覆盖产品概述、API端点、认证方式、响应格式、计费模型等多个方面",
+  "complexity_reason": "涉及强制接地和共享黑板两个独立技术维度，需要覆盖学术论文、业界实践、框架实现和具体落地方案。不需要大规模数据收集或复杂建模，但需要跨多个框架和论文进行对比分析",
   "dimensions": [
-    "产品概述（Agent Plan 是什么、定位、功能）",
-    "API 接口文档（用量统计相关 API 端点、认证方式）",
-    "计费与用量模型（计费维度、计量单位、定价）",
-    "SDK/工具链（SDK 支持、CLI 工具、控制台）",
-    "使用案例（典型用量查询场景）"
+    "强制接地技术（prompt工程、约束策略、时间戳注入、引用强制、hallucination预防）",
+    "共享黑板模式（架构设计、实现框架、vs消息传递对比、状态管理）",
+    "落地方案（OpenClaw现有架构分析、具体prompt修改建议、集成可行性）"
   ],
   "search_queries": [
-    {"id": 1, "query": "火山引擎 Agent Plan 产品介绍 功能 概述 2025 2026", "dimension": "产品概述", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 2, "query": "火山引擎 Agent Plan 用量统计 API 文档 接口", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 3, "query": "火山引擎 Agent Plan 计费 用量 统计 查询", "dimension": "计费模型", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 4, "query": "Volcano Engine Agent Plan usage statistics API documentation", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-1"},
-    {"id": 5, "query": "火山引擎 Agent Plan 控制台 用量查询 账单", "dimension": "计费模型", "priority": "medium", "assigned_to": "searcher-1"},
-    {"id": 6, "query": "火山引擎 大模型 API 用量统计 计量 计费文档 2025", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 7, "query": "火山引擎 Ark 平台 Agent Plan API 调用 用量 查询接口", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 8, "query": "火山引擎 豆包大模型 Agent Plan 是什么 怎么用", "dimension": "产品概述", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 9, "query": "火山引擎 OpenAPI 用量 统计 ListUsage 接口 文档", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-2"},
-    {"id": 10, "query": "火山引擎 模型推理 用量 计量 Token 计费 API SDK Python", "dimension": "SDK/工具", "priority": "medium", "assigned_to": "searcher-2"},
-    {"id": 11, "query": "火山引擎 Agent Plan 定价 价格 计费方式 Token 消耗", "dimension": "计费模型", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 12, "query": "火山引擎 大模型服务 用量查询 API DescribeUsage QueryUsage", "dimension": "API 接口", "priority": "high", "assigned_to": "searcher-3"},
-    {"id": 13, "query": "火山引擎 volcengine SDK 用量统计 API 调用示例 Python Go", "dimension": "SDK/工具", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 14, "query": "火山引擎 Agent Plan 与 豆包大模型 关系 区别", "dimension": "产品概述", "priority": "medium", "assigned_to": "searcher-3"},
-    {"id": 15, "query": "火山引擎 大模型 API 鉴权 AK SK 签名 用量查询 权限", "dimension": "API 接口", "priority": "medium", "assigned_to": "searcher-3"}
+    {"id": 1, "query": "multi-agent system forced grounding prompt engineering best practices 2024 2025 hallucination prevention", "dimension": "强制接地", "priority": "high", "assigned_to": "searcher-grounding"},
+    {"id": 2, "query": "RAG retrieval augmented generation agent grounding constraint 'cite sources' 'no external knowledge' prompt template", "dimension": "强制接地", "priority": "high", "assigned_to": "searcher-grounding"},
+    {"id": 3, "query": "LangGraph agent grounding retrieval-only response constraint prompt design pattern 2024 2025", "dimension": "强制接地", "priority": "high", "assigned_to": "searcher-grounding"},
+    {"id": 4, "query": "AutoGen CrewAI grounding agent search-based response forced citation prompt strategy", "dimension": "强制接地", "priority": "high", "assigned_to": "searcher-grounding"},
+    {"id": 5, "query": "AI agent timestamp injection grounding temporal context prompt 'current date' strategy", "dimension": "强制接地", "priority": "medium", "assigned_to": "searcher-grounding"},
+    {"id": 6, "query": "citation enforcement multi-agent LLM grounded generation 'must cite' 'only use provided sources' prompt pattern", "dimension": "强制接地", "priority": "high", "assigned_to": "searcher-grounding"},
+    {"id": 7, "query": "multi-agent grounding hallucination reduction survey paper arxiv 2024 2025", "dimension": "强制接地", "priority": "medium", "assigned_to": "searcher-grounding"},
+    {"id": 8, "query": "LLM agent search-based answer verification 'cross-check' 'fact verification' retrieval grounding prompt", "dimension": "强制接地", "priority": "medium", "assigned_to": "searcher-grounding"},
+    {"id": 9, "query": "blackboard pattern multi-agent system architecture shared memory state implementation 2024 2025", "dimension": "共享黑板", "priority": "high", "assigned_to": "searcher-blackboard"},
+    {"id": 10, "query": "multi-agent shared memory state tree context management efficient pattern LangGraph Swarm", "dimension": "共享黑板", "priority": "high", "assigned_to": "searcher-blackboard"},
+    {"id": 11, "query": "agent blackboard architecture vs message passing context sharing comparison pros cons", "dimension": "共享黑板", "priority": "high", "assigned_to": "searcher-blackboard"},
+    {"id": 12, "query": "multi-agent task context compression efficient sharing state management reduction redundancy", "dimension": "共享黑板", "priority": "high", "assigned_to": "searcher-blackboard"},
+    {"id": 13, "query": "OpenAI swarm agents Anthropic agent framework shared context memory workspace pattern 2025", "dimension": "共享黑板", "priority": "medium", "assigned_to": "searcher-blackboard"},
+    {"id": 14, "query": "agent framework shared workspace knowledge base state synchronization pattern production 2024 2025", "dimension": "共享黑板", "priority": "medium", "assigned_to": "searcher-blackboard"},
+    {"id": 15, "query": "multi-agent state management best practices memory overhead optimization token efficiency context window", "dimension": "共享黑板", "priority": "medium", "assigned_to": "searcher-blackboard"},
+    {"id": 16, "query": "multi-agent prompt optimization grounding constraint production deployment case study lessons learned", "dimension": "落地方案", "priority": "medium", "assigned_to": "searcher-grounding"},
+    {"id": 17, "query": "agent grounding 'do not use training data' 'strictly based on search results' prompt engineering technique", "dimension": "强制接地", "priority": "high", "assigned_to": "searcher-grounding"},
+    {"id": 18, "query": "multi-agent context passing optimization shared state vs linear context practical comparison", "dimension": "共享黑板", "priority": "medium", "assigned_to": "searcher-blackboard"},
+    {"id": 19, "query": "DeepSeek model hallucination outdated information retrieval grounding mitigation strategy", "dimension": "强制接地", "priority": "medium", "assigned_to": "searcher-grounding"},
+    {"id": 20, "query": "multi-agent collaboration architecture file-based state sharing JSON shared memory pattern", "dimension": "共享黑板", "priority": "medium", "assigned_to": "searcher-blackboard"}
   ],
   "searcher_assignments": {
-    "searcher-1": {"queries": [1, 2, 3, 4, 5], "focus": "Agent Plan 产品概述、用量统计 API 核心文档、计费模型"},
-    "searcher-2": {"queries": [6, 7, 8, 9, 10], "focus": "大模型用量统计通用 API、Ark 平台、OpenAPI 接口"},
-    "searcher-3": {"queries": [11, 12, 13, 14, 15], "focus": "定价模型、SDK 示例、产品关系、鉴权机制"}
+    "searcher-grounding": {"queries": [1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 19], "focus": "强制接地技术：prompt约束策略、时间戳注入、引用强制、hallucination预防、业界案例"},
+    "searcher-blackboard": {"queries": [9, 10, 11, 12, 13, 14, 15, 18, 20], "focus": "共享黑板模式：架构设计、实现框架、vs消息传递对比、状态管理、OpenClaw集成可行性"}
   },
-  "searcher_count": 3,
+  "searcher_count": 2,
   "review_rounds": 1,
-  "report_id": "R-133",
-  "category": "02-AI技术调研"
+  "report_id": "R-134",
+  "category": "06-开发实践"
 }
