@@ -1,0 +1,223 @@
+{
+  "review_type": "citation",
+  "urls_verified": 20,
+  "accessible": 20,
+  "issues": 0,
+  "results": [
+    {
+      "index": 1,
+      "url": "https://arxiv.org/abs/2310.11511",
+      "label": "Self-RAG",
+      "status": "accessible",
+      "title": "Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "authors": "Asai et al.",
+      "date": "2023-10-17",
+      "note": "摘要确认：训练LLM生成Retrieve/IsRel/IsSup/IsUse反思token，与报告F001描述一致"
+    },
+    {
+      "index": 2,
+      "url": "https://arxiv.org/abs/2311.09210",
+      "label": "Chain-of-Noting",
+      "status": "accessible",
+      "title": "Enhancing Robustness in Retrieval-Augmented Language Models",
+      "authors": "Yu et al.",
+      "date": "2023-11-15",
+      "venue": "EMNLP 2024",
+      "note": "摘要确认：通过生成sequential reading notes评估检索文档相关性，噪声文档下EM +7.9，拒绝率+10.5，与报告F002一致"
+    },
+    {
+      "index": 3,
+      "url": "https://arxiv.org/abs/2312.10997",
+      "label": "RAG Survey",
+      "status": "accessible",
+      "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+      "authors": "Gao et al.",
+      "date": "2023-12-18",
+      "note": "摘要确认：全面综述RAG范式（Naive/Advanced/Modular RAG），涵盖检索、生成、增强技术，与报告F003一致"
+    },
+    {
+      "index": 4,
+      "url": "https://arxiv.org/abs/2401.10225",
+      "label": "ChatQA",
+      "status": "accessible",
+      "title": "Surpassing GPT-4 on Conversational QA and RAG",
+      "authors": "Liu et al. (NVIDIA)",
+      "date": "2024-01-18",
+      "venue": "NeurIPS 2024",
+      "note": "摘要确认：两阶段指令微调，Llama3-ChatQA-1.5-70B超越GPT-4-Turbo 4.4%，与报告F004一致"
+    },
+    {
+      "index": 5,
+      "url": "https://arxiv.org/abs/2305.14283",
+      "label": "Rewrite-Retrieve-Read",
+      "status": "accessible",
+      "title": "Query Rewriting for Retrieval-Augmented Large Language Models",
+      "authors": "Ma et al.",
+      "date": "2023-05-23",
+      "venue": "EMNLP 2023",
+      "note": "摘要确认：提出Rewrite-Retrieve-Read框架，通过query rewriting改进检索增强LLM，与报告一致"
+    },
+    {
+      "index": 6,
+      "url": "https://arxiv.org/abs/2404.03602",
+      "label": "ReaLMistake",
+      "status": "accessible",
+      "title": "Evaluating LLMs at Detecting Errors in LLM Responses",
+      "authors": "Kamoi et al.",
+      "date": "2024-04-04",
+      "venue": "COLM 2024",
+      "note": "摘要确认：首个LLM错误检测基准，涵盖推理正确性/指令遵循/上下文忠实度/参数化知识四类错误。报告中Claude3数据需全文验证（摘要未提及Claude3具体数值）"
+    },
+    {
+      "index": 7,
+      "url": "https://arxiv.org/abs/2312.16171",
+      "label": "26 Prompt Principles",
+      "status": "accessible",
+      "title": "Principled Instructions Are All You Need for Questioning LLaMA-1/2, GPT-3.5/4",
+      "authors": "Bsharat et al.",
+      "date": "2023-12-26",
+      "note": "摘要确认：提出26条提示原则。但报告F007用于支撑接地策略关联性较弱——该论文关注通用提示工程而非检索接地，报告已标注'关联性弱'"
+    },
+    {
+      "index": 8,
+      "url": "https://arxiv.org/abs/2402.03367",
+      "label": "RAG-Fusion",
+      "status": "accessible",
+      "title": "RAG-Fusion: a New Take on Retrieval-Augmented Generation",
+      "authors": "Rackauckas",
+      "date": "2024-01-31",
+      "venue": "IJNLC Vol.13, No.1, 2024",
+      "note": "摘要确认：结合RAG与reciprocal rank fusion，生成多查询重排序融合文档，与报告F008一致"
+    },
+    {
+      "index": 9,
+      "url": "https://arxiv.org/abs/2507.01701",
+      "label": "Blackboard LLM MAS",
+      "status": "accessible",
+      "title": "Exploring Advanced LLM Multi-Agent Systems Based on Blackboard Architecture",
+      "authors": "Han & Zhang",
+      "date": "2025-07-02",
+      "note": "摘要确认：首次将黑板架构引入LLM MAS，Agent通过共享黑板交换信息，基于黑板内容动态选择Agent，在常识推理和数学任务上SOTA且token消耗更少，与报告F009一致"
+    },
+    {
+      "index": 10,
+      "url": "https://arxiv.org/abs/2510.01285",
+      "label": "Blackboard Data Science",
+      "status": "accessible",
+      "title": "LLM-Based Multi-Agent Blackboard System for Information Discovery in Data Science",
+      "authors": "Salemi et al.",
+      "date": "2025-09-30",
+      "note": "摘要确认：去中心化黑板系统，中央Agent发布请求到共享黑板，自治子Agent自愿响应，端到端成功率提升13%-57%，数据发现F1提升9%，与报告F010一致"
+    },
+    {
+      "index": 11,
+      "url": "https://arxiv.org/abs/2603.15183",
+      "label": "Token Coherence",
+      "status": "accessible",
+      "title": "Adapting MESI Cache Protocols to Minimize Synchronization Overhead in Multi-Agent LLM Systems",
+      "authors": "Parakhin",
+      "date": "2026-03-19",
+      "note": "摘要确认：MESI协议映射到多Agent同步，惰性失效将O(n×S×|D|)降至O((n+W)×|D|)，token节省84%-95%，提供LangGraph/CrewAI/AutoGen适配层，与报告F011一致"
+    },
+    {
+      "index": 12,
+      "url": "https://arxiv.org/abs/2510.00615",
+      "label": "ACON",
+      "status": "accessible",
+      "title": "Optimizing Context Compression for Long-horizon LLM Agents",
+      "authors": "Kang et al.",
+      "date": "2025-10-01",
+      "venue": "ICML 2026",
+      "note": "摘要确认：ACON通过失败分析驱动压缩，峰值token减少26-54%，与报告F012一致"
+    },
+    {
+      "index": 13,
+      "url": "https://arxiv.org/abs/2512.16970",
+      "label": "PAACE",
+      "status": "accessible",
+      "title": "A Plan-Aware Automated Agent Context Engineering Framework",
+      "authors": "Yuksel",
+      "date": "2025-12-22",
+      "note": "摘要确认：计划感知的上下文压缩，蒸馏版保留97%性能/10x成本降低，与报告F013一致"
+    },
+    {
+      "index": 14,
+      "url": "https://arxiv.org/abs/2603.13327",
+      "label": "DOVA",
+      "status": "accessible",
+      "title": "Deliberation-First Multi-Agent Orchestration for Autonomous Research Automation",
+      "authors": "Shen & Shen",
+      "date": "2026-03-04",
+      "note": "摘要确认：deliberation-first编排、hybrid collaborative reasoning、六层token预算分配，推理成本降低40-60%，与报告F014一致"
+    },
+    {
+      "index": 15,
+      "url": "https://github.com/openai/swarm",
+      "label": "OpenAI Swarm",
+      "status": "accessible",
+      "title": "openai/swarm - GitHub Repository",
+      "authors": "OpenAI",
+      "note": "GitHub页面web_fetch超时，但通过GitHub API (api.github.com/repos/openai/swarm) 确认仓库存在且公开可访问。报告F015引用其context_variables和handoff机制"
+    },
+    {
+      "index": 16,
+      "url": "https://github.com/openai/openai-agents-python",
+      "label": "OpenAI Agents SDK",
+      "status": "accessible",
+      "title": "openai/openai-agents-python - GitHub Repository",
+      "authors": "OpenAI",
+      "note": "通过GitHub API确认仓库存在（id: 946380199），公开可访问。报告F015引用其Sandbox Agent和容器化文件系统工作区"
+    },
+    {
+      "index": 17,
+      "url": "https://github.com/langchain-ai/langgraph",
+      "label": "LangGraph",
+      "status": "accessible",
+      "title": "langchain-ai/langgraph - GitHub Repository",
+      "authors": "LangChain AI",
+      "note": "GitHub页面web_fetch超时，但通过GitHub API (api.github.com/repos/langchain-ai/langgraph) 确认仓库存在且公开可访问。报告F016引用其StateGraph和TypedDict State Schema"
+    },
+    {
+      "index": 18,
+      "url": "https://arxiv.org/abs/2504.17967",
+      "label": "PharmaSwarm",
+      "status": "accessible",
+      "title": "LLM Agent Swarm for Hypothesis-Driven Drug Discovery",
+      "authors": "Song et al.",
+      "date": "2025-04-23",
+      "note": "摘要确认：多Agent框架用于药物发现，共享记忆层，Evaluator LLM持续排序提案，与报告F017一致"
+    },
+    {
+      "index": 19,
+      "url": "https://arxiv.org/abs/2604.04853",
+      "label": "MemMachine",
+      "status": "accessible",
+      "title": "A Ground-Truth-Preserving Memory System for Personalized AI Agents",
+      "authors": "Wang et al.",
+      "date": "2026-04-06",
+      "note": "摘要确认：开源记忆系统，集成短期/长期情景/档案记忆，LoCoMo达到0.9169，LongMemEvalS达到93.0%，与报告F018一致"
+    },
+    {
+      "index": 20,
+      "url": "https://www.promptingguide.ai/techniques/rag",
+      "label": "Prompt Engineering Guide (RAG)",
+      "status": "accessible",
+      "title": "Retrieval Augmented Generation (RAG) | Prompt Engineering Guide",
+      "note": "页面可访问，内容涵盖RAG基础概念、Lewis et al. (2021)原始RAG方案、检索与生成流程，与报告F019引用的RAG基础知识一致"
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "accessible": 20,
+    "arxiv_papers": 17,
+    "github_repos": 3,
+    "broken": 0,
+    "mismatch": 0,
+    "notes": [
+      "所有17篇arXiv论文均可通过abs页面正常访问（HTTP 200），标题与摘要内容与报告中引用一致",
+      "GitHub仓库#15(openai/swarm)和#17(langchain-ai/langgraph)的HTML页面因GitHub反爬超时，但通过GitHub REST API确认仓库存在且公开",
+      "F006 (ReaLMistake) 报告中提及Claude3具体数据，摘要未体现，需全文验证（报告已标注⚠️部分验证）",
+      "F007 (26 Prompt Principles) 报告已标注'关联性弱'——该论文关注通用提示工程，与检索接地直接关联有限"
+    ]
+  }
+}
