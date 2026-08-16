@@ -1,0 +1,70 @@
+{
+  "version": "v2f_lv",
+  "evaluated_at": "2026-08-16 15:24:02",
+  "oos_split": "2021-01",
+  "n_trials": 51,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1069,
+    "max_drawdown": -0.3363,
+    "sharpe": 0.7525,
+    "calmar": 0.3177
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 1.1132,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.3515,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.02543,
+      "mean_ic_oos": 0.02135,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 1.2857
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.5577,
+      "worst_pair": [
+        "volatility_20d",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "volatility_20d"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.9495,
+      "sr_period": 0.04741,
+      "sr0_expected_max": 0.022481,
+      "T": 4490,
+      "skew": -0.695,
+      "kurtosis": 8.469,
+      "n_trials": 51,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向e(选股腿低波化): v1e_vol排序(0.5·-z mv+0.5·-z vol20)进v1i框架; 第一批证据: v1e单独跑MDD -66.7% vs v0 -69.5%(改善2.78pp)且g1 1.113全绿; 选股腿σ下降与择时层乘性合成检验边际增益; 预期年化~10-11%(低于15%), 作为收益-回撤前沿证据点(选股低波化的收益代价定量)"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.3363,
+      "mdd_parent": -0.3474,
+      "mdd_deterioration_pp": -1.11,
+      "threshold_pp": 2.0,
+      "parent_version": "v1i_q3z"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

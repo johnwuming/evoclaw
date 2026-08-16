@@ -1,0 +1,65 @@
+{
+  "version": "v2b_trr",
+  "evaluated_at": "2026-08-16 15:24:02",
+  "oos_split": "2021-01",
+  "n_trials": 51,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1515,
+    "max_drawdown": -0.2986,
+    "sharpe": 0.9356,
+    "calmar": 0.5074
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9873,
+      "sr_period": 0.05894,
+      "sr0_expected_max": 0.024803,
+      "T": 4490,
+      "skew": -0.709,
+      "kurtosis": 8.024,
+      "n_trials": 51,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向a(多信号择时组合): 诊断显示四个≥30%回撤段中2011-12与2016-18为低估值慢熊, q3z估值信号天然失明; 趋势信号(价格vs MA200)覆盖全部慢熊段(2008/2011-12/2016-18全程破位); 两信号互补: 估值管泡沫顶(2007/2015), 趋势管破位后下行段; 破位×0.6与q3z乘法合成"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2986,
+      "mdd_parent": -0.3474,
+      "mdd_deterioration_pp": -4.88,
+      "threshold_pp": 2.0,
+      "parent_version": "v1i_q3z"
+    }
+  },
+  "verdict": "PASS",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

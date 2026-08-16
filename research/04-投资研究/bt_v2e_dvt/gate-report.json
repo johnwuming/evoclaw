@@ -1,0 +1,65 @@
+{
+  "version": "v2e_dvt",
+  "evaluated_at": "2026-08-16 15:24:02",
+  "oos_split": "2021-01",
+  "n_trials": 51,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.121,
+    "max_drawdown": -0.2861,
+    "sharpe": 0.8545,
+    "calmar": 0.4229
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9818,
+      "sr_period": 0.05383,
+      "sr0_expected_max": 0.02191,
+      "T": 4490,
+      "skew": -0.777,
+      "kurtosis": 6.459,
+      "n_trials": 51,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向d+b(合成主攻手): q3z中度深化(cut0.55,w_min0.20)×波动率目标14%双通道; 估值高位段(2007/2009H2/2015H1/2021)深化降仓 + 全时段高波动段自适应缩放; 两机制正交(估值状态×波动状态), 乘法合成使危机段有效仓位~0.1-0.2; 直击MDD≤10%攻坚目标, 预期σ_d~0.008支撑DSR, 代价是年化回落至~12%"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2861,
+      "mdd_parent": -0.3474,
+      "mdd_deterioration_pp": -6.13,
+      "threshold_pp": 2.0,
+      "parent_version": "v1i_q3z"
+    }
+  },
+  "verdict": "PASS",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "version": "v2a_deep",
+  "evaluated_at": "2026-08-16 15:24:01",
+  "oos_split": "2021-01",
+  "n_trials": 51,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1511,
+    "max_drawdown": -0.3251,
+    "sharpe": 0.9,
+    "calmar": 0.4648
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9781,
+      "sr_period": 0.0567,
+      "sr0_expected_max": 0.025949,
+      "T": 4490,
+      "skew": -0.682,
+      "kurtosis": 6.947,
+      "n_trials": 51,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向d(q3z参数加深): 前批已证估值择时是MDD主压缩器(2008段-34.7%由高位持仓贡献); 本候选把已验证信号推向极限(cut0.40→0.65, w_min0.30→0.15): z>1段降仓至0.35倍, 极端高估(z≥2.33)仓位下限0.15; 经济含义: PE 36月z高位=未来尾部风险聚集, 更深折价换取危机段σ与损失双降; 无新数据依赖"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.3251,
+      "mdd_parent": -0.3474,
+      "mdd_deterioration_pp": -2.23,
+      "threshold_pp": 2.0,
+      "parent_version": "v1i_q3z"
+    }
+  },
+  "verdict": "PASS",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}
