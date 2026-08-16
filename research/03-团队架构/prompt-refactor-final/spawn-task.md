@@ -74,3 +74,14 @@
 3. 检查修改范围：没有无关文件被改动。
 4. 查看 `sessions_list` 的 `totalTokens`：>50 万需警惕，结论必须独立核验。
 5. 检查过程笔记文件存在且内容能支撑结论。
+
+## 量化任务附加纪律（spawn 量化任务时，除上方模板外额外贴入）
+
+```text
+## 量化任务附加纪律
+1. HP（量化主机）：sshpass -p "$QUANT_SSH_PASSWORD" ssh noname@10.12.192.174；主目录 ~/quant-evolve；python 用 /home/noname/miniconda3/envs/quant/bin/python
+2. HP 上已跑进程（模拟实盘 cron/采集循环）一律勿杀；长计算 nohup 后台+日志轮询，不阻塞等待超过 1 小时的同步调用
+3. 财务因子必须 PIT 对齐（用披露日列，严禁报告期直接 join 产生前视）；IC 口径与 W1 一致（月频全市场，去极值/标准化）
+4. 因子进化迭代：五门禁（IC/ICIR/ turnover/容量/相关性）全部 PASS 后直接 activate（2026-08-16 规则，Dashboard 时间线一键回退作兜底）
+5. 不修改 evolution_pipeline.py / registry / paper_engine / HP crontab（模型迭代另行立项）
+```
