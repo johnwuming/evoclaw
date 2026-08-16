@@ -44,3 +44,11 @@
 - MOBILE_STRESS: scrollWidth=390 <= 390 ✅ / DESKTOP_STRESS: 1425 <= 1425 ✅
 - 回归断言 eval 抛 SyntaxError（正则字面量 flags 解析问题）→ 需改用 includes 重跑；截图未拍
 - 结论：核心验收 2/3 已过（自然+极端均无横滚）
+
+## CDP v2 全量跑（22:5x，脚本 /tmp/task0326-cdp.mjs 修复版）
+- NAV ok:39367；MOBILE_NAT 390<=390 ✅；SHOT_MOBILE 73KB；DESKTOP_NAT 1425<=1425 ✅；SHOT_DESKTOP 116KB
+- INJECT 全 true；MOBILE_STRESS 390<=390 ✅；DESKTOP_STRESS 1425<=1425 ✅；SHOT_STRESS 116KB
+- REGRESSION: baselineCard/gates/abc/timeline/scatter/ledger/lifecycle/validation/modelLayer 全 true；**baselineTxt=false**
+- 基线 API 复查：/api/quant/baseline/summary 返回 annual_return=0.2635 ✅（值存在）
+- baselineTxt=false 根因：基线卡异步加载（loadQuantBaselineCard），断言时机早于其渲染完成
+- 待办：等待基线卡渲染后重断言；确认 0.2626（locked 口径）值
