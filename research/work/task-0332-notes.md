@@ -43,12 +43,29 @@
 
 ## 三、执行记录
 - [x] 备份 server.js.bak-task0332-20260817-002031
-- [ ] A1-A4 前端删除/修正
-- [ ] B1-B5 API stub 化
-- [ ] C 微盘股后端 + 死 CSS 删除
-- [ ] D1/D2 注释更新
-- [ ] node --check + restart + active
-- [ ] 回归：7 个新 API 全 200；根页 grep V2_d25=0；deprecated 路由返回标记
-- [ ] CDP 截图 /tmp/task0332-{quant,model,mobile}.png
+- [x] A1-A4 前端删除/修正（含模型页 SOTA 徽章移除、btlc ②层版本不再回退 sota.json）
+- [x] B1-B5 API stub 化（quantDeprecated 统一返回）
+- [x] C 微盘股后端 + 死 CSS 删除
+- [x] D1/D2 注释更新
+- [x] node --check + restart + active
+- [x] 回归：7 个新 API 全 200；根页 grep V2_d25=0；deprecated 路由返回标记
+- [x] CDP 截图 /tmp/task0332-{quant,model,mobile}.png
 
-（以下追加验证证据）
+## 四、验证证据（2026-08-17 00:39）
+1. `node --check server.js` ✅；`systemctl is-active agent-dashboard` = active ✅
+2. `curl -s http://127.0.0.1:8055/ | grep -c 'V2_d25_n30_p10'` = **0** ✅
+3. 新周期 API：baseline/summary:200 models:200 lifecycle:200 gates:200 freshness:200 q4b-contrast:200 dsr:200 ✅
+4. `/api/quant/microcap/phases`、`/api/quant/evolution`、`/api/quant/evolution/summary`、`/api/quant/summary|nav|factors`、`/api/quant/microcap/status` → `{ok:true,deprecated:true,note:'旧周期留档（微盘股 LightGBM+RD-Agent 路线，task-0250 废弃），2026-08-16 起新周期为 registry 驱动，2026-08-17 task-0332 清理'}` ✅（决策：保留路由返回 deprecated，未删）
+5. `/api/quant/evolution/models` 保留且正常（返回新周期 main=v2b_trr）✅
+6. CDP 双视口截图：/tmp/task0332-quant.png（153KB，因子页 107 因子表正常）/tmp/task0332-model.png（132KB，当前生效卡 v2b_trr + 决策时间线 + 试验台账正常）/tmp/task0332-mobile.png（181KB，390×844 导航 5 个子Tab 正常）✅
+7. 全量子Tab渲染探针：data/factor/models/btlc/paper 全部 loadFail=false、v2d25=false、console 0 错误 ✅
+8. 追加发现并同批清理：
+   - 模型页「· SOTA V2_d25_n30_p10」徽章（读 sota.json 旧值）→ 移除（现役以 registry active 卡为准）
+   - btlc 四层归因 ②基线层版本回退 sota.json 旧值 → 改为 registry version_id
+   - `/api/quant/btlc` JSON 中 versions[].code_ref 仍含 `legacy(task-0272 upgrade from V2_d25_n30_p10)` 字样——这是 registry 版本文件的**代码来源描述**（历史事实记录，v1.1-v1.4 确从该版本引导而来），前端不渲染该字段，**保留不改**
+9. 页面导航无死链：量化 Tab 5 个子Tab（数据/因子/模型/回测·生命周期/模拟实盘）均可切换渲染；主屏路由 `#page=quant` 正常
+
+## 五、改动统计
+- server.js: 655206 → 约 594xxx bytes（约 -61KB：删除旧路由逻辑/微盘股静态配置/R196任务表/死CSS/僵尸前端函数）
+- 全部残留 grep：`renderEvolutionQuant|loadEvolutionQuant|renderEvolutionHistory|evoSummary|quant-page-evolution|microcap-param|microcap-phase|microcap-iter` = 0 命中
+- `微盘股|RD-Agent|LightGBM` 仅剩 5 处归档注释（deprecated 说明+历史事实），无 UI 可见残留
