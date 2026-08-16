@@ -43,3 +43,9 @@
 - runner 早已完成: mfcount=50 + mfsummary.json (03:12 窗口确认)
 - finish 启动日志: finish_start=19:38:24 runner_done_at=19:38:24 iter=1 (HP时区19:38 = VPS 03:38)
 - 待办: 轮询 /tmp/mf_FINISHED + gate/report 产物, 验证后收口
+## 03:40 finish 完成但 post_bt 崩溃 (rc=139 SIGSEGV)
+- marker=1 ✓ / ic_ext=1 ✓ (mf_ic_monthly_ext.csv 247x113) / report=1 ✓ (8400B) / close=1 ✓ (D-20260816-032)
+- 问题: postbt_rc=139 (段错误, 无任何输出→崩溃在 print 之前, 疑 compute_data_snapshot 或 load_json); eval_rc=1 (registry 无 v4a_mf0_trr)
+- 连锁: gate=0 (mf_gate_table.json 缺失), ledger 未加行, registry 未注册
+- 修复计划: 诊断 post_bt (前台跑拿 stderr) → 修 → 重跑 post_bt → evaluate → 重生成 report (带门禁表)
+- 注意: HP 时区=UTC (VPS-8h), decision-log 日期为 20260816 (house style 同 a4d)
