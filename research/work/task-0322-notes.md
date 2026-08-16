@@ -42,3 +42,11 @@
   - models：v0_seed active + archive v1.1-v1.4
 - [x] factor-catalog 改读 v3（107因子）+ adoption 反查列；前端因子表 F-前缀/采用版本列/概念徽标/用途标注（fmtID/quantConceptBadge 复用）
 - [x] btlc 页新增 模型层(版本切换器+双版对比+择时四代) + 验证层(五门禁+DSR曲线+A/B/C对照) 前端，异步加载
+
+## 验收结果（2026-08-16 22:10）
+- [x] 验收1：node --check server.js OK；systemctl is-active = active
+- [x] 验收2：q4b-contrast A_full=25.73 / BUB_full=-1.40 / BUB dd=-98.15 正确
+- [x] 验收3：models active=v0_seed，versions=[v0_seed,v1.1,v1.2,v1.3,v1.4]
+- [x] 验收4：gates ok:true，五门禁 g1-g5 结构完整
+- [x] 验收5：CDP DOM 检查全 true（模型层/验证层/五门禁面板/DSR曲线/A-B-C对照/采用版本徽标/因子表 F-前缀/用途标注）；手机 390x844 无横向溢出（bodyScrollW=390）；截图 /tmp/task0322-{quant,mobile}.png
+- 改动汇总：server.js 新增 5 处（4 新 API + factor-catalog v3/adoption）+ 前端模型层/验证层/因子表；archive-cache.json（v1.1-v1.4）落盘；备份 server.js.bak-task0322-20260816-214211
