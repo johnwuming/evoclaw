@@ -22,12 +22,33 @@
 - **回测是验证器**：五门禁决定淘汰上岗；DSR（g4）做多重检验校正——试得越多门槛越严
 - **样本外是裁决**：因子层 OOS IC（g2）、择时层 WF 三窗、审计锁 locked 口径（≤2024-06-30）
 
+## 1.5 ID 概念前缀体系（全局强制，2026-08-16 21:05 用户要求）
+
+量化系统所有 ID 一律带概念前缀，跨页面一眼识别属于哪个概念：
+
+| 前缀 | 概念 | 示例 | 出处 |
+|---|---|---|---|
+| `SNAP-YYYYMMDD` | 行情数据快照（qfq 收盘日） | SNAP-20260814 | data 快照元数据 |
+| `PAN-vN` | 财务面板版本 | PAN-v3（4.4万行全量池 panel） | data/derived |
+| `F-<id>` | **因子编号** | F-div_yield_ttm | factor_catalog_v3 |
+| `V-<ver>` | **选股模型版本**（冻结快照） | V-v0_seed | model registry |
+| `T-<ver>` | **择时模型版本** | T-i4_q3z | 择时 registry |
+| `IT-<n>` | 迭代/试验编号（过程记录，未必成版本） | IT-001 | experiment-ledger 行序 |
+| `D-<日期-主题>` | 决策记录（已在用） | D-20260816-Q4B-BC | decision-log |
+| `R-<nnn>` | 研究报告（既有） | R-214 | shared/results |
+
+落地规则：
+1. **粗暴加前缀**：页面上出现的裸 id（div_yield_ttm / v0_seed / i4_q3z）一律渲染为带前缀形式；原始存储不改，仅展示层加前缀（渲染函数统一处理）
+2. **区块概念说明**：每个页面区块标题右侧挂灰色小字徽标，注明本区块 ID 属于哪个概念，如「〔本区块 ID：F- 因子编号〕」「〔本区块 ID：V- 选股版本 / T- 择时版本〕」
+3. 版本 vs 迭代的区别在页面上必须有说明入口（版本=冻结可回退的里程碑；迭代=一次试验，REJECT 的不成版本）——⑥ 层概念说明常驻
+
 ## 2. 页面结构：六层流水线
 
 ### ① 数据层 Data
 | 组件 | 内容 | 状态 |
 |---|---|---|
 | 全量池状态卡 | 存活 5448 + 退市 299、panel 44,005 行、退市财务 293/293 采完 | **新增** |
+| **底座版本徽标（补丁①）** | 每个回测结果/图表角标显示 `SNAP-20260814 · PAN-v3 · 全量池`，数据跟着结果走，历史结果不回溯改写 | **新增** |
 | 4 灰卡（PIT合规/幸存者偏差/估值新鲜度/财务新鲜度） | 已有（task-0287 C1） | 复用 |
 | 审计锁状态灯 | AUDIT_LOCK_END=2024-06-30，locked 数据是否越界 | **新增** |
 | qfq 快照覆盖日 | 最后交易日 + 文件数 | 已有微调 |
@@ -35,7 +56,8 @@
 ### ② 因子层 Factors
 | 组件 | 内容 | 状态 |
 |---|---|---|
-| 因子库表 | factor_catalog_v3（100+ 因子：IC/ICIR/半衰期/类别/入池状态） | **改造**（API 已有读 catalog，补 v3 适配） |
+| 因子库表 | factor_catalog_v3（100+ 因子：IC/ICIR/半衰期/类别/入池状态），ID 一律显示为 `F-` 前缀 | **改造**（API 已有读 catalog，补 v3 适配） |
+| **「采用版本」列（补丁③）** | 从各版本 registry 的 factors 数组反查，每因子显示被哪个版本采用（V-v0_seed）；未被采用显示「监控中」——补上因子↔版本断链 | **新增** |
 | 因子月度 IC 趋势 | factor_ic_monthly 数据已有 | 复用 |
 | 用途标注 | 「当前仅监控，未进选股权重」徽标，防误解 | **新增** |
 
@@ -66,6 +88,7 @@
 |---|---|---|
 | 决策时间线 | decision-log.jsonl（D-20260816-Q4B-BC 等）逐条可溯 | **新开发** |
 | 实验台账 | experiment-ledger（清零后新周期计数） | **新开发** |
+| **迭代轨迹散点图（补丁②）** | x=IT 编号（时间序）、y=年化/Sharpe，点色=裁决（PASS绿/REJECT红/进行中灰），hover 展示五门禁明细——一眼看出「这十几轮折腾值不值」；数据直读 ledger（行含 full/locked metrics + pool 口径，已就绪） | **新开发** |
 | 操作留痕 | activate/回退历史（政策已改 PASS 即 activate + 一键回退，操作必须留痕） | **新开发** |
 
 ## 3. 已有 vs 新开发评估（总账）
@@ -86,14 +109,18 @@
 | 因子层 | /api/quant/factor-catalog（改造） | VPS `workspace-quant/results/factor_catalog_v3.json` | task-0285 A1 |
 | 数据层 | /api/quant/data-health（已有）+ 退市池状态（新增） | baseline-paper-validation.json + delisted panel 元数据 | C1 / q4b |
 | 决策时间线 | /api/quant/decision-log（新增） | HP `model/decision-log.jsonl` | 收口流程 |
+| 迭代轨迹图 | 复用台账 API | HP `results/experiment-ledger.jsonl`（行结构：ts/event/IT序/full/locked/pool） | 进化管线/收口流程 |
+| 底座徽标 | 复用 registry API | registry `context`（universe/pool 字段已有）+ panel 元数据 | task-0316/0317 |
+| 采用版本列 | 复用 registry API | 各版本 registry `factors` 数组反查 | model registry |
 
 ⚠️ 同步链修复项：HP 上 seedB 的 nav/trades/holdings 尚未镜像到 VPS（当前 VPS 只有 metrics+yearly），P1 需排查 auto-sync rsync 规则后补齐。
 
 ## 5. 实施分期（确认后派发）
 
 - **P1 数据接通**（约半天）：rsync 修复 + 基线 API 适配 seedB + 口径徽标 → 看板立即恢复有数
-- **P2 验证层**（约 1 天）：五门禁面板 + DSR 曲线 + 口径切换器 + A/B/C 对照卡
-- **P3 生命周期**（约 1 天）：决策时间线 + 实验台账 + A2 管线状态视图（赶在 A2 出结果前上线最好）
+- **P1 数据接通**（约半天）：rsync 修复 + 基线 API 适配 seedB + 口径徽标 + **ID 前缀渲染函数（全局一次到位）+ 底座版本徽标①** → 看板立即恢复有数
+- **P2 验证层**（约 1 天）：五门禁面板 + DSR 曲线 + 口径切换器 + A/B/C 对照卡 + **因子表采用版本列③**
+- **P3 生命周期**（约 1 天）：决策时间线 + 实验台账 + **迭代轨迹散点图②** + A2 管线状态视图（赶在 A2 出结果前上线最好）
 
 ## 6. 风险与注意
 
