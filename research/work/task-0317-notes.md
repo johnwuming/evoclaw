@@ -72,3 +72,12 @@
 - 已修复（_args 先存再重写 argv），重新 nohup 启动 HP PID 1249810（20:06）
 - 第二次跑失败：BASE.clear() 导致 cfg 缺 drawdown_control 键 KeyError。修复为只 update 种子B 三参数（div_min=0.02/n_hold=20/min_amt=0），其余继承 q4b BASE（roe=0.15/roa=0.10/price_cap=10/sort=mv/dd默认off）
 - 第三次启动 HP PID 1251243（20:25），冒烟已证明引擎链路正常，本次预计 ~10-15min
+
+## 步骤8 结果收尾（主agent，子agent终止后独立核验）
+- 双区间跑完，日志尾部 SEEDB_V0_DONE，PID 1251243 已正常退出
+- full: 20.61y / ann 26.35% / mdd -69.49% / sharpe 0.9027 / 248调仓 / avg_holdings 18.89 / 月换手27.26%
+- locked: 18.48y / ann 26.26% / mdd -69.49% / sharpe 0.885 / 222调仓 / 月胜率58.37%
+- 对照锚：旧流程 A_locked 26.11% → 新流程全量池+成本v2+一字板 locked 26.26%，基线口径更严反而略优，锚接续合理
+- 核验项：v0_seed.json 注册✅ registry空(已归档)✅ ledger=reset行+baseline_v0_seed行✅ decision-log D-20260816-SEEDB-RESET✅ crontab 9/10行#PAUSED✅ 备份tar 729条目md5✅
+- VPS镜像：seedB_v0_{full,locked}_{metrics.json,yearly.csv} 4文件
+- 遗留小项：HP侧未生成种子B基线md报告（结果以metrics+ledger+本笔记为准，需要正式R报告时另行立项）
