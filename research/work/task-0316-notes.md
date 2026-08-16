@@ -34,3 +34,8 @@
 - 进程 1240006 活：市场 load 完（5505 只，交易日 5250，月度调仓 260）
 - 19:14 标记：B_full 完成 → B_locked 启动中（六腿：B/C/BUB × full/locked）
 - 日志 /tmp/q4b_run_BC_full.log，等 Q4B_BC_DONE
+
+## 19:13 B/C/BUB 六腿全跑完（步骤3过）
+- 11:13:39 UTC 确认 Q4B_BC_DONE，进程 1240006 退出
+- 六腿：B_full/B_locked/C_full/C_locked/BUB_full/BUB_locked 全部完成，无 Traceback
+- 下一步：抽取 metrics → 写报告
