@@ -64,3 +64,17 @@
 - 旧 `subagent-context-discipline.md` 与新 spawn-task.md 并存 30 天后删除前者
 - `USER_PRIVATE.md` 依赖 §4 指令补读（约定层）而非 OpenClaw 机制层——若未来 OpenClaw 支持自定义注入文件再升级
 - 17-量化投资 与 04-投资研究 目录合并（PATHS.md 已标注"待合并"）
+
+---
+
+## 七、部署执行记录（2026-08-16 15:15，用户批准不分阶段一次性完成）
+
+- ✅ 备份 9 文件 → /root/backups/prompt-bak-20260816/
+- ✅ secrets.env 建立（0600，4变量），NAS/HP SSH 双验证通过
+- ✅ 9 个提示词文件 + spawn-task 模板部署（IDENTITY.md 保留原版未覆盖）
+- ✅ heartbeat.sh 落地（文档稿→脚本），run/review/clear-notifications 三子命令冒烟全过
+- ✅ 新 HEARTBEAT.md 契约版上线（79KB→1.6KB 时代彻底结束）
+- ✅ 3 个 skill 落位：group-chat / image-understanding / dev-task
+- 验证：文件注入为 each-run 重建（官方文档确认），运行中会话/任务零影响（task-0309 与 Q4b 不受扰）
+- 回退方式：cp /root/backups/prompt-bak-20260816/* 回原位
+- 遗留：密码轮换待用户择期（NAS/SUDO/DSH/QUANT 四个，非急救）；旧 subagent-context-discipline.md 30天后清理
