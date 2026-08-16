@@ -50,3 +50,10 @@
   - paper_engine validate（周日数据校验，只读不写模型）保留
   - paper_trade.py 两行 = 旧版独立模拟盘（2026-08-09 建，非 baseline 引擎）；与 14:49 方案中"paper 模拟盘两个 cron"语义对比：方案确认消息上下文里"两个 cron"对应的是当前在跑的 baseline paper_engine 每日+月调仓。paper_trade 保留（属"不动 scripts/与现有运行"范围）——此判定如实记录，若需连旧 paper_trade 一起停，恢复方法：同法注释行3/4
 - diff 确认只动了 9/10 两行；crontab -l 验证已生效，其余 19 行原样
+
+## 步骤7 准备：runner 参照研读（19:45）
+- q4b_run_BC.py 结构：load_fullpool_market() 合并存活qfq+退市hfq（raw_close缩放价至qfq口径）、panel 主+退市合并、B/C组经 engine.run_backtest(cfg, market=mk)
+- 关键参数 BASE: sort=mv, div_min=0.025, roe_min=0.15, roa_min=0.10, n_hold=30, price_cap=10.0, min_amt=5M —— C组口径
+- 种子B 需改 DEFAULTS: div_min=0.02, n_hold=20, min_amt=0（backtest_dividend_quality_iter.py DEFAULTS 原始值，下一步核对）
+- 区间: full=(2006-01-01, 2026-08-31), locked=(2006-01-01, AUDIT_LOCK_END=2024-06-30)
+- cost: "v2", limit_board: "on"（种子B新口径=C组口径+种子B参数）
