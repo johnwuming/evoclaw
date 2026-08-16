@@ -63,3 +63,9 @@
 - 后端：三 baseline API 改 seedB_v0_<window>_*（quantBaselineResolve 白名单 window=full|locked 默认full、version 映射表 v0_seed→seedB_v0 预留版本化）；新增 /api/quant/baseline/meta（registry context + QUANT_BASE_SNAP='SNAP-20260814' / QUANT_BASE_PAN='PAN-v3' 常量，注明来源）；summary 头部指标前置（验收 head -c 400 可见）
 - 前端：fmtID/quantConceptBadge 全局函数（Quant Tab 段，R-214 §1.5 全前缀表）；基线回测卡（renderBtlcPage 版本切换器后，!available 早退分支也渲染）；M1.1 灰卡区块挂〔ID：SNAP-/PAN-〕、E2E 图挂〔ID：V-〕、基线卡〔ID：V-〕
 - 验证：node --check ✓；restart 后 active ✓；summary?window=full 头400字符含 0.2635 ✓；?window=locked 含 0.2626 ✓（meta.id=V-v0_seed）；nav?window=locked 4491 点>200 ✓；yearly 21 行 ✓；meta 返回 base_badge='SNAP-20260814 · PAN-v3 · 全量池' + caliber(pool/cost/limit_up/audit_lock) ✓；页面 grep fmtID=3、SNAP-20260814 渲染点存在 ✓
+
+## 5. rsync 修复（已完成）
+- 备份 auto_sync_notify.py.bak-task0321-20260816-213236；cron 未动（*/30 cron-auto-sync + 0 3 cron-full-sync）
+- 改动：MIRROR_INCLUDES=[seedB_*, q4b*, q4b/**] + DEFAULT_QUANT_MIRROR_DIR=workspace-quant/results/；新函数 mirror_quant_results()（复用 RSYNC_EXCLUDES，尾置 --exclude=* 拦其余）；main() Step4.5 调用（失败非致命，不阻断主同步）
+- 验证：ast.parse ✓；本地仿真（/tmp/task0321-fake-hp→mirror-dest dry-run）：seedB_*/q4b 根文件 + q4b/ 子目录内容（AB/BC_metrics.json）放行，other_result.csv / *.parquet 被拦 ✓；真实 HP dry-run（HP 可达）：主同步行为不变（0 新文件，dest 04-投资研究 不变），量化镜像「将同步 12 个 seedB_*/q4b* 文件 → workspace-quant/results/」✓（10 seedB + q4b 空目录 + . ）
+- HP results/ 实况：14 文件（10 seedB_v0_* + factor_catalog_v3.json + experiment-ledger.jsonl + 2 md + q4b 空目录）
