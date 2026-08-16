@@ -29,3 +29,8 @@
 - q4b_run_BC.py 全读：main 支持 all=B+C+BUB 六腿（各 full+locked），单进程 market 只 load 一次，最省
 - HP 4核/15G，可用 13G；已有模拟实盘进程 1017445 占 1 核（勿杀），负载 1.59 可承受再起一个
 - 计划：nohup 后台 `q4b_run_BC.py all` → /tmp/q4b_run_BC_full.log，轮询到 Q4B_BC_DONE
+
+## 19:15 B/C 回测进行中（步骤3过，跑完才算）
+- 进程 1240006 活：市场 load 完（5505 只，交易日 5250，月度调仓 260）
+- 19:14 标记：B_full 完成 → B_locked 启动中（六腿：B/C/BUB × full/locked）
+- 日志 /tmp/q4b_run_BC_full.log，等 Q4B_BC_DONE
