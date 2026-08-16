@@ -36,3 +36,8 @@
 - 隐藏点文件（.check/.dircheck/.p3-3-status/.placeholder）为同步机制状态文件，保留
 - VPS workspace-quant/results/ 现与 HP 清空后状态一致（HP 3 保留文件已在此镜像存在；HP 侧已删除的隐藏文件 VPS 侧保留无碍）
 - 修正：VPS 镜像最初缺 3 个保留文件，已从 HP scp 补齐（R-188/factor-expansion-report.md/factor_catalog_v3.json），现与 HP 一致 ✓
+
+## 步骤5 experiment-ledger 清零（19:35 完成）
+- 定位：唯一 ledger 文件 = ~/quant-evolve/results/experiment-ledger.jsonl（HP 全树 find 确认无其他）
+- 历史 71 行已在 tar 备份内（tar -tzf 确认条目存在）
+- 已重置为首行 ledger_reset 标记（指明备份路径）
