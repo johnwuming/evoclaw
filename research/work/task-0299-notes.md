@@ -47,3 +47,19 @@
 - top:0px → 与 detail-bar 平齐，问题3实锤
 - 页面 script 块语法 OK；jsdom 的 fetch 报错为环境缺 API，与真浏览器无关
 - 修复方案：.toc-sidebar 收起时 translateX(100%)（右侧）滑出屏外 + open 时 translateX(0)；侧栏 right:0；--toc-top 变量控制 panel/overlay 顶部
+
+## 修复实施（14:00 完成）
+- CSS：.toc-overlay/.toc-panel 顶部改 var(--toc-top,54px)；.toc-sidebar 改右侧(right:0;left:auto;border-left)+收起滑出(transform:translateX(100%)，open 时 translateX(0))+保留过渡动画；.toc-pinned 改 padding-right；media 同步
+- JS：新增 syncTocTop()（实测 .detail-bar 高度→CSS 变量，兜底54px）；toggleTOC 开头调用
+- node --check 通过；systemctl restart 后 active；curl 确认新 CSS 上线、syncTocTop 出现2次
+
+## 验证结果（三层）
+1. jsdom 逻辑验证：开关后 class 序列正确（open↔无open，toc-pinned 同步）
+2. 真浏览器 puppeteer（R-213 实测）：
+   - 桌面1600px：ON→panel[1340,1600]右侧贴边；OFF→[1600,1860]完全出屏；再ON恢复 ✓ 开关有效
+   - panelTop=55=顶栏barBottom ✓ 目录从顶栏下方开始；--toc-top=55px 实测值
+   - 移动500px：抽屉模式+遮罩出现，顶栏107px（换行更高）自动适配 ✓
+   - 目录点击跳转 active 生效、侧栏不收起 ✓；PAGE_ERRORS none
+3. 正文布局自洽：ON 时正文[260,1080]居中于[0,1340]，与panel无重叠
+- diff 仅24行变更，全部在 TOC CSS/JS 内，无越界
+- 截图：/tmp/toc-desktop-on.png、/tmp/toc-desktop-off.png、/tmp/toc-mobile-on.png
