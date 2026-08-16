@@ -31,3 +31,12 @@
 - mirror includes 扩展：--include=*_[fu]ll_metrics.json 等三类 + versions-manifest.json
 - freshness：generated_at + last_sync + 关键文件 mtime
 - --push-now：ssh 重生成 manifest → rsync manifest+model/ 四类小文件 → 不动状态/通知
+
+### server.js 改动清单（23:55 完成初版，node --check 通过）
+1. resolve/manifest：新增 QUANT_MANIFEST_PATH/QUANT_MODEL_REGISTRY_DIR/QUANT_MODEL_MAIN + loadQuantManifest()/quantActiveVersion()；quantBaselineResolve manifest 优先（带 manifest_windows），VERSION_MAP 兜底保留
+2. baseline/summary：镜像文件缺 annual_return 时用 manifest.windows[win] 兜底（meta.source 标注）
+3. baseline/meta：双 registry 路径（旧 results/model 优先 → 新 model/registry），caliber 从 selection.params 补 cost_model/limit_board
+4. /api/quant/models 重写：active=main.json 指针（回退 manifest.active→v0_seed）；versions 合并 model/registry/*.json（新）⊕ manifest ⊕ 旧 v0_seed ⊕ archive-cache，去重，active 置顶
+5. 新增 /api/quant/freshness：generated_at/last_sync/versions_count/files mtime
+6. 前端：基线卡加版本下拉（_baselineVersion/_baselineVersionList，models API 动态渲染）；quantSeg 下加 quantFreshness 小字条（HH:MM，HP UTC→补 Z 转换）；visibilitychange → 仅 screen-quant 可见时刷新当前子Tab（sig 守卫）+ freshness + 失效版本清单缓存；loadQuant() 启动调 loadQuantFreshness()
+7. 备份：server.js.bak-task0329-20260816-234526
