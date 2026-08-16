@@ -1,0 +1,65 @@
+{
+  "version": "v1h_buf",
+  "evaluated_at": "2026-08-16 14:52:43",
+  "oos_split": "2021-01",
+  "n_trials": 45,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2699,
+    "max_drawdown": -0.6891,
+    "sharpe": 0.9155,
+    "calmar": 0.3917
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.7656,
+      "sr_period": 0.05767,
+      "sr0_expected_max": 0.046653,
+      "T": 4490,
+      "skew": -0.592,
+      "kurtosis": 6.219,
+      "n_trials": 45,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向c(换手治理): 排名缓冲带 top20进/top40出(hysteresis); 边际排名噪音引发的不必要换手被过滤, 成本v2冲击按换手近似线性下降, 净SR↑; 持仓延续性提升并保留小盘贝塔"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.6891,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": -0.58,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

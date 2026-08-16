@@ -1,0 +1,70 @@
+{
+  "version": "v1f_lv70",
+  "evaluated_at": "2026-08-16 14:52:43",
+  "oos_split": "2021-01",
+  "n_trials": 45,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1647,
+    "max_drawdown": -0.6551,
+    "sharpe": 0.7206,
+    "calmar": 0.2515
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 1.1132,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.3515,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.02543,
+      "mean_ic_oos": 0.02135,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 1.2857
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.5577,
+      "worst_pair": [
+        "volatility_20d",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "volatility_20d"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.6834,
+      "sr_period": 0.04539,
+      "sr0_expected_max": 0.038151,
+      "T": 4490,
+      "skew": -0.645,
+      "kurtosis": 8.349,
+      "n_trials": 45,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向a(低波增强): v1e(0.5:0.5)已证低波倾斜降回撤(MDD -2.78pp)但SR受损(0.90->0.72); 本候选加深低波权重(0.3:0.7)检验σ下降能否换DSR门槛下降(sr0=c(N)·σ, σ↓同时升sr降sr0); 经济含义: 小盘池低波动异象(簇4)主导选股, 博弈溢价与尾部暴露进一步压缩"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.6551,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": -3.98,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

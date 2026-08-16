@@ -1,0 +1,182 @@
+{
+ "v1f_lv70": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "FAIL",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1647,
+   "max_drawdown": -0.6551,
+   "sharpe": 0.7206,
+   "calmar": 0.2515
+  },
+  "dsr_detail": {
+   "dsr": 0.6834,
+   "sr_period": 0.04539,
+   "sr0_expected_max": 0.038151,
+   "T": 4490,
+   "skew": -0.645,
+   "kurtosis": 8.349,
+   "n_trials": 45
+  },
+  "icir_is": 1.1132,
+  "oos_p": null,
+  "max_corr": 0.5577,
+  "mdd_deterioration_pp": -3.98
+ },
+ "v1g_ivw": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "N/A",
+   "g4_dsr": "FAIL",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.2732,
+   "max_drawdown": -0.6973,
+   "sharpe": 0.9204,
+   "calmar": 0.3918
+  },
+  "dsr_detail": {
+   "dsr": 0.7666,
+   "sr_period": 0.05798,
+   "sr0_expected_max": 0.046905,
+   "T": 4490,
+   "skew": -0.612,
+   "kurtosis": 6.413,
+   "n_trials": 45
+  },
+  "icir_is": 0.5994,
+  "oos_p": null,
+  "max_corr": null,
+  "mdd_deterioration_pp": 0.24
+ },
+ "v1h_buf": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "N/A",
+   "g4_dsr": "FAIL",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.2699,
+   "max_drawdown": -0.6891,
+   "sharpe": 0.9155,
+   "calmar": 0.3917
+  },
+  "dsr_detail": {
+   "dsr": 0.7656,
+   "sr_period": 0.05767,
+   "sr0_expected_max": 0.046653,
+   "T": 4490,
+   "skew": -0.592,
+   "kurtosis": 6.219,
+   "n_trials": 45
+  },
+  "icir_is": 0.5994,
+  "oos_p": null,
+  "max_corr": null,
+  "mdd_deterioration_pp": -0.58
+ },
+ "v1i_q3z": {
+  "verdict": "PASS",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "N/A",
+   "g4_dsr": "PASS",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.158,
+   "max_drawdown": -0.3474,
+   "sharpe": 0.9051,
+   "calmar": 0.4548
+  },
+  "dsr_detail": {
+   "dsr": 0.9776,
+   "sr_period": 0.05702,
+   "sr0_expected_max": 0.026438,
+   "T": 4490,
+   "skew": -0.669,
+   "kurtosis": 6.514,
+   "n_trials": 45
+  },
+  "icir_is": 0.5994,
+  "oos_p": null,
+  "max_corr": null,
+  "mdd_deterioration_pp": -34.75
+ },
+ "v1j_vt18": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "N/A",
+   "g4_dsr": "FAIL",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1808,
+   "max_drawdown": -0.5015,
+   "sharpe": 0.8395,
+   "calmar": 0.3605
+  },
+  "dsr_detail": {
+   "dsr": 0.8953,
+   "sr_period": 0.05289,
+   "sr0_expected_max": 0.033783,
+   "T": 4490,
+   "skew": -0.688,
+   "kurtosis": 5.17,
+   "n_trials": 45
+  },
+  "icir_is": 0.5994,
+  "oos_p": null,
+  "max_corr": null,
+  "mdd_deterioration_pp": -19.34
+ },
+ "v1k_q5z": {
+  "verdict": "PASS",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "N/A",
+   "g4_dsr": "PASS",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1701,
+   "max_drawdown": -0.3737,
+   "sharpe": 0.9173,
+   "calmar": 0.4552
+  },
+  "dsr_detail": {
+   "dsr": 0.9743,
+   "sr_period": 0.05778,
+   "sr0_expected_max": 0.028095,
+   "T": 4490,
+   "skew": -0.635,
+   "kurtosis": 7.801,
+   "n_trials": 45
+  },
+  "icir_is": 0.5994,
+  "oos_p": null,
+  "max_corr": null,
+  "mdd_deterioration_pp": -32.12
+ }
+}

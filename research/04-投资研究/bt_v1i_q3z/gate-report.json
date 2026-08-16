@@ -1,0 +1,65 @@
+{
+  "version": "v1i_q3z",
+  "evaluated_at": "2026-08-16 14:52:43",
+  "oos_split": "2021-01",
+  "n_trials": 45,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.158,
+    "max_drawdown": -0.3474,
+    "sharpe": 0.9051,
+    "calmar": 0.4548
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9776,
+      "sr_period": 0.05702,
+      "sr0_expected_max": 0.026438,
+      "T": 4490,
+      "skew": -0.669,
+      "kurtosis": 6.514,
+      "n_trials": 45,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向d(择时叠加): q3z=沪深300 PE 36月窗zscore择时(T线task-0297回溯DSR=0.9715@n=174); 估值高位->未来尾部风险大, 降仓压缩危机段σ与MDD; 对DSR分子(sr↑候选)分母(σ↓)同时改善; 选股腿零改动, 仅叠加仓位系数(market.timing_pos 原生机制)"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.3474,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": -34.75,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "PASS",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

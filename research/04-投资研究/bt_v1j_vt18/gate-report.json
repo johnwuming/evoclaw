@@ -1,0 +1,65 @@
+{
+  "version": "v1j_vt18",
+  "evaluated_at": "2026-08-16 14:52:43",
+  "oos_split": "2021-01",
+  "n_trials": 45,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1808,
+    "max_drawdown": -0.5015,
+    "sharpe": 0.8395,
+    "calmar": 0.3605
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.8953,
+      "sr_period": 0.05289,
+      "sr0_expected_max": 0.033783,
+      "T": 4490,
+      "skew": -0.688,
+      "kurtosis": 5.17,
+      "n_trials": 45,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "方向e(仓位管理): 组合目标波动率18%, 每日按自身trailing 63日已实现波动缩放仓位(floor 30%, 无前视); 波动聚集性使已实现波动对未来波动有预测力, 高波动段自动降仓; σ_d压至约1.1%, DSR通过线从Sharpe>=1.09降至>=0.80; 现金零收益但小盘池年化26%远超资金成本"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.5015,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": -19.34,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

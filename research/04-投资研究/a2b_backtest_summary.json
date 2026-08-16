@@ -1,0 +1,172 @@
+{
+ "task": "task-0325 A2-b2",
+ "generated_at": "2026-08-16 14:42:10",
+ "equiv_check": {
+  "full_ok": true,
+  "locked_ok": true
+ },
+ "v1e_repro": {
+  "full_ok": true,
+  "locked_ok": true,
+  "full_diffs": {},
+  "locked_diffs": {}
+ },
+ "candidates": {
+  "v1f_lv70": {
+   "full": {
+    "annual_return": 0.1708,
+    "max_drawdown": -0.6551,
+    "sharpe": 0.7489,
+    "calmar": 0.2608,
+    "cumulative_return": 24.7973,
+    "monthly_win_rate": 0.5709,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.95,
+    "monthly_turnover_est": 0.5149
+   },
+   "locked": {
+    "annual_return": 0.1647,
+    "max_drawdown": -0.6551,
+    "sharpe": 0.7206,
+    "calmar": 0.2515,
+    "cumulative_return": 15.7497,
+    "monthly_win_rate": 0.5701,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.76,
+    "monthly_turnover_est": 0.5294
+   }
+  },
+  "v1g_ivw": {
+   "full": {
+    "annual_return": 0.2694,
+    "max_drawdown": -0.6973,
+    "sharpe": 0.9287,
+    "calmar": 0.3864,
+    "cumulative_return": 135.4927,
+    "monthly_win_rate": 0.5992,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.89,
+    "monthly_turnover_est": 0.2726
+   },
+   "locked": {
+    "annual_return": 0.2732,
+    "max_drawdown": -0.6973,
+    "sharpe": 0.9204,
+    "calmar": 0.3918,
+    "cumulative_return": 85.7754,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.68,
+    "monthly_turnover_est": 0.2721
+   }
+  },
+  "v1h_buf": {
+   "full": {
+    "annual_return": 0.2707,
+    "max_drawdown": -0.6891,
+    "sharpe": 0.934,
+    "calmar": 0.3928,
+    "cumulative_return": 138.388,
+    "monthly_win_rate": 0.5789,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.91,
+    "monthly_turnover_est": 0.1731
+   },
+   "locked": {
+    "annual_return": 0.2699,
+    "max_drawdown": -0.6891,
+    "sharpe": 0.9155,
+    "calmar": 0.3917,
+    "cumulative_return": 81.7537,
+    "monthly_win_rate": 0.5792,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.71,
+    "monthly_turnover_est": 0.1677
+   }
+  },
+  "v1j_vt18": {
+   "full": {
+    "annual_return": 0.1852,
+    "max_drawdown": -0.5015,
+    "sharpe": 0.8649,
+    "calmar": 0.3692,
+    "cumulative_return": 32.1369,
+    "monthly_win_rate": 0.5789,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.89,
+    "monthly_turnover_est": 0.2726
+   },
+   "locked": {
+    "annual_return": 0.1808,
+    "max_drawdown": -0.5015,
+    "sharpe": 0.8395,
+    "calmar": 0.3605,
+    "cumulative_return": 20.5703,
+    "monthly_win_rate": 0.5747,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.68,
+    "monthly_turnover_est": 0.2721
+   }
+  },
+  "v1i_q3z": {
+   "full": {
+    "annual_return": 0.1584,
+    "max_drawdown": -0.3474,
+    "sharpe": 0.9214,
+    "calmar": 0.456,
+    "cumulative_return": 19.7056,
+    "monthly_win_rate": 0.5911,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.89,
+    "monthly_turnover_est": 0.2726
+   },
+   "locked": {
+    "annual_return": 0.158,
+    "max_drawdown": -0.3474,
+    "sharpe": 0.9051,
+    "calmar": 0.4548,
+    "cumulative_return": 14.0455,
+    "monthly_win_rate": 0.5882,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.68,
+    "monthly_turnover_est": 0.2721
+   }
+  },
+  "v1k_q5z": {
+   "full": {
+    "annual_return": 0.1704,
+    "max_drawdown": -0.3737,
+    "sharpe": 0.9316,
+    "calmar": 0.4559,
+    "cumulative_return": 24.5942,
+    "monthly_win_rate": 0.5911,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.89,
+    "monthly_turnover_est": 0.2726
+   },
+   "locked": {
+    "annual_return": 0.1701,
+    "max_drawdown": -0.3737,
+    "sharpe": 0.9173,
+    "calmar": 0.4552,
+    "cumulative_return": 17.2341,
+    "monthly_win_rate": 0.5882,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.68,
+    "monthly_turnover_est": 0.2721
+   }
+  }
+ }
+}
