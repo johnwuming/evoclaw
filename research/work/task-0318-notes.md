@@ -33,3 +33,20 @@
 - node --check 通过；systemctl restart agent-dashboard 后 is-active = active
 - ⚠️ 任务书端口信息有误：dashboard 实际监听 127.0.0.1:8055（PORT=8055, L17）；8053 是小青账账单 API（另一 node 进程）。nginx 8052 的 / 和 /task/ 均 proxy_pass 到 8055
 - curl 127.0.0.1:8055/ 落盘 /tmp/task0318-dash.html（353KB）：d-path 出现 5 次、detailPath 5 次，CSS/HTML/JS 三处改动均已生效
+
+## CDP 无头浏览器验证（chrome 147 headless, 端口 9223 专用实例，2026-08-16 21:05）
+截图：/tmp/task0318-mobile.png(390x844 R-214) /task0318-mobile-long.png(390x844 R-138) /task0318-desktop.png(1440x900 R-214) /task0318-desktop-toc.png(1440x900 R-138+TOC)
+数值断言结果（/tmp/task0318-results.json + /tmp/task0318-recheck.json）：
+- 手机 390x844：twoRow=true（path top=95 / actions top=55）；path 独占一行；R-138 长路径 scrollable=true 可滚动 maxScrollLeft=111；overflow-x=auto、white-space=nowrap、text-overflow=clip（无省略号）✓
+- 桌面 1440x900：back/title/cat/path/actions 五元素垂直中心全部 cy=28 → 严格单行；path 在 cat 与 actions 之间；title/path 各占 495px ✓
+- 窄桌面 1000x900 R-138：sameRow=true、actions 全可见、path scrollable+canScroll=true ✓（桌面溢出滚动也生效）
+- TOC free 档(≥1420)：panel 顶边 57 == bar 底边 57，path 可见 ✓
+- TOC pinned 档(1100px, 1024-1419)：pinned=true、margin-right=-240px、padR=240px、panel 在 bar 下方不重叠、正文右缘 825 < 面板左缘 ✓ 无错位
+- 回归：关闭→重开 R-214 path 正常回填；loading 态 path 为空（:empty 不占行）
+- 量化报告：openQuantReportDetail 显示 workspace-quant/results/R-188-….md，scrollable=true，overlay 正常
+- 备注：初次断言 desktop oneRow=false 是按 top 边缘比高（path 高 20px vs 按钮 32px）的测量误差；按垂直中心复测 allCentered=true
+- 本运行时不支持图片输入，无法目视截图；布局全部以数值断言覆盖（行位置/中心对齐/滚动几何/面板几何）
+
+## 最终状态
+- node --check ✓；agent-dashboard active ✓；curl 8055 首页 d-path 出现 5 次 ✓
+- 唯一改动文件：tools/agent-dashboard/server.js（备份 server.js.bak-task0318-20260816-204815）；未动扫描逻辑/API；chrome 9223 实例与临时 profile 已清理
