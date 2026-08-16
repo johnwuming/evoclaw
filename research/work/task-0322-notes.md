@@ -31,3 +31,12 @@
 3. registry archive-cache 落盘 workspace-quant/results/model/archive-cache.json
 4. 前端：btlc 页新增 验证层分区（五门禁面板+DSR曲线+口径切换+A/B/C对照）+ 模型层分区（版本切换器）+ 因子表升级
 5. 验收 5 条命令
+
+## 实施进展
+- [x] 备份 server.js.bak-task0322-20260816-214211
+- [x] archive-cache.json（v1.1-v1.4，HP archive-20260816 缓存）落盘 model/
+- [x] 新增 4 个 API（server.js @2754-2880）：q4b-contrast/gates/dsr/models，node --check 通过
+  - q4b-contrast：A 组缺文件→取 q4b-final 报告值（25.73/26.11）+note；B/C/BUB 直读文件
+  - gates：v0_seed 基线五门禁 N/A 中性态
+  - dsr：静态锚点（n=22/174 DSR 0.9715 pass，v1.3 DSR 0.93 reject）
+  - models：v0_seed active + archive v1.1-v1.4
