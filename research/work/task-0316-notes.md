@@ -24,3 +24,8 @@
 - 输出 parquet 532KB → data/derived/fundamentals_delisted_monthly.parquet
 - ⚠️ 注意：codes=299 比任务书预期 293 略多（可能含部分额外采集），以实际为准，不影响正确性
 - 待办：B/C 全区间回测
+
+## 19:10 B/C runner 就绪，准备启动
+- q4b_run_BC.py 全读：main 支持 all=B+C+BUB 六腿（各 full+locked），单进程 market 只 load 一次，最省
+- HP 4核/15G，可用 13G；已有模拟实盘进程 1017445 占 1 核（勿杀），负载 1.59 可承受再起一个
+- 计划：nohup 后台 `q4b_run_BC.py all` → /tmp/q4b_run_BC_full.log，轮询到 Q4B_BC_DONE
