@@ -57,3 +57,9 @@
 - 种子B 需改 DEFAULTS: div_min=0.02, n_hold=20, min_amt=0（backtest_dividend_quality_iter.py DEFAULTS 原始值，下一步核对）
 - 区间: full=(2006-01-01, 2026-08-31), locked=(2006-01-01, AUDIT_LOCK_END=2024-06-30)
 - cost: "v2", limit_board: "on"（种子B新口径=C组口径+种子B参数）
+
+## 步骤7 冒烟验证（19:52 通过）
+- runner: scripts/seedB_run_v0.py（复用 q4b_run_BC 框架，BASE 替换为种子B参数 div=0.02/n_hold=20/min_amt=0）
+- SMOKE_SEEDB 2011（全量池+v2+一字板）: ann=-30.87%, mdd=-32.45%, avg_holdings=19.67/20（接近满仓20只，选股逻辑正常）, turnover 24.15%
+- 2011 年小盘股熊市，负收益符合历史认知（C组同期亦差）；引擎链路跑通
+- 注意：本次冒烟已在 results/ 落了 seedB_smoke_2011_* 产物（正式报告时说明为冒烟件）
