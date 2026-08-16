@@ -16,3 +16,6 @@
 - HP 打包: /tmp/quant-results-model-20260816.tar.gz, 9.9M, 729 条目（603 results 项 + model/ 子项，目录条目也计入，合理）
 - md5: b2e1d572ee6477acadb7a24f5b5687db
 - 大小 9.9M << 500MB，可 scp 回 VPS
+- scp 回 VPS: /root/backups/quant-results-model-20260816.tar.gz (9.9M), md5 一致 ✓
+- HP 同步留档: ~/quant-backups/quant-results-model-20260816.tar.gz, md5 一致 ✓
+- 三处副本（VPS /root/backups、HP ~/quant-backups、HP /tmp）校验完成，备份验证通过，可执行破坏性操作
