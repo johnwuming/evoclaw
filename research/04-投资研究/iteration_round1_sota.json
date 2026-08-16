@@ -1,0 +1,24 @@
+{
+  "baseline": {
+    "variant": "V1_mv",
+    "annual_return": 0.0587,
+    "max_drawdown": -0.7911,
+    "calmar": 0.0742
+  },
+  "best_calmar": {
+    "variant": "V2_d25_n30_p10",
+    "calmar": 0.0946,
+    "annual_return": 0.076,
+    "max_drawdown": -0.8034
+  },
+  "best_sharpe": {
+    "variant": "V2_d25_n30_p10",
+    "sharpe": 0.4038,
+    "annual_return": 0.076
+  },
+  "best_drawdown": {
+    "variant": "V3_dd20_amt500w",
+    "max_drawdown": -0.5798,
+    "annual_return": 0.0529
+  }
+}

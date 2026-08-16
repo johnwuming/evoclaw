@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-08-15 09:00:01",
+  "steps": {
+    "step0_data_validation": {
+      "passed": 5,
+      "failed": 1,
+      "all_pass": false
+    }
+  },
+  "abort": "Step0 数据校验 FAIL → fail-fast（本轮跳过）",
+  "finished_at": "2026-08-15 09:00:04"
+}

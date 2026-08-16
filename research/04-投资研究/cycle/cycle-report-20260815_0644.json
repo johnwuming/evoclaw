@@ -1,0 +1,34 @@
+{
+  "started_at": "2026-08-15 06:44:48",
+  "steps": {
+    "step0_data_validation": {
+      "passed": 5,
+      "failed": 1,
+      "note": "--ignore-validation 演练模式：FAIL 但继续（生产cron不带此旗标）"
+    },
+    "step1_snapshot": {
+      "kline_as_of_now": "2026-08-10",
+      "hash_now": "9aeb9b28d51c42606e8c4f62b21d7c5b",
+      "active": "v1.1",
+      "active_snapshot_asof": "2026-08-10",
+      "data_moved": false,
+      "stale_snapshot": true
+    },
+    "step2_ideas": {
+      "skipped": "ideas/pool.jsonl 不存在"
+    },
+    "step3_factor_iteration": {
+      "placeholder": "待W1因子注册表对接"
+    },
+    "step45_backtest_evaluate": {
+      "candidates": [],
+      "auto_processed": [],
+      "note": "骨架版：自动候选生成待W1/想法池对接"
+    },
+    "step6_notify": {
+      "queued": true
+    }
+  },
+  "abort": null,
+  "finished_at": "2026-08-15 06:44:51"
+}

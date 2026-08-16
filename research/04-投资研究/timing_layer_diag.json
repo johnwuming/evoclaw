@@ -1,0 +1,38 @@
+{
+  "mode": "timing_diagnostic",
+  "generated_at": "2026-08-15T14:40:40",
+  "trade_date": "2026-08-07",
+  "model_version": "v1.4",
+  "timing_layer": "timing_v4_i4_q3z",
+  "timing_enabled": true,
+  "n_targets": 11,
+  "portfolio_total_assets": 99803.24,
+  "no_timing": {
+    "target_position_ratio": 1.0,
+    "target_market_value": 99803.24,
+    "per_stock_budget": 9073.02
+  },
+  "with_timing": {
+    "target_position_ratio": 0.617398,
+    "target_market_value": 61618.34,
+    "per_stock_budget": 5601.67,
+    "meta": {
+      "source": "timing_layer_prod",
+      "ratio": 0.6173982193310479
+    }
+  },
+  "explain": {
+    "as_of": "2026-08-07",
+    "signal_month_end": "2026-07-31",
+    "effective_for_month": "2026-08",
+    "note": "信号仅用 ≤ signal_month_end 数据；对 effective_for_month 全月生效",
+    "f_trend_comp": 0.3,
+    "f_vol_comp": 0.736472,
+    "f_q_q3z": 0.91429,
+    "pe_hs300": 13.68,
+    "w_raw": 0.3,
+    "w_smooth": 0.617398,
+    "pos_ratio": 0.617398,
+    "version": "timing_v4_i4_q3z"
+  }
+}

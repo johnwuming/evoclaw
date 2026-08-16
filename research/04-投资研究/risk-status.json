@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-08-15 06:24:36",
+  "charter_version": "1.0",
+  "benchmark": "hs300",
+  "overall_status": "green",
+  "nav_sources": {
+    "paper_nav": {
+      "file": "results/baseline-paper-nav.csv",
+      "obs": 1,
+      "range": "2026-08-07~2026-08-07"
+    },
+    "strategy_track_record": {
+      "file": "results/i3_abs_s1_nav.csv",
+      "obs": 5003,
+      "range": "2006-01-04~2026-08-07"
+    },
+    "benchmark": "hs300",
+    "note": "paper 实盘刚启动（仅2个净值点），回撤与超额类规则主序列使用同策略回测净值 i3_abs_s1（与当前生效 V2_d25_n30_p10+i4_q3z 同参数）作为 strategy track record；paper 积累 >=20 点后自动切换为实盘主判。"
+  },
+  "rules": {
+    "drawdown_circuit_breaker.level1_cut_half": {
+      "rule": "drawdown_circuit_breaker.level1_cut_half",
+      "metric": "nav_drawdown_vs_hwm",
+      "current": -0.09047,
+      "current_abs": 0.09047,
+      "threshold": 0.25,
+      "margin": 0.6381,
+      "color": "green",
+      "status": "ok",
+      "action": "降仓至50%",
+      "data_source": "strategy_track_record(i3_abs_s1_nav.csv)",
+      "as_of": "2026-08-07",
+      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=0.0"
+    },
+    "drawdown_circuit_breaker.level2_stop": {
+      "rule": "drawdown_circuit_breaker.level2_stop",
+      "metric": "nav_drawdown_vs_hwm",
+      "current": -0.09047,
+      "current_abs": 0.09047,
+      "threshold": 0.35,
+      "margin": 0.7415,
+      "color": "green",
+      "status": "ok",
+      "action": "清仓复盘，人工重启",
+      "data_source": "strategy_track_record(i3_abs_s1_nav.csv)",
+      "as_of": "2026-08-07",
+      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=0.0"
+    },
+    "underperform_discipline.watch": {
+      "rule": "underperform_discipline.watch",
+      "metric": "rolling_6m_excess_vs_benchmark",
+      "current": -0.03439,
+      "threshold": -0.1,
+      "window": "6m",
+      "margin": 0.6561,
+      "color": "green",
+      "status": "ok",
+      "action": "进入观察，暂停模型升级",
+      "data_source": "strategy_track_record(6m累计超额 vs hs300)",
+      "as_of": "2026-08-07",
+      "cross_check_vs_microcap_eqw": 0.22028
+    },
+    "underperform_discipline.downweight": {
+      "rule": "underperform_discipline.downweight",
+      "metric": "rolling_12m_excess_vs_benchmark",
+      "current": -0.04408,
+      "threshold": -0.15,
+      "window": "12m",
+      "margin": 0.7061,
+      "color": "green",
+      "status": "ok",
+      "action": "降仓至70%",
+      "data_source": "strategy_track_record(12m累计超额 vs hs300)",
+      "as_of": "2026-08-07",
+      "cross_check_vs_microcap_eqw": 0.25804
+    },
+    "live_vs_backtest": {
+      "rule": "live_vs_backtest",
+      "metric": "live_sharpe_vs_backtest",
+      "current": null,
+      "live_sharpe_6m": null,
+      "backtest_sharpe_6m": -0.436,
+      "ratio_threshold": 0.5,
+      "margin": null,
+      "color": "grey",
+      "status": "insufficient_data",
+      "action": "策略失效review",
+      "data_source": "paper < 20 obs => insufficient",
+      "as_of": "2026-08-07"
+    }
+  },
+  "crowding_reference": {
+    "latest_date": "2026-08-07",
+    "overall_flag": "red",
+    "indicators": {
+      "micro_turnover_share": {
+        "latest": 0.02533,
+        "flag": "green",
+        "pct_rank": null
+      },
+      "micro_turnover_pctile": {
+        "latest": 46.67,
+        "flag": "green",
+        "pct_rank": null
+      },
+      "excess_decay": {
+        "latest": -0.004422,
+        "flag": "red",
+        "pct_rank": null
+      },
+      "snowball_knockin": {
+        "latest": 0.58497,
+        "flag": "green",
+        "pct_rank": null
+      }
+    },
+    "capacity": {
+      "as_of": "last trading day",
+      "method": "单日可买量=ADV20×参与率，策略容量=可买量÷持仓权重，取11票瓶颈(min)",
+      "conservative_5pct": 13659439.0,
+      "neutral_10pct": 27318878.0,
+      "optimistic_15pct": 40978317.0,
+      "bottleneck_stock": "603551",
+      "mean_5pct": 255135596.0,
+      "mean_10pct": 510271191.0,
+      "mean_15pct": 765406787.0
+    }
+  },
+  "drill": {
+    "mode": "replay",
+    "window": "2015-01-01 ~ 2015-12-31",
+    "nav_source": "results/i3_abs_s1_nav.csv",
+    "max_drawdown_in_window": -0.36852,
+    "max_dd_date": "2015-07-08",
+    "events_fired": [
+      {
+        "rule": "level1_cut_half",
+        "date": "2015-07-03",
+        "current": -0.27638,
+        "threshold": 0.25
+      },
+      {
+        "rule": "level2_stop",
+        "date": "2015-07-08",
+        "current": -0.36852,
+        "threshold": 0.35
+      },
+      {
+        "rule": "underperform_discipline.downweight",
+        "date": "2015-01-05",
+        "current": -0.18257,
+        "threshold": -0.15
+      }
+    ]
+  }
+}

@@ -1,0 +1,1086 @@
+{
+  "generated_at": "2026-08-13 08:01:52",
+  "round": "iteration_round1_metrics.csv",
+  "baseline": "V1_mv",
+  "main": {
+    "version": "v1.0",
+    "metrics": {
+      "annual_return": 0.0587,
+      "cumulative_return": 2.2344,
+      "max_drawdown": -0.7911,
+      "sharpe": 0.348,
+      "calmar": 0.0742,
+      "monthly_win_rate": 0.4453,
+      "avg_holdings": 10.53,
+      "monthly_turnover_est": 0.216
+    }
+  },
+  "merged": "V2_d25_n30_p10",
+  "evaluated_count": 23,
+  "gates": {
+    "g1_annual_coef": 0.9,
+    "g2_dd_improve_pp": 0.05,
+    "g2_sharpe_coef": 0.95,
+    "g3_calmar_coef": 0.9
+  },
+  "results": [
+    {
+      "variant": "V2_d25_n30_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0760 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.8034 vs -0.7911+0.05) FAIL | 夏普(0.4038 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0946 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.076,
+        "cumulative_return": 3.5199,
+        "max_drawdown": -0.8034,
+        "sharpe": 0.4038,
+        "calmar": 0.0946,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 11.57,
+        "monthly_turnover_est": 0.2091
+      },
+      "candidate": "v_V2_d25_n30_p10_20260813.json",
+      "calmar": 0.0946
+    },
+    {
+      "variant": "V2_d25_n20_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0755 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7997 vs -0.7911+0.05) FAIL | 夏普(0.4019 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0944 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0755,
+        "cumulative_return": 3.4759,
+        "max_drawdown": -0.7997,
+        "sharpe": 0.4019,
+        "calmar": 0.0944,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.0,
+        "monthly_turnover_est": 0.2161
+      },
+      "candidate": "v_V2_d25_n20_p10_20260813.json",
+      "calmar": 0.0944
+    },
+    {
+      "variant": "V2_d25_n10_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0752 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.8009 vs -0.7911+0.05) FAIL | 夏普(0.3999 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0939 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0752,
+        "cumulative_return": 3.4493,
+        "max_drawdown": -0.8009,
+        "sharpe": 0.3999,
+        "calmar": 0.0939,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 6.84,
+        "monthly_turnover_est": 0.2234
+      },
+      "candidate": "v_V2_d25_n10_p10_20260813.json",
+      "calmar": 0.0939
+    },
+    {
+      "variant": "V3_dd20_amt500w",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0529 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.5798 vs -0.7911+0.05) PASS | 夏普(0.3831 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0912 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0529,
+        "cumulative_return": 1.888,
+        "max_drawdown": -0.5798,
+        "sharpe": 0.3831,
+        "calmar": 0.0912,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.2194
+      },
+      "candidate": "v_V3_dd20_amt500w_20260813.json",
+      "calmar": 0.0912
+    },
+    {
+      "variant": "V3_dd20",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0526 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.581 vs -0.7911+0.05) PASS | 夏普(0.3815 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0905 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0526,
+        "cumulative_return": 1.872,
+        "max_drawdown": -0.581,
+        "sharpe": 0.3815,
+        "calmar": 0.0905,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.216
+      },
+      "candidate": "v_V3_dd20_20260813.json",
+      "calmar": 0.0905
+    },
+    {
+      "variant": "V2_d25_n30_p15",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0697 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7958 vs -0.7911+0.05) FAIL | 夏普(0.3832 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0876 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0697,
+        "cumulative_return": 3.0027,
+        "max_drawdown": -0.7958,
+        "sharpe": 0.3832,
+        "calmar": 0.0876,
+        "monthly_win_rate": 0.4696,
+        "avg_holdings": 14.52,
+        "monthly_turnover_est": 0.2085
+      },
+      "candidate": "v_V2_d25_n30_p15_20260813.json",
+      "calmar": 0.0876
+    },
+    {
+      "variant": "V2_d25_n20_p15",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0662 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7889 vs -0.7911+0.05) FAIL | 夏普(0.3717 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0839 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0662,
+        "cumulative_return": 2.7407,
+        "max_drawdown": -0.7889,
+        "sharpe": 0.3717,
+        "calmar": 0.0839,
+        "monthly_win_rate": 0.4656,
+        "avg_holdings": 11.96,
+        "monthly_turnover_est": 0.2167
+      },
+      "candidate": "v_V2_d25_n20_p15_20260813.json",
+      "calmar": 0.0839
+    },
+    {
+      "variant": "V2_d25_n10_p15",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0668 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.8015 vs -0.7911+0.05) FAIL | 夏普(0.3727 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0833 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0668,
+        "cumulative_return": 2.7887,
+        "max_drawdown": -0.8015,
+        "sharpe": 0.3727,
+        "calmar": 0.0834,
+        "monthly_win_rate": 0.4575,
+        "avg_holdings": 7.18,
+        "monthly_turnover_est": 0.2444
+      },
+      "candidate": "v_V2_d25_n10_p15_20260813.json",
+      "calmar": 0.0834
+    },
+    {
+      "variant": "V2_d15_n10_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0642 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7863 vs -0.7911+0.05) FAIL | 夏普(0.3652 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0816 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0642,
+        "cumulative_return": 2.6027,
+        "max_drawdown": -0.7863,
+        "sharpe": 0.3652,
+        "calmar": 0.0817,
+        "monthly_win_rate": 0.4332,
+        "avg_holdings": 7.15,
+        "monthly_turnover_est": 0.2262
+      },
+      "candidate": "v_V2_d15_n10_p10_20260813.json",
+      "calmar": 0.0817
+    },
+    {
+      "variant": "V1_div",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0641 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7872 vs -0.7911+0.05) FAIL | 夏普(0.366 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0814 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0641,
+        "cumulative_return": 2.5964,
+        "max_drawdown": -0.7872,
+        "sharpe": 0.366,
+        "calmar": 0.0815,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 10.54,
+        "monthly_turnover_est": 0.2105
+      },
+      "candidate": "v_V1_div_20260813.json",
+      "calmar": 0.0815
+    },
+    {
+      "variant": "V2_d20_n10_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0636 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7971 vs -0.7911+0.05) FAIL | 夏普(0.3634 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0798 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0636,
+        "cumulative_return": 2.5599,
+        "max_drawdown": -0.7971,
+        "sharpe": 0.3634,
+        "calmar": 0.0798,
+        "monthly_win_rate": 0.4332,
+        "avg_holdings": 6.98,
+        "monthly_turnover_est": 0.2265
+      },
+      "candidate": "v_V2_d20_n10_p10_20260813.json",
+      "calmar": 0.0798
+    },
+    {
+      "variant": "V1_score",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0622 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.794 vs -0.7911+0.05) FAIL | 夏普(0.3595 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0783 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0622,
+        "cumulative_return": 2.4625,
+        "max_drawdown": -0.794,
+        "sharpe": 0.3595,
+        "calmar": 0.0783,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.211
+      },
+      "candidate": "v_V1_score_20260813.json",
+      "calmar": 0.0783
+    },
+    {
+      "variant": "V3_amt500w",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0593 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7899 vs -0.7911+0.05) FAIL | 夏普(0.3499 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0751 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0593,
+        "cumulative_return": 2.2711,
+        "max_drawdown": -0.7899,
+        "sharpe": 0.3499,
+        "calmar": 0.075,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.2194
+      },
+      "candidate": "v_V3_amt500w_20260813.json",
+      "calmar": 0.075
+    },
+    {
+      "variant": "V2_d20_n20_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0587 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7911 vs -0.7911+0.05) FAIL | 夏普(0.348 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0742 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0587,
+        "cumulative_return": 2.2344,
+        "max_drawdown": -0.7911,
+        "sharpe": 0.348,
+        "calmar": 0.0742,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.216
+      },
+      "candidate": "v_V2_d20_n20_p10_20260813.json",
+      "calmar": 0.0742
+    },
+    {
+      "variant": "V2_d20_n30_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0565 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.8016 vs -0.7911+0.05) FAIL | 夏普(0.3411 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0705 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0565,
+        "cumulative_return": 2.102,
+        "max_drawdown": -0.8016,
+        "sharpe": 0.3411,
+        "calmar": 0.0705,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 12.3,
+        "monthly_turnover_est": 0.2114
+      },
+      "candidate": "v_V2_d20_n30_p10_20260813.json",
+      "calmar": 0.0705
+    },
+    {
+      "variant": "V2_d15_n30_p10",
+      "decision": "merge",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": true,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0535 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7987 vs -0.7911+0.05) FAIL | 夏普(0.3313 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0670 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0535,
+        "cumulative_return": 1.9259,
+        "max_drawdown": -0.7987,
+        "sharpe": 0.3313,
+        "calmar": 0.067,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 13.02,
+        "monthly_turnover_est": 0.209
+      },
+      "candidate": "v_V2_d15_n30_p10_20260813.json",
+      "calmar": 0.067
+    },
+    {
+      "variant": "V2_d20_n30_p15",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": true,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": true
+      },
+      "reasons": [
+        "①年化 0.0532 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.7962 vs -0.7911+0.05) FAIL | 夏普(0.3304 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0668 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "metrics": {
+        "annual_return": 0.0532,
+        "cumulative_return": 1.9082,
+        "max_drawdown": -0.7962,
+        "sharpe": 0.3304,
+        "calmar": 0.0668,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 15.52,
+        "monthly_turnover_est": 0.2044
+      },
+      "candidate": "v_V2_d20_n30_p15_20260813.json",
+      "calmar": 0.0668
+    },
+    {
+      "variant": "V2_d15_n20_p10",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": false
+      },
+      "reasons": [
+        "①年化 0.0523 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.7918 vs -0.7911+0.05) FAIL | 夏普(0.3271 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0661 vs 主模型×0.9=0.0668 → FAIL"
+      ],
+      "metrics": {
+        "annual_return": 0.0523,
+        "cumulative_return": 1.8557,
+        "max_drawdown": -0.7918,
+        "sharpe": 0.3271,
+        "calmar": 0.066,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 11.02,
+        "monthly_turnover_est": 0.2123
+      },
+      "candidate": "v_V2_d15_n20_p10_20260813.json",
+      "calmar": 0.066
+    },
+    {
+      "variant": "V2_d20_n20_p15",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": false
+      },
+      "reasons": [
+        "①年化 0.0484 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.7988 vs -0.7911+0.05) FAIL | 夏普(0.3145 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0606 vs 主模型×0.9=0.0668 → FAIL"
+      ],
+      "metrics": {
+        "annual_return": 0.0484,
+        "cumulative_return": 1.6469,
+        "max_drawdown": -0.7988,
+        "sharpe": 0.3145,
+        "calmar": 0.0606,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 12.35,
+        "monthly_turnover_est": 0.2237
+      },
+      "candidate": "v_V2_d20_n20_p15_20260813.json",
+      "calmar": 0.0606
+    },
+    {
+      "variant": "V2_d15_n10_p15",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": false
+      },
+      "reasons": [
+        "①年化 0.0428 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.7759 vs -0.7911+0.05) FAIL | 夏普(0.2966 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0552 vs 主模型×0.9=0.0668 → FAIL"
+      ],
+      "metrics": {
+        "annual_return": 0.0428,
+        "cumulative_return": 1.3693,
+        "max_drawdown": -0.7759,
+        "sharpe": 0.2966,
+        "calmar": 0.0551,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 7.41,
+        "monthly_turnover_est": 0.2447
+      },
+      "candidate": "v_V2_d15_n10_p15_20260813.json",
+      "calmar": 0.0551
+    },
+    {
+      "variant": "V2_d20_n10_p15",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": false
+      },
+      "reasons": [
+        "①年化 0.0430 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.798 vs -0.7911+0.05) FAIL | 夏普(0.2967 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0539 vs 主模型×0.9=0.0668 → FAIL"
+      ],
+      "metrics": {
+        "annual_return": 0.043,
+        "cumulative_return": 1.3782,
+        "max_drawdown": -0.798,
+        "sharpe": 0.2967,
+        "calmar": 0.0539,
+        "monthly_win_rate": 0.4575,
+        "avg_holdings": 7.36,
+        "monthly_turnover_est": 0.2357
+      },
+      "candidate": "v_V2_d20_n10_p15_20260813.json",
+      "calmar": 0.0539
+    },
+    {
+      "variant": "V2_d15_n30_p15",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": false
+      },
+      "reasons": [
+        "①年化 0.0333 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.7797 vs -0.7911+0.05) FAIL | 夏普(0.2651 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0427 vs 主模型×0.9=0.0668 → FAIL"
+      ],
+      "metrics": {
+        "annual_return": 0.0333,
+        "cumulative_return": 0.9635,
+        "max_drawdown": -0.7797,
+        "sharpe": 0.2651,
+        "calmar": 0.0427,
+        "monthly_win_rate": 0.4494,
+        "avg_holdings": 16.36,
+        "monthly_turnover_est": 0.2097
+      },
+      "candidate": "v_V2_d15_n30_p15_20260813.json",
+      "calmar": 0.0427
+    },
+    {
+      "variant": "V2_d15_n20_p15",
+      "decision": "reject",
+      "gates": {
+        "g1_annual": false,
+        "g2_dd_or_sharpe": false,
+        "g3_calmar": false
+      },
+      "reasons": [
+        "①年化 0.0277 vs 主模型×0.9=0.0528 → FAIL",
+        "②回撤改善(dd -0.7958 vs -0.7911+0.05) FAIL | 夏普(0.2471 vs 0.33059999999999995) FAIL → FAIL",
+        "③Calmar 0.0348 vs 主模型×0.9=0.0668 → FAIL"
+      ],
+      "metrics": {
+        "annual_return": 0.0277,
+        "cumulative_return": 0.7552,
+        "max_drawdown": -0.7958,
+        "sharpe": 0.2471,
+        "calmar": 0.0348,
+        "monthly_win_rate": 0.4494,
+        "avg_holdings": 12.38,
+        "monthly_turnover_est": 0.2267
+      },
+      "candidate": "v_V2_d15_n20_p15_20260813.json",
+      "calmar": 0.0348
+    }
+  ],
+  "history": [
+    {
+      "op": "baseline_reconcile",
+      "baseline": "V1_mv",
+      "old_metrics": {
+        "annual_return": 0.1253,
+        "sharpe": 0.56,
+        "max_drawdown": -0.7514
+      },
+      "new_metrics": {
+        "annual_return": 0.0587,
+        "cumulative_return": 2.2344,
+        "max_drawdown": -0.7911,
+        "sharpe": 0.348,
+        "calmar": 0.0742,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.216
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V1_div_20260813.json",
+      "version": "V1_div",
+      "metrics": {
+        "annual_return": 0.0641,
+        "cumulative_return": 2.5964,
+        "max_drawdown": -0.7872,
+        "sharpe": 0.366,
+        "calmar": 0.0815,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 10.54,
+        "monthly_turnover_est": 0.2105
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V1_score_20260813.json",
+      "version": "V1_score",
+      "metrics": {
+        "annual_return": 0.0622,
+        "cumulative_return": 2.4625,
+        "max_drawdown": -0.794,
+        "sharpe": 0.3595,
+        "calmar": 0.0783,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.211
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d15_n10_p10_20260813.json",
+      "version": "V2_d15_n10_p10",
+      "metrics": {
+        "annual_return": 0.0642,
+        "cumulative_return": 2.6027,
+        "max_drawdown": -0.7863,
+        "sharpe": 0.3652,
+        "calmar": 0.0817,
+        "monthly_win_rate": 0.4332,
+        "avg_holdings": 7.15,
+        "monthly_turnover_est": 0.2262
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d15_n10_p15_20260813.json",
+      "version": "V2_d15_n10_p15",
+      "metrics": {
+        "annual_return": 0.0428,
+        "cumulative_return": 1.3693,
+        "max_drawdown": -0.7759,
+        "sharpe": 0.2966,
+        "calmar": 0.0551,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 7.41,
+        "monthly_turnover_est": 0.2447
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d15_n10_p15_20260813.json",
+      "reason": "①年化 0.0428 vs 主模型×0.9=0.0528 → FAIL; ②回撤改善(dd -0.7759 vs -0.7911+0.05) FAIL | 夏普(0.2966 vs 0.33059999999999995) FAIL → FAIL; ③Calmar 0.0552 vs 主模型×0.9=0.0668 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d15_n20_p10_20260813.json",
+      "version": "V2_d15_n20_p10",
+      "metrics": {
+        "annual_return": 0.0523,
+        "cumulative_return": 1.8557,
+        "max_drawdown": -0.7918,
+        "sharpe": 0.3271,
+        "calmar": 0.066,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 11.02,
+        "monthly_turnover_est": 0.2123
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d15_n20_p10_20260813.json",
+      "reason": "①年化 0.0523 vs 主模型×0.9=0.0528 → FAIL; ②回撤改善(dd -0.7918 vs -0.7911+0.05) FAIL | 夏普(0.3271 vs 0.33059999999999995) FAIL → FAIL; ③Calmar 0.0661 vs 主模型×0.9=0.0668 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d15_n20_p15_20260813.json",
+      "version": "V2_d15_n20_p15",
+      "metrics": {
+        "annual_return": 0.0277,
+        "cumulative_return": 0.7552,
+        "max_drawdown": -0.7958,
+        "sharpe": 0.2471,
+        "calmar": 0.0348,
+        "monthly_win_rate": 0.4494,
+        "avg_holdings": 12.38,
+        "monthly_turnover_est": 0.2267
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d15_n20_p15_20260813.json",
+      "reason": "①年化 0.0277 vs 主模型×0.9=0.0528 → FAIL; ②回撤改善(dd -0.7958 vs -0.7911+0.05) FAIL | 夏普(0.2471 vs 0.33059999999999995) FAIL → FAIL; ③Calmar 0.0348 vs 主模型×0.9=0.0668 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d15_n30_p10_20260813.json",
+      "version": "V2_d15_n30_p10",
+      "metrics": {
+        "annual_return": 0.0535,
+        "cumulative_return": 1.9259,
+        "max_drawdown": -0.7987,
+        "sharpe": 0.3313,
+        "calmar": 0.067,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 13.02,
+        "monthly_turnover_est": 0.209
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d15_n30_p15_20260813.json",
+      "version": "V2_d15_n30_p15",
+      "metrics": {
+        "annual_return": 0.0333,
+        "cumulative_return": 0.9635,
+        "max_drawdown": -0.7797,
+        "sharpe": 0.2651,
+        "calmar": 0.0427,
+        "monthly_win_rate": 0.4494,
+        "avg_holdings": 16.36,
+        "monthly_turnover_est": 0.2097
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d15_n30_p15_20260813.json",
+      "reason": "①年化 0.0333 vs 主模型×0.9=0.0528 → FAIL; ②回撤改善(dd -0.7797 vs -0.7911+0.05) FAIL | 夏普(0.2651 vs 0.33059999999999995) FAIL → FAIL; ③Calmar 0.0427 vs 主模型×0.9=0.0668 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d20_n10_p10_20260813.json",
+      "version": "V2_d20_n10_p10",
+      "metrics": {
+        "annual_return": 0.0636,
+        "cumulative_return": 2.5599,
+        "max_drawdown": -0.7971,
+        "sharpe": 0.3634,
+        "calmar": 0.0798,
+        "monthly_win_rate": 0.4332,
+        "avg_holdings": 6.98,
+        "monthly_turnover_est": 0.2265
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d20_n10_p15_20260813.json",
+      "version": "V2_d20_n10_p15",
+      "metrics": {
+        "annual_return": 0.043,
+        "cumulative_return": 1.3782,
+        "max_drawdown": -0.798,
+        "sharpe": 0.2967,
+        "calmar": 0.0539,
+        "monthly_win_rate": 0.4575,
+        "avg_holdings": 7.36,
+        "monthly_turnover_est": 0.2357
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d20_n10_p15_20260813.json",
+      "reason": "①年化 0.0430 vs 主模型×0.9=0.0528 → FAIL; ②回撤改善(dd -0.798 vs -0.7911+0.05) FAIL | 夏普(0.2967 vs 0.33059999999999995) FAIL → FAIL; ③Calmar 0.0539 vs 主模型×0.9=0.0668 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d20_n20_p10_20260813.json",
+      "version": "V2_d20_n20_p10",
+      "metrics": {
+        "annual_return": 0.0587,
+        "cumulative_return": 2.2344,
+        "max_drawdown": -0.7911,
+        "sharpe": 0.348,
+        "calmar": 0.0742,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.216
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d20_n20_p15_20260813.json",
+      "version": "V2_d20_n20_p15",
+      "metrics": {
+        "annual_return": 0.0484,
+        "cumulative_return": 1.6469,
+        "max_drawdown": -0.7988,
+        "sharpe": 0.3145,
+        "calmar": 0.0606,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 12.35,
+        "monthly_turnover_est": 0.2237
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d20_n20_p15_20260813.json",
+      "reason": "①年化 0.0484 vs 主模型×0.9=0.0528 → FAIL; ②回撤改善(dd -0.7988 vs -0.7911+0.05) FAIL | 夏普(0.3145 vs 0.33059999999999995) FAIL → FAIL; ③Calmar 0.0606 vs 主模型×0.9=0.0668 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d20_n30_p10_20260813.json",
+      "version": "V2_d20_n30_p10",
+      "metrics": {
+        "annual_return": 0.0565,
+        "cumulative_return": 2.102,
+        "max_drawdown": -0.8016,
+        "sharpe": 0.3411,
+        "calmar": 0.0705,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 12.3,
+        "monthly_turnover_est": 0.2114
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d20_n30_p15_20260813.json",
+      "version": "V2_d20_n30_p15",
+      "metrics": {
+        "annual_return": 0.0532,
+        "cumulative_return": 1.9082,
+        "max_drawdown": -0.7962,
+        "sharpe": 0.3304,
+        "calmar": 0.0668,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 15.52,
+        "monthly_turnover_est": 0.2044
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V2_d20_n30_p15_20260813.json",
+      "reason": "②回撤改善(dd -0.7962 vs -0.7911+0.05) FAIL | 夏普(0.3304 vs 0.33059999999999995) FAIL → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d25_n10_p10_20260813.json",
+      "version": "V2_d25_n10_p10",
+      "metrics": {
+        "annual_return": 0.0752,
+        "cumulative_return": 3.4493,
+        "max_drawdown": -0.8009,
+        "sharpe": 0.3999,
+        "calmar": 0.0939,
+        "monthly_win_rate": 0.4372,
+        "avg_holdings": 6.84,
+        "monthly_turnover_est": 0.2234
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d25_n10_p15_20260813.json",
+      "version": "V2_d25_n10_p15",
+      "metrics": {
+        "annual_return": 0.0668,
+        "cumulative_return": 2.7887,
+        "max_drawdown": -0.8015,
+        "sharpe": 0.3727,
+        "calmar": 0.0834,
+        "monthly_win_rate": 0.4575,
+        "avg_holdings": 7.18,
+        "monthly_turnover_est": 0.2444
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d25_n20_p10_20260813.json",
+      "version": "V2_d25_n20_p10",
+      "metrics": {
+        "annual_return": 0.0755,
+        "cumulative_return": 3.4759,
+        "max_drawdown": -0.7997,
+        "sharpe": 0.4019,
+        "calmar": 0.0944,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.0,
+        "monthly_turnover_est": 0.2161
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d25_n20_p15_20260813.json",
+      "version": "V2_d25_n20_p15",
+      "metrics": {
+        "annual_return": 0.0662,
+        "cumulative_return": 2.7407,
+        "max_drawdown": -0.7889,
+        "sharpe": 0.3717,
+        "calmar": 0.0839,
+        "monthly_win_rate": 0.4656,
+        "avg_holdings": 11.96,
+        "monthly_turnover_est": 0.2167
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d25_n30_p10_20260813.json",
+      "version": "V2_d25_n30_p10",
+      "metrics": {
+        "annual_return": 0.076,
+        "cumulative_return": 3.5199,
+        "max_drawdown": -0.8034,
+        "sharpe": 0.4038,
+        "calmar": 0.0946,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 11.57,
+        "monthly_turnover_est": 0.2091
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V2_d25_n30_p15_20260813.json",
+      "version": "V2_d25_n30_p15",
+      "metrics": {
+        "annual_return": 0.0697,
+        "cumulative_return": 3.0027,
+        "max_drawdown": -0.7958,
+        "sharpe": 0.3832,
+        "calmar": 0.0876,
+        "monthly_win_rate": 0.4696,
+        "avg_holdings": 14.52,
+        "monthly_turnover_est": 0.2085
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V3_dd20_20260813.json",
+      "version": "V3_dd20",
+      "metrics": {
+        "annual_return": 0.0526,
+        "cumulative_return": 1.872,
+        "max_drawdown": -0.581,
+        "sharpe": 0.3815,
+        "calmar": 0.0905,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.216
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "reject",
+      "candidate": "v_V3_dd20_20260813.json",
+      "reason": "①年化 0.0526 vs 主模型×0.9=0.0528 → FAIL",
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V3_amt500w_20260813.json",
+      "version": "V3_amt500w",
+      "metrics": {
+        "annual_return": 0.0593,
+        "cumulative_return": 2.2711,
+        "max_drawdown": -0.7899,
+        "sharpe": 0.3499,
+        "calmar": 0.075,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.2194
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "register",
+      "candidate": "v_V3_dd20_amt500w_20260813.json",
+      "version": "V3_dd20_amt500w",
+      "metrics": {
+        "annual_return": 0.0529,
+        "cumulative_return": 1.888,
+        "max_drawdown": -0.5798,
+        "sharpe": 0.3831,
+        "calmar": 0.0912,
+        "monthly_win_rate": 0.4453,
+        "avg_holdings": 10.53,
+        "monthly_turnover_est": 0.2194
+      },
+      "ts": "2026-08-13 08:01:52"
+    },
+    {
+      "op": "merge",
+      "candidate": "v_V2_d25_n30_p10_20260813.json",
+      "new_version": "V2_d25_n30_p10",
+      "old_version": "v1.0",
+      "metrics": {
+        "annual_return": 0.076,
+        "cumulative_return": 3.5199,
+        "max_drawdown": -0.8034,
+        "sharpe": 0.4038,
+        "calmar": 0.0946,
+        "monthly_win_rate": 0.4413,
+        "avg_holdings": 11.57,
+        "monthly_turnover_est": 0.2091
+      },
+      "reasons": [
+        "①年化 0.0760 vs 主模型×0.9=0.0528 → PASS",
+        "②回撤改善(dd -0.8034 vs -0.7911+0.05) FAIL | 夏普(0.4038 vs 0.33059999999999995) PASS → PASS",
+        "③Calmar 0.0946 vs 主模型×0.9=0.0668 → PASS"
+      ],
+      "ts": "2026-08-13 08:01:52"
+    }
+  ]
+}

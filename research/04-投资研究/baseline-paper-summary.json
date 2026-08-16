@@ -1,0 +1,98 @@
+{
+  "mode": "paper",
+  "start_date": "2026-08-13",
+  "initial_capital": 100000.0,
+  "current_nav": 99803.24,
+  "total_return": -0.001968,
+  "month_return": 0.0,
+  "current_holdings": [
+    {
+      "code": "002107",
+      "name": "沃华医药",
+      "weight": 0.088374,
+      "shares": 1400,
+      "cost": 6.3
+    },
+    {
+      "code": "000848",
+      "name": "承德露露",
+      "weight": 0.088073,
+      "shares": 1000,
+      "cost": 8.79
+    },
+    {
+      "code": "603998",
+      "name": "方盛制药",
+      "weight": 0.087652,
+      "shares": 900,
+      "cost": 9.72
+    },
+    {
+      "code": "002027",
+      "name": "分众传媒",
+      "weight": 0.087552,
+      "shares": 1700,
+      "cost": 5.14
+    },
+    {
+      "code": "601600",
+      "name": "中国铝业",
+      "weight": 0.087404,
+      "shares": 900,
+      "cost": 9.85
+    },
+    {
+      "code": "002372",
+      "name": "伟星新材",
+      "weight": 0.08657,
+      "shares": 1000,
+      "cost": 8.64
+    },
+    {
+      "code": "300453",
+      "name": "三鑫医疗",
+      "weight": 0.086119,
+      "shares": 900,
+      "cost": 9.55
+    },
+    {
+      "code": "300009",
+      "name": "安科生物",
+      "weight": 0.085669,
+      "shares": 1000,
+      "cost": 8.55
+    },
+    {
+      "code": "300824",
+      "name": "北鼎股份",
+      "weight": 0.085418,
+      "shares": 1100,
+      "cost": 7.75
+    },
+    {
+      "code": "600867",
+      "name": "通化东宝",
+      "weight": 0.084366,
+      "shares": 1000,
+      "cost": 8.42
+    },
+    {
+      "code": "603551",
+      "name": "奥普科技",
+      "weight": 0.084045,
+      "shares": 900,
+      "cost": 9.32
+    }
+  ],
+  "holdings_count": 11,
+  "last_rebalance": "2026-08-07",
+  "next_rebalance": null,
+  "trade_count": 11,
+  "days_active": 0,
+  "cash": 4866.0,
+  "holdings_value": 94937.24,
+  "updated_at": "2026-08-15T13:48:31",
+  "model_version": "v1.4",
+  "timing_layer": "timing_v4_i4_q3z",
+  "timing_ratio": 1.0
+}

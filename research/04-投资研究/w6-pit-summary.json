@@ -1,0 +1,133 @@
+{
+  "ts": "2026-08-15 08:59:28",
+  "src_dir": "/home/noname/quant-evolve/data/financial-ths",
+  "buffer_days": 1,
+  "n_files_total": 5206,
+  "n_files_ok": 5206,
+  "n_files_err": 0,
+  "n_rows": 314332,
+  "n_codes": 5206,
+  "files_with_ann_col": 5206,
+  "rows_with_file_ann": 314332,
+  "ann_col_names_seen": [
+    "disclosure_date"
+  ],
+  "period_col_names_seen": [
+    "报告期"
+  ],
+  "errors": [],
+  "map_rows": 314332,
+  "pct_rows_with_file_ann": 100.0,
+  "period_type_counts": {
+    "FY": 93148,
+    "H1": 76646,
+    "Q1": 73663,
+    "Q3": 70875
+  },
+  "lag_days_all": {
+    "median": 62.0,
+    "mean": 64.8,
+    "p90": 120.0
+  },
+  "samples": [
+    {
+      "code": "000001",
+      "report_period": "1989-12-31",
+      "ann_raw": "1990-04-30 00:00:00",
+      "period_type": "FY",
+      "ann_date_src": "file",
+      "ann_date": "1990-04-30",
+      "usable_from": "1990-05-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1990-12-31",
+      "ann_raw": "1991-04-30 00:00:00",
+      "period_type": "FY",
+      "ann_date_src": "file",
+      "ann_date": "1991-04-30",
+      "usable_from": "1991-05-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1991-12-31",
+      "ann_raw": "1992-04-30 00:00:00",
+      "period_type": "FY",
+      "ann_date_src": "file",
+      "ann_date": "1992-04-30",
+      "usable_from": "1992-05-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1992-12-31",
+      "ann_raw": "1993-04-30 00:00:00",
+      "period_type": "FY",
+      "ann_date_src": "file",
+      "ann_date": "1993-04-30",
+      "usable_from": "1993-05-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1993-06-30",
+      "ann_raw": "1993-08-31 00:00:00",
+      "period_type": "H1",
+      "ann_date_src": "file",
+      "ann_date": "1993-08-31",
+      "usable_from": "1993-09-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1993-12-31",
+      "ann_raw": "1994-04-30 00:00:00",
+      "period_type": "FY",
+      "ann_date_src": "file",
+      "ann_date": "1994-04-30",
+      "usable_from": "1994-05-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1994-06-30",
+      "ann_raw": "1994-08-31 00:00:00",
+      "period_type": "H1",
+      "ann_date_src": "file",
+      "ann_date": "1994-08-31",
+      "usable_from": "1994-09-01"
+    },
+    {
+      "code": "000001",
+      "report_period": "1994-12-31",
+      "ann_raw": "1995-04-30 00:00:00",
+      "period_type": "FY",
+      "ann_date_src": "file",
+      "ann_date": "1995-04-30",
+      "usable_from": "1995-05-01"
+    }
+  ],
+  "output_parquet": "/home/noname/quant-evolve/data/pit_disclosure_map.parquet",
+  "lag_days_by_period_type_fileonly": {
+    "FY": {
+      "n": 93148,
+      "median": 120.0,
+      "mean": 120.2,
+      "p90": 121.0
+    },
+    "H1": {
+      "n": 76646,
+      "median": 62.0,
+      "mean": 62.1,
+      "p90": 62.0
+    },
+    "Q1": {
+      "n": 73663,
+      "median": 30.0,
+      "mean": 30.0,
+      "p90": 30.0
+    },
+    "Q3": {
+      "n": 70875,
+      "median": 31.0,
+      "mean": 31.1,
+      "p90": 31.0
+    }
+  }
+}

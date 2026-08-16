@@ -1,0 +1,38 @@
+{
+  "version": "v1.4",
+  "generated_at": "2026-08-15 13:47:17",
+  "date_range": null,
+  "baseline": {
+    "annual_return": 0.2434,
+    "max_drawdown": -0.7,
+    "sharpe": 0.89,
+    "calmar": 0.3477,
+    "monthly_win_rate": 0.5598,
+    "cumulative_return": 109.7281
+  },
+  "endtoend": {
+    "annual_return": 0.1417,
+    "max_drawdown": -0.3524,
+    "sharpe": 0.8873,
+    "calmar": 0.402,
+    "monthly_win_rate": 0.5598,
+    "cumulative_return": 16.5073
+  },
+  "timing_effect": {
+    "annual_return": -0.10170000000000001,
+    "max_drawdown": 0.34759999999999996,
+    "sharpe": -0.0027000000000000357,
+    "calmar": 0.054300000000000015
+  },
+  "params": {
+    "sort": "mv",
+    "div_min": 0.025,
+    "roe_min": 0.15,
+    "roa_min": 0.1,
+    "price_cap": 10.0,
+    "n_hold": 30,
+    "min_amt": 5000000,
+    "drawdown_control": false
+  },
+  "timing_type": "i4_q3z"
+}

@@ -1,0 +1,224 @@
+{
+  "old": {
+    "rows": 15324349,
+    "cols": [
+      "date",
+      "symbol",
+      "open",
+      "close",
+      "high",
+      "low",
+      "volume",
+      "amount",
+      "amplitude",
+      "pct_change",
+      "change",
+      "turnover",
+      "outstanding_share"
+    ],
+    "date_min": "2006-01-04",
+    "date_max": "2026-08-10",
+    "year_dist": {
+      "2006": {
+        "rows": 251785,
+        "n_stocks": 0
+      },
+      "2007": {
+        "rows": 287314,
+        "n_stocks": 0
+      },
+      "2008": {
+        "rows": 322356,
+        "n_stocks": 0
+      },
+      "2009": {
+        "rows": 336771,
+        "n_stocks": 0
+      },
+      "2010": {
+        "rows": 389859,
+        "n_stocks": 0
+      },
+      "2011": {
+        "rows": 464798,
+        "n_stocks": 0
+      },
+      "2012": {
+        "rows": 515538,
+        "n_stocks": 0
+      },
+      "2013": {
+        "rows": 514738,
+        "n_stocks": 0
+      },
+      "2014": {
+        "rows": 521965,
+        "n_stocks": 0
+      },
+      "2015": {
+        "rows": 526813,
+        "n_stocks": 0
+      },
+      "2016": {
+        "rows": 593642,
+        "n_stocks": 0
+      },
+      "2017": {
+        "rows": 696075,
+        "n_stocks": 0
+      },
+      "2018": {
+        "rows": 768039,
+        "n_stocks": 0
+      },
+      "2019": {
+        "rows": 832188,
+        "n_stocks": 0
+      },
+      "2020": {
+        "rows": 937285,
+        "n_stocks": 271
+      },
+      "2021": {
+        "rows": 1103783,
+        "n_stocks": 468
+      },
+      "2022": {
+        "rows": 1235555,
+        "n_stocks": 620
+      },
+      "2023": {
+        "rows": 1344487,
+        "n_stocks": 723
+      },
+      "2024": {
+        "rows": 1394298,
+        "n_stocks": 749
+      },
+      "2025": {
+        "rows": 1425770,
+        "n_stocks": 783
+      },
+      "2026": {
+        "rows": 861290,
+        "n_stocks": 825
+      }
+    },
+    "n_stocks": 825,
+    "null_codes": 14422358
+  },
+  "new": {
+    "rows": 14613191,
+    "cols": [
+      "date",
+      "code",
+      "open",
+      "close",
+      "high",
+      "low",
+      "volume",
+      "amount"
+    ],
+    "date_min": "2006-01-04",
+    "date_max": "2026-08-10",
+    "n_stocks": 5447,
+    "cn_cols_remaining": [],
+    "year_dist": {
+      "2006": {
+        "rows": 251785,
+        "n_stocks": 1230
+      },
+      "2007": {
+        "rows": 287314,
+        "n_stocks": 1342
+      },
+      "2008": {
+        "rows": 322356,
+        "n_stocks": 1408
+      },
+      "2009": {
+        "rows": 336771,
+        "n_stocks": 1501
+      },
+      "2010": {
+        "rows": 389859,
+        "n_stocks": 1822
+      },
+      "2011": {
+        "rows": 464798,
+        "n_stocks": 2088
+      },
+      "2012": {
+        "rows": 515538,
+        "n_stocks": 2231
+      },
+      "2013": {
+        "rows": 514738,
+        "n_stocks": 2246
+      },
+      "2014": {
+        "rows": 521965,
+        "n_stocks": 2363
+      },
+      "2015": {
+        "rows": 526813,
+        "n_stocks": 2577
+      },
+      "2016": {
+        "rows": 593642,
+        "n_stocks": 2803
+      },
+      "2017": {
+        "rows": 696075,
+        "n_stocks": 3230
+      },
+      "2018": {
+        "rows": 768039,
+        "n_stocks": 3336
+      },
+      "2019": {
+        "rows": 832188,
+        "n_stocks": 3538
+      },
+      "2020": {
+        "rows": 899332,
+        "n_stocks": 3963
+      },
+      "2021": {
+        "rows": 1023721,
+        "n_stocks": 4473
+      },
+      "2022": {
+        "rows": 1125785,
+        "n_stocks": 4876
+      },
+      "2023": {
+        "rows": 1216153,
+        "n_stocks": 5166
+      },
+      "2024": {
+        "rows": 1259838,
+        "n_stocks": 5259
+      },
+      "2025": {
+        "rows": 1288328,
+        "n_stocks": 5370
+      },
+      "2026": {
+        "rows": 778153,
+        "n_stocks": 5447
+      }
+    },
+    "file_size_mb": 289.9
+  },
+  "files_total": 6030,
+  "success": 6029,
+  "failed": 1,
+  "fail_details": {
+    "error: Could not open Parquet input source '<Buffer>': Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file.": 1
+  },
+  "col_formats": {
+    "error": 200
+  },
+  "timestamp": "2026-08-11T01:46:44.660008"
+}

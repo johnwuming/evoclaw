@@ -1,0 +1,162 @@
+{
+  "mode": "validation",
+  "updated_at": "2026-08-13T07:48:33",
+  "all_pass": false,
+  "passed": 5,
+  "failed": 1,
+  "checks": [
+    {
+      "id": "kline_freshness",
+      "name": "K线新鲜度",
+      "status": "FAIL",
+      "message": "最新交易日 2026-08-07，距今 6 天（阈值 3）",
+      "detail": {
+        "latest_trade_date": "2026-08-07",
+        "age_days": 6,
+        "threshold": 3
+      }
+    },
+    {
+      "id": "panel_coverage",
+      "name": "因子面板覆盖率",
+      "status": "PASS",
+      "message": "最新月份 2026-08 面板 5028 只，非空率 {'div_yield_ttm': 1.0, 'roe_ttm': 1.0, 'roa_ttm': 1.0}",
+      "detail": {
+        "month": "2026-08",
+        "stocks_in_month": 5028,
+        "nonnull_rates": {
+          "div_yield_ttm": 1.0,
+          "roe_ttm": 1.0,
+          "roa_ttm": 1.0
+        },
+        "threshold": 0.95
+      }
+    },
+    {
+      "id": "holdings_kline",
+      "name": "持仓股当日K线完整性",
+      "status": "PASS",
+      "message": "持仓 11 只，异常 0 只",
+      "detail": {
+        "holdings": 11,
+        "bad": [],
+        "detail": [
+          {
+            "code": "300824",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 7.75
+          },
+          {
+            "code": "002107",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 6.3
+          },
+          {
+            "code": "300453",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 9.55
+          },
+          {
+            "code": "603551",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 9.32
+          },
+          {
+            "code": "603998",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 9.72
+          },
+          {
+            "code": "000848",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 8.79
+          },
+          {
+            "code": "300009",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 8.55
+          },
+          {
+            "code": "002372",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 8.64
+          },
+          {
+            "code": "600867",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 8.42
+          },
+          {
+            "code": "002027",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 5.14
+          },
+          {
+            "code": "601600",
+            "last_date": "2026-08-07",
+            "age_days": 0,
+            "close": 9.85
+          }
+        ]
+      }
+    },
+    {
+      "id": "price_reasonable",
+      "name": "价格合理性",
+      "status": "PASS",
+      "message": "抽样检查 212 只最新收盘价，异常 0 只",
+      "detail": {
+        "checked": 212,
+        "bad": [],
+        "range": [
+          0.01,
+          100000.0
+        ]
+      }
+    },
+    {
+      "id": "dividend_continuity",
+      "name": "分红数据连续性",
+      "status": "PASS",
+      "message": "近12个月分红事件 4532 条，涉及 3671 只股票",
+      "detail": {
+        "events_last_12m": 4532,
+        "stocks_last_12m": 3671,
+        "earliest_recent": "2025-08-13"
+      }
+    },
+    {
+      "id": "selection_count",
+      "name": "调仓日选股结果≥5",
+      "status": "PASS",
+      "message": "最新交易日 2026-08-07 选股 11 只（阈值 5）",
+      "detail": {
+        "selection_count": 11,
+        "codes": [
+          "300824",
+          "002107",
+          "300453",
+          "603551",
+          "603998",
+          "000848",
+          "300009",
+          "002372",
+          "600867",
+          "002027",
+          "601600"
+        ],
+        "threshold": 5
+      }
+    }
+  ]
+}

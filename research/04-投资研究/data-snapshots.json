@@ -1,0 +1,10 @@
+{
+  "snapshots": [
+    {
+      "ts": "2026-08-15 06:44:51",
+      "kline_as_of": "2026-08-10",
+      "hash": "9aeb9b28d51c42606e8c4f62b21d7c5b",
+      "hash_method": "file-meta(W6升级内容hash)"
+    }
+  ]
+}

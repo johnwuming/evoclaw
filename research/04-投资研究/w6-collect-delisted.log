@@ -1,0 +1,117 @@
+[ok] sz 终止上市公司: 208 行, cols=['证券代码', '证券简称', '上市日期', '终止上市日期']
+[warn] stock_zh_a_spot_em 失败: Traceback (most recent call last):
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/noname/quant-evolve/scripts/w6_collect_delisted.py", line 111, in collect_st_current
+    df = fn()
+         ^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/akshare/stock_feature/stock_hist_em.py", line 36, in stock_zh_a_spot_em
+    temp_df = fetch_paginated_data(url, params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+Please wait for a moment:   0%|          | 0/70 [00:00<?, ?it/s]Please wait for a moment:   1%|▏         | 1/70 [00:00<00:14,  4.65it/s]Please wait for a moment:   3%|▎         | 2/70 [00:00<00:29,  2.30it/s]Please wait for a moment:   4%|▍         | 3/70 [00:01<00:21,  3.06it/s]Please wait for a moment:   6%|▌         | 4/70 [00:02<00:44,  1.47it/s]Please wait for a moment:   7%|▋         | 5/70 [00:02<00:32,  2.02it/s]Please wait for a moment:   9%|▊         | 6/70 [00:02<00:24,  2.64it/s]Please wait for a moment:  10%|█         | 7/70 [00:02<00:21,  2.98it/s]Please wait for a moment:  11%|█▏        | 8/70 [00:03<00:18,  3.31it/s]Please wait for a moment:  13%|█▎        | 9/70 [00:03<00:17,  3.53it/s]Please wait for a moment:  14%|█▍        | 10/70 [00:03<00:15,  3.90it/s]Please wait for a moment:  16%|█▌        | 11/70 [00:03<00:14,  4.02it/s]Please wait for a moment:  17%|█▋        | 12/70 [00:03<00:14,  4.08it/s]Please wait for a moment:  19%|█▊        | 13/70 [00:04<00:23,  2.45it/s]Please wait for a moment:  20%|██        | 14/70 [00:04<00:18,  3.00it/s]Please wait for a moment:  21%|██▏       | 15/70 [00:05<00:16,  3.29it/s]Please wait for a moment:  23%|██▎       | 16/70 [00:05<00:14,  3.72it/s]Please wait for a moment:  24%|██▍       | 17/70 [00:05<00:17,  3.05it/s]Please wait for a moment:  26%|██▌       | 18/70 [00:06<00:19,  2.72it/s]Please wait for a moment:  27%|██▋       | 19/70 [00:06<00:15,  3.23it/s]Please wait for a moment:  29%|██▊       | 20/70 [00:06<00:13,  3.79it/s]Please wait for a moment:  30%|███       | 21/70 [00:07<00:15,  3.14it/s]Please wait for a moment:  31%|███▏      | 22/70 [00:07<00:14,  3.40it/s]Please wait for a moment:  33%|███▎      | 23/70 [00:07<00:12,  3.90it/s]Please wait for a moment:  34%|███▍      | 24/70 [00:07<00:10,  4.40it/s]Please wait for a moment:  36%|███▌      | 25/70 [00:07<00:09,  4.65it/s]Please wait for a moment:  37%|███▋      | 26/70 [00:08<00:21,  2.01it/s]Please wait for a moment:  39%|███▊      | 27/70 [00:09<00:17,  2.51it/s]Please wait for a moment:  40%|████      | 28/70 [00:09<00:13,  3.01it/s]Please wait for a moment:  41%|████▏     | 29/70 [00:09<00:12,  3.36it/s]Please wait for a moment:  43%|████▎     | 30/70 [00:09<00:10,  3.89it/s]Please wait for a moment:  44%|████▍     | 31/70 [00:09<00:08,  4.37it/s]Please wait for a moment:  46%|████▌     | 32/70 [00:10<00:14,  2.59it/s]Please wait for a moment:  47%|████▋     | 33/70 [00:10<00:11,  3.14it/s]Please wait for a moment:  49%|████▊     | 34/70 [00:11<00:15,  2.31it/s]Please wait for a moment:  50%|█████     | 35/70 [00:11<00:13,  2.67it/s]Please wait for a moment:  51%|█████▏    | 36/70 [00:11<00:10,  3.20it/s]Please wait for a moment:  53%|█████▎    | 37/70 [00:11<00:08,  3.74it/s]Please wait for a moment:  54%|█████▍    | 38/70 [00:12<00:08,  3.90it/s]Please wait for a moment:  56%|█████▌    | 39/70 [00:12<00:07,  4.33it/s]Please wait for a moment:  57%|█████▋    | 40/70 [00:12<00:06,  4.72it/s]Please wait for a moment:  59%|█████▊    | 41/70 [00:13<00:10,  2.74it/s]Please wait for a moment:  60%|██████    | 42/70 [00:13<00:13,  2.14it/s]Please wait for a moment:  61%|██████▏   | 43/70 [00:14<00:10,  2.65it/s]Please wait for a moment:  63%|██████▎   | 44/70 [00:14<00:08,  3.17it/s]Please wait for a moment:  64%|██████▍   | 45/70 [00:14<00:06,  3.69it/s]Please wait for a moment:  66%|██████▌   | 46/70 [00:14<00:06,  3.79it/s]Please wait for a moment:  67%|██████▋   | 47/70 [00:14<00:05,  3.94it/s]Please wait for a moment:  69%|██████▊   | 48/70 [00:15<00:07,  2.81it/s]Please wait for a moment:  70%|███████   | 49/70 [00:15<00:06,  3.36it/s]Please wait for a moment:  71%|███████▏  | 50/70 [00:15<00:05,  3.55it/s]Please wait for a moment:  73%|███████▎  | 51/70 [00:16<00:07,  2.44it/s]Please wait for a moment:  74%|███████▍  | 52/70 [00:16<00:06,  2.96it/s]Please wait for a moment:  76%|███████▌  | 53/70 [00:17<00:07,  2.25it/s]Please wait for a moment:  77%|███████▋  | 54/70 [00:18<00:08,  1.91it/s]Please wait for a moment:  79%|███████▊  | 55/70 [00:18<00:08,  1.85it/s]Please wait for a moment:  80%|████████  | 56/70 [00:19<00:08,  1.72it/s]Please wait for a moment:  81%|████████▏ | 57/70 [00:20<00:07,  1.66it/s]Please wait for a moment:  83%|████████▎ | 58/70 [00:20<00:06,  1.75it/s]Please wait for a moment:  84%|████████▍ | 59/70 [00:20<00:04,  2.23it/s]Please wait for a moment:  86%|████████▌ | 60/70 [00:20<00:03,  2.73it/s]Please wait for a moment:  87%|████████▋ | 61/70 [00:21<00:02,  3.27it/s]Please wait for a moment:  89%|████████▊ | 62/70 [00:21<00:02,  3.79it/s]Please wait for a moment:  90%|█████████ | 63/70 [00:21<00:01,  4.29it/s]Please wait for a moment:  91%|█████████▏| 64/70 [00:21<00:01,  4.76it/s]Please wait for a moment:  93%|█████████▎| 65/70 [00:22<00:01,  3.57it/s]Please wait for a moment:  94%|█████████▍| 66/70 [00:22<00:01,  2.83it/s]Please wait for a moment:  96%|█████████▌| 67/70 [00:22<00:00,  3.14it/s]Please wait for a moment:  97%|█████████▋| 68/70 [00:23<00:00,  3.62it/s]Please wait for a moment:  99%|█████████▊| 69/70 [00:23<00:00,  2.73it/s]Please wait for a moment: 100%|██████████| 70/70 [00:24<00:00,  2.47it/s]                                                                         {
+  "ts": "2026-08-15 08:55:14",
+  "errors": [
+    "sh:终止上市公司: Traceback (most recent call last):\n  File \"/home/noname/quant-evolve/scripts/w6_collect_delisted.py\", line 78, in collect_exchange_delist\n    df = fn(symbol=sym)\n         ^^^^^^^^^^^^^^\n  File \"/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/akshare/stock/stock_info.py\", line 319, in stock_info_sh_delist\n    \"STOCK_TYPE\": symbol_map[symbol],\n                  ~~~~~~~~~~^^^^^^^^\nKeyError: '终止上市公司'\n",
+    "sh:暂停上市公司: Traceback (most recent call last):\n  File \"/home/noname/quant-evolve/scripts/w6_collect_delisted.py\", line 78, in collect_exchange_delist\n    df = fn(symbol=sym)\n         ^^^^^^^^^^^^^^\n  File \"/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/akshare/stock/stock_info.py\", line 319, in stock_info_sh_delist\n    \"STOCK_TYPE\": symbol_map[symbol],\n                  ~~~~~~~~~~^^^^^^^^\nKeyError: '暂停上市公司'\n",
+    "sh:重新上市公司: Traceback (most recent call last):\n  File \"/home/noname/quant-evolve/scripts/w6_collect_delisted.py\", line 78, in collect_exchange_delist\n    df = fn(symbol=sym)\n         ^^^^^^^^^^^^^^\n  File \"/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/akshare/stock/stock_info.py\", line 319, in stock_info_sh_delist\n    \"STOCK_TYPE\": symbol_map[symbol],\n                  ~~~~~~~~~~^^^^^^^^\nKeyError: '重新上市公司'\n"
+  ],
+  "akshare_version": "1.18.83",
+  "delisted_total_rows": 208,
+  "delisted_sh_rows": 0,
+  "delisted_sz_rows": 208,
+  "delisted_terminated": 208,
+  "delisted_suspended": 0,
+  "delisted_codes_unique": 208,
+  "spot_source": "stock_zh_a_spot",
+  "live_universe_total": 5542,
+  "st_current_total": 206,
+  "st_star_total": 95,
+  "st_history_rows": 206,
+  "st_history_snapshots": 1,
+  "kline_files": 5448,
+  "delisted_with_kline_history": 0,
+  "delisted_missing_kline_history": 208,
+  "st_in_kline": 0,
+  "kline_missing_vs_live": 94,
+  "note": "delisted_missing_kline_history=已退市且K线目录无其历史的只数(历史缺口); kline_missing_vs_live=当前在市但K线目录缺失的只数(若为负/0说明覆盖全)"
+}
+[done] 2026-08-15 08:55:46 | pool=208 rows | st=206 | kline=5448
+[ok] sh 全部: 159 行, cols=['公司代码', '公司简称', '上市日期', '暂停上市日期']
+[ok] sz 终止上市公司: 208 行, cols=['证券代码', '证券简称', '上市日期', '终止上市日期']
+[warn] stock_zh_a_spot_em 失败: Traceback (most recent call last):
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/noname/quant-evolve/scripts/w6_collect_delisted.py", line 111, in collect_st_current
+    df = fn()
+         ^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/akshare/stock_feature/stock_hist_em.py", line 36, in stock_zh_a_spot_em
+    temp_df = fetch_paginated_data(url, params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+Please wait for a moment:   0%|          | 0/70 [00:00<?, ?it/s]Please wait for a moment:   1%|▏         | 1/70 [00:00<00:11,  6.06it/s]Please wait for a moment:   3%|▎         | 2/70 [00:00<00:24,  2.79it/s]Please wait for a moment:   4%|▍         | 3/70 [00:00<00:17,  3.76it/s]Please wait for a moment:   6%|▌         | 4/70 [00:00<00:14,  4.41it/s]Please wait for a moment:   7%|▋         | 5/70 [00:01<00:13,  4.93it/s]Please wait for a moment:   9%|▊         | 6/70 [00:01<00:12,  5.25it/s]Please wait for a moment:  10%|█         | 7/70 [00:01<00:18,  3.34it/s]Please wait for a moment:  11%|█▏        | 8/70 [00:01<00:15,  3.93it/s]Please wait for a moment:  13%|█▎        | 9/70 [00:02<00:20,  2.97it/s]Please wait for a moment:  14%|█▍        | 10/70 [00:02<00:18,  3.29it/s]Please wait for a moment:  16%|█▌        | 11/70 [00:03<00:27,  2.15it/s]Please wait for a moment:  17%|█▋        | 12/70 [00:03<00:21,  2.69it/s]Please wait for a moment:  19%|█▊        | 13/70 [00:03<00:17,  3.20it/s]Please wait for a moment:  20%|██        | 14/70 [00:04<00:14,  3.75it/s]Please wait for a moment:  21%|██▏       | 15/70 [00:04<00:14,  3.85it/s]Please wait for a moment:  23%|██▎       | 16/70 [00:04<00:12,  4.32it/s]Please wait for a moment:  24%|██▍       | 17/70 [00:04<00:11,  4.80it/s]Please wait for a moment:  26%|██▌       | 18/70 [00:04<00:10,  5.10it/s]Please wait for a moment:  27%|██▋       | 19/70 [00:04<00:09,  5.44it/s]Please wait for a moment:  29%|██▊       | 20/70 [00:05<00:09,  5.37it/s]Please wait for a moment:  30%|███       | 21/70 [00:05<00:13,  3.57it/s]Please wait for a moment:  31%|███▏      | 22/70 [00:05<00:11,  4.06it/s]Please wait for a moment:  33%|███▎      | 23/70 [00:05<00:10,  4.53it/s]Please wait for a moment:  34%|███▍      | 24/70 [00:06<00:10,  4.47it/s]Please wait for a moment:  36%|███▌      | 25/70 [00:06<00:09,  4.88it/s]Please wait for a moment:  37%|███▋      | 26/70 [00:07<00:15,  2.88it/s]Please wait for a moment:  39%|███▊      | 27/70 [00:07<00:17,  2.42it/s]Please wait for a moment:  40%|████      | 28/70 [00:07<00:14,  2.96it/s]Please wait for a moment:  41%|████▏     | 29/70 [00:07<00:11,  3.52it/s]Please wait for a moment:  43%|████▎     | 30/70 [00:08<00:10,  3.70it/s]Please wait for a moment:  44%|████▍     | 31/70 [00:08<00:10,  3.89it/s]Please wait for a moment:  46%|████▌     | 32/70 [00:09<00:14,  2.61it/s]Please wait for a moment:  47%|████▋     | 33/70 [00:09<00:14,  2.49it/s]Please wait for a moment:  49%|████▊     | 34/70 [00:10<00:15,  2.31it/s]Please wait for a moment:  50%|█████     | 35/70 [00:10<00:15,  2.20it/s]Please wait for a moment:  51%|█████▏    | 36/70 [00:11<00:18,  1.85it/s]Please wait for a moment:  53%|█████▎    | 37/70 [00:12<00:19,  1.67it/s]Please wait for a moment:  54%|█████▍    | 38/70 [00:12<00:18,  1.71it/s]Please wait for a moment:  56%|█████▌    | 39/70 [00:12<00:14,  2.17it/s]Please wait for a moment:  57%|█████▋    | 40/70 [00:13<00:14,  2.09it/s]Please wait for a moment:  59%|█████▊    | 41/70 [00:13<00:13,  2.12it/s]Please wait for a moment:  60%|██████    | 42/70 [00:14<00:13,  2.14it/s]Please wait for a moment:  61%|██████▏   | 43/70 [00:14<00:13,  2.07it/s]Please wait for a moment:  63%|██████▎   | 44/70 [00:15<00:14,  1.80it/s]Please wait for a moment:  64%|██████▍   | 45/70 [00:15<00:10,  2.30it/s]Please wait for a moment:  66%|██████▌   | 46/70 [00:16<00:11,  2.18it/s]Please wait for a moment:  67%|██████▋   | 47/70 [00:16<00:10,  2.21it/s]Please wait for a moment:  69%|██████▊   | 48/70 [00:17<00:10,  2.11it/s]Please wait for a moment:  70%|███████   | 49/70 [00:17<00:10,  2.08it/s]Please wait for a moment:  71%|███████▏  | 50/70 [00:17<00:09,  2.13it/s]Please wait for a moment:  73%|███████▎  | 51/70 [00:18<00:10,  1.78it/s]Please wait for a moment:  74%|███████▍  | 52/70 [00:18<00:08,  2.24it/s]Please wait for a moment:  76%|███████▌  | 53/70 [00:19<00:08,  2.10it/s]Please wait for a moment:  77%|███████▋  | 54/70 [00:19<00:07,  2.07it/s]Please wait for a moment:  79%|███████▊  | 55/70 [00:20<00:07,  1.98it/s]Please wait for a moment:  80%|████████  | 56/70 [00:21<00:07,  1.86it/s]Please wait for a moment:  81%|████████▏ | 57/70 [00:21<00:05,  2.29it/s]Please wait for a moment:  83%|████████▎ | 58/70 [00:21<00:05,  2.15it/s]Please wait for a moment:  84%|████████▍ | 59/70 [00:22<00:05,  1.91it/s]Please wait for a moment:  86%|████████▌ | 60/70 [00:22<00:04,  2.41it/s]Please wait for a moment:  87%|████████▋ | 61/70 [00:22<00:03,  2.85it/s]Please wait for a moment:  89%|████████▊ | 62/70 [00:23<00:03,  2.62it/s]Please wait for a moment:  90%|█████████ | 63/70 [00:23<00:02,  2.34it/s]Please wait for a moment:  91%|█████████▏| 64/70 [00:24<00:02,  2.70it/s]Please wait for a moment:  93%|█████████▎| 65/70 [00:24<00:01,  3.14it/s]Please wait for a moment:  94%|█████████▍| 66/70 [00:24<00:01,  3.54it/s]Please wait for a moment:  96%|█████████▌| 67/70 [00:24<00:00,  3.02it/s]Please wait for a moment:  97%|█████████▋| 68/70 [00:25<00:00,  2.42it/s]Please wait for a moment:  99%|█████████▊| 69/70 [00:26<00:00,  2.25it/s]Please wait for a moment: 100%|██████████| 70/70 [00:26<00:00,  2.14it/s]                                                                         {
+  "ts": "2026-08-15 08:58:04",
+  "errors": [],
+  "akshare_version": "1.18.83",
+  "delisted_total_rows": 361,
+  "delisted_sh_rows": 153,
+  "delisted_sz_rows": 208,
+  "delisted_terminated": 208,
+  "delisted_suspended": 0,
+  "delisted_codes_unique": 361,
+  "spot_source": "stock_zh_a_spot",
+  "live_universe_total": 5542,
+  "st_current_total": 206,
+  "st_star_total": 95,
+  "st_history_rows": 206,
+  "st_history_snapshots": 1,
+  "kline_files": 5448,
+  "delisted_with_kline_history": 0,
+  "delisted_missing_kline_history": 361,
+  "st_in_kline": 0,
+  "kline_missing_vs_live": 94,
+  "note": "delisted_missing_kline_history=已退市且K线目录无其历史的只数(历史缺口); kline_missing_vs_live=当前在市但K线目录缺失的只数(若为负/0说明覆盖全)"
+}
+[done] 2026-08-15 08:58:37 | pool=361 rows | st=206 | kline=5448

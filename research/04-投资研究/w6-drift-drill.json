@@ -1,0 +1,21 @@
+{
+  "ts": "2026-08-15 09:02:04",
+  "tool": "w6_snapshot_manager v1.0",
+  "datasets": {
+    "delisted": {
+      "status": "drift",
+      "registered_sha": "cae778f3feff9868421233d9502d8e1845ff83175973c981ba1f9bd25b2b1483",
+      "current_sha": "1ef0ffc083f40bbc153f964e9948c8f616d63e8df5b59786079f3304ef74d21e",
+      "files_registered": 1,
+      "files_current": 1,
+      "bytes_registered": 13176,
+      "bytes_current": 13193,
+      "files_added": [],
+      "files_removed": [],
+      "files_modified": [
+        "data/delisted_pool.parquet"
+      ]
+    }
+  },
+  "overall": "drift"
+}

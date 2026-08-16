@@ -1,0 +1,41 @@
+{
+  "version": "v1.2",
+  "generated_at": "2026-08-15 06:39:24",
+  "date_range": [
+    "2020-01-01",
+    "2025-12-31"
+  ],
+  "baseline": {
+    "annual_return": 0.2327,
+    "max_drawdown": -0.2228,
+    "sharpe": 1.0834,
+    "calmar": 1.0445,
+    "monthly_win_rate": 0.5493,
+    "cumulative_return": 2.5064
+  },
+  "endtoend": {
+    "annual_return": 0.117,
+    "max_drawdown": -0.1292,
+    "sharpe": 0.9355,
+    "calmar": 0.9057,
+    "monthly_win_rate": 0.5634,
+    "cumulative_return": 0.9415
+  },
+  "timing_effect": {
+    "annual_return": -0.11569999999999998,
+    "max_drawdown": 0.09359999999999999,
+    "sharpe": -0.14789999999999992,
+    "calmar": -0.13880000000000003
+  },
+  "params": {
+    "sort": "mv",
+    "div_min": 0.025,
+    "roe_min": 0.15,
+    "roa_min": 0.1,
+    "price_cap": 10.0,
+    "n_hold": 25,
+    "min_amt": 0.0,
+    "drawdown_control": false
+  },
+  "timing_type": "i4_q3z"
+}

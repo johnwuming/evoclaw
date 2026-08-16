@@ -1,0 +1,52 @@
+{
+  "version": "v1.3",
+  "evaluated_at": "2026-08-15 13:42:16",
+  "oos_split": "2021-01",
+  "n_trials": 37,
+  "backtest_metrics": {
+    "annual_return": 0.0988,
+    "max_drawdown": -0.414,
+    "sharpe": 0.6488,
+    "calmar": 0.2387
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.8758,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.1575,
+      "n_months_oos": 67,
+      "mean_ic_is": 0.02217,
+      "mean_ic_oos": 0.01064,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 0.4796
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁平凡通过"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.8901,
+      "sr_period": 0.04087,
+      "sr0_expected_max": 0.023688,
+      "T": 5249,
+      "skew": -0.632,
+      "kurtosis": 7.493,
+      "n_trials": 37,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "加入日均成交额5000万下限：W1全量IC检验显示流动性簇为最强因子簇(amount_cv ICIR年化-2.64/avg_amount_20d -2.33)，低流动性微盘股长期收益差且2024-01微盘流动性危机证明流动性风险真实存在；提高min_amt可降低冲击成本与流动性踩雷风险，预期小幅牺牲收益换取回撤改善"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

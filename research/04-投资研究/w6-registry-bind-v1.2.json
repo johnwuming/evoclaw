@@ -1,0 +1,64 @@
+{
+  "snapshot_id": "snap-20260815-090210",
+  "as_of": "2026-08-15",
+  "source": "data/snapshots.json",
+  "tool": "w6_snapshot_manager v1.0",
+  "captured_at": "2026-08-15 09:01:48",
+  "kline_hash": "3aac4b24fc002f71e6c87111269a74654281644124ef1c86e47fcfca3312d976",
+  "financial_hash": "f6e1a2cc38a1d063355d4f48eda641d797df356b0cab379e309228a8eb572c5d",
+  "valuation_hash": "1af0698dbd54e4fa702e2428137c457baf41effaf54383f9d58d1c343ace8761",
+  "datasets": {
+    "kline": "3aac4b24fc002f71e6c87111269a74654281644124ef1c86e47fcfca3312d976",
+    "financial_ths": "f6e1a2cc38a1d063355d4f48eda641d797df356b0cab379e309228a8eb572c5d",
+    "financial_full": "e4d38a429e5bde151eaf521c77e42eb30a7dadb78a7cc5d500c2fa30a9facdff",
+    "stock_info": "d9d036dd7882636e922c7d3b7ba142530e034a34a4cc1561f9aa6569a878a149",
+    "index": "b6a4599846c355249f622e85e2ab44e6af6c82f24863388c62221dc3d3c88fc1",
+    "valuation": "1af0698dbd54e4fa702e2428137c457baf41effaf54383f9d58d1c343ace8761",
+    "merged_kline": "64632766ed26f0b68b6b0c47b5862ca999b0974af863ca807d1313193129f97d",
+    "delisted": "cae778f3feff9868421233d9502d8e1845ff83175973c981ba1f9bd25b2b1483",
+    "st_history": "f3dd739032f10c53c25510404abccbc61aafe8cbe5f318a0924603e5af2226a5",
+    "pit_map": "6b12e6e1bfd96197e7c1997cd79c161111f4a1cbce01f8114997bb496e7c9364"
+  },
+  "datasets_meta": {
+    "kline": {
+      "files": 6030,
+      "bytes": 683048761
+    },
+    "financial_ths": {
+      "files": 5206,
+      "bytes": 58125164
+    },
+    "financial_full": {
+      "files": 480,
+      "bytes": 43609078
+    },
+    "stock_info": {
+      "files": 4,
+      "bytes": 588718
+    },
+    "index": {
+      "files": 3,
+      "bytes": 693760
+    },
+    "valuation": {
+      "files": 1,
+      "bytes": 97922
+    },
+    "merged_kline": {
+      "files": 1,
+      "bytes": 304013940
+    },
+    "delisted": {
+      "files": 1,
+      "bytes": 13176
+    },
+    "st_history": {
+      "files": 1,
+      "bytes": 5853
+    },
+    "pit_map": {
+      "files": 1,
+      "bytes": 219945
+    }
+  }
+}

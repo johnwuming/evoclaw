@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home/noname/quant-evolve/scripts/w6_snapshot_manager.py", line 329, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/noname/quant-evolve/scripts/w6_snapshot_manager.py", line 325, in main
+    return {"snapshot": cmd_snapshot, "check": cmd_check, "bind": cmd_bind, "show": cmd_show}[args.cmd](args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noname/quant-evolve/scripts/w6_snapshot_manager.py", line 164, in cmd_snapshot
+    snap["datasets"] = snap.get("datasets") or {}
+                       ^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+[snap] kline           files=6030   bytes=683048761    sha=3aac4b24fc00 (new, rehash=6030)
+[snap] financial_ths   files=5206   bytes=58125164     sha=f6e1a2cc38a1 (new, rehash=5206)
+[snap] financial_full  files=480    bytes=43609078     sha=e4d38a429e5b (new, rehash=480)
+[snap] stock_info      files=4      bytes=588718       sha=d9d036dd7882 (new, rehash=4)
+[snap] index           files=3      bytes=693760       sha=b6a4599846c3 (new, rehash=3)
+[snap] valuation       files=1      bytes=97922        sha=1af0698dbd54 (new, rehash=1)
+[snap] merged_kline    files=1      bytes=304013940    sha=64632766ed26 (new, rehash=1)
+[snap] delisted        files=1      bytes=13176        sha=cae778f3feff (new, rehash=1)
+[snap] st_history      files=1      bytes=5853         sha=f3dd739032f1 (new, rehash=1)
+[snap] pit_map         files=1      bytes=219945       sha=6b12e6e1bfd9 (new, rehash=1)
+[done] snapshots.json 更新, 变更数据集: ['kline', 'financial_ths', 'financial_full', 'stock_info', 'index', 'valuation', 'merged_kline', 'delisted', 'st_history', 'pit_map']

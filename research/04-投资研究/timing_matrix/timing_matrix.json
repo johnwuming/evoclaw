@@ -1,0 +1,159 @@
+{
+  "generated_at": "2026-08-15 17:07:45",
+  "period": "2005-01-04 ~ 2026-08-14",
+  "selection_params": {
+    "sort": "mv",
+    "div_min": 0.025,
+    "roe_min": 0.15,
+    "roa_min": 0.1,
+    "n_hold": 30,
+    "price_cap": 10.0,
+    "min_amt": 5000000,
+    "drawdown_control": false
+  },
+  "score_weights": "0.400,0.300,0.300,0.300",
+  "caliber": "全部跑在 v1.4 选股基线，与 bt_v1.4 同快照同区间；端到端=选股腿×择时pos（月度系数ffill），基线腿引用 bt_v1.4",
+  "iter4_rerun_check": {
+    "annual_return": 0.0,
+    "max_drawdown": -0.0001,
+    "sharpe": 0.0004,
+    "segment_2015_dd": 0.0
+  },
+  "iter4_rerun_consistent": true,
+  "rows": [
+    {
+      "key": "no_timing",
+      "version": "v1.4 选股基线",
+      "name": "无择时（基线）",
+      "signal_desc": "仅选股腿：mv排序 + 股息≥2.5% + ROE≥15% + ROA≥10% + 股价≤10 + N=30 + 成交额≥500万，无择时层",
+      "annual_return": 0.2434,
+      "max_drawdown": -0.7,
+      "sharpe": 0.89,
+      "calmar": 0.3477,
+      "monthly_win_rate": 0.5598,
+      "cumulative_return": 109.7281,
+      "segment_2015_dd": -0.4787735841846674,
+      "delta_annual": 0.0,
+      "delta_dd": 0.0,
+      "source": "results/bt_v1.4/baseline_metrics.json + baseline.csv",
+      "note": "基线腿，直接引用，勿重跑",
+      "pos_stats": null
+    },
+    {
+      "key": "iter1",
+      "version": "iter1 p3_trendvol",
+      "name": "iter1 趋势+波动",
+      "signal_desc": "trendvol：MA120双指数趋势 × 60日波动率（target_vol 0.25, floor 0.5），无估值（task-0257 最优变体）",
+      "annual_return": 0.1527,
+      "max_drawdown": -0.3907,
+      "sharpe": 0.8786,
+      "calmar": 0.3908,
+      "monthly_win_rate": 0.5598,
+      "cumulative_return": 20.548,
+      "segment_2015_dd": -0.3906549444763241,
+      "delta_annual": -0.0907,
+      "delta_dd": 0.3093,
+      "source": "results/timing_matrix/runs/iter1_trendvol/metrics.json",
+      "note": "pos 由 macro_timing_layer.compute_pos_ratio(mode=trendvol)['pos_ratio'] 重放（首跑因返回DataFrame致择时未生效，已修复重跑）",
+      "pos_stats": {
+        "mean": 0.6083,
+        "min": 0.3,
+        "n_low": 245,
+        "n": 248
+      }
+    },
+    {
+      "key": "iter2",
+      "version": "iter2 i2_val_q3",
+      "name": "iter2 PE分位估值",
+      "signal_desc": "trendvol × PE 3年滚动分位（task-0258 报告命名最优变体 i2_val_q3；分位信号历史恒1.0，详见note）",
+      "annual_return": 0.1527,
+      "max_drawdown": -0.3907,
+      "sharpe": 0.8786,
+      "calmar": 0.3908,
+      "monthly_win_rate": 0.5598,
+      "cumulative_return": 20.548,
+      "segment_2015_dd": -0.3906549444763241,
+      "delta_annual": -0.0907,
+      "delta_dd": 0.3093,
+      "source": "results/timing_matrix/runs/iter2_val_q3/metrics.json",
+      "note": "pos 由 macro_timing_layer_iter2.compute_pos_ratio_iter2(mode=val_q3) 重放；f_val_q3 在 2005-2026 数据上仍恒1.0（min-max 被2007 PE峰值压制），故行为≈trendvol",
+      "pos_stats": {
+        "mean": 0.6083,
+        "min": 0.3,
+        "n_low": 245,
+        "n": 248
+      }
+    },
+    {
+      "key": "iter2_abs",
+      "version": "iter2 i2_val_abs",
+      "name": "iter2 PE绝对值（生效变体）",
+      "signal_desc": "trendvol × PE绝对水平分段映射（task-0258 唯一实际生效的估值信号，附加对照行）",
+      "annual_return": 0.1378,
+      "max_drawdown": -0.3679,
+      "sharpe": 0.8605,
+      "calmar": 0.3744,
+      "monthly_win_rate": 0.5598,
+      "cumulative_return": 15.259,
+      "segment_2015_dd": -0.3679245670404001,
+      "delta_annual": -0.1056,
+      "delta_dd": 0.3321,
+      "source": "results/timing_matrix/runs/iter2_val_abs/metrics.json",
+      "note": "附加对照行（非任务要求的5行之一）：展示 iter2 唯一生效信号的贡献",
+      "pos_stats": {
+        "mean": 0.574,
+        "min": 0.3,
+        "n_low": 245,
+        "n": 248
+      }
+    },
+    {
+      "key": "iter3",
+      "version": "iter3 i3_abs_s1",
+      "name": "iter3 绝对PE网格",
+      "signal_desc": "trendvol × abs_s1 绝对PE网格（task-0264 当时最优 Calmar 变体）",
+      "annual_return": 0.1391,
+      "max_drawdown": -0.3685,
+      "sharpe": 0.8683,
+      "calmar": 0.3774,
+      "monthly_win_rate": 0.5598,
+      "cumulative_return": 15.6675,
+      "segment_2015_dd": -0.36846865802632955,
+      "delta_annual": -0.1043,
+      "delta_dd": 0.3315,
+      "source": "results/timing_matrix/runs/iter3_abs_s1/metrics.json",
+      "note": "pos 由 macro_timing_layer_iter3.compute_pos_ratio_iter3(abs_key=s1, power=1.0) 重放",
+      "pos_stats": {
+        "mean": 0.5705,
+        "min": 0.3,
+        "n_low": 245,
+        "n": 248
+      }
+    },
+    {
+      "key": "iter4",
+      "version": "iter4 i4_q3z",
+      "name": "iter4 36月zscore估值（现役）",
+      "signal_desc": "trendvol × PE 36月滚动 zscore 估值信号（task-0271 现役 i4_q3z）",
+      "annual_return": 0.1417,
+      "max_drawdown": -0.3524,
+      "sharpe": 0.8873,
+      "calmar": 0.402,
+      "monthly_win_rate": 0.5598,
+      "cumulative_return": 16.5073,
+      "segment_2015_dd": -0.2828642325246702,
+      "delta_annual": -0.1017,
+      "delta_dd": 0.3476,
+      "source": "results/bt_v1.4/endtoend_metrics.json + endtoend.csv",
+      "note": "直接引用 bt_v1.4 端到端实测（task 指示）；本次已用同驱动重跑验证一致",
+      "pos_stats": {
+        "mean": 0.5805,
+        "min": 0.3,
+        "n_low": 245,
+        "n": 248
+      }
+    }
+  ],
+  "iter1_rerun_fix": "2026-08-16: 首跑 compute_pos_ratio 返回 DataFrame 致择时未生效（=基线），取 pos_ratio 列 Series 后重跑"
+}

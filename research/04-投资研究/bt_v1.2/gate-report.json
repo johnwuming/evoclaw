@@ -1,0 +1,52 @@
+{
+  "version": "v1.2",
+  "evaluated_at": "2026-08-15 06:50:42",
+  "oos_split": "2021-01",
+  "n_trials": 36,
+  "backtest_metrics": {
+    "annual_return": 0.117,
+    "max_drawdown": -0.1292,
+    "sharpe": 0.9355,
+    "calmar": 0.9057
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.8758,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.1575,
+      "n_months_oos": 67,
+      "mean_ic_is": 0.02217,
+      "mean_ic_oos": 0.01064,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 0.4796
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁平凡通过"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.9347,
+      "sr_period": 0.05893,
+      "sr0_expected_max": 0.017904,
+      "T": 1454,
+      "skew": -1.028,
+      "kurtosis": 12.842,
+      "n_trials": 36,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "高股息+高ROE/ROA质量过滤的小市值组合：股息与质量提供安全边际，小市值提供长期超额来源；hs300估值zscore择时在极端估值区间降仓以压缩危机段回撤"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

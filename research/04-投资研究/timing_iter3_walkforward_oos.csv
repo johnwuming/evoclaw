@@ -1,0 +1,4 @@
+window,oos_period,best_params,train_calmar,oos_annual,oos_dd,oos_sharpe,oos_calmar,oos_dd_2015seg
+WF1,2011-01-01~2015-12-31,abs_s2_p1_mom1_bd0,0.8978,0.2031,-0.3515,1.0242,0.5777,
+WF2,2016-01-01~2020-12-31,abs_s3_p2_mom1_bd0,0.7761,0.0271,-0.1323,0.3222,0.2045,
+WF3,2021-01-01~2026-12-31,abs_s3_p2_mom1_bd0,0.5245,0.0709,-0.1663,0.8363,0.4265,

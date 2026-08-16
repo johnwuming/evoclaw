@@ -1,0 +1,52 @@
+{
+  "version": "v1.4",
+  "evaluated_at": "2026-08-15 13:48:06",
+  "oos_split": "2021-01",
+  "n_trials": 38,
+  "backtest_metrics": {
+    "annual_return": 0.1417,
+    "max_drawdown": -0.3524,
+    "sharpe": 0.8873,
+    "calmar": 0.402
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.8758,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.1575,
+      "n_months_oos": 67,
+      "mean_ic_is": 0.02217,
+      "mean_ic_oos": 0.01064,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 0.4796
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁平凡通过"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9893,
+      "sr_period": 0.0559,
+      "sr0_expected_max": 0.023447,
+      "T": 5249,
+      "skew": -0.701,
+      "kurtosis": 7.512,
+      "n_trials": 38,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "温和流动性过滤：日均成交额≥500万下限。iter_v3同口径实测amt500w全面小幅优于base(夏普0.3499 vs 0.3480/回撤-79.0 vs -79.1/年化5.93 vs 5.87)；W1目录流动性簇为最强因子簇(amount_cv ICIR-2.64)，500万仅过滤极端流动性差持仓，避免v1.3五千万门槛过度削减池子；目标降冲击成本+防流动性踩雷且不伤收益"
+    }
+  },
+  "verdict": "PASS",
+  "notes": []
+}

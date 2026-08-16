@@ -1,0 +1,5 @@
+annual_return,max_drawdown,sharpe,calmar,monthly_win_rate,cumulative_return,avg_holdings,monthly_turnover_est,variant
+0.1619,-0.3907,0.9052,0.4144,0.583,20.9648,27.4,0.2516,p3_trendvol
+0.1365,-0.3367,0.8895,0.4052,0.583,12.9228,27.4,0.2516,p3_full
+0.216,-0.6297,0.9038,0.343,0.583,55.0265,27.4,0.2516,p3_macro_only
+0.1038,-0.2747,0.8648,0.3779,0.5789,6.6422,27.4,0.2516,p3_full_plus_v3dd

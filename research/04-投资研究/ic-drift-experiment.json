@@ -1,0 +1,100 @@
+{
+  "months": [
+    {
+      "month": "2026-01",
+      "n": 3175,
+      "ic_current": -0.102059,
+      "ic_pre_ex": -0.103692,
+      "ic_delta": -0.001633,
+      "mean_abs_mv_shift": 0.012942
+    },
+    {
+      "month": "2026-02",
+      "n": 3179,
+      "ic_current": -0.025461,
+      "ic_pre_ex": -0.022896,
+      "ic_delta": 0.002564,
+      "mean_abs_mv_shift": 0.012937
+    },
+    {
+      "month": "2026-03",
+      "n": 3183,
+      "ic_current": -0.052661,
+      "ic_pre_ex": -0.055252,
+      "ic_delta": -0.002591,
+      "mean_abs_mv_shift": 0.012927
+    },
+    {
+      "month": "2026-04",
+      "n": 3188,
+      "ic_current": 0.182826,
+      "ic_pre_ex": 0.181866,
+      "ic_delta": -0.00096,
+      "mean_abs_mv_shift": 0.012917
+    },
+    {
+      "month": "2026-05",
+      "n": 3188,
+      "ic_current": 0.21368,
+      "ic_pre_ex": 0.212509,
+      "ic_delta": -0.001171,
+      "mean_abs_mv_shift": 0.009701
+    },
+    {
+      "month": "2026-06",
+      "n": 3188,
+      "ic_current": -0.081976,
+      "ic_pre_ex": -0.080404,
+      "ic_delta": 0.001572,
+      "mean_abs_mv_shift": 0.003474
+    },
+    {
+      "month": "2026-07",
+      "n": 3187,
+      "ic_current": -0.191384,
+      "ic_pre_ex": -0.191409,
+      "ic_delta": -2.5e-05,
+      "mean_abs_mv_shift": 0.00017
+    }
+  ],
+  "n_used": 3188,
+  "summary": {
+    "n_months": 7,
+    "mean_ic_current": -0.008148,
+    "mean_ic_pre_ex": -0.008468,
+    "mean_abs_ic_delta": 0.001502,
+    "max_abs_ic_delta": 0.002591,
+    "icir_current": -0.0585,
+    "icir_pre_ex": -0.0609
+  },
+  "top20_overlap": [
+    {
+      "month": "2026-01",
+      "top20_overlap": 20
+    },
+    {
+      "month": "2026-02",
+      "top20_overlap": 19
+    },
+    {
+      "month": "2026-03",
+      "top20_overlap": 20
+    },
+    {
+      "month": "2026-04",
+      "top20_overlap": 20
+    },
+    {
+      "month": "2026-05",
+      "top20_overlap": 20
+    },
+    {
+      "month": "2026-06",
+      "top20_overlap": 20
+    },
+    {
+      "month": "2026-07",
+      "top20_overlap": 20
+    }
+  ]
+}

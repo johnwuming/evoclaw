@@ -1,0 +1,129 @@
+{
+  "year_distribution": {
+    "2006": {
+      "n_stocks": 0,
+      "n_rows": 251785,
+      "n_days": 241
+    },
+    "2007": {
+      "n_stocks": 0,
+      "n_rows": 287314,
+      "n_days": 242
+    },
+    "2008": {
+      "n_stocks": 0,
+      "n_rows": 322356,
+      "n_days": 246
+    },
+    "2009": {
+      "n_stocks": 0,
+      "n_rows": 336771,
+      "n_days": 244
+    },
+    "2010": {
+      "n_stocks": 0,
+      "n_rows": 389859,
+      "n_days": 242
+    },
+    "2011": {
+      "n_stocks": 0,
+      "n_rows": 464798,
+      "n_days": 244
+    },
+    "2012": {
+      "n_stocks": 0,
+      "n_rows": 515538,
+      "n_days": 243
+    },
+    "2013": {
+      "n_stocks": 0,
+      "n_rows": 514738,
+      "n_days": 238
+    },
+    "2014": {
+      "n_stocks": 0,
+      "n_rows": 521965,
+      "n_days": 245
+    },
+    "2015": {
+      "n_stocks": 0,
+      "n_rows": 526813,
+      "n_days": 244
+    },
+    "2016": {
+      "n_stocks": 0,
+      "n_rows": 593642,
+      "n_days": 244
+    },
+    "2017": {
+      "n_stocks": 0,
+      "n_rows": 696075,
+      "n_days": 244
+    },
+    "2018": {
+      "n_stocks": 0,
+      "n_rows": 768039,
+      "n_days": 243
+    },
+    "2019": {
+      "n_stocks": 0,
+      "n_rows": 832188,
+      "n_days": 244
+    },
+    "2020": {
+      "n_stocks": 271,
+      "n_rows": 937285,
+      "n_days": 243
+    },
+    "2021": {
+      "n_stocks": 468,
+      "n_rows": 1103783,
+      "n_days": 243
+    },
+    "2022": {
+      "n_stocks": 620,
+      "n_rows": 1235555,
+      "n_days": 242
+    },
+    "2023": {
+      "n_stocks": 723,
+      "n_rows": 1344487,
+      "n_days": 242
+    },
+    "2024": {
+      "n_stocks": 749,
+      "n_rows": 1394298,
+      "n_days": 339
+    },
+    "2025": {
+      "n_stocks": 783,
+      "n_rows": 1425770,
+      "n_days": 243
+    },
+    "2026": {
+      "n_stocks": 825,
+      "n_rows": 861290,
+      "n_days": 145
+    }
+  },
+  "anomalies": [],
+  "columns": [
+    "date",
+    "symbol",
+    "open",
+    "close",
+    "high",
+    "low",
+    "volume",
+    "amount",
+    "amplitude",
+    "pct_change",
+    "change",
+    "turnover",
+    "outstanding_share",
+    "year"
+  ],
+  "chinese_cols_remaining": [],
+  "avg_stock_days": 1093.3224242424242,
+  "median_stock_days": 1205.0
+}

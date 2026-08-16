@@ -1,0 +1,23 @@
+{
+  "ts": "2026-08-15 08:58:04",
+  "errors": [],
+  "akshare_version": "1.18.83",
+  "delisted_total_rows": 361,
+  "delisted_sh_rows": 153,
+  "delisted_sz_rows": 208,
+  "delisted_terminated": 208,
+  "delisted_suspended": 0,
+  "delisted_codes_unique": 361,
+  "spot_source": "stock_zh_a_spot",
+  "live_universe_total": 5542,
+  "st_current_total": 206,
+  "st_star_total": 95,
+  "st_history_rows": 206,
+  "st_history_snapshots": 1,
+  "kline_files": 5448,
+  "delisted_with_kline_history": 0,
+  "delisted_missing_kline_history": 361,
+  "st_in_kline": 0,
+  "kline_missing_vs_live": 94,
+  "note": "delisted_missing_kline_history=已退市且K线目录无其历史的只数(历史缺口); kline_missing_vs_live=当前在市但K线目录缺失的只数(若为负/0说明覆盖全)"
+}

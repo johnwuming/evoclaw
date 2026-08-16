@@ -1,0 +1,43 @@
+[fatal] 无可用数据
+[progress] 500/5206 files, rows=47984
+[progress] 1000/5206 files, rows=85802
+[progress] 1500/5206 files, rows=112583
+[progress] 2000/5206 files, rows=143883
+[progress] 2500/5206 files, rows=163477
+[progress] 3000/5206 files, rows=185358
+[progress] 3500/5206 files, rows=238562
+[progress] 4000/5206 files, rows=271657
+[progress] 4500/5206 files, rows=292768
+[progress] 5000/5206 files, rows=308632
+{
+  "ts": "2026-08-15 08:58:45",
+  "src_dir": "/home/noname/quant-evolve/data/financial-ths",
+  "buffer_days": 1,
+  "n_files_total": 5206,
+  "n_files_ok": 5206,
+  "n_files_err": 0,
+  "n_rows": 314332,
+  "n_codes": 5206,
+  "files_with_ann_col": 0,
+  "rows_with_file_ann": 0,
+  "ann_col_names_seen": [],
+  "period_col_names_seen": [
+    "报告期"
+  ],
+  "map_rows": 314332,
+  "pct_rows_with_file_ann": 0.0,
+  "period_type_counts": {
+    "FY": 93148,
+    "H1": 76646,
+    "Q1": 73663,
+    "Q3": 70875
+  },
+  "lag_days_all": {
+    "median": 62.0,
+    "mean": 64.8,
+    "p90": 120.0
+  },
+  "output_parquet": "/home/noname/quant-evolve/data/pit_disclosure_map.parquet",
+  "lag_days_by_period_type_fileonly": {}
+}
+[done] 2026-08-15 08:59:10 | map=314332 rows / 5206 codes -> /home/noname/quant-evolve/data/pit_disclosure_map.parquet

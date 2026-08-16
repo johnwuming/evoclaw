@@ -1,0 +1,155 @@
+{
+  "version": "timing_v4_i4_q3z",
+  "computed_at": "2026-08-15 00:26:06",
+  "params": {
+    "ma_window": 120,
+    "vol_window": 60,
+    "target_vol": 0.25,
+    "vol_floor": 0.5,
+    "w_min": 0.3,
+    "smooth_alpha": 0.3,
+    "q3z_win": 36,
+    "q3z_minp": 12,
+    "q3z_hi": 1.0,
+    "q3z_cut": 0.4
+  },
+  "lag_semantics": "月末信号对次月生效（回测 reindex-ffill 同口径）；get_timing_ratio(as_of) 取 as_of 所在月的上月末信号",
+  "data_source": {
+    "index_valuation": "data/macro/index_valuation.parquet",
+    "index_daily": "data/hs300*.parquet, data/zz500*.parquet"
+  },
+  "n_months": 248,
+  "first_month_end": "2006-01-31",
+  "last_month_end": "2026-08-31",
+  "last_row": {
+    "f_trend_comp": 0.3,
+    "f_vol_comp": 0.726083,
+    "f_q_q3z": 0.939348,
+    "w_raw": 0.3,
+    "w_smooth": 0.522179,
+    "pos_ratio": 0.522179,
+    "pe": 13.63
+  },
+  "monthly_series_tail": [
+    {
+      "month_end": "2024-09-30",
+      "pos_ratio": 0.502788,
+      "effective_for": "2024-10-31"
+    },
+    {
+      "month_end": "2024-10-31",
+      "pos_ratio": 0.541525,
+      "effective_for": "2024-11-30"
+    },
+    {
+      "month_end": "2024-11-30",
+      "pos_ratio": 0.561257,
+      "effective_for": "2024-12-31"
+    },
+    {
+      "month_end": "2024-12-31",
+      "pos_ratio": 0.630871,
+      "effective_for": "2025-01-31"
+    },
+    {
+      "month_end": "2025-01-31",
+      "pos_ratio": 0.741609,
+      "effective_for": "2025-02-28"
+    },
+    {
+      "month_end": "2025-02-28",
+      "pos_ratio": 0.818182,
+      "effective_for": "2025-03-31"
+    },
+    {
+      "month_end": "2025-03-31",
+      "pos_ratio": 0.767727,
+      "effective_for": "2025-04-30"
+    },
+    {
+      "month_end": "2025-04-30",
+      "pos_ratio": 0.627409,
+      "effective_for": "2025-05-31"
+    },
+    {
+      "month_end": "2025-05-31",
+      "pos_ratio": 0.529186,
+      "effective_for": "2025-06-30"
+    },
+    {
+      "month_end": "2025-06-30",
+      "pos_ratio": 0.622867,
+      "effective_for": "2025-07-31"
+    },
+    {
+      "month_end": "2025-07-31",
+      "pos_ratio": 0.68702,
+      "effective_for": "2025-08-31"
+    },
+    {
+      "month_end": "2025-08-31",
+      "pos_ratio": 0.683918,
+      "effective_for": "2025-09-30"
+    },
+    {
+      "month_end": "2025-09-30",
+      "pos_ratio": 0.692509,
+      "effective_for": "2025-10-31"
+    },
+    {
+      "month_end": "2025-10-31",
+      "pos_ratio": 0.715141,
+      "effective_for": "2025-11-30"
+    },
+    {
+      "month_end": "2025-11-30",
+      "pos_ratio": 0.751089,
+      "effective_for": "2025-12-31"
+    },
+    {
+      "month_end": "2025-12-31",
+      "pos_ratio": 0.765027,
+      "effective_for": "2026-01-31"
+    },
+    {
+      "month_end": "2026-01-31",
+      "pos_ratio": 0.782814,
+      "effective_for": "2026-02-28"
+    },
+    {
+      "month_end": "2026-02-28",
+      "pos_ratio": 0.806056,
+      "effective_for": "2026-03-31"
+    },
+    {
+      "month_end": "2026-03-31",
+      "pos_ratio": 0.654239,
+      "effective_for": "2026-04-30"
+    },
+    {
+      "month_end": "2026-04-30",
+      "pos_ratio": 0.685084,
+      "effective_for": "2026-05-31"
+    },
+    {
+      "month_end": "2026-05-31",
+      "pos_ratio": 0.716394,
+      "effective_for": "2026-06-30"
+    },
+    {
+      "month_end": "2026-06-30",
+      "pos_ratio": 0.753426,
+      "effective_for": "2026-07-31"
+    },
+    {
+      "month_end": "2026-07-31",
+      "pos_ratio": 0.617398,
+      "effective_for": "2026-08-31"
+    },
+    {
+      "month_end": "2026-08-31",
+      "pos_ratio": 0.522179,
+      "effective_for": "2026-09-30"
+    }
+  ]
+}

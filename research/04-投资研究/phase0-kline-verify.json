@@ -1,0 +1,133 @@
+{
+ "generated_at": "2026-08-15 17:09:34",
+ "n_files": 5206,
+ "coverage_ok": 5206,
+ "coverage_rate": 1.0,
+ "not_ok_sample": [],
+ "jump_check": {
+  "n_sample": 20,
+  "total_flags": 0,
+  "detail": [
+   {
+    "code": "002402",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "000679",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "300816",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "300556",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "300369",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "002654",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "002326",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "603982",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "002191",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "688281",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "600745",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "000761",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "000731",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "002248",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "300324",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "300451",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "603332",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "688389",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "000698",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   },
+   {
+    "code": "688004",
+    "last_date": "2026-08-14",
+    "jump_flags": [],
+    "n_flags": 0
+   }
+  ]
+ }
+}

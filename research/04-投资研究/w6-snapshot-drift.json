@@ -1,0 +1,97 @@
+{
+  "ts": "2026-08-15 09:01:56",
+  "tool": "w6_snapshot_manager v1.0",
+  "datasets": {
+    "kline": {
+      "status": "match",
+      "registered_sha": "3aac4b24fc002f71e6c87111269a74654281644124ef1c86e47fcfca3312d976",
+      "current_sha": "3aac4b24fc002f71e6c87111269a74654281644124ef1c86e47fcfca3312d976",
+      "files_registered": 6030,
+      "files_current": 6030,
+      "bytes_registered": 683048761,
+      "bytes_current": 683048761
+    },
+    "financial_ths": {
+      "status": "match",
+      "registered_sha": "f6e1a2cc38a1d063355d4f48eda641d797df356b0cab379e309228a8eb572c5d",
+      "current_sha": "f6e1a2cc38a1d063355d4f48eda641d797df356b0cab379e309228a8eb572c5d",
+      "files_registered": 5206,
+      "files_current": 5206,
+      "bytes_registered": 58125164,
+      "bytes_current": 58125164
+    },
+    "financial_full": {
+      "status": "match",
+      "registered_sha": "e4d38a429e5bde151eaf521c77e42eb30a7dadb78a7cc5d500c2fa30a9facdff",
+      "current_sha": "e4d38a429e5bde151eaf521c77e42eb30a7dadb78a7cc5d500c2fa30a9facdff",
+      "files_registered": 480,
+      "files_current": 480,
+      "bytes_registered": 43609078,
+      "bytes_current": 43609078
+    },
+    "stock_info": {
+      "status": "match",
+      "registered_sha": "d9d036dd7882636e922c7d3b7ba142530e034a34a4cc1561f9aa6569a878a149",
+      "current_sha": "d9d036dd7882636e922c7d3b7ba142530e034a34a4cc1561f9aa6569a878a149",
+      "files_registered": 4,
+      "files_current": 4,
+      "bytes_registered": 588718,
+      "bytes_current": 588718
+    },
+    "index": {
+      "status": "match",
+      "registered_sha": "b6a4599846c355249f622e85e2ab44e6af6c82f24863388c62221dc3d3c88fc1",
+      "current_sha": "b6a4599846c355249f622e85e2ab44e6af6c82f24863388c62221dc3d3c88fc1",
+      "files_registered": 3,
+      "files_current": 3,
+      "bytes_registered": 693760,
+      "bytes_current": 693760
+    },
+    "valuation": {
+      "status": "match",
+      "registered_sha": "1af0698dbd54e4fa702e2428137c457baf41effaf54383f9d58d1c343ace8761",
+      "current_sha": "1af0698dbd54e4fa702e2428137c457baf41effaf54383f9d58d1c343ace8761",
+      "files_registered": 1,
+      "files_current": 1,
+      "bytes_registered": 97922,
+      "bytes_current": 97922
+    },
+    "merged_kline": {
+      "status": "match",
+      "registered_sha": "64632766ed26f0b68b6b0c47b5862ca999b0974af863ca807d1313193129f97d",
+      "current_sha": "64632766ed26f0b68b6b0c47b5862ca999b0974af863ca807d1313193129f97d",
+      "files_registered": 1,
+      "files_current": 1,
+      "bytes_registered": 304013940,
+      "bytes_current": 304013940
+    },
+    "delisted": {
+      "status": "match",
+      "registered_sha": "cae778f3feff9868421233d9502d8e1845ff83175973c981ba1f9bd25b2b1483",
+      "current_sha": "cae778f3feff9868421233d9502d8e1845ff83175973c981ba1f9bd25b2b1483",
+      "files_registered": 1,
+      "files_current": 1,
+      "bytes_registered": 13176,
+      "bytes_current": 13176
+    },
+    "st_history": {
+      "status": "match",
+      "registered_sha": "f3dd739032f10c53c25510404abccbc61aafe8cbe5f318a0924603e5af2226a5",
+      "current_sha": "f3dd739032f10c53c25510404abccbc61aafe8cbe5f318a0924603e5af2226a5",
+      "files_registered": 1,
+      "files_current": 1,
+      "bytes_registered": 5853,
+      "bytes_current": 5853
+    },
+    "pit_map": {
+      "status": "match",
+      "registered_sha": "6b12e6e1bfd96197e7c1997cd79c161111f4a1cbce01f8114997bb496e7c9364",
+      "current_sha": "6b12e6e1bfd96197e7c1997cd79c161111f4a1cbce01f8114997bb496e7c9364",
+      "files_registered": 1,
+      "files_current": 1,
+      "bytes_registered": 219945,
+      "bytes_current": 219945
+    }
+  },
+  "overall": "match"
+}
