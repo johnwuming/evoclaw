@@ -35,3 +35,4 @@
 - 其余 174 项历史产物 → /root/backups/vps-results-archive-20260816/（移走归档，不删）
 - 隐藏点文件（.check/.dircheck/.p3-3-status/.placeholder）为同步机制状态文件，保留
 - VPS workspace-quant/results/ 现与 HP 清空后状态一致（HP 3 保留文件已在此镜像存在；HP 侧已删除的隐藏文件 VPS 侧保留无碍）
+- 修正：VPS 镜像最初缺 3 个保留文件，已从 HP scp 补齐（R-188/factor-expansion-report.md/factor_catalog_v3.json），现与 HP 一致 ✓
