@@ -39,3 +39,11 @@
 - 7608-7622：toggleTOC
 - 7623-7634：resize handler（含小 bug：toc-pinned 不看 show，顺手修为 sidebar && _tocOpen）
 - detail-bar 样式 5828 行：position:sticky;top:0;padding:11px 14px
+
+## 复现验证（13:45 jsdom，改动前）
+- 1600px 视口 buildTOC → sidebar 模式，默认 open=true
+- 点击 tocBtn 关：_tocOpen=false，panel classes="toc-panel toc-sidebar"（无 open），**computed transform=none → panel 仍显示在左侧固定位置** →「关不了」实锤
+- 再点开：panel transform 仍 none、left:0 → 视觉无变化 →「打不开」实锤
+- top:0px → 与 detail-bar 平齐，问题3实锤
+- 页面 script 块语法 OK；jsdom 的 fetch 报错为环境缺 API，与真浏览器无关
+- 修复方案：.toc-sidebar 收起时 translateX(100%)（右侧）滑出屏外 + open 时 translateX(0)；侧栏 right:0；--toc-top 变量控制 panel/overlay 顶部
