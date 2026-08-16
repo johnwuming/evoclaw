@@ -49,3 +49,14 @@
 - 连锁: gate=0 (mf_gate_table.json 缺失), ledger 未加行, registry 未注册
 - 修复计划: 诊断 post_bt (前台跑拿 stderr) → 修 → 重跑 post_bt → evaluate → 重生成 report (带门禁表)
 - 注意: HP 时区=UTC (VPS-8h), decision-log 日期为 20260816 (house style 同 a4d)
+## 03:47 五门禁完成! (清理pandas pycache修复段错误)
+- n_trials=67; 全部 REJECT (0 activate)
+- v4a_mf0_trr: g1 FAIL 0.338 g2 FAIL g3 PASS g4 PASS 0.9936 g5 PASS g6 PASS | 16.53%/-29.86%/1.011
+- v4b_mfu_trr: g1 FAIL 0.338 g2 FAIL g4 PASS 0.9678 | 12.42%/-28.95%/0.832
+- v4c_mfu_e1_trr: g1 FAIL 0.338 g2 FAIL g4 PASS 0.962 | 11.99%/-28.95%/0.812
+- v4d_mfu_raw: g1 FAIL g2 FAIL g4 FAIL 0.5483 g6 FAIL | 20.59%/-69.27%/0.777
+- v4e_rocblend_trr: g1 PASS 0.5753(!) g2 FAIL 0.0153 g4 PASS 0.967 | 12.35%/-29.97%/0.829
+- 核心印证: 去掉ev_ebit负IC腿后 g1 0.338→0.575 过线; 但OOS劣化(g2)仍FAIL — 质量腿零alpha被证实
+- max_corr=0.0752 (与active因子低相关); ledger实际文件=results/experiment-ledger.jsonl (非model/history.jsonl!)
+- decision-log: D-20260816-032(close) ~037(evaluate_reject×5)
+- 待办: 重跑report(含门禁表) → 最终验证 → 收口notes+completions
