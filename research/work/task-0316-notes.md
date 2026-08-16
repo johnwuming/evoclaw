@@ -50,3 +50,11 @@
 - 注：BUB_full 较 BUB_locked 崩盘 → 2024-2026 尾部退市股集中暴露致 cum 从 +81%→-25%
 - 关键发现：B≈A（ann 25.76 vs 25.73，差 +0.03pp）→ 财务五门禁挡住退市股 → 幸存者偏差被抑制
 - 待办：取 A 组 exact metrics → 写报告 → decision-log → VPS 镜像
+
+## 19:20 A 组 exact metrics（对照用）
+- A_full:   cum 111.09%, ann 25.73%, mdd -70.00%, sharpe 0.9133, calmar 0.368
+- A_locked: cum 71.79%,  ann 26.11%, mdd -70.00%, sharpe 0.9074, calmar 0.373
+- B−A 差值（ann）：full +0.03pp（25.76 vs 25.73）；locked +0.03pp（26.14 vs 26.11）
+- C−B 增量（ann）：full +0.71pp（26.47 vs 25.76）；locked +0.74pp（26.88 vs 26.14）
+- 五门禁状态：BUB（无财务过滤）ann -1.40%/mdd -98% vs B（有过滤）ann +25.76%/mdd -70% → 五门禁是幸存者偏差闸门
+- 待办：写报告 → decision-log → VPS 镜像 → completion
