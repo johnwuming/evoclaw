@@ -17,6 +17,8 @@
 touch /root/.openclaw/secrets.env && chmod 600 /root/.openclaw/secrets.env
 ```
 
+首次迁移清单（从旧 TOOLS.md 抽取，迁完即验证可用）：`NAS_SSH_PASSWORD`、`SUDO_PASSWORD`、`DSH_ACCESS_CODE`、`QUANT_SSH_PASSWORD`（HP 量化主机）。已暴露于旧文件的密码建议同期轮换（机器有入侵史）。
+
 ## 服务速查
 
 | 服务 | 地址 | 认证 | 常驻/日志 |
