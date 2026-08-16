@@ -24,3 +24,10 @@
 - 已尝试: mf_supervise.sh(一次 RC=0, 可能已启动runner), mf_ensure.sh(推送成功 scp_exit=0, 运行超时但远端可能已启动)
 - 恢复点: 若runner已在HP跑, 结果自动落 results/mf_*; 若未跑, 需重连后 bash /tmp/mf_ensure.sh (幂等: 确保runner+finish流水线)
 - finish流水线: runner完成后自动 ic_ext -> evaluate -> post_bt -> report -> touch /tmp/mf_FINISHED
+## 03:00+ 状态更新
+- 8个脚本全部确认推送到HP /tmp/ (mf_runner/mf_supervise/mf_ic_ext/mf_evaluate/mf_post_bt/mf_finish/mf_report/mf_ensure)
+- mf_supervise.sh 曾以 RC=0 执行过(会setsid nohup 启动 runner); mf_ensure.sh 也被调用过(幂等确保 runner+finish)
+- 结论: HP 上 detached 流水线大概率已自主运行: runner(等价校验+10回测) -> finish等runner -> ic_ext->evaluate->post_bt->report -> touch /tmp/mf_FINISHED
+- 沙箱->HP ssh 持续超时(rc=124), 但 TCP/ping/NAS->HP 正常 → 判定沙箱IP sshd槽位问题/间歇性, 非HP宕机
+- NAS 端口转发被 sshd 禁止(administratively prohibited), NAS 无法做中继 → 只能直接ssh重试
+- 待办: HP通后 ①验证 results/mf_*(50) + report>4KB + registry/ledger/decision-log ②scp拉 mfsummary.json+gate table ③同步notes ④写 .task-completions.jsonl
