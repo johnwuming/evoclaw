@@ -37,3 +37,9 @@
 - 注意: 早期探测 summary=0 是相对路径误报(ssh默认cwd=home, 应为 ~/quant-evolve/results/)
 - finish 日志为空 → mf_finish.sh 可能未启动(ensure 曾超时); 需重跑 ensure(幂等) 确保 finish 流水线
 - pgrep -f 计数含探测命令自匹配(误报), 以日志为准
+## 03:38 finish 流水线已启动!
+- 关键修复: 之前 scp "exit=0" 是管道 tail 退出码误报, 实际脚本从未推送成功(mf_ensure.sh 不存在)
+- 改用 base64 内联经单次 ssh 推送(mf_ic_ext/mf_evaluate/mf_post_bt/mf_report/mf_close/mf_finish.sh), 修正 mf_finish.sh 顺序: ic_ext -> post_bt(registry先注册) -> evaluate(门禁) -> close(decision-log) -> report
+- runner 早已完成: mfcount=50 + mfsummary.json (03:12 窗口确认)
+- finish 启动日志: finish_start=19:38:24 runner_done_at=19:38:24 iter=1 (HP时区19:38 = VPS 03:38)
+- 待办: 轮询 /tmp/mf_FINISHED + gate/report 产物, 验证后收口
