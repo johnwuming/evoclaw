@@ -35,3 +35,12 @@
 ## 服务重启（22:5x 续）
 - systemctl restart agent-dashboard → active；/login 200 正常响应
 - 下一步：CDP 双视口验证 + 极端注入 + 回归 + 截图
+
+## CDP 首跑（22:5x，脚本 /tmp/task0326-cdp.mjs）
+- NAV: ok:39367（btlc 渲染完成）
+- MOBILE_NAT 390x844: scrollWidth=390 <= clientWidth=390 ✅
+- DESKTOP_NAT 1440x900: scrollWidth=1425 <= clientWidth=1425 ✅
+- INJECT: ledgerInjected=true scatterInjected=true pipelineInjected=true
+- MOBILE_STRESS: scrollWidth=390 <= 390 ✅ / DESKTOP_STRESS: 1425 <= 1425 ✅
+- 回归断言 eval 抛 SyntaxError（正则字面量 flags 解析问题）→ 需改用 includes 重跑；截图未拍
+- 结论：核心验收 2/3 已过（自然+极端均无横滚）
