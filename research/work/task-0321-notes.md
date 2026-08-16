@@ -69,3 +69,18 @@
 - 改动：MIRROR_INCLUDES=[seedB_*, q4b*, q4b/**] + DEFAULT_QUANT_MIRROR_DIR=workspace-quant/results/；新函数 mirror_quant_results()（复用 RSYNC_EXCLUDES，尾置 --exclude=* 拦其余）；main() Step4.5 调用（失败非致命，不阻断主同步）
 - 验证：ast.parse ✓；本地仿真（/tmp/task0321-fake-hp→mirror-dest dry-run）：seedB_*/q4b 根文件 + q4b/ 子目录内容（AB/BC_metrics.json）放行，other_result.csv / *.parquet 被拦 ✓；真实 HP dry-run（HP 可达）：主同步行为不变（0 新文件，dest 04-投资研究 不变），量化镜像「将同步 12 个 seedB_*/q4b* 文件 → workspace-quant/results/」✓（10 seedB + q4b 空目录 + . ）
 - HP results/ 实况：14 文件（10 seedB_v0_* + factor_catalog_v3.json + experiment-ledger.jsonl + 2 md + q4b 空目录）
+
+## 6. 前端验证（CDP 390x844，已完成）
+- 截图：/tmp/task0321-quant.png（整页）+ /tmp/task0321-quant-card.png（基线卡）均产出（零依赖 CDP 脚本 /tmp/task0321-cdp*.js，Node22 内置 WebSocket）
+- 卡片文本证据（Runtime.evaluate）：🎯 基线回测 · V-v0_seed｜〔ID：V-〕｜full/locked 切换｜底座 SNAP-20260814 · PAN-v3 · 全量池｜年化 26.35%｜回撤 -69.49%｜夏普 0.903｜Calmar 0.379｜累计 12288%｜月胜率 58.7%｜口径 全量池+成本v2+一字板+full全区间｜区间 2006-01-04~2026-08-14（20.6年）·调仓248次
+- locked 切换实测（点击按钮）：年化 26.26% / 夏普 0.885 / 口径…审计锁≤2024-06 / 区间 ~2024-06-28（18.5年）· 调仓222次 → 切换重取数链路通 ✓
+- 移动端布局：docScrollW=390=viewportW 无横向溢出；基线卡 342x286 可见；导航正常 → 无回归 ✓
+
+## 7. 验收总表（2026-08-16 21:36 全绿）
+1. node --check SYNTAX_OK + agent-dashboard active ✓
+2. summary?window=full 头400字符含 0.2635；?window=locked 含 0.2626 ✓（meta.id=V-v0_seed）
+3. nav?window=locked 4491 点 >200 ✓
+4. 页面 grep fmtID=3 >0；SNAP- 渲染点=4（含客户端底座徽标回退常量）✓
+5. CDP 截图 2 张产出，基线卡有数+口径徽标+底座徽标可见（文本证据）✓
+6. auto_sync_notify.py ast.parse OK ✓；HP dry-run 量化镜像 12 文件 seedB_*/q4b* ✓ 主同步不受影响 ✓
+- 改动面：server.js（5处 edit）+ auto_sync_notify.py（3处 edit）+ 2 备份 + 笔记；无无关文件改动
