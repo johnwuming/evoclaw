@@ -66,6 +66,6 @@
 9. 页面导航无死链：量化 Tab 5 个子Tab（数据/因子/模型/回测·生命周期/模拟实盘）均可切换渲染；主屏路由 `#page=quant` 正常
 
 ## 五、改动统计
-- server.js: 655206 → 596704 bytes（约 -59KB：删除旧路由逻辑/微盘股静态配置/R196任务表/死CSS/僵尸前端函数）
+- server.js: 655206 → 639538 bytes（约 -16KB：删除旧路由逻辑/微盘股静态配置/R196任务表/死CSS/僵尸前端函数）
 - 全部残留 grep：`renderEvolutionQuant|loadEvolutionQuant|renderEvolutionHistory|evoSummary|quant-page-evolution|microcap-param|microcap-phase|microcap-iter` = 0 命中
 - `微盘股|RD-Agent|LightGBM` 仅剩 5 处归档注释（deprecated 说明+历史事实），无 UI 可见残留
