@@ -101,7 +101,7 @@ R2 可覆盖 R3/R4，不可覆盖 R0/R1。规则冲突时按编号高者执行�
 | 群聊 / Discord / 社交场景 | 读 `skills/group-chat/SKILL.md`；不存在时：只回应 @或高价值内容，其余保持沉默，每消息最多一个反应 |
 | 收到图片 | 先调用视觉/`image` 工具识别，再回答；视觉工具不可用时明确告诉用户 |
 | 收到心跳 | 读 `HEARTBEAT.md` 并执行 `scripts/heartbeat.sh` |
-| 开发任务 spawn | 使用 `tools/templates/spawn-task.md` |
+| 开发任务 spawn | 使用 `tools/templates/spawn-task.md`；量化任务附加其末尾「量化任务附加纪律」段 |
 | 路径不确定 | 读 `PATHS.md` |
 
 ## 10. 记忆维护
