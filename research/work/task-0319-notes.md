@@ -30,3 +30,20 @@
 - 待验收：node --check、服务 active、iconbtn 渲染 ≥44、图标 ≥18px、桌面 scrollWidth≤clientWidth、截图落盘
 
 ## 验证记录（后续追加）
+## 验证记录（2026-08-16 21:05）
+- 备份：server.js.bak-task0319-20260816-210112
+- node --check server.js：SYNTAX OK
+- systemctl restart agent-dashboard：active
+- curl / | grep -c iconbtn：10（结构仍在）
+- 无头 Chrome CDP（390x844 + 1440x900，打开 #page=reports → 点首个报告 → 详情加载 .md 且 4+ iconbtn 可见）：
+  - MOBILE：btnRects 全 44×44（5 个）；iconFontSizes 全 18px；barScrollW=clientW=390 无溢出；path 两行布局保持（order:1, display:block）
+  - DESKTOP：btnRects 全 44×44；icons 18px；singleRow=true（kidsCenters 全 33）；barScrollW=clientW=1410 无溢出；backBtnH=44；barH=67（=11+44+11+1 border，单行）
+  - VERDICT: PASS
+- 截图落盘：/tmp/task0319-mobile.png（242795B）、/tmp/task0319-desktop.png（216010B）
+- 全量 diff（vs 备份）：仅 3 处改动
+  - L5553 detail-bar：gap 10→8、row-gap 6→4（4pt 网格）
+  - L5556-5560 新增 task-0319 CSS 块（5 行）
+  - L5990-5991 两个 fs-btn 移除内联 font-size 13px/17px（统一走 scoped 18px）
+  - 无其他文件改动；TOC pinned 两档规则未动
+## 结论
+- 全部验收标准通过；触达区 44×44pt、图标 18px、桌面单行不溢出、手机双行不回归
