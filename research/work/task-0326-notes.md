@@ -31,3 +31,7 @@
 - JS 兜底 quantHScrollGuard 插在 quantRestoreScroll 后：量化页可见时若 de.scrollWidth>clientWidth → 根禁止横滚 + 超宽元素降级内部横滚；resize 防抖触发
 - node --check 通过（NODE_OK）；服务仍 active（重启前快照）
 - 密码默认 'Ak704223'；用户默认 admin/alison/john
+
+## 服务重启（22:5x 续）
+- systemctl restart agent-dashboard → active；/login 200 正常响应
+- 下一步：CDP 双视口验证 + 极端注入 + 回归 + 截图
