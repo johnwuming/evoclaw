@@ -58,3 +58,8 @@
 - api() 助手 L6049、esc() L6058、fmtPct L10267；CSS 变量 --card/--sub/--fg/--green/--red/--amber/--accent/--border/--fill 均在用
 - e2e 趋势图标题在 renderBtlcE2E（L9587，chart-title）；数据灰卡在 renderDataQuant M1.1 区块（L7963 quant-section-title）
 - auto_sync_notify.py（496行）：VPS 上跑、ssh 拉 HP(10.12.192.174)~/quant-evolve/results/ → VPS shared/results/04-投资研究/；model/ → workspace-quant/model/。缺：results→workspace-quant/results/ 镜像（看板读取路径）→ 加 Step4.5 mirror：include seedB_*/q4b* + 复用 RSYNC_EXCLUDES + exclude *
+
+## 4. server.js 改动与验证（已完成）
+- 后端：三 baseline API 改 seedB_v0_<window>_*（quantBaselineResolve 白名单 window=full|locked 默认full、version 映射表 v0_seed→seedB_v0 预留版本化）；新增 /api/quant/baseline/meta（registry context + QUANT_BASE_SNAP='SNAP-20260814' / QUANT_BASE_PAN='PAN-v3' 常量，注明来源）；summary 头部指标前置（验收 head -c 400 可见）
+- 前端：fmtID/quantConceptBadge 全局函数（Quant Tab 段，R-214 §1.5 全前缀表）；基线回测卡（renderBtlcPage 版本切换器后，!available 早退分支也渲染）；M1.1 灰卡区块挂〔ID：SNAP-/PAN-〕、E2E 图挂〔ID：V-〕、基线卡〔ID：V-〕
+- 验证：node --check ✓；restart 后 active ✓；summary?window=full 头400字符含 0.2635 ✓；?window=locked 含 0.2626 ✓（meta.id=V-v0_seed）；nav?window=locked 4491 点>200 ✓；yearly 21 行 ✓；meta 返回 base_badge='SNAP-20260814 · PAN-v3 · 全量池' + caliber(pool/cost/limit_up/audit_lock) ✓；页面 grep fmtID=3、SNAP-20260814 渲染点存在 ✓
