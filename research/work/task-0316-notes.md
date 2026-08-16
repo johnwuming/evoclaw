@@ -39,3 +39,14 @@
 - 11:13:39 UTC 确认 Q4B_BC_DONE，进程 1240006 退出
 - 六腿：B_full/B_locked/C_full/C_locked/BUB_full/BUB_locked 全部完成，无 Traceback
 - 下一步：抽取 metrics → 写报告
+
+## 19:15 六腿 metrics 全量到手（已落盘 /tmp 于 SSH 输出，下面数字为最终采用）
+- B_full:    cum 111.53%, ann 25.76%, mdd -70.02%, sharpe 0.9138, calmar 0.368, 调仓248
+- B_locked:  cum 72.08%,  ann 26.14%, mdd -70.02%, sharpe 0.9080
+- C_full:    cum 125.41%, ann 26.47%, mdd -69.88%, sharpe 0.9323
+- C_locked:  cum 80.48%,  ann 26.88%, mdd -69.88%, sharpe 0.9267
+- BUB_full:  cum -25.29%, ann -1.40%, mdd -98.15%, sharpe 0.115  （上界代理，灾难）
+- BUB_locked:cum 81.24%,  ann 3.27%,  mdd -94.57%, sharpe 0.2666
+- 注：BUB_full 较 BUB_locked 崩盘 → 2024-2026 尾部退市股集中暴露致 cum 从 +81%→-25%
+- 关键发现：B≈A（ann 25.76 vs 25.73，差 +0.03pp）→ 财务五门禁挡住退市股 → 幸存者偏差被抑制
+- 待办：取 A 组 exact metrics → 写报告 → decision-log → VPS 镜像
