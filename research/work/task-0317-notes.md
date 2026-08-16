@@ -68,3 +68,5 @@
 - HP 后台: nohup python scripts/seedB_run_v0.py all > logs/seedB_v0_run.log (HP PID 1248645)
 - 冒烟产物已清（seedB_smoke_2011_*）
 - 跑 full+locked 双区间，预计耗时类似 q4b C 组（数据加载~3-5min + 每区间回测~2-5min）
+- 第一次正式跑失败：seedB_run_v0.py 里 sys.argv 被导入期重写导致 which='none' 空跑（日志只有加载+DONE，无回测段）
+- 已修复（_args 先存再重写 argv），重新 nohup 启动 HP PID 1249810（20:06）
