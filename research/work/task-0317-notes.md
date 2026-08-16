@@ -29,3 +29,9 @@
 - 注册 model/v0_seed.json：种子B参数 div≥2%/roe≥15%/roa≥10%/mv升序Top20/price_cap=10，上下文含全量池+cost v2+一字板+审计锁+五门禁
 - decision-log.jsonl 重开，首行 D-20260816-SEEDB-RESET
 - R-188 种子文档格式已参照（简洁 JSON 格式注册）
+
+## 步骤4 VPS 镜像同步（19:33 完成）
+- q4b 收口 11 文件 → /root/backups/q4b-closeout-20260816/（保留不删）
+- 其余 174 项历史产物 → /root/backups/vps-results-archive-20260816/（移走归档，不删）
+- 隐藏点文件（.check/.dircheck/.p3-3-status/.placeholder）为同步机制状态文件，保留
+- VPS workspace-quant/results/ 现与 HP 清空后状态一致（HP 3 保留文件已在此镜像存在；HP 侧已删除的隐藏文件 VPS 侧保留无碍）
