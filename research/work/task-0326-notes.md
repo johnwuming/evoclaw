@@ -25,3 +25,9 @@
 - 量化表全部被内联 overflow-x:auto 包裹（17 处，无裸表）；md-table-wrap 也有 overflow-x:auto
 - 台账表 L10448、决策 L2552+、lifecycle L2569+
 - 拟定 CSS 加固点：#screen-quant 与 .quant-page.active / .quant-chart-wrap 加 overflow-x:hidden + min-width:0 + max-width:100%；.quant-page.active 继承 overflow-wrap:anywhere（防 flex/grid 长串撑破）；canvas/svg/img max-width:100%；select max-width
+
+## 实施（22:5x）
+- CSS 加固块插入 L6193 后（</style> 前）：#screen-quant 系 max-width/overflow-x:hidden；flex/grid 子项 min-width:0；td/th word-break；td span/div break-all；svg/canvas/img max-width:100%；tl-body/desc/summary overflow-wrap
+- JS 兜底 quantHScrollGuard 插在 quantRestoreScroll 后：量化页可见时若 de.scrollWidth>clientWidth → 根禁止横滚 + 超宽元素降级内部横滚；resize 防抖触发
+- node --check 通过（NODE_OK）；服务仍 active（重启前快照）
+- 密码默认 'Ak704223'；用户默认 admin/alison/john
