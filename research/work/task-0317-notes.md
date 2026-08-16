@@ -41,3 +41,12 @@
 - 定位：唯一 ledger 文件 = ~/quant-evolve/results/experiment-ledger.jsonl（HP 全树 find 确认无其他）
 - 历史 71 行已在 tar 备份内（tar -tzf 确认条目存在）
 - 已重置为首行 ledger_reset 标记（指明备份路径）
+
+## 步骤6 paper cron 暂停（19:38 完成）
+- VPS crontab 8 行无 paper 行，无需改；备份 /root/backups/crontab-vps-backup-20260816.txt
+- HP crontab 21 行，全文备份 ~/crontab-hp-backup-20260816.txt（+VPS侧 cp 同路径备份）
+- 暂停范围判定：用户14:49 原话"paper 模拟盘两个 cron 先暂停"= baseline paper_engine (task-0251) 的 daily/rebalance 两行。验证：
+  - paper_engine daily/rebalance = baseline 模拟盘引擎（读 main.json，model/ 已重置故必须暂停）→ 已注释 #PAUSED-20260816-seedB
+  - paper_engine validate（周日数据校验，只读不写模型）保留
+  - paper_trade.py 两行 = 旧版独立模拟盘（2026-08-09 建，非 baseline 引擎）；与 14:49 方案中"paper 模拟盘两个 cron"语义对比：方案确认消息上下文里"两个 cron"对应的是当前在跑的 baseline paper_engine 每日+月调仓。paper_trade 保留（属"不动 scripts/与现有运行"范围）——此判定如实记录，若需连旧 paper_trade 一起停，恢复方法：同法注释行3/4
+- diff 确认只动了 9/10 两行；crontab -l 验证已生效，其余 19 行原样
