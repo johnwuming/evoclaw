@@ -52,3 +52,8 @@
 - nginx sites-enabled/bill-editor 内 name-quiz / mysticmirror-styles 两处 alias 仍指 ubuntu 路径（root 侧无这两个工具目录，属独立工具迁移，未动）
 - /root/.openclaw/evolving-claw-repo 仓库 git dirty 状态为迁移前既有（非本次引入）
 - 子agent完成 A/B/C 后异常中断（输出截断），D/E 由主 agent 接手完成并独立验证
+
+## F. 附加：name-quiz + mysticmirror-styles ✅（12:12，主agent执行）
+- root 侧已有旧副本（6月底），ubuntu 侧更新（7/8、7/17）→ 按生产为准 rsync ubuntu → root，nginx 两工具 3 处 alias 改 /root
+- 验证：/name-quiz/ 200、/styles/index.html 200、/mystic/index.html 200
+- **nginx 全配置（sites-enabled + conf.d）home/ubuntu 引用：0**
