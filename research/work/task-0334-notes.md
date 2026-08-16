@@ -17,3 +17,10 @@
 - v4e_rocblend_trr: 质量宇宙 + 0.5mv+0.5roc blend + q3z_tr (预检显示ev_ebit维度弱, 只保留roc质量腿)
 ## 完成回报
 - 见 .task-completions.jsonl
+## 连通性故障记录与恢复点 (02:00-02:4x)
+- 症状: 沙箱→HP ssh 握手卡死(TCP/ping正常, NAS→HP正常); scp 推送间歇可用; 长时间ssh会话随turn超时被SIGKILL
+- 判定: HP sshd 未认证连接槽耗尽(我的快速重连) 或 A5 重负载; setsid nohup 全detach 的远端进程不受影响
+- 已完成(确认在HP): 阶段0 mfpanel.parquet / 阶段1 mfic_monthly.csv+mfic_monthly_univ.csv / 8个脚本在 /tmp/
+- 已尝试: mf_supervise.sh(一次 RC=0, 可能已启动runner), mf_ensure.sh(推送成功 scp_exit=0, 运行超时但远端可能已启动)
+- 恢复点: 若runner已在HP跑, 结果自动落 results/mf_*; 若未跑, 需重连后 bash /tmp/mf_ensure.sh (幂等: 确保runner+finish流水线)
+- finish流水线: runner完成后自动 ic_ext -> evaluate -> post_bt -> report -> touch /tmp/mf_FINISHED
