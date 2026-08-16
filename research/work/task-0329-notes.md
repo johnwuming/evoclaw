@@ -40,3 +40,15 @@
 5. 新增 /api/quant/freshness：generated_at/last_sync/versions_count/files mtime
 6. 前端：基线卡加版本下拉（_baselineVersion/_baselineVersionList，models API 动态渲染）；quantSeg 下加 quantFreshness 小字条（HH:MM，HP UTC→补 Z 转换）；visibilitychange → 仅 screen-quant 可见时刷新当前子Tab（sig 守卫）+ freshness + 失效版本清单缓存；loadQuant() 启动调 loadQuantFreshness()
 7. 备份：server.js.bak-task0329-20260816-234526
+
+### 验证结果（00:05 全部通过）
+1. node --check server.js ✓ | systemctl is-active agent-dashboard = active ✓ | ast.parse(auto_sync) ✓
+2. HP results/versions-manifest.json：active=v2b_trr，n=22，generated_at=2026-08-16T16:00:02（cron Step0.9 自动重生成）✓
+3. baseline/summary?version=v2b_trr&window=locked → ann=0.1515 mdd=-0.2986 sharpe=0.9356 calmar=0.5074（已读镜像文件 a2c_v2b_trr_locked_metrics.json，非 manifest 兜底）✓
+4. models → v2b_trr & v1i_q3z in versions，len=26（19 model/registry + 7 manifest-only；archive-cache v1.1-1.4 被新 registry 去重）✓
+5. freshness → ok:true，generated_at + last_sync 都在 ✓
+6. CDP /tmp/task0329-quant.png（232KB）：DOM 确认基线卡下拉 26 项含 v2b_trr★在役/v1i_q3z，顶部新鲜度「🔄 数据更新于 23:51（registry/结果） · 同步 23:30 · 22 版本」，locked 指标 年化15.15%/回撤-29.86%/夏普0.936/Calmar0.507/累计1256%/月胜率59.7%，口径 v2+一字板+审计锁 ✓
+- 空态：?version=unknown_xyz → HTTP 200，回退 v0_seed（0.2626/-0.6949）不 500 ✓；lifecycle HTTP 200 未改 ✓
+- diff 30 hunks 全在预期区域（baseline/models/freshness/前端/HTML/JS），gates/dsr/q4b-contrast/lifecycle 未触碰 ✓
+- auto_sync 常规 cron（00:00）正常：Step0.9 manifest 重生成 → 128 文件扩展镜像（含 a2c_* metrics/nav）→ 状态/通知正常 ✓；--push-now 独立入口测试通过（不动 .sync-state）✓
+- 改动文件：server.js（原地，备份 server.js.bak-task0329-20260816-234526）、auto_sync_notify.py（原地，备份 .bak-task0329）、HP ~/quant-evolve/scripts/gen_versions_manifest.py（本地副本 shared/results/work/gen_versions_manifest.py）
