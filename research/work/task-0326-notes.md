@@ -52,3 +52,10 @@
 - 基线 API 复查：/api/quant/baseline/summary 返回 annual_return=0.2635 ✅（值存在）
 - baselineTxt=false 根因：基线卡异步加载（loadQuantBaselineCard），断言时机早于其渲染完成
 - 待办：等待基线卡渲染后重断言；确认 0.2626（locked 口径）值
+
+## 基线卡重断言 + 收尾（23:0x）
+- 基线卡 DOM 实际文本：「年化 26.35%」——0.2635 在 UI 以百分比显示，baselineTxt=false 是格式误报，值确实渲染 ✅
+- API 复核：full 口径 annual_return=0.2635；locked 口径 annual_return=0.2626（?window=locked）✅ 两者都在
+- 截图：/tmp/task0326-mobile.png (73KB)、desktop (116KB)、stress (116KB) 均已生成
+- 回归断言终版全部通过：baselineCard/gates/abc/decisionTimeline/scatter/ledger/lifecycleRoot/validationRoot/modelLayerRoot 全 true
+- 最终交付核验：node --check OK、服务 active、task-0326 标记 ×2（CSS 块 + JS 兜底）、备份 server.js.bak-task0326-20260816-223216 存在
