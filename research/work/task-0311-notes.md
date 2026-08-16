@@ -8,3 +8,12 @@
 - [x] 15:48 dispatch.js → /root/backups/dispatch.js.task0311 (19238B, mv 成功)
 - [x] 15:49 rm dispatch.log (17875509B=17.8MB) + dispatch.log.* + *.tmp
   - 未删 dispatch.js.bak-task0265-20260814（不在任务书范围，保留）
+
+## P1 死代码删除（server.js 11531 → 11212 行，-319 行）
+- [x] 备份 server.js.bak-task0311-20260816 (595778B)
+- [x] 删 writeDispatchQueue(362-378) + DISPATCH_QUEUE 常量(L113)
+- [x] 删 POST /api/tasks/:id/dispatch(975-985) 与 /pause(997-1006)
+- [x] 删 R-126 引擎块：头注释1014-1022、COMPLETIONS_FILE_R126(1029)、SPAWN_MAX_FAILURES/RESEARCH_AGENTS/QUANT_AGENTS/SPAWN_TEAMS(1031-1041)、isResearchAgent/isQuantAgent/spawnTeamOf/buildSpawnPrompt/pickSessionKey/extractSessionKey/spawnAgentViaCLI/spawnAgentViaGateway/spawnAgent/dispatchPendingTasks(1055-1301)、调度注释(1302-1303)、POST /internal/dispatch(1314-1322)
+- 保留（被块外引用）：OPENCLAW_CONFIG_PATH/BIN/PATH、GATEWAY_BASE_URL、NOTIFY_FILE、readGatewayToken(被abort会话用@3912)、requireInternalAuth、INTERNAL_TOKEN
+- [x] grep 零残留：writeDispatchQueue/dispatchPendingTasks/SPAWN_TEAMS/buildSpawnQueue 等全部无匹配
+- [x] node --check 通过
