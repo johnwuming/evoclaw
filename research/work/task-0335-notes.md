@@ -23,3 +23,11 @@
 2. 容器类 .quant-table-scroll：overflow-x:auto + -webkit-overflow-scrolling:touch + scrollbar-width:thin + overscroll-behavior-x:contain；16 处 sed 替换
 3. 5 处描述列 td 加 class="cell-wrap"
 4. 页面级横滚禁令（#screen-quant overflow-x:hidden 块、quantHScrollGuard）不动
+
+## 修改完成（02:1x）
+- CSS 块替换：task-0326 折行三连（td normal / anywhere / span break-all）→ nowrap 恢复 + .cell-wrap 例外（min220/max460px, break-word）+ .quant-table-scroll 容器类（touch 惯性 + overscroll-contain + thin 滚动条）
+- 16 处 `<div style="overflow-x:auto">` → `<div class="quant-table-scroll">`（sed 全量替换，0 残留）
+- 5 处描述列 td 加 class="cell-wrap"：L8419 资产备注 / L9395 择时信号描述 / L9421 早期9信号说明 / L9483 择时配置说明 / L9801 五门禁说明
+- 页面级禁令（#screen-quant overflow-x:hidden 块、quantHScrollGuard、svg/img max-width、tl-body/desc 折行）均未动
+- 验证：node --check OK；systemctl restart agent-dashboard → active
+- 静态页核验（/tmp/task0335-page.html 落盘，不重复拉取）：`quant-table td{white-space:normal` 计数=0 ✅；quant-table-scroll 18 处（16 div + 1 CSS 规则 + 1 注释）✅；td.cell-wrap CSS 规则 1 处 ✅
