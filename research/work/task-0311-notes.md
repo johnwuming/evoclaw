@@ -17,3 +17,11 @@
 - 保留（被块外引用）：OPENCLAW_CONFIG_PATH/BIN/PATH、GATEWAY_BASE_URL、NOTIFY_FILE、readGatewayToken(被abort会话用@3912)、requireInternalAuth、INTERNAL_TOKEN
 - [x] grep 零残留：writeDispatchQueue/dispatchPendingTasks/SPAWN_TEAMS/buildSpawnQueue 等全部无匹配
 - [x] node --check 通过
+
+## P2 简化（同一份 server.js，未二次重启前完成）
+- [x] /internal/review 两处 fs.appendFileSync(NOTIFY_FILE) 整块删除（approve/reject 分支各一处），状态更新+addEvent+鉴权+decision 校验原样保留；grep 'appendFileSync(NOTIFY_FILE' 计数=0
+- [x] POST /api/tasks 白名单删 spawn_config/schedule_window/max_retries/parent_task_id/version（insertTask SQL 为迁移共用语句未动，POST 侧改硬编码默认 null/2）
+- [x] PUT 白名单删同5项（保留 title/type/priority/expected_output/assigned_agent/notes/project_id/completion_summary/task_prompt/spawn_owner/source_session；status 走原有独立联动逻辑未动）
+- [x] created_by INSERT 默认 'web' → 'main-agent'（req.user 缺省时）
+- [x] retry 注释改"v4 重置 pending（主 agent 手动口，不再自动调度）"；DELETE 注释改"主 agent 清理口"
+- [x] node --check 通过；11531 → 11189 行（P1+P2 合计 -342 行）
