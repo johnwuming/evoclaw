@@ -60,3 +60,17 @@
 - max_corr=0.0752 (与active因子低相关); ledger实际文件=results/experiment-ledger.jsonl (非model/history.jsonl!)
 - decision-log: D-20260816-032(close) ~037(evaluate_reject×5)
 - 待办: 重跑report(含门禁表) → 最终验证 → 收口notes+completions
+## 03:48 收口验证完成 (全部产物确认)
+- report: 8606B (>4KB✓), 含门禁表+IC预检表+A4对照段
+- ledger: results/experiment-ledger.jsonl (5行backtest带features + 5行evaluate)
+- decision-log: D-20260816-032(a6_batch_close) + D-20260816-033~037(evaluate_reject×5)
+- registry: v4a_mf0_trr/v4b_mfu_trr/v4c_mfu_e1_trr/v4d_mfu_raw/v4e_rocblend_trr 5个候选
+- mf_* 产物 53个 (50件正式套件 + mfsummary/mf_gate_table/mf_ic_ext)
+- 验收标准全部满足: 产物齐全/报告>4KB含IC表与A4对照/ledger带features/0 activate
+## 最终结论 (认知增量)
+- 神奇公式与A4价值指标的本质区别: 数据不支持其增量
+  1) EV/EBIT 与 pe_ttm 排名相关 0.881 → 净债务调整在低杠杆质量池几乎不改变排名, 仍是同一个负alpha便宜度维度 (宇宙内 ICIR -1.25, 与a4d的pe -1.37同量级)
+  2) ROC 是独立维度(与roe相关仅0.30) 但 IC≈0 (宇宙 -0.15) → 质量/资本效率无定价能力
+  3) 实证铁证: 砍掉ev_ebit腿后 v4e g1 ICIR 0.338→0.5753 过线(唯一PASS), 但OOS劣化仍FAIL — 质量腿确实独立但非alpha源
+- 战役目标对照: 全部候选 25%/-20%/1.2 不可达 (最佳v4a: 16.53%/-29.86%/1.011, 原教旨反而最好因全市场含高股息池)
+- 0 activate; v2b_trr 现役不变
