@@ -31,3 +31,9 @@
 - 沙箱->HP ssh 持续超时(rc=124), 但 TCP/ping/NAS->HP 正常 → 判定沙箱IP sshd槽位问题/间歇性, 非HP宕机
 - NAS 端口转发被 sshd 禁止(administratively prohibited), NAS 无法做中继 → 只能直接ssh重试
 - 待办: HP通后 ①验证 results/mf_*(50) + report>4KB + registry/ledger/decision-log ②scp拉 mfsummary.json+gate table ③同步notes ④写 .task-completions.jsonl
+## 03:15 突破: runner 已完成!
+- 03:12:01 重试循环成功连接: mf_run.log 显示 MF_RUNNER_DONE 1077.7s (全候选回测完成)
+- v4e_rocblend_trr full: ann=12.48% mdd=-29.97% sharpe=0.846 calmar=0.416 (log尾部可见)
+- 注意: 早期探测 summary=0 是相对路径误报(ssh默认cwd=home, 应为 ~/quant-evolve/results/)
+- finish 日志为空 → mf_finish.sh 可能未启动(ensure 曾超时); 需重跑 ensure(幂等) 确保 finish 流水线
+- pgrep -f 计数含探测命令自匹配(误报), 以日志为准
