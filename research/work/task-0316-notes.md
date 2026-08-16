@@ -12,3 +12,8 @@
 4. ⏳ 收口报告
 5. ⏳ decision-log 入档
 6. ⏳ VPS 镜像同步
+
+## 19:00 panel 重建中
+- 发现 HP 上已有全量重建进程在跑（PID 1235807，nohup → /tmp/q4b_panel_full.log，10:57 启动，source files: 301）——判断为第三棒遗留/就绪进程，正好是我们要的重建任务
+- 我误启了一个重复 build，已 kill 掉（1237022 wrapper + 1237023 orphaned python），保留 1235807 唯一写入者
+- 现状：1235807 100% CPU，日志 "source files: 301"，等它跑完 → rows/codes 摘要
