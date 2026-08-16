@@ -27,3 +27,9 @@
 4. @media(max-width:768px): .d-path{order:1;flex-basis:100%} → 换行独占一行（flex-wrap 下 order 后置到第二行），工具按钮组留第一行
 5. openReportDetail: 重置时清空 path；rep 加载后 path=rep.path，title 同步，补 syncTocTop()
 6. openQuantReportDetail: 显示 workspace-quant/results/<id>.md
+
+## 实施与基础验证（2026-08-16 20:56）
+- 6 处编辑完成：CSS(.detail-bar flex-wrap + .d-path 新样式 + 768px 媒体查询)、HTML(插入 #detailPath)、openReportDetail 重置/加载两处、openQuantReportDetail 两处（量化路径 workspace-quant/results/<id>.md）
+- node --check 通过；systemctl restart agent-dashboard 后 is-active = active
+- ⚠️ 任务书端口信息有误：dashboard 实际监听 127.0.0.1:8055（PORT=8055, L17）；8053 是小青账账单 API（另一 node 进程）。nginx 8052 的 / 和 /task/ 均 proxy_pass 到 8055
+- curl 127.0.0.1:8055/ 落盘 /tmp/task0318-dash.html（353KB）：d-path 出现 5 次、detailPath 5 次，CSS/HTML/JS 三处改动均已生效
