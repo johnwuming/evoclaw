@@ -43,8 +43,19 @@
 
 ## 执行记录
 - [x] 15:12 备份 server.js.bak-task0309-20260816
-- [x] CSS toolbar 样式（插 .report-list 前）
-- [x] CSS 浅色 .md code 覆盖
-- [x] HTML toolbar 插入
-- [x] JS loadReports 改造 + filter 函数
-- [ ] node --check / restart / curl 验证
+- [x] CSS toolbar 样式（L5856 插入 .report-list 前）
+- [x] CSS 浅色 .md code 覆盖（L5925）
+- [x] HTML toolbar 插入（L6248）
+- [x] JS loadReports 改造 + filter 函数（L7447）
+- [x] node --check 通过 / systemctl restart + active / curl 200
+- [x] 注入验证：reports-toolbar/reportsChips/reportsSearchInput/rs-clear/.md code{color:#C7254E} 全部在响应中
+- [x] CDP 浏览器 E2E：192 条全列 → 选「AI行业研究」32 条 → 匹配信息「32/192」→ AND 搜索 → 清空按钮 → toggle 重置回 192 → localStorage 持久化 → 刷新恢复 → 无 JS 错误
+- [x] CDP 配色：浅色 inline code rgb(199,37,78)=#C7254E ✓，深色 rgb(255,214,10)=#FFD60A 不变 ✓
+- [x] 移动端 375px：无横向溢出、chips 可横滚、搜索框不挤压
+- [x] diff 确认仅 4 个改动区块，TOC/主题变量/API 均未碰
+- [x] 完成回报已写入 .task-completions.jsonl
+
+## E2E 实测数据（CDP 真实浏览器）
+- chips = 「全部192」+ 19 个分类（去前缀名+计数）
+- 分类筛选：点「AI行业研究」→ 32 条；localStorage {cat:01-AI行业研究}
+- AND 搜索、清空、toggle 取消、刷新恢复全部通过
