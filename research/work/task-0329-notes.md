@@ -10,3 +10,24 @@
 ## 勘察记录
 
 (待填)
+
+### 勘察结论（2026-08-16 23:45）
+1. server.js 644KB。版本映射实为 `QUANT_BASELINE_VERSIONS`（L2812 附近，v0_seed→seedB_v0），resolve 函数 `quantBaselineResolve`。
+   - baseline summary/nav/yearly/meta 都走 `${prefix}_${window}_*.json|csv` 于 QUANT_BASELINE_DIR=/root/.openclaw/workspace-quant/results
+   - meta 读 QUANT_BASELINE_REGISTRY_DIR=results/model/{version}.json（仅 v0_seed 存在）
+2. models API（L3008）：扫 MODEL_REGISTRY_DIR=workspace-quant/results/model（仅 v0_seed.json + archive-cache.json），activeId 硬编码 'v0_seed'。**新 registry 实际在 /root/.openclaw/workspace-quant/model/registry/（VPS 29 文件含 .snapshot/.bak）**
+3. HP 侧：results/ 44 个 *_metrics.json，模式 {tool}_{version}_{full,locked}_metrics.json（tool=a2/a2b/a2c/seedB，version=v1i_q3z/v2b_trr/…）+ 配套 nav/yearly csv
+   - HP model/registry/ 21 文件；**registry JSON 含 backtest_refs 字段直接指向 results 文件（如 results/a2c_v2b_trr_locked_metrics.json）→ 生成脚本可零启发式取 prefix**
+   - registry 结构：{version_id, status, created_at, main_alias, selection{strategy,params,...}, timing, backtest_refs{metrics_full, baseline, endtoend, metrics{...}, eval_window}, gate, activated_at}
+   - HP model/main.json: version=v2b_trr（现役）
+   - a2c_v2b_trr_locked_metrics.json: ann=0.1515 mdd=-0.2986 sharpe=0.9356 calmar=0.5074（验收锚点✓）
+4. auto_sync_notify.py 20KB 555 行：main() 顺序 = 可达检查 → Step1.5 通知转发 → Step1.5 model/ rsync（→workspace-quant/model/）→ Step2 列文件 → Step4 rsync 主同步 → Step4.5 mirror_quant_results（MIRROR_INCLUDES 仅 seedB_*/q4b*）→ Step5 状态 → Step6 通知。已有 ssh_exec()/do_rsync() 可复用。
+5. VPS workspace-quant/results/ 现只有 seedB_v0_* + q4b/ + model/。a2c_* 未镜像 → mirror includes 需扩展 *_metrics.json/*_nav.csv/*_yearly.csv/versions-manifest.json。
+
+### 设计决定
+- gen_versions_manifest.py（HP）：以 model/registry/*.json 为主源（backtest_refs 取 prefix，读 metrics 文件嵌 windows），再扫 results/ 未覆盖的 {tool}_{version}_{full,locked}_metrics.json 作 status=backtest-only；active=model/main.json.version
+- VPS baseline：manifest 优先（version→prefix 映射 + windows 内嵌指标兜底），VERSION_MAP 降级兜底；summary 缺文件时用 manifest.windows
+- models：active=workspace-quant/model/main.json 指针；versions 合并 新registry/*.json + manifest + 旧 results/model/v0_seed + archive-cache
+- mirror includes 扩展：--include=*_[fu]ll_metrics.json 等三类 + versions-manifest.json
+- freshness：generated_at + last_sync + 关键文件 mtime
+- --push-now：ssh 重生成 manifest → rsync manifest+model/ 四类小文件 → 不动状态/通知
