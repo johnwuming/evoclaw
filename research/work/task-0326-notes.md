@@ -17,3 +17,11 @@
 - 台账/决策时间线/五门禁等 API：/api/quant/ledger (L2553)、lifecycle (L2569)、pending (L2502)
 - btlc 页渲染：loadBtlcQuant L9585 → page#quant-page-btlc → div#quantBtlcBody
 - 登录：有 /login (L527)，CDP 验证需先处理登录
+
+## 补充情报（22:3x，重试前）
+- 导航：底部 nav 按钮 onclick="showPage('quant',this)"；量化子Tab switchQuantTab('btlc',true)，按钮 id=qseg-btlc
+- 登录：POST /api/login {username,password} → Set-Cookie dash_sess（HMAC 签名，密钥 .session-secret）；默认用户 admin/alison/john，默认密码环境变量 DASHBOARD_PASSWORD 未设时用代码内默认（systemd Environment 只见 NODE_ENV=production，待确认完整 unit）
+- Chrome 可用：/usr/bin/google-chrome-stable、/usr/local/bin/chromium-browser；Node 22 自带 WebSocket → 可写零依赖 CDP 脚本
+- 量化表全部被内联 overflow-x:auto 包裹（17 处，无裸表）；md-table-wrap 也有 overflow-x:auto
+- 台账表 L10448、决策 L2552+、lifecycle L2569+
+- 拟定 CSS 加固点：#screen-quant 与 .quant-page.active / .quant-chart-wrap 加 overflow-x:hidden + min-width:0 + max-width:100%；.quant-page.active 继承 overflow-wrap:anywhere（防 flex/grid 长串撑破）；canvas/svg/img max-width:100%；select max-width
