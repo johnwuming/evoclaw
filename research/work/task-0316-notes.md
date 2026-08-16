@@ -68,3 +68,8 @@
 - decision-log 已入档：D-20260816-Q4B-BC（baseline_closeout，R-208/R-213 基建收口闭环），grep count=1
 - VPS 镜像：/root/.openclaw/workspace-quant/results/ 已有 11 个 q4b 文件（报告 + 10 metrics JSON）
 - 剩余：写 .task-completions.jsonl → 完成
+
+## 19:35 完成（task-0316 收口闭环）
+- 六步全部通过：①采集✅ ②panel重建✅(299/44005行) ③B/C/BUB六腿全区间✅(Q4B_BC_DONE) ④报告✅ ⑤decision-log✅ ⑥VPS镜像✅
+- 核心结论：B−A +0.03pp 无幸存者偏差；C组 +0.71pp 最优；五门禁=BUB灾难(ann-1.4%/mdd-98%)的闸门
+- completion jsonl 已写（task-0316, 341字符, 4 outputFiles）
