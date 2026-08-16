@@ -11,3 +11,8 @@
   3. factor_catalog_v3.json
 - model/ 含 decision-log.jsonl、factor_pool.json、history.jsonl、main.json、pending.json、rejected_last.json、sota.json、switch_log.jsonl、candidates/、registry/
 - experiment-ledger.jsonl 位于 ~/quant-evolve/results/experiment-ledger.jsonl
+
+## 步骤1 tar 备份（19:26 完成）
+- HP 打包: /tmp/quant-results-model-20260816.tar.gz, 9.9M, 729 条目（603 results 项 + model/ 子项，目录条目也计入，合理）
+- md5: b2e1d572ee6477acadb7a24f5b5687db
+- 大小 9.9M << 500MB，可 scp 回 VPS
