@@ -26,3 +26,11 @@
 - node --check 通过；systemctl restart 后 is-active = active
 - curl / : grep -c 'rel="icon"' = 1，href 含 svg+emoji ✓
 - curl / : grep -o '🪙' 出现 2 处（favicon href + 顶栏 h1）✓
+
+## 截图与渲染验证（21:23）
+- /tmp/task0320-icon.png（首页 1280x900，172KB）；/tmp/task0320-login.png（登录页 480x760，21KB）
+- 无头 Chrome --dump-dom 渲染后 DOM：首页含 rel="icon" 与 `<h1>🪙任务</h1>`（落地任务屏顶栏）；登录页 `<h1>🪙 任务中心</h1>`
+- 注：模型侧无法直接看图，用 DOM dump 作为渲染证据；截图文件已留存供人工复核
+
+## 结论
+验收标准 1-4 全部通过；仅改 server.js 一个文件（+备份），无无关文件改动。
