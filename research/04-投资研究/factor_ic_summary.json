@@ -10,20 +10,20 @@
       "label": "股息率(TTM)",
       "direction": "正(高好)",
       "n_months": 247,
-      "mean_ic": 0.0246,
-      "std_ic": 0.1051,
-      "icir": 0.234,
-      "t_stat": 3.67,
-      "ic_positive_ratio": 0.575,
-      "pass_ic": false,
+      "mean_ic": 0.0265,
+      "std_ic": 0.1018,
+      "icir": 0.261,
+      "t_stat": 4.1,
+      "ic_positive_ratio": 0.583,
+      "pass_ic": true,
       "pass_icir": false,
-      "max_corr_with_others": 0.342,
+      "max_corr_with_others": 0.357,
       "pass_corr": true,
       "pass_all": false,
       "incremental_ic": {
-        "composite_ic_all": 0.0271,
-        "composite_ic_without": 0.0205,
-        "incremental_ic": 0.0067,
+        "composite_ic_all": 0.0139,
+        "composite_ic_without": -0.0007,
+        "incremental_ic": 0.0145,
         "pass_incremental": true
       }
     },
@@ -31,20 +31,20 @@
       "label": "ROE(TTM)",
       "direction": "正(高好)",
       "n_months": 247,
-      "mean_ic": 0.0007,
-      "std_ic": 0.1419,
-      "icir": 0.005,
-      "t_stat": 0.07,
-      "ic_positive_ratio": 0.474,
+      "mean_ic": -0.013,
+      "std_ic": 0.1405,
+      "icir": -0.092,
+      "t_stat": -1.45,
+      "ic_positive_ratio": 0.449,
       "pass_ic": false,
       "pass_icir": false,
-      "max_corr_with_others": 0.92,
+      "max_corr_with_others": 0.913,
       "pass_corr": false,
       "pass_all": false,
       "incremental_ic": {
-        "composite_ic_all": 0.0271,
-        "composite_ic_without": 0.0292,
-        "incremental_ic": -0.0021,
+        "composite_ic_all": 0.0139,
+        "composite_ic_without": 0.0216,
+        "incremental_ic": -0.0077,
         "pass_incremental": false
       }
     },
@@ -52,20 +52,20 @@
       "label": "ROA(TTM)",
       "direction": "正(高好)",
       "n_months": 247,
-      "mean_ic": 0.0003,
-      "std_ic": 0.1397,
-      "icir": 0.002,
-      "t_stat": 0.03,
-      "ic_positive_ratio": 0.482,
+      "mean_ic": -0.0101,
+      "std_ic": 0.1447,
+      "icir": -0.07,
+      "t_stat": -1.1,
+      "ic_positive_ratio": 0.474,
       "pass_ic": false,
       "pass_icir": false,
-      "max_corr_with_others": 0.92,
+      "max_corr_with_others": 0.913,
       "pass_corr": false,
       "pass_all": false,
       "incremental_ic": {
-        "composite_ic_all": 0.0271,
-        "composite_ic_without": 0.0381,
-        "incremental_ic": -0.011,
+        "composite_ic_all": 0.0139,
+        "composite_ic_without": 0.0245,
+        "incremental_ic": -0.0106,
         "pass_incremental": false
       }
     },
@@ -73,20 +73,20 @@
       "label": "流通市值(小盘方向)",
       "direction": "负(小盘好)",
       "n_months": 247,
-      "mean_ic": 0.0507,
-      "std_ic": 0.1736,
-      "icir": 0.292,
-      "t_stat": 4.59,
+      "mean_ic": 0.0475,
+      "std_ic": 0.1764,
+      "icir": 0.269,
+      "t_stat": 4.24,
       "ic_positive_ratio": 0.611,
       "pass_ic": true,
       "pass_icir": false,
-      "max_corr_with_others": 0.122,
+      "max_corr_with_others": 0.073,
       "pass_corr": true,
       "pass_all": false,
       "incremental_ic": {
-        "composite_ic_all": 0.0271,
-        "composite_ic_without": 0.0155,
-        "incremental_ic": 0.0116,
+        "composite_ic_all": 0.0139,
+        "composite_ic_without": 0.0066,
+        "incremental_ic": 0.0073,
         "pass_incremental": true
       }
     }
@@ -94,26 +94,26 @@
   "corr_matrix": {
     "div_yield_ttm": {
       "div_yield_ttm": 1.0,
-      "roe_ttm": 0.33832934993299807,
-      "roa_ttm": 0.34171788907145645,
-      "circ_mv": 0.06776039786374043
+      "roe_ttm": 0.35728938534859495,
+      "roa_ttm": 0.35601067806146947,
+      "circ_mv": 0.06552198938099617
     },
     "roe_ttm": {
-      "div_yield_ttm": 0.33832934993299807,
+      "div_yield_ttm": 0.35728938534859495,
       "roe_ttm": 1.0,
-      "roa_ttm": 0.9201073729578887,
-      "circ_mv": 0.12239143001596768
+      "roa_ttm": 0.9134548153927278,
+      "circ_mv": 0.039859069149770575
     },
     "roa_ttm": {
-      "div_yield_ttm": 0.34171788907145645,
-      "roe_ttm": 0.9201073729578887,
+      "div_yield_ttm": 0.35601067806146947,
+      "roe_ttm": 0.9134548153927278,
       "roa_ttm": 1.0,
-      "circ_mv": 0.010548918867625174
+      "circ_mv": -0.07337761764499547
     },
     "circ_mv": {
-      "div_yield_ttm": 0.06776039786374043,
-      "roe_ttm": 0.12239143001596768,
-      "roa_ttm": 0.010548918867625174,
+      "div_yield_ttm": 0.06552198938099617,
+      "roe_ttm": 0.039859069149770575,
+      "roa_ttm": -0.07337761764499547,
       "circ_mv": 1.0
     }
   },
@@ -121,9 +121,9 @@
     {
       "f": "roe_ttm",
       "g": "roa_ttm",
-      "corr": 0.92
+      "corr": 0.913
     }
   ],
-  "composite_ic_all_factors": 0.0271,
+  "composite_ic_all_factors": 0.0139,
   "n_redundant_pairs": 1
 }

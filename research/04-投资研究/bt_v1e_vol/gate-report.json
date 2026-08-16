@@ -1,0 +1,70 @@
+{
+  "version": "v1e_vol",
+  "evaluated_at": "2026-08-16 14:20:37",
+  "oos_split": "2021-01",
+  "n_trials": 39,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1689,
+    "max_drawdown": -0.6671,
+    "sharpe": 0.7239,
+    "calmar": 0.2532
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 1.1132,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.3515,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.02543,
+      "mean_ic_oos": 0.02135,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 1.2857
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.5577,
+      "worst_pair": [
+        "volatility_20d",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "volatility_20d"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.6905,
+      "sr_period": 0.0456,
+      "sr0_expected_max": 0.038055,
+      "T": 4490,
+      "skew": -0.654,
+      "kurtosis": 8.124,
+      "n_trials": 39,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "A股小盘池低波动异象显著(A1 t=-7.0, 方向调整后ICIR 1.57, 簇4与市值簇7互补): 低波动标的博弈溢价低、回撤更浅, 混合排序保留小盘暴露的同时压缩危机段回撤(MDD门禁友好)"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.6671,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": -2.78,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

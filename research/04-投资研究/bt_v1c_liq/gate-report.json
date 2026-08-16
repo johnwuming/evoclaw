@@ -1,0 +1,65 @@
+{
+  "version": "v1c_liq",
+  "evaluated_at": "2026-08-16 14:20:35",
+  "oos_split": "2021-01",
+  "n_trials": 39,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2619,
+    "max_drawdown": -0.7036,
+    "sharpe": 0.8824,
+    "calmar": 0.3723
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.7228,
+      "sr_period": 0.05559,
+      "sr0_expected_max": 0.046599,
+      "T": 4490,
+      "skew": -0.602,
+      "kurtosis": 6.21,
+      "n_trials": 39,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "剔除20日均成交额<500万的极端不可交易标的, 降低冲击成本与一字板不可成交损耗; 本金1000万/20票=单票50万, 500万日额提供约10%日换手容量"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.7036,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": 0.87,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

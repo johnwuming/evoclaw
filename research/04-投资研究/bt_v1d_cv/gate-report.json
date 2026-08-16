@@ -1,0 +1,70 @@
+{
+  "version": "v1d_cv",
+  "evaluated_at": "2026-08-16 14:20:36",
+  "oos_split": "2021-01",
+  "n_trials": 39,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2158,
+    "max_drawdown": -0.7231,
+    "sharpe": 0.7916,
+    "calmar": 0.2984
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 1.025,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0552,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.02395,
+      "mean_ic_oos": 0.00786,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 0.5281
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.3207,
+      "worst_pair": [
+        "amount_cv",
+        "roe_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "amount_cv"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.6445,
+      "sr_period": 0.04986,
+      "sr0_expected_max": 0.044244,
+      "T": 4490,
+      "skew": -0.585,
+      "kurtosis": 6.647,
+      "n_trials": 39,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "成交额波动率低=资金进出节奏平稳、机构筹码稳定、无游资炒作痕迹; A1全池最强新因子(t=-11.8, 方向调整后ICIR年化2.64), 与市值水平(簇7)信息互补, 混合排序在保留小盘暴露同时规避炒作型小盘"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "FAIL",
+      "mdd_candidate": -0.7231,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": 2.82,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

@@ -1,0 +1,60 @@
+{
+ "task": "task-0324 A2",
+ "generated_at": "2026-08-16 14:10:48",
+ "runtime_sec": 562.4,
+ "n_factors": 107,
+ "months": "2006-01~2026-07",
+ "n_months_ic": 246,
+ "ic_universe": "全A（剔除当月停牌/上市<6月/价格≤0数据异常；qfq价格已前复权故不以价格过滤ST）",
+ "sign_convention": "W1 direction-adjusted (pos=+1, neg=-1)",
+ "source": "factor_expansion_v3ak machinery rebuild",
+ "consistency_check": {
+  "div_yield_ttm": {
+   "n_months": 0,
+   "mean_ic_adj": NaN,
+   "catalog_signed": 0.02759,
+   "diff": NaN
+  },
+  "roe_ttm": {
+   "n_months": 0,
+   "mean_ic_adj": NaN,
+   "catalog_signed": -0.00915,
+   "diff": NaN
+  },
+  "roa_ttm": {
+   "n_months": 0,
+   "mean_ic_adj": NaN,
+   "catalog_signed": -0.00622,
+   "diff": NaN
+  },
+  "circ_mv": {
+   "n_months": 240,
+   "mean_ic_adj": 0.05406,
+   "catalog_signed": 0.05398,
+   "diff": 8e-05
+  },
+  "amount_cv": {
+   "n_months": 240,
+   "mean_ic_adj": 0.0547,
+   "catalog_signed": 0.05421,
+   "diff": 0.00049
+  },
+  "volatility_20d": {
+   "n_months": 240,
+   "mean_ic_adj": 0.07248,
+   "catalog_signed": 0.07395,
+   "diff": -0.00147
+  },
+  "turnover_rate": {
+   "n_months": 240,
+   "mean_ic_adj": 0.07727,
+   "catalog_signed": 0.07835,
+   "diff": -0.00108
+  }
+ },
+ "outputs": [
+  "results/factor_ic_monthly.csv",
+  "results/factor_ic_corr.csv",
+  "results/factor_catalog_v2.json"
+ ]
+}

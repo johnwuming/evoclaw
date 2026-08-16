@@ -1,0 +1,65 @@
+{
+  "version": "v1a_score",
+  "evaluated_at": "2026-08-16 14:20:32",
+  "oos_split": "2021-01",
+  "n_trials": 39,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2155,
+    "max_drawdown": -0.7017,
+    "sharpe": 0.8098,
+    "calmar": 0.3072
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.7123,
+      "sr_period": 0.05101,
+      "sr0_expected_max": 0.042528,
+      "T": 4490,
+      "skew": -0.513,
+      "kurtosis": 6.464,
+      "n_trials": 39,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "在质量过滤后的池内, 用股息率+ROE+ROA+市值的标准化合成(z div/roe/roa 正、mv 负)替代纯市值排序, 捕捉'便宜的高质量小盘'而非'最小盘', 降低纯壳股暴露, 提升组合质量与价值暴露"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.7017,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": 0.68,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}

@@ -1,36 +1,7 @@
 {
- "version": "1.0",
- "generated_at": "2026-08-15",
- "n_factors": 72,
- "categories": {
-  "市值": {
-   "count": 4
-  },
-  "流动性": {
-   "count": 13
-  },
-  "量价": {
-   "count": 11
-  },
-  "波动": {
-   "count": 10
-  },
-  "回撤": {
-   "count": 7
-  },
-  "反转": {
-   "count": 6
-  },
-  "动量": {
-   "count": 5
-  },
-  "技术": {
-   "count": 5
-  },
-  "财务": {
-   "count": 11
-  }
- },
+ "version": "v2-rebuild-20260816-A2",
+ "generated_at": "2026-08-16 14:01:26",
+ "note": "A2 从 catalog_v3 重建(剔除A1新增35因子), 供 v3ak 面板构建与门禁3回退; 与A1口径一致",
  "factors": {
   "market_cap_log": {
    "id": "market_cap_log",
@@ -1954,28 +1925,6 @@
    ],
    "last_tested": "2026-08-15"
   },
-  "debt_to_asset": {
-   "id": "debt_to_asset",
-   "label": "资产负债率",
-   "category": "财务",
-   "direction": "neg",
-   "source": "THS财务",
-   "expression": "总负债/总资产(最新期)",
-   "econ_logic": "杠杆风险高者财务脆弱，方向为负",
-   "status": "tested",
-   "mean_ic": -0.00335,
-   "icir_monthly": -0.0272,
-   "icir_annual": -0.0944,
-   "t_stat": -0.422,
-   "coverage": 0.9756,
-   "half_life_months": 12.0,
-   "turnover_monthly": 0.0349,
-   "cluster_id": 4,
-   "corr_alerts": [
-    "idiosyncratic_vol"
-   ],
-   "last_tested": "2026-08-15"
-  },
   "ocf_to_asset": {
    "id": "ocf_to_asset",
    "label": "经营现金流/总资产",
@@ -2025,147 +1974,28 @@
     "net_profit_margin"
    ],
    "last_tested": "2026-08-15"
+  },
+  "debt_to_asset": {
+   "id": "debt_to_asset",
+   "label": "资产负债率",
+   "category": "财务",
+   "direction": "neg",
+   "source": "THS财务",
+   "expression": "总负债/总资产(最新期)",
+   "econ_logic": "杠杆风险高者财务脆弱，方向为负",
+   "status": "tested",
+   "mean_ic": -0.00335,
+   "icir_monthly": -0.0272,
+   "icir_annual": -0.0944,
+   "t_stat": -0.422,
+   "coverage": 0.9756,
+   "half_life_months": 12.0,
+   "turnover_monthly": 0.0349,
+   "cluster_id": 4,
+   "corr_alerts": [
+    "idiosyncratic_vol"
+   ],
+   "last_tested": "2026-08-15"
   }
- },
- "thresholds": {
-  "ic_entry": 0.02,
-  "icir_annual_min": 0.5,
-  "corr_max": 0.6
- },
- "clusters": {
-  "7": {
-   "members": [
-    "market_cap_log",
-    "circ_mv",
-    "avg_amount_20d",
-    "amihud_illiquidity",
-    "log_amount_60d",
-    "amihud_60d",
-    "return_skew_60d"
-   ],
-   "keep": "avg_amount_20d",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "4": {
-   "members": [
-    "float_ratio",
-    "mv_volatility_60d",
-    "turnover_rate",
-    "turnover_rate_60d",
-    "turnover_std_20d",
-    "volatility_20d",
-    "volatility_60d",
-    "idiosyncratic_vol",
-    "volatility_120d",
-    "downside_vol_20d",
-    "return_kurt_60d",
-    "atr_ratio_20d",
-    "gk_vol_20d",
-    "debt_to_asset",
-    "ocf_to_asset"
-   ],
-   "keep": "turnover_std_20d",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "5": {
-   "members": [
-    "amount_cv",
-    "amount_cv_60d",
-    "vp_corr",
-    "vp_corr_60d"
-   ],
-   "keep": "amount_cv",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "8": {
-   "members": [
-    "zero_volume_ratio"
-   ],
-   "keep": "zero_volume_ratio",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "2": {
-   "members": [
-    "amount_ratio_10_60",
-    "turnover_chg_20_60",
-    "vol_ratio_20_60"
-   ],
-   "keep": "amount_ratio_10_60",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "3": {
-   "members": [
-    "volume_slope_20d",
-    "volume_surge",
-    "up_down_volume_ratio",
-    "obv_factor",
-    "vr",
-    "mfi",
-    "vol_surge_5d",
-    "max_drawdown_20d",
-    "max_drawdown_60d",
-    "max_drawdown_120d",
-    "max_drawdown_250d",
-    "dd_current",
-    "dd_area_120d",
-    "return_5d",
-    "return_10d",
-    "return_20d",
-    "price_52w_pos",
-    "rsi_14",
-    "macd_hist_norm",
-    "boll_pos_20",
-    "ma5_ma20_ratio"
-   ],
-   "keep": "obv_factor",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "9": {
-   "members": [
-    "tail_volume_ratio"
-   ],
-   "keep": null,
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "1": {
-   "members": [
-    "obv_slope_60d",
-    "vwap_slope_20d",
-    "dd_duration_120d",
-    "return_60d",
-    "return_120d",
-    "return_250d",
-    "mom_3_1",
-    "mom_6_1",
-    "mom_12_1",
-    "mom_accel",
-    "ma20_ma60_ratio"
-   ],
-   "keep": "return_60d",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "6": {
-   "members": [
-    "roe",
-    "roa",
-    "roe_ttm",
-    "roa_ttm",
-    "net_profit_margin",
-    "revenue_growth_yoy",
-    "profit_growth_yoy",
-    "div_yield_ttm"
-   ],
-   "keep": "div_yield_ttm",
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  },
-  "10": {
-   "members": [
-    "gross_profit_margin"
-   ],
-   "keep": null,
-   "reason": "簇内ICIR年化最高（|icir_annual|最大），其余因子与保留因子相关性>0.6时标记corr_alerts"
-  }
- },
- "ic_universe": "全A（剔除当月停牌/上市<6月/价格≤0数据异常；qfq价格已前复权故不以价格过滤ST）",
- "ic_method": "月度截面 Spearman Rank IC；icir_annual=icir_monthly×√12"
+ }
 }

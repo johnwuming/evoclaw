@@ -1,0 +1,65 @@
+{
+  "version": "v1b_mvq",
+  "evaluated_at": "2026-08-16 14:20:33",
+  "oos_split": "2021-01",
+  "n_trials": 39,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2475,
+    "max_drawdown": -0.6688,
+    "sharpe": 0.8735,
+    "calmar": 0.3701
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.7597,
+      "sr_period": 0.05502,
+      "sr0_expected_max": 0.044321,
+      "T": 4490,
+      "skew": -0.527,
+      "kurtosis": 6.402,
+      "n_trials": 39,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "保留小市值主贝塔(权重0.7)叠加质量/价值微调(合计0.3): 不放弃规模溢价的同时优化边际选股质量, 与v1a(质量主导)构成小盘/质量两极对照"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.6688,
+      "mdd_parent": -0.6949,
+      "mdd_deterioration_pp": -2.61,
+      "threshold_pp": 2.0,
+      "parent_version": "v0_seed"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ]
+}
