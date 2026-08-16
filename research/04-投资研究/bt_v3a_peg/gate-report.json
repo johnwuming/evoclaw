@@ -1,0 +1,76 @@
+{
+  "version": "v3a_peg",
+  "evaluated_at": "2026-08-16 16:46:29",
+  "oos_split": "2021-01",
+  "n_trials": 57,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2472,
+    "max_drawdown": -0.721,
+    "sharpe": 0.8835,
+    "calmar": 0.3429,
+    "cumulative_return": 58.322,
+    "monthly_win_rate": 0.5882,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.77,
+    "monthly_turnover_est": 0.294
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "FAIL",
+      "icir_is_annualized": 0.3424,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "FAIL",
+      "p_one_sided": 0.0385,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.00778,
+      "mean_ic_oos": -0.01046,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.6707
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0351,
+      "worst_pair": [
+        "peg_np",
+        "roa_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "peg_np"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.729,
+      "sr_period": 0.05566,
+      "sr0_expected_max": 0.046397,
+      "T": 4490,
+      "skew": -0.553,
+      "kurtosis": 6.803,
+      "n_trials": 57,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "林奇PEG进选股层(裸, parent=v0_seed): 在质量小盘过滤内(div>=2%, roe>15%, roa>10%, price<10) 用 0.5·(-z mv) + 0.5·(-z peg_np) 排序取Top20; 林奇'以合理价格买入成长'——PEG=PE_ttm/净利润同比(ttm代理), 低PEG=增长相对便宜; 前批已证该宇宙小市值溢价为主alpha源, 价值维度作辅, 本候选测纯选股层价值改造对年化/MDD的影响"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "FAIL",
+      "mdd_candidate": -0.721,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 42.24,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

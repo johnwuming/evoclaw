@@ -1,0 +1,218 @@
+{
+ "v3a_peg": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "FAIL",
+   "g2_icir_oos": "FAIL",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "FAIL",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "FAIL"
+  },
+  "metrics": {
+   "annual_return": 0.2472,
+   "max_drawdown": -0.721,
+   "sharpe": 0.8835,
+   "calmar": 0.3429,
+   "cumulative_return": 58.322,
+   "monthly_win_rate": 0.5882,
+   "years": 18.48,
+   "num_rebalance": 222,
+   "avg_holdings": 19.77,
+   "monthly_turnover_est": 0.294
+  },
+  "dsr_detail": {
+   "dsr": 0.729,
+   "sr_period": 0.05566,
+   "sr0_expected_max": 0.046397,
+   "T": 4490,
+   "skew": -0.553,
+   "kurtosis": 6.803,
+   "n_trials": 57
+  },
+  "icir_is": 0.3424,
+  "oos_p": 0.0385,
+  "max_corr": 0.0351,
+  "mdd_deterioration_pp": 42.24
+ },
+ "v3b_glm": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "FAIL",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "FAIL"
+  },
+  "metrics": {
+   "annual_return": 0.2048,
+   "max_drawdown": -0.6776,
+   "sharpe": 0.7571,
+   "calmar": 0.3022,
+   "cumulative_return": 30.2847,
+   "monthly_win_rate": 0.5792,
+   "years": 18.48,
+   "num_rebalance": 222,
+   "avg_holdings": 19.86,
+   "monthly_turnover_est": 0.3062
+  },
+  "dsr_detail": {
+   "dsr": 0.4972,
+   "sr_period": 0.04769,
+   "sr0_expected_max": 0.047797,
+   "T": 4490,
+   "skew": -0.578,
+   "kurtosis": 6.496,
+   "n_trials": 57
+  },
+  "icir_is": 0.5612,
+  "oos_p": 0.0593,
+  "max_corr": 0.0488,
+  "mdd_deterioration_pp": 37.9
+ },
+ "v3c_peg_trr": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "FAIL",
+   "g2_icir_oos": "FAIL",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "PASS",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1465,
+   "max_drawdown": -0.3073,
+   "sharpe": 0.9638,
+   "calmar": 0.4766,
+   "cumulative_return": 11.5008,
+   "monthly_win_rate": 0.5928,
+   "years": 18.48,
+   "num_rebalance": 222,
+   "avg_holdings": 19.77,
+   "monthly_turnover_est": 0.294
+  },
+  "dsr_detail": {
+   "dsr": 0.9925,
+   "sr_period": 0.06071,
+   "sr0_expected_max": 0.023527,
+   "T": 4490,
+   "skew": -0.687,
+   "kurtosis": 8.779,
+   "n_trials": 57
+  },
+  "icir_is": 0.3424,
+  "oos_p": 0.0385,
+  "max_corr": 0.0351,
+  "mdd_deterioration_pp": 0.87
+ },
+ "v3d_buf_trr": {
+  "verdict": "PASS",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "PASS",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1238,
+   "max_drawdown": -0.2929,
+   "sharpe": 0.808,
+   "calmar": 0.4228,
+   "cumulative_return": 7.65,
+   "monthly_win_rate": 0.5792,
+   "years": 18.48,
+   "num_rebalance": 222,
+   "avg_holdings": 19.68,
+   "monthly_turnover_est": 0.3131
+  },
+  "dsr_detail": {
+   "dsr": 0.9587,
+   "sr_period": 0.0509,
+   "sr0_expected_max": 0.024515,
+   "T": 4490,
+   "skew": -0.63,
+   "kurtosis": 8.141,
+   "n_trials": 57
+  },
+  "icir_is": 0.5752,
+  "oos_p": 0.0634,
+  "max_corr": 0.0498,
+  "mdd_deterioration_pp": -0.57
+ },
+ "v3e_peg_dd": {
+  "verdict": "REJECT",
+  "gates": {
+   "g1_icir_is": "FAIL",
+   "g2_icir_oos": "FAIL",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "PASS",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1005,
+   "max_drawdown": -0.2276,
+   "sharpe": 0.932,
+   "calmar": 0.4413,
+   "cumulative_return": 4.8658,
+   "monthly_win_rate": 0.5837,
+   "years": 18.48,
+   "num_rebalance": 222,
+   "avg_holdings": 19.77,
+   "monthly_turnover_est": 0.294
+  },
+  "dsr_detail": {
+   "dsr": 0.997,
+   "sr_period": 0.05871,
+   "sr0_expected_max": 0.016628,
+   "T": 4490,
+   "skew": -0.679,
+   "kurtosis": 12.846,
+   "n_trials": 57
+  },
+  "icir_is": 0.3424,
+  "oos_p": 0.0385,
+  "max_corr": 0.0351,
+  "mdd_deterioration_pp": -7.1
+ },
+ "v3f_grm_trr": {
+  "verdict": "PASS",
+  "gates": {
+   "g1_icir_is": "PASS",
+   "g2_icir_oos": "PASS",
+   "g3_max_corr": "PASS",
+   "g4_dsr": "PASS",
+   "g5_logic": "PASS",
+   "g6_mdd_vs_parent": "PASS"
+  },
+  "metrics": {
+   "annual_return": 0.1239,
+   "max_drawdown": -0.2947,
+   "sharpe": 0.8193,
+   "calmar": 0.4204,
+   "cumulative_return": 7.6579,
+   "monthly_win_rate": 0.5928,
+   "years": 18.48,
+   "num_rebalance": 222,
+   "avg_holdings": 19.86,
+   "monthly_turnover_est": 0.3062
+  },
+  "dsr_detail": {
+   "dsr": 0.9647,
+   "sr_period": 0.05161,
+   "sr0_expected_max": 0.024103,
+   "T": 4490,
+   "skew": -0.669,
+   "kurtosis": 8.5,
+   "n_trials": 57
+  },
+  "icir_is": 0.5612,
+  "oos_p": 0.0593,
+  "max_corr": 0.0488,
+  "mdd_deterioration_pp": -0.39
+ }
+}

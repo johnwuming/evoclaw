@@ -1,0 +1,76 @@
+{
+  "version": "v3e_peg_dd",
+  "evaluated_at": "2026-08-16 16:46:29",
+  "oos_split": "2021-01",
+  "n_trials": 57,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1005,
+    "max_drawdown": -0.2276,
+    "sharpe": 0.932,
+    "calmar": 0.4413,
+    "cumulative_return": 4.8658,
+    "monthly_win_rate": 0.5837,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.77,
+    "monthly_turnover_est": 0.294
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "FAIL",
+      "icir_is_annualized": 0.3424,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "FAIL",
+      "p_one_sided": 0.0385,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.00778,
+      "mean_ic_oos": -0.01046,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.6707
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0351,
+      "worst_pair": [
+        "peg_np",
+        "roa_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "peg_np"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.997,
+      "sr_period": 0.05871,
+      "sr0_expected_max": 0.016628,
+      "T": 4490,
+      "skew": -0.679,
+      "kurtosis": 12.846,
+      "n_trials": 57,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "林奇PEG选股 × q3z + 回撤触发(v2d_dd血统): dd≤-8%仓位×0.45, 修复≥-3%恢复; v2d_dd 已证 MDD -19.98% 是现役最深的回撤压缩器, 换PEG选股试图在保持MDD的同时拉回年化"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2276,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": -7.1,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

@@ -1,0 +1,76 @@
+{
+  "version": "v3d_buf_trr",
+  "evaluated_at": "2026-08-16 16:46:29",
+  "oos_split": "2021-01",
+  "n_trials": 57,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1238,
+    "max_drawdown": -0.2929,
+    "sharpe": 0.808,
+    "calmar": 0.4228,
+    "cumulative_return": 7.65,
+    "monthly_win_rate": 0.5792,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.68,
+    "monthly_turnover_est": 0.3131
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5752,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0634,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.01376,
+      "mean_ic_oos": -0.00142,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0987
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0498,
+      "worst_pair": [
+        "buf_quality",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "buf_quality"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9587,
+      "sr_period": 0.0509,
+      "sr0_expected_max": 0.024515,
+      "T": 4490,
+      "skew": -0.63,
+      "kurtosis": 8.141,
+      "n_trials": 57,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "巴菲特质量带 × v2b_trr择时: buf_quality = ROE_ttm - 0.3·debt_to_asset + 0.5·clip(cf_np_ratio,0,3), 高ROE+低杠杆+强现金流=持续竞争优势(护城河代理); 质量带是价值大师中唯一IC非负指标(IC precheck +0.0076)"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2929,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": -0.57,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "PASS",
+  "notes": []
+}

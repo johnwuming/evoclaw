@@ -1,0 +1,11 @@
+{
+ "annual_return": 0.2625,
+ "max_drawdown": -0.6949,
+ "sharpe": 0.8806,
+ "cumulative_return": 73.3069,
+ "calmar": 0.3778,
+ "monthly_win_rate": 0.5837,
+ "avg_holdings": 19.68,
+ "period_start": "2006-01-04",
+ "period_end": "2024-06-28"
+}

@@ -1,0 +1,76 @@
+{
+  "version": "v3c_peg_trr",
+  "evaluated_at": "2026-08-16 16:46:29",
+  "oos_split": "2021-01",
+  "n_trials": 57,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1465,
+    "max_drawdown": -0.3073,
+    "sharpe": 0.9638,
+    "calmar": 0.4766,
+    "cumulative_return": 11.5008,
+    "monthly_win_rate": 0.5928,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.77,
+    "monthly_turnover_est": 0.294
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "FAIL",
+      "icir_is_annualized": 0.3424,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "FAIL",
+      "p_one_sided": 0.0385,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.00778,
+      "mean_ic_oos": -0.01046,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.6707
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0351,
+      "worst_pair": [
+        "peg_np",
+        "roa_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "peg_np"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9925,
+      "sr_period": 0.06071,
+      "sr0_expected_max": 0.023527,
+      "T": 4490,
+      "skew": -0.687,
+      "kurtosis": 8.779,
+      "n_trials": 57,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "林奇PEG选股 × q3z×MA200趋势择时(v2b_trr血统): 价值选股拉年化 + 双信号择时压回撤; 目标组合拳验证 a2c 结论'回撤压缩靠择时, 年化靠选股alpha'——PEG进排序, 择时不动"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.3073,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 0.87,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

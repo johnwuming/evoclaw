@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T16:30:03",
+  "generated_at": "2026-08-16T17:00:02",
   "active": "v2b_trr",
   "versions": [
     {
@@ -819,12 +819,24 @@
       "files_note": "results/a2c_v2f_lv_{full,locked}_metrics.json"
     },
     {
-      "version_id": "v3a_peg_formal",
+      "version_id": "v3a_peg",
       "strategy_prefix": "a4d_v3a_peg_formal",
-      "status": "backtest-only",
-      "strategy": null,
-      "registered_at": null,
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 16:44:46",
       "windows": {
+        "full": {
+          "annual_return": 0.2534,
+          "max_drawdown": -0.721,
+          "sharpe": 0.9152,
+          "calmar": 0.3515,
+          "cumulative_return": 104.1384,
+          "monthly_win_rate": 0.5749,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
         "locked": {
           "annual_return": 0.2472,
           "max_drawdown": -0.721,
@@ -838,7 +850,177 @@
           "num_rebalance": 222
         }
       },
-      "files_note": "results/a4d_v3a_peg_formal_{full,locked}_metrics.json（未注册 registry）"
+      "files_note": "results/a4d_v3a_peg_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v3b_glm",
+      "strategy_prefix": "a4d_v3b_glm_formal",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 16:44:46",
+      "windows": {
+        "full": {
+          "annual_return": 0.2124,
+          "max_drawdown": -0.6776,
+          "sharpe": 0.7896,
+          "calmar": 0.3135,
+          "cumulative_return": 51.9811,
+          "monthly_win_rate": 0.5789,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2048,
+          "max_drawdown": -0.6776,
+          "sharpe": 0.7571,
+          "calmar": 0.3022,
+          "cumulative_return": 30.2847,
+          "monthly_win_rate": 0.5792,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a4d_v3b_glm_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v3c_peg_trr",
+      "strategy_prefix": "a4d_v3c_peg_trr_formal",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 16:44:46",
+      "windows": {
+        "full": {
+          "annual_return": 0.1474,
+          "max_drawdown": -0.3073,
+          "sharpe": 0.9837,
+          "calmar": 0.4797,
+          "cumulative_return": 16.0038,
+          "monthly_win_rate": 0.5789,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1465,
+          "max_drawdown": -0.3073,
+          "sharpe": 0.9638,
+          "calmar": 0.4766,
+          "cumulative_return": 11.5008,
+          "monthly_win_rate": 0.5928,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a4d_v3c_peg_trr_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v3d_buf_trr",
+      "strategy_prefix": "a4d_v3d_buf_trr_formal",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 16:44:46",
+      "windows": {
+        "full": {
+          "annual_return": 0.125,
+          "max_drawdown": -0.2929,
+          "sharpe": 0.8257,
+          "calmar": 0.4268,
+          "cumulative_return": 10.324,
+          "monthly_win_rate": 0.5789,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1238,
+          "max_drawdown": -0.2929,
+          "sharpe": 0.808,
+          "calmar": 0.4228,
+          "cumulative_return": 7.65,
+          "monthly_win_rate": 0.5792,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a4d_v3d_buf_trr_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v3e_peg_dd",
+      "strategy_prefix": "a4d_v3e_peg_dd_formal",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 16:44:46",
+      "windows": {
+        "full": {
+          "annual_return": 0.0979,
+          "max_drawdown": -0.2276,
+          "sharpe": 0.9131,
+          "calmar": 0.4302,
+          "cumulative_return": 5.8571,
+          "monthly_win_rate": 0.5709,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1005,
+          "max_drawdown": -0.2276,
+          "sharpe": 0.932,
+          "calmar": 0.4413,
+          "cumulative_return": 4.8658,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a4d_v3e_peg_dd_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v3f_grm_trr",
+      "strategy_prefix": "a4d_v3f_grm_trr_formal",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 16:44:46",
+      "windows": {
+        "full": {
+          "annual_return": 0.1251,
+          "max_drawdown": -0.2947,
+          "sharpe": 0.8368,
+          "calmar": 0.4245,
+          "cumulative_return": 10.3469,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1239,
+          "max_drawdown": -0.2947,
+          "sharpe": 0.8193,
+          "calmar": 0.4204,
+          "cumulative_return": 7.6579,
+          "monthly_win_rate": 0.5928,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a4d_v3f_grm_trr_formal_{full,locked}_metrics.json"
     }
   ]
 }

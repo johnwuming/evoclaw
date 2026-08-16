@@ -1,0 +1,76 @@
+{
+  "version": "v3b_glm",
+  "evaluated_at": "2026-08-16 16:46:29",
+  "oos_split": "2021-01",
+  "n_trials": 57,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2048,
+    "max_drawdown": -0.6776,
+    "sharpe": 0.7571,
+    "calmar": 0.3022,
+    "cumulative_return": 30.2847,
+    "monthly_win_rate": 0.5792,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.86,
+    "monthly_turnover_est": 0.3062
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5612,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0593,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.01344,
+      "mean_ic_oos": -0.00206,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.1437
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0488,
+      "worst_pair": [
+        "graham_score",
+        "circ_mv"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "graham_score"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.4972,
+      "sr_period": 0.04769,
+      "sr0_expected_max": 0.047797,
+      "T": 4490,
+      "skew": -0.578,
+      "kurtosis": 6.496,
+      "n_trials": 57,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "格雷厄姆烟蒂分进选股层(裸): graham_score = -ln(PB)-ln(PE)+2·cash_to_asset-debt_to_asset, 低PB低PE高现金低杠杆=安全边际; 格雷厄姆'烟蒂股'买在净资产折扣; blend 0.5mv+0.5graham 测裸价值改造"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "FAIL",
+      "mdd_candidate": -0.6776,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 37.9,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}
