@@ -58,3 +58,8 @@
 - C−B 增量（ann）：full +0.71pp（26.47 vs 25.76）；locked +0.74pp（26.88 vs 26.14）
 - 五门禁状态：BUB（无财务过滤）ann -1.40%/mdd -98% vs B（有过滤）ann +25.76%/mdd -70% → 五门禁是幸存者偏差闸门
 - 待办：写报告 → decision-log → VPS 镜像 → completion
+
+## 19:25 报告已推送 HP（步骤4过）
+- results/q4b-fullpool-baseline-final.md 4412B，head 已验
+- decision-log 尾部 ts=2026-08-15 13:48:16 / D-20260815-010
+- 待办：decision-log 入档(R-208/R-213) → VPS 镜像 → completion jsonl
