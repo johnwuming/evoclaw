@@ -19,3 +19,7 @@
 - scp 回 VPS: /root/backups/quant-results-model-20260816.tar.gz (9.9M), md5 一致 ✓
 - HP 同步留档: ~/quant-backups/quant-results-model-20260816.tar.gz, md5 一致 ✓
 - 三处副本（VPS /root/backups、HP ~/quant-backups、HP /tmp）校验完成，备份验证通过，可执行破坏性操作
+
+## 步骤2 清空 HP results/（19:28 完成）
+- 保留 3 文件确认存在后删除其余 600 项（清单存 HP /tmp/results-to-delete-20260816.txt）
+- 结果: results/ 仅剩 R-188 种子文档、factor-expansion-report.md、factor_catalog_v3.json ✓
