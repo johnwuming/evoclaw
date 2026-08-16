@@ -1,0 +1,754 @@
+{
+  "generated_at": "2026-08-16T16:00:02",
+  "active": "v2b_trr",
+  "versions": [
+    {
+      "version_id": "v2b_trr",
+      "strategy_prefix": "a2c_v2b_trr",
+      "status": "active",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 15:23:48",
+      "windows": {
+        "full": {
+          "annual_return": 0.1499,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9411,
+          "calmar": 0.5018,
+          "cumulative_return": 16.7698,
+          "monthly_win_rate": 0.5992,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1515,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9356,
+          "calmar": 0.5074,
+          "cumulative_return": 12.5597,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2c_v2b_trr_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "a2_equivcheck",
+      "strategy_prefix": "a2_equivcheck",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.2635,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.9027,
+          "calmar": 0.3791,
+          "cumulative_return": 122.8777,
+          "monthly_win_rate": 0.587,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2626,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.885,
+          "calmar": 0.3779,
+          "cumulative_return": 73.3822,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2_equivcheck_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a2b_equivcheck",
+      "strategy_prefix": "a2b_equivcheck",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.2635,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.9027,
+          "calmar": 0.3791,
+          "cumulative_return": 122.8777,
+          "monthly_win_rate": 0.587,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2626,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.885,
+          "calmar": 0.3779,
+          "cumulative_return": 73.3822,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_equivcheck_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a2b_repro_v1e",
+      "strategy_prefix": "a2b_repro_v1e",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1773,
+          "max_drawdown": -0.6671,
+          "sharpe": 0.7592,
+          "calmar": 0.2657,
+          "cumulative_return": 27.871,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1689,
+          "max_drawdown": -0.6671,
+          "sharpe": 0.7239,
+          "calmar": 0.2532,
+          "cumulative_return": 16.8895,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_repro_v1e_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a2cx_equiv",
+      "strategy_prefix": "a2cx_equiv",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1584,
+          "max_drawdown": -0.3474,
+          "sharpe": 0.9214,
+          "calmar": 0.456,
+          "cumulative_return": 19.7056,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.158,
+          "max_drawdown": -0.3474,
+          "sharpe": 0.9051,
+          "calmar": 0.4548,
+          "cumulative_return": 14.0455,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2cx_equiv_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "v0_seed",
+      "strategy_prefix": "seedB_v0",
+      "status": "retired",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:30:00",
+      "windows": {
+        "full": {
+          "annual_return": 0.2635,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.9027,
+          "calmar": 0.3791,
+          "cumulative_return": 122.8777,
+          "monthly_win_rate": 0.587,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2626,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.885,
+          "calmar": 0.3779,
+          "cumulative_return": 73.3822,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/seedB_v0_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1a_score",
+      "strategy_prefix": "a2_v1a_score",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:08:29",
+      "windows": {
+        "full": {
+          "annual_return": 0.22,
+          "max_drawdown": -0.7017,
+          "sharpe": 0.8346,
+          "calmar": 0.3136,
+          "cumulative_return": 59.2394,
+          "monthly_win_rate": 0.5951,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2155,
+          "max_drawdown": -0.7017,
+          "sharpe": 0.8098,
+          "calmar": 0.3072,
+          "cumulative_return": 35.8666,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2_v1a_score_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1b_mvq",
+      "strategy_prefix": "a2_v1b_mvq",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:08:29",
+      "windows": {
+        "full": {
+          "annual_return": 0.2509,
+          "max_drawdown": -0.6688,
+          "sharpe": 0.8967,
+          "calmar": 0.3751,
+          "cumulative_return": 99.8101,
+          "monthly_win_rate": 0.587,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2475,
+          "max_drawdown": -0.6688,
+          "sharpe": 0.8735,
+          "calmar": 0.3701,
+          "cumulative_return": 58.5789,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2_v1b_mvq_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1c_liq",
+      "strategy_prefix": "a2_v1c_liq",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:08:29",
+      "windows": {
+        "full": {
+          "annual_return": 0.2629,
+          "max_drawdown": -0.7036,
+          "sharpe": 0.9002,
+          "calmar": 0.3736,
+          "cumulative_return": 121.664,
+          "monthly_win_rate": 0.587,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2619,
+          "max_drawdown": -0.7036,
+          "sharpe": 0.8824,
+          "calmar": 0.3723,
+          "cumulative_return": 72.649,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2_v1c_liq_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1d_cv",
+      "strategy_prefix": "a2_v1d_cv",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:08:29",
+      "windows": {
+        "full": {
+          "annual_return": 0.2192,
+          "max_drawdown": -0.7231,
+          "sharpe": 0.8135,
+          "calmar": 0.3031,
+          "cumulative_return": 58.3789,
+          "monthly_win_rate": 0.587,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2158,
+          "max_drawdown": -0.7231,
+          "sharpe": 0.7916,
+          "calmar": 0.2984,
+          "cumulative_return": 36.0068,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2_v1d_cv_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1e_vol",
+      "strategy_prefix": "a2_v1e_vol",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:08:29",
+      "windows": {
+        "full": {
+          "annual_return": 0.1773,
+          "max_drawdown": -0.6671,
+          "sharpe": 0.7592,
+          "calmar": 0.2657,
+          "cumulative_return": 27.871,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1689,
+          "max_drawdown": -0.6671,
+          "sharpe": 0.7239,
+          "calmar": 0.2532,
+          "cumulative_return": 16.8895,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2_v1e_vol_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1f_lv70",
+      "strategy_prefix": "a2b_v1f_lv70",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:51:57",
+      "windows": {
+        "full": {
+          "annual_return": 0.1708,
+          "max_drawdown": -0.6551,
+          "sharpe": 0.7489,
+          "calmar": 0.2608,
+          "cumulative_return": 24.7973,
+          "monthly_win_rate": 0.5709,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1647,
+          "max_drawdown": -0.6551,
+          "sharpe": 0.7206,
+          "calmar": 0.2515,
+          "cumulative_return": 15.7497,
+          "monthly_win_rate": 0.5701,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_v1f_lv70_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1g_ivw",
+      "strategy_prefix": "a2b_v1g_ivw",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:51:57",
+      "windows": {
+        "full": {
+          "annual_return": 0.2694,
+          "max_drawdown": -0.6973,
+          "sharpe": 0.9287,
+          "calmar": 0.3864,
+          "cumulative_return": 135.4927,
+          "monthly_win_rate": 0.5992,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2732,
+          "max_drawdown": -0.6973,
+          "sharpe": 0.9204,
+          "calmar": 0.3918,
+          "cumulative_return": 85.7754,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_v1g_ivw_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1h_buf",
+      "strategy_prefix": "a2b_v1h_buf",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:51:57",
+      "windows": {
+        "full": {
+          "annual_return": 0.2707,
+          "max_drawdown": -0.6891,
+          "sharpe": 0.934,
+          "calmar": 0.3928,
+          "cumulative_return": 138.388,
+          "monthly_win_rate": 0.5789,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2699,
+          "max_drawdown": -0.6891,
+          "sharpe": 0.9155,
+          "calmar": 0.3917,
+          "cumulative_return": 81.7537,
+          "monthly_win_rate": 0.5792,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_v1h_buf_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1i_q3z",
+      "strategy_prefix": "a2b_v1i_q3z",
+      "status": "sota",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:51:57",
+      "windows": {
+        "full": {
+          "annual_return": 0.1584,
+          "max_drawdown": -0.3474,
+          "sharpe": 0.9214,
+          "calmar": 0.456,
+          "cumulative_return": 19.7056,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.158,
+          "max_drawdown": -0.3474,
+          "sharpe": 0.9051,
+          "calmar": 0.4548,
+          "cumulative_return": 14.0455,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_v1i_q3z_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1j_vt18",
+      "strategy_prefix": "a2b_v1j_vt18",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:51:57",
+      "windows": {
+        "full": {
+          "annual_return": 0.1852,
+          "max_drawdown": -0.5015,
+          "sharpe": 0.8649,
+          "calmar": 0.3692,
+          "cumulative_return": 32.1369,
+          "monthly_win_rate": 0.5789,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1808,
+          "max_drawdown": -0.5015,
+          "sharpe": 0.8395,
+          "calmar": 0.3605,
+          "cumulative_return": 20.5703,
+          "monthly_win_rate": 0.5747,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_v1j_vt18_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v1k_q5z",
+      "strategy_prefix": "a2b_v1k_q5z",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 14:51:57",
+      "windows": {
+        "full": {
+          "annual_return": 0.1704,
+          "max_drawdown": -0.3737,
+          "sharpe": 0.9316,
+          "calmar": 0.4559,
+          "cumulative_return": 24.5942,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1701,
+          "max_drawdown": -0.3737,
+          "sharpe": 0.9173,
+          "calmar": 0.4552,
+          "cumulative_return": 17.2341,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2b_v1k_q5z_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v2a_deep",
+      "strategy_prefix": "a2c_v2a_deep",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 15:23:48",
+      "windows": {
+        "full": {
+          "annual_return": 0.1522,
+          "max_drawdown": -0.3251,
+          "sharpe": 0.9181,
+          "calmar": 0.4682,
+          "cumulative_return": 17.5344,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1511,
+          "max_drawdown": -0.3251,
+          "sharpe": 0.9,
+          "calmar": 0.4648,
+          "cumulative_return": 12.4696,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2c_v2a_deep_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v2c_vt13",
+      "strategy_prefix": "a2c_v2c_vt13",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 15:23:48",
+      "windows": {
+        "full": {
+          "annual_return": 0.1207,
+          "max_drawdown": -0.2936,
+          "sharpe": 0.8638,
+          "calmar": 0.411,
+          "cumulative_return": 9.4651,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1188,
+          "max_drawdown": -0.2936,
+          "sharpe": 0.8462,
+          "calmar": 0.4045,
+          "cumulative_return": 6.9571,
+          "monthly_win_rate": 0.5792,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2c_v2c_vt13_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v2d_dd",
+      "strategy_prefix": "a2c_v2d_dd",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 15:23:48",
+      "windows": {
+        "full": {
+          "annual_return": 0.094,
+          "max_drawdown": -0.1998,
+          "sharpe": 0.859,
+          "calmar": 0.4706,
+          "cumulative_return": 5.3703,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.0951,
+          "max_drawdown": -0.1998,
+          "sharpe": 0.8568,
+          "calmar": 0.4759,
+          "cumulative_return": 4.3554,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2c_v2d_dd_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v2e_dvt",
+      "strategy_prefix": "a2c_v2e_dvt",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 15:23:48",
+      "windows": {
+        "full": {
+          "annual_return": 0.1231,
+          "max_drawdown": -0.2861,
+          "sharpe": 0.8729,
+          "calmar": 0.4305,
+          "cumulative_return": 9.9469,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.121,
+          "max_drawdown": -0.2861,
+          "sharpe": 0.8545,
+          "calmar": 0.4229,
+          "cumulative_return": 7.2537,
+          "monthly_win_rate": 0.5792,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2c_v2e_dvt_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v2f_lv",
+      "strategy_prefix": "a2c_v2f_lv",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 15:23:48",
+      "windows": {
+        "full": {
+          "annual_return": 0.1115,
+          "max_drawdown": -0.3363,
+          "sharpe": 0.7848,
+          "calmar": 0.3315,
+          "cumulative_return": 7.832,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1069,
+          "max_drawdown": -0.3363,
+          "sharpe": 0.7525,
+          "calmar": 0.3177,
+          "cumulative_return": 5.5293,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a2c_v2f_lv_{full,locked}_metrics.json"
+    }
+  ]
+}
