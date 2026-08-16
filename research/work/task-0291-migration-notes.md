@@ -57,3 +57,8 @@
 - root 侧已有旧副本（6月底），ubuntu 侧更新（7/8、7/17）→ 按生产为准 rsync ubuntu → root，nginx 两工具 3 处 alias 改 /root
 - 验证：/name-quiz/ 200、/styles/index.html 200、/mystic/index.html 200
 - **nginx 全配置（sites-enabled + conf.d）home/ubuntu 引用：0**
+
+## F. 附加：name-quiz + mysticmirror-styles ✅（12:12，主agent执行）
+- root 侧已有旧副本（6月底），ubuntu 侧更新（7/8、7/17）→ 按生产为准 rsync ubuntu → root，nginx 两工具 3 处 alias 改 /root
+- 验证：/name-quiz/ 200、/styles/index.html 200、/mystic/index.html 200
+- **nginx 全配置（sites-enabled + conf.d）home/ubuntu 引用：0**
