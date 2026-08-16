@@ -13,21 +13,11 @@ WATCH_DIRS=(
     "/root/.openclaw/workspace"
 )
 
-# 构建 inotifywait 参数：只监听存在的目录（目录不存在会导致 inotifywait 报错退出 → systemd 无限重启）
+# 构建 inotifywait 参数
 WATCH_ARGS=()
 for d in "${WATCH_DIRS[@]}"; do
-    if [ -d "$d" ]; then
-        WATCH_ARGS+=("$d")
-    else
-        echo "[inotify-daemon] skip missing watch dir: $d"
-    fi
+    WATCH_ARGS+=("$d")
 done
-
-# 没有有效监听目录则直接退出（避免空参数）
-if [ ${#WATCH_ARGS[@]} -eq 0 ]; then
-    echo "[inotify-daemon] no valid watch dirs, exiting"
-    exit 1
-fi
 
 inotifywait -m -r -e create,modify,moved_to,moved_from,delete --format '%w%f' "${WATCH_ARGS[@]}" | while read filepath; do
     # 只处理 md/json/sh 文件
