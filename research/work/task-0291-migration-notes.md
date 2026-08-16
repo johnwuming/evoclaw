@@ -27,3 +27,28 @@
 - **验证**：is-active=active；curl 8055/ → 200；curl /api/tasks → 返回真实 JSON（task-0292 等任务数据，db 可读）；新实例已在 root 侧写 metrics.db-wal（12:07 时间戳）
 - **附带**：agent-dashboard.bak-20260801-194935（2.8M）→ tar 217K 移 /root/backups/agent-dashboard.bak-20260801-194935.tar.gz，原目录已删
 - **回滚**：service 改回 ubuntu 路径 + restart；软链重建 ln -s（root 侧实体目录保留即可用）
+
+## D. bill-editor ✅（12:09 完成，停服窗口仅 3 秒：12:09:52→12:09:55）
+- **迁移前**：systemd WorkingDirectory/ExecStart 指向 ubuntu 副本 + ubuntu node v22.23.1；nginx /etc/nginx/sites-enabled/bill-editor 两处 alias（desktop/mobile 静态资源）指向 ubuntu；生产 data.db（5.6M）持续被写
+- **改动**：① rsync desktop/mobile/public 到 root 仓库副本（diff 确认一致，node_modules root 侧更全 84:81，依赖冒烟 express 加载 OK）② 停服 → cp data.db（干净关闭无 journal）③ service 改 /root 路径 + root node v22.23.2 ④ daemon-reload + start ⑤ nginx 两处 alias 改 /root，nginx -t PASS + reload
+- **验证**：is-active=active；HTTPS 8052 / → 302（正常跳登录）；/billing/ → 200；/billing/mobile/ → 200；API /api/bills → {"error":"未登录"}（鉴权正常=服务+db 可读）
+- **回滚**：service/nginx 改回 ubuntu 路径 + restart/reload；ubuntu 副本全量保留未动
+
+## E. 最终核查 ✅（12:10）
+- crontab ubuntu 残留：0（原 3 条已全改 /root）
+- 业务进程 ubuntu 残留：0（inotify 已跑 /root 路径）
+- systemd 单元 /root 指向：5/5（bill-editor、agent-dashboard、evolving-claw-sync 的 ExecStart/WorkingDirectory）
+- 服务状态：bill-editor/agent-dashboard/evolving-claw-sync/dsh-web/nginx 全 active
+
+## 确认可删清单（用户二次确认后执行，预计回收 ~2.1G+）
+- /home/ubuntu/.openclaw/workspace/tools/agent-dashboard（257M，root 已有完整实体副本）
+- /home/ubuntu/.openclaw/workspace/tools/bill-editor（146M，源码一致+db 已拷贝）
+- /home/ubuntu/.openclaw/evolving-claw-repo（11M，已 cp -a 到 /root）
+- /home/ubuntu/.lighthouse（仅备份脚本 68K 已迁，但含历史 bak 数据需确认）
+- /home/ubuntu/.openclaw 其余（npm 缓存 1.5G 等，见 R-212 M5/H2）
+- ⚠️ 前提：观察 24-48h 服务稳定 + 用户确认
+
+## 遗留事项
+- nginx sites-enabled/bill-editor 内 name-quiz / mysticmirror-styles 两处 alias 仍指 ubuntu 路径（root 侧无这两个工具目录，属独立工具迁移，未动）
+- /root/.openclaw/evolving-claw-repo 仓库 git dirty 状态为迁移前既有（非本次引入）
+- 子agent完成 A/B/C 后异常中断（输出截断），D/E 由主 agent 接手完成并独立验证
