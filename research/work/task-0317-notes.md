@@ -23,3 +23,9 @@
 ## 步骤2 清空 HP results/（19:28 完成）
 - 保留 3 文件确认存在后删除其余 600 项（清单存 HP /tmp/results-to-delete-20260816.txt）
 - 结果: results/ 仅剩 R-188 种子文档、factor-expansion-report.md、factor_catalog_v3.json ✓
+
+## 步骤3 model/ 注册表重置（19:31 完成）
+- 历史 10 项全部归档至 model/archive-20260816/
+- 注册 model/v0_seed.json：种子B参数 div≥2%/roe≥15%/roa≥10%/mv升序Top20/price_cap=10，上下文含全量池+cost v2+一字板+审计锁+五门禁
+- decision-log.jsonl 重开，首行 D-20260816-SEEDB-RESET
+- R-188 种子文档格式已参照（简洁 JSON 格式注册）
