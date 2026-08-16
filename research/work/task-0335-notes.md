@@ -31,3 +31,28 @@
 - 页面级禁令（#screen-quant overflow-x:hidden 块、quantHScrollGuard、svg/img max-width、tl-body/desc 折行）均未动
 - 验证：node --check OK；systemctl restart agent-dashboard → active
 - 静态页核验（/tmp/task0335-page.html 落盘，不重复拉取）：`quant-table td{white-space:normal` 计数=0 ✅；quant-table-scroll 18 处（16 div + 1 CSS 规则 + 1 注释）✅；td.cell-wrap CSS 规则 1 处 ✅
+
+## CDP 实测（02:16，/tmp/task0335-cdp.mjs，完整日志 /tmp/task0335-cdp-run3.log）
+- 登录 POST /api/login → 200，dash_sess len=70
+- 视口×子页 6 组合，documentElement.scrollWidth==clientWidth 全部成立（无整页横滚）：
+  - Mobile 390x844：factor/btlc/models 均 390=390 ✅
+  - Desktop 1440x900：models/factor/btlc 均 1425=1425 ✅
+- 表格容器横滑（.quant-table-scroll）：
+  - Mobile 因子表 5 张（分类）：scW 871~1282 vs clW 340，全部 overflow+scrollable=true（scrollLeft=60 可设可读）✅
+  - Mobile 台账表 IT-（37行）：881 vs 318 可滑 ✅；五门禁表：741 vs 342 可滑 ✅；A-B-C 组/口径表：702 vs 318 可滑 ✅；代际表 708 vs 342 可滑 ✅；择时对照 912 vs 342 可滑 ✅
+  - Desktop：多数表恰好放下（scW==clW）；因子表 1282/966/973/1103 vs 902 与择时对照 912 vs 904 轻微溢出且可滑 ✅
+- 单行不折行：所有数据表 td computed white-space=nowrap，maxTdH=37~38（13px字号+16px内边距单行）✅
+  - 仅两处 maxTdH=50/71 为结构化双行内容（A/B/C 口径列显式 <br> 成本说明；择时表首列 name+version div），非文字折行 ✅
+  - cell-wrap 描述列（说明/备注/信号描述）按设计折行（mobile 信号说明 maxTdH=76 为 .cell-wrap 例外，不计违约）
+- quantHScrollGuard 未误伤：6 组合 scrollWidth==clientWidth → guard 内层降级循环全程未触发，表格未被动过 inline style ✅
+- KEYTABLES（desktop/btlc）：abc(存活池)/ledger(IT-)/gates(2018熊市) 全部 found+容器存在；factor 表在 factor 页由容器测量覆盖
+- 截图：/tmp/task0335-mobile-factor.png 85435B、/tmp/task0335-mobile-ledger.png 66938B、/tmp/task0335-desktop.png 104041B
+
+## 最终验收（02:2x）
+- node --check OK；agent-dashboard active
+- curl -s http://127.0.0.1:8055/ | grep -c 'quant-table td{white-space:normal' = 0 ✅
+- diff 备份 vs 现行：58 行变更，全部落在计划内（16 容器类 + 5 cell-wrap 标记 + CSS 块替换），无无关文件改动
+- JS 逻辑/API 零改动；quantHScrollGuard、页面级 overflow-x:hidden 约束原样保留
+
+## 结论
+两条规则均达成：表格列宽内容自适应单行显示+容器内横滑可用；卡片/图表无整页横向滚动。任务完成。
