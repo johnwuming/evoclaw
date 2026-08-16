@@ -70,3 +70,5 @@
 - 跑 full+locked 双区间，预计耗时类似 q4b C 组（数据加载~3-5min + 每区间回测~2-5min）
 - 第一次正式跑失败：seedB_run_v0.py 里 sys.argv 被导入期重写导致 which='none' 空跑（日志只有加载+DONE，无回测段）
 - 已修复（_args 先存再重写 argv），重新 nohup 启动 HP PID 1249810（20:06）
+- 第二次跑失败：BASE.clear() 导致 cfg 缺 drawdown_control 键 KeyError。修复为只 update 种子B 三参数（div_min=0.02/n_hold=20/min_amt=0），其余继承 q4b BASE（roe=0.15/roa=0.10/price_cap=10/sort=mv/dd默认off）
+- 第三次启动 HP PID 1251243（20:25），冒烟已证明引擎链路正常，本次预计 ~10-15min
