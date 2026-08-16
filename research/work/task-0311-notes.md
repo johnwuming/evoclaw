@@ -25,3 +25,20 @@
 - [x] created_by INSERT 默认 'web' → 'main-agent'（req.user 缺省时）
 - [x] retry 注释改"v4 重置 pending（主 agent 手动口，不再自动调度）"；DELETE 注释改"主 agent 清理口"
 - [x] node --check 通过；11531 → 11189 行（P1+P2 合计 -342 行）
+
+## 重启与验证（15:54-15:56，全部通过）
+- [x] systemctl restart agent-dashboard 一次完成（P1+P2 合并，无二次重启）→ is-active=active
+- [x] /api/tasks HTTP 200，247 个历史任务可读
+- [x] heartbeat.sh run 契约输出正常（CHECK/notifications/pending_review/running 四字段，识别到本任务 running）
+- [x] 审核冒烟：POST task-0312 → /internal/review approve（带 x-internal-token）→ status=done + review_summary 写入 → 通知文件 0 新增条目 → DELETE 后 404
+- [x] created_by 默认值验证 = main-agent（req.user 缺省路径）
+- [x] P4：task-0296 → cancelled，notes=v4死单归档：成果已由微信通道产出(q4b-fullpool-baseline-report.md)，登记作废 2026-08-16 task-0311
+- [x] 最终残留 grep（writeDispatchQueue/dispatchPendingTasks/SPAWN_TEAMS/buildSpawnPrompt/spawnAgentVia/COMPLETIONS_FILE_R126/DISPATCH_QUEUE/isDispatching/internal/dispatch/dispatch+pause端点/appendFileSync(NOTIFY_FILE）全部 0 匹配
+- [x] 红线未碰：requireInternalAuth、/internal/review 鉴权+decision、session-key 端点、GET 端点、PUT 状态联动、前端看板（TOC/筛选/配色/URL路由）均原样
+- 行数：11531 → 11189（-342）；另删 dispatch.log 17.8MB
+
+## 产物
+- server.js（瘦身后的任务中心）
+- /root/backups/dispatch.js.task0311（dispatch.js 归档）
+- server.js.bak-task0311-20260816（改前备份）
+- 保留 dispatch.js.bak-task0265-20260814（不在任务书范围，未动）
