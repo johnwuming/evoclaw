@@ -19,3 +19,11 @@
 - **改动**：cp 整个 .lighthouse/scripts（68K，含 backup_config.sh + probe_model.py + upgrade_guard.sh + weixin_bot_creator.py，另 3 个无 cron/systemd 引用但一并归口）→ /root/.lighthouse/scripts/，chown root；crontab 行改 /root 路径
 - **验证**：手动跑 --type auto 返回 success:true，产物 /etc/lighthouse/openclaw/bak/auto/openclaw-1786853166197-20260701-auto.json（12:06 落盘）
 - **回滚**：crontab 行改回即可
+
+## C. agent-dashboard ✅（12:07 完成，停服窗口 ~23 秒：12:06:45→12:07:08）
+- **迁移前**：root 侧 tools/agent-dashboard 是指向 ubuntu 实体目录的软链（257M：node_modules 20M、metrics.db 110M + wal 97M、tasks.db 1.4M + wal 4M、dashboard.db 0 字节疑似弃用）；service ExecStart/WorkingDirectory 全在 ubuntu 侧 node v22.23.1；cron collect-metrics.sh 走 ubuntu 路径（pull-hp-metrics.sh 已是 /root 路径，确认无需改）
+- **脚本内检查**：collect-metrics.sh / pull-hp-metrics.sh / server.js（PORT=8055，QUANT_REPORTS_DIR 已是 /root）均无 ubuntu 硬编码，无需改脚本内容
+- **改动**：① stop 服务（SQLite 干净关闭 checkpoint WAL）② rm 软链 → cp -a 全目录（2.0 秒）③ crontab collect-metrics 行改 /root ④ service ExecStart=/root/.nvm/versions/node/v22.23.2/bin/node + WorkingDirectory=/root ⑤ daemon-reload + start
+- **验证**：is-active=active；curl 8055/ → 200；curl /api/tasks → 返回真实 JSON（task-0292 等任务数据，db 可读）；新实例已在 root 侧写 metrics.db-wal（12:07 时间戳）
+- **附带**：agent-dashboard.bak-20260801-194935（2.8M）→ tar 217K 移 /root/backups/agent-dashboard.bak-20260801-194935.tar.gz，原目录已删
+- **回滚**：service 改回 ubuntu 路径 + restart；软链重建 ln -s（root 侧实体目录保留即可用）
