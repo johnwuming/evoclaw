@@ -63,3 +63,8 @@
 - SMOKE_SEEDB 2011（全量池+v2+一字板）: ann=-30.87%, mdd=-32.45%, avg_holdings=19.67/20（接近满仓20只，选股逻辑正常）, turnover 24.15%
 - 2011 年小盘股熊市，负收益符合历史认知（C组同期亦差）；引擎链路跑通
 - 注意：本次冒烟已在 results/ 落了 seedB_smoke_2011_* 产物（正式报告时说明为冒烟件）
+
+## 步骤7 正式回测启动（19:54）
+- HP 后台: nohup python scripts/seedB_run_v0.py all > logs/seedB_v0_run.log (HP PID 1248645)
+- 冒烟产物已清（seedB_smoke_2011_*）
+- 跑 full+locked 双区间，预计耗时类似 q4b C 组（数据加载~3-5min + 每区间回测~2-5min）
