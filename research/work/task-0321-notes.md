@@ -53,3 +53,8 @@
 
 ## 3. 执行记录
 - [21:30] 备份 server.js → server.js.bak-task0321-<ts>
+- [21:27] server.js 已备份 server.js.bak-task0321-20260816-212747（580899B）
+- [21:30] 前端结构确认：量化Tab 5子页(data/factor/models/btlc/paper)；基线API当前无调用方 → 新增基线回测卡挂 btlc 页 renderBtlcPage（9767行）版本切换器之后、!data.available 早退之前（seedB 卡独立于旧 btlc 管线，始终渲染）
+- api() 助手 L6049、esc() L6058、fmtPct L10267；CSS 变量 --card/--sub/--fg/--green/--red/--amber/--accent/--border/--fill 均在用
+- e2e 趋势图标题在 renderBtlcE2E（L9587，chart-title）；数据灰卡在 renderDataQuant M1.1 区块（L7963 quant-section-title）
+- auto_sync_notify.py（496行）：VPS 上跑、ssh 拉 HP(10.12.192.174)~/quant-evolve/results/ → VPS shared/results/04-投资研究/；model/ → workspace-quant/model/。缺：results→workspace-quant/results/ 镜像（看板读取路径）→ 加 Step4.5 mirror：include seedB_*/q4b* + 复用 RSYNC_EXCLUDES + exclude *
