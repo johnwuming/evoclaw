@@ -63,3 +63,8 @@
 - results/q4b-fullpool-baseline-final.md 4412B，head 已验
 - decision-log 尾部 ts=2026-08-15 13:48:16 / D-20260815-010
 - 待办：decision-log 入档(R-208/R-213) → VPS 镜像 → completion jsonl
+
+## 19:30 全部交付完成（步骤5/6过）
+- decision-log 已入档：D-20260816-Q4B-BC（baseline_closeout，R-208/R-213 基建收口闭环），grep count=1
+- VPS 镜像：/root/.openclaw/workspace-quant/results/ 已有 11 个 q4b 文件（报告 + 10 metrics JSON）
+- 剩余：写 .task-completions.jsonl → 完成
