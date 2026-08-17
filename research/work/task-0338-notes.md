@@ -112,3 +112,13 @@
 - 六门禁键名（ledger 实际格式）：g1_icir_is / g2_icir_oos / g3_max_corr / g4_dsr / g5_logic / g6_mdd_vs_parent
 - DSR 计算可复用 evolution_pipeline.py:~453（norm.cdf 公式，dsr_min=0.95）
 - ledger 尾 = v4e_gqg1x evaluate 行（REJECT）；decision-log 尾 = D-20260816-043（A5 closeout）→ A7 行/决策均未写，待本任务补
+
+### 批1补跑结果（12:5x，resume1 完成 469s）
+| 候选 | full | locked |
+|---|---|---|
+| v5d_amh55 | 12.93%/-31.03%/0.8587 | 13.18%/-31.03%/0.8606（已有）|
+| v5e_cv73(换手CV 0.7/0.3) | 12.48%/-29.89%/0.8343 | 12.69%/-29.89%/0.8348 → **无增量**（Sharpe 略降，换手未降 0.636，A7c"近端走强"未兑现）|
+| v5f_cal(日历1/4月×0.5) | 13.38%/-29.86%/0.9199 | 13.83%/-29.86%/0.9308 → **+1.41pp vs v4b**，MDD仅差0.87pp，**换手减半 0.314** |
+- amt_cv20 IC：mean -0.1888/ICIR -1.315/pos 9%/last12 -0.117（信号强但回测不兑现→微盘组合内无经济增量，与 v5e 结果互证）
+- DSR 复用：ep.deflated_sharpe(returns, n_trials)，dsr_min=0.95；n_trials 基数 67（A5 尾行 n_trials_cum）
+- locked 排名：v5b 14.52 > v5a 14.42 > v5c 14.25 > v5f 13.83 > v5d 13.18 > v5e 12.69 > v4b 12.42
