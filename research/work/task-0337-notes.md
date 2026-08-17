@@ -12,3 +12,16 @@
 
 ## HP 数据资产核查
 （待查：因子 catalog 字段清单、panel 数据日期范围、可用表）
+
+### [查证1] 万得微盘 8841431 构成与日历效应（中信银行财富管理/中信证券资管，新浪财经转载 2025-01-09）
+- 构成：剔除 ST/*ST/退市警示，市值最小 400 只，每日等权；成分市值中位数 17.78 亿
+- 长期：2010 至今累计 3881%，年化 28.78%（沪深300 年化 0.75%）；MDD -46.73%（东方财富财富号引回测，2026-04）
+- **日历效应（强证据）**：2018 年至今每一年 10-01~次年 03-31 微盘均阶段性跑输沪深300；2018/2021/2024 尤甚（2018 业绩雷、2021 核心资产虹吸、2024 量化监管）；机制=年报/一季报披露期业绩雷 + 年末资金回笼避险 + 退市新规担忧
+- 对本框架意义：v2b 双信号择时之外可叠加"季节减仓/春节效应"择时；纯日历规则、零数据成本 → 可测性极高
+- 来源：https://finance.sina.com.cn/roll/2025-01-09/doc-ineekqsv3025614.shtml
+- 同文：底部后第 1 季度业绩因子弱、第 2 季度 ROE 有效性回升（中信证券资管实验）→ 择时叠加项
+
+### [查证2] HP 数据资产实查（2026-08-17 SSH）
+- kline（all_stocks_merged.parquet，1461 万行）：date/code/open/close/high/volume/amount —— **无现成换手率列**，需流通股本或流通市值数据折算
+- derived/：dividend_events、factor_registry_financial_panel、fin_deep_monthly_panel_ak、fundamentals_monthly、fundamentals_delisted_monthly、ths_ttm_panel、pit_disclosure_map
+- factor_db.sqlite 存在，107 因子明细待查
