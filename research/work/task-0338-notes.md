@@ -60,3 +60,9 @@
 - amt_cv20（换手CV，DIR=-1 低好）：mean_ic **-0.189** / ICIR -1.32 / pos 9% / last12 -0.117 → **显著反向**（微盘内高换手CV反而收益高，与 BigQuant 全市场 -0.03 相反）
 - 结论：三个排序类因子 IC 预检均未通过（无正 IC 支撑），如实记录；按任务书仍进回测（单维度归因验证，预期贡献弱）
 - 附：原始 corr（调整前）：amt20 +0.106 / amihud20 +0.0039 / amt_cv20 +0.189
+
+### 10:50 引擎细节确认
+- DEFAULTS: limit_up_pct=0.098, cost_model=legacy→v2(回测用v2), limit_board=off→on
+- 引擎已消费: closes/prev_closes/susp/rets/amt/st_flag/opens/highs/lows/first_last/bench_nav
+- a5_runner 的 ext 分支已支持 amount_cv/volatility_20d；A7 需扩展 low_amount/amihud + ext_sign + e1_guard
+- 计划候选8个（单维度）：a=low_amount×3权重, b=amihud×2权重, c=amount_cv×1, d=日历×0.5, e=涨停剔除, f=次新剔除
