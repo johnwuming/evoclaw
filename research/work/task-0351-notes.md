@@ -28,3 +28,13 @@
 - v5h/v5f/v5g 为规则版: g1-g3 N/A(无新因子), p缺失→missW=.275(=.175p+.10corr)<0.30 非partial 仍在池
 - v6a_def/v0_seed: p/dsr双缺→missW=.35>.30→partial, 不入池(与设计一致)
 - 注意: 老PASS-pending组(从未上岗)中位数 .7079, 部分低于被拒的 v5i/v4a —— 这正是评分制要修复的"门禁过松保留平庸版本"问题, 报告中如实披露
+## 阶段2-2 实施+阶段3 回填（已完成 2026-08-17 23:0x）
+- 补丁落地: apply_s7.py 9处替换全命中; py_compile OK; score_composite×3; SCORED verdict ✓
+- 备份: HP scripts/evolution_pipeline.py.bak-r220s7-20260817-150439 (55603B=原件)
+- 改动面: 仅 evolution_pipeline.py + model/registry/v6a_def.json(+.bak-r220s7-demo); refresh_data.py 的 M 为现场既有,未触碰
+- 回填(用已部署模块实跑, 非原型): 池n=40, v5i_comb 池内#3/全场#4 ✓; 上岗组(.7755均值) vs 被拒27版(.5941/.5817), 上岗全部>被拒中位, 被拒最高v4a(.7719)<v2b/v5h ✓; 上岗vs被拒两两一致79/81=97.5% ✓ (参考AUC 79.5%披露)
+- partial: v6a_def(.55缺权)+v0_seed; stat_warn: v1批多数+3a/3b/4d_mfu_raw/4e_gqg1x (dsr<0.90, 均为老版本)
+- v6a_def试算: score=0.6446 missW=0.55 partial 不入池, 已写入registry(备份.bak-r220s7-demo)
+- decision-log 尾行 D-20260817-R220-7 (type=gate_scoring_deploy) ✓
+- 回填表: HP /tmp/backfill_table.md 已拉回 VPS /tmp/backfill_table.md (44行, 5039B)
+- 冷启动说明: 老版本registry不带score → 排名池初始仅含新评估版本+写入过score的版本; v6a_def为partial不入池
