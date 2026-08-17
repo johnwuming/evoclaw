@@ -98,3 +98,8 @@ pb_inv = 1/(circ_mv/equity)，方向已校正为引擎偏好（a4d 历史口径 
 - decision-log：D-20260817-A9-1（a9_closeout）。
 - 数据文件：a9_raw_universe_{full,locked}_*、a9_pb_ic_{monthly,summary}、a9_ranksum_{quality,raw}_{full,locked}_*（20 文件）、a9_timing_grid_{metrics,table,navs} + 独立 nav 若干。
 - 过程笔记：/tmp/a9-notes.md；本报告：results/a9-iteration-report.md。
+
+
+## 衔接注记（task-0348 A8 收尾，2026-08-17）
+
+本报告 E3 的 ranksum/zsum 与 task-0348 补跑的 bucket 版构成三方式对照闭环（详见 a8-iteration-report.md）：raw 宇宙年化排序 ranksum 21.76% > zscore 19.85% > bucket 18.29%，bucket 顶部分辨率不足、桶并列推高换手（0.536 全场最高），无候选过新血统线（bucket raw 年化 +2.55pp 但 MDD 恶化 4.21pp）。合成方式维度归因完毕，排序层后续转向因子集扩展与闸门内外配比。

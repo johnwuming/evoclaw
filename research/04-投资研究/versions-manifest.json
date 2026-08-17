@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T12:30:03",
+  "generated_at": "2026-08-17T13:00:03",
   "active": "v5h_xsub",
   "versions": [
     {
@@ -375,6 +375,108 @@
         }
       },
       "files_note": "results/a7x_ref_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a8_bucket_quality",
+      "strategy_prefix": "a8_bucket_quality",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1483,
+          "max_drawdown": -0.288,
+          "sharpe": 0.9921,
+          "calmar": 0.515,
+          "cumulative_return": 16.2907,
+          "monthly_win_rate": 0.6032,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1527,
+          "max_drawdown": -0.288,
+          "sharpe": 1.0052,
+          "calmar": 0.5301,
+          "cumulative_return": 12.8154,
+          "monthly_win_rate": 0.6063,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a8_bucket_quality_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a8_bucket_raw",
+      "strategy_prefix": "a8_bucket_raw",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1826,
+          "max_drawdown": -0.3401,
+          "sharpe": 1.1777,
+          "calmar": 0.537,
+          "cumulative_return": 30.7169,
+          "monthly_win_rate": 0.6397,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1829,
+          "max_drawdown": -0.3401,
+          "sharpe": 1.1762,
+          "calmar": 0.5379,
+          "cumulative_return": 21.3037,
+          "monthly_win_rate": 0.6244,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a8_bucket_raw_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a8x_equiv_v5h",
+      "strategy_prefix": "a8x_equiv_v5h",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1527,
+          "max_drawdown": -0.298,
+          "sharpe": 0.9861,
+          "calmar": 0.5124,
+          "cumulative_return": 17.6931,
+          "monthly_win_rate": 0.6113,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1574,
+          "max_drawdown": -0.298,
+          "sharpe": 0.9983,
+          "calmar": 0.5283,
+          "cumulative_return": 13.9047,
+          "monthly_win_rate": 0.6109,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a8x_equiv_v5h_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "a9_ranksum_quality",

@@ -1,0 +1,192 @@
+{
+  "task": "task-0348 A8 分桶打分补跑 + 三方式对照(zscore/ranksum/bucket)",
+  "specs": "[('log_mv', 1.0, -1), ('amt20', 1.0, -1), ('pb_inv', 0.7, 1.0), ('roe', 0.3, 1.0)]",
+  "bucket_semantics": "月度截面每因子 quintile 桶号0-4(sgn翻转后4=最优), score=Σw_i×桶号_i",
+  "anchor": {
+    "a8x_equiv_v5h_vs_a7_v5h_xsub_formal": "BIT_EXACT"
+  },
+  "modes": {
+    "a9_zsum_quality": {
+      "full": {
+        "annual_return": 0.154,
+        "max_drawdown": -0.2952,
+        "sharpe": 1.0191,
+        "calmar": 0.5218,
+        "cumulative_return": 18.1536,
+        "monthly_win_rate": 0.6154,
+        "monthly_turnover_est": 0.3273,
+        "avg_holdings": 18.72,
+        "years": 20.61,
+        "num_rebalance": 248
+      },
+      "locked": {
+        "annual_return": 0.1594,
+        "max_drawdown": -0.2952,
+        "sharpe": 1.0364,
+        "calmar": 0.5398,
+        "cumulative_return": 14.3742,
+        "monthly_win_rate": 0.6199,
+        "monthly_turnover_est": 0.3296,
+        "avg_holdings": 19.53,
+        "years": 18.48,
+        "num_rebalance": 222
+      }
+    },
+    "a9_zsum_raw": {
+      "full": {
+        "annual_return": 0.207,
+        "max_drawdown": -0.3459,
+        "sharpe": 1.315,
+        "calmar": 0.5986,
+        "cumulative_return": 47.3246,
+        "monthly_win_rate": 0.6275,
+        "monthly_turnover_est": 0.2522,
+        "avg_holdings": 19.92,
+        "years": 20.61,
+        "num_rebalance": 248
+      },
+      "locked": {
+        "annual_return": 0.1985,
+        "max_drawdown": -0.3459,
+        "sharpe": 1.2641,
+        "calmar": 0.5739,
+        "cumulative_return": 27.4041,
+        "monthly_win_rate": 0.6018,
+        "monthly_turnover_est": 0.2576,
+        "avg_holdings": 19.91,
+        "years": 18.48,
+        "num_rebalance": 222
+      }
+    },
+    "a9_ranksum_quality": {
+      "full": {
+        "annual_return": 0.1486,
+        "max_drawdown": -0.2878,
+        "sharpe": 0.9945,
+        "calmar": 0.5165,
+        "cumulative_return": 16.3885,
+        "monthly_win_rate": 0.6113,
+        "monthly_turnover_est": 0.3442,
+        "avg_holdings": 18.74,
+        "years": 20.61,
+        "num_rebalance": 248
+      },
+      "locked": {
+        "annual_return": 0.1533,
+        "max_drawdown": -0.2878,
+        "sharpe": 1.0092,
+        "calmar": 0.5325,
+        "cumulative_return": 12.9441,
+        "monthly_win_rate": 0.6154,
+        "monthly_turnover_est": 0.3472,
+        "avg_holdings": 19.55,
+        "years": 18.48,
+        "num_rebalance": 222
+      }
+    },
+    "a9_ranksum_raw": {
+      "full": {
+        "annual_return": 0.2216,
+        "max_drawdown": -0.3355,
+        "sharpe": 1.3624,
+        "calmar": 0.6605,
+        "cumulative_return": 60.8746,
+        "monthly_win_rate": 0.6559,
+        "monthly_turnover_est": 0.4582,
+        "avg_holdings": 19.94,
+        "years": 20.61,
+        "num_rebalance": 248
+      },
+      "locked": {
+        "annual_return": 0.2176,
+        "max_drawdown": -0.3355,
+        "sharpe": 1.3435,
+        "calmar": 0.6485,
+        "cumulative_return": 37.0224,
+        "monthly_win_rate": 0.6516,
+        "monthly_turnover_est": 0.4661,
+        "avg_holdings": 19.94,
+        "years": 18.48,
+        "num_rebalance": 222
+      }
+    },
+    "a8_bucket_quality": {
+      "full": {
+        "annual_return": 0.1483,
+        "max_drawdown": -0.288,
+        "sharpe": 0.9921,
+        "calmar": 0.515,
+        "cumulative_return": 16.2907,
+        "monthly_win_rate": 0.6032,
+        "monthly_turnover_est": 0.355,
+        "avg_holdings": 18.74,
+        "years": 20.61,
+        "num_rebalance": 248
+      },
+      "locked": {
+        "annual_return": 0.1527,
+        "max_drawdown": -0.288,
+        "sharpe": 1.0052,
+        "calmar": 0.5301,
+        "cumulative_return": 12.8154,
+        "monthly_win_rate": 0.6063,
+        "monthly_turnover_est": 0.359,
+        "avg_holdings": 19.55,
+        "years": 18.48,
+        "num_rebalance": 222
+      }
+    },
+    "a8_bucket_raw": {
+      "full": {
+        "annual_return": 0.1826,
+        "max_drawdown": -0.3401,
+        "sharpe": 1.1777,
+        "calmar": 0.537,
+        "cumulative_return": 30.7169,
+        "monthly_win_rate": 0.6397,
+        "monthly_turnover_est": 0.5344,
+        "avg_holdings": 19.89,
+        "years": 20.61,
+        "num_rebalance": 248
+      },
+      "locked": {
+        "annual_return": 0.1829,
+        "max_drawdown": -0.3401,
+        "sharpe": 1.1762,
+        "calmar": 0.5379,
+        "cumulative_return": 21.3037,
+        "monthly_win_rate": 0.6244,
+        "monthly_turnover_est": 0.5363,
+        "avg_holdings": 19.88,
+        "years": 18.48,
+        "num_rebalance": 222
+      }
+    }
+  },
+  "incumbent": {
+    "a7_v5h_xsub_full": {
+      "annual_return": 0.1527,
+      "max_drawdown": -0.298,
+      "sharpe": 0.9861,
+      "calmar": 0.5124,
+      "cumulative_return": 17.6931,
+      "monthly_win_rate": 0.6113,
+      "monthly_turnover_est": 0.3181,
+      "avg_holdings": 18.72,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "a7_v5h_xsub_locked": {
+      "annual_return": 0.1574,
+      "max_drawdown": -0.298,
+      "sharpe": 0.9983,
+      "calmar": 0.5283,
+      "cumulative_return": 13.9047,
+      "monthly_win_rate": 0.6109,
+      "monthly_turnover_est": 0.3197,
+      "avg_holdings": 19.53,
+      "years": 18.48,
+      "num_rebalance": 222
+    }
+  }
+}
