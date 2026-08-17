@@ -25,3 +25,9 @@
 - all_stocks_merged.parquet：14,613,191 行 × 8 列 = date,code,open,close,high,low,volume,amount
 - **有 amount（成交额），无 turnover（换手率）** → 换手率需用股本数据计算（查 fundamentals_monthly 是否含总/流通股本）
 - factor_db.sqlite 是因子元数据表（3 因子），非行情表；amount/turnover 在 kline
+
+### 09:50 追加
+- merged kline 已核对：有 amount，无 turnover（首查①过半结论；换手需股本表）
+- factor_db.sqlite=因子元数据表（非行情表）；行情字段在 merged parquet
+- dividend_events 列名查询多次 segfault（API 瞬时），改用落盘脚本再查
+- 访问路径确定：HP HTTP API（8060+key），SSH 端口拒绝
