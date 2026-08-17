@@ -90,3 +90,57 @@
 - 特殊处置：#12 战役目标 25%/-20%/1.2 从迭代评判摘除（是 openclaw goal 非评判标准）；#37 paper 月末 vs 回测月首口径 bug 级独立修复（已完成 task-0347）；#8 activate 人工确认删除（task-0345 执行）
 - 综合评分公式草案：0.35×S_stat + 0.25×S_oos + 0.15×S_is + 0.10×S_dd + 0.10×S_corr + 0.05×S_logic
 - **#7 评分制改造现状：R-220 已定但未实施**（pipeline 现读仍是一票否决 verdict 逻辑）；路线图第一项"[立即] #7 verdict 改造"尚未落地
+
+## 10. 各批次迭代报告要点（HP results/*-iteration-report.md 现读）
+### A2/task-0324（107因子进管线第一批，5 候选全 REJECT）
+- 基线 v0_seed：full 26.35%/-69.49%/0.903；locked 26.26%/-69.49%/0.885（裸选股无择时）
+- 候选：v1a_score 质量复合分 / v1b_mvq 小盘主导复合 / v1c_liq min_amt500万 / v1d_cv 成交额CV / v1e_vol 低波；全 REJECT
+- 首创 ext runner：对 engine.run_backtest 源码字符串级插入 ext 分支、exec 副本，引擎文件零改动；等价校验逐位一致 diffs={}
+- 基建口径从此确立：全量池+成本v2+一字板+审计锁（AUDIT_LOCK_END=2024-06-30）
+
+### A2B/task-0325（DSR 友好化，6 候选 2 PASS，v1i_q3z activate）
+- 先算 DSR 通过线再设计：N=45 时 σ_d≈0.0125（择时档）需 Sharpe≥0.84 → 降σ仓位类改动是过 g4 唯一现实路径
+- v1i_q3z（+q3z 估值择时 PE36月z>1降仓）五门禁全 PASS → activate；v1k_q5z PASS 留备选
+- 四路新 patch：inv_vol 加权 / rank_buffer / vt_target + 原有 ext，等价校验逐位一致
+
+### A2C/task-0327（回撤攻坚，6 候选 5 PASS，v2b_trr activate）
+- 父 v1i_q3z locked 15.80%/-34.74%/0.905；诊断四个≥30%回撤段：2008(-34.74%)/2011-12慢熊(-31.4%)/2016-18慢熊(-30.5%)/2015一字跌停(-29.9%仅8日)
+- 低估值慢熊 q3z 天然失明 → 趋势信号补位：v2b_trr = q3z×池内EW指数MA200趋势（月末破位×0.6）五门禁全 PASS → activate，成为长期现役（后被 v5h 替代转 sota）
+- 战役三目标 15%/10%/1.0 同时不可达（本批口径）→ 交付可达前沿 + 现役升级；Calmar 不变式首次提出（纯择时/风控到不了 25%+20%，需选股层真 alpha）
+- 5 PASS 4 留 pending，1 REJECT
+
+### A4D/task-0328（价值大师选股，6 候选 2 PASS 0 activate）
+- 大师指标 IC 预检全负：pb ICIR -1.626、peg_np -1.337、neff -0.796；buf_quality 唯一近零(+0.0035/+0.091)；lynch_bucket 无IC砍掉
+- 结论：质量小盘宇宙内价值指标 IC 全负，价值不能当排序主键；alpha 由小市值+成长主导
+- 0 activate，现役仍 v2b_trr
+
+### A5/task-0333（成长×质量+E1护栏，5 候选 2 PASS 0 activate）
+- 证据链三报告：a4d（价值IC负）+ holdings-postmortem task-0331（E1 砍20.8%尾部亏损/误杀12.1%赢家；G1 avg+21.2%/胜率78.4%）+ a2c（Calmar不变式）
+- v4b_mve1（仅加E1护栏）与 v4d_gqg1 六门全 PASS 留 pending；最优 v4b_mve1 12.42%/-28.99%/0.840 不优于 v2b_trr 15.15%/-29.86%/0.936
+- 核心结论：成长×质量复合在质量小盘宇宙无 alpha（IC -0.0265/-0.62 + 回测双证）；E1 单加压 MDD 但年化/Sharpe 双降；25%/-20%/1.2 前沿无交点需换赛道
+- v4b_mve1 成为 A7 骨架 parent
+- 新基建：ST 区间表加入（a5 起口径=全量池+成本v2+一字板+审计锁+ST区间表）
+
+### A7/task-0338（微盘宇宙 P0 增强因子，9 候选 4 PASS，v5h_xsub activate）★现役上岗批
+- 骨架 v4b_mve1；裁决：v5h_xsub（次新剔除 xsub_days=365）六门禁全 PASS 且 locked 三项全优于 v2b_trr → activate（D-20260817-001/-002），v2b_trr→sota
+- v5h locked 15.74%/-29.80%/0.998/Calmar 0.528
+- IC 预检：amt20 -0.107 / amt_cv20 -0.189（低成交额/低换手CV 收益更高）；amihud 近零 +0.0039
+- 前置证据 A7b（task-0339）：常驻现金曲线 每10%现金≈-1.31pp年化/+2.55pp MDD，Sharpe 单调缓降无拐点 → 现金只压回撤不补收益
+- 前置证据 A7c（task-0341）：动态画像 低成交额族近端仍有效（推进）、换手CV 近端走强（补测）、Amihud 全市场强但微盘增量弱
+- 次新剔除 +3.32pp 实测最强增益（R-220 引用）；涨停剔除 +2.32pp 未上岗
+
+### A8/task-0348（合成方式归因，ranksum/zscore/bucket 三方式对照）
+- 同因子集（log_mv1.0+amt20 1.0+pb_inv0.7+roe0.3）× 三方式：
+  quality 宇宙：zscore 15.94%/-29.52% 最优 > ranksum 15.33%/-28.78% > bucket 15.27%/-28.80%
+  raw 宇宙：ranksum 21.76%/-33.55%/1.344/0.649 最优 > zscore 19.85%/-34.59% > bucket 18.29%/-34.01%
+- bucket raw 年化+2.55pp 过线但 MDD 恶化4.21pp>2pp → 不注册
+- bucket 语义：月度截面 rank(pct)→符号翻转→floor(r×5) 得桶号0-4→Σ权重×桶号；月换手0.536 全场最高（并列推高换手）
+- 归因闭环：ranksum 排序层最优（抗极值+全序分辨率）；zscore quality 宇宙最优但 raw 被极值扭曲；bucket 顶部分辨率不足
+
+### A9/task-0342（原始宇宙对照+PB IC+排序合成+择时网格 40 组）→ 详见 R-222
+- raw locked 21.76%/-36.78%/1.215/0.592；四闸门=+6.02pp年化/+6.98pp MDD 真实安全换收益交易
+- PB IC：原始全宇宙 0.0576/0.521 vs 质量闸门内 0.0313/0.196（差2.7倍）；质量宇宙近12月 0.0042 失效；微盘底20%近12月 0.0007 归零
+- E3 raw 21.76%/-33.55%：闸门外价值暴露比纯去闸门省 3.23pp 回撤
+- E2 网格：MA15_on_f0 14.63%/-24.67%/0.593 最优（MDD改善5.13pp/年化损1.11pp）→ 用户 20:10 拍板注册 v6a_def candidate
+- 证伪1：q3z off 纯趋势全部 MDD -38%~-52%（外部 MA15 空仓说法不成立）；证伪2：A7b"MA缩短恶化"仅在重地板成立
+- 前沿：防守 MA15_on_f0(14.6/-24.7) — v5h(15.7/-29.8) — 进攻 E3 raw ranksum(21.8/-33.6)；25%/-20% 双目标无交点
