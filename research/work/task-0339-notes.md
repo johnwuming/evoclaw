@@ -21,3 +21,10 @@
 - A7 进程检查：ps 未见 a7/runner 进程（A7 批可能已结束或未起）；勿动其产物
 - 复跑机制：/tmp/a5_runner.py（18KB）patch q4b_run_BC.py 的 run_backtest（ext 排序/权重/inv_vol/vt_target/dd_trigger/value-mom/gq 分支），base_cfg 注入 SEEDP
 - 下一步：读 a5_runner main 流程 + base_cfg 复现 v4b_mve1 配置；设计现金注入方式
+
+### 10:30 runner 机制读通（a5_runner.py 362行）
+- v4b_mve1 配置 = sort=gq, gq_weights=[1.0,0.0]（即纯 mv 排序）, e1_guard=True, value_cols+mom_cols=GQCOLS, timing=q3z_tr（q3z × EW-MA200 双信号）
+- 主循环：MODE=screen/formal_full/formal_locked；base_cfg 注入 SEEDP+engine.DEFAULTS；每次候选先 mk["timing_pos"]=POS[pk]
+- POS 构造：q3z 择时 × (ew>ma200 ? 1.0 : 0.6) 月频趋势因子
+- 等价校验：patched 开关全关 == 原引擎 nav 逐位一致（full/locked 均 OK）
+- 市场加载 q4b.load_fullpool_market 需数分钟（每候选复用同一 market，可一次加载多候选）
