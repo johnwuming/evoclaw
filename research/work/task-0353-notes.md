@@ -29,3 +29,12 @@
 ## 补丁全部落地 (00:2x)
 - 11/11 PATCH_OK（p01 常量/p02 _seg_nav_metrics/p03 compute_holdout_metrics/p04 _shadow_update/p05 holdout变量+report字段/p06 gate.score_holdout 回写/p07a+b 晋升链/shadow_watch·holdout_hold 分支/p08 decision-log 双段/p09 _do_activate 晋升前双检查/p10 activate 日志加 shadow_clean·holdout_pass）
 - 每补丁 assert 锚点唯一+py_compile OK；grep -cE "shadow|holdout"=43(≥6)；64079→71547B
+
+## 三版试算表（holdout=2024-07→2026-08-14, 517 交易日；locked=registry backtest_refs.metrics 口径）
+| 版本 | locked ann/mdd | holdout ann/mdd | 检查 | holdout判定 | 晋升结论 |
+|---|---|---|---|---|---|
+| v5h_xsub | .1574 / -.298 | .1101 / -.1562 (sharpe .84) | ann≥.0944✓ mdd改善14.2pp✓ | PASS | 影子/门槛均可过（但现为 active，无晋升动作） |
+| v6a_def | .1463 / -.2467 | .1298 / -.1350 (sharpe 1.06) | ann≥.0878✓ mdd改善11.2pp✓ | PASS | score=partial 不入排名池 → 不晋升，holdout 仅记录进 gate.score_holdout |
+| v5i_comb | .1523 / -.293 | .1054 / -.1562 (sharpe .82) | ann≥.0914✓ mdd改善13.7pp✓ | PASS | score=None(legacy) 不入池 → 与 v1.0 方向一致（均不自动上岗），holdout 供人工参考 |
+- 三版均过双阈值（2024-09 行情后时段收益/回撤均好于 locked 段），门槛主要拦"holdout 崩坏"型候选
+- 影子状态机 UT：warn→(clean 1)→warn 重置→(clean 1,2,3)→出影 passed_at ✓；_do_activate 影子拦截 SystemExit 早于写盘 ✓
