@@ -1,0 +1,84 @@
+{
+  "version": "v4c_gqpeg",
+  "evaluated_at": "2026-08-16 19:57:34",
+  "oos_split": "2021-01",
+  "n_trials": 67,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1036,
+    "max_drawdown": -0.3368,
+    "sharpe": 0.7231,
+    "calmar": 0.3076,
+    "cumulative_return": 5.1843,
+    "monthly_win_rate": 0.5837,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.51,
+    "monthly_turnover_est": 0.6101
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 3.1959,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.1402,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.07722,
+      "mean_ic_oos": 0.06603,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 4.3056
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.1596,
+      "worst_pair": [
+        "ret120",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 7,
+      "new_factors": [
+        "revenue_yoy",
+        "net_profit_yoy",
+        "profit_accel",
+        "buf_quality",
+        "cf_np_ratio",
+        "peg_np",
+        "ret120"
+      ],
+      "threshold": 0.7,
+      "unresolved_pairs": 24,
+      "note": "24个组合无相关性数据（按未超限处理）"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.9228,
+      "sr_period": 0.04555,
+      "sr0_expected_max": 0.023904,
+      "T": 4490,
+      "skew": -0.723,
+      "kurtosis": 9.006,
+      "n_trials": 67,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "任务骨架c: 在a基础上加PEG<2软过滤——价值降级为过滤而非排序(a4d证价值排序无alpha, 但postmortem E3系高股息陷阱提示极端高估值小盘可能是接飞刀; PEG过滤测'过滤性价值'是否止损降MDD"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "FAIL",
+      "mdd_candidate": -0.3368,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 3.82,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

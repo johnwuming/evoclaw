@@ -1,0 +1,83 @@
+{
+  "version": "v4a_gqe1",
+  "evaluated_at": "2026-08-16 19:57:34",
+  "oos_split": "2021-01",
+  "n_trials": 67,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1074,
+    "max_drawdown": -0.3131,
+    "sharpe": 0.7437,
+    "calmar": 0.3432,
+    "cumulative_return": 5.5932,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.51,
+    "monthly_turnover_est": 0.622
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 3.1959,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.1402,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.07722,
+      "mean_ic_oos": 0.06603,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 4.3056
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.1596,
+      "worst_pair": [
+        "ret120",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 6,
+      "new_factors": [
+        "revenue_yoy",
+        "net_profit_yoy",
+        "profit_accel",
+        "buf_quality",
+        "cf_np_ratio",
+        "ret120"
+      ],
+      "threshold": 0.7,
+      "unresolved_pairs": 20,
+      "note": "20个组合无相关性数据（按未超限处理）"
+    },
+    "g4_dsr": {
+      "status": "FAIL",
+      "dsr": 0.9338,
+      "sr_period": 0.04685,
+      "sr0_expected_max": 0.023984,
+      "T": 4490,
+      "skew": -0.692,
+      "kurtosis": 8.847,
+      "n_trials": 67,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "成长×质量复合排序(0.6·(-z mv)+0.4·z(gq), gq=z(grw)+z(qly)) + E1动量护栏(ret120>-30%) + v2b_trr双信号择时; a4d证该宇宙价值IC全负故价值不作主键, postmortem证E1砍20.8%尾部亏损/误杀12.1%赢家, 任务骨架a: 成长×质量替换纯mv + E1 + v2b择时"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.3131,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 1.45,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

@@ -1,0 +1,118 @@
+{
+ "cash_curve": [
+  {
+   "cash_pct": 0,
+   "annual_return": 0.1242,
+   "max_drawdown": -0.2899,
+   "sharpe": 0.8401,
+   "calmar": 0.4285,
+   "d_ann": 0.0,
+   "d_mdd": 0.0,
+   "d_sharpe": 0.0
+  },
+  {
+   "cash_pct": 10,
+   "annual_return": 0.1114,
+   "max_drawdown": -0.2642,
+   "sharpe": 0.8335,
+   "calmar": 0.4216,
+   "d_ann": -0.012800000000000006,
+   "d_mdd": 0.0257,
+   "d_sharpe": -0.006599999999999939
+  },
+  {
+   "cash_pct": 20,
+   "annual_return": 0.0984,
+   "max_drawdown": -0.2385,
+   "sharpe": 0.8251,
+   "calmar": 0.4124,
+   "d_ann": -0.025800000000000003,
+   "d_mdd": 0.0514,
+   "d_sharpe": -0.015000000000000013
+  },
+  {
+   "cash_pct": 30,
+   "annual_return": 0.0852,
+   "max_drawdown": -0.213,
+   "sharpe": 0.8142,
+   "calmar": 0.4001,
+   "d_ann": -0.03900000000000001,
+   "d_mdd": 0.0769,
+   "d_sharpe": -0.025899999999999923
+  },
+  {
+   "cash_pct": 40,
+   "annual_return": 0.072,
+   "max_drawdown": -0.1877,
+   "sharpe": 0.7996,
+   "calmar": 0.3834,
+   "d_ann": -0.05220000000000001,
+   "d_mdd": 0.10219999999999999,
+   "d_sharpe": -0.04049999999999998
+  }
+ ],
+ "slope_per_10pct": {
+  "ann": -0.0131,
+  "mdd": 0.0255
+ },
+ "robust": [
+  {
+   "cand": "v4b_mve1(基线)",
+   "perturb": "—",
+   "ann": 0.1242,
+   "mdd": -0.2899,
+   "sharpe": 0.8401,
+   "dir": "REF"
+  },
+  {
+   "cand": "e1_lo",
+   "perturb": "ret120>-0.20(收紧)",
+   "ann": 0.1147,
+   "mdd": -0.3115,
+   "sharpe": 0.783,
+   "dir": "ann↓/mdd↓ → 收紧损风险"
+  },
+  {
+   "cand": "e1_hi",
+   "perturb": "ret120>-0.40(放宽)",
+   "ann": 0.1239,
+   "mdd": -0.289,
+   "sharpe": 0.8373,
+   "dir": "与基线几乎无差 → 稳健"
+  },
+  {
+   "cand": "ma_150",
+   "perturb": "EW-MA窗口150(缩短)",
+   "ann": 0.1194,
+   "mdd": -0.3156,
+   "sharpe": 0.8136,
+   "dir": "mdd恶化 → 窗口缩短损风险"
+  },
+  {
+   "cand": "ma_250",
+   "perturb": "EW-MA窗口250(加长)",
+   "ann": 0.1188,
+   "mdd": -0.3008,
+   "sharpe": 0.8026,
+   "dir": "ann/mdd/sharpe均略降 → 略差"
+  }
+ ],
+ "subsamples": [
+  {
+   "cand": "v4b_mve1",
+   "seg": "2018-2021",
+   "ann": 0.0733,
+   "mdd": -0.1388,
+   "sharpe": 0.6311,
+   "calmar": 0.5282
+  },
+  {
+   "cand": "v4b_mve1",
+   "seg": "2022-2026",
+   "ann": 0.05,
+   "mdd": -0.1555,
+   "sharpe": 0.4929,
+   "calmar": 0.3214
+  }
+ ]
+}

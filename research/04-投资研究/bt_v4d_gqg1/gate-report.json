@@ -1,0 +1,84 @@
+{
+  "version": "v4d_gqg1",
+  "evaluated_at": "2026-08-16 19:57:34",
+  "oos_split": "2021-01",
+  "n_trials": 67,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1159,
+    "max_drawdown": -0.2967,
+    "sharpe": 0.7962,
+    "calmar": 0.3907,
+    "cumulative_return": 6.5913,
+    "monthly_win_rate": 0.6018,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.5,
+    "monthly_turnover_est": 0.6319
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 5.0524,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.2376,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.12981,
+      "mean_ic_oos": 0.12172,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 7.1325
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.1596,
+      "worst_pair": [
+        "ret120",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 7,
+      "new_factors": [
+        "revenue_yoy",
+        "net_profit_yoy",
+        "profit_accel",
+        "buf_quality",
+        "cf_np_ratio",
+        "ret120",
+        "dist250h"
+      ],
+      "threshold": 0.7,
+      "unresolved_pairs": 20,
+      "note": "20个组合无相关性数据（按未超限处理）"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9579,
+      "sr_period": 0.05015,
+      "sr0_expected_max": 0.023877,
+      "T": 4490,
+      "skew": -0.674,
+      "kurtosis": 8.855,
+      "n_trials": 67,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "任务骨架d: 成长×质量×小市值三维混合 + G1加强(接近年高点dist250h>-10%且ret120>0加分项) + v2b择时; postmortem G1 avg+21.2%/胜率78.4%为最强赢面信号, 与E1护栏叠加"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2967,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": -0.19,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "PASS",
+  "notes": []
+}

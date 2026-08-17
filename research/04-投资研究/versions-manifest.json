@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T17:30:02",
+  "generated_at": "2026-08-17T04:34:17",
   "active": "v2b_trr",
   "versions": [
     {
@@ -239,6 +239,210 @@
         }
       },
       "files_note": "results/a4dx_ref_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a5x_equiv",
+      "strategy_prefix": "a5x_equiv",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.151,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9462,
+          "calmar": 0.5056,
+          "cumulative_return": 17.1361,
+          "monthly_win_rate": 0.6032,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1528,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9413,
+          "calmar": 0.5116,
+          "cumulative_return": 12.8398,
+          "monthly_win_rate": 0.6018,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5x_equiv_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a5x_ref",
+      "strategy_prefix": "a5x_ref",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.151,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9462,
+          "calmar": 0.5056,
+          "cumulative_return": 17.1361,
+          "monthly_win_rate": 0.6032,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1528,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9413,
+          "calmar": 0.5116,
+          "cumulative_return": 12.8398,
+          "monthly_win_rate": 0.6018,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5x_ref_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a7x_equiv",
+      "strategy_prefix": "a7x_equiv",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.151,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9462,
+          "calmar": 0.5056,
+          "cumulative_return": 17.1361,
+          "monthly_win_rate": 0.6032,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1528,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9413,
+          "calmar": 0.5116,
+          "cumulative_return": 12.8398,
+          "monthly_win_rate": 0.6018,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7x_equiv_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a7x_ref",
+      "strategy_prefix": "a7x_ref",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.151,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9462,
+          "calmar": 0.5056,
+          "cumulative_return": 17.1361,
+          "monthly_win_rate": 0.6032,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1528,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9413,
+          "calmar": 0.5116,
+          "cumulative_return": 12.8398,
+          "monthly_win_rate": 0.6018,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7x_ref_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "mfx_equiv",
+      "strategy_prefix": "mfx_equiv",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.2652,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.9066,
+          "calmar": 0.3817,
+          "cumulative_return": 126.4589,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2646,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.8894,
+          "calmar": 0.3807,
+          "cumulative_return": 75.5458,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mfx_equiv_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "mfx_ref",
+      "strategy_prefix": "mfx_ref",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.2652,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.9066,
+          "calmar": 0.3817,
+          "cumulative_return": 126.4589,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2646,
+          "max_drawdown": -0.6949,
+          "sharpe": 0.8894,
+          "calmar": 0.3807,
+          "cumulative_return": 75.5458,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mfx_ref_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "v0_seed",
@@ -1021,6 +1225,504 @@
         }
       },
       "files_note": "results/a4d_v3f_grm_trr_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4a_gqe1",
+      "strategy_prefix": "a5_v4a_gqe1_formal",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:36:11",
+      "windows": {
+        "full": {
+          "annual_return": 0.1079,
+          "max_drawdown": -0.3131,
+          "sharpe": 0.7548,
+          "calmar": 0.3446,
+          "cumulative_return": 7.263,
+          "monthly_win_rate": 0.5951,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1074,
+          "max_drawdown": -0.3131,
+          "sharpe": 0.7437,
+          "calmar": 0.3432,
+          "cumulative_return": 5.5932,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5_v4a_gqe1_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4a_mf0_trr",
+      "strategy_prefix": "mf_v4a_mf0_trr",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:41:05",
+      "windows": {
+        "full": {
+          "annual_return": 0.1538,
+          "max_drawdown": -0.2986,
+          "sharpe": 0.9683,
+          "calmar": 0.515,
+          "cumulative_return": 18.0628,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1653,
+          "max_drawdown": -0.2986,
+          "sharpe": 1.0107,
+          "calmar": 0.5536,
+          "cumulative_return": 15.8974,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mf_v4a_mf0_trr_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4b_mfu_trr",
+      "strategy_prefix": "mf_v4b_mfu_trr",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:41:05",
+      "windows": {
+        "full": {
+          "annual_return": 0.1246,
+          "max_drawdown": -0.2895,
+          "sharpe": 0.845,
+          "calmar": 0.4302,
+          "cumulative_return": 10.2366,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1242,
+          "max_drawdown": -0.2895,
+          "sharpe": 0.8322,
+          "calmar": 0.429,
+          "cumulative_return": 7.7033,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mf_v4b_mfu_trr_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4b_mve1",
+      "strategy_prefix": "a5_v4b_mve1_formal",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:36:11",
+      "windows": {
+        "full": {
+          "annual_return": 0.1231,
+          "max_drawdown": -0.2899,
+          "sharpe": 0.8427,
+          "calmar": 0.4245,
+          "cumulative_return": 9.9327,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1242,
+          "max_drawdown": -0.2899,
+          "sharpe": 0.8401,
+          "calmar": 0.4285,
+          "cumulative_return": 7.706,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5_v4b_mve1_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4b_mve1",
+      "strategy_prefix": "a7b_v4b_mve1",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "locked": {
+          "annual_return": 0.1242,
+          "max_drawdown": -0.2899,
+          "sharpe": 0.8401,
+          "calmar": 0.4285,
+          "cumulative_return": 7.706,
+          "monthly_win_rate": 0.5882,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7b_v4b_mve1_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "v4c_gqpeg",
+      "strategy_prefix": "a5_v4c_gqpeg_formal",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:36:11",
+      "windows": {
+        "full": {
+          "annual_return": 0.1037,
+          "max_drawdown": -0.3368,
+          "sharpe": 0.73,
+          "calmar": 0.3078,
+          "cumulative_return": 6.6344,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1036,
+          "max_drawdown": -0.3368,
+          "sharpe": 0.7231,
+          "calmar": 0.3076,
+          "cumulative_return": 5.1843,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5_v4c_gqpeg_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4c_mfu_e1_trr",
+      "strategy_prefix": "mf_v4c_mfu_e1_trr",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:41:05",
+      "windows": {
+        "full": {
+          "annual_return": 0.1188,
+          "max_drawdown": -0.2895,
+          "sharpe": 0.8152,
+          "calmar": 0.4103,
+          "cumulative_return": 9.107,
+          "monthly_win_rate": 0.5709,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1199,
+          "max_drawdown": -0.2895,
+          "sharpe": 0.8116,
+          "calmar": 0.4143,
+          "cumulative_return": 7.1116,
+          "monthly_win_rate": 0.5701,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mf_v4c_mfu_e1_trr_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4d_gqg1",
+      "strategy_prefix": "a5_v4d_gqg1_formal",
+      "status": "pending",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:36:11",
+      "windows": {
+        "full": {
+          "annual_return": 0.1155,
+          "max_drawdown": -0.2967,
+          "sharpe": 0.8025,
+          "calmar": 0.3892,
+          "cumulative_return": 8.508,
+          "monthly_win_rate": 0.5992,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1159,
+          "max_drawdown": -0.2967,
+          "sharpe": 0.7962,
+          "calmar": 0.3907,
+          "cumulative_return": 6.5913,
+          "monthly_win_rate": 0.6018,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5_v4d_gqg1_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4d_mfu_raw",
+      "strategy_prefix": "mf_v4d_mfu_raw",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:41:05",
+      "windows": {
+        "full": {
+          "annual_return": 0.2118,
+          "max_drawdown": -0.6927,
+          "sharpe": 0.8061,
+          "calmar": 0.3058,
+          "cumulative_return": 51.4119,
+          "monthly_win_rate": 0.583,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2059,
+          "max_drawdown": -0.6927,
+          "sharpe": 0.7774,
+          "calmar": 0.2972,
+          "cumulative_return": 30.8113,
+          "monthly_win_rate": 0.5837,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mf_v4d_mfu_raw_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4e_gqg1x",
+      "strategy_prefix": "a5_v4e_gqg1x_formal",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:36:11",
+      "windows": {
+        "full": {
+          "annual_return": 0.1935,
+          "max_drawdown": -0.7169,
+          "sharpe": 0.7694,
+          "calmar": 0.2699,
+          "cumulative_return": 37.2949,
+          "monthly_win_rate": 0.5911,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1909,
+          "max_drawdown": -0.7169,
+          "sharpe": 0.7511,
+          "calmar": 0.2663,
+          "cumulative_return": 24.2423,
+          "monthly_win_rate": 0.5928,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a5_v4e_gqg1x_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v4e_rocblend_trr",
+      "strategy_prefix": "mf_v4e_rocblend_trr",
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-16 19:41:05",
+      "windows": {
+        "full": {
+          "annual_return": 0.1248,
+          "max_drawdown": -0.2997,
+          "sharpe": 0.8463,
+          "calmar": 0.4164,
+          "cumulative_return": 10.2838,
+          "monthly_win_rate": 0.6113,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1235,
+          "max_drawdown": -0.2997,
+          "sharpe": 0.8289,
+          "calmar": 0.4122,
+          "cumulative_return": 7.6047,
+          "monthly_win_rate": 0.6109,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/mf_v4e_rocblend_trr_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v5a_amt37_formal",
+      "strategy_prefix": "a7_v5a_amt37_formal",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1406,
+          "max_drawdown": -0.3076,
+          "sharpe": 0.9252,
+          "calmar": 0.4571,
+          "cumulative_return": 14.0507,
+          "monthly_win_rate": 0.6113,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1442,
+          "max_drawdown": -0.3076,
+          "sharpe": 0.9325,
+          "calmar": 0.4686,
+          "cumulative_return": 11.0469,
+          "monthly_win_rate": 0.6154,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7_v5a_amt37_formal_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "v5b_amt55_formal",
+      "strategy_prefix": "a7_v5b_amt55_formal",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1413,
+          "max_drawdown": -0.3076,
+          "sharpe": 0.94,
+          "calmar": 0.4595,
+          "cumulative_return": 14.248,
+          "monthly_win_rate": 0.6073,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1452,
+          "max_drawdown": -0.3076,
+          "sharpe": 0.9494,
+          "calmar": 0.472,
+          "cumulative_return": 11.2516,
+          "monthly_win_rate": 0.6109,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7_v5b_amt55_formal_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "v5c_amt73_formal",
+      "strategy_prefix": "a7_v5c_amt73_formal",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.139,
+          "max_drawdown": -0.3065,
+          "sharpe": 0.9345,
+          "calmar": 0.4536,
+          "cumulative_return": 13.6191,
+          "monthly_win_rate": 0.5951,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1425,
+          "max_drawdown": -0.3065,
+          "sharpe": 0.9427,
+          "calmar": 0.4649,
+          "cumulative_return": 10.7258,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7_v5c_amt73_formal_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "v5d_amh55_formal",
+      "strategy_prefix": "a7_v5d_amh55_formal",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1293,
+          "max_drawdown": -0.3103,
+          "sharpe": 0.8587,
+          "calmar": 0.4167,
+          "cumulative_return": 11.2549,
+          "monthly_win_rate": 0.5951,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1318,
+          "max_drawdown": -0.3103,
+          "sharpe": 0.8606,
+          "calmar": 0.4246,
+          "cumulative_return": 8.8485,
+          "monthly_win_rate": 0.5973,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7_v5d_amh55_formal_{full,locked}_metrics.json（未注册 registry）"
     }
   ]
 }

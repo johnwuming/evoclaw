@@ -1,0 +1,131 @@
+{
+ "target": {
+  "annual_return": 0.25,
+  "max_drawdown": -0.2,
+  "sharpe": 1.2
+ },
+ "active": "v2b_trr",
+ "rows": {
+  "v4a_gqe1": {
+   "verdict": "REJECT",
+   "gates": {
+    "g1_icir_is": "PASS",
+    "g2_icir_oos": "PASS",
+    "g3_max_corr": "PASS",
+    "g4_dsr": "FAIL",
+    "g5_logic": "PASS",
+    "g6_mdd_vs_parent": "PASS"
+   },
+   "locked": {
+    "annual_return": 0.1074,
+    "max_drawdown": -0.3131,
+    "sharpe": 0.7437,
+    "calmar": 0.3432
+   },
+   "gap_vs_target": {
+    "ann_gap_pp": 14.26,
+    "mdd_gap_pp": 11.31,
+    "sharpe_gap": 0.456
+   },
+   "better_than_active": false,
+   "action": "reject"
+  },
+  "v4b_mve1": {
+   "verdict": "PASS",
+   "gates": {
+    "g1_icir_is": "PASS",
+    "g2_icir_oos": "PASS",
+    "g3_max_corr": "PASS",
+    "g4_dsr": "PASS",
+    "g5_logic": "PASS",
+    "g6_mdd_vs_parent": "PASS"
+   },
+   "locked": {
+    "annual_return": 0.1242,
+    "max_drawdown": -0.2899,
+    "sharpe": 0.8401,
+    "calmar": 0.4285
+   },
+   "gap_vs_target": {
+    "ann_gap_pp": 12.58,
+    "mdd_gap_pp": 8.99,
+    "sharpe_gap": 0.36
+   },
+   "better_than_active": false,
+   "action": "pending"
+  },
+  "v4c_gqpeg": {
+   "verdict": "REJECT",
+   "gates": {
+    "g1_icir_is": "PASS",
+    "g2_icir_oos": "PASS",
+    "g3_max_corr": "PASS",
+    "g4_dsr": "FAIL",
+    "g5_logic": "PASS",
+    "g6_mdd_vs_parent": "FAIL"
+   },
+   "locked": {
+    "annual_return": 0.1036,
+    "max_drawdown": -0.3368,
+    "sharpe": 0.7231,
+    "calmar": 0.3076
+   },
+   "gap_vs_target": {
+    "ann_gap_pp": 14.64,
+    "mdd_gap_pp": 13.68,
+    "sharpe_gap": 0.477
+   },
+   "better_than_active": false,
+   "action": "reject"
+  },
+  "v4d_gqg1": {
+   "verdict": "PASS",
+   "gates": {
+    "g1_icir_is": "PASS",
+    "g2_icir_oos": "PASS",
+    "g3_max_corr": "PASS",
+    "g4_dsr": "PASS",
+    "g5_logic": "PASS",
+    "g6_mdd_vs_parent": "PASS"
+   },
+   "locked": {
+    "annual_return": 0.1159,
+    "max_drawdown": -0.2967,
+    "sharpe": 0.7962,
+    "calmar": 0.3907
+   },
+   "gap_vs_target": {
+    "ann_gap_pp": 13.41,
+    "mdd_gap_pp": 9.67,
+    "sharpe_gap": 0.404
+   },
+   "better_than_active": false,
+   "action": "pending"
+  },
+  "v4e_gqg1x": {
+   "verdict": "REJECT",
+   "gates": {
+    "g1_icir_is": "PASS",
+    "g2_icir_oos": "PASS",
+    "g3_max_corr": "PASS",
+    "g4_dsr": "FAIL",
+    "g5_logic": "PASS",
+    "g6_mdd_vs_parent": "FAIL"
+   },
+   "locked": {
+    "annual_return": 0.1909,
+    "max_drawdown": -0.7169,
+    "sharpe": 0.7511,
+    "calmar": 0.2663
+   },
+   "gap_vs_target": {
+    "ann_gap_pp": 5.91,
+    "mdd_gap_pp": 51.69,
+    "sharpe_gap": 0.449
+   },
+   "better_than_active": false,
+   "action": "reject"
+  }
+ },
+ "generated_at": "2026-08-16 19:59:29"
+}

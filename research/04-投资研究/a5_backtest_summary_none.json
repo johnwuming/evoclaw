@@ -1,0 +1,142 @@
+{
+ "task": "task-0333 A5",
+ "generated_at": "2026-08-16 18:51:10",
+ "mode": "none",
+ "equiv_check": {
+  "method": "原引擎 vs patched 开关全关(同一市场, nav 逐位一致)",
+  "full_ok": true,
+  "locked_ok": true
+ },
+ "candidates": {
+  "v4a_gqe1": {
+   "formal_locked": {
+    "annual_return": 0.1074,
+    "max_drawdown": -0.3131,
+    "sharpe": 0.7437,
+    "calmar": 0.3432,
+    "cumulative_return": 5.5932,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.51,
+    "monthly_turnover_est": 0.622
+   },
+   "formal_full": {
+    "annual_return": 0.1079,
+    "max_drawdown": -0.3131,
+    "sharpe": 0.7548,
+    "calmar": 0.3446,
+    "cumulative_return": 7.263,
+    "monthly_win_rate": 0.5951,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.7,
+    "monthly_turnover_est": 0.6002
+   }
+  },
+  "v4b_mve1": {
+   "formal_locked": {
+    "annual_return": 0.1242,
+    "max_drawdown": -0.2899,
+    "sharpe": 0.8401,
+    "calmar": 0.4285,
+    "cumulative_return": 7.706,
+    "monthly_win_rate": 0.5882,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.52,
+    "monthly_turnover_est": 0.6156
+   },
+   "formal_full": {
+    "annual_return": 0.1231,
+    "max_drawdown": -0.2899,
+    "sharpe": 0.8427,
+    "calmar": 0.4245,
+    "cumulative_return": 9.9327,
+    "monthly_win_rate": 0.5911,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.71,
+    "monthly_turnover_est": 0.5943
+   }
+  },
+  "v4c_gqpeg": {
+   "formal_locked": {
+    "annual_return": 0.1036,
+    "max_drawdown": -0.3368,
+    "sharpe": 0.7231,
+    "calmar": 0.3076,
+    "cumulative_return": 5.1843,
+    "monthly_win_rate": 0.5837,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.51,
+    "monthly_turnover_est": 0.6101
+   },
+   "formal_full": {
+    "annual_return": 0.1037,
+    "max_drawdown": -0.3368,
+    "sharpe": 0.73,
+    "calmar": 0.3078,
+    "cumulative_return": 6.6344,
+    "monthly_win_rate": 0.583,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.6,
+    "monthly_turnover_est": 0.5931
+   }
+  },
+  "v4d_gqg1": {
+   "formal_locked": {
+    "annual_return": 0.1159,
+    "max_drawdown": -0.2967,
+    "sharpe": 0.7962,
+    "calmar": 0.3907,
+    "cumulative_return": 6.5913,
+    "monthly_win_rate": 0.6018,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.5,
+    "monthly_turnover_est": 0.6319
+   },
+   "formal_full": {
+    "annual_return": 0.1155,
+    "max_drawdown": -0.2967,
+    "sharpe": 0.8025,
+    "calmar": 0.3892,
+    "cumulative_return": 8.508,
+    "monthly_win_rate": 0.5992,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.7,
+    "monthly_turnover_est": 0.6097
+   }
+  },
+  "v4e_gqg1x": {
+   "formal_locked": {
+    "annual_return": 0.1909,
+    "max_drawdown": -0.7169,
+    "sharpe": 0.7511,
+    "calmar": 0.2663,
+    "cumulative_return": 24.2423,
+    "monthly_win_rate": 0.5928,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.5,
+    "monthly_turnover_est": 0.6319
+   },
+   "formal_full": {
+    "annual_return": 0.1935,
+    "max_drawdown": -0.7169,
+    "sharpe": 0.7694,
+    "calmar": 0.2699,
+    "cumulative_return": 37.2949,
+    "monthly_win_rate": 0.5911,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.7,
+    "monthly_turnover_est": 0.6097
+   }
+  }
+ }
+}

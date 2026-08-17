@@ -1,0 +1,77 @@
+{
+  "version": "v4a_mf0_trr",
+  "evaluated_at": "2026-08-16 19:47:24",
+  "oos_split": "2021-01",
+  "n_trials": 67,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1653,
+    "max_drawdown": -0.2986,
+    "sharpe": 1.0107,
+    "calmar": 0.5536,
+    "cumulative_return": 15.8974,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.72,
+    "monthly_turnover_est": 0.2229
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "FAIL",
+      "icir_is_annualized": 0.338,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "FAIL",
+      "p_one_sided": 0.0153,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0079,
+      "mean_ic_oos": -0.01369,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.9423
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0752,
+      "worst_pair": [
+        "ev_ebit",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 2,
+      "new_factors": [
+        "roc",
+        "ev_ebit"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9936,
+      "sr_period": 0.06367,
+      "sr0_expected_max": 0.025805,
+      "T": 4490,
+      "skew": -0.498,
+      "kurtosis": 7.386,
+      "n_trials": 67,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "原教旨神奇公式 (parent=v2b_trr): 替换 div/roe/roa 三过滤为 mf_score(ROC+EV/EBIT 等权排名) 全市场排序取Top20, price_cap<10 保留; 格林布拉特原意'好生意+好价格', 测原教旨版在A股小盘质量池的适用性"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2986,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 0.0,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}

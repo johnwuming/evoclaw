@@ -1,0 +1,76 @@
+{
+  "version": "v4e_rocblend_trr",
+  "evaluated_at": "2026-08-16 19:47:24",
+  "oos_split": "2021-01",
+  "n_trials": 67,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1235,
+    "max_drawdown": -0.2997,
+    "sharpe": 0.8289,
+    "calmar": 0.4122,
+    "cumulative_return": 7.6047,
+    "monthly_win_rate": 0.6109,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.71,
+    "monthly_turnover_est": 0.2306
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5753,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "FAIL",
+      "p_one_sided": 0.0327,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.01386,
+      "mean_ic_oos": -0.00555,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.3555
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.0746,
+      "worst_pair": [
+        "roc",
+        "div_yield_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "roc"
+      ],
+      "threshold": 0.7
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.967,
+      "sr_period": 0.05221,
+      "sr0_expected_max": 0.02429,
+      "T": 4490,
+      "skew": -0.583,
+      "kurtosis": 8.384,
+      "n_trials": 67,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "针对性变体 (parent=v2b_trr): 预检显示 ev_ebit 维度 ICIR -1.25 (与pe/pb同类负alpha), roc 维度约0(唯一非负) → 砍掉估值腿, 0.5·(-z mv)+0.5·(z roc) blend + v2b_trr择时——只保留格林布拉特的质量/资本效率腿, 避免负IC估值腿拖累"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.2997,
+      "mdd_parent": -0.2986,
+      "mdd_deterioration_pp": 0.11,
+      "threshold_pp": 2.0,
+      "parent_version": "v2b_trr"
+    }
+  },
+  "verdict": "REJECT",
+  "notes": []
+}
