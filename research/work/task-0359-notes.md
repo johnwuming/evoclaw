@@ -47,3 +47,26 @@
   - error 级全过（active 指针/models/registry 档案/台账自洽/镜像新鲜度 19min）
   - truth 输出：active=v5h_xsub, registry=48, manifest=69, decisions=59, ledger IT=34/36
 - 02:22 P2 完成：量化 Tab 顶部一致性状态点（quantConsistDot + quantConsistDetail 明细表 + toggleQuantConsist），30min setInterval + loadQuant/visibilitychange 双钩子；服务已重启，HTML 含 8 处新元素/函数引用
+
+## 执行日志（续2）
+- 02:24 P3 完成：quantIsLegacyVersion()（/^v0_|^v1[._a-z]/ 前缀或 created_at<2026-08）；history items/version-options/models pushVersion/history 详情 4 处加 legacy 字段；history 支持 ?hide_legacy=1（默认关，保 active 不隐藏）+ hidden_legacy 计数回显。实测：69 版中 12 个 legacy（v0_seed + v1a~v1k）；hide=1 → 68 版
+- 02:25 P4 完成：前端 v5LegacyBadge()（灰虚线徽标）+ v5ToggleLegacy() 开关 chip + 「已隐藏 N 个旧周期版本」提示 + 列表/详情徽标 + 版本选择器选项 ' · legacy' 后缀；_v5State.hideLegacy 默认 true
+- 02:26 P5 完成：quantBaselineResolve 显式未知版本 → {missing:true} 不再静默回退 v0_seed；baseline summary/nav/yearly 三路由均降级 available:false+note（source:'missing'）。实测 v99_ghost→数据缺失 / 无参→v0_seed 合法默认 / v5h_xsub→正常
+- 02:27 P6 完成：模型页头卡「数据源:」角标（镜像 metrics 文件=绿 / registry 内嵌=黄 / manifest 内嵌=黄 / 指标全缺=红「数据缺失」），title 注明回退链
+- 02:27 三态测试（沙箱副本 8099 端口，路径重定向 /tmp，不碰真数据）：
+  - 正常态（8055 真数据）：status=yellow（warn×3 如实列出，error 级全过）
+  - 缺文件态：status=red（active 版本无 registry 档案=error；manifest 缺失→freshness warn）
+  - 空目录+陈旧指针态：status=red，active=vX_test_missing，4 项失败逐条列出
+- 02:29-02:30 截图（google-chrome headless + CDP，task-0349 同法）7 张存 shared/results/work/task-0359-shots/：
+  - v5model 390/1440（状态点「● 镜像延迟」+「数据源: 镜像 metrics 文件」角标）
+  - consist-detail 1440（9 项检查表展开）
+  - v5hist-p4-legacy 390/1440（第 4 页 7 行 legacy 徽标）+ v5hist-legacy 390/1440（默认隐藏态）
+  - 横向滚动检查：390 宽 sw=cw=390、1440 宽 sw=cw=1425，均无横向滚动 ✅
+- 02:31 回归：16 个 quant API 端点全 200（含旧 gates/lifecycle/registry 不动）；node --check 通过；备份 server.js.bak-a103-20260818 存在
+- 沙箱/Chrome 进程已清理，8099 端口释放
+
+## 交付清单
+- 改动：server.js 单文件（694331B → ~707KB），6 个小补丁，每补丁 node --check+curl 验证
+- 新 API：/api/quant/consistency（consistent/status/truth/checks[]，含 severity 分级）
+- 前端：一致性状态点+明细、legacy 徽标+筛选、数据源角标
+- 已知遗留（如实报告，不在本任务范围）：/gates 与 /lifecycle 仍读旧 results/model（旧端点保留防断链，consistency API 已将其滞后显式化为 warn 项）；manifest v4b_mve1 重复（HP 侧生成问题，自检已捕获）；decision-log 双路径分叉（model/ 59 行 vs results/model/ 1 行，自检已捕获）
