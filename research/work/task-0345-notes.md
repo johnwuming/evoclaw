@@ -90,3 +90,13 @@
   - 旧 active→sota 流转正确
   - SANDBOX_OK
 - 生产未动（沙箱 /tmp/evolve_sandbox_*，已 rmtree）
+
+## 完成（14:23 重试恢复）
+- decision-log 已追加并验证：D-20260817-R220-1 r220_remove task-0345 (R220 #8/#13 实施)
+- 全部验收项：
+  1. 残留 grep：仅注释 + backtest--override(参数覆盖,保留) + confirmed_by(审计字段) ✓
+  2. 等价校验：沙箱 _do_activate 通过（自动 activate/快照冻结/decision-log/旧active→sota）✓
+  3. py_compile OK（HP quant python）+ 备份存在（evolution_pipeline.py.bak-r220-20260817-1414）✓
+  4. decision-log D-20260817-R220-1 追加 ✓
+- #7 verdict 合成（g1-g6）未动：diff 中无 verdict 合成逻辑变更 ✓
+- 备份路径：HP ~/quant-evolve/scripts/evolution_pipeline.py.bak-r220-20260817-1414 (55157B)
