@@ -20,3 +20,8 @@
 - HP 现场: pipeline 64079B=完整态 mtime 15:04(UTC); shadow/holdout 命中=0; py_compile OK(一次 transient segfault 重试即过)
 - 备份已建: scripts/evolution_pipeline.py.bak-p04-155305
 - 路径: HP ~/quant-evolve/scripts/evolution_pipeline.py; PY=/home/noname/miniconda3/envs/quant/bin/python
+- 代码勘察: nav csv 格式=date,nav[,num_held]; 三份 nav 均 5009 行 2006-01-04→2026-08-14
+- v5h/v5i backtest_refs: endtoend=_locked_nav, baseline=_full_nav(全窗口!), metrics=locked口径(v5h ann .1574/mdd -.298; v5i .1523/-.293)
+- v6a_def: metrics=locked口径(ann .1463/mdd -.2467 源 a9 grid 表), nav=a9_timing_MA15_on_f0_nav.csv 全窗口
+- save_version=save_json 直接写 registry/<vid>.json 无备份 → demo 写前手动 cp .bak
+- 设计: SHADOW_CONFIG 常量(N=3, holdout 2024-07, ann≥60%locked, mdd≤+10pp); _seg_nav_metrics+compute_holdout_metrics(nav→baseline→locked换full 兜底); _shadow_update 状态机(gate.shadow_watch); cmd_evaluate 晋升链 rank1→影子→holdout→activate(shadow_watch/holdout_hold decision-log); _do_activate 晋升前双检查(--force 越过); score_holdout 写入 gate; 11 个小补丁逐个验证
