@@ -37,3 +37,8 @@
   - 稳健性A(参数扰动): e1_thresh {-0.20,-0.40} / ma_window {150,250} locked
   - 稳健性B(分段子样本): 2018-2021 / 2022-2026
 - 输出: results/a7b_* + a7b_summary.json
+
+### 10:45 等价校验 PASS + baseline verify 进行中
+- a7b_runner 等价校验 full+locked 均 EQUIV_OK（nav 逐位一致），等价于原引擎
+- 已进入 baseline verify (locked) 回测（sort=mv 纯 mv 路径，18.48y/222调仓）
+- 注：等价校验用 sort=mv 原引擎路径；v4b_mve1 正式候选走 GQ 分支（gq_weights=[1,0] 纯mv）
