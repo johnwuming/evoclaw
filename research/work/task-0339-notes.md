@@ -88,3 +88,10 @@
 - 2018-2021: 0.0733/-0.1388/0.6311/calmar 0.528
 - 2022-2026: 0.0500/-0.1555/0.4929/calmar 0.321
 - 两段方向一致：均正收益/正夏普/正Calmar，但近年显著衰减（ann 7.3→5.0），微盘alpha衰减确认
+
+### 11:20 交付物验收 + 收口
+- HP results/ a7b 文件 **65 个**（≥10 验收线 ✓）
+- a7b-iteration-report.md **5688B**（>3KB 验收线 ✓）
+- a7b-cash-curve-metrics.md / a7b-robustness-table.md / a7b-summary-table.json 齐全 ✓
+- 现金曲线表 5 档齐全（≥4 档验收线 ✓）；稳健性判定表含参数扰动+分段子样本 ✓
+- 结论：事前杠杆不推动前沿；离目标 ann +12.6pt / MDD 需改善 8.99pt / Sharpe +0.36；与 task-0333 Calmar 不变式一致
