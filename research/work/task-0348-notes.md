@@ -33,8 +33,8 @@
 - [x] 20:27 a8_bucket.py 写入 scripts/（9.9KB, py_compile OK; scp 不可用 → ssh cat 管道上传）
   - patch 链 = a9_common.patch_engine 源码定点替换（2 处 assert anchor），exec 重编译；bucket 自检（10票×2/桶、端点符号）PASS
   - 流程: S0 加载 → S1 a8x_equiv_v5h 锚(逐位, FAIL即exit3) → S2 bucket_quality/raw → S3 汇总 a8_bucket_summary.json
-- [x] 20:28 nohup 启动 pid 21644, log=~/quant-evolve/logs/a8_bucket.log
-- [ ] 锚定校验 PASS
+- [x] 20:28 nohup 启动 → 首版自检断言过严(n=10 浮点边界降桶)失败，修为 n=11 边界安全用例后 20:36 重启
+- [x] 20:38 锚定校验 PASS: A8 EQUIV 锚(a8x_equiv_v5h) 逐位复现 v5h locked 15.74%/-29.80% → a9 骾架+bucket 分支链路可信
 - [ ] bucket quality/raw 双跑完成
 - [ ] 三方式对照表 + a8-iteration-report.md(HP)
 - [ ] ledger + decision-log
