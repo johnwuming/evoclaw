@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T12:00:02",
+  "generated_at": "2026-08-17T12:30:03",
   "active": "v5h_xsub",
   "versions": [
     {
@@ -2199,6 +2199,15 @@
         }
       },
       "files_note": "results/a7_v5i_comb_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v6a_def",
+      "strategy_prefix": null,
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-17 12:12:45",
+      "windows": {},
+      "files_note": "registry only（无回测文件）"
     }
   ]
 }
