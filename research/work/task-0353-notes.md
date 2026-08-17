@@ -15,3 +15,8 @@
 - 三版现状：v5h_xsub active score=None(legacy) nav=results/a7_v5h_xsub_formal_locked_nav.csv(止2024-06-28)；v6a_def candidate score=0.6446 flags=partial，endtoend=None 但 backtest_refs.nav=results/a9_timing_MA15_on_f0_nav.csv(2006→2026-08-14)；v5i_comb candidate score=None nav=a7_v5i_comb_formal_locked(止2024-06-28)
 - 关键：v5h/v5i locked nav 无 holdout 段，但 results/ 有同名 _full_ nav（a7_v5h_xsub_formal_full_nav.csv / a7_v5i_comb_formal_full_nav.csv，均 2006-01→2026-08-14）→ 计算函数用 "_locked_→_full_" 换名约定兜底
 - v6a_def locked 指标源自 a9_timing_grid_table.csv（locked 口径）；a9 nav 全窗口
+
+## P04 实施开始 (23:53)
+- HP 现场: pipeline 64079B=完整态 mtime 15:04(UTC); shadow/holdout 命中=0; py_compile OK(一次 transient segfault 重试即过)
+- 备份已建: scripts/evolution_pipeline.py.bak-p04-155305
+- 路径: HP ~/quant-evolve/scripts/evolution_pipeline.py; PY=/home/noname/miniconda3/envs/quant/bin/python
