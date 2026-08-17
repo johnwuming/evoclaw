@@ -65,9 +65,10 @@ for fac, cols in MAPPING.items():
         r24 = ic_stats(s[df['ym'] >= df['ym'].max() - pd.DateOffset(months=23)])
         r36 = ic_stats(s[df['ym'] >= df['ym'].max() - pd.DateOffset(months=35)])
         hl = half_life_ar1(s)
+        hl_cat = cat.get(c,{}).get('half_life_months')
         results.append(dict(survey=fac, col=c, cat=cat.get(c,{}).get('category',''),
             dirn=d, label=cat.get(c,{}).get('label',c),
-            full=full, seg181_211=seg1, seg221=seg2, r24=r24, r36=r36, hl=hl))
+            full=full, seg181_211=seg1, seg221=seg2, r24=r24, r36=r36, hl=hl, hl_cat=hl_cat))
 
 # classification
 def classify(r):
@@ -110,7 +111,7 @@ for r in results:
         'r24_IC': g(r['r24'],'mean'), 'r24_ICIR': g(r['r24'],'icir'),
         'seg181_IC': g(r['seg181_211'],'mean'), 'seg181_ICIR': g(r['seg181_211'],'icir'),
         'seg221_IC': g(r['seg221'],'mean'), 'seg221_ICIR': g(r['seg221'],'icir'),
-        'half_life_m': round(r['hl'],1) if r['hl'] else 'NA',
+        'half_life_m': r['hl_cat'] if r.get('hl_cat') else (round(r['hl'],1) if r['hl'] else 'NA'),
         'profile': r['profile'],
     })
 

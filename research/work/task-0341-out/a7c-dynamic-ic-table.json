@@ -16,7 +16,7 @@
   "seg181_ICIR":-0.499,
   "seg221_IC":-0.11,
   "seg221_ICIR":-0.686,
-  "half_life_m":"NA",
+  "half_life_m":6.0,
   "profile":"稳定有效"
  },
  {
@@ -36,7 +36,7 @@
   "seg181_ICIR":-0.533,
   "seg221_IC":-0.081,
   "seg221_ICIR":-0.43,
-  "half_life_m":"NA",
+  "half_life_m":3.0,
   "profile":"衰减中"
  },
  {
@@ -56,7 +56,7 @@
   "seg181_ICIR":-0.455,
   "seg221_IC":-0.07,
   "seg221_ICIR":-0.369,
-  "half_life_m":"NA",
+  "half_life_m":4.0,
   "profile":"衰减中"
  },
  {
@@ -76,7 +76,7 @@
   "seg181_ICIR":-0.449,
   "seg221_IC":-0.098,
   "seg221_ICIR":-0.612,
-  "half_life_m":"NA",
+  "half_life_m":12.0,
   "profile":"稳定有效"
  },
  {
@@ -96,7 +96,7 @@
   "seg181_ICIR":0.335,
   "seg221_IC":0.078,
   "seg221_ICIR":0.481,
-  "half_life_m":0.2,
+  "half_life_m":11.0,
   "profile":"稳定有效"
  },
  {
@@ -116,7 +116,7 @@
   "seg181_ICIR":0.266,
   "seg221_IC":0.067,
   "seg221_ICIR":0.412,
-  "half_life_m":0.2,
+  "half_life_m":12.0,
   "profile":"稳定有效"
  },
  {
@@ -136,7 +136,7 @@
   "seg181_ICIR":-0.623,
   "seg221_IC":-0.062,
   "seg221_ICIR":-1.042,
-  "half_life_m":0.2,
+  "half_life_m":2.0,
   "profile":"稳定有效"
  },
  {
@@ -156,7 +156,7 @@
   "seg181_ICIR":-0.51,
   "seg221_IC":-0.048,
   "seg221_ICIR":-0.519,
-  "half_life_m":"NA",
+  "half_life_m":2.0,
   "profile":"稳定有效"
  },
  {
@@ -176,7 +176,7 @@
   "seg181_ICIR":-0.613,
   "seg221_IC":-0.087,
   "seg221_ICIR":-0.517,
-  "half_life_m":"NA",
+  "half_life_m":3.0,
   "profile":"衰减中"
  },
  {
@@ -196,7 +196,7 @@
   "seg181_ICIR":-0.492,
   "seg221_IC":-0.088,
   "seg221_ICIR":-0.479,
-  "half_life_m":"NA",
+  "half_life_m":4.0,
   "profile":"衰减中"
  },
  {
@@ -216,7 +216,7 @@
   "seg181_ICIR":-0.475,
   "seg221_IC":-0.086,
   "seg221_ICIR":-0.422,
-  "half_life_m":"NA",
+  "half_life_m":4.0,
   "profile":"衰减中"
  },
  {
@@ -236,7 +236,7 @@
   "seg181_ICIR":-0.503,
   "seg221_IC":-0.092,
   "seg221_ICIR":-0.481,
-  "half_life_m":"NA",
+  "half_life_m":3.0,
   "profile":"衰减中"
  },
  {
@@ -256,7 +256,7 @@
   "seg181_ICIR":-0.382,
   "seg221_IC":-0.065,
   "seg221_ICIR":-0.385,
-  "half_life_m":"NA",
+  "half_life_m":5.0,
   "profile":"衰减中"
  },
  {
@@ -276,7 +276,7 @@
   "seg181_ICIR":0.479,
   "seg221_IC":0.022,
   "seg221_ICIR":0.158,
-  "half_life_m":0.2,
+  "half_life_m":12.0,
   "profile":"已失效\/反转"
  },
  {
