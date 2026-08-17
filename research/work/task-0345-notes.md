@@ -35,3 +35,8 @@
 - _do_activate L847-943：L848-849 verdict in ("PASS","legacy-grandfathered") and not force → 拒绝；后续为激活主体逻辑（快照冻结/main重建/registry流转/decision_log），需保留
 - cmd_override L967-999：L969-974 --clear 分支；L978-994 写 TTL 覆盖；L985 timing_off；decision_log L990-993
 - _parse_ttl L955-963
+
+## 补读（14:08 重试恢复）
+- L584-590：backtest --override key=val 是"临时参数覆盖"（写入 sel_params），非择时安全阀——与 #13 的 override --ttl 是两回事
+- L584-589 是 backtest 的参数覆盖循环
+- 待查：调用方是否引用 --confirm/--override/--ttl/legacy/grandfather（a5/a7 runner、cron、paper_engine）
