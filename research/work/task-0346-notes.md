@@ -16,3 +16,10 @@
   8. override cmd 块(953): 整段 cmd_override/_parse_ttl —— #13 恢复
   9. Step7(1090): 当前=自动activate(#8保留)
   10. argparse(1137): override 子命令 —— #13 恢复
+## 阶段1 恢复执行（15:20）
+- SSH 2222 被拒 → HTTP API /run + env:"raw" 跳过 conda 前缀（quant python 绝对路径可跑）
+- 恢复脚本 /tmp/hp_restore13.py 执行成功：
+  - 备份已建：evolution_pipeline.py.bak-r220fix-20260817-065116
+  - 注入结果：cmd_override=1, _parse_ttl=1, OVERRIDE_FILE=5, legacy-grandfathered=2, unknown-legacy=1, pending_assign=0(#8保留), auto_activate_log=1(#8保留)
+  - ⚠️ py_compile 失败：line 956 游离 `-`（R6 提取 block 时 bak[si-2:ei] 多取一个字符）
+  - 当前 grep：957:# cmd: override / 959:def _parse_ttl / 971:def cmd_override / 1003:# cmd: status / 1005:def cmd_status —— 结构正确，仅游离符需修
