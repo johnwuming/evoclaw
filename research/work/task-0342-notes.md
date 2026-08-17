@@ -64,8 +64,8 @@
 ## 6. 待办
 - [x] E2 完整性判定：40/40 组全，无需补跑
 - [ ] 读 E3 full 两版 metrics（补录）
-- [ ] HP ledger IT-A9-01.. 行（E1/E3/最优择时组，features 字段）
-- [ ] HP decision-log a9_closeout 条目
+- [x] HP ledger IT-A9-01..04 已写入（81 行，n_trials 76-79）
+- [x] HP decision-log D-20260817-A9-1 a9_closeout 已写入（50 行）
 - [ ] HP results/a9-iteration-report.md >4KB
 - [ ] VPS R-222 报告 ≥3KB + README 变更记录
 - [ ] VPS .task-completions.jsonl
