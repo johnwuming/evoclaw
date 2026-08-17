@@ -31,7 +31,7 @@
 - 对照 v5h locked 15.74%/-29.80%/0.998/0.528：
   - quality: 年化 -0.41pp、MDD 改善 1.02pp → 加 pb_inv 在质量宇宙内无实质增益（微幅换收益，不过任何注册线）
   - raw: 年化 +6.02pp、MDD 恶化 3.75pp → 未过新血统线（3.75pp > 2pp），但优于 E1 raw 的 MDD（-33.55% vs -36.78%），即"排序合成+闸门外价值暴露"比"纯去闸门"多省 3.2pp 回撤、年化持平
-- E3 raw full 口径待补读（文件在 HP，743B，非关键决策项）
+- E3 full 口径：quality 14.86%/-28.78%/0.9945/0.5165；raw 22.16%/-33.55%/1.3624/0.6605（full>locked，无近端衰减）
 - E4 新血统判定：E3 两版均不满足
 
 ## 4. E2 择时网格（a9_timing_grid_table.csv，40 组全 = MA{15,20,50,100,200} × q3z{on,off} × 地板{0,10,18,30}，full+locked 双口径全行有值 → 判定完整，无需补跑）
@@ -56,6 +56,10 @@
 - → **无候选过新血统线，不注册 v6a，走 a9_closeout**
 - 但 MA15_on_f0 等四组过"防御线"（MDD≥3pp 改善且年化损失≤2pp）→ 作为记录性备选操作点写入 closeout 与 ledger，不注册血统
 - 前沿表述：现役 v5h (15.7%/-29.8%) 与 raw 系 (21.8%/-36.8%) 构成当前可达前沿两端；MA15_on_f0 (14.6%/-24.7%) 在左下方新增一个防守端点；25%/-20% 双目标仍不可达
+
+- 台账/日志位置：results/experiment-ledger.jsonl（77 行，末行 IT-A7-09 n_trials_cum=75，data_snapshot hash bcf45e9f kline 2026-08-10）；model/decision-log.jsonl（49 行，格式 ts/decision_id/type/version/trigger/metrics/expected_impact/rollback_condition/code_ref/files）；model/registry/（v0~v5i，v5h_xsub 现役，本批不新增）
+- ledger IT-A9 计划 4 行：01=E1 raw(REJECT)、02=E3 raw(REJECT)、03=E3 quality(REJECT)、04=E2 最优 MA15_on_f0(REJECT 新血统/记录防御备选)，n_trials_cum 76-79
+- decision-log：D-20260817-A9-1 type=a9_closeout
 
 ## 6. 待办
 - [x] E2 完整性判定：40/40 组全，无需补跑
