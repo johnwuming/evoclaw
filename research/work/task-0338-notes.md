@@ -75,3 +75,20 @@
 - nohup/setsid 后台进程均被 API 请求清理（测试证实）→ 必须同步执行
 - API /run 单请求超时上限 1800s（30min）；A5 同规模 5候选×2窗+等价约 10min，A7 9候选×2窗+等价预计 20-25min，可容纳
 - 启动同步回测：HP /tmp/a7_runner.py formal（等价校验 diffs={} + 9 候选 full+locked）
+
+## 12:2x 收口会话恢复（task-0338 正式执行）
+- **HP API /run conda 激活已坏**：任何 env（quant/base）都 KeyError('user_agent')（anaconda_anon_usage 插件 bug）→ exit 139
+- **绕过方案（已验证）**：/run body 传 `"env":"system"`（或空 env）直接用系统 shell，exit 0
+- quant 环境回测用直调二进制：/home/noname/miniconda3/envs/quant/bin/python（无需 conda activate）
+- /health 仍 OK（16GB 内存可用 14.9GB，磁盘 31.7GB free）
+
+### 12:3x 盘点结论（阶段1 完成）
+- results/ a7_ 前缀 37 文件：
+  - a7_ic_monthly.csv + a7_ic_summary.json（IC 预检产物）
+  - v5a_amt37 full+locked 完整（10 文件）
+  - v5b_amt55 full+locked 完整（10）
+  - v5c_amt73 full+locked 完整（10）
+  - v5d_amh55 **只有 locked（5 文件），full 缺** → 11:20 启动的同步回测在 v5d full 处被中断
+- v5e（换手CV）/v5f（日历）/v5g（涨停剔除）/v5h（次新剔除）/v5i（组合）**全部未跑**
+- a7b-*（现金曲线+稳健性，8 组）与 a7c-*（动态画像，6 文件）已有，非本任务产出但作交叉解读素材
+- 无 a7-iteration-report.md；ledger 尾行待查
