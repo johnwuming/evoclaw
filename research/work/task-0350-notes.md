@@ -144,3 +144,32 @@
 - E2 网格：MA15_on_f0 14.63%/-24.67%/0.593 最优（MDD改善5.13pp/年化损1.11pp）→ 用户 20:10 拍板注册 v6a_def candidate
 - 证伪1：q3z off 纯趋势全部 MDD -38%~-52%（外部 MA15 空仓说法不成立）；证伪2：A7b"MA缩短恶化"仅在重地板成立
 - 前沿：防守 MA15_on_f0(14.6/-24.7) — v5h(15.7/-29.8) — 进攻 E3 raw ranksum(21.8/-33.6)；25%/-20% 双目标无交点
+
+## 11. 补充批次与 HP 自动化
+### A6/task-0334（神奇公式批次，D-20260816-032）
+- 无 activate；结论=估值腿负 alpha（ev_ebit ICIR -1.25，与 pe 相关 0.88）；质量腿零 alpha（roc IC≈0）
+- 候选 v4a_mf0_trr/v4b_mfu_trr/v4c_mfu_e1_trr/v4d_mfu_raw/v4e_rocblend_trr
+
+### A7b/task-0339（常驻现金曲线+稳健性）
+- 现金网格 {0..40%}：每10%现金≈-1.31pp年化/+2.55pp MDD改善；Sharpe 单调缓降 0.8401→0.7996 无拐点（贴主"夏普略升"不迁移）
+- MDD≤20% 需 cash≥40%（-18.77%）但年化只剩 7.20%（距25%目标 -17.8pp）→ 现金只压回撤压不回收益
+- 参数扰动+分段稳健性：2018-2021/2022-2026 分段方向一致才算数
+- 结论：参数无隐藏空间/现金杠杆不推动前沿
+
+### A7c/task-0341（动态有效性画像）
+- 低成交额族近端仍有效（推进）；换手CV 近端走强（补测）；Amihud 全市场强但微盘增量弱；低波族近端衰减
+
+### Calmar 不变式五次验证时间线
+1. a2c(08-16)：首次实证，7 数据点 Calmar 0.32-0.51，MDD 每压5pp年化掉约3pp
+2. a4d(08-16)：再证，v3e MDD 压到 -22.8% 时年化只剩 10.05%
+3. a5(08-17)：第三次，v4e 裸选股 19.09%/-71.69% vs v4d 择时 11.59%/-29.67%；30+候选无 25%/-20% 交点
+4. a7b(08-17)：第四次，40%现金档 MDD 达标但年化 7.20%
+5. A9(08-17 R-222)：第五次，年化25%所有路径附≥3.5pp MDD恶化；MDD -20%端最高年化仅14.6%
+
+### HP crontab 自动化（现读）
+- paper_trade.py --action daily：工作日 16:30
+- cron_paper_rebalance.sh：工作日 16:30，gate 自检月首才调仓（task-0347/R220-#37，旧"每月25日"cron 已停）
+- refresh_data.py：周日 20:00；fetch_valuation_data.py：周日 06:30
+- p3_3_evolution_standalone.py --rounds 5：每月 1/15 日 02:00（半月度因子进化）
+- paper_engine baseline（task-0251）：daily/rebalance 已 PAUSED-20260816-seedB，validate 周日 20:00 保留
+- collect-metrics.sh：每分钟推 VPS 8055（量化指标采集循环）
