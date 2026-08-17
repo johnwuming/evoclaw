@@ -40,3 +40,21 @@
 - L584-590：backtest --override key=val 是"临时参数覆盖"（写入 sel_params），非择时安全阀——与 #13 的 override --ttl 是两回事
 - L584-589 是 backtest 的参数覆盖循环
 - 待查：调用方是否引用 --confirm/--override/--ttl/legacy/grandfather（a5/a7 runner、cron、paper_engine）
+
+## 侦察完成（14:10 重试恢复）
+- pending 全引用（evolution_pipeline.py）：仅 L64(enum)/L778-779(设置pending)/L790(注释文本)
+- activate 子命令无 runner/cron 调用方（grep 空）→ 纯手动命令，可安全改造为自动
+- cmd_status 显示 gate_verdict，无 pending 特判 → 不受影响
+- temp_override.json 不存在（无残留覆盖文件）；paper_engine 读它，但本任务不碰 paper_engine（写侧 cmd_override 移除后文件不再产生，读侧自然失效，无需改）
+- notify_hub.py 有 scan_pending（通知侧，非 evolution_pipeline 机制实现）→ 不改（超范围，仅记录）
+- a2_registry_bootstrap.py L58 也有 legacy-grandfathered（一次性历史 bootstrap 脚本，已跑过）→ 不改（超范围，仅记录）
+
+## 改动方案（对齐 R-220 #8/#13）
+1. evaluate（L778-790）：PASS 且 prev==candidate → 直接 _do_activate（自动 activate），不再置 pending；L790 expected_impact 改"PASS→自动 activate"
+2. _do_activate（L848-849）：verdict 白名单去掉 "legacy-grandfathered" → 仅 "PASS"（保留 force 供 rollback/演练）
+3. 删除 cmd_override + _parse_ttl（L953-999 整段）+ OVERRIDE_FILE 常量（L45）+ override 子命令 argparse（L1183-1188）+ 文件头 usage 注释
+4. bootstrap（L491/494/508）：去掉 legacy 标签（hash "unknown-legacy"→"unknown"；code_ref 去 legacy() 前缀；verdict "legacy-grandfathered"→改中性 + note 更新）
+5. Step7 日志（L1136）：改"evaluate PASS 即自动 activate（R220 #8 移除人工确认）"
+6. STATUS_ENUM：保留 "pending"（历史 pending 条目 9 个是存量数据，不迁移、不删枚举避免破坏展示）
+7. backtest --override（L584/589/1162）：保留——是"参数覆盖"非 #13 择时安全阀，且 task-0340/0342 A8/A9 网格实验会用到；报告里明确说明
+8. 不删 activate 子命令（rollback 也走 _do_activate；admin 保留）
