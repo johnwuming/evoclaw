@@ -18,3 +18,20 @@
   - Step1.5/push_now: model/(registry/,main.json,decision-log.jsonl)+manifest+ledger→workspace-quant/（已覆盖 registry/decision-log/ledger ✓ 无需补）
   - **需补**：新基准/仓位文件加 --include=dash_*.csv 进 MIRROR_INCLUDES
 - 结论：基准数据齐全（hs300 parquet + ew_idx csv），在 HP 一次性生成 dash_pos_ratio.csv + dash_bench_monthly.csv 落盘 results/，改 sync include 即全自动
+
+## 阶段2 server.js 结构勘察（13:15-13:25）
+- express 单文件；量化屏 #screen-quant：quantSeg 5按钮(data/factor/models/btlc/paper) + 5个 .quant-page div；switchQuantTab@8220 白名单分派；loadQuant@8294 恢复 localStorage quantTab（默认factor）
+- _QUANT_BODY_ID@8247 供 quantShouldSkip 签名跳渲染；quantHScrollGuard 已有横滚兜底
+- Chart.js 本地 /chart.umd.min.js（5534），CSP 允许 unsafe-inline；btlcE2EDraw@10035 是现成折线图范式（可仿写）
+- 关键后端件：readJsonFile@1805 / readCsvLines@2174 / loadQuantManifest / quantActiveVersion（main.json→manifest.active）/ quantBaselineResolve（manifest→strategy_prefix→metrics文件路径）
+- /api/quant/models@2872 已做 registry+manifest 合并（56版本）
+- /api/quant/decisions@2423 读 model/decision-log.jsonl（records 含 version 字段）
+- e2e-curves@3834：shared/04-投资研究/e2e_curves/ 有 index_hs300.csv（日频 2006→2026-08-07，date,close）→ **沪深300基准现成**
+- systemd: agent-dashboard.service；重启 systemctl restart agent-dashboard
+
+## 方案定稿
+- **同步清单：零改动**。registry/decision-log（Step1.5 model/）、ledger+manifest、timing_signals_iter4.csv+a2cx_ew_trend_signal.csv（do_rsync→shared/04-投资研究/）、metrics/nav（MIRROR_INCLUDES）全部已覆盖；hs300 在 e2e_curves（一次性采集，图注标截至日）
+- **HP 侧：零改动**。仓位曲线=q3z(f_q_q3z)×trend_f 在 VPS 端实时合成；微盘基准=a2cx ew_idx 列
+- server.js 新增 5 API：/api/quant/active、/active/pos、/active/curves、/history(分页)、/history/:id
+- 模板引擎：quantExplainVersion(reg, metricsJson) 纯函数分三层（选股/择时/交易），未知参数兜底 k=v
+- 前端：quantSeg 换 3 按钮（模型/回测/迭代历史→v5model/v5btlc/v5hist），新增3个 quant-page div + 3 loader/renderer；旧页面 div 与全部旧 API 保留不删
