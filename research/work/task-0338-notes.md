@@ -139,3 +139,27 @@
   - g6 按 v2b_trr 口径：v5a/b 0.90pp v5c 0.79 v5d 1.17 v5e 0.03 v5f 0.00 v5g 0.19 v5h -0.06 v5i -0.56 → 全 PASS
 - registry: model/registry/*.json；active=v2b_trr（factors=div_yield/roe/roa/circ_mv）；factor_ic_corr.csv 存在（g3 有真实数据）
 - activate 通道：ep._do_activate(reg, trigger, reason, force) 要求 gate.verdict=PASS，自动 main.json 重建+快照+状态流转+switch_log
+
+## 收口完成（13:2x）——最终结论
+### 六门禁 + 裁决（ledger IT-A7-01..09 权威值）
+| IT | 候选 | g1 | g2 | g4 DSR | g6 pp | verdict |
+|---|---|---|---|---|---|---|
+| 01 | v5a_amt37 | 2.59✓ | 0.039✗ | 0.986 | +0.90 | REJECT |
+| 02 | v5b_amt55 | 2.59✓ | 0.039✗ | 0.989 | +0.90 | REJECT |
+| 03 | v5c_amt73 | 2.59✓ | 0.039✗ | 0.989 | +0.79 | REJECT |
+| 04 | v5d_amh55 | -0.08✗ | 0.79✓ | 0.971 | +1.17 | REJECT |
+| 05 | v5e_cv73 | 4.26✓ | 0.99✓ | 0.964 | +0.03 | PASS |
+| 06 | v5f_cal | N/A | N/A | 0.988 | 0.00 | PASS |
+| 07 | v5g_lim | N/A | N/A | 0.981 | +0.19 | PASS |
+| 08 | **v5h_xsub** | N/A | N/A | 0.993 | **-0.06** | **PASS→ACTIVE** |
+| 09 | v5i_comb | 2.59✓ | 0.039✗ | 0.995 | -0.56 | REJECT |
+- g3 全部条件性 PASS（新因子不在 factor_ic_corr 矩阵，unresolved 按未超限，留痕）
+- g2 FAIL 机理：amt20 IC 在 2021-2024 OOS 对 IS 显著劣化（p=0.039）→ 低成交额排序因子被门禁拦截（A7c 画像看近24m、门禁看2021-24 的口径差）
+- **activate：v5h_xsub（15.74%/-29.80%/0.998，六门禁全PASS+三项全优于 v2b_trr）** → main.json 已切、v2b_trr→sota、decision-log D-20260817-001/-002/-A7-01/-A7-02
+- **附2 披露（D-20260817-A7-02）**：paper_engine 选股只消费 base 参数，e1/xsub 规则层未实现于实盘代码 → 切换后实盘行为不变（不崩溃），+3.32pp 中规则层部分暂不生效，建议下批补 paper_engine
+### 交付清单
+- HP results/：a7_ 前缀 96 文件（≥50 ✓：IC 2 + v5a-i×10 + summary + gates）；a7-iteration-report.md 13.5KB（>4KB ✓）
+- ledger：IT-A7-01..09 均带 features/gate_detail ✓；decision-log 4 条新记录 ✓
+- registry：v5a-i 9 候选注册，active=v5h_xsub，v2b_trr=sota ✓
+- VPS 镜像：shared/results/work/{a7-iteration-report.md, a7_backtest_summary_formal.json, a7_gates_result.json, a7_ledger_tail_IT-A7.jsonl, a7_decision_log_tail.jsonl} + workspace-quant/results/a7-iteration-report.md
+- 战役：25%/-20%/1.2 仍未达（新现役 15.74%/-29.80%/0.998，换手减半）；A7b/A7c 交叉解读见报告 §7
