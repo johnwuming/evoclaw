@@ -22,3 +22,23 @@
 
 （边查边写，以下逐项补充）
 
+### 1.1 HP 本地数据（SSH 实查 2026-08-18 07:2x）
+
+- `data/all_stocks_merged.parquet`：304MB / 14,613,191 行 / 5447 只股票 / 字段 date,code,open,close,high,low,volume,amount / 范围 2006-01-04~2026-08-10。含退市股（另有 delisted_pool）。→ **D2 市场广度 + D5 超跌 + 量价资金代理：全部可自算，零边际数据成本**。注意：>30 万行聚合必须流式/分块（整读 OOM 实测 137 退出）。
+- `results/breadth.parquet`：上涨家数占比（close.pct_change>0 占比），2006-01-05~2026-08-10 日频，已有缓存。生成脚本 `scripts/macro_timing_layer.py::load_breadth`。
+- `results/crowding_history.csv`（2019-01-02~2026-08-14）：micro_turnover_share（微盘成交占比）+ excess_slope_60d 等 8 列，T1 拥挤度半成品。
+- `scripts/macro_timing_layer.py`（316 行）：v1 宏观择时层已有 f_trend/f_momentum/f_volatility/f_breadth/f_valuation 乘法框架，f_breadth=breadth/0.5 clip[0.5,1]。→ v2 设计可直接挂接此模块。
+
+### 1.2 akshare 连通性与接口（HP quant env，akshare 1.18.83，实测）
+
+- 连通性：2026-08-17 16:16 crowding-indicators.json 曾记"akshare 不可达(连接失败)"，**今日实测恢复**（sh000001 日线 8705 行，最新 2026-08-17）→ 结论：可用但需容错+缓存落盘（瞬时故障真实发生过）。
+- **两融（D3）**：`ak.stock_margin_sse(start_date, end_date)` 实测 OK，日频汇总，字段：信用交易日期/融资余额/融资买入额/融券余量/融券卖出量/融资融券余额。2010-04-01~04-20 段实测返回 13 行（两融业务 2010-03-31 启动，历史深度=2010-03 起）。融资偿还额可递推：偿还额_t = 融资余额_{t-1} + 融资买入额_t − 融资余额_t。深市配套 `stock_margin_szse(date)`（逐日单查，未实测）。
+- **PCR（D4）**：`ak.option_daily_stats_sse(date)` 实测 OK，单日返回逐标的：认购成交量/认沽成交量/**未平仓认购合约数/未平仓认沽合约数**→ 成交量 PCR 与持仓量 PCR 均可直算（华福 PCR=持仓量比）。2015-06-01 实测仅 50ETF 一个标的（期权 2015-02-09 上市，历史深度=2015-02 起）。2026-08-07 返回 5 个标的（50ETF/300ETF/500ETF 等）。逐日抓取 ~2800 天×5 行可行但需限速。深市 `option_daily_stats_szse(date)` 同签名存在。
+- `option_sse_daily`（旧接口名）已不存在于 1.18.83 → 接口名以当日 dir(ak) 实测为准（写进风险）。
+- **QVIX 加赠**：`ak.index_option_50etf_qvix()` 实测 OK，2791 行，2015-02-09~2026-08-17 完整日线。另有 1000index/300etf/500etf/cyb/kcb 等 9 个 QVIX 变体接口 → 情绪维度可用 QVIX 做 PCR 的补充/对照。
+
+### 1.3 覆盖缺口（硬结论）
+
+- PCR：2015-02 前不存在（期权未上市）→ 回测 2006-2014 段该维度只能缺省（不触发）或用情绪代理。
+- NMTAP：2010-03 前不存在（两融未启动）→ 2006-2010 段缺省。
+- 微盘域期权不存在（最小 1000 股指期权 2022-07 上市）→ PCR 是全市场情绪信号，按华福用法（全市场指标择微盘）使用，非微盘专属。
