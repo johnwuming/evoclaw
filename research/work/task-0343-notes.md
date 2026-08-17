@@ -35,3 +35,34 @@
 - server.js 新增 5 API：/api/quant/active、/active/pos、/active/curves、/history(分页)、/history/:id
 - 模板引擎：quantExplainVersion(reg, metricsJson) 纯函数分三层（选股/择时/交易），未知参数兜底 k=v
 - 前端：quantSeg 换 3 按钮（模型/回测/迭代历史→v5model/v5btlc/v5hist），新增3个 quant-page div + 3 loader/renderer；旧页面 div 与全部旧 API 保留不删
+
+## 阶段3 实施与验收（13:18-13:35）
+### 改动（仅 server.js，640KB→684KB，备份 server.js.bak-dashv5-08171318）
+后端新增（/api/quant/freshness 前插入）：
+- 模板引擎纯函数：quantTplSelection/quantTplTrading/quantTplTiming + quantExplainVersion（参数缺失块自动跳过；未知机制兜底"机制: xxx（参数: k=v）"；零 LLM）
+- ① GET /api/quant/active：active版本+locked/full指标+三层解释（metrics文件→registry.backtest_refs→manifest.windows 三级回退）
+- ② GET /api/quant/active/pos：pos=q3z(timing_signals_iter4.csv f_q_q3z)×trend_f(a2cx_ew_trend_signal.csv)，248月度点，VPS端实时合成
+- ③ GET /api/quant/active/curves：策略nav(locked+full,周频降采样) + hs300(e2e_curves/index_hs300.csv归一) + ewmicro(a2cx ew_idx月频归一)
+- ④ GET /api/quant/history?page&page_size：manifest 56版+registry特征+decision-log最新摘要，active置顶
+- ⑤ GET /api/quant/history/:versionId：registry+双窗metrics+模板解释+该版全部决策记录
+前端：
+- quantSeg 5按钮→3按钮（模型v5model/回测v5btlc/迭代历史v5hist）；旧5个 quant-page div 与全部旧API/旧loader保留（仅无UI入口）
+- 三页loader/renderer：指标卡6张(年化/回撤/夏普/卡玛/月胜率/月换手)+locked/full切换；解释三层卡；仓位Chart面积图(0~105%)；nav三线对比图(窗口重归一+全期/3y/1y)；历史分页列表(10/页)+点开报告式详情(locked+full指标+机制解释+决策时间线)
+- switchQuantTab/loadQuant/_QUANT_BODY_ID 适配新tab，旧 localStorage 值映射到新页；30s 定时刷新走签名守卫不变
+- CSS：.v5-metric-grid/.v5-chip/.v5-hist-row 等（3列自适应，无横向溢出）
+修复1个bug：v5SeriesStats 对前向填充首部 null 除法产生 Infinity%（改为跳过首尾null）；策略曲线指标窗口与实际绘制窗口对齐
+
+### 验收结果（全部通过）
+1. node --check ✓（两次：初版+修bug后）
+2. 5个新API全 200 且 JSON 可解析 ✓；active 端点含 v5h_xsub 15.74%/-29.8%/0.9983/0.5283/61.1%/32% 与分层解释 ✓
+3. 无头浏览器（google-chrome headless + CDP）：
+   - 390x844：三页+历史详情+历史列表 scrollW=375 ≤390 ✓ 无横向滚动
+   - 1440x900：三页正常 1425 ✓
+   - 截图8张：dashv5-{v5model,v5btlc,v5hist,v5hist-list}-{390x844,1440x900}.png
+   - 内容级验证（innerText提取）：模型页=版本徽章+6指标卡+三层解释+仓位图(最新2026-08-31仓位56%=q3z0.94×0.60)；回测页=指标+三线图(策略15.3%/沪深300 8.1%/微盘等权17.0%)；历史页=56版分页列表+详情报告 ✓
+4. 旧API回归：models/baseline/summary/decisions/freshness/e2e-curves 全200 ✓；nginx 8052 入口 200 ✓
+5. 空态：history/nonexist_v99 → ok:true available:false note 提示，无500 ✓
+
+### 同步链路结论（零改动）
+registry/decision-log（Step1.5 model/镜像）、manifest+ledger、timing/a2cx csv（do_rsync→shared/04-投资研究/）、metrics/nav（MIRROR_INCLUDES）均已自动同步，本次确认无需改 auto_sync_notify.py；HP 侧零改动。新版本 activate → main.json/registry/metrics/nav 30分钟内同步 → 所有新API动态解析 active → 看板自动切换，全自动闭环。
+基准数据说明：沪深300=e2e_curves 一次性采集(截至2026-08-07，图注标注)；微盘等权=a2cx ew_idx(月频,随同步更新)
