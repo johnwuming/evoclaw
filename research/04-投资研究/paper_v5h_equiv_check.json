@@ -4,19 +4,65 @@
  "checks": [
   {
    "date": "2026-06-01",
-   "error": "fail"
+   "n_paper": 9,
+   "n_backtest": 9,
+   "match": true,
+   "only_paper": [],
+   "only_backtest": [],
+   "paper": [
+    "000554",
+    "300824",
+    "300453",
+    "002107",
+    "000848",
+    "002668",
+    "300009",
+    "600867",
+    "002027"
+   ]
   },
   {
    "date": "2026-07-01",
-   "error": "fail"
+   "n_paper": 9,
+   "n_backtest": 9,
+   "match": true,
+   "only_paper": [],
+   "only_backtest": [],
+   "paper": [
+    "002582",
+    "002107",
+    "300453",
+    "603551",
+    "603998",
+    "000848",
+    "300009",
+    "002372",
+    "600867"
+   ]
   },
   {
    "date": "2026-08-03",
-   "error": "fail"
+   "n_paper": 10,
+   "n_backtest": 10,
+   "match": true,
+   "only_paper": [],
+   "only_backtest": [],
+   "paper": [
+    "300824",
+    "002107",
+    "300453",
+    "603551",
+    "603998",
+    "000848",
+    "300009",
+    "002372",
+    "600867",
+    "002027"
+   ]
   }
  ],
- "all_match": false,
- "verdict": "MISMATCH",
+ "all_match": true,
+ "verdict": "EQUIV_DIFF0",
  "checked_at": "2026-08-17",
- "method": "paper_engine.select_target_codes dry-run (isolated subprocess per date, retry x3) vs a7_v5h_xsub backtest holdings; ordered full-list compare"
+ "method": "paper_engine.select_target_codes(rules layer t0352) vs a7_v5h_xsub backtest holdings; ordered compare; single-thread parquet reads w/ retry-6x (mem pressure mitigation)"
 }

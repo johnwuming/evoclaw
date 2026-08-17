@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15 06:24:36",
+  "generated_at": "2026-08-17 16:14:50",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
@@ -7,7 +7,7 @@
     "paper_nav": {
       "file": "results/baseline-paper-nav.csv",
       "obs": 1,
-      "range": "2026-08-07~2026-08-07"
+      "range": "2026-08-14~2026-08-14"
     },
     "strategy_track_record": {
       "file": "results/i3_abs_s1_nav.csv",
@@ -58,7 +58,7 @@
       "action": "进入观察，暂停模型升级",
       "data_source": "strategy_track_record(6m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": 0.22028
+      "cross_check_vs_microcap_eqw": null
     },
     "underperform_discipline.downweight": {
       "rule": "underperform_discipline.downweight",
@@ -72,7 +72,7 @@
       "action": "降仓至70%",
       "data_source": "strategy_track_record(12m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": 0.25804
+      "cross_check_vs_microcap_eqw": null
     },
     "live_vs_backtest": {
       "rule": "live_vs_backtest",
@@ -86,71 +86,7 @@
       "status": "insufficient_data",
       "action": "策略失效review",
       "data_source": "paper < 20 obs => insufficient",
-      "as_of": "2026-08-07"
+      "as_of": "2026-08-14"
     }
-  },
-  "crowding_reference": {
-    "latest_date": "2026-08-07",
-    "overall_flag": "red",
-    "indicators": {
-      "micro_turnover_share": {
-        "latest": 0.02533,
-        "flag": "green",
-        "pct_rank": null
-      },
-      "micro_turnover_pctile": {
-        "latest": 46.67,
-        "flag": "green",
-        "pct_rank": null
-      },
-      "excess_decay": {
-        "latest": -0.004422,
-        "flag": "red",
-        "pct_rank": null
-      },
-      "snowball_knockin": {
-        "latest": 0.58497,
-        "flag": "green",
-        "pct_rank": null
-      }
-    },
-    "capacity": {
-      "as_of": "last trading day",
-      "method": "单日可买量=ADV20×参与率，策略容量=可买量÷持仓权重，取11票瓶颈(min)",
-      "conservative_5pct": 13659439.0,
-      "neutral_10pct": 27318878.0,
-      "optimistic_15pct": 40978317.0,
-      "bottleneck_stock": "603551",
-      "mean_5pct": 255135596.0,
-      "mean_10pct": 510271191.0,
-      "mean_15pct": 765406787.0
-    }
-  },
-  "drill": {
-    "mode": "replay",
-    "window": "2015-01-01 ~ 2015-12-31",
-    "nav_source": "results/i3_abs_s1_nav.csv",
-    "max_drawdown_in_window": -0.36852,
-    "max_dd_date": "2015-07-08",
-    "events_fired": [
-      {
-        "rule": "level1_cut_half",
-        "date": "2015-07-03",
-        "current": -0.27638,
-        "threshold": 0.25
-      },
-      {
-        "rule": "level2_stop",
-        "date": "2015-07-08",
-        "current": -0.36852,
-        "threshold": 0.35
-      },
-      {
-        "rule": "underperform_discipline.downweight",
-        "date": "2015-01-05",
-        "current": -0.18257,
-        "threshold": -0.15
-      }
-    ]
   }
 }

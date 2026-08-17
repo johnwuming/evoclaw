@@ -1,6 +1,6 @@
 {
   "version": "timing_v4_i4_q3z",
-  "computed_at": "2026-08-15 00:26:06",
+  "computed_at": "2026-08-17 16:01:50",
   "params": {
     "ma_window": 120,
     "vol_window": 60,
@@ -24,11 +24,11 @@
   "last_row": {
     "f_trend_comp": 0.3,
     "f_vol_comp": 0.726083,
-    "f_q_q3z": 0.939348,
+    "f_q_q3z": 0.940993,
     "w_raw": 0.3,
     "w_smooth": 0.522179,
     "pos_ratio": 0.522179,
-    "pe": 13.63
+    "pe": 13.62
   },
   "monthly_series_tail": [
     {

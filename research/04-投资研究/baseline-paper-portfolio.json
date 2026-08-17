@@ -1,76 +1,58 @@
 {
   "holdings": {
     "300824": {
-      "shares": 1100,
-      "cost": 7.75,
-      "weight": 0.085418,
+      "shares": 900,
+      "cost": 7.74,
+      "weight": 0.069688,
       "name": "北鼎股份"
     },
     "002107": {
-      "shares": 1400,
-      "cost": 6.3,
-      "weight": 0.088374,
+      "shares": 1200,
+      "cost": 6.41,
+      "weight": 0.076951,
       "name": "沃华医药"
     },
-    "300453": {
-      "shares": 900,
-      "cost": 9.55,
-      "weight": 0.086119,
-      "name": "三鑫医疗"
-    },
     "603551": {
-      "shares": 900,
-      "cost": 9.32,
-      "weight": 0.084045,
+      "shares": 800,
+      "cost": 9.4,
+      "weight": 0.07523,
       "name": "奥普科技"
     },
-    "603998": {
-      "shares": 900,
-      "cost": 9.72,
-      "weight": 0.087652,
-      "name": "方盛制药"
-    },
     "000848": {
-      "shares": 1000,
-      "cost": 8.79,
-      "weight": 0.088073,
+      "shares": 900,
+      "cost": 8.32,
+      "weight": 0.07491,
       "name": "承德露露"
     },
     "300009": {
-      "shares": 1000,
-      "cost": 8.55,
-      "weight": 0.085669,
+      "shares": 800,
+      "cost": 8.95,
+      "weight": 0.071629,
       "name": "安科生物"
     },
-    "002372": {
-      "shares": 1000,
-      "cost": 8.64,
-      "weight": 0.08657,
-      "name": "伟星新材"
-    },
     "600867": {
-      "shares": 1000,
-      "cost": 8.42,
-      "weight": 0.084366,
+      "shares": 900,
+      "cost": 8.57,
+      "weight": 0.077161,
       "name": "通化东宝"
     },
     "002027": {
-      "shares": 1700,
-      "cost": 5.14,
-      "weight": 0.087552,
+      "shares": 1500,
+      "cost": 5.08,
+      "weight": 0.07623,
       "name": "分众传媒"
     },
     "601600": {
-      "shares": 900,
-      "cost": 9.85,
-      "weight": 0.087404,
+      "shares": 800,
+      "cost": 9.26,
+      "weight": 0.07411,
       "name": "中国铝业"
     }
   },
-  "cash": 4866.0,
-  "total_value": 99803.24,
-  "updated_at": "2026-08-15T13:48:30",
-  "model_version": "v1.4",
+  "cash": 40393.0,
+  "total_value": 99960.0,
+  "updated_at": "2026-08-17T16:10:57",
+  "model_version": "v5h_xsub",
   "timing_layer": "timing_v4_i4_q3z",
   "timing_ratio": 1.0
 }

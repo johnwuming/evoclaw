@@ -1,67 +1,51 @@
 {
-  "cash": 4866.0,
+  "cash": 40393.0,
   "holdings": {
     "300824": {
-      "shares": 1100,
-      "cost": 7.75,
-      "buy_date": "2026-08-07"
+      "shares": 900,
+      "cost": 7.74,
+      "buy_date": "2026-08-14"
     },
     "002107": {
-      "shares": 1400,
-      "cost": 6.3,
-      "buy_date": "2026-08-07"
-    },
-    "300453": {
-      "shares": 900,
-      "cost": 9.55,
-      "buy_date": "2026-08-07"
+      "shares": 1200,
+      "cost": 6.41,
+      "buy_date": "2026-08-14"
     },
     "603551": {
-      "shares": 900,
-      "cost": 9.32,
-      "buy_date": "2026-08-07"
-    },
-    "603998": {
-      "shares": 900,
-      "cost": 9.72,
-      "buy_date": "2026-08-07"
+      "shares": 800,
+      "cost": 9.4,
+      "buy_date": "2026-08-14"
     },
     "000848": {
-      "shares": 1000,
-      "cost": 8.79,
-      "buy_date": "2026-08-07"
+      "shares": 900,
+      "cost": 8.32,
+      "buy_date": "2026-08-14"
     },
     "300009": {
-      "shares": 1000,
-      "cost": 8.55,
-      "buy_date": "2026-08-07"
-    },
-    "002372": {
-      "shares": 1000,
-      "cost": 8.64,
-      "buy_date": "2026-08-07"
+      "shares": 800,
+      "cost": 8.95,
+      "buy_date": "2026-08-14"
     },
     "600867": {
-      "shares": 1000,
-      "cost": 8.42,
-      "buy_date": "2026-08-07"
+      "shares": 900,
+      "cost": 8.57,
+      "buy_date": "2026-08-14"
     },
     "002027": {
-      "shares": 1700,
-      "cost": 5.14,
-      "buy_date": "2026-08-07"
+      "shares": 1500,
+      "cost": 5.08,
+      "buy_date": "2026-08-14"
     },
     "601600": {
-      "shares": 900,
-      "cost": 9.85,
-      "buy_date": "2026-08-07"
+      "shares": 800,
+      "cost": 9.26,
+      "buy_date": "2026-08-14"
     }
   },
-  "created_at": "2026-08-13T08:02:35",
+  "created_at": "2026-08-17T16:09:39",
   "initial_capital": 100000,
-  "last_rebalance": "2026-08-07",
-  "last_daily": "2026-08-07",
-  "updated_at": "2026-08-15T13:48:30",
-  "last_daily_update": "2026-08-14T16:30:21.250276",
-  "model_version": "v1.4"
+  "last_rebalance": "2026-08-14",
+  "last_daily": "2026-08-14",
+  "model_version": "v5h_xsub",
+  "updated_at": "2026-08-17T16:10:56"
 }
