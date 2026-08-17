@@ -67,3 +67,16 @@
 - **#8 已实施**（evolution_pipeline.py L776-781）：evaluate verdict=PASS 且 prev=candidate → 自动 _do_activate，日志注明"R220 #8 移除人工确认制"；decision-log expected_impact 同步注明
 - **audit_lock.py**（task-0292/E6）：AUDIT_LOCK_END=2024-06-30（locked 审计段，OOS/评估窗口不得穿透）；clamp_date/clamp_ym 统一截断；v1.4 前历史穿透不回改
 - **rebalance_gate.py**（task-0347/R220-#37）：判断今日是否当月首个交易日，对齐回测 groupby(M).min() 口径；日历源 T1 官方缓存→T2 本地K线→T3 兜底周一~五；退出码 0=PASS/3=SKIP/2=ERROR；修复 paper_engine --check-month-start 因周度刷新月首无K线而永久 skip 的缺陷
+
+## 7. cost_model_v2.py（task-0293/Q3 可交易性基建）
+- estimate_cost(): 佣金 2.5bp（最低5元）+ 印花税卖出 5bp + 滑点/冲击 ADV 平方根模型 impact=k*sqrt(order_amt/ADV20)，k=10 保守
+- is_untradeable(): 一字板判定 O==H==L==C(容差1e-6) 且涨跌幅≥板块阈值-0.1%容差
+- 涨跌停分段：主板10%；科创板688 20%(2019-07-22起)；创业板300/301 10%→20%(2020-08-24注册制)；ST 5%/20%；北交所30%(2021-11-15起)
+- qfq 前复权近似性论证在文件头
+
+## 8. Registry 五操作 + rollback 机制
+- evolution_pipeline.py: 版本 Registry + 五操作 backtest/evaluate/activate/rollback/override
+- activate 时冻结 main.json 字节快照 → rollback 字节级还原依据（registry/*.main.json.snapshot）
+- decision_log() 每操作写 decision-log.jsonl（trigger/metrics_summary/expected_impact/rollback_condition/phash/data_snapshot）
+- ledger_append() 写 experiment-ledger.jsonl（entry_type/version/metrics/data_snapshot/phash）
+- temp_override 可 TTL 关闭（timing.disable_switch 字段）
