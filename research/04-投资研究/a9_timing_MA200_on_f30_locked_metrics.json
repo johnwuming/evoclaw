@@ -1,0 +1,18 @@
+{
+  "experiment": "E2 anchor(\u2261v5h)",
+  "ma": 200,
+  "q3z": "on",
+  "floor": 0.3,
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 19.53,
+  "monthly_turnover_est": 0.3197,
+  "cumulative_return": 13.9047,
+  "annual_return": 0.1574,
+  "max_drawdown": -0.298,
+  "sharpe": 0.9983,
+  "calmar": 0.5283,
+  "monthly_win_rate": 0.6109
+}
