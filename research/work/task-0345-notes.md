@@ -81,3 +81,12 @@
 - 模块加载：_do_activate 保留(True)，cmd_override/OVERRIDE_FILE/_parse_ttl 均不存在(False)，STATUS_ENUM 保留 pending（历史数据兼容）
 - 无 evolution/paper 进程在跑（pgrep 仅命中自身）
 - 残留 grep 命中=仅注释 + backtest--override(参数覆盖) + confirmed_by(审计字段)，无 #8/#13 机制实现
+
+## 沙箱等价校验通过（14:21）
+- 用临时沙箱路径跑 _do_activate（模拟 evaluate PASS 自动 activate）：
+  - rc=0；v_new status→active；activated_at 写入
+  - 新快照 + 旧快照均冻结（.main.json.snapshot 生成）
+  - decision-log 追加 type=activate
+  - 旧 active→sota 流转正确
+  - SANDBOX_OK
+- 生产未动（沙箱 /tmp/evolve_sandbox_*，已 rmtree）
