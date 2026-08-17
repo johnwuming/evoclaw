@@ -128,3 +128,8 @@ g2 FAIL 解读：amt20 排序的 IC 在 2021-2024 OOS 窗口对 IS 显著劣化�
 - resume 与收口阶段共遇 6+ 次瞬时段错误（numpy 导入段/进程启动段，内存/瞬时故障特征：同命令重试即过）；关键写入均以幂等护栏（skip-if-exists + 唯一 decision_id）防重复，最终状态已逐项核验（active/main.json/ledger 9 行/decision-log 3 行）
 - 首轮中断会话的"IC 预检未通过"结论系符号约定误读，已在 §2.2 更正留痕
 - 等价校验产物 a7x_equiv_* 保留（patch 开关全关 == 原引擎，nav 逐位一致）；本批未修改任何管线代码（evolution_pipeline/paper_engine/crontab 未动）
+
+### 附2：activate 后实盘集成披露（D-20260817-A7-02）
+- paper_engine.py 选股仅消费 base 参数（div/roe/roa/price_cap/sort=mv asc/n_hold）+ timing 层（tlp.get_timing_ratio）；e1_guard（A5 起）/xsub_days（本批）/calendar/limup 规则层**未实现于实盘选股代码**
+- 切换后实盘选股行为与 v2b_trr 期一致（不崩溃、行为不变），但与 v5h endtoend 回测（含规则层）存在已知偏离：+3.32pp 增益中 e1+xsub 部分暂不在实盘生效
+- 处置：不回滚（登记表/基线已升级，实盘行为未变）；建议下批排期 paper_engine 补规则层实现；回退兜底不变
