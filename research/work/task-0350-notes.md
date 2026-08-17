@@ -15,3 +15,23 @@
 - work/ 下 notes：task-0331~0349
 
 （后续持续追加）
+
+## 3. 现役/关键版本配置（registry 现读）
+### v5h_xsub（active，activated 2026-08-17 04:58:48）
+- selection: strategy=dividend_quality_smallcap_seedB, sort=ext(ext_factor=low_amount, ext_weights=[1.0,0.0]), e1_guard=true, mom_cols=[ret120], xsub_days=365（次新剔除：上市不满1年剔除，first_last字段实现含退市）
+- factors: div_yield_ttm / roe_ttm / roa_ttm / circ_mv / ret120
+- timing: q3z_x_ew_trend_overlay；q_key=q3z(win36,zscore,hi1.0,cut0.40,w_min0.3)；trend=池内等权指数(含退市)月末收盘 vs MA200 破位×0.6；月度乘法合成，无重裁剪(自然下限0.18)
+- gate: DSR=0.9923, n_trial=85, verdict=PASS；logic=次新剔除(P0-5)降尾部风险
+- provenance: task-0338 A7 P0 增强因子批次收口, parent=v4b_mve1, report=results/a7-iteration-report.md
+
+### v6a_def（candidate，created 2026-08-17 12:12:45）
+- selection 与 v5h 完全一致（四闸门+ext low_amount+E1+xsub365）
+- timing: q3z(w_min=0.0) × MA15 快趋势，自然下限 0.0；[A9 E2 网格 MA15_on_f0]
+- gate verdict=candidate；注册线: MDD 改善 5.13pp(≥3) 且年化损失 1.11pp(≤2)；用户 2026-08-17 20:10 拍板注册防守档；Calmar 0.593 > v5h 0.528
+- provenance: batch=A9, task-0342, experiment=E2 timing grid MA15_on_f0
+
+### v2b_trr（sota，evaluated 2026-08-16 15:24:02）
+- selection: sort=mv, div_min=0.02, roe_min=0.15, roa_min=0.10, n_hold=20, price_cap=10.0, cost_model=v2, limit_board=on, capital_base=1000万
+- timing: 同结构 q3z(w_min0.3)×EW-MA200
+- gate: ICIR_IS=0.5994, ICIR_OOS=-0.0525, DSR=0.9873, n_trial=51, MDD改善 -4.88pp（即恶化4.88? 待对符号：mdd_deterioration_pp=-4.88 为改善4.88pp）, oos_split=2021-01
+- provenance: task-0327 A3 fork 回撤攻坚, parent=v1i_q3z
