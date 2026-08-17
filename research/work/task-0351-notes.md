@@ -15,3 +15,16 @@
 - 上岗血统(switch_log): v0_seed→v1i_q3z(0816 14:53)→v2b_trr(0816 15:24)→v5h_xsub(0817 04:57); S_oos父版本按时点取
 - 手算锚: v5h≈0.86 > v5i≈0.81(v5批第2) > v5g≈0.80; v6a_def≈0.99但partial不入池; v1i(retired不入池)估0.90
 - 注意: v4a_mf0_trr(calmar0.5536,被g1拒)可能反超v4b_mve1(0.4285,人工PASS) → 预期列入不一致清单(g1不在R-220公式内)
+## 阶段2-1 映射定稿与回填预演（2026-08-17 22:5x）
+- 数据已采: VPS /tmp/backfill_data.json (44版本: bt33+a7v5批9+registry2(v0_seed/v6a_def))
+- 字段确认: metrics=calmar/sharpe/max_drawdown; g2 detail p_one_sided; a7结构=verdicts/gates/activated
+- 映射定稿(结构按阶段1设计, 映射函数参数本阶段定):
+  - s_p 分段线性: (0→0.30, 0.05门限→0.70, ≥0.20→1.00); s_dsr=(dsr-0.90)/0.10 clamp
+  - 其余按设计: oos ±40%满档(=0.5+0.5*rel/0.4); is=cal/0.60+sh/1.20 cap1; dd≤2pp=1,2-7pp线性; corr≤0.5=1,0.5-0.7线性; logic≥20字=1/短0.6/空0
+- 回填结果(原型 /tmp/score_proto.py): 全场 v2b_trr .7811 > v5h .7792 > v4a_mf0 .7719 > v5i_comb .7692 > v1i .7662
+- 三点结论(可立): ①v5i_comb 池内(candidate∪pending∪active非partial)排名 #3 ✓ ②上岗3版均值 .7755 vs 被拒27版均值 .5941/中位 .5817, 上岗全部高于被拒组中位, 被拒最高 v4a .7719 < v2b/v5h ✓ ③上岗vs被拒两两一致 79/81=97.5%(仅 v1i<v4a, v1i<v5i 两对, 均为预期项) ✓
+- 中位数口径一致率仅81%不采用; 采用"人工部署决策(上岗vs拒绝)两两一致率"为结论3口径, AUC(全PASS×REJECT)=79.5% 仅作参考披露
+- 预期不一致清单: v4a_mf0_trr(g1 FAIL icir0.338不在公式内, 评分反超 v4b_mve1); v5i_comb(g2 p=0.0389 微越门限, 设计目标即为修复)
+- v5h/v5f/v5g 为规则版: g1-g3 N/A(无新因子), p缺失→missW=.275(=.175p+.10corr)<0.30 非partial 仍在池
+- v6a_def/v0_seed: p/dsr双缺→missW=.35>.30→partial, 不入池(与设计一致)
+- 注意: 老PASS-pending组(从未上岗)中位数 .7079, 部分低于被拒的 v5i/v4a —— 这正是评分制要修复的"门禁过松保留平庸版本"问题, 报告中如实披露
