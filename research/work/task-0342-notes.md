@@ -66,6 +66,6 @@
 - [ ] 读 E3 full 两版 metrics（补录）
 - [x] HP ledger IT-A9-01..04 已写入（81 行，n_trials 76-79）
 - [x] HP decision-log D-20260817-A9-1 a9_closeout 已写入（50 行）
-- [ ] HP results/a9-iteration-report.md >4KB
-- [ ] VPS R-222 报告 ≥3KB + README 变更记录
-- [ ] VPS .task-completions.jsonl
+- [x] HP results/a9-iteration-report.md 6780B（>4KB）
+- [x] VPS R-222 报告 4111B（≥0）KB） + README 台账更新（快入口+表首行）
+- [x] VPS .task-completions.jsonl task-0342 条目（573 字摘要）
