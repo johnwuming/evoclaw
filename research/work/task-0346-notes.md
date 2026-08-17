@@ -24,3 +24,14 @@
   - ⚠️ py_compile 失败：line 956 游离 `-`（R6 提取 block 时 bak[si-2:ei] 多取一个字符）
   - 当前 grep：957:# cmd: override / 959:def _parse_ttl / 971:def cmd_override / 1003:# cmd: status / 1005:def cmd_status —— 结构正确，仅游离符需修
 - 修复游离 `-`：line 956 单独 `-` 行（R6 提取 si-2 误取），删除即可
+## 阶段1 修复完成（15:30）
+- 游离 `-` 已删除，py_compile OK（55603B）
+- 白名单: L852 `if verdict not in ("PASS","legacy-grandfathered") and not force:` ✓
+- bootstrap: L492 unknown-legacy / L495 code_ref legacy() / L509 verdict legacy-grandfathered ✓
+- argparse: L1186 add_parser("override") ✓
+- cmd_status 仅 1 处（无重复注入）✓
+- 验收: A1=11(≥3) ✓ A2=pending仅1(STATUS_ENUM常量,无pending→人工) ✓ A3=备份存在 ✓ A4=PYCOMPILE_OK ✓
+- A5 #12: 25%/-20%/1.2 在 pipeline 无命中（仅版本号v1.2、n_hold=25参数、数据文件名）→ 确认无需代码改动 ✓
+
+## 阶段2 等价校验
+（待填）
