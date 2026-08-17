@@ -92,3 +92,7 @@
 - v5e（换手CV）/v5f（日历）/v5g（涨停剔除）/v5h（次新剔除）/v5i（组合）**全部未跑**
 - a7b-*（现金曲线+稳健性，8 组）与 a7c-*（动态画像，6 文件）已有，非本任务产出但作交叉解读素材
 - 无 a7-iteration-report.md；ledger 尾行待查
+- 补查：a7x_equiv_{full,locked}_* 文件存在（10 个）→ 等价校验在首轮已通过（patch 开关全关==原引擎逐位一致）
+- 时间线还原：01:45 IC 预检 → 02:20-02:21 v5a → v5b/v5c → 02:27 v5d locked 写完 → v5d full 中断（API 会话被杀）
+- a7_backtest_summary_formal.json 不存在（脚本末尾才写，未到达）→ 补跑后需单独合并生成
+- v5d_locked_metrics.json 742B 可读；v5a 743B
