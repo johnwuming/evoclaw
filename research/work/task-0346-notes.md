@@ -35,3 +35,12 @@
 
 ## 阶段2 等价校验
 （待填）
+## 阶段2 等价校验完成（15:35）
+- CLI status 干跑：registry 正常输出（v0_seed gate_verdict=legacy-grandfathered）✓
+- 单测：_parse_ttl 24h/30m/7d 均 True（初测 "30m:0.5h" 系测试脚本期望值笔误，非代码问题）✓
+- 白名单谓词：legacy-grandfathered/PASS 放行、REJECT 拒绝、force 放行 ✓
+- OVERRIDE_FILE 常量存在、cmd_override/cmd_status 可调用 ✓
+- 无意外写 MODEL_DIR 文件 ✓
+- 无正在运行的 activate/cycle 进程 ✓
+## 阶段3 收尾
+（待填：decision-log / 完成回报）
