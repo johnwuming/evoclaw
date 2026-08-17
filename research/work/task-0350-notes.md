@@ -180,3 +180,24 @@
 - HP→VPS：collect-metrics.sh 每分钟推 VPS:8055（agent-dashboard，量化Tab）；sync_to_vps.sh 经 ZeroTier（HP 10.12.192.174→VPS 10.12.192.225）同步 results/
 - HP 其余 cron：evolution_pipeline.py cycle 周六09:00；notify_hub.py 每小时:10（W8 task-0279）；w6_collect_delisted 每月1日06:00；reboot_autostart @reboot；heartbeat_selfheal */5min（含 2222 用户态 sshd 自愈，R-221 缓解项）
 - VPS 端：shared/results/04-投资研究/ 与 05-量化投资/ 承接同步成果；README.md 变更记录
+
+## 13. 待办三件（现读确认）
+1. **#7 评分制改造未实施**：R-220 路线图第一项"[立即] verdict 改造"，但 evolution_pipeline.py 现读仍是一票否决逻辑（decisive 全 PASS→PASS），#8 自动 activate 已实施
+2. **paper PIT 滞后**（task-0347 残留）：数据周度刷新，月首当日调仓用的价格仍是上周五收盘（PIT 层面滞后），paper_trade.py 结构不许动
+3. **memtest 硬件确诊**（R-221）：HP 系统性硬件级不稳定（i5-4590T Haswell 非 ECC），崩溃计数 2→99 渐进退化，SIGSEGV 跨二进制；建议重启+memtest86+；心跳自愈 */5min 已部署为缓解
+
+## 14. R-219 审计底稿要点（47 条分类）
+- A类=宇宙定义（四闸门/次新/ST/涨停等）；B类=机制参数；C类=物理现实（一字板/T+1/成本/停牌 5条）；D类=防作弊基建（PIT/退市全样本/快照哈希/防漂移 8条）
+- 保留硬底线最小集：locked 窗口#10、数据校验#44、PIT/全样本#40/41、一字板与成本#35/36
+
+## 15. 取证完成度检查
+- [x] registry 现读（验收1）
+- [x] 五门禁定义+阈值（pipeline 源码）
+- [x] R-220 三档处置+特殊处置+评分公式草案
+- [x] v5h/v6a/v2b 完整配置
+- [x] A2/A2B/A2C/A4D/A5/A6/A7/A7b/A7c/A8/A9 全批次结论
+- [x] Calmar 不变式五次验证
+- [x] 基建脚本（audit_lock/cost_model_v2/rebalance_gate/ext runner 等价校验）
+- [x] 自动化 cron + 架构
+- [x] 待办三件
+- 材料足够，转入报告撰写（报告只从本笔记取材）
