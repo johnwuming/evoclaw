@@ -52,3 +52,13 @@
   - D-20260817-A9-2 (12:12): v6a_def 注册 candidate（不切换现役，上线需 evaluate/评分流程）
   - D-20260817-R220N37 (12:28): paper 调仓时点对齐回测口径（R-219 #37 发现，task-0347）；下次调仓 2026-09-01
   - D-20260817-A8-1 (20:58): A8 收尾；bucket raw 年化+2.55pp 过线但 MDD 恶化4.21pp>2pp → 不注册；合成方式归因闭环：ranksum 排序层最优(抗极值+全序分辨率)；bucket 顶部分辨率不足且并列推高换手0.536全场最高；zscore quality宇宙最优但raw被极值扭曲；前沿 v5h(15.7/-29.8)~raw ranksum(21.8/-33.6)
+
+## 5. 五门禁定义（evolution_pipeline.py 现读，L57-65 GATE_CONFIG）
+- STATUS_ENUM = [candidate, pending, active, sota, retired]
+- g1 icir_is_min=0.5：IS 全样本复合 ICIR 年化下限
+- g2 oos_p_min=0.05：OOS 相对 IS 劣化单侧 t 检验 p>0.05（不显著劣于）；oos_split_ym=2021-01
+- g3 max_corr_max=0.7：候选新增因子 vs 在役因子最高|ρ|<0.7；数据源 factor_ic_corr.csv 优先/catalog corr_alerts；无新增因子→N/A（E3修复 task-0292）
+- g4 dsr_min=0.95：Deflated Sharpe（Bailey & López de Prado 2014），n_trials 累计计数
+- g5 logic 非空：候选改动须有逻辑说明
+- g6 mdd_vs_parent_max_pp=2.0：endtoend MDD 较父版本(active)恶化 ≤2pp，**一票否决**（E3修复 task-0292；数据缺失→N/A 不折减）
+- verdict 规则：decisive(有 PASS/FAIL 的门禁) 全 PASS → PASS；L778: PASS 且 prev=candidate → 自动 activate（待确认具体行文）
