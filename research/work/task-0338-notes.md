@@ -53,3 +53,10 @@
 - HP /tmp/a5_runner.py 存在，results/a5_v4b_mve1_formal_locked_metrics.json 存在（基线可复跑）
 - a5_runner ext 分支已支持 amount_cv / volatility_20d（ext_factor + ext_weights）
 - A7 需新增 ext_factor: low_amount(20d均额反向) / amihud(|ret|/amount 20d均值) / turnover_cv(已有 amount_cv 可复用)；规则类: 日历降仓/涨停剔除/次新剔除需新 patch
+
+### 10:30 阶段1 IC 预检完成（微盘宇宙 circ_mv 最小400，月度 spearman，247月）
+- amt20（低成交额，DIR=-1 低好）：mean_ic **-0.106** / ICIR -0.67 / pos 23% / last12 -0.057 → **方向与外部相反**（微盘内高成交额略好），低成交额排序在本宇宙无 alpha 甚至反向
+- amihud20（高好）：mean_ic +0.0039 / ICIR +0.025 / pos 49% / last12 +0.022 → **极弱接近零**
+- amt_cv20（换手CV，DIR=-1 低好）：mean_ic **-0.189** / ICIR -1.32 / pos 9% / last12 -0.117 → **显著反向**（微盘内高换手CV反而收益高，与 BigQuant 全市场 -0.03 相反）
+- 结论：三个排序类因子 IC 预检均未通过（无正 IC 支撑），如实记录；按任务书仍进回测（单维度归因验证，预期贡献弱）
+- 附：原始 corr（调整前）：amt20 +0.106 / amihud20 +0.0039 / amt_cv20 +0.189
