@@ -25,3 +25,11 @@
 - kline（all_stocks_merged.parquet，1461 万行）：date/code/open/close/high/volume/amount —— **无现成换手率列**，需流通股本或流通市值数据折算
 - derived/：dividend_events、factor_registry_financial_panel、fin_deep_monthly_panel_ak、fundamentals_monthly、fundamentals_delisted_monthly、ths_ttm_panel、pit_disclosure_map
 - factor_db.sqlite 存在，107 因子明细待查
+
+### [查证3] 聚宽社区小市值策略线索（搜索摘要，待fetch细节）
+- 《小市值适配因子》wywy1995：小市值+低换手率，**年化近50%，有实盘线**（聚宽2022年度精选提及）→ 低换手率因子强证据
+- 《高股息+高波动+低负债小市值策略》：换手率波动率因子(turnover_volatility) 增强小市值
+- 《小市值+低X+涨停检查调仓》：低价小市值 81.63% / MDD 20.50（回测）
+- 小市值+PEG加换手率策略、多成长因子（成长类已判无效→SKIP同类）
+- 动量+行业轮动+高ROE微盘 年化54%（知乎复盘，提示实盘风险）
+- 条件选股：流通市值×换手率×收盘价截面排序（BigQuant）
