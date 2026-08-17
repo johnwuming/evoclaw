@@ -70,3 +70,8 @@
 ### 11:05 a7_runner 就绪（9候选 v5a-v5i）
 - a7_runner.py 语法 OK，等价校验 + 9 候选（low_amount×3权重 / amihud×1 / cv×1 / 日历×0.5 / 涨停剔除 / 次新剔除 / a+e组合）
 - 开始上传 HP 后台执行（nohup + log 轮询）
+
+### 11:20 执行方式修正
+- nohup/setsid 后台进程均被 API 请求清理（测试证实）→ 必须同步执行
+- API /run 单请求超时上限 1800s（30min）；A5 同规模 5候选×2窗+等价约 10min，A7 9候选×2窗+等价预计 20-25min，可容纳
+- 启动同步回测：HP /tmp/a7_runner.py formal（等价校验 diffs={} + 9 候选 full+locked）
