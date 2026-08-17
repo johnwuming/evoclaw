@@ -62,3 +62,8 @@
 - g5 logic 非空：候选改动须有逻辑说明
 - g6 mdd_vs_parent_max_pp=2.0：endtoend MDD 较父版本(active)恶化 ≤2pp，**一票否决**（E3修复 task-0292；数据缺失→N/A 不折减）
 - verdict 规则：decisive(有 PASS/FAIL 的门禁) 全 PASS → PASS；L778: PASS 且 prev=candidate → 自动 activate（待确认具体行文）
+
+## 6. R-220 执行现状与基建脚本（HP 现读）
+- **#8 已实施**（evolution_pipeline.py L776-781）：evaluate verdict=PASS 且 prev=candidate → 自动 _do_activate，日志注明"R220 #8 移除人工确认制"；decision-log expected_impact 同步注明
+- **audit_lock.py**（task-0292/E6）：AUDIT_LOCK_END=2024-06-30（locked 审计段，OOS/评估窗口不得穿透）；clamp_date/clamp_ym 统一截断；v1.4 前历史穿透不回改
+- **rebalance_gate.py**（task-0347/R220-#37）：判断今日是否当月首个交易日，对齐回测 groupby(M).min() 口径；日历源 T1 官方缓存→T2 本地K线→T3 兜底周一~五；退出码 0=PASS/3=SKIP/2=ERROR；修复 paper_engine --check-month-start 因周度刷新月首无K线而永久 skip 的缺陷
