@@ -23,3 +23,9 @@
   - L1162 backtest --override 参数
   - L1183-1188 override 子命令 argparse
 - 待确认：backtest 的 --override（L584/1162）是参数覆盖机制还是择时安全阀？R-220 #13 指"override --ttl 临时关闭择时安全阀"，即 cmd_override 子命令。backtest --override key=val 是别的功能（参数覆盖），任务书要求 grep 无 override 命中业务代码——但删 backtest --override 可能超出范围。需要看 R-220 原文确认。
+
+## R-220 确认（14:05 已读 VPS 副本 8585B）
+- #8 删除：activate 人工确认制→自动上岗，评分第一即自动 activate（不再人工拍板）
+- #13 删除：legacy 豁免 + override TTL（非迭代评判标准）
+- 保留：#9 rollback 快照、#10 locked、快照冻结、等价校验
+- 本任务不动 #7 verdict 合成（task-0346）
