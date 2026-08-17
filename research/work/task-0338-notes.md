@@ -42,3 +42,9 @@
 **首查② dividend_events 公告日**：
 - dividend_events.parquet：5 列 code, ex_date, cash_per_share, period, __index_level_0__
 - **只有除权除息日 ex_date，无预案公告日** → F13 股息事件 PIT（预案公告日）**本批不可行，不测**（只查不测达成）
+
+### 10:20 恢复执行（上次超时，A5 runner 机制已读通）
+- a5_runner.py 机制：patch 引擎 run_backtest（ext 排序分支 P1 + inv_vol P2 + rank_buffer P3 + vt_target P4 + dd_trigger P5 + value/mom lookup P6/P8 + gq 排序 P9），等价校验 diffs={} 后跑候选
+- a5_post_bt.py：registry 注册（fork 自 parent）+ ledger_append（带 features 字段）
+- a5_ic_ext.py：月度 IC（spearman，方向调整，W1 口径）
+- A7 计划：基于 v4b_mve1（sort=mv + e1_guard + q3z_tr 择时）骨架，新增 P0 因子 ext 分支（low_amount/amihud/cv）+ 日历降仓 + 涨停剔除 + 次新剔除，逐一单维度叠加
