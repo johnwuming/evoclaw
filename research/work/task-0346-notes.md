@@ -23,3 +23,4 @@
   - 注入结果：cmd_override=1, _parse_ttl=1, OVERRIDE_FILE=5, legacy-grandfathered=2, unknown-legacy=1, pending_assign=0(#8保留), auto_activate_log=1(#8保留)
   - ⚠️ py_compile 失败：line 956 游离 `-`（R6 提取 block 时 bak[si-2:ei] 多取一个字符）
   - 当前 grep：957:# cmd: override / 959:def _parse_ttl / 971:def cmd_override / 1003:# cmd: status / 1005:def cmd_status —— 结构正确，仅游离符需修
+- 修复游离 `-`：line 956 单独 `-` 行（R6 提取 si-2 误取），删除即可
