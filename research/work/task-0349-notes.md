@@ -50,3 +50,25 @@
 - 主流版本（active v5h_xsub + sota v2b_trr + 近三轮实验 a9_*/a8_*）：指标+趋势图 100%；a9_*/a8_* 参数解释为部分（无 registry）但不阻塞切换展示
 
 **评估结论：主流版本数据齐备 → 过闸，进入第二阶段实现。**
+
+## 2. 实现与验证（2026-08-17 22:05-22:10）
+
+### 2.1 后端 /api/quant/version-options（插在 curves 之后）
+- 实现：manifest 69 entries → 同 version_id 去重（v4b_mve1 保 a5 前缀那条，评分 metrics×2+nav×1）→ 68 条
+- caps 判定：metrics/nav=QUANT_REPORTS_DIR 下 prefix_locked/full 文件任一存在；explain_full=registry 存在 AND metrics 有（notes §1.8 口径）
+- 排序：active 最前（v5h_xsub），其余 registered_at 倒序（次条 v6a_def 2026-08-17 12:12:45）
+- node --check 通过；重启 agent-dashboard 后 active
+
+### 2.2 验证输出（实际运行）
+- 任务中心正常：GET /api/tasks 返回 JSON（task-0350 在列）✓
+- version-options：{"ok":true,"available":true,"total":68,"active_version":"v5h_xsub"}；caps 计数 metrics=67/nav=67/explain_full=43（=44 registry 版 − v6a_def 无文件）；nodata 仅 v6a_def（caps 全 false，windows null）✓
+- 去重验证：v4b_mve1 仅 1 条，strategy_prefix=a5_v4b_mve1_formal ✓
+- active?version=v2b_trr：available，prefix=a2c_v2b_trr，windows.locked annual 15.15% ✓
+- curves?version=v2b_trr：strategy locked 899 点 / full 1003 点（周频降采样）+ hs300 + ewmicro ✓
+- bad version（nonexist99）：available:false + note '版本不存在或等待同步…' ✓（响应落盘 /tmp/t0349-opts.json、/tmp/t0349-curves.json）
+
+### 2.3 前端（模型/回测 Tab 版本选择器）
+- _v5State 增 version/versionOptions；v5VersionSelHtml() 共用选择器（默认=active，选项文本 `version_id (status)`，无数据版本 disabled+"（无数据）"后缀，选中历史版显示"历史版本"徽标）
+- loadV5ModelQuant/loadV5BtlcQuant：quant/active 与 curves 追加 ?version=（v5QuantVersionQ()），并拉 version-options（btlc 仅在 available 时覆盖缓存）；sig 增 version+versionOptions
+- renderV5Model：头部插选择器；isHist 时徽标换"历史版本"、说明行提示当前 active；renderV5Btlc：标题"历史版本回测"
+- 切换→v5SetVersion→switchQuantTab(force)→两 Tab 联动，tab 间共享不重置
