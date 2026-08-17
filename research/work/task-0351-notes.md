@@ -38,3 +38,10 @@
 - decision-log 尾行 D-20260817-R220-7 (type=gate_scoring_deploy) ✓
 - 回填表: HP /tmp/backfill_table.md 已拉回 VPS /tmp/backfill_table.md (44行, 5039B)
 - 冷启动说明: 老版本registry不带score → 排名池初始仅含新评估版本+写入过score的版本; v6a_def为partial不入池
+## 阶段4-5 决策日志+报告（已完成 2026-08-17 23:1x）
+- decision-log: D-20260817-R220-7 type=gate_scoring_deploy, 尾行验证 ✓
+- 编号: 任务书预期R-224已被占用(看板版本选择器) → 本报告顺延 R-225
+- R-225: shared/results/05-量化投资/R-225-五门禁评分制改造与回填验证.md (11641B, 含44行回填表+三点结论+预期不一致清单+冷启动风险+回滚)
+- README台账: 变更记录快记区+主表均已加R-225行
+- completions: .task-completions.jsonl 已写 taskId=task-0351
+- 口径披露: a7 v5批数据为v5h上岗后复核口径(g6 parent=v5h), v5i为评估时点口径(在役=v2b); 敏感度<0.01结论不变; 全PASS×REJECT AUC=79.5%仅参考披露
