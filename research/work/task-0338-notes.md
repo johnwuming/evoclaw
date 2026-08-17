@@ -96,3 +96,19 @@
 - 时间线还原：01:45 IC 预检 → 02:20-02:21 v5a → v5b/v5c → 02:27 v5d locked 写完 → v5d full 中断（API 会话被杀）
 - a7_backtest_summary_formal.json 不存在（脚本末尾才写，未到达）→ 补跑后需单独合并生成
 - v5d_locked_metrics.json 742B 可读；v5a 743B
+
+### 已有产物 locked/full 指标全表（12:4x 抽取，来源 metrics.json）
+| 候选 | full ann/mdd/sharpe | locked ann/mdd/sharpe/calmar | locked 月胜率/换手 |
+|---|---|---|---|
+| v5a_amt37(低额0.7mv+0.3amt) | 14.06%/-30.76%/0.9252 | 14.42%/-30.76%/0.9325/0.4686 | 61.54%/0.3819 |
+| v5b_amt55(0.5/0.5) | 14.13%/-30.76%/0.9400 | 14.52%/-30.76%/0.9494/0.4720 | 61.09%/0.4008 |
+| v5c_amt73(0.3/0.7) | 13.90%/-30.65%/0.9345 | 14.25%/-30.65%/0.9427/0.4649 | 59.73%/0.4091 |
+| v5d_amh55(Amihud) | full缺(补跑中) | 13.18%/-31.03%/0.8606/0.4246 | 59.73%/0.4166 |
+| 基线 v4b_mve1 | 12.31%/-28.99%/0.8427 | 12.42%/-28.99%/0.8401/0.4285 | 58.82%/0.6156 |
+- 要点：低成交额三档年化 +1.8~2.1pp、Sharpe +0.09~0.11、**换手 0.6156→0.38-0.41（降约35%）**、MDD 恶化 -1.7~-2.0pp
+- 现役 v2b_trr（decision-log 口径）：15.15%/-29.86%/0.936 → v5b 年化/MDD 均不优于现役，仅 Sharpe 略高 → 不满足 activate
+- a7_ic_summary（微盘宇宙 247m）：amt20 mean_ic=-0.1065/ICIR=-0.668/pos23%/last12=-0.057（原始符号：低成交额→高未来收益，支持低额倾斜）；amihud20 +0.0039/0.0246（近零）；amt_cv20 待补（截断）
+- 上一会话笔记 10:30 段"预检未通过/方向相反"系符号误读：raw IC=-0.107 = 低额好；A7c 动态画像与回测结果一致支持低成交额族
+- 六门禁键名（ledger 实际格式）：g1_icir_is / g2_icir_oos / g3_max_corr / g4_dsr / g5_logic / g6_mdd_vs_parent
+- DSR 计算可复用 evolution_pipeline.py:~453（norm.cdf 公式，dsr_min=0.95）
+- ledger 尾 = v4e_gqg1x evaluate 行（REJECT）；decision-log 尾 = D-20260816-043（A5 closeout）→ A7 行/决策均未写，待本任务补
