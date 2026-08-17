@@ -58,3 +58,20 @@
 6. STATUS_ENUM：保留 "pending"（历史 pending 条目 9 个是存量数据，不迁移、不删枚举避免破坏展示）
 7. backtest --override（L584/589/1162）：保留——是"参数覆盖"非 #13 择时安全阀，且 task-0340/0342 A8/A9 网格实验会用到；报告里明确说明
 8. 不删 activate 子命令（rollback 也走 _do_activate；admin 保留）
+
+## 编辑完成（14:14 重试恢复）— 全部改动已应用 + py_compile OK
+改动清单：
+1. 文件头：五操作→四操作；删 override usage 行；加 R220 注释
+2. activate help：注明正常路径由 evaluate PASS 自动触发
+3. 删 OVERRIDE_FILE 常量
+4. evaluate：PASS→直接 _do_activate（自动 activate），不再置 pending；expected_impact 更新
+5. _do_activate：verdict 白名单仅 "PASS"（force 保留 rollback/演练）
+6. 删 cmd_override + _parse_ttl 整段
+7. 删 override 子命令 argparse
+8. bootstrap：hash unknown-legacy→unknown；code_ref 去 legacy() 前缀；verdict legacy-grandfathered→PASS（note 说明 R220 移除豁免）
+9. Step7 日志：改"门禁 PASS 即自动 activate"
+
+残留 grep 命中分类：
+- 注释/文档：L8, L131, L508, L850 → 允许
+- backtest --override（L583/585/588/1119）：参数覆盖（非 #13 择时安全阀），保留，报告中说明
+- confirmed_by（L896/940）：switch_log 审计字段（非 #8 人工确认机制），保留
