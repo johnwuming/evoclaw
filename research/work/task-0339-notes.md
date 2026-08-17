@@ -28,3 +28,12 @@
 - POS 构造：q3z 择时 × (ew>ma200 ? 1.0 : 0.6) 月频趋势因子
 - 等价校验：patched 开关全关 == 原引擎 nav 逐位一致（full/locked 均 OK）
 - 市场加载 q4b.load_fullpool_market 需数分钟（每候选复用同一 market，可一次加载多候选）
+
+### 10:35 a7b_runner.py 生成完毕（HP /tmp/a7b_runner.py, 383行, SYNTAX_OK）
+- 改造点：①cash_ratio patch（eff_ret *= (1-cash)）②e1_thresh 可配置（默认-0.30）③ma_window 可配置（默认200）④新增 _pos_ma(w) helper ⑤main 段重写
+- 运行计划（一次加载市场，12次回测）：
+  - baseline: v4b_mve1 locked 复跑核对
+  - 现金曲线: cash_ratio {0,10,20,30,40}% locked
+  - 稳健性A(参数扰动): e1_thresh {-0.20,-0.40} / ma_window {150,250} locked
+  - 稳健性B(分段子样本): 2018-2021 / 2022-2026
+- 输出: results/a7b_* + a7b_summary.json
