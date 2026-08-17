@@ -29,3 +29,37 @@
 - AUDIT_LOCK_END="2024-06-30"：2024-06-30之后为锁定审计段，所有OOS/评估窗口不得穿透（R-213评审确认，task-0292/E6修复）
 - clamp_date/clamp_ym/breaches_lock 统一工具；gate_icir 中 oos_mask 强制 ym<=2024-06
 - 历史：v1.4及之前 gate-report OOS穿透是历史事实，不回改
+
+### 1.3 backtest_dividend_quality_iter.py（36KB）— 基线回测引擎（q4b/a5/a7 系列共用底座）
+DEFAULTS（L54-71）：
+- sort=mv（默认按流通市值升序=小市值优先）；score_weights=[0.4,0.3,0.3,0.3]（div+roe+roa-mv z-score 加权）
+- div_min=0.02 / roe_min=0.15 / roa_min=0.10（v2b 四闸门之三）
+- n_hold=20；price_cap=10.0（qfq口径）；min_amt=0.0
+- drawdown_control=0, dd_thresh=0.20, dd_reduce=0.5, dd_recover=0.05（V3回撤控制层，默认关）
+- cost_rate=0.001（legacy成本7.5bp两倍？待核）；limit_up_pct=0.098
+- cost_model="legacy"|"v2"; limit_board="off"|"on"; capital_base=1e7（v2成本佣金min5元折算本金）
+- WF_PARAM_GRID：div_min{0.020,0.025}×n_hold{20,30} 4格
+
+选股过滤（L386-424，每月调仓日）：
+1. div_yield_ttm 缺失或 < div_min → 剔除
+2. roe_ttm 缺失或 <= roe_min → 剔除
+3. roa_ttm 缺失或 <= roa_min → 剔除
+4. price >= price_cap 或 <=0 → 剔除（qfq绝对价）
+5. ST（st_history_ranges.csv 精确区间表 task-0330）→ 剔除；持仓中变ST → 强制卖出
+6. 停牌 → 剔除/当日不计收益；持仓停牌 → 顺延
+7. 未上市 → 剔除
+8. min_amt>0 时：20日均成交额 < min_amt（需≥10有效日）→ 剔除
+9. 退市日 → 强制卖出（DELIST）
+组合规则：
+- 月度调仓（每月第一个交易日 rebalance_dates）
+- 等权（weights 均分）
+- top n_hold
+- 回撤控制层（默认关）：NAV回撤>dd_thresh→仓位×dd_reduce，恢复到峰值-dd_recover→满仓
+- 宏观择时层（timing_pos 叠加）：eff_ret = day_ret × pos_ratio × timing_ratio（双层防御 task-0255）
+- 一字板约束（limit_board=on）：买入遇一字涨停 skip，卖出遇一字跌停顺延
+
+### 1.4 cost_model_v2.py（9KB）— 成本模型v2 + 一字板判定
+- COMM_BPS=2.5（最低5元）；STAMP_BPS_SELL=5.0；IMPACT_K=10.0（ADV平方根冲击 k*sqrt(order/ADV20)，保守值可调）
+- is_untradeable：O==H==L==C（1e-6相对容差）且涨跌幅达板块阈值-0.1%容差 → 一字板不可成交
+- 板块阈值分段：主板10%；科创板688=20%（2019-07-22起）；创业板300/301 10%→20%（2020-08-24起）；ST 5%（主板）/20%（双创注册制）；北交所30%
+- direction="buy"仅一字涨停不可买，"sell"仅一字跌停不可卖
