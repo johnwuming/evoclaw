@@ -38,3 +38,11 @@
 | v5i_comb | .1523 / -.293 | .1054 / -.1562 (sharpe .82) | ann≥.0914✓ mdd改善13.7pp✓ | PASS | score=None(legacy) 不入池 → 与 v1.0 方向一致（均不自动上岗），holdout 供人工参考 |
 - 三版均过双阈值（2024-09 行情后时段收益/回撤均好于 locked 段），门槛主要拦"holdout 崩坏"型候选
 - 影子状态机 UT：warn→(clean 1)→warn 重置→(clean 1,2,3)→出影 passed_at ✓；_do_activate 影子拦截 SystemExit 早于写盘 ✓
+
+## 收尾核验 (00:22)
+- CLI --help 正常；grep -cE "shadow|holdout"=43；py_compile OK；备份 evolution_pipeline.py.bak-p04-155305 存在
+- registry 仅 v6a_def.json 变更（+score_holdout 子对象，含 .bak-p04-20260817）；main.json/switch_log 未动；paper_engine.py 未碰（其 16:08 mtime 属并行 task-0352）
+- decision-log 尾行 D-20260817-013（type=p04_release，tag=D-20260817-P04）
+- 语义要点：自动上岗链 rank1→影子满足→holdout pass=True 才 activate；holdout pass=None 时自动路径按 holdout_hold 拦截（人工 activate 不阻断仅提示）；stat_warn 的 v1.0 margin 通道废弃（常量保留）
+## 结论
+P0-4 评分制 v1.1 全部落地：影子观察期（N=3）+ holdout 晋升门槛（2024-07 起 ann≥60%locked、mdd≤+10pp）+ evaluate/decision-log 双段口径 + 三版试算（v5h 过/v6a partial 仅记录/v5i 方向一致）
