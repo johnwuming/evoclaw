@@ -42,3 +42,7 @@
 - a7b_runner 等价校验 full+locked 均 EQUIV_OK（nav 逐位一致），等价于原引擎
 - 已进入 baseline verify (locked) 回测（sort=mv 纯 mv 路径，18.48y/222调仓）
 - 注：等价校验用 sort=mv 原引擎路径；v4b_mve1 正式候选走 GQ 分支（gq_weights=[1,0] 纯mv）
+
+### 10:50 baseline verify 复跑确认（cash_00 = 0%现金档）
+- v4b_mve1 locked 复跑：**ann=0.1242 mdd=-0.2899 sharpe=0.8401 calmar=0.4285** ✓ 与任务书 locked 口径完全一致
+- 批处理已产出 10 个 a7b 文件，继续跑 cash_10..40 + 稳健性
