@@ -1,0 +1,22 @@
+{
+ "model": "v5h_xsub",
+ "ref": "a7_v5h_xsub_formal_full_holdings",
+ "checks": [
+  {
+   "date": "2026-06-01",
+   "error": "fail"
+  },
+  {
+   "date": "2026-07-01",
+   "error": "fail"
+  },
+  {
+   "date": "2026-08-03",
+   "error": "fail"
+  }
+ ],
+ "all_match": false,
+ "verdict": "MISMATCH",
+ "checked_at": "2026-08-17",
+ "method": "paper_engine.select_target_codes dry-run (isolated subprocess per date, retry x3) vs a7_v5h_xsub backtest holdings; ordered full-list compare"
+}
