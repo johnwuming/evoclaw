@@ -29,3 +29,9 @@
 - #13 删除：legacy 豁免 + override TTL（非迭代评判标准）
 - 保留：#9 rollback 快照、#10 locked、快照冻结、等价校验
 - 本任务不动 #7 verdict 合成（task-0346）
+
+## 已读代码段（14:06）
+- evaluate 函数 L778-790：PASS→pending；L790 expected_impact="PASS→pending 待人工确认后 activate"
+- _do_activate L847-943：L848-849 verdict in ("PASS","legacy-grandfathered") and not force → 拒绝；后续为激活主体逻辑（快照冻结/main重建/registry流转/decision_log），需保留
+- cmd_override L967-999：L969-974 --clear 分支；L978-994 写 TTL 覆盖；L985 timing_off；decision_log L990-993
+- _parse_ttl L955-963
