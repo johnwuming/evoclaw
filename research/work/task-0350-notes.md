@@ -35,3 +35,20 @@
 - timing: 同结构 q3z(w_min0.3)×EW-MA200
 - gate: ICIR_IS=0.5994, ICIR_OOS=-0.0525, DSR=0.9873, n_trial=51, MDD改善 -4.88pp（即恶化4.88? 待对符号：mdd_deterioration_pp=-4.88 为改善4.88pp）, oos_split=2021-01
 - provenance: task-0327 A3 fork 回撤攻坚, parent=v1i_q3z
+
+## 4. decision-log 全貌（53 条）
+- 结构字段：ts/decision_id/type/version/trigger/action/backup/params/rollback_condition/expected_impact/code_ref/data_snapshot
+- 类型序列：seed_reset → bootstrap → evaluate_pass/reject → activate → a2b/a2c_batch_activate → a4d/a5/a6_batch_closeout → A7 closeout+addendum → R220 处置 → A9 closeout+register_candidate → paper_timing_align → A8 closeout
+- 关键决策详情：
+  - D-20260816-SEEDB-RESET: task-0316 Q4b 收口后种子B重置；params={div_min0.02,roe_min0.15,roa_min0.10,sort:mv,n_hold20,price_cap10.0}；备份 tar 729条目 md5 b2e1d572
+  - D-20260817-A7-01: A7 收口 9 版本（v5a_amt37/v5b_amt55/v5c_amt73/v5d_amh55/v5e_cv73/v5f_cal/v5g_lim/v5h_xsub/v5i_comb）；v5h activate；回退条件=激活后回撤超阈值或paper显著劣于endtoend→rollback v2b_trr
+  - D-20260817-A9-1 (19:50): A9 收口结论 6 条：
+    (1) 四闸门=真实安全换收益交易(+6.0pp年化/+7.0pp MDD)
+    (2) PB 价值 alpha 主要藏于原始宇宙（质量宇宙近12月IC≈0.004失效, raw仍0.0324, 微盘段近端归零）
+    (3) 闸门外价值暴露(E3 raw)较纯去闸门(E1 raw)省3.23pp回撤且年化持平
+    (4) MA15_on_f0 过防御线(MDD改善5.13pp, 年化损1.11pp)→防守备选操作点（后经用户20:10拍板注册为 v6a_def candidate）
+    (5) q3z off 纯趋势空仓全部 MDD -38%~-52%，外部"MA15空仓压回撤"证伪
+    (6) 当前可达前沿 v5h(15.7/-29.8)~raw(21.8/-36.8)，防守端点 MA15_on_f0(14.6/-24.7)，25%/-20% 双目标仍不可达
+  - D-20260817-A9-2 (12:12): v6a_def 注册 candidate（不切换现役，上线需 evaluate/评分流程）
+  - D-20260817-R220N37 (12:28): paper 调仓时点对齐回测口径（R-219 #37 发现，task-0347）；下次调仓 2026-09-01
+  - D-20260817-A8-1 (20:58): A8 收尾；bucket raw 年化+2.55pp 过线但 MDD 恶化4.21pp>2pp → 不注册；合成方式归因闭环：ranksum 排序层最优(抗极值+全序分辨率)；bucket 顶部分辨率不足且并列推高换手0.536全场最高；zscore quality宇宙最优但raw被极值扭曲；前沿 v5h(15.7/-29.8)~raw ranksum(21.8/-33.6)
