@@ -24,7 +24,10 @@
 - **微盘等权指数 M_t（超跌包载体）**：v6a_def/A9 的趋势锚在 `a9_common.py::build_timing` = `ew_ret = mean(全池 rets)`（q4b 全池=merged 5,447 只）→ `ew_idx=cumprod(1+ew_ret.fillna(0))`。故 M_t 用 merged 流式复算（row-group 逐块读 date/code/close，pct_change 同码连续行），与引擎同构；同期复算 up-share 与 breadth.parquet 交叉验证。
 - breadth.parquet 生成口径（macro_timing_layer.load_breadth）：ret=close.pct_change() 按码分组，up=ret>0 占比——与我的 Part A 同构。
 
-### 1.3 信号与触发定义（画像冻结参数，出处 R-230 §三/§四、R-227）
+### 1.4 执行环境突变与处置（07:5x）
+- HP 内存耗尽：MemAvailable 57MB，SwapFree 164KB（4GB swap 几乎满）；259 进程 sumRSS=14.7GB，其中 106 个 idle `openclaw-node`（每个 ~190MB，0% CPU）。按纪律**一律勿杀**，HP 无法承载本任务计算（峰值需 ~350MB+）。
+- 处置：数据只读副本 rsync 到 VPS `/root/tv2data/`（qfq 池 1.1G + merged 290M + breadth.parquet），VPS venv（pandas 3.0.5 / pyarrow 25.0.1 / numpy 2.5.2）计算；口径完全不变；产物回写 HP `results/timing_v2/`。已在脚本头部与 summary.json 记录 compute_env 偏离。
+- 内存安全重写：Part A 按 row group 流式+日桶增量聚合；Part B 按日期 5 块分块（块前扩 30 天上下文保 rolling5/pct_change），块内 numpy lexsort（与 crowding 同构），VPS 峰值 ~350MB（MemAvailable 584MB + swap 8GB）。
 - SPREAD_w = breadth.rolling(w).mean()，w∈{5,10,20}（n_trials=3）。
 - 顶部 SPREAD_top_w：`SPREAD_w.rolling(20).max()≥0.85`（T1 曾达高位）且 `max(SPREAD_w, t-5..t-1) − SPREAD_w(t) ≥ 0.05`（T2 5日内回落）。
 - REB（B2 广度部分）：`REB≥0.55` 且 `REB−REB.shift(5)≥0.05`；REB=微盘池内(vol/vol_MA5>1.2 & vol>0 & ret>0)/（微盘池内有效成员：ret 非缺 & vol_MA5 有效 & vol>0）。
