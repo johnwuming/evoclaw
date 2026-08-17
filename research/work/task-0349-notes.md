@@ -72,3 +72,9 @@
 - loadV5ModelQuant/loadV5BtlcQuant：quant/active 与 curves 追加 ?version=（v5QuantVersionQ()），并拉 version-options（btlc 仅在 available 时覆盖缓存）；sig 增 version+versionOptions
 - renderV5Model：头部插选择器；isHist 时徽标换"历史版本"、说明行提示当前 active；renderV5Btlc：标题"历史版本回测"
 - 切换→v5SetVersion→switchQuantTab(force)→两 Tab 联动，tab 间共享不重置
+
+### 2.4 无头浏览器验证（google-chrome headless + CDP，Node22 内置 WebSocket 零依赖，脚本 /tmp/t0349-shots.js）
+- 4 张截图存 shared/results/work/task-0349-shots/：t0349-v5model-v2btrr-{390x844,1440x900}.png、t0349-v5btlc-v2btrr-{390x844,1440x900}.png（110-202KB，内容实渲染非空白）
+- 模型页选中 v2b_trr：select.value=v2b_trr ✓、徽标"历史版本"✓、scrollW=390=cw（390 宽口）/ 1425=cw（1440 宽口）→ 无横向滚动 ✓
+- 回测页共享选择：标题"历史版本回测（v2b_trr）"✓、scrollW 同样无溢出 ✓
+- 验证方式：showPage('quant')→switchQuantTab('v5model',true)→v5SetVersion('v2b_trr')，与真实用户操作路径一致
