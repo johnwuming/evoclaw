@@ -40,3 +40,10 @@
 
 ## 执行日志
 - 02:10 勘察完成，上述坐标与不一致清单已落盘
+
+## 执行日志（续）
+- 02:18 P1a+P1b 完成：/api/quant/consistency 上线，真数据实测 **status=yellow**：
+  - warn×3：① /gates 内部读值 v0_seed ≠ main.json v5h_xsub（旧周期滞后）② manifest v4b_mve1 重复 ③ decision-log 分叉 model/59行 vs results/model/1行（lifecycle 主源）
+  - error 级全过（active 指针/models/registry 档案/台账自洽/镜像新鲜度 19min）
+  - truth 输出：active=v5h_xsub, registry=48, manifest=69, decisions=59, ledger IT=34/36
+- 02:22 P2 完成：量化 Tab 顶部一致性状态点（quantConsistDot + quantConsistDetail 明细表 + toggleQuantConsist），30min setInterval + loadQuant/visibilitychange 双钩子；服务已重启，HTML 含 8 处新元素/函数引用
