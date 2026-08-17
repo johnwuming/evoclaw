@@ -44,3 +44,14 @@
 - 无正在运行的 activate/cycle 进程 ✓
 ## 阶段3 收尾
 （待填：decision-log / 完成回报）
+## 阶段3 收尾完成（15:40）
+- decision-log 已追加：D-20260817-006 type=r220_restore_13（~quant-evolve/model/decision-log.jsonl）
+- 最终验收：
+  - F1=11(≥3) ✓ #13 恢复
+  - F2=PYCOMPILE_OK ✓
+  - F3=无 reg["status"]="pending" ✓ #8 保留（evaluate 无人工确认制）
+  - F4=L780 门禁 PASS→自动 activate ✓ #8 保留
+  - F5=r220_restore_13=1 ✓ decision-log 已追加
+- 文件最终状态：55603B；备份 evolution_pipeline.py.bak-r220fix-20260817-065116（53096B 恢复前状态）+ 原始 .bak-r220-20260817-1414
+## 结论
+task-0346 完成：#13（legacy 豁免 + override TTL）已从备份恢复，#8（自动 activate）保留未回退，#12 确认无需代码改动。等价校验（parse_ttl/白名单/status 干跑/无意外写入）通过。
