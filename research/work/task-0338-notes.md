@@ -66,3 +66,7 @@
 - 引擎已消费: closes/prev_closes/susp/rets/amt/st_flag/opens/highs/lows/first_last/bench_nav
 - a5_runner 的 ext 分支已支持 amount_cv/volatility_20d；A7 需扩展 low_amount/amihud + ext_sign + e1_guard
 - 计划候选8个（单维度）：a=low_amount×3权重, b=amihud×2权重, c=amount_cv×1, d=日历×0.5, e=涨停剔除, f=次新剔除
+
+### 11:05 a7_runner 就绪（9候选 v5a-v5i）
+- a7_runner.py 语法 OK，等价校验 + 9 候选（low_amount×3权重 / amihud×1 / cv×1 / 日历×0.5 / 涨停剔除 / 次新剔除 / a+e组合）
+- 开始上传 HP 后台执行（nohup + log 轮询）
