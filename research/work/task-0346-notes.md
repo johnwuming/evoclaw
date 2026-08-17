@@ -55,3 +55,9 @@
 - 文件最终状态：55603B；备份 evolution_pipeline.py.bak-r220fix-20260817-065116（53096B 恢复前状态）+ 原始 .bak-r220-20260817-1414
 ## 结论
 task-0346 完成：#13（legacy 豁免 + override TTL）已从备份恢复，#8（自动 activate）保留未回退，#12 确认无需代码改动。等价校验（parse_ttl/白名单/status 干跑/无意外写入）通过。
+## 终态复核（16:05）
+- HP evolution_pipeline.py=55603B, PYCOMPILE_OK ✓
+- 备份 evolution_pipeline.py.bak-r220fix-20260817-065116 存在 ✓
+- decision-log r220_restore_13=1（D-20260817-006）✓
+- L852 白名单 `("PASS","legacy-grandfathered")` 恢复 ✓
+- 完成回报已写入 VPS .task-completions.jsonl（taskId=task-0346）✓
