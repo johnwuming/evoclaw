@@ -1,0 +1,451 @@
+{
+ "verdicts": {
+  "v5a_amt37": "REJECT",
+  "v5b_amt55": "REJECT",
+  "v5c_amt73": "REJECT",
+  "v5d_amh55": "REJECT",
+  "v5e_cv73": "PASS",
+  "v5f_cal": "PASS",
+  "v5g_lim": "PASS",
+  "v5h_xsub": "PASS",
+  "v5i_comb": "REJECT"
+ },
+ "gates": {
+  "v5a_amt37": {
+   "g1_icir_is": {
+    "status": "PASS",
+    "icir_is_annualized": 2.5896,
+    "n_months_is": 179,
+    "threshold": 0.5
+   },
+   "g2_icir_oos": {
+    "status": "FAIL",
+    "p_one_sided": 0.0389,
+    "n_months_oos": 42,
+    "oos_end_ym": "2024-06",
+    "audit_lock_end_ym": "2024-06",
+    "mean_ic_is": 0.12005,
+    "mean_ic_oos": 0.07158,
+    "threshold_p": 0.05
+   },
+   "g3_max_corr": {
+    "status": "PASS",
+    "max_abs_corr": 0.0,
+    "worst_pair": null,
+    "n_new_factors": 1,
+    "new_factors": [
+     "amt20"
+    ],
+    "threshold": 0.7,
+    "unresolved_pairs": 5,
+    "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9849,
+    "sr_period": 0.05874,
+    "sr0_expected_max": 0.025608,
+    "T": 4490,
+    "skew": -0.726,
+    "kurtosis": 8.634,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "低流动性溢价: 微盘宇宙内低20d成交额相对高收益(月度IC -0.107 原始符号, 方向校正后+0.107), 与市值排序混合; A7c动态画像: 近24m -0.104 近端更强"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.3076,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.96,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5b_amt55": {
+   "g1_icir_is": {
+    "status": "PASS",
+    "icir_is_annualized": 2.5896,
+    "n_months_is": 179,
+    "threshold": 0.5
+   },
+   "g2_icir_oos": {
+    "status": "FAIL",
+    "p_one_sided": 0.0389,
+    "n_months_oos": 42,
+    "oos_end_ym": "2024-06",
+    "audit_lock_end_ym": "2024-06",
+    "mean_ic_is": 0.12005,
+    "mean_ic_oos": 0.07158,
+    "threshold_p": 0.05
+   },
+   "g3_max_corr": {
+    "status": "PASS",
+    "max_abs_corr": 0.0,
+    "worst_pair": null,
+    "n_new_factors": 1,
+    "new_factors": [
+     "amt20"
+    ],
+    "threshold": 0.7,
+    "unresolved_pairs": 5,
+    "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9881,
+    "sr_period": 0.05981,
+    "sr0_expected_max": 0.025244,
+    "T": 4490,
+    "skew": -0.718,
+    "kurtosis": 8.721,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "低成交额0.5满格版; A7c: 低成交额族为P0中近端最强推进项; 换手-35%的附带经济性"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.3076,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.96,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5c_amt73": {
+   "g1_icir_is": {
+    "status": "PASS",
+    "icir_is_annualized": 2.5896,
+    "n_months_is": 179,
+    "threshold": 0.5
+   },
+   "g2_icir_oos": {
+    "status": "FAIL",
+    "p_one_sided": 0.0389,
+    "n_months_oos": 42,
+    "oos_end_ym": "2024-06",
+    "audit_lock_end_ym": "2024-06",
+    "mean_ic_is": 0.12005,
+    "mean_ic_oos": 0.07158,
+    "threshold_p": 0.05
+   },
+   "g3_max_corr": {
+    "status": "PASS",
+    "max_abs_corr": 0.0,
+    "worst_pair": null,
+    "n_new_factors": 1,
+    "new_factors": [
+     "amt20"
+    ],
+    "threshold": 0.7,
+    "unresolved_pairs": 5,
+    "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9877,
+    "sr_period": 0.05938,
+    "sr0_expected_max": 0.024972,
+    "T": 4490,
+    "skew": -0.748,
+    "kurtosis": 9.037,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "低成交额主导版: 市值依赖降至0.3, 检验排序主键切换的稳健性"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.3065,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.85,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5d_amh55": {
+   "g1_icir_is": {
+    "status": "FAIL",
+    "icir_is_annualized": -0.0783,
+    "n_months_is": 179,
+    "threshold": 0.5
+   },
+   "g2_icir_oos": {
+    "status": "PASS",
+    "p_one_sided": 0.7923,
+    "n_months_oos": 42,
+    "oos_end_ym": "2024-06",
+    "audit_lock_end_ym": "2024-06",
+    "mean_ic_is": -0.00363,
+    "mean_ic_oos": 0.01733,
+    "threshold_p": 0.05
+   },
+   "g3_max_corr": {
+    "status": "PASS",
+    "max_abs_corr": 0.0,
+    "worst_pair": null,
+    "n_new_factors": 1,
+    "new_factors": [
+     "amihud20"
+    ],
+    "threshold": 0.7,
+    "unresolved_pairs": 5,
+    "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9692,
+    "sr_period": 0.05421,
+    "sr0_expected_max": 0.025723,
+    "T": 4490,
+    "skew": -0.696,
+    "kurtosis": 8.527,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "Amihud非流动性: 全市场月度IC 0.076稳定, 但微盘宇宙内近零(+0.004)——A7c: 增量弱降优先级"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.3103,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 1.23,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5e_cv73": {
+   "g1_icir_is": {
+    "status": "PASS",
+    "icir_is_annualized": 4.2628,
+    "n_months_is": 179,
+    "threshold": 0.5
+   },
+   "g2_icir_oos": {
+    "status": "PASS",
+    "p_one_sided": 0.9912,
+    "n_months_oos": 42,
+    "oos_end_ym": "2024-06",
+    "audit_lock_end_ym": "2024-06",
+    "mean_ic_is": 0.18263,
+    "mean_ic_oos": 0.23277,
+    "threshold_p": 0.05
+   },
+   "g3_max_corr": {
+    "status": "PASS",
+    "max_abs_corr": 0.0,
+    "worst_pair": null,
+    "n_new_factors": 1,
+    "new_factors": [
+     "amt_cv20"
+    ],
+    "threshold": 0.7,
+    "unresolved_pairs": 5,
+    "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9613,
+    "sr_period": 0.05259,
+    "sr0_expected_max": 0.025684,
+    "T": 4490,
+    "skew": -0.706,
+    "kurtosis": 8.407,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "换手CV: A7c动态画像近24m ICIR -1.10 近端最强, 原计划v5未含, 本批补测(任务书a-g顺延); 回测归因为准"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.2989,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.09,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5f_cal": {
+   "g1_icir_is": {
+    "status": "N/A",
+    "note": "因子IC数据中无该版本因子列 → N/A (规则层候选, 以回测归因)"
+   },
+   "g2_icir_oos": {
+    "status": "N/A",
+    "note": "因子IC数据中无该版本因子列 → N/A"
+   },
+   "g3_max_corr": {
+    "status": "N/A",
+    "max_abs_corr": null,
+    "worst_pair": null,
+    "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9868,
+    "sr_period": 0.05863,
+    "sr0_expected_max": 0.024593,
+    "T": 4490,
+    "skew": -0.816,
+    "kurtosis": 9.377,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "日历效应(P0-3): 1月(春季躁动后流动性收紧)与4月(年报披露踩雷季)小盘风险窗口降仓50%; A7c标注非横截面IC类, 回测归因"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.2986,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.06,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5g_lim": {
+   "g1_icir_is": {
+    "status": "N/A",
+    "note": "因子IC数据中无该版本因子列 → N/A (规则层候选, 以回测归因)"
+   },
+   "g2_icir_oos": {
+    "status": "N/A",
+    "note": "因子IC数据中无该版本因子列 → N/A"
+   },
+   "g3_max_corr": {
+    "status": "N/A",
+    "max_abs_corr": null,
+    "worst_pair": null,
+    "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9792,
+    "sr_period": 0.05784,
+    "sr0_expected_max": 0.026703,
+    "T": 4490,
+    "skew": -0.71,
+    "kurtosis": 8.072,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "涨停交易层(P0-4): 20日内涨停>3次视为博弈/炒作标的剔除, 博彩偏好溢价不纳入组合; A7c标注数据缺口, 回测归因"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.3005,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.25,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5h_xsub": {
+   "g1_icir_is": {
+    "status": "N/A",
+    "note": "因子IC数据中无该版本因子列 → N/A (规则层候选, 以回测归因)"
+   },
+   "g2_icir_oos": {
+    "status": "N/A",
+    "note": "因子IC数据中无该版本因子列 → N/A"
+   },
+   "g3_max_corr": {
+    "status": "N/A",
+    "max_abs_corr": null,
+    "worst_pair": null,
+    "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9923,
+    "sr_period": 0.06289,
+    "sr0_expected_max": 0.025821,
+    "T": 4490,
+    "skew": -0.669,
+    "kurtosis": 8.524,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "次新剔除(P0-5): 上市不满1年无足够基本面/波动极端, 剔除以降尾部风险(first_last字段实现, 含幸存者处理)"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "PASS",
+    "mdd_candidate": -0.298,
+    "mdd_parent": -0.298,
+    "mdd_deterioration_pp": 0.0,
+    "threshold_pp": 2.0,
+    "parent_version": "v5h_xsub"
+   }
+  },
+  "v5i_comb": {
+   "g1_icir_is": {
+    "status": "PASS",
+    "icir_is_annualized": 2.5896,
+    "n_months_is": 179,
+    "threshold": 0.5
+   },
+   "g2_icir_oos": {
+    "status": "FAIL",
+    "p_one_sided": 0.0389,
+    "n_months_oos": 42,
+    "oos_end_ym": "2024-06",
+    "audit_lock_end_ym": "2024-06",
+    "mean_ic_is": 0.12005,
+    "mean_ic_oos": 0.07158,
+    "threshold_p": 0.05
+   },
+   "g3_max_corr": {
+    "status": "PASS",
+    "max_abs_corr": 0.0,
+    "worst_pair": null,
+    "n_new_factors": 6,
+    "new_factors": [
+     "div_yield_ttm",
+     "roe_ttm",
+     "roa_ttm",
+     "circ_mv",
+     "ret120",
+     "amt20"
+    ],
+    "threshold": 0.7
+   },
+   "g4_dsr": {
+    "status": "PASS",
+    "dsr": 0.9947,
+    "sr_period": 0.06371,
+    "sr0_expected_max": 0.024576,
+    "T": 4490,
+    "skew": -0.729,
+    "kurtosis": 9.112,
+    "n_trials": 85,
+    "threshold": 0.95
+   },
+   "g5_logic": {
+    "status": "PASS",
+    "logic": "组合版: 排序层最优(v5b) + 交易层规则(涨停/次新剔除)——检验排序增益与规则增益是否可叠加"
+   },
+   "g6_mdd_vs_parent": {
+    "status": "N/A",
+    "note": "无在役(active)版本可比 → N/A"
+   }
+  }
+ },
+ "activated": "v5h_xsub",
+ "n_pass": 4
+}

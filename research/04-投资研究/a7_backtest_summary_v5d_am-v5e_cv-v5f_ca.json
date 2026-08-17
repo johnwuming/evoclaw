@@ -1,0 +1,90 @@
+{
+ "task": "task-0338 A7",
+ "generated_at": "2026-08-17 04:31:27",
+ "mode": "formal",
+ "equiv_check": {
+  "method": "原引擎 vs patched 开关全关(同一市场, nav 逐位一致)",
+  "full_ok": true,
+  "locked_ok": true
+ },
+ "candidates": {
+  "v5d_amh55": {
+   "formal_locked": {
+    "annual_return": 0.1318,
+    "max_drawdown": -0.3103,
+    "sharpe": 0.8606,
+    "calmar": 0.4246,
+    "cumulative_return": 8.8485,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.57,
+    "monthly_turnover_est": 0.4166
+   },
+   "formal_full": {
+    "annual_return": 0.1293,
+    "max_drawdown": -0.3103,
+    "sharpe": 0.8587,
+    "calmar": 0.4167,
+    "cumulative_return": 11.2549,
+    "monthly_win_rate": 0.5951,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.76,
+    "monthly_turnover_est": 0.4089
+   }
+  },
+  "v5e_cv73": {
+   "formal_locked": {
+    "annual_return": 0.1269,
+    "max_drawdown": -0.2989,
+    "sharpe": 0.8348,
+    "calmar": 0.4246,
+    "cumulative_return": 8.103,
+    "monthly_win_rate": 0.5747,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.61,
+    "monthly_turnover_est": 0.6363
+   },
+   "formal_full": {
+    "annual_return": 0.1248,
+    "max_drawdown": -0.2989,
+    "sharpe": 0.8343,
+    "calmar": 0.4176,
+    "cumulative_return": 10.2965,
+    "monthly_win_rate": 0.5789,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.79,
+    "monthly_turnover_est": 0.6143
+   }
+  },
+  "v5f_cal": {
+   "formal_locked": {
+    "annual_return": 0.1383,
+    "max_drawdown": -0.2986,
+    "sharpe": 0.9308,
+    "calmar": 0.4633,
+    "cumulative_return": 9.9613,
+    "monthly_win_rate": 0.6109,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.62,
+    "monthly_turnover_est": 0.3142
+   },
+   "formal_full": {
+    "annual_return": 0.1338,
+    "max_drawdown": -0.2986,
+    "sharpe": 0.9199,
+    "calmar": 0.4479,
+    "cumulative_return": 12.2895,
+    "monthly_win_rate": 0.6113,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.81,
+    "monthly_turnover_est": 0.313
+   }
+  }
+ }
+}
