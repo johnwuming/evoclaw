@@ -1,0 +1,29 @@
+{
+  "task": "task-0342 E1-adj PB倒数 IC 重测",
+  "factor": "pb_inv = 1/(circ_mv/equity), PIT by avail_date",
+  "fwd": "月频 month-end → next month-end close(qfq 口径, 退市已缩放)",
+  "universes": {
+    "quality_gates_on": {
+      "mean_ic": 0.0313,
+      "icir_m": 0.196,
+      "pos_pct": 0.606,
+      "n_months": 221,
+      "last12_mean": 0.0042
+    },
+    "raw_all": {
+      "mean_ic": 0.0576,
+      "icir_m": 0.521,
+      "pos_pct": 0.717,
+      "n_months": 247,
+      "last12_mean": 0.0324
+    },
+    "raw_microcap_bottom20mv": {
+      "mean_ic": 0.0487,
+      "icir_m": 0.537,
+      "pos_pct": 0.692,
+      "n_months": 247,
+      "last12_mean": 0.0007
+    }
+  },
+  "a4d_ref": "pb mean_IC -0.0525(ICIR -1.626, 方向-1) 质量宇宙内 -0.0412"
+}
