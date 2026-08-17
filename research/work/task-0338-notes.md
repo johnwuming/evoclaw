@@ -20,3 +20,8 @@
 - factors 列：id,name,description,code,source,created_at,status,ic_mean,ic_ir,ic_history,weight,llm_hypothesis,iteration —— 这是因子元数据表，不是行情数据表
 - 行情字段（amount/turnover）需查 all_stocks_merged.parquet（v4b 基建实际用表）
 - merged parquet 读取报错（疑似 pyarrow/engine 问题），待复读
+
+### 09:45 追加：merged kline 字段核对（首查项①部分结论）
+- all_stocks_merged.parquet：14,613,191 行 × 8 列 = date,code,open,close,high,low,volume,amount
+- **有 amount（成交额），无 turnover（换手率）** → 换手率需用股本数据计算（查 fundamentals_monthly 是否含总/流通股本）
+- factor_db.sqlite 是因子元数据表（3 因子），非行情表；amount/turnover 在 kline
