@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T16:30:03",
+  "generated_at": "2026-08-17T17:00:03",
   "active": "v5h_xsub",
   "versions": [
     {
@@ -2304,12 +2304,37 @@
     },
     {
       "version_id": "v6a_def",
-      "strategy_prefix": null,
+      "strategy_prefix": "a10_v6a_def_formal",
       "status": "candidate",
       "strategy": "dividend_quality_smallcap_seedB",
       "registered_at": "2026-08-17 12:12:45",
-      "windows": {},
-      "files_note": "registry only（无回测文件）"
+      "windows": {
+        "full": {
+          "annual_return": 0.1448,
+          "max_drawdown": -0.2467,
+          "sharpe": 1.0453,
+          "calmar": 0.5871,
+          "cumulative_return": 15.2425,
+          "monthly_win_rate": 0.6073,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1463,
+          "max_drawdown": -0.2467,
+          "sharpe": 1.0412,
+          "calmar": 0.5931,
+          "cumulative_return": 11.4776,
+          "monthly_win_rate": 0.6063,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a10_v6a_def_formal_{full,locked}_metrics.json"
     }
   ]
 }

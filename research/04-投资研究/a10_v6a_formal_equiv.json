@@ -1,0 +1,28 @@
+{
+  "task": "task-0356 A10-2 v6a_def formal backtest",
+  "version": "v6a_def",
+  "tag": "a10_v6a_def_formal",
+  "equiv": "BIT_EXACT",
+  "anchor": "a9_timing_MA15_on_f0_nav.csv",
+  "n_days": 5008,
+  "nav_first": "2006-01-04",
+  "nav_last": "2026-08-14",
+  "dates_eq": true,
+  "vals_bit_exact": true,
+  "locked_bit_exact": true,
+  "max_abs_diff": 0.0,
+  "grid_metrics_match": true,
+  "n_product_files": 10,
+  "full": {
+    "annual_return": 0.1448,
+    "max_drawdown": -0.2467,
+    "sharpe": 1.0453,
+    "calmar": 0.5871
+  },
+  "locked": {
+    "annual_return": 0.1463,
+    "max_drawdown": -0.2467,
+    "sharpe": 1.0412,
+    "calmar": 0.5931
+  }
+}

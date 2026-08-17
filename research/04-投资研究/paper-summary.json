@@ -1,88 +1,67 @@
 {
-  "nav": 99990.0,
-  "nav_per_unit": 0.9999,
-  "total_return": -0.01,
-  "holdings_count": 11,
-  "cash": 4866.0,
-  "holdings_value": 95124.0,
-  "last_update": "2026-08-07",
+  "nav": 99960.0,
+  "nav_per_unit": 0.9996,
+  "total_return": -0.04,
+  "holdings_count": 8,
+  "cash": 40393.0,
+  "holdings_value": 59567.0,
+  "last_update": "2026-08-14",
   "status": "running",
   "holdings_detail": {
     "300824": {
-      "shares": 1100,
-      "cost": 7.75,
-      "current_price": 7.75,
-      "value": 8525.0,
+      "shares": 900,
+      "cost": 7.74,
+      "current_price": 7.74,
+      "value": 6966.0,
       "pnl": 0
     },
     "002107": {
-      "shares": 1400,
-      "cost": 6.3,
-      "current_price": 6.3,
-      "value": 8820.0,
-      "pnl": 0
-    },
-    "300453": {
-      "shares": 900,
-      "cost": 9.55,
-      "current_price": 9.55,
-      "value": 8595.0,
+      "shares": 1200,
+      "cost": 6.41,
+      "current_price": 6.41,
+      "value": 7692.0,
       "pnl": 0
     },
     "603551": {
-      "shares": 900,
-      "cost": 9.32,
-      "current_price": 9.32,
-      "value": 8388.0,
+      "shares": 800,
+      "cost": 9.4,
+      "current_price": 9.4,
+      "value": 7520.0,
       "pnl": 0
     },
-    "603998": {
-      "shares": 900,
-      "cost": 9.72,
-      "current_price": 9.77,
-      "value": 8793.0,
-      "pnl": 45.0
-    },
     "000848": {
-      "shares": 1000,
-      "cost": 8.79,
-      "current_price": 8.79,
-      "value": 8790.0,
+      "shares": 900,
+      "cost": 8.32,
+      "current_price": 8.32,
+      "value": 7488.0,
       "pnl": 0
     },
     "300009": {
-      "shares": 1000,
-      "cost": 8.55,
-      "current_price": 8.55,
-      "value": 8550.0,
-      "pnl": 0
-    },
-    "002372": {
-      "shares": 1000,
-      "cost": 8.64,
-      "current_price": 8.64,
-      "value": 8640.0,
+      "shares": 800,
+      "cost": 8.95,
+      "current_price": 8.95,
+      "value": 7160.0,
       "pnl": 0
     },
     "600867": {
-      "shares": 1000,
-      "cost": 8.42,
-      "current_price": 8.42,
-      "value": 8420.0,
+      "shares": 900,
+      "cost": 8.57,
+      "current_price": 8.57,
+      "value": 7713.0,
       "pnl": 0
     },
     "002027": {
-      "shares": 1700,
-      "cost": 5.14,
-      "current_price": 5.14,
-      "value": 8738.0,
+      "shares": 1500,
+      "cost": 5.08,
+      "current_price": 5.08,
+      "value": 7620.0,
       "pnl": 0
     },
     "601600": {
-      "shares": 900,
-      "cost": 9.85,
-      "current_price": 9.85,
-      "value": 8865.0,
+      "shares": 800,
+      "cost": 9.26,
+      "current_price": 9.26,
+      "value": 7408.0,
       "pnl": 0
     }
   }

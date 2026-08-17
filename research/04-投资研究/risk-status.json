@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17 16:14:50",
+  "generated_at": "2026-08-17 16:45:02",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
@@ -58,7 +58,7 @@
       "action": "进入观察，暂停模型升级",
       "data_source": "strategy_track_record(6m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": null
+      "cross_check_vs_microcap_eqw": 0.20541
     },
     "underperform_discipline.downweight": {
       "rule": "underperform_discipline.downweight",
@@ -72,7 +72,7 @@
       "action": "降仓至70%",
       "data_source": "strategy_track_record(12m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": null
+      "cross_check_vs_microcap_eqw": 0.23811
     },
     "live_vs_backtest": {
       "rule": "live_vs_backtest",
@@ -87,6 +87,43 @@
       "action": "策略失效review",
       "data_source": "paper < 20 obs => insufficient",
       "as_of": "2026-08-14"
+    }
+  },
+  "crowding_reference": {
+    "latest_date": "2026-08-14",
+    "overall_flag": "red",
+    "indicators": {
+      "micro_turnover_share": {
+        "latest": 0.02814,
+        "flag": "green",
+        "pct_rank": null
+      },
+      "micro_turnover_pctile": {
+        "latest": 6.67,
+        "flag": "green",
+        "pct_rank": null
+      },
+      "excess_decay": {
+        "latest": -0.002795,
+        "flag": "red",
+        "pct_rank": null
+      },
+      "snowball_knockin": {
+        "latest": 0.58497,
+        "flag": "green",
+        "pct_rank": null
+      }
+    },
+    "capacity": {
+      "as_of": "last trading day",
+      "method": "单日可买量=ADV20×参与率，策略容量=可买量÷持仓权重，取11票瓶颈(min)",
+      "conservative_5pct": 14941998.0,
+      "neutral_10pct": 29883996.0,
+      "optimistic_15pct": 44825994.0,
+      "bottleneck_stock": "603551",
+      "mean_5pct": 369472201.0,
+      "mean_10pct": 738944402.0,
+      "mean_15pct": 1108416603.0
     }
   }
 }
