@@ -14,3 +14,9 @@
 
 ## 阶段0 首查两项（factor_db 字段 / dividend_events 公告日）
 （待填写）
+
+### 09:40 追加：factor_db 结构
+- factor_db.sqlite 表：factors(3行)、evolution_history(0行)、sqlite_sequence
+- factors 列：id,name,description,code,source,created_at,status,ic_mean,ic_ir,ic_history,weight,llm_hypothesis,iteration —— 这是因子元数据表，不是行情数据表
+- 行情字段（amount/turnover）需查 all_stocks_merged.parquet（v4b 基建实际用表）
+- merged parquet 读取报错（疑似 pyarrow/engine 问题），待复读
