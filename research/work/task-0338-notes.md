@@ -31,3 +31,14 @@
 - factor_db.sqlite=因子元数据表（非行情表）；行情字段在 merged parquet
 - dividend_events 列名查询多次 segfault（API 瞬时），改用落盘脚本再查
 - 访问路径确定：HP HTTP API（8060+key），SSH 端口拒绝
+
+### 10:05 首查两项结论（A7 开工）
+**首查① factor_db 字段核对**：
+- factor_db.sqlite = 因子元数据表（factors 3 行：id,name,description,code,source,created_at,status,ic_mean,ic_ir,ic_history,weight,llm_hypothesis,iteration），非行情表
+- 行情表 all_stocks_merged.parquet：8 列 date,code,open,close,high,low,volume,**amount**（有成交额，无 turnover）
+- fundamentals_monthly.parquet：code,date,div_yield_ttm,**circ_mv**,roe_ttm,roa_ttm → 有流通市值（月频），无总股本
+- 结论：成交额版因子直接可用；**换手率版需日频股本（无）→ 用 amount/circ_mv 月频近似或只测成交额版**
+
+**首查② dividend_events 公告日**：
+- dividend_events.parquet：5 列 code, ex_date, cash_per_share, period, __index_level_0__
+- **只有除权除息日 ex_date，无预案公告日** → F13 股息事件 PIT（预案公告日）**本批不可行，不测**（只查不测达成）
