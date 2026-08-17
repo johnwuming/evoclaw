@@ -122,3 +122,20 @@
 - amt_cv20 IC：mean -0.1888/ICIR -1.315/pos 9%/last12 -0.117（信号强但回测不兑现→微盘组合内无经济增量，与 v5e 结果互证）
 - DSR 复用：ep.deflated_sharpe(returns, n_trials)，dsr_min=0.95；n_trials 基数 67（A5 尾行 n_trials_cum）
 - locked 排名：v5b 14.52 > v5a 14.42 > v5c 14.25 > v5f 13.83 > v5d 13.18 > v5e 12.69 > v4b 12.42
+
+### 批2补跑结果（13:0x，重试1次后成功 460s；另 2 次 numpy 导入段 segfault 为 HP 瞬时故障）
+| 候选 | full | locked |
+|---|---|---|
+| v5g_lim(涨停≤3剔除) | 14.37%/-30.05%/0.9125 | 14.74%/-30.05%/0.9181 |
+| **v5h_xsub(次新剔除)** | 15.27%/-29.80%/0.9861 | **15.74%/-29.80%/0.9983** |
+| **v5i_comb(v5b+涨停+次新)** | 14.76%/-29.30%/0.9961 | **15.23%/-29.30%/1.0113** |
+- **重大发现：v5h 与 v5i locked 三项全部严格优于现役 v2b_trr（15.15%/-29.86%/0.936）**
+  - v5h: 年化 15.74>15.15 ✓ MDD -29.80>-29.86 ✓ Sharpe 0.998>0.936 ✓
+  - v5i: 年化 15.23>15.15 ✓ MDD -29.30>-29.86 ✓ Sharpe 1.011>0.936 ✓
+  - 两者月换手均降至 0.32-0.38（vs v2b/v4b 0.62，减半）→ 若门禁全 PASS 按规则直接 activate
+- 规则层贡献排序：次新剔除 +3.32pp > 涨停剔除 +2.32pp > 日历 +1.41pp（vs v4b 基线）
+- **门禁语义核对（evolution_pipeline 实源）**：
+  - g1 复合ICIR年化≥0.5（IS=2021-01前）；g2 OOS(2021-01~2024-06) Welch单侧t检验 p>0.05；g3 新增因子vs在役因子 IC-corr<0.7（无新增→N/A 不折减）；g4 DSR≥0.95（N=34偏移+backtest数→本批76）；g5 logic；g6 MDD较**在役**(v2b_trr -0.2986)恶化≤2pp
+  - g6 按 v2b_trr 口径：v5a/b 0.90pp v5c 0.79 v5d 1.17 v5e 0.03 v5f 0.00 v5g 0.19 v5h -0.06 v5i -0.56 → 全 PASS
+- registry: model/registry/*.json；active=v2b_trr（factors=div_yield/roe/roa/circ_mv）；factor_ic_corr.csv 存在（g3 有真实数据）
+- activate 通道：ep._do_activate(reg, trigger, reason, force) 要求 gate.verdict=PASS，自动 main.json 重建+快照+状态流转+switch_log
