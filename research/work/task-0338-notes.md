@@ -48,3 +48,8 @@
 - a5_post_bt.py：registry 注册（fork 自 parent）+ ledger_append（带 features 字段）
 - a5_ic_ext.py：月度 IC（spearman，方向调整，W1 口径）
 - A7 计划：基于 v4b_mve1（sort=mv + e1_guard + q3z_tr 择时）骨架，新增 P0 因子 ext 分支（low_amount/amihud/cv）+ 日历降仓 + 涨停剔除 + 次新剔除，逐一单维度叠加
+
+### 10:25 恢复执行
+- HP /tmp/a5_runner.py 存在，results/a5_v4b_mve1_formal_locked_metrics.json 存在（基线可复跑）
+- a5_runner ext 分支已支持 amount_cv / volatility_20d（ext_factor + ext_weights）
+- A7 需新增 ext_factor: low_amount(20d均额反向) / amihud(|ret|/amount 20d均值) / turnover_cv(已有 amount_cv 可复用)；规则类: 日历降仓/涨停剔除/次新剔除需新 patch
