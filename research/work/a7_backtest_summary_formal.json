@@ -1,0 +1,247 @@
+{
+ "task": "task-0338 A7 P0增强因子回测批(收口: 02:1x首轮v5a-d + 12:4x-13:0x resume v5d(full)/e/f/g/h/i)",
+ "generated_at": "2026-08-17 04:58:47",
+ "mode": "formal",
+ "equiv_check": {
+  "method": "原引擎 vs patched 开关全关(同一市场, nav 逐位一致)",
+  "full_ok": true,
+  "locked_ok": true,
+  "note": "a7x_equiv_* 产物 2026-08-17 02:1x 通过(diffs={}, nav 逐位一致); resume 批未重跑, patch 代码未变"
+ },
+ "candidates": {
+  "v5a_amt37": {
+   "formal_locked": {
+    "annual_return": 0.1442,
+    "max_drawdown": -0.3076,
+    "sharpe": 0.9325,
+    "calmar": 0.4686,
+    "cumulative_return": 11.0469,
+    "monthly_win_rate": 0.6154,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.62,
+    "monthly_turnover_est": 0.3819
+   },
+   "formal_full": {
+    "annual_return": 0.1406,
+    "max_drawdown": -0.3076,
+    "sharpe": 0.9252,
+    "calmar": 0.4571,
+    "cumulative_return": 14.0507,
+    "monthly_win_rate": 0.6113,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.81,
+    "monthly_turnover_est": 0.3766
+   }
+  },
+  "v5b_amt55": {
+   "formal_locked": {
+    "annual_return": 0.1452,
+    "max_drawdown": -0.3076,
+    "sharpe": 0.9494,
+    "calmar": 0.472,
+    "cumulative_return": 11.2516,
+    "monthly_win_rate": 0.6109,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.61,
+    "monthly_turnover_est": 0.4008
+   },
+   "formal_full": {
+    "annual_return": 0.1413,
+    "max_drawdown": -0.3076,
+    "sharpe": 0.94,
+    "calmar": 0.4595,
+    "cumulative_return": 14.248,
+    "monthly_win_rate": 0.6073,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.79,
+    "monthly_turnover_est": 0.3944
+   }
+  },
+  "v5c_amt73": {
+   "formal_locked": {
+    "annual_return": 0.1425,
+    "max_drawdown": -0.3065,
+    "sharpe": 0.9427,
+    "calmar": 0.4649,
+    "cumulative_return": 10.7258,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.62,
+    "monthly_turnover_est": 0.4091
+   },
+   "formal_full": {
+    "annual_return": 0.139,
+    "max_drawdown": -0.3065,
+    "sharpe": 0.9345,
+    "calmar": 0.4536,
+    "cumulative_return": 13.6191,
+    "monthly_win_rate": 0.5951,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.8,
+    "monthly_turnover_est": 0.4019
+   }
+  },
+  "v5d_amh55": {
+   "formal_locked": {
+    "annual_return": 0.1318,
+    "max_drawdown": -0.3103,
+    "sharpe": 0.8606,
+    "calmar": 0.4246,
+    "cumulative_return": 8.8485,
+    "monthly_win_rate": 0.5973,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.57,
+    "monthly_turnover_est": 0.4166
+   },
+   "formal_full": {
+    "annual_return": 0.1293,
+    "max_drawdown": -0.3103,
+    "sharpe": 0.8587,
+    "calmar": 0.4167,
+    "cumulative_return": 11.2549,
+    "monthly_win_rate": 0.5951,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.76,
+    "monthly_turnover_est": 0.4089
+   }
+  },
+  "v5e_cv73": {
+   "formal_locked": {
+    "annual_return": 0.1269,
+    "max_drawdown": -0.2989,
+    "sharpe": 0.8348,
+    "calmar": 0.4246,
+    "cumulative_return": 8.103,
+    "monthly_win_rate": 0.5747,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.61,
+    "monthly_turnover_est": 0.6363
+   },
+   "formal_full": {
+    "annual_return": 0.1248,
+    "max_drawdown": -0.2989,
+    "sharpe": 0.8343,
+    "calmar": 0.4176,
+    "cumulative_return": 10.2965,
+    "monthly_win_rate": 0.5789,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.79,
+    "monthly_turnover_est": 0.6143
+   }
+  },
+  "v5f_cal": {
+   "formal_locked": {
+    "annual_return": 0.1383,
+    "max_drawdown": -0.2986,
+    "sharpe": 0.9308,
+    "calmar": 0.4633,
+    "cumulative_return": 9.9613,
+    "monthly_win_rate": 0.6109,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.62,
+    "monthly_turnover_est": 0.3142
+   },
+   "formal_full": {
+    "annual_return": 0.1338,
+    "max_drawdown": -0.2986,
+    "sharpe": 0.9199,
+    "calmar": 0.4479,
+    "cumulative_return": 12.2895,
+    "monthly_win_rate": 0.6113,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.81,
+    "monthly_turnover_est": 0.313
+   }
+  },
+  "v5g_lim": {
+   "formal_locked": {
+    "annual_return": 0.1474,
+    "max_drawdown": -0.3005,
+    "sharpe": 0.9181,
+    "calmar": 0.4904,
+    "cumulative_return": 11.6849,
+    "monthly_win_rate": 0.6109,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.62,
+    "monthly_turnover_est": 0.3185
+   },
+   "formal_full": {
+    "annual_return": 0.1437,
+    "max_drawdown": -0.3005,
+    "sharpe": 0.9125,
+    "calmar": 0.4781,
+    "cumulative_return": 14.9025,
+    "monthly_win_rate": 0.6113,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.8,
+    "monthly_turnover_est": 0.3173
+   }
+  },
+  "v5h_xsub": {
+   "formal_locked": {
+    "annual_return": 0.1574,
+    "max_drawdown": -0.298,
+    "sharpe": 0.9983,
+    "calmar": 0.5283,
+    "cumulative_return": 13.9047,
+    "monthly_win_rate": 0.6109,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.53,
+    "monthly_turnover_est": 0.3197
+   },
+   "formal_full": {
+    "annual_return": 0.1527,
+    "max_drawdown": -0.298,
+    "sharpe": 0.9861,
+    "calmar": 0.5124,
+    "cumulative_return": 17.6931,
+    "monthly_win_rate": 0.6113,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.72,
+    "monthly_turnover_est": 0.3181
+   }
+  },
+  "v5i_comb": {
+   "formal_locked": {
+    "annual_return": 0.1523,
+    "max_drawdown": -0.293,
+    "sharpe": 1.0113,
+    "calmar": 0.5197,
+    "cumulative_return": 12.7262,
+    "monthly_win_rate": 0.6063,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.5,
+    "monthly_turnover_est": 0.3783
+   },
+   "formal_full": {
+    "annual_return": 0.1476,
+    "max_drawdown": -0.293,
+    "sharpe": 0.9961,
+    "calmar": 0.5038,
+    "cumulative_return": 16.0641,
+    "monthly_win_rate": 0.6032,
+    "years": 20.61,
+    "num_rebalance": 248,
+    "avg_holdings": 18.69,
+    "monthly_turnover_est": 0.3736
+   }
+  }
+ }
+}
