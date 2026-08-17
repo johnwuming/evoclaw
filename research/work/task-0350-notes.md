@@ -173,3 +173,10 @@
 - p3_3_evolution_standalone.py --rounds 5：每月 1/15 日 02:00（半月度因子进化）
 - paper_engine baseline（task-0251）：daily/rebalance 已 PAUSED-20260816-seedB，validate 周日 20:00 保留
 - collect-metrics.sh：每分钟推 VPS 8055（量化指标采集循环）
+
+## 12. 架构与同步（VPS+HP 现读）
+- R-203 五层架构：L1 因子层（72因子字典+IC/ICIR+观察池）/ L2 选股层（股息+ROE+ROA 小盘 + 三重gate+WF）/ L3 择时层 / L4 模拟盘（paper_engine 3条cron 全自动）/ L5 进化闭环（evolution_engine）
+- R-203 断点评估（08-15）：L4 已全自动，唯一断点=L5 定时+统一编排；改造=纯增量（决策日志/想法池/统一runner/页面控制面）
+- HP→VPS：collect-metrics.sh 每分钟推 VPS:8055（agent-dashboard，量化Tab）；sync_to_vps.sh 经 ZeroTier（HP 10.12.192.174→VPS 10.12.192.225）同步 results/
+- HP 其余 cron：evolution_pipeline.py cycle 周六09:00；notify_hub.py 每小时:10（W8 task-0279）；w6_collect_delisted 每月1日06:00；reboot_autostart @reboot；heartbeat_selfheal */5min（含 2222 用户态 sshd 自愈，R-221 缓解项）
+- VPS 端：shared/results/04-投资研究/ 与 05-量化投资/ 承接同步成果；README.md 变更记录
