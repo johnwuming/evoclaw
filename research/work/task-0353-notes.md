@@ -25,3 +25,7 @@
 - v6a_def: metrics=locked口径(ann .1463/mdd -.2467 源 a9 grid 表), nav=a9_timing_MA15_on_f0_nav.csv 全窗口
 - save_version=save_json 直接写 registry/<vid>.json 无备份 → demo 写前手动 cp .bak
 - 设计: SHADOW_CONFIG 常量(N=3, holdout 2024-07, ann≥60%locked, mdd≤+10pp); _seg_nav_metrics+compute_holdout_metrics(nav→baseline→locked换full 兜底); _shadow_update 状态机(gate.shadow_watch); cmd_evaluate 晋升链 rank1→影子→holdout→activate(shadow_watch/holdout_hold decision-log); _do_activate 晋升前双检查(--force 越过); score_holdout 写入 gate; 11 个小补丁逐个验证
+
+## 补丁全部落地 (00:2x)
+- 11/11 PATCH_OK（p01 常量/p02 _seg_nav_metrics/p03 compute_holdout_metrics/p04 _shadow_update/p05 holdout变量+report字段/p06 gate.score_holdout 回写/p07a+b 晋升链/shadow_watch·holdout_hold 分支/p08 decision-log 双段/p09 _do_activate 晋升前双检查/p10 activate 日志加 shadow_clean·holdout_pass）
+- 每补丁 assert 锚点唯一+py_compile OK；grep -cE "shadow|holdout"=43(≥6)；64079→71547B
