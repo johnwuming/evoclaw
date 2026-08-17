@@ -75,3 +75,9 @@
 - 注释/文档：L8, L131, L508, L850 → 允许
 - backtest --override（L583/585/588/1119）：参数覆盖（非 #13 择时安全阀），保留，报告中说明
 - confirmed_by（L896/940）：switch_log 审计字段（非 #8 人工确认机制），保留
+
+## HP 部署验证（14:17 重试恢复）
+- evolution_pipeline.py 已推送 HP（53096 bytes），HP quant python py_compile OK
+- 模块加载：_do_activate 保留(True)，cmd_override/OVERRIDE_FILE/_parse_ttl 均不存在(False)，STATUS_ENUM 保留 pending（历史数据兼容）
+- 无 evolution/paper 进程在跑（pgrep 仅命中自身）
+- 残留 grep 命中=仅注释 + backtest--override(参数覆盖) + confirmed_by(审计字段)，无 #8/#13 机制实现
