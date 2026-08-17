@@ -111,3 +111,28 @@ v0_seed→v1a-v1k（排序/流动性/波动/逆波动/缓冲/q3z/vt18/q5z）→v
 
 ### 2.4 CLAUDE.md 遗留"回测参数（不可变）"段
 - 初始资金10万/持仓20/月频/双边千一/候选池市值最小500只/2016起 —— 系 v0 seed 旧口径，与现行引擎（1e7/成本v2）不一致，属文档遗留（登记为流程约束-文档类）
+
+### 2.5 运行层（paper/cron/override）
+- paper_engine.py：自有选股参数 price_cap=10/n_hold=20（快照与 main.json 同步）；cron 月度调仓=每月最后一个工作日16:30（⚠️ 与回测引擎"每月首个交易日"口径不一致，登记待确认）
+- override 机制：temp_override.json TTL 临时覆盖（--timing-off 等），过期自动忽略；decision_log 记录
+- 防漂移守卫 guard_override_and_drift（task-0275）：main.json↔registry[active] 同口径比对，漂移写 drift-alert.json
+- data_validator.py 六检查：K线新鲜度≤3天 / 面板覆盖≥0.95 / 持仓K线 / 价格区间0.01-100000 / 分红连续性回看365天 / 选股≥5只；Step0 FAIL→cycle fail-fast
+- cron_paper_rebalance 同步产物到 VPS 04-投资研究（旧目录）
+
+### 2.6 数据正确性基建（D类证据）
+- PIT：fund = panel[panel["date"] <= d]（as-of 取数，无前视）
+- 幸存者偏差：宇宙5205只含退市股（first_last 字段；backfill_delisted.py / collect_delisted_hfq.py 补数）
+- 数据快照哈希：data_snapshot{hash, kline_as_of}（W6 内容hash bcf45e9...）写进 ledger，防"改数据不报告"
+- ST 精确区间：st_history_ranges.csv（task-0330，替代静态 is_st 列）
+- 审计锁 audit_lock.py（2024-06-30）统一 clamp，防评估穿透锁定段
+- 等价校验：a5/a7 runner patched vs 原引擎 nav 逐位一致才放行
+- 命名/呈现约束：R-编号报告 + README 顶部变更记录（Dashboard 消费约定）
+
+### 2.7 数值影响锚点（交叉引用）
+- E1护栏：压MDD 0.87pp（-29.86→-28.99）、年化-2.7pp、Sharpe-0.096、DSR 0.936→0.971（a5报告 IT-A5-02）
+- E1 postmortem：砍20.8%尾部亏损、误杀12.1%赢家；G1加强：avg+21.2%/胜率78.4%（task-0331）
+- 次新剔除v5h：+3.32pp年化、MDD持平、Sharpe+0.158、换手0.616→0.320（a7报告）
+- 涨停剔除v5g：+2.32pp年化；日历降仓v5f：+1.41pp；低成交额族：+1.8~2.1pp、MDD恶化~1.8pp、换手-35%
+- 现役 v5h_xsub locked：15.74%/-29.80%/0.998/Calmar0.528；战役目标差距 +9.3pp年化/+9.8pp MDD/+0.2 Sharpe
+- v2b_trr（cost v2+一字板后现役参照）locked 15.15%/-29.86%/0.936
+- a7b：40%现金档 ann=7.2%；事前杠杆不推动前沿（Calmar不变式）
