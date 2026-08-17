@@ -28,14 +28,42 @@
 - E4 线: bucket raw locked 年化 ≥17.74%(+2pp vs 现役) 且 MDD ≥-31.80%(恶化≤2pp) → 过线记 decision-log；否则 closeout
 - ledger: IT-A8-01 (bucket_quality) / IT-A8-02 (bucket_raw)，features 字段必带
 
-## 进度
+## 结果（20:40-21:00 全部完成）
+
+EQUIV 锚: a8x_equiv_v5h ≡ a7_v5h_xsub_formal 逐位一致 BIT_EXACT（locked 15.74%/-29.80% 复现）→ a9 骾架+bucket 分支链路可信
+
+### 三方式对照（locked，同因子同宇宙：log_mv1.0+amt20 1.0+pb_inv0.7+roe0.3）
+| 方式 | quality 年化/MDD/Sharpe | raw 年化/MDD/Sharpe | raw 换手 |
+|---|---|---|---|
+| zscore(A9) | 15.94%/-29.52%/1.036 | 19.85%/-34.59%/1.264 | 0.258 |
+| ranksum(A9) | 15.33%/-28.78%/1.009 | 21.76%/-33.55%/1.344 | 0.466 |
+| bucket(本批) | 15.27%/-28.80%/1.005 | 18.29%/-34.01%/1.176 | 0.536 |
+- bucket full: quality 14.83%/-28.80%, raw 18.26%/-34.01%; locked≥full 无近端衰减
+
+### E4 判定: 未过线 → closeout
+- bucket raw locked 18.29% = +2.55pp ✓ 但 MDD -34.01% 恶化4.21pp > 2pp ✗ → 不注册
+- bucket quality: 年化-0.47pp 无增益; MDD改善1.0pp<3pp防御线 → 无任何注册路径
+
+### 结论（机制排序）
+1. **ranksum > zscore > bucket**（raw 年化 21.76>19.85>18.29）——ranksum 为排序层最优合成方式
+2. 机制: 尾部分辨率决定性（n=20 持仓取自顶端，bucket 5 级量化顶部并列成灾，并列组内排序≈无信息）；ranksum 抗极值+全序分辨率，微盘宇宙最稀缺性质；zscore 保幅度在 quality 最优但 raw 被市值/成交额重右尾拉伸
+3. bucket 双重代价: 年化垫底 + 换手0.536全场最高（桶并列月间洗牌，纯损耗）；非线性容量未被框架使用
+4. 前沿不变: v5h(15.7/-29.8)~raw ranksum(21.8/-33.6)，防守端 MA15_on_f0(14.6/-24.7)
+
+## 交付物清单（HP）
+- results/a8_bucket_* 21 文件（quality/raw × full/locked × 5 产物 + summary 锚1）+ a8_bucket_summary.json
+- results/a8-iteration-report.md（6.6KB, 三方式对照表+E4+机制解释）
+- ledger IT-A8-01/02（n_cum 80/81）+ decision-log D-20260817-A8-1（a8_closeout）
+- a9-iteration-report.md 末尾衔接注记
+- scripts/a8_bucket.py（新文件，不动现有链路；首版自检 n=10 浮点边界误报已修 n=11）
+- 全程 nohup，无已跑进程被杀；未改 evolution_pipeline/paper_engine/crontab
+
+## 进度（终）
 - [x] 20:20 上下文恢复 + 基线确认
-- [x] 20:27 a8_bucket.py 写入 scripts/（9.9KB, py_compile OK; scp 不可用 → ssh cat 管道上传）
-  - patch 链 = a9_common.patch_engine 源码定点替换（2 处 assert anchor），exec 重编译；bucket 自检（10票×2/桶、端点符号）PASS
-  - 流程: S0 加载 → S1 a8x_equiv_v5h 锚(逐位, FAIL即exit3) → S2 bucket_quality/raw → S3 汇总 a8_bucket_summary.json
+- [x] 20:27 a8_bucket.py 写入 scripts/
 - [x] 20:28 nohup 启动 → 首版自检断言过严(n=10 浮点边界降桶)失败，修为 n=11 边界安全用例后 20:36 重启
-- [x] 20:38 锚定校验 PASS: A8 EQUIV 锚(a8x_equiv_v5h) 逐位复现 v5h locked 15.74%/-29.80% → a9 骾架+bucket 分支链路可信
-- [ ] bucket quality/raw 双跑完成
-- [ ] 三方式对照表 + a8-iteration-report.md(HP)
-- [ ] ledger + decision-log
-- [ ] completions
+- [x] 20:38 锚定校验 PASS: A8 EQUIV 锚逐位复现 v5h locked 15.74%/-29.80%
+- [x] 20:41 bucket quality 完成；20:45 bucket raw 完成（raw 因宇宙大耗时 ~5.5min）
+- [x] 20:52 三方式对照表 + a8-iteration-report.md 上传 HP
+- [x] 20:58 ledger IT-A8-01/02 + decision D-20260817-A8-1 + a9 衔接注记
+- [x] 21:00 验收 5 项全过（21 文件/6.6KB/ledger+decision/锚 BIT_EXACT/注记）
