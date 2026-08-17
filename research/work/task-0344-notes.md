@@ -90,3 +90,24 @@ A7 候选（外部流动性因子 low_amount/amihud/amount_cv × E1 骨架）：
 
 ### 1.7 registry 版本史（43版）
 v0_seed→v1a-v1k（排序/流动性/波动/逆波动/缓冲/q3z/vt18/q5z）→v2a-v2f（深度价值/三闸门trr/vt13/dd/dvt/lv）→v3a-v3f（peg/glm/组合）→v4a-v4e（gq/e1/mfu/trr）→v5a-v5i（低流动性因子/日历/涨停/次新/组合）
+
+## 阶段2：流程级盘点
+
+### 2.1 战役目标（a7b-iteration-report.md）
+- locked 口径：年化≥25% / MDD≤20% / Sharpe≥1.2（微盘增强档位B）
+- a7b 结论：40%现金档 ann=7.20% 距25%目标 -17.8pt；基线 v4b_mve1 ann=12.42%/MDD-28.99%/Sharpe0.84 → 差距 +12.6pt/+8.99pt/+0.36
+- 事前杠杆不推动前沿；当前框架内不可达 → a7b 建议换赛道或下调目标（R-217 即换赛道调研）
+
+### 2.2 activate/回退规则（evolution_pipeline.py）
+- verdict 必须 PASS 或 legacy-grandfathered 才能 activate；否则需 --force（人工强制）
+- activate 为人工确认操作，cycle Step7 不自动激活
+- rollback：--to 指定回退版本；切换冻结旧 active main.json 字节快照；switch_log/history/decision-log 全程记录 md5
+- 状态机：candidate→(PASS)→pending→(人工activate)→active→sota→retired
+
+### 2.3 台账与审计（ledger 实例证据）
+- experiment-ledger.jsonl：每次 backtest 记 run_id/params_hash/data_snapshot(hash)/metrics{full,locked}/n_trials_cum；DSR 用 n_trials 累计（现 69+）
+- gates 实战样例：v5b_amt55 g2_icir_oos FAIL（p=0.0389<0.05，OOS IC 0.072 vs IS 0.120 劣化）→ REJECT；v5g_lim 规则层候选 g1/g2 N/A 以回测归因
+- IT 编号：IT-A7-02..08；评估口径 locked=2006-01-01~2024-06-30
+
+### 2.4 CLAUDE.md 遗留"回测参数（不可变）"段
+- 初始资金10万/持仓20/月频/双边千一/候选池市值最小500只/2016起 —— 系 v0 seed 旧口径，与现行引擎（1e7/成本v2）不一致，属文档遗留（登记为流程约束-文档类）
