@@ -80,3 +80,13 @@
 - decision_log() 每操作写 decision-log.jsonl（trigger/metrics_summary/expected_impact/rollback_condition/phash/data_snapshot）
 - ledger_append() 写 experiment-ledger.jsonl（entry_type/version/metrics/data_snapshot/phash）
 - temp_override 可 TTL 关闭（timing.disable_switch 字段）
+
+## 9. R-220 处置细节（报告现读，task-0344 续，用户 13:58/14:09 确认）
+- 总原则（用户 13:10）：门禁机制改权重机制，不设强制通过门禁
+- 三档处置：
+  - 第一档立即权重化：#7 一票否决→综合评分制（核心改造）；g2/g4→最高权重评分项+统计警示线（g2 p<0.01 或 DSR<0.90→人工复核标签）；g1/g3/g5 低权重；#18 E1→惩罚分；#21 日历降仓系数网格{0,0.3,0.5,0.7}；#29 排序权重与 A8 合流；#11 OOS split 可调
+  - 第二档 A9 实验裁决（用户 13:58 授权验证后自动推进）：#14-17 四闸门→质量分进排序（ROE降权0.3-0.5）；#19 次新剔除保留硬剔除（+3.32pp 实测最强增益）；#20 涨停剔除（+2.32pp 未上岗）A9 顺带测；#23/24 MA{15,20,50,100,200}×floor{0,10,18,30}%×q3z{开,关}；#39 ST 对照
+  - 第三档保留：#9 rollback 快照、#10 locked≤2024-06-30（可信评估职责）、#13 legacy 豁免+override TTL（14:09 澄清保留）、#22/25 q3z 参数、C类物理现实、D类防作弊
+- 特殊处置：#12 战役目标 25%/-20%/1.2 从迭代评判摘除（是 openclaw goal 非评判标准）；#37 paper 月末 vs 回测月首口径 bug 级独立修复（已完成 task-0347）；#8 activate 人工确认删除（task-0345 执行）
+- 综合评分公式草案：0.35×S_stat + 0.25×S_oos + 0.15×S_is + 0.10×S_dd + 0.10×S_corr + 0.05×S_logic
+- **#7 评分制改造现状：R-220 已定但未实施**（pipeline 现读仍是一票否决 verdict 逻辑）；路线图第一项"[立即] #7 verdict 改造"尚未落地
