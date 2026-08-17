@@ -1,0 +1,23 @@
+{
+  "nav_full": {
+    "bit_exact": true,
+    "max_abs_diff": 0.0,
+    "note": ""
+  },
+  "nav_locked": {
+    "bit_exact": true,
+    "max_abs_diff": 0.0,
+    "note": ""
+  },
+  "metrics_vs_a7": {
+    "full": {
+      "empty": true,
+      "diffs": {}
+    },
+    "locked": {
+      "empty": true,
+      "diffs": {}
+    }
+  },
+  "verdict": "PASS"
+}

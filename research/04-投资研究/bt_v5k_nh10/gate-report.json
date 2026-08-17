@@ -1,0 +1,134 @@
+{
+  "version": "v5k_nh10",
+  "evaluated_at": "2026-08-17 18:18:21",
+  "oos_split": "2021-01",
+  "n_trials": 86,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "sort": "ext",
+    "cost_model": "v2",
+    "limit_board": "on",
+    "capital_base": 10000000.0,
+    "div_min": 0.02,
+    "roe_min": 0.15,
+    "roa_min": 0.1,
+    "n_hold": 10,
+    "price_cap": 10.0,
+    "min_amt": 0.0,
+    "ext_mode": "zscore",
+    "e1_guard": 1,
+    "xsub_days": 365.0,
+    "raw_universe": 0,
+    "task": "task-0358 A11",
+    "timing": "q3z_tr(MA200,f0.30)",
+    "exp": "G5 n_hold 网格",
+    "g5": "n_hold=10",
+    "period_start": "2006-01-04",
+    "period_end": "2024-06-28",
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 9.88,
+    "monthly_turnover_est": 0.3697,
+    "cumulative_return": 17.5761,
+    "annual_return": 0.1713,
+    "max_drawdown": -0.294,
+    "sharpe": 1.0158,
+    "calmar": 0.5825,
+    "monthly_win_rate": 0.5837
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 0.5994,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0714,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.0165,
+      "mean_ic_oos": -0.00092,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.0525
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9914,
+      "sr_period": 0.06399,
+      "sr0_expected_max": 0.027615,
+      "T": 4490,
+      "skew": -0.617,
+      "kurtosis": 7.858,
+      "n_trials": 86,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "R-228 G5: 持仓数 20→10(其余参数不动)。单维增量: lock 年化+1.39pp(17.13% vs 15.74%), MDD 反而改善 0.40pp(-29.40% vs -29.80%), Sharpe 0.998→1.016, 换手 0.320→0.370(集中度换收益)。"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "PASS",
+      "mdd_candidate": -0.294,
+      "mdd_parent": -0.298,
+      "mdd_deterioration_pp": -0.4,
+      "threshold_pp": 2.0,
+      "parent_version": "v5h_xsub"
+    }
+  },
+  "verdict": "SCORED",
+  "notes": [
+    "门禁3 N/A：无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ],
+  "score": {
+    "score": 0.8,
+    "components": {
+      "p": 0.7428,
+      "dsr": 0.914,
+      "oos_calmar": 0.6282,
+      "oos_sharpe": 0.5219,
+      "is_calmar": 0.9708,
+      "is_sharpe": 0.8465,
+      "dd": 1.0,
+      "corr": null,
+      "logic": 1.0
+    },
+    "missing_weight": 0.1,
+    "partial": false,
+    "stat_warn": false,
+    "flags": [],
+    "incumbent": "v5h_xsub"
+  },
+  "holdout": {
+    "pass": true,
+    "nav_file": "results/a11_nh10_full_nav.csv",
+    "start_ym": "2024-07",
+    "segment": {
+      "annual_return": 0.1335,
+      "max_drawdown": -0.1564,
+      "sharpe": 0.9341,
+      "n_days": 517,
+      "start": "2024-07-01",
+      "end": "2026-08-14"
+    },
+    "locked": {
+      "annual_return": 0.1713,
+      "max_drawdown": -0.294
+    },
+    "checks": {
+      "ann_ratio_min": 0.6,
+      "ann_ok": true,
+      "mdd_extra_pp_max": 10.0,
+      "mdd_deterioration_pp": -13.76,
+      "mdd_ok": true
+    }
+  }
+}

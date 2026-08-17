@@ -1,0 +1,15 @@
+{
+  "orig_len": 16899,
+  "patched_len": 23711,
+  "patches": [
+    "PA/PV/PC/PB/PD/PE(a9原样)",
+    "PC2m(lim_win/lim_thr参数化)",
+    "G2(blacklist)",
+    "G3(band)"
+  ],
+  "a11_flags": [
+    "lim_filter+lim_win+lim_thr",
+    "g2_blacklist+g2_bl_days",
+    "g3_band"
+  ]
+}
