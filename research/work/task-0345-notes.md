@@ -100,3 +100,9 @@
   4. decision-log D-20260817-R220-1 追加 ✓
 - #7 verdict 合成（g1-g6）未动：diff 中无 verdict 合成逻辑变更 ✓
 - 备份路径：HP ~/quant-evolve/scripts/evolution_pipeline.py.bak-r220-20260817-1414 (55157B)
+
+## ⚠️ 任务修正（14:09 主 agent 转达用户澄清）
+- #13（legacy 豁免/override TTL）= 误打，**保留原样**（之前删除需回滚）
+- 真正要移除的是 **#12 战役目标（25%/-20%/1.2）作为迭代评判标准**
+- #8（activate 人工确认制）移除照常执行
+- 执行计划：从 HP 备份（原版 55157B）重新出发，只应用 #8 改动 + #12 改动，恢复 #13
