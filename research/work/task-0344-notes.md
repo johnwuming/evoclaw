@@ -63,3 +63,30 @@ DEFAULTS（L54-71）：
 - is_untradeable：O==H==L==C（1e-6相对容差）且涨跌幅达板块阈值-0.1%容差 → 一字板不可成交
 - 板块阈值分段：主板10%；科创板688=20%（2019-07-22起）；创业板300/301 10%→20%（2020-08-24起）；ST 5%（主板）/20%（双创注册制）；北交所30%
 - direction="buy"仅一字涨停不可买，"sell"仅一字跌停不可卖
+
+### 1.5 a5_runner.py / a7_runner.py（/tmp，task-0333/0338 系列）— 补丁引擎
+A5 候选（成长×质量复合排序+E1护栏+G1加强+PEG过滤×v2b择时）：
+- e1_guard：ret120 < -30% 剔除（买入时深跌股剔除）
+- G1 加强（g1_boost）：dist250h>-10%（接近年高点）且 ret120>0 → 加分 g1_bonus=0.5
+- peg_max=2.0（PEG过滤）
+- gq_weights=[0.6,0.4]（成长×质量权重）
+- 择时：q3z × EW-MA200 双信号：EW组合净值>MA200月线 → 1.0，破位 → 0.6；q3z_tr=q3z×trend_f
+- vt_target/vt_floor=0.3（波动率目标层）、dd_trigger/dd_cut=0.5（回撤触发减仓）、inv_vol（反波动加权）、rank_buffer（排名缓冲带）
+
+A7 候选（外部流动性因子 low_amount/amihud/amount_cv × E1 骨架）：
+- v5g limup_max=3.0：近20日涨停(≥9.8%)计数>3天剔除
+- v5h xsub_days=365：上市<365天剔除（次新股）
+- v5f calendar_months=[1,4] calendar_factor=0.5：1/4月日历效应仓位减半
+- v5a-c ext_weights 流动性因子权重梯度；v5d amihud；v5e amount_cv
+- **active 版本 = v5h_xsub**：sort=ext(low_amount 权重1.0) + e1_guard + xsub_days=365，timing=q3z_tr
+
+### 1.6 macro_timing_layer_iter4.py — 宏观择时层
+- 合成：w = f_trend_comp × f_vol_comp × f_val(type_key)，clip [0.3,1.0]，EWM(α=0.3)平滑
+- q3z 规格：win=36月, minp=12, zscore, hi=1.0σ, max_cut=0.40（PE z>1σ 开始线性降仓，最多降40%）
+- SPECS 网格：q3r60/r70、q5r60/r70、q3m60、q5m60、q3z、q5z、q8r60（96月）
+- ITER4_DEFAULTS：ma_window=120, target_vol=0.25, vol_floor=0.5, w_min=0.3, smooth_alpha=0.3
+- 双红灯=估值层0.6底 × w_min 0.3地板 = 0.18（18%）
+- CRISIS_SEGMENTS：2008熊/2015股灾/2018熊（校准段）
+
+### 1.7 registry 版本史（43版）
+v0_seed→v1a-v1k（排序/流动性/波动/逆波动/缓冲/q3z/vt18/q5z）→v2a-v2f（深度价值/三闸门trr/vt13/dd/dvt/lv）→v3a-v3f（peg/glm/组合）→v4a-v4e（gq/e1/mfu/trr）→v5a-v5i（低流动性因子/日历/涨停/次新/组合）
