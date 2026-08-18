@@ -1,0 +1,33 @@
+{
+  "cand": "a4b_s1c_pegq60",
+  "desc": "结构1: mv主干+PEG≤60分位 (na保留)",
+  "cfg": {
+    "ext_mode": "zscore",
+    "ext_specs": [
+      [
+        "amt20",
+        0.0,
+        -1
+      ],
+      [
+        "circ_mv",
+        1.0,
+        -1
+      ]
+    ],
+    "peg_filter_q": 0.6,
+    "peg_na_keep": 1
+  },
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 19.2,
+  "monthly_turnover_est": 0.335,
+  "cumulative_return": 15.2627,
+  "annual_return": 0.1629,
+  "max_drawdown": -0.3007,
+  "sharpe": 1.0437,
+  "calmar": 0.5417,
+  "monthly_win_rate": 0.6471
+}

@@ -1,0 +1,41 @@
+{
+  "cand": "a4b_s2a_gqblend",
+  "desc": "结构2: 0.6·(-z mv)+0.2·grw+0.2·bufq 均衡复合",
+  "cfg": {
+    "ext_mode": "zscore",
+    "ext_specs": [
+      [
+        "amt20",
+        0.0,
+        -1
+      ],
+      [
+        "circ_mv",
+        0.6,
+        -1
+      ],
+      [
+        "grw",
+        0.2,
+        1.0
+      ],
+      [
+        "bufq",
+        0.2,
+        1.0
+      ]
+    ]
+  },
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 19.72,
+  "monthly_turnover_est": 0.2925,
+  "cumulative_return": 9.8574,
+  "annual_return": 0.1377,
+  "max_drawdown": -0.285,
+  "sharpe": 0.9412,
+  "calmar": 0.4833,
+  "monthly_win_rate": 0.6063
+}

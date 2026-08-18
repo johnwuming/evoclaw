@@ -1,0 +1,14 @@
+{
+  "period_start": "2024-07-01",
+  "period_end": "2026-08-14",
+  "years": 2.12,
+  "num_rebalance": 26,
+  "avg_holdings": 8.0,
+  "monthly_turnover_est": 0.3221,
+  "cumulative_return": 0.1099,
+  "annual_return": 0.0504,
+  "max_drawdown": -0.1849,
+  "sharpe": 0.3901,
+  "calmar": 0.2727,
+  "monthly_win_rate": 0.52
+}
