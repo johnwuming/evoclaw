@@ -1,0 +1,315 @@
+{
+  "task": "task-0362 E2 阶段A'' 引擎级重跑",
+  "engine": "a9_grid 单遍 v5h 选择路径 + 后验递推(引擎公式); 成本=调仓日逐股 ADV20 冲击; 择时缩放不计独立换仓成本",
+  "signal_lag_days": 1,
+  "hold_bottom_td": 15,
+  "hold_top_td": 10,
+  "params": {
+    "MA15_base": "q3z(w_min=0)×MA15 trend(1.0/0.6) 月频采样 ffill 日频, ≡网格 MA15_on_f0",
+    "A_REB": "flag_REB_bottom→满仓15td, 否则 MA15 基线",
+    "B_combo": "三重AND(REB&NMTAP_low&B1)+C首日快道→满仓15td, 否则 MA15 基线",
+    "NMTAP_low": "NMTAP≤rolling250d q15; 2010-03 前恒不触发",
+    "B_FLOW_top": "B + FLOW_MA3<5日前&<0→空仓10td; 优先级 入场>顶部>基线(试验性)",
+    "gate_lag": "日频门 t+1 生效; 月频基线本身 t+1 口径"
+  },
+  "anchor": {
+    "target": "a10_v6a_def formal (MA15_on_f0)",
+    "locked_ann_ref": 0.1463,
+    "locked_mdd_ref": -0.2467,
+    "locked_ann_got": 0.1463,
+    "locked_mdd_got": -0.2467,
+    "diff_full": {},
+    "diff_locked": {},
+    "nav_max_abs_diff_vs_a9_grid_csv": 1.7763568394002505e-15,
+    "ok": true
+  },
+  "triggers": {
+    "REB_bottom": {
+      "days": 112,
+      "segments": 97
+    },
+    "NMTAP_low": {
+      "days": 600,
+      "segments": 130
+    },
+    "B1_oversold": {
+      "days": 530,
+      "segments": 134
+    },
+    "C_crisis_raw": {
+      "days": 18,
+      "segments": 16
+    },
+    "C_firstday": {
+      "days": 13,
+      "segments": 13
+    },
+    "triple_AND_sameday": {
+      "days": 1,
+      "segments": 1
+    },
+    "FLOW_weak": {
+      "days": 1530,
+      "segments": 548
+    }
+  },
+  "n_trials_declared": 2,
+  "n_trials_note": "E2结构试验A/B=2; B_FLOW_top为探索性顶部退出试验(+1)",
+  "variants": {
+    "buyhold": {
+      "switches": {
+        "n_switches": 0,
+        "avg_pos": 1.0
+      },
+      "full": {
+        "ann": 0.2517,
+        "mdd": -0.7429,
+        "sharpe": 0.9066,
+        "calmar": 0.3388,
+        "mwin": null,
+        "years": 20.61,
+        "cum": 101.2052
+      },
+      "locked_0601_2406": {
+        "ann": 0.2561,
+        "mdd": -0.7429,
+        "sharpe": 0.9029,
+        "calmar": 0.3447,
+        "mwin": null,
+        "years": 18.48,
+        "cum": 66.5898
+      },
+      "holdout_2407_2608": {
+        "ann": 0.2057,
+        "mdd": -0.2114,
+        "sharpe": 0.9618,
+        "calmar": 0.9727,
+        "mwin": null,
+        "years": 2.12,
+        "cum": 0.4864
+      },
+      "s1_0601_1606": {
+        "ann": 0.3581,
+        "mdd": -0.7429,
+        "sharpe": 1.0409,
+        "calmar": 0.482,
+        "mwin": null,
+        "years": 10.49,
+        "cum": 23.7632
+      },
+      "s2_1607_2608": {
+        "ann": 0.1505,
+        "mdd": -0.3171,
+        "sharpe": 0.7484,
+        "calmar": 0.4746,
+        "mwin": null,
+        "years": 10.12,
+        "cum": 3.1313
+      }
+    },
+    "MA15_base": {
+      "switches": {
+        "n_switches": 244,
+        "avg_pos": 0.47751333852807054
+      },
+      "full": {
+        "ann": 0.1448,
+        "mdd": -0.2467,
+        "sharpe": 1.0453,
+        "calmar": 0.5871,
+        "mwin": null,
+        "years": 20.61,
+        "cum": 15.2425
+      },
+      "locked_0601_2406": {
+        "ann": 0.1463,
+        "mdd": -0.2467,
+        "sharpe": 1.0412,
+        "calmar": 0.5931,
+        "mwin": null,
+        "years": 18.48,
+        "cum": 11.4776
+      },
+      "holdout_2407_2608": {
+        "ann": 0.1295,
+        "mdd": -0.135,
+        "sharpe": 1.0791,
+        "calmar": 0.959,
+        "mwin": null,
+        "years": 2.12,
+        "cum": 0.2943
+      },
+      "s1_0601_1606": {
+        "ann": 0.2122,
+        "mdd": -0.2467,
+        "sharpe": 1.2676,
+        "calmar": 0.8599,
+        "mwin": null,
+        "years": 10.49,
+        "cum": 6.5201
+      },
+      "s2_1607_2608": {
+        "ann": 0.0791,
+        "mdd": -0.1416,
+        "sharpe": 0.7544,
+        "calmar": 0.5591,
+        "mwin": null,
+        "years": 10.12,
+        "cum": 1.1614
+      }
+    },
+    "A_REB": {
+      "switches": {
+        "n_switches": 295,
+        "avg_pos": 0.6130850563048592
+      },
+      "full": {
+        "ann": 0.245,
+        "mdd": -0.5261,
+        "sharpe": 1.1905,
+        "calmar": 0.4657,
+        "mwin": null,
+        "years": 20.61,
+        "cum": 90.4695
+      },
+      "locked_0601_2406": {
+        "ann": 0.254,
+        "mdd": -0.5261,
+        "sharpe": 1.2038,
+        "calmar": 0.4827,
+        "mwin": null,
+        "years": 18.48,
+        "cum": 64.5076
+      },
+      "holdout_2407_2608": {
+        "ann": 0.1676,
+        "mdd": -0.1363,
+        "sharpe": 1.0649,
+        "calmar": 1.2295,
+        "mwin": null,
+        "years": 2.12,
+        "cum": 0.3887
+      },
+      "s1_0601_1606": {
+        "ann": 0.3778,
+        "mdd": -0.5261,
+        "sharpe": 1.4127,
+        "calmar": 0.7182,
+        "mwin": null,
+        "years": 10.49,
+        "cum": 27.809
+      },
+      "s2_1607_2608": {
+        "ann": 0.121,
+        "mdd": -0.1422,
+        "sharpe": 0.9173,
+        "calmar": 0.8511,
+        "mwin": null,
+        "years": 10.12,
+        "cum": 2.1779
+      }
+    },
+    "B_combo": {
+      "switches": {
+        "n_switches": 254,
+        "avg_pos": 0.5059926667318622
+      },
+      "full": {
+        "ann": 0.1557,
+        "mdd": -0.5013,
+        "sharpe": 0.9505,
+        "calmar": 0.3106,
+        "mwin": null,
+        "years": 20.61,
+        "cum": 18.734
+      },
+      "locked_0601_2406": {
+        "ann": 0.1585,
+        "mdd": -0.5013,
+        "sharpe": 0.9435,
+        "calmar": 0.3162,
+        "mwin": null,
+        "years": 18.48,
+        "cum": 14.1676
+      },
+      "holdout_2407_2608": {
+        "ann": 0.1292,
+        "mdd": -0.1351,
+        "sharpe": 1.0772,
+        "calmar": 0.9564,
+        "mwin": null,
+        "years": 2.12,
+        "cum": 0.2937
+      },
+      "s1_0601_1606": {
+        "ann": 0.2309,
+        "mdd": -0.5013,
+        "sharpe": 1.1056,
+        "calmar": 0.4607,
+        "mwin": null,
+        "years": 10.49,
+        "cum": 7.8359
+      },
+      "s2_1607_2608": {
+        "ann": 0.0827,
+        "mdd": -0.1416,
+        "sharpe": 0.7773,
+        "calmar": 0.5842,
+        "mwin": null,
+        "years": 10.12,
+        "cum": 1.235
+      }
+    },
+    "B_FLOW_top": {
+      "switches": {
+        "n_switches": 223,
+        "avg_pos": 0.09425038255099782
+      },
+      "full": {
+        "ann": 0.0343,
+        "mdd": -0.3913,
+        "sharpe": 0.3609,
+        "calmar": 0.0877,
+        "mwin": null,
+        "years": 20.61,
+        "cum": 1.0041
+      },
+      "locked_0601_2406": {
+        "ann": 0.0417,
+        "mdd": -0.3913,
+        "sharpe": 0.4089,
+        "calmar": 0.1065,
+        "mwin": null,
+        "years": 18.48,
+        "cum": 1.1268
+      },
+      "holdout_2407_2608": {
+        "ann": -0.0275,
+        "mdd": -0.0574,
+        "sharpe": -1.3485,
+        "calmar": -0.4793,
+        "mwin": null,
+        "years": 2.12,
+        "cum": -0.0574
+      },
+      "s1_0601_1606": {
+        "ann": 0.0589,
+        "mdd": -0.3913,
+        "sharpe": 0.4537,
+        "calmar": 0.1505,
+        "mwin": null,
+        "years": 10.49,
+        "cum": 0.8223
+      },
+      "s2_1607_2608": {
+        "ann": 0.0095,
+        "mdd": -0.094,
+        "sharpe": 0.3136,
+        "calmar": 0.1012,
+        "mwin": null,
+        "years": 10.12,
+        "cum": 0.1005
+      }
+    }
+  }
+}
