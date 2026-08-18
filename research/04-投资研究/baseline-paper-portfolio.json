@@ -87,7 +87,7 @@
   "total_asset": 99960.0,
   "total_pnl": -40.0,
   "price_basis": "qfq",
-  "updated_at": "2026-08-18T14:22:33",
+  "updated_at": "2026-08-18T16:30:03",
   "model_version": "v5h_xsub",
   "timing_layer": "timing_v4_i4_q3z",
   "timing_ratio": 1.0
