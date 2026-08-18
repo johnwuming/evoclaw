@@ -1,0 +1,330 @@
+{
+ "task": "task-0361 [T1-E1]",
+ "date": "2026-08-18",
+ "n_trials": 3,
+ "compute_env": "VPS(vm-0-11) 数据副本 rsync 自 HP；HP MemAvailable 57MB 无法本地计算；产物已回写 HP results/timing_v2/",
+ "params_frozen": "华福原参+R-230 固定参数; SPREAD w∈{5,10,20}; 顶部=rollmax20≥0.85 & 5日回落≥0.05; REB≥55% & Δ5≥5pp; B1=dd60<-10%&dev15<-3pp&RSI14≤45; C=dd250<-35%&ret>+5%",
+ "M_stats": {
+  "n_days": 5003,
+  "start": "2006-01-05",
+  "end": "2026-08-10",
+  "total_return": 59.7169,
+  "ann_return": 0.2207,
+  "MDD": -0.7183
+ },
+ "breadth_crosscheck": {
+  "n": 5003,
+  "mean_abs_diff": 0.0,
+  "corr": 1.0
+ },
+ "signals": {
+  "SPREAD5_top": {
+   "direction": "top",
+   "trigger_days": 12,
+   "n_episodes": 2,
+   "n_events_with_fwd15": 2,
+   "win_rate": 0.0,
+   "fwd15_mean": 0.0605,
+   "fwd15_median": 0.0605,
+   "fwd15_min": 0.0399,
+   "fwd15_max": 0.081,
+   "first_episode": "2024-10-09",
+   "last_episode": "2024-11-04"
+  },
+  "SPREAD10_top": {
+   "direction": "top",
+   "trigger_days": 0,
+   "n_episodes": 0,
+   "n_events_with_fwd15": 0,
+   "win_rate": null,
+   "fwd15_mean": null,
+   "fwd15_median": null,
+   "fwd15_min": null,
+   "fwd15_max": null,
+   "first_episode": null,
+   "last_episode": null
+  },
+  "SPREAD20_top": {
+   "direction": "top",
+   "trigger_days": 0,
+   "n_episodes": 0,
+   "n_events_with_fwd15": 0,
+   "win_rate": null,
+   "fwd15_mean": null,
+   "fwd15_median": null,
+   "fwd15_min": null,
+   "fwd15_max": null,
+   "first_episode": null,
+   "last_episode": null
+  },
+  "REB_bottom": {
+   "direction": "bottom",
+   "trigger_days": 112,
+   "n_episodes": 97,
+   "n_events_with_fwd15": 97,
+   "win_rate": 0.7629,
+   "fwd15_mean": 0.057,
+   "fwd15_median": 0.0439,
+   "fwd15_min": -0.1784,
+   "fwd15_max": 0.3405,
+   "first_episode": "2006-05-09",
+   "last_episode": "2024-10-08"
+  },
+  "FLOW_pos_cross": {
+   "direction": "bottom",
+   "trigger_days": 580,
+   "n_episodes": 580,
+   "n_events_with_fwd15": 577,
+   "win_rate": 0.5858,
+   "fwd15_mean": 0.0136,
+   "fwd15_median": 0.0117,
+   "fwd15_min": -0.3238,
+   "fwd15_max": 0.3296,
+   "first_episode": "2006-01-18",
+   "last_episode": "2026-07-31"
+  },
+  "dd60": {
+   "direction": "bottom",
+   "trigger_days": 1281,
+   "n_episodes": 111,
+   "n_events_with_fwd15": 111,
+   "win_rate": 0.5225,
+   "fwd15_mean": 0.0058,
+   "fwd15_median": 0.0065,
+   "fwd15_min": -0.2841,
+   "fwd15_max": 0.2225,
+   "first_episode": "2006-06-09",
+   "last_episode": "2026-08-10"
+  },
+  "dev15": {
+   "direction": "bottom",
+   "trigger_days": 761,
+   "n_episodes": 178,
+   "n_events_with_fwd15": 178,
+   "win_rate": 0.5225,
+   "fwd15_mean": 0.002,
+   "fwd15_median": 0.0039,
+   "fwd15_min": -0.2776,
+   "fwd15_max": 0.2768,
+   "first_episode": "2006-03-07",
+   "last_episode": "2026-07-24"
+  },
+  "rsi14": {
+   "direction": "bottom",
+   "trigger_days": 1323,
+   "n_episodes": 212,
+   "n_events_with_fwd15": 212,
+   "win_rate": 0.5,
+   "fwd15_mean": -0.0011,
+   "fwd15_median": 0.0005,
+   "fwd15_min": -0.2776,
+   "fwd15_max": 0.3769,
+   "first_episode": "2006-03-07",
+   "last_episode": "2026-07-31"
+  },
+  "B1_oversold": {
+   "direction": "bottom",
+   "trigger_days": 530,
+   "n_episodes": 134,
+   "n_events_with_fwd15": 134,
+   "win_rate": 0.5299,
+   "fwd15_mean": 0.0063,
+   "fwd15_median": 0.009,
+   "fwd15_min": -0.2776,
+   "fwd15_max": 0.2768,
+   "first_episode": "2006-08-02",
+   "last_episode": "2026-07-24"
+  },
+  "C_crisis": {
+   "direction": "bottom",
+   "trigger_days": 18,
+   "n_episodes": 16,
+   "n_events_with_fwd15": 16,
+   "win_rate": 0.6875,
+   "fwd15_mean": 0.0588,
+   "fwd15_median": 0.067,
+   "fwd15_min": -0.1732,
+   "fwd15_max": 0.2748,
+   "first_episode": "2008-06-18",
+   "last_episode": "2018-10-22"
+  }
+ },
+ "major_drawdowns": [
+  {
+   "drawdown": {
+    "peak": "2008-03-12",
+    "trough": "2008-11-04",
+    "end": "2009-07-24",
+    "depth": -0.7183
+   },
+   "bottom_hits": {
+    "REB_bottom": 3,
+    "FLOW_pos_cross": 2,
+    "dd60": 0,
+    "dev15": 0,
+    "rsi14": 0,
+    "B1_oversold": 0,
+    "C_crisis": 1
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2015-06-25",
+    "trough": "2015-07-08",
+    "end": "2016-11-11",
+    "depth": -0.5224
+   },
+   "bottom_hits": {
+    "REB_bottom": 1,
+    "FLOW_pos_cross": 2,
+    "dd60": 0,
+    "dev15": 1,
+    "rsi14": 1,
+    "B1_oversold": 2,
+    "C_crisis": 1
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2017-11-14",
+    "trough": "2018-10-18",
+    "end": "2020-07-03",
+    "depth": -0.4915
+   },
+   "bottom_hits": {
+    "REB_bottom": 1,
+    "FLOW_pos_cross": 4,
+    "dd60": 1,
+    "dev15": 1,
+    "rsi14": 2,
+    "B1_oversold": 1,
+    "C_crisis": 1
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2011-09-02",
+    "trough": "2012-12-03",
+    "end": "2013-10-08",
+    "depth": -0.446
+   },
+   "bottom_hits": {
+    "REB_bottom": 3,
+    "FLOW_pos_cross": 3,
+    "dd60": 1,
+    "dev15": 1,
+    "rsi14": 0,
+    "B1_oversold": 1,
+    "C_crisis": 0
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2024-01-29",
+    "trough": "2024-02-05",
+    "end": "2024-02-26",
+    "depth": -0.3155
+   },
+   "bottom_hits": {
+    "REB_bottom": 0,
+    "FLOW_pos_cross": 2,
+    "dd60": 0,
+    "dev15": 1,
+    "rsi14": 0,
+    "B1_oversold": 1,
+    "C_crisis": 0
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2007-06-21",
+    "trough": "2007-07-05",
+    "end": "2007-07-25",
+    "depth": -0.3067
+   },
+   "bottom_hits": {
+    "REB_bottom": 0,
+    "FLOW_pos_cross": 3,
+    "dd60": 1,
+    "dev15": 2,
+    "rsi14": 2,
+    "B1_oversold": 3,
+    "C_crisis": 0
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2009-08-11",
+    "trough": "2009-08-19",
+    "end": "2009-10-19",
+    "depth": -0.2999
+   },
+   "bottom_hits": {
+    "REB_bottom": 0,
+    "FLOW_pos_cross": 2,
+    "dd60": 1,
+    "dev15": 2,
+    "rsi14": 3,
+    "B1_oversold": 3,
+    "C_crisis": 0
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  },
+  {
+   "drawdown": {
+    "peak": "2010-05-07",
+    "trough": "2010-07-05",
+    "end": "2010-07-30",
+    "depth": -0.2892
+   },
+   "bottom_hits": {
+    "REB_bottom": 1,
+    "FLOW_pos_cross": 3,
+    "dd60": 0,
+    "dev15": 1,
+    "rsi14": 3,
+    "B1_oversold": 1,
+    "C_crisis": 0
+   },
+   "top_hits": {
+    "SPREAD5_top": 0,
+    "SPREAD10_top": 0,
+    "SPREAD20_top": 0
+   }
+  }
+ ]
+}

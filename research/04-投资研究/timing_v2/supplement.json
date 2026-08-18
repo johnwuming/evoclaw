@@ -1,0 +1,679 @@
+{
+ "breadth": {
+  "max": 1.0,
+  "p99": 0.9882,
+  "p95": 0.9364,
+  "days_ge_085": 567
+ },
+ "SPREAD5": {
+  "max": 0.9371,
+  "p99": 0.7729,
+  "p95": 0.6902,
+  "days_ge_085": 2
+ },
+ "SPREAD10": {
+  "max": 0.7635,
+  "p99": 0.6982,
+  "p95": 0.6313,
+  "days_ge_085": 0
+ },
+ "SPREAD20": {
+  "max": 0.6964,
+  "p99": 0.644,
+  "p95": 0.6047,
+  "days_ge_085": 0
+ },
+ "by_segment_M": {
+  "M": {
+   "SPREAD5_top": {
+    "2006-2015": {
+     "n": 0
+    },
+    "2016-2026": {
+     "n": 2,
+     "win": 0.0,
+     "fwd15_mean": 0.0605
+    },
+    "full": {
+     "n": 2,
+     "win": 0.0,
+     "fwd15_mean": 0.0605
+    }
+   },
+   "REB_bottom": {
+    "2006-2015": {
+     "n": 63,
+     "win": 0.7619,
+     "fwd15_mean": 0.0631
+    },
+    "2016-2026": {
+     "n": 34,
+     "win": 0.7647,
+     "fwd15_mean": 0.0456
+    },
+    "full": {
+     "n": 97,
+     "win": 0.7629,
+     "fwd15_mean": 0.057
+    }
+   },
+   "FLOW_pos_cross": {
+    "2006-2015": {
+     "n": 251,
+     "win": 0.6096,
+     "fwd15_mean": 0.0243
+    },
+    "2016-2026": {
+     "n": 326,
+     "win": 0.5675,
+     "fwd15_mean": 0.0053
+    },
+    "full": {
+     "n": 577,
+     "win": 0.5858,
+     "fwd15_mean": 0.0136
+    }
+   },
+   "dd60": {
+    "2006-2015": {
+     "n": 52,
+     "win": 0.5192,
+     "fwd15_mean": 0.0016
+    },
+    "2016-2026": {
+     "n": 59,
+     "win": 0.5254,
+     "fwd15_mean": 0.0094
+    },
+    "full": {
+     "n": 111,
+     "win": 0.5225,
+     "fwd15_mean": 0.0058
+    }
+   },
+   "dev15": {
+    "2006-2015": {
+     "n": 85,
+     "win": 0.5176,
+     "fwd15_mean": -0.0041
+    },
+    "2016-2026": {
+     "n": 93,
+     "win": 0.5269,
+     "fwd15_mean": 0.0076
+    },
+    "full": {
+     "n": 178,
+     "win": 0.5225,
+     "fwd15_mean": 0.002
+    }
+   },
+   "rsi14": {
+    "2006-2015": {
+     "n": 86,
+     "win": 0.5,
+     "fwd15_mean": -0.0074
+    },
+    "2016-2026": {
+     "n": 126,
+     "win": 0.5,
+     "fwd15_mean": 0.0033
+    },
+    "full": {
+     "n": 212,
+     "win": 0.5,
+     "fwd15_mean": -0.0011
+    }
+   },
+   "B1_oversold": {
+    "2006-2015": {
+     "n": 66,
+     "win": 0.5152,
+     "fwd15_mean": -0.0032
+    },
+    "2016-2026": {
+     "n": 68,
+     "win": 0.5441,
+     "fwd15_mean": 0.0154
+    },
+    "full": {
+     "n": 134,
+     "win": 0.5299,
+     "fwd15_mean": 0.0063
+    }
+   },
+   "C_crisis": {
+    "2006-2015": {
+     "n": 14,
+     "win": 0.6429,
+     "fwd15_mean": 0.0552
+    },
+    "2016-2026": {
+     "n": 2,
+     "win": 1.0,
+     "fwd15_mean": 0.0837
+    },
+    "full": {
+     "n": 16,
+     "win": 0.6875,
+     "fwd15_mean": 0.0588
+    }
+   }
+  }
+ },
+ "by_segment_Mmicro": {
+  "M_micro_ew": {
+   "SPREAD5_top": {
+    "2006-2015": {
+     "n": 0
+    },
+    "2016-2026": {
+     "n": 2,
+     "win": 0.0,
+     "fwd15_mean": 0.0397
+    },
+    "full": {
+     "n": 2,
+     "win": 0.0,
+     "fwd15_mean": 0.0397
+    }
+   },
+   "REB_bottom": {
+    "2006-2015": {
+     "n": 63,
+     "win": 0.7937,
+     "fwd15_mean": 0.0644
+    },
+    "2016-2026": {
+     "n": 34,
+     "win": 0.7353,
+     "fwd15_mean": 0.0502
+    },
+    "full": {
+     "n": 97,
+     "win": 0.7732,
+     "fwd15_mean": 0.0594
+    }
+   },
+   "FLOW_pos_cross": {
+    "2006-2015": {
+     "n": 251,
+     "win": 0.6135,
+     "fwd15_mean": 0.022
+    },
+    "2016-2026": {
+     "n": 326,
+     "win": 0.5307,
+     "fwd15_mean": 0.0029
+    },
+    "full": {
+     "n": 577,
+     "win": 0.5667,
+     "fwd15_mean": 0.0112
+    }
+   },
+   "dd60": {
+    "2006-2015": {
+     "n": 52,
+     "win": 0.5192,
+     "fwd15_mean": -0.0015
+    },
+    "2016-2026": {
+     "n": 59,
+     "win": 0.5424,
+     "fwd15_mean": 0.0086
+    },
+    "full": {
+     "n": 111,
+     "win": 0.5315,
+     "fwd15_mean": 0.0039
+    }
+   },
+   "dev15": {
+    "2006-2015": {
+     "n": 85,
+     "win": 0.5294,
+     "fwd15_mean": -0.0031
+    },
+    "2016-2026": {
+     "n": 93,
+     "win": 0.5376,
+     "fwd15_mean": 0.0074
+    },
+    "full": {
+     "n": 178,
+     "win": 0.5337,
+     "fwd15_mean": 0.0024
+    }
+   },
+   "rsi14": {
+    "2006-2015": {
+     "n": 86,
+     "win": 0.5465,
+     "fwd15_mean": -0.0043
+    },
+    "2016-2026": {
+     "n": 126,
+     "win": 0.4921,
+     "fwd15_mean": 0.0039
+    },
+    "full": {
+     "n": 212,
+     "win": 0.5142,
+     "fwd15_mean": 0.0005
+    }
+   },
+   "B1_oversold": {
+    "2006-2015": {
+     "n": 66,
+     "win": 0.5152,
+     "fwd15_mean": -0.0024
+    },
+    "2016-2026": {
+     "n": 68,
+     "win": 0.5735,
+     "fwd15_mean": 0.018
+    },
+    "full": {
+     "n": 134,
+     "win": 0.5448,
+     "fwd15_mean": 0.0079
+    }
+   },
+   "C_crisis": {
+    "2006-2015": {
+     "n": 14,
+     "win": 0.7143,
+     "fwd15_mean": 0.0545
+    },
+    "2016-2026": {
+     "n": 2,
+     "win": 1.0,
+     "fwd15_mean": 0.0878
+    },
+    "full": {
+     "n": 16,
+     "win": 0.75,
+     "fwd15_mean": 0.0587
+    }
+   }
+  }
+ },
+ "key_episodes": {
+  "SPREAD5_top": [
+   {
+    "signal": "SPREAD5_top",
+    "start": "2024-10-09",
+    "end": "2024-10-17",
+    "n_days": 7,
+    "fwd15": 0.081,
+    "hit": false
+   },
+   {
+    "signal": "SPREAD5_top",
+    "start": "2024-10-29",
+    "end": "2024-11-04",
+    "n_days": 5,
+    "fwd15": 0.0399,
+    "hit": false
+   }
+  ],
+  "C_crisis": [
+   {
+    "signal": "C_crisis",
+    "start": "2008-06-18",
+    "end": "2008-06-18",
+    "n_days": 1,
+    "fwd15": 0.0643,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2008-06-25",
+    "end": "2008-06-25",
+    "n_days": 1,
+    "fwd15": -0.0093,
+    "hit": false
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2008-07-07",
+    "end": "2008-07-07",
+    "n_days": 1,
+    "fwd15": 0.0616,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2008-08-20",
+    "end": "2008-08-20",
+    "n_days": 1,
+    "fwd15": -0.1689,
+    "hit": false
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2008-09-19",
+    "end": "2008-09-19",
+    "n_days": 1,
+    "fwd15": -0.1732,
+    "hit": false
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2008-11-10",
+    "end": "2008-11-10",
+    "n_days": 1,
+    "fwd15": 0.152,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2008-11-19",
+    "end": "2008-11-19",
+    "n_days": 1,
+    "fwd15": 0.1486,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2009-03-04",
+    "end": "2009-03-04",
+    "n_days": 1,
+    "fwd15": 0.068,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2015-07-09",
+    "end": "2015-07-13",
+    "n_days": 3,
+    "fwd15": 0.2748,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2015-08-28",
+    "end": "2015-08-28",
+    "n_days": 1,
+    "fwd15": -0.0599,
+    "hit": false
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2015-09-08",
+    "end": "2015-09-08",
+    "n_days": 1,
+    "fwd15": -0.0058,
+    "hit": false
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2015-09-16",
+    "end": "2015-09-16",
+    "n_days": 1,
+    "fwd15": 0.1633,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2015-10-08",
+    "end": "2015-10-08",
+    "n_days": 1,
+    "fwd15": 0.1814,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2015-10-12",
+    "end": "2015-10-12",
+    "n_days": 1,
+    "fwd15": 0.0763,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2016-03-02",
+    "end": "2016-03-02",
+    "n_days": 1,
+    "fwd15": 0.1013,
+    "hit": true
+   },
+   {
+    "signal": "C_crisis",
+    "start": "2018-10-22",
+    "end": "2018-10-22",
+    "n_days": 1,
+    "fwd15": 0.0661,
+    "hit": true
+   }
+  ],
+  "B1_oversold_top8_by_fwd15": [
+   {
+    "signal": "B1_oversold",
+    "start": "2007-07-16",
+    "end": "2007-07-16",
+    "n_days": 1,
+    "fwd15": 0.2768,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2015-09-17",
+    "end": "2015-09-17",
+    "n_days": 1,
+    "fwd15": 0.2342,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2019-01-31",
+    "end": "2019-01-31",
+    "n_days": 1,
+    "fwd15": 0.2225,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2016-02-29",
+    "end": "2016-03-01",
+    "n_days": 2,
+    "fwd15": 0.1815,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2020-02-03",
+    "end": "2020-02-05",
+    "n_days": 3,
+    "fwd15": 0.1809,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2015-09-14",
+    "end": "2015-09-15",
+    "n_days": 2,
+    "fwd15": 0.1793,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2009-08-31",
+    "end": "2009-09-02",
+    "n_days": 3,
+    "fwd15": 0.173,
+    "hit": true
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2011-06-20",
+    "end": "2011-06-20",
+    "n_days": 1,
+    "fwd15": 0.1406,
+    "hit": true
+   }
+  ],
+  "B1_oversold_worst5": [
+   {
+    "signal": "B1_oversold",
+    "start": "2015-08-21",
+    "end": "2015-09-10",
+    "n_days": 13,
+    "fwd15": -0.2776,
+    "hit": false
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2008-05-29",
+    "end": "2008-05-30",
+    "n_days": 2,
+    "fwd15": -0.2535,
+    "hit": false
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2008-03-13",
+    "end": "2008-04-23",
+    "n_days": 29,
+    "fwd15": -0.2392,
+    "hit": false
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2008-05-26",
+    "end": "2008-05-27",
+    "n_days": 2,
+    "fwd15": -0.2309,
+    "hit": false
+   },
+   {
+    "signal": "B1_oversold",
+    "start": "2008-08-05",
+    "end": "2008-08-28",
+    "n_days": 18,
+    "fwd15": -0.2203,
+    "hit": false
+   }
+  ],
+  "REB_bottom_top8_by_fwd15": [
+   {
+    "signal": "REB_bottom",
+    "start": "2015-05-11",
+    "end": "2015-05-11",
+    "n_days": 1,
+    "fwd15": 0.3405,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2024-09-24",
+    "end": "2024-09-25",
+    "n_days": 2,
+    "fwd15": 0.2644,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2015-03-16",
+    "end": "2015-03-16",
+    "n_days": 1,
+    "fwd15": 0.249,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2007-01-08",
+    "end": "2007-01-08",
+    "n_days": 1,
+    "fwd15": 0.2374,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2006-05-09",
+    "end": "2006-05-09",
+    "n_days": 1,
+    "fwd15": 0.2255,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2019-02-13",
+    "end": "2019-02-13",
+    "n_days": 1,
+    "fwd15": 0.2053,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2008-11-05",
+    "end": "2008-11-05",
+    "n_days": 1,
+    "fwd15": 0.1827,
+    "hit": true
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2006-05-15",
+    "end": "2006-05-15",
+    "n_days": 1,
+    "fwd15": 0.1809,
+    "hit": true
+   }
+  ],
+  "REB_bottom_worst5": [
+   {
+    "signal": "REB_bottom",
+    "start": "2008-03-03",
+    "end": "2008-03-03",
+    "n_days": 1,
+    "fwd15": -0.1784,
+    "hit": false
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2008-09-19",
+    "end": "2008-09-22",
+    "n_days": 2,
+    "fwd15": -0.1732,
+    "hit": false
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2008-08-20",
+    "end": "2008-08-20",
+    "n_days": 1,
+    "fwd15": -0.1689,
+    "hit": false
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2015-12-17",
+    "end": "2015-12-17",
+    "n_days": 1,
+    "fwd15": -0.1481,
+    "hit": false
+   },
+   {
+    "signal": "REB_bottom",
+    "start": "2011-09-21",
+    "end": "2011-09-21",
+    "n_days": 1,
+    "fwd15": -0.089,
+    "hit": false
+   }
+  ]
+ },
+ "M_stats": {
+  "ann": 0.2207,
+  "mdd": -0.7183,
+  "n": 5003
+ },
+ "M_micro_ew_stats": {
+  "ann": 0.1572,
+  "mdd": -0.7145,
+  "n": 5003
+ },
+ "M_vs_Mmicro_daily_corr": 0.9599
+}
