@@ -23,3 +23,7 @@
   - 结构2：s2a z(0.6·-mv+0.2·grw+0.2·bufq)；s2b ranksum(-log_mv, npg, bufq, gpersist)；s2c z(0.5·-mv+0.35·grw+0.15·bufq)
   - grw = mean(z(npg), z(rev_yoy), z(growth_persist))
 - 五门禁：g1 locked mean_IC>0；g2 ICIR_m(locked)≥0.25 且 holdout IC>0；g3 turnover≤0.60；g4 容量≥0.7×v5h（0.05×持仓amt20均值×n_hold 口径）；g5 月收益 corr vs v2b_trr/v5h_xsub <0.97
+
+### T+22min 首跑失败→修复
+- merge_asof 全局排序 bug（by=code 时 right 需全局按 key 排序，a9 同款处理）；已 sed 修复 avail_date/m_end 全局排序后重启
+- 教训：merge_asof(by=...) 的 right 必须 sort_values(key) 全局序，(code,key) 序不够
