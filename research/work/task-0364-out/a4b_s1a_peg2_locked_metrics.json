@@ -1,0 +1,32 @@
+{
+  "cand": "a4b_s1a_peg2",
+  "desc": "结构1: mv主干(v5h骨架)+PEG<2 (na剔除)",
+  "cfg": {
+    "ext_mode": "zscore",
+    "ext_specs": [
+      [
+        "amt20",
+        0.0,
+        -1
+      ],
+      [
+        "circ_mv",
+        1.0,
+        -1
+      ]
+    ],
+    "peg_filter": 2.0
+  },
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 19.48,
+  "monthly_turnover_est": 0.3136,
+  "cumulative_return": 13.2076,
+  "annual_return": 0.1544,
+  "max_drawdown": -0.2998,
+  "sharpe": 1.0074,
+  "calmar": 0.5151,
+  "monthly_win_rate": 0.5928
+}
