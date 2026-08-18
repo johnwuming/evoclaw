@@ -11,56 +11,88 @@
       "name": "通化东宝",
       "weight": 0.077161,
       "shares": 900,
-      "cost": 8.57
+      "cost": 8.57,
+      "price": 8.57,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "002107",
       "name": "沃华医药",
       "weight": 0.076951,
       "shares": 1200,
-      "cost": 6.41
+      "cost": 6.41,
+      "price": 6.41,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "002027",
       "name": "分众传媒",
       "weight": 0.07623,
       "shares": 1500,
-      "cost": 5.08
+      "cost": 5.08,
+      "price": 5.08,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "603551",
       "name": "奥普科技",
       "weight": 0.07523,
       "shares": 800,
-      "cost": 9.4
+      "cost": 9.4,
+      "price": 9.4,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "000848",
       "name": "承德露露",
       "weight": 0.07491,
       "shares": 900,
-      "cost": 8.32
+      "cost": 8.32,
+      "price": 8.32,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "601600",
       "name": "中国铝业",
       "weight": 0.07411,
       "shares": 800,
-      "cost": 9.26
+      "cost": 9.26,
+      "price": 9.26,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "300009",
       "name": "安科生物",
       "weight": 0.071629,
       "shares": 800,
-      "cost": 8.95
+      "cost": 8.95,
+      "price": 8.95,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     },
     {
       "code": "300824",
       "name": "北鼎股份",
       "weight": 0.069688,
       "shares": 900,
-      "cost": 7.74
+      "cost": 7.74,
+      "price": 7.74,
+      "price_date": "2026-08-14",
+      "pnl_amount": 0.0,
+      "pnl_pct": 0.0
     }
   ],
   "holdings_count": 8,
@@ -70,7 +102,10 @@
   "days_active": 0,
   "cash": 40393.0,
   "holdings_value": 59567.0,
-  "updated_at": "2026-08-17T16:30:03",
+  "total_asset": 99960.0,
+  "total_pnl": -40.0,
+  "price_basis": "qfq",
+  "updated_at": "2026-08-18T14:22:34",
   "model_version": "v5h_xsub",
   "timing_layer": "timing_v4_i4_q3z",
   "timing_ratio": 1.0
