@@ -1,0 +1,192 @@
+{
+  "task": "task-0364 A4b 阶段A 价值过滤器+成长×质量复合",
+  "generated_at": "2026-08-18 06:23:46",
+  "n_trials": 6,
+  "factor_coverage": {
+    "pe_ttm": 0.8944,
+    "peg_np": 0.5312,
+    "npg": 0.9531,
+    "gpersist": 0.9842,
+    "grw": 0.9943,
+    "bufq": 0.9954
+  },
+  "incumbents": {
+    "v5h_xsub": "15.74%/-29.80%",
+    "v2b_trr": "15.15%/-29.86%"
+  },
+  "bloodline_bar": "新血统线: locked 年化 ≥ max(inc)+2pp 且 MDD 恶化 ≤2pp; 五门禁全过",
+  "candidates": {
+    "a4b_s1a_peg2": {
+      "desc": "结构1: mv主干(v5h骨架)+PEG<2 (na剔除)",
+      "locked": {
+        "annual_return": 0.1544,
+        "max_drawdown": -0.2998,
+        "sharpe": 1.0074,
+        "calmar": 0.5151,
+        "cumulative_return": 13.2076,
+        "monthly_win_rate": 0.5928,
+        "monthly_turnover_est": 0.3136,
+        "avg_holdings": 19.48,
+        "years": 18.48,
+        "num_rebalance": 222
+      },
+      "holdout": {
+        "annual_return": 0.07,
+        "max_drawdown": -0.1682,
+        "sharpe": 0.527,
+        "calmar": 0.4163,
+        "cumulative_return": 0.1542,
+        "monthly_win_rate": 0.52,
+        "monthly_turnover_est": 0.3243,
+        "avg_holdings": 8.54,
+        "years": 2.12,
+        "num_rebalance": 26
+      },
+      "verdict": "REJECT"
+    },
+    "a4b_s1b_peg15": {
+      "desc": "结构1: mv主干+PEG<1.5 (na剔除)",
+      "locked": {
+        "annual_return": 0.1522,
+        "max_drawdown": -0.3001,
+        "sharpe": 0.994,
+        "calmar": 0.507,
+        "cumulative_return": 12.7007,
+        "monthly_win_rate": 0.5928,
+        "monthly_turnover_est": 0.3155,
+        "avg_holdings": 19.44,
+        "years": 18.48,
+        "num_rebalance": 222
+      },
+      "holdout": {
+        "annual_return": 0.0504,
+        "max_drawdown": -0.1849,
+        "sharpe": 0.3901,
+        "calmar": 0.2727,
+        "cumulative_return": 0.1099,
+        "monthly_win_rate": 0.52,
+        "monthly_turnover_est": 0.3221,
+        "avg_holdings": 8.0,
+        "years": 2.12,
+        "num_rebalance": 26
+      },
+      "verdict": "REJECT"
+    },
+    "a4b_s1c_pegq60": {
+      "desc": "结构1: mv主干+PEG≤60分位 (na保留)",
+      "locked": {
+        "annual_return": 0.1629,
+        "max_drawdown": -0.3007,
+        "sharpe": 1.0437,
+        "calmar": 0.5417,
+        "cumulative_return": 15.2627,
+        "monthly_win_rate": 0.6471,
+        "monthly_turnover_est": 0.335,
+        "avg_holdings": 19.2,
+        "years": 18.48,
+        "num_rebalance": 222
+      },
+      "holdout": {
+        "annual_return": 0.1219,
+        "max_drawdown": -0.1847,
+        "sharpe": 0.8927,
+        "calmar": 0.6601,
+        "cumulative_return": 0.2761,
+        "monthly_win_rate": 0.6,
+        "monthly_turnover_est": 0.412,
+        "avg_holdings": 8.96,
+        "years": 2.12,
+        "num_rebalance": 26
+      },
+      "verdict": "REJECT"
+    },
+    "a4b_s2a_gqblend": {
+      "desc": "结构2: 0.6·(-z mv)+0.2·grw+0.2·bufq 均衡复合",
+      "locked": {
+        "annual_return": 0.1377,
+        "max_drawdown": -0.285,
+        "sharpe": 0.9412,
+        "calmar": 0.4833,
+        "cumulative_return": 9.8574,
+        "monthly_win_rate": 0.6063,
+        "monthly_turnover_est": 0.2925,
+        "avg_holdings": 19.72,
+        "years": 18.48,
+        "num_rebalance": 222
+      },
+      "holdout": {
+        "annual_return": 0.1092,
+        "max_drawdown": -0.1561,
+        "sharpe": 0.8512,
+        "calmar": 0.6996,
+        "cumulative_return": 0.2456,
+        "monthly_win_rate": 0.6,
+        "monthly_turnover_est": 0.301,
+        "avg_holdings": 11.88,
+        "years": 2.12,
+        "num_rebalance": 26
+      },
+      "verdict": "REJECT"
+    },
+    "a4b_s2b_gqrank": {
+      "desc": "结构2: ranksum(-log_mv, npg, bufq, gpersist)",
+      "locked": {
+        "annual_return": 0.1397,
+        "max_drawdown": -0.2789,
+        "sharpe": 0.9444,
+        "calmar": 0.5011,
+        "cumulative_return": 10.215,
+        "monthly_win_rate": 0.5701,
+        "monthly_turnover_est": 0.2989,
+        "avg_holdings": 19.74,
+        "years": 18.48,
+        "num_rebalance": 222
+      },
+      "holdout": {
+        "annual_return": 0.1093,
+        "max_drawdown": -0.1561,
+        "sharpe": 0.8505,
+        "calmar": 0.7004,
+        "cumulative_return": 0.2459,
+        "monthly_win_rate": 0.6,
+        "monthly_turnover_est": 0.288,
+        "avg_holdings": 11.88,
+        "years": 2.12,
+        "num_rebalance": 26
+      },
+      "verdict": "REJECT"
+    },
+    "a4b_s2c_growdom": {
+      "desc": "结构2: 0.5·(-z mv)+0.35·grw+0.15·bufq 成长主导",
+      "locked": {
+        "annual_return": 0.1396,
+        "max_drawdown": -0.2772,
+        "sharpe": 0.9597,
+        "calmar": 0.5034,
+        "cumulative_return": 10.1833,
+        "monthly_win_rate": 0.6154,
+        "monthly_turnover_est": 0.2912,
+        "avg_holdings": 19.74,
+        "years": 18.48,
+        "num_rebalance": 222
+      },
+      "holdout": {
+        "annual_return": 0.1057,
+        "max_drawdown": -0.1561,
+        "sharpe": 0.8282,
+        "calmar": 0.6769,
+        "cumulative_return": 0.2372,
+        "monthly_win_rate": 0.6,
+        "monthly_turnover_est": 0.2977,
+        "avg_holdings": 11.88,
+        "years": 2.12,
+        "num_rebalance": 26
+      },
+      "verdict": "REJECT"
+    }
+  },
+  "gate_table": "results/a4b_gate_table.json",
+  "peg_def": "pe_ttm(circ_mv/net_profit_ttm, avail_date PIT) / net_profit_yoy(fin_deep ak 面板 usable_from 月频), 仅 yoy>0",
+  "bufq_def": "mean(z(roe_ttm)+z(gp_margin)+z(cf_np_ratio)-z(debt_to_asset)) 月度横截面",
+  "grw_def": "mean(z(net_profit_yoy), z(revenue_yoy), z(growth_persist)) 月度横截面"
+}
