@@ -88,3 +88,26 @@
 - 对拍锚：`results/a10_v6a_def_formal_{full,locked}_metrics.json`（locked 14.63%/-24.67%），diff_metrics 自动比对 + a9_timing_MA15_on_f0_nav.csv nav 逐位 max|Δ|。
 - 触发统计预期（载体级先验）：REB 112日/97段、NMTAP_low 600/130、B1 530/134、C原始 18/16→首日 13/13、三重同日 AND=1、FLOW弱 1530/548。
 - 输出：HP results/timing_v2/e2_eng_stats.json + e2_eng_navs.csv + e2_eng_pos.csv；16:52 nohup 启动（logs/e2_eng_timing.log）。
+
+### 7.1 引擎级结果（16:5x-17:0x 完成，HP 130s 跑完）
+**对拍 ✅**：MA15_base locked = 14.6300%/-24.6700%（diff_metrics 零差异，nav vs a9_timing_MA15_on_f0_nav.csv max|Δ|=1.78e-15 逐位一致）；full 14.48%/-24.67% 与 R-222 formal 引用完全一致。触发统计与载体级逐项相同（REB 112/97、NMTAP_low 600/130、B1 530/134、C 18/16→首日 13/13、三重同日 AND=1、FLOW弱 1530/548）→ 门序列一致，差异全部来自引擎收益流/成本口径。
+
+| 变体 | full 年化/MDD | locked 年化/MDD | holdout 年化/MDD | s1 | s2 | Calmar(full) | avg_pos |
+|---|---|---|---|---|---|---|---|
+| buyhold | 25.17%/-74.29% | 25.61%/-74.29% | 20.57%/-21.14% | 35.81% | 15.05% | 0.34 | 1.00 |
+| MA15_base | 14.48%/-24.67% | 14.63%/-24.67% | 12.95%/-13.50% | 21.22% | 7.91% | 0.59 | 0.48 |
+| A_REB | 24.50%/-52.61% | 25.40%/-52.61% | 16.76%/-13.63% | 37.78% | 12.10% | 0.47 | 0.61 |
+| B_combo | 15.57%/-50.13% | 15.85%/-50.13% | 12.92%/-13.51% | 23.09% | 8.27% | 0.31 | 0.51 |
+| B_FLOW_top | 3.43%/-39.13% | 4.17%/-39.13% | -2.75%/-5.74% | 5.89% | 0.95% | 0.09 | 0.09 |
+
+### 7.2 引擎级 vs 载体级结论对比（阶段B素材）
+- **结论方向不变，幅度放大**：A_REB 年化 +10.0pp（24.50 vs 14.48）但 MDD 恶化 27.9pp（-52.61 vs -24.67），血统线（MDD 恶化≤2pp）大幅不达标；Calmar 0.47<0.59。载体级曾显示"年化持平、MDD 恶化 10pp"，引擎口径下 REB 门的收益增强更明显、回撤代价也更重（2008 长熊满仓 15td 的暴露在个股组合上放大）。
+- B_combo：三重 AND 仍仅 1 次触发（证伪不变），实质=C 首日快道+基线，年化 +1.1pp、MDD 恶化 25.5pp → 不胜任。
+- B_FLOW_top：引擎口径下 avg_pos=0.09（FLOW 弱窗 10td 高度重叠近乎常空仓），年化 3.43%——构造性失败比载体级更彻底。
+- buyhold 引擎 locked 25.61%/-74.29%（选股组合无门），微盘载体 16.54%/-71.45%：选股 alpha 抬高年化但 MDD 同量级。
+- holdout 段 A_REB 16.76% vs base 12.95%（+3.8pp）且 MDD 相当 → REB 信号在 2024-09/10 修复段仍有增益，与载体级结论一致。
+
+### 7.3 产物
+- VPS task-0362-out/：e2_stats.json（引擎级，含 anchor/触发/五变体五分段）、e2_nav_daily_eng.csv、e2_pos_daily_eng.csv；旧载体级统计存 e2_stats_v1_buggy.json（口径偏离版，非数值 bug）。
+- HP：scripts/e2_eng_timing.py（md5 afb1f092）、results/timing_v2/e2_eng_{stats.json,navs.csv,pos.csv}、logs/e2_eng_timing.log。
+- 阶段A'' 完成：引擎级重跑+对拍通过；R-233 报告撰写留阶段B。
