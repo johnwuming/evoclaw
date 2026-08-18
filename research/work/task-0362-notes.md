@@ -79,3 +79,12 @@
 - **简报症状核对**：磁盘 e2_stats.json（14:09）中 BASE_MA15=26.33%/-35.95% 非"全 0"；HP/VPS 均无输出全 0 的 e2 产物。但用户对拍要求成立：MA15_base 应复现 R-222 MA15_on_f0 locked 14.63%/-24.67%，载体级日频 MA15 门（27.28%/-29.32% locked）口径不符 → **根因=载体级类比无法对拍引擎口径（notes §4 偏离1/2 的直接后果），非 dtype 污染类 bug**。
 - **修复方案**：引擎级重建。a9_grid.py（R-222 E2 网格脚本）= 单遍 v5h 选择路径 + 后验递推（成本=调仓日逐股 ADV20 冲击，MA200_on_f30 锚定 a7_v5h formal 逐位校验）。task-0364 已证 HP 引擎可用（6 候选 469s）。
 - E2 变体（引擎级）：buyhold(pos≡1) / MA15_base(≡MA15_on_f0, 对拍 14.63%/-24.67%) / A_REB(REB 触发→满仓15td, 否则 MA15 基线) / B_combo(三重AND+C首日快道→满仓15td) / B_FLOW_top(B+FLOW走弱→空仓10td)。日频门 t+1 生效；语义与网格递推一致（择时缩放不计独立换仓成本，见偏离记录）。
+
+## 7. 阶段A'' 引擎级重跑执行记录（16:3x-16:5x）
+- HP 内存恢复（12.6G 可用）→ 转引擎级路径。NMTAP parquet 已传 HP `results/timing_v2/`（md5 一致 34e23d1a...）。
+- 脚本 `HP:~/quant-evolve/scripts/e2_eng_timing.py`（md5 afb1f092...）：单遍 v5h 选择路径逐位复刻 a9_grid.py + 5 变体后验递推（成本=调仓日逐股 ADV20 冲击，择时缩放不计独立换仓成本=对拍口径）。
+- 变体：buyhold / MA15_base(≡网格 MA15_on_f0: q3z w_min=0 × MA15 trend 月频采样 ffill) / A_REB / B_combo(三重AND+C首日快道15td) / B_FLOW_top(+FLOW走弱空仓10td, 优先级 入场>顶部>基线, 复刻载体级语义)。
+- 门滞后：日频门 shift1（t+1）；月频基线本身即 t+1 口径不额外 shift。
+- 对拍锚：`results/a10_v6a_def_formal_{full,locked}_metrics.json`（locked 14.63%/-24.67%），diff_metrics 自动比对 + a9_timing_MA15_on_f0_nav.csv nav 逐位 max|Δ|。
+- 触发统计预期（载体级先验）：REB 112日/97段、NMTAP_low 600/130、B1 530/134、C原始 18/16→首日 13/13、三重同日 AND=1、FLOW弱 1530/548。
+- 输出：HP results/timing_v2/e2_eng_stats.json + e2_eng_navs.csv + e2_eng_pos.csv；16:52 nohup 启动（logs/e2_eng_timing.log）。
