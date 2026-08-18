@@ -1,0 +1,6 @@
+category,task_ref,report_ref,n_trials_consumed,n_trials_registered,n_trials_debt,registration_status,date,evidence_file
+E2 择时网格40组,task-0342,R-222 §五,40,1,39,欠账39,2026-08-17,HP results/a9_timing_grid_table.csv(40组); ledger IT-A9-04(仅网格优胜组登记1)
+A7c 因子动态画像,task-0341,R-223 A7c行,17,0,17,欠账17,2026-08-17,work/task-0341-out/a7c-dynamic-ic-table.csv(17因子变体); ledger无IT-A7c
+A7b 现金曲线,task-0339,R-223 A7b行,12,0,12,欠账12,2026-08-17,HP results/a7b_summary.json(baseline+cash5+robust4+sub2=12次回测); ledger无IT-A7b
+择时v2信号画像E1,task-0361,R-231 §四,3,0,3,报告已声明待入台账,2026-08-18,R-231(SPREAD w∈{5,10,20} n_trials=3); HP ledger未写
+TOTAL,-,-,72,1,71,欠账合计,2026-08-18,三块欠账68 + R-231待入3
