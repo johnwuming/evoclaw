@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T15:00:03",
+  "generated_at": "2026-08-18T15:30:02",
   "active": "v5h_xsub",
   "versions": [
     {
@@ -341,6 +341,15 @@
         }
       },
       "files_note": "results/a11_nh30_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a12_s2_reb",
+      "strategy_prefix": null,
+      "status": "candidate",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-18 23:00:00",
+      "windows": {},
+      "files_note": "registry only（无回测文件）"
     },
     {
       "version_id": "a2_equivcheck",
