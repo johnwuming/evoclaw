@@ -55,6 +55,7 @@
 - 更正：HP 时区 UTC，cron "45 16 * * 1-5" = 北京次日 00:45，今晚才自然触发；改为手动跑一次同等验证（RP_PID 147742，无并发进程）
 - 结果：risk-status.json 更新（08:51 HP时），**cross_check_vs_microcap_eqw = 0.20541/0.23811，与改造前（JSON全史）完全一致** → CSV 路径数据等价性得证；strict JSON 解析 OK，无 NaN 字面量
 - server.js 风险卡消费链路不受影响
+- **17:00 auto-sync 镜像验证**：VPS 看板目录 crowding-indicators.json → 9,145B / mtime 16:40(HP源) / schema_version=2 / eqw_len=90 / overall=red —— HP产出→同步→看板读路径全链路闭环
 
 ## 5. 遗留
 - 方案I（HP 日更增量管线）另立项，未动 HP crontab
