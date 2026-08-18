@@ -1,0 +1,41 @@
+{
+  "cand": "a4b_s2b_gqrank",
+  "desc": "结构2: ranksum(-log_mv, npg, bufq, gpersist)",
+  "cfg": {
+    "ext_mode": "ranksum",
+    "ext_specs": [
+      [
+        "log_mv",
+        1.0,
+        -1
+      ],
+      [
+        "npg",
+        0.6,
+        1.0
+      ],
+      [
+        "bufq",
+        0.6,
+        1.0
+      ],
+      [
+        "gpersist",
+        0.3,
+        1.0
+      ]
+    ]
+  },
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 19.74,
+  "monthly_turnover_est": 0.2989,
+  "cumulative_return": 10.215,
+  "annual_return": 0.1397,
+  "max_drawdown": -0.2789,
+  "sharpe": 0.9444,
+  "calmar": 0.5011,
+  "monthly_win_rate": 0.5701
+}
