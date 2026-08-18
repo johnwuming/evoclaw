@@ -52,7 +52,9 @@
 - auto_sync（VPS 每 30min）：MIRROR_INCLUDES 已含 crowding-indicators.json，镜像后看板目录自动升级 v2；eqw_index_history.csv 未加入 MIRROR_INCLUDES（VPS 侧无消费，按需后加）
 
 ## 4. 16:45 risk_patrol cron 端到端验证
-（待补：risk-status.json mtime + cross_check_vs_microcap_eqw 非 NaN）
+- 更正：HP 时区 UTC，cron "45 16 * * 1-5" = 北京次日 00:45，今晚才自然触发；改为手动跑一次同等验证（RP_PID 147742，无并发进程）
+- 结果：risk-status.json 更新（08:51 HP时），**cross_check_vs_microcap_eqw = 0.20541/0.23811，与改造前（JSON全史）完全一致** → CSV 路径数据等价性得证；strict JSON 解析 OK，无 NaN 字面量
+- server.js 风险卡消费链路不受影响
 
 ## 5. 遗留
 - 方案I（HP 日更增量管线）另立项，未动 HP crontab
