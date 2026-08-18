@@ -1,0 +1,39 @@
+{
+  "version": "a12_s2_reb",
+  "task": "task-0384 formal products (engine-level; 源自 task-0374 timing_v2)",
+  "layer": "timing overlay on stock layer ≡ v5h_xsub (unchanged); S2 = REB 触发强制微盘腿 15td",
+  "stats_source": "results/timing_v2/a12_stats.json variants.S2_reb（数字逐位复制，不重算）",
+  "nav_source": "results/timing_v2/a12_s2_reb_nav.csv（≡ a12_navs.csv S2_reb 列，逐位一致）",
+  "equiv_anchor": "MA15_base ≡ a10_v6a_def formal BIT_EXACT（task-0374 对拍）",
+  "cum_convention": "nav_end/nav_start - 1（引擎口径，首行 2006-01-04=1.01375）",
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "num_rebalance_note": "选股层调仓次数（选股层≡v6a_def BIT_EXACT）；full=registry backtest_refs.metrics_full；locked 取自 a10_v6a_def_formal_locked_metrics.json(222) 同层同日历",
+  "cumulative_return": 11.151,
+  "annual_return": 0.1447,
+  "max_drawdown": -0.2516,
+  "sharpe": 1.0777,
+  "calmar": 0.5751,
+  "monthly_win_rate": null,
+  "monthly_win_rate_note": "stats.json mwin=null（引擎未输出），未补算",
+  "timing_switches": {
+    "n_leg_switches_binary": 109,
+    "leg_turnover_sum_absdw": 218.0,
+    "leg_turnover_annual": 10.58252427184466,
+    "avg_pos": 0.47751333852807054,
+    "avg_w_micro": 0.5265575079872205,
+    "large_days_frac": 0.47344249201277955
+  },
+  "holdout_info_only": {
+    "ann": 0.2532,
+    "mdd": -0.082,
+    "sharpe": 1.9294,
+    "calmar": 3.0874,
+    "mwin": null,
+    "years": 2.12,
+    "cum": 0.6132
+  },
+  "eval_window": "locked 2006-01-01~2024-06-30(AUDIT_LOCK_END); full 2006-01~2026-08-14; holdout 2024-07~2026-08-14"
+}

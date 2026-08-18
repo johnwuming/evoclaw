@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T17:00:03",
+  "generated_at": "2026-08-18T17:09:52",
   "active": "v5h_xsub",
   "versions": [
     {
@@ -344,12 +344,37 @@
     },
     {
       "version_id": "a12_s2_reb",
-      "strategy_prefix": null,
+      "strategy_prefix": "a12_s2_reb_formal",
       "status": "candidate",
       "strategy": "dividend_quality_smallcap_seedB",
       "registered_at": "2026-08-18 23:00:00",
-      "windows": {},
-      "files_note": "registry only（无回测文件）"
+      "windows": {
+        "full": {
+          "annual_return": 0.1555,
+          "max_drawdown": -0.2516,
+          "sharpe": 1.1581,
+          "calmar": 0.6182,
+          "cumulative_return": 18.6707,
+          "monthly_win_rate": null,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1447,
+          "max_drawdown": -0.2516,
+          "sharpe": 1.0777,
+          "calmar": 0.5751,
+          "cumulative_return": 11.151,
+          "monthly_win_rate": null,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a12_s2_reb_formal_{full,locked}_metrics.json"
     },
     {
       "version_id": "a2_equivcheck",
