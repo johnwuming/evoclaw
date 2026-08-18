@@ -1,0 +1,386 @@
+{
+  "a4b_s1a_peg2": {
+    "verdict": "REJECT",
+    "desc": "结构1: mv主干(v5h骨架)+PEG<2 (na剔除)",
+    "gates": {
+      "g1_ic_locked": "PASS",
+      "g2_icir": "FAIL",
+      "g3_turnover": "PASS",
+      "g4_capacity": "PASS",
+      "g5_corr": "FAIL"
+    },
+    "ic": {
+      "mean_ic_locked": 0.0431,
+      "icir_m_locked": 0.172,
+      "mean_ic_holdout": 0.0527,
+      "n_months_locked": 210,
+      "n_months_holdout": 2
+    },
+    "capacity_yi": 0.5916,
+    "capacity_v5h_yi": 0.5448,
+    "corr_vs_incumbent": {
+      "v5h_xsub": 0.9756,
+      "v2b_trr": 0.94
+    },
+    "metrics_locked": {
+      "annual_return": 0.1544,
+      "max_drawdown": -0.2998,
+      "sharpe": 1.0074,
+      "calmar": 0.5151,
+      "cumulative_return": 13.2076,
+      "monthly_win_rate": 0.5928,
+      "monthly_turnover_est": 0.3136,
+      "avg_holdings": 19.48,
+      "years": 18.48,
+      "num_rebalance": 222
+    },
+    "metrics_full": {
+      "annual_return": 0.1457,
+      "max_drawdown": -0.2998,
+      "sharpe": 0.9609,
+      "calmar": 0.486,
+      "cumulative_return": 15.4946,
+      "monthly_win_rate": 0.583,
+      "monthly_turnover_est": 0.3145,
+      "avg_holdings": 18.31,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "metrics_holdout": {
+      "annual_return": 0.07,
+      "max_drawdown": -0.1682,
+      "sharpe": 0.527,
+      "calmar": 0.4163,
+      "cumulative_return": 0.1542,
+      "monthly_win_rate": 0.52,
+      "monthly_turnover_est": 0.3243,
+      "avg_holdings": 8.54,
+      "years": 2.12,
+      "num_rebalance": 26
+    },
+    "vs_bloodline": {
+      "ann_minus_best_inc_pp": -0.3,
+      "mdd_gap_vs_best_inc_pp": -0.12
+    }
+  },
+  "a4b_s1b_peg15": {
+    "verdict": "REJECT",
+    "desc": "结构1: mv主干+PEG<1.5 (na剔除)",
+    "gates": {
+      "g1_ic_locked": "PASS",
+      "g2_icir": "FAIL",
+      "g3_turnover": "PASS",
+      "g4_capacity": "PASS",
+      "g5_corr": "FAIL"
+    },
+    "ic": {
+      "mean_ic_locked": 0.0457,
+      "icir_m_locked": 0.1834,
+      "mean_ic_holdout": 0.0384,
+      "n_months_locked": 209,
+      "n_months_holdout": 2
+    },
+    "capacity_yi": 0.5904,
+    "capacity_v5h_yi": 0.5448,
+    "corr_vs_incumbent": {
+      "v5h_xsub": 0.9723,
+      "v2b_trr": 0.9384
+    },
+    "metrics_locked": {
+      "annual_return": 0.1522,
+      "max_drawdown": -0.3001,
+      "sharpe": 0.994,
+      "calmar": 0.507,
+      "cumulative_return": 12.7007,
+      "monthly_win_rate": 0.5928,
+      "monthly_turnover_est": 0.3155,
+      "avg_holdings": 19.44,
+      "years": 18.48,
+      "num_rebalance": 222
+    },
+    "metrics_full": {
+      "annual_return": 0.1416,
+      "max_drawdown": -0.3001,
+      "sharpe": 0.9319,
+      "calmar": 0.4717,
+      "cumulative_return": 14.3069,
+      "monthly_win_rate": 0.583,
+      "monthly_turnover_est": 0.3162,
+      "avg_holdings": 18.23,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "metrics_holdout": {
+      "annual_return": 0.0504,
+      "max_drawdown": -0.1849,
+      "sharpe": 0.3901,
+      "calmar": 0.2727,
+      "cumulative_return": 0.1099,
+      "monthly_win_rate": 0.52,
+      "monthly_turnover_est": 0.3221,
+      "avg_holdings": 8.0,
+      "years": 2.12,
+      "num_rebalance": 26
+    },
+    "vs_bloodline": {
+      "ann_minus_best_inc_pp": -0.52,
+      "mdd_gap_vs_best_inc_pp": -0.15
+    }
+  },
+  "a4b_s1c_pegq60": {
+    "verdict": "REJECT",
+    "desc": "结构1: mv主干+PEG≤60分位 (na保留)",
+    "gates": {
+      "g1_ic_locked": "PASS",
+      "g2_icir": "FAIL",
+      "g3_turnover": "PASS",
+      "g4_capacity": "PASS",
+      "g5_corr": "FAIL"
+    },
+    "ic": {
+      "mean_ic_locked": 0.0443,
+      "icir_m_locked": 0.1729,
+      "mean_ic_holdout": -0.0143,
+      "n_months_locked": 208,
+      "n_months_holdout": 2
+    },
+    "capacity_yi": 0.6175,
+    "capacity_v5h_yi": 0.5448,
+    "corr_vs_incumbent": {
+      "v5h_xsub": 0.9773,
+      "v2b_trr": 0.9282
+    },
+    "metrics_locked": {
+      "annual_return": 0.1629,
+      "max_drawdown": -0.3007,
+      "sharpe": 1.0437,
+      "calmar": 0.5417,
+      "cumulative_return": 15.2627,
+      "monthly_win_rate": 0.6471,
+      "monthly_turnover_est": 0.335,
+      "avg_holdings": 19.2,
+      "years": 18.48,
+      "num_rebalance": 222
+    },
+    "metrics_full": {
+      "annual_return": 0.1589,
+      "max_drawdown": -0.3007,
+      "sharpe": 1.0307,
+      "calmar": 0.5283,
+      "cumulative_return": 19.868,
+      "monthly_win_rate": 0.6397,
+      "monthly_turnover_est": 0.3391,
+      "avg_holdings": 18.12,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "metrics_holdout": {
+      "annual_return": 0.1219,
+      "max_drawdown": -0.1847,
+      "sharpe": 0.8927,
+      "calmar": 0.6601,
+      "cumulative_return": 0.2761,
+      "monthly_win_rate": 0.6,
+      "monthly_turnover_est": 0.412,
+      "avg_holdings": 8.96,
+      "years": 2.12,
+      "num_rebalance": 26
+    },
+    "vs_bloodline": {
+      "ann_minus_best_inc_pp": 0.55,
+      "mdd_gap_vs_best_inc_pp": -0.21
+    }
+  },
+  "a4b_s2a_gqblend": {
+    "verdict": "REJECT",
+    "desc": "结构2: 0.6·(-z mv)+0.2·grw+0.2·bufq 均衡复合",
+    "gates": {
+      "g1_ic_locked": "PASS",
+      "g2_icir": "FAIL",
+      "g3_turnover": "PASS",
+      "g4_capacity": "PASS",
+      "g5_corr": "PASS"
+    },
+    "ic": {
+      "mean_ic_locked": 0.0335,
+      "icir_m_locked": 0.1825,
+      "mean_ic_holdout": 0.0089,
+      "n_months_locked": 218,
+      "n_months_holdout": 3
+    },
+    "capacity_yi": 0.8099,
+    "capacity_v5h_yi": 0.5448,
+    "corr_vs_incumbent": {
+      "v5h_xsub": 0.9537,
+      "v2b_trr": 0.9278
+    },
+    "metrics_locked": {
+      "annual_return": 0.1377,
+      "max_drawdown": -0.285,
+      "sharpe": 0.9412,
+      "calmar": 0.4833,
+      "cumulative_return": 9.8574,
+      "monthly_win_rate": 0.6063,
+      "monthly_turnover_est": 0.2925,
+      "avg_holdings": 19.72,
+      "years": 18.48,
+      "num_rebalance": 222
+    },
+    "metrics_full": {
+      "annual_return": 0.135,
+      "max_drawdown": -0.285,
+      "sharpe": 0.934,
+      "calmar": 0.4737,
+      "cumulative_return": 12.5973,
+      "monthly_win_rate": 0.6032,
+      "monthly_turnover_est": 0.2933,
+      "avg_holdings": 18.89,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "metrics_holdout": {
+      "annual_return": 0.1092,
+      "max_drawdown": -0.1561,
+      "sharpe": 0.8512,
+      "calmar": 0.6996,
+      "cumulative_return": 0.2456,
+      "monthly_win_rate": 0.6,
+      "monthly_turnover_est": 0.301,
+      "avg_holdings": 11.88,
+      "years": 2.12,
+      "num_rebalance": 26
+    },
+    "vs_bloodline": {
+      "ann_minus_best_inc_pp": -1.97,
+      "mdd_gap_vs_best_inc_pp": 1.36
+    }
+  },
+  "a4b_s2b_gqrank": {
+    "verdict": "REJECT",
+    "desc": "结构2: ranksum(-log_mv, npg, bufq, gpersist)",
+    "gates": {
+      "g1_ic_locked": "PASS",
+      "g2_icir": "FAIL",
+      "g3_turnover": "PASS",
+      "g4_capacity": "PASS",
+      "g5_corr": "PASS"
+    },
+    "ic": {
+      "mean_ic_locked": 0.0206,
+      "icir_m_locked": 0.1145,
+      "mean_ic_holdout": 0.0589,
+      "n_months_locked": 212,
+      "n_months_holdout": 3
+    },
+    "capacity_yi": 0.6995,
+    "capacity_v5h_yi": 0.5448,
+    "corr_vs_incumbent": {
+      "v5h_xsub": 0.9683,
+      "v2b_trr": 0.9313
+    },
+    "metrics_locked": {
+      "annual_return": 0.1397,
+      "max_drawdown": -0.2789,
+      "sharpe": 0.9444,
+      "calmar": 0.5011,
+      "cumulative_return": 10.215,
+      "monthly_win_rate": 0.5701,
+      "monthly_turnover_est": 0.2989,
+      "avg_holdings": 19.74,
+      "years": 18.48,
+      "num_rebalance": 222
+    },
+    "metrics_full": {
+      "annual_return": 0.1368,
+      "max_drawdown": -0.2789,
+      "sharpe": 0.9368,
+      "calmar": 0.4906,
+      "cumulative_return": 13.0486,
+      "monthly_win_rate": 0.5709,
+      "monthly_turnover_est": 0.2988,
+      "avg_holdings": 18.88,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "metrics_holdout": {
+      "annual_return": 0.1093,
+      "max_drawdown": -0.1561,
+      "sharpe": 0.8505,
+      "calmar": 0.7004,
+      "cumulative_return": 0.2459,
+      "monthly_win_rate": 0.6,
+      "monthly_turnover_est": 0.288,
+      "avg_holdings": 11.88,
+      "years": 2.12,
+      "num_rebalance": 26
+    },
+    "vs_bloodline": {
+      "ann_minus_best_inc_pp": -1.77,
+      "mdd_gap_vs_best_inc_pp": 1.97
+    }
+  },
+  "a4b_s2c_growdom": {
+    "verdict": "REJECT",
+    "desc": "结构2: 0.5·(-z mv)+0.35·grw+0.15·bufq 成长主导",
+    "gates": {
+      "g1_ic_locked": "PASS",
+      "g2_icir": "FAIL",
+      "g3_turnover": "PASS",
+      "g4_capacity": "PASS",
+      "g5_corr": "PASS"
+    },
+    "ic": {
+      "mean_ic_locked": 0.031,
+      "icir_m_locked": 0.1899,
+      "mean_ic_holdout": 0.0091,
+      "n_months_locked": 218,
+      "n_months_holdout": 3
+    },
+    "capacity_yi": 0.8468,
+    "capacity_v5h_yi": 0.5448,
+    "corr_vs_incumbent": {
+      "v5h_xsub": 0.9446,
+      "v2b_trr": 0.9153
+    },
+    "metrics_locked": {
+      "annual_return": 0.1396,
+      "max_drawdown": -0.2772,
+      "sharpe": 0.9597,
+      "calmar": 0.5034,
+      "cumulative_return": 10.1833,
+      "monthly_win_rate": 0.6154,
+      "monthly_turnover_est": 0.2912,
+      "avg_holdings": 19.74,
+      "years": 18.48,
+      "num_rebalance": 222
+    },
+    "metrics_full": {
+      "annual_return": 0.1363,
+      "max_drawdown": -0.2772,
+      "sharpe": 0.9488,
+      "calmar": 0.4916,
+      "cumulative_return": 12.9134,
+      "monthly_win_rate": 0.6113,
+      "monthly_turnover_est": 0.2918,
+      "avg_holdings": 18.9,
+      "years": 20.61,
+      "num_rebalance": 248
+    },
+    "metrics_holdout": {
+      "annual_return": 0.1057,
+      "max_drawdown": -0.1561,
+      "sharpe": 0.8282,
+      "calmar": 0.6769,
+      "cumulative_return": 0.2372,
+      "monthly_win_rate": 0.6,
+      "monthly_turnover_est": 0.2977,
+      "avg_holdings": 11.88,
+      "years": 2.12,
+      "num_rebalance": 26
+    },
+    "vs_bloodline": {
+      "ann_minus_best_inc_pp": -1.78,
+      "mdd_gap_vs_best_inc_pp": 2.14
+    }
+  }
+}
