@@ -36,3 +36,9 @@
 - C1 结果：a13_rsraw_e1f05 full 22.28%/-33.55%/1.369 | locked 21.92%/-33.55%/1.351（vs a9_ranksum_raw E1硬 21.76%/-33.55%）
 - 评分脚本 `scripts/a13_score.py` 已就位（py_compile OK）：复用 evolution_pipeline 的 gate_icir/deflated_sharpe/gate_mdd_vs_parent/score_composite（R-225 v1.1 口径），补建原始全市场月度 IC（pb_inv/ret120/mom_pen/mom_pen_dz，PIT），输出 a13_score_summary.json
 - 关键评分口径：metrics=locked 窗；DSR 用 locked 净值日收益×n_trials_cum；g3 用月度IC序列Pearson（与 factor_ic_corr.csv 同源方法）；holdout 用 SHADOW_CONFIG(2024-07起, ann≥0.6×locked, MDD≤locked+10pp)
+
+### 11:05 (重试恢复, 回测进程持续运行中)
+- a13_run 进程 pid 253603 100% CPU 运行中, elapsed 14:29（启动约 10:48 北京）
+- C2 a13_rsraw_e1f10 完成: full 22.08%/-33.55%/1.363 | locked 21.63%/-33.55%/1.341
+- 已完成: equiv2 PASS, C1(e1f05), C2(e1f10)；剩余 C3(e1f15), C4(e1f10dz) 各约 346s
+- 进度节奏: 每候选 ~346s, C3≈11:06, C4≈11:12 完成 → 随后跑 a13_score.py 评分
