@@ -20,3 +20,11 @@
 ### Dashboard 消费检查（完成）
 - Dashboard server.js 量化 Tab 读 factor_ic_monthly_v2.csv / QUANT_REPORTS_DIR/factor_ic_monthly.csv（W8 IC 曲线用），**不读 a7c-* 或本任务新产物**
 - 本任务新增产物（a10-monthly-profile/、a10-ic-decay-alerts.*）当前不被任何页面消费 → 无需无头浏览器抽查（无消费路径，不引入横向溢出风险）；待接线时再做 390x844 检查。已在报告中注明。
+
+## Step 2: 脚本实现与首次运行（完成）
+- scp sftp 子系统不可用（subsystem request failed），改 ssh cat > 管道传输，OK
+- HP 新增：~/quant-evolve/scripts/a10_monthly_profile_update.py（8.9KB）、a10_ic_decay_monitor.py（8.7KB），py_compile OK
+- **monthly_profile_update 首跑**：exit 0，panel 2006-01→2026-07 n=247，17 因子，画像={稳定有效:9, 衰减中:7, 已失效/反转:1}
+- 数值与 A7c 原表完全一致（avg_amount_20d full -0.103/-0.664 r24 -0.104/-0.561 等）→ 方法复现正确
+- 产物：results/a10-monthly-profile/{dynamic-ic-table.csv|json, rolling-ic-series.json, state.json, history/dynamic-ic-table-asof-202607.csv}
+- **幂等验证**：二跑 exit 0，输出 "[up-to-date] inputs unchanged... skip recompute"，产物 md5 未变（34ae240a/549ad672）✓
