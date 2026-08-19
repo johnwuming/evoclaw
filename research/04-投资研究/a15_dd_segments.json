@@ -1,0 +1,903 @@
+{
+ "task": "task-0399 A15 dd segment comparison",
+ "incumbent": "a9_ranksum_raw",
+ "method": "running-max peak/trough/recovery scan (R-240 §4.1)",
+ "inc_segments": [
+  {
+   "peak": "2015-06-12",
+   "trough": "2015-07-08",
+   "rec": "2019-10-28",
+   "depth": -0.3355,
+   "decline_days": 26,
+   "rec_days": 1599,
+   "recovered": true
+  },
+  {
+   "peak": "2008-01-15",
+   "trough": "2008-11-04",
+   "rec": "2009-06-24",
+   "depth": -0.2459,
+   "decline_days": 294,
+   "rec_days": 526,
+   "recovered": true
+  },
+  {
+   "peak": "2007-05-29",
+   "trough": "2007-07-05",
+   "rec": "2007-08-20",
+   "depth": -0.1682,
+   "decline_days": 37,
+   "rec_days": 83,
+   "recovered": true
+  },
+  {
+   "peak": "2010-12-21",
+   "trough": "2012-01-16",
+   "rec": "2013-05-21",
+   "depth": -0.1598,
+   "decline_days": 391,
+   "rec_days": 882,
+   "recovered": true
+  },
+  {
+   "peak": "2009-08-10",
+   "trough": "2009-08-19",
+   "rec": "2009-09-17",
+   "depth": -0.1455,
+   "decline_days": 9,
+   "rec_days": 38,
+   "recovered": true
+  },
+  {
+   "peak": "2020-09-08",
+   "trough": "2021-01-13",
+   "rec": "2021-09-13",
+   "depth": -0.1444,
+   "decline_days": 127,
+   "rec_days": 370,
+   "recovered": true
+  },
+  {
+   "peak": "2022-01-12",
+   "trough": "2022-04-28",
+   "rec": "2023-02-13",
+   "depth": -0.1277,
+   "decline_days": 106,
+   "rec_days": 397,
+   "recovered": true
+  },
+  {
+   "peak": "2010-04-22",
+   "trough": "2010-05-17",
+   "rec": "2010-10-29",
+   "depth": -0.1274,
+   "decline_days": 25,
+   "rec_days": 190,
+   "recovered": true
+  }
+ ],
+ "window_stats": [
+  {
+   "seg": "2015-06~2015-07",
+   "inc_depth": -0.3355,
+   "inc_rec_days": 1599,
+   "a15_nh30": -0.3454,
+   "a15_nh30_rec": 529,
+   "a15_ddc20": -0.2716,
+   "a15_ddc20_rec": 1886,
+   "a15_nh30_ddc20": -0.2772,
+   "a15_nh30_ddc20_rec": 1859,
+   "a15_ddc15": -0.2533,
+   "a15_ddc15_rec": 1852,
+   "a15_ddc25": -0.302,
+   "a15_ddc25_rec": 2356
+  },
+  {
+   "seg": "2008-01~2008-11",
+   "inc_depth": -0.2459,
+   "inc_rec_days": 526,
+   "a15_nh30": -0.2524,
+   "a15_nh30_rec": 527,
+   "a15_ddc20": -0.2248,
+   "a15_ddc20_rec": 658,
+   "a15_nh30_ddc20": -0.2309,
+   "a15_nh30_ddc20_rec": 660,
+   "a15_ddc15": -0.2065,
+   "a15_ddc15_rec": 568,
+   "a15_ddc25": -0.2459,
+   "a15_ddc25_rec": 526
+  },
+  {
+   "seg": "2007-05~2007-07",
+   "inc_depth": -0.1682,
+   "inc_rec_days": 83,
+   "a15_nh30": -0.1697,
+   "a15_nh30_rec": 66,
+   "a15_ddc20": -0.1682,
+   "a15_ddc20_rec": 83,
+   "a15_nh30_ddc20": -0.1697,
+   "a15_nh30_ddc20_rec": 66,
+   "a15_ddc15": -0.1594,
+   "a15_ddc15_rec": 210,
+   "a15_ddc25": -0.1682,
+   "a15_ddc25_rec": 83
+  },
+  {
+   "seg": "2010-12~2012-01",
+   "inc_depth": -0.1598,
+   "inc_rec_days": 882,
+   "a15_nh30": -0.1821,
+   "a15_nh30_rec": 885,
+   "a15_ddc20": -0.1592,
+   "a15_ddc20_rec": 881,
+   "a15_nh30_ddc20": -0.1813,
+   "a15_nh30_ddc20_rec": 885,
+   "a15_ddc15": -0.1604,
+   "a15_ddc15_rec": 1060,
+   "a15_ddc25": -0.1598,
+   "a15_ddc25_rec": 882
+  },
+  {
+   "seg": "2009-08~2009-08",
+   "inc_depth": -0.1455,
+   "inc_rec_days": 38,
+   "a15_nh30": -0.1311,
+   "a15_nh30_rec": 38,
+   "a15_ddc20": -0.1455,
+   "a15_ddc20_rec": 38,
+   "a15_nh30_ddc20": -0.1311,
+   "a15_nh30_ddc20_rec": 38,
+   "a15_ddc15": -0.1455,
+   "a15_ddc15_rec": 38,
+   "a15_ddc25": -0.1455,
+   "a15_ddc25_rec": 38
+  },
+  {
+   "seg": "2020-09~2021-01",
+   "inc_depth": -0.1444,
+   "inc_rec_days": 370,
+   "a15_nh30": -0.1438,
+   "a15_nh30_rec": 442,
+   "a15_ddc20": -0.1439,
+   "a15_ddc20_rec": 370,
+   "a15_nh30_ddc20": -0.1433,
+   "a15_nh30_ddc20_rec": 441,
+   "a15_ddc15": -0.1437,
+   "a15_ddc15_rec": 370,
+   "a15_ddc25": -0.144,
+   "a15_ddc25_rec": 370
+  },
+  {
+   "seg": "2022-01~2022-04",
+   "inc_depth": -0.1277,
+   "inc_rec_days": 397,
+   "a15_nh30": -0.1204,
+   "a15_nh30_rec": 421,
+   "a15_ddc20": -0.1274,
+   "a15_ddc20_rec": 397,
+   "a15_nh30_ddc20": -0.1203,
+   "a15_nh30_ddc20_rec": 399,
+   "a15_ddc15": -0.1274,
+   "a15_ddc15_rec": 397,
+   "a15_ddc25": -0.1275,
+   "a15_ddc25_rec": 397
+  },
+  {
+   "seg": "2010-04~2010-05",
+   "inc_depth": -0.1274,
+   "inc_rec_days": 190,
+   "a15_nh30": -0.1262,
+   "a15_nh30_rec": 187,
+   "a15_ddc20": -0.1274,
+   "a15_ddc20_rec": 190,
+   "a15_nh30_ddc20": -0.1262,
+   "a15_nh30_ddc20_rec": 187,
+   "a15_ddc15": -0.1274,
+   "a15_ddc15_rec": 190,
+   "a15_ddc25": -0.1274,
+   "a15_ddc25_rec": 190
+  }
+ ],
+ "trap_rates": {
+  "a9_ranksum_raw": [
+   {
+    "seg": "2015-06~2015-07",
+    "trap_rate": 0.2,
+    "n_buys": 10
+   },
+   {
+    "seg": "2008-01~2008-11",
+    "trap_rate": 0.0424,
+    "n_buys": 118
+   },
+   {
+    "seg": "2007-05~2007-07",
+    "trap_rate": 0.0625,
+    "n_buys": 16
+   },
+   {
+    "seg": "2010-12~2012-01",
+    "trap_rate": 0.1973,
+    "n_buys": 147
+   },
+   {
+    "seg": "2009-08~2009-08",
+    "trap_rate": null,
+    "n_buys": 0
+   },
+   {
+    "seg": "2020-09~2021-01",
+    "trap_rate": 0.2619,
+    "n_buys": 42
+   },
+   {
+    "seg": "2022-01~2022-04",
+    "trap_rate": 0.2778,
+    "n_buys": 18
+   },
+   {
+    "seg": "2010-04~2010-05",
+    "trap_rate": 0.0,
+    "n_buys": 7
+   }
+  ],
+  "a15_nh30": [
+   {
+    "seg": "2015-06~2015-07",
+    "trap_rate": 0.1875,
+    "n_buys": 16
+   },
+   {
+    "seg": "2008-01~2008-11",
+    "trap_rate": 0.0556,
+    "n_buys": 180
+   },
+   {
+    "seg": "2007-05~2007-07",
+    "trap_rate": 0.08,
+    "n_buys": 25
+   },
+   {
+    "seg": "2010-12~2012-01",
+    "trap_rate": 0.1864,
+    "n_buys": 177
+   },
+   {
+    "seg": "2009-08~2009-08",
+    "trap_rate": null,
+    "n_buys": 0
+   },
+   {
+    "seg": "2020-09~2021-01",
+    "trap_rate": 0.3148,
+    "n_buys": 54
+   },
+   {
+    "seg": "2022-01~2022-04",
+    "trap_rate": 0.3077,
+    "n_buys": 26
+   },
+   {
+    "seg": "2010-04~2010-05",
+    "trap_rate": 0.0,
+    "n_buys": 11
+   }
+  ],
+  "a15_ddc20": [
+   {
+    "seg": "2015-06~2015-07",
+    "trap_rate": 0.3,
+    "n_buys": 10
+   },
+   {
+    "seg": "2008-01~2008-11",
+    "trap_rate": 0.1271,
+    "n_buys": 118
+   },
+   {
+    "seg": "2007-05~2007-07",
+    "trap_rate": 0.0625,
+    "n_buys": 16
+   },
+   {
+    "seg": "2010-12~2012-01",
+    "trap_rate": 0.4966,
+    "n_buys": 147
+   },
+   {
+    "seg": "2009-08~2009-08",
+    "trap_rate": null,
+    "n_buys": 0
+   },
+   {
+    "seg": "2020-09~2021-01",
+    "trap_rate": 0.4048,
+    "n_buys": 42
+   },
+   {
+    "seg": "2022-01~2022-04",
+    "trap_rate": 0.2778,
+    "n_buys": 18
+   },
+   {
+    "seg": "2010-04~2010-05",
+    "trap_rate": 0.1429,
+    "n_buys": 7
+   }
+  ],
+  "a15_nh30_ddc20": [
+   {
+    "seg": "2015-06~2015-07",
+    "trap_rate": 0.625,
+    "n_buys": 16
+   },
+   {
+    "seg": "2008-01~2008-11",
+    "trap_rate": 0.1667,
+    "n_buys": 180
+   },
+   {
+    "seg": "2007-05~2007-07",
+    "trap_rate": 0.08,
+    "n_buys": 25
+   },
+   {
+    "seg": "2010-12~2012-01",
+    "trap_rate": 0.5367,
+    "n_buys": 177
+   },
+   {
+    "seg": "2009-08~2009-08",
+    "trap_rate": null,
+    "n_buys": 0
+   },
+   {
+    "seg": "2020-09~2021-01",
+    "trap_rate": 0.5,
+    "n_buys": 54
+   },
+   {
+    "seg": "2022-01~2022-04",
+    "trap_rate": 0.3462,
+    "n_buys": 26
+   },
+   {
+    "seg": "2010-04~2010-05",
+    "trap_rate": 0.0909,
+    "n_buys": 11
+   }
+  ],
+  "a15_ddc15": [
+   {
+    "seg": "2015-06~2015-07",
+    "trap_rate": 0.3,
+    "n_buys": 10
+   },
+   {
+    "seg": "2008-01~2008-11",
+    "trap_rate": 0.1271,
+    "n_buys": 118
+   },
+   {
+    "seg": "2007-05~2007-07",
+    "trap_rate": 0.0625,
+    "n_buys": 16
+   },
+   {
+    "seg": "2010-12~2012-01",
+    "trap_rate": 0.4966,
+    "n_buys": 147
+   },
+   {
+    "seg": "2009-08~2009-08",
+    "trap_rate": null,
+    "n_buys": 0
+   },
+   {
+    "seg": "2020-09~2021-01",
+    "trap_rate": 0.4048,
+    "n_buys": 42
+   },
+   {
+    "seg": "2022-01~2022-04",
+    "trap_rate": 0.2778,
+    "n_buys": 18
+   },
+   {
+    "seg": "2010-04~2010-05",
+    "trap_rate": 0.1429,
+    "n_buys": 7
+   }
+  ],
+  "a15_ddc25": [
+   {
+    "seg": "2015-06~2015-07",
+    "trap_rate": 0.3,
+    "n_buys": 10
+   },
+   {
+    "seg": "2008-01~2008-11",
+    "trap_rate": 0.1271,
+    "n_buys": 118
+   },
+   {
+    "seg": "2007-05~2007-07",
+    "trap_rate": 0.0625,
+    "n_buys": 16
+   },
+   {
+    "seg": "2010-12~2012-01",
+    "trap_rate": 0.4966,
+    "n_buys": 147
+   },
+   {
+    "seg": "2009-08~2009-08",
+    "trap_rate": null,
+    "n_buys": 0
+   },
+   {
+    "seg": "2020-09~2021-01",
+    "trap_rate": 0.4048,
+    "n_buys": 42
+   },
+   {
+    "seg": "2022-01~2022-04",
+    "trap_rate": 0.2778,
+    "n_buys": 18
+   },
+   {
+    "seg": "2010-04~2010-05",
+    "trap_rate": 0.1429,
+    "n_buys": 7
+   }
+  ]
+ },
+ "own_segments": {
+  "a9_ranksum_raw": [
+   {
+    "peak": "2015-06-12",
+    "trough": "2015-07-08",
+    "rec": "2019-10-28",
+    "depth": -0.3355,
+    "decline_days": 26,
+    "rec_days": 1599,
+    "recovered": true
+   },
+   {
+    "peak": "2008-01-15",
+    "trough": "2008-11-04",
+    "rec": "2009-06-24",
+    "depth": -0.2459,
+    "decline_days": 294,
+    "rec_days": 526,
+    "recovered": true
+   },
+   {
+    "peak": "2007-05-29",
+    "trough": "2007-07-05",
+    "rec": "2007-08-20",
+    "depth": -0.1682,
+    "decline_days": 37,
+    "rec_days": 83,
+    "recovered": true
+   },
+   {
+    "peak": "2010-12-21",
+    "trough": "2012-01-16",
+    "rec": "2013-05-21",
+    "depth": -0.1598,
+    "decline_days": 391,
+    "rec_days": 882,
+    "recovered": true
+   },
+   {
+    "peak": "2009-08-10",
+    "trough": "2009-08-19",
+    "rec": "2009-09-17",
+    "depth": -0.1455,
+    "decline_days": 9,
+    "rec_days": 38,
+    "recovered": true
+   },
+   {
+    "peak": "2020-09-08",
+    "trough": "2021-01-13",
+    "rec": "2021-09-13",
+    "depth": -0.1444,
+    "decline_days": 127,
+    "rec_days": 370,
+    "recovered": true
+   },
+   {
+    "peak": "2022-01-12",
+    "trough": "2022-04-28",
+    "rec": "2023-02-13",
+    "depth": -0.1277,
+    "decline_days": 106,
+    "rec_days": 397,
+    "recovered": true
+   },
+   {
+    "peak": "2010-04-22",
+    "trough": "2010-05-17",
+    "rec": "2010-10-29",
+    "depth": -0.1274,
+    "decline_days": 25,
+    "rec_days": 190,
+    "recovered": true
+   }
+  ],
+  "a15_nh30": [
+   {
+    "peak": "2015-06-12",
+    "trough": "2015-07-08",
+    "rec": "2016-11-22",
+    "depth": -0.3454,
+    "decline_days": 26,
+    "rec_days": 529,
+    "recovered": true
+   },
+   {
+    "peak": "2008-01-15",
+    "trough": "2008-11-04",
+    "rec": "2009-06-25",
+    "depth": -0.2524,
+    "decline_days": 294,
+    "rec_days": 527,
+    "recovered": true
+   },
+   {
+    "peak": "2016-11-22",
+    "trough": "2018-02-06",
+    "rec": "2020-01-13",
+    "depth": -0.2058,
+    "decline_days": 441,
+    "rec_days": 1147,
+    "recovered": true
+   },
+   {
+    "peak": "2010-12-21",
+    "trough": "2012-12-03",
+    "rec": "2013-05-24",
+    "depth": -0.1821,
+    "decline_days": 713,
+    "rec_days": 885,
+    "recovered": true
+   },
+   {
+    "peak": "2007-05-29",
+    "trough": "2007-07-05",
+    "rec": "2007-08-03",
+    "depth": -0.1697,
+    "decline_days": 37,
+    "rec_days": 66,
+    "recovered": true
+   },
+   {
+    "peak": "2020-09-08",
+    "trough": "2021-02-08",
+    "rec": "2021-11-24",
+    "depth": -0.1438,
+    "decline_days": 153,
+    "rec_days": 442,
+    "recovered": true
+   },
+   {
+    "peak": "2009-08-11",
+    "trough": "2009-08-19",
+    "rec": "2009-10-23",
+    "depth": -0.1359,
+    "decline_days": 8,
+    "rec_days": 73,
+    "recovered": true
+   },
+   {
+    "peak": "2010-04-22",
+    "trough": "2010-05-20",
+    "rec": "2010-10-26",
+    "depth": -0.1262,
+    "decline_days": 28,
+    "rec_days": 187,
+    "recovered": true
+   }
+  ],
+  "a15_ddc20": [
+   {
+    "peak": "2015-06-12",
+    "trough": "2015-07-08",
+    "rec": "2020-08-10",
+    "depth": -0.2716,
+    "decline_days": 26,
+    "rec_days": 1886,
+    "recovered": true
+   },
+   {
+    "peak": "2008-01-15",
+    "trough": "2008-11-04",
+    "rec": "2009-11-03",
+    "depth": -0.2248,
+    "decline_days": 294,
+    "rec_days": 658,
+    "recovered": true
+   },
+   {
+    "peak": "2007-05-29",
+    "trough": "2007-07-05",
+    "rec": "2007-08-20",
+    "depth": -0.1682,
+    "decline_days": 37,
+    "rec_days": 83,
+    "recovered": true
+   },
+   {
+    "peak": "2010-12-21",
+    "trough": "2012-01-16",
+    "rec": "2013-05-20",
+    "depth": -0.1592,
+    "decline_days": 391,
+    "rec_days": 881,
+    "recovered": true
+   },
+   {
+    "peak": "2020-09-08",
+    "trough": "2021-01-13",
+    "rec": "2021-09-13",
+    "depth": -0.1439,
+    "decline_days": 127,
+    "rec_days": 370,
+    "recovered": true
+   },
+   {
+    "peak": "2010-04-22",
+    "trough": "2010-05-17",
+    "rec": "2010-10-29",
+    "depth": -0.1274,
+    "decline_days": 25,
+    "rec_days": 190,
+    "recovered": true
+   },
+   {
+    "peak": "2022-01-12",
+    "trough": "2022-04-28",
+    "rec": "2023-02-13",
+    "depth": -0.1274,
+    "decline_days": 106,
+    "rec_days": 397,
+    "recovered": true
+   },
+   {
+    "peak": "2013-05-27",
+    "trough": "2013-06-28",
+    "rec": "2013-09-16",
+    "depth": -0.1242,
+    "decline_days": 32,
+    "rec_days": 112,
+    "recovered": true
+   }
+  ],
+  "a15_nh30_ddc20": [
+   {
+    "peak": "2015-06-12",
+    "trough": "2015-07-08",
+    "rec": "2020-07-14",
+    "depth": -0.2772,
+    "decline_days": 26,
+    "rec_days": 1859,
+    "recovered": true
+   },
+   {
+    "peak": "2008-01-15",
+    "trough": "2008-11-04",
+    "rec": "2009-11-05",
+    "depth": -0.2309,
+    "decline_days": 294,
+    "rec_days": 660,
+    "recovered": true
+   },
+   {
+    "peak": "2010-12-21",
+    "trough": "2012-12-03",
+    "rec": "2013-05-24",
+    "depth": -0.1813,
+    "decline_days": 713,
+    "rec_days": 885,
+    "recovered": true
+   },
+   {
+    "peak": "2007-05-29",
+    "trough": "2007-07-05",
+    "rec": "2007-08-03",
+    "depth": -0.1697,
+    "decline_days": 37,
+    "rec_days": 66,
+    "recovered": true
+   },
+   {
+    "peak": "2020-09-08",
+    "trough": "2021-02-08",
+    "rec": "2021-11-23",
+    "depth": -0.1433,
+    "decline_days": 153,
+    "rec_days": 441,
+    "recovered": true
+   },
+   {
+    "peak": "2010-04-22",
+    "trough": "2010-05-20",
+    "rec": "2010-10-26",
+    "depth": -0.1262,
+    "decline_days": 28,
+    "rec_days": 187,
+    "recovered": true
+   },
+   {
+    "peak": "2022-01-17",
+    "trough": "2022-04-28",
+    "rec": "2023-02-15",
+    "depth": -0.1206,
+    "decline_days": 101,
+    "rec_days": 394,
+    "recovered": true
+   },
+   {
+    "peak": "2013-05-30",
+    "trough": "2013-06-28",
+    "rec": "2013-08-26",
+    "depth": -0.1161,
+    "decline_days": 29,
+    "rec_days": 88,
+    "recovered": true
+   }
+  ],
+  "a15_ddc15": [
+   {
+    "peak": "2015-06-12",
+    "trough": "2015-07-08",
+    "rec": "2020-07-07",
+    "depth": -0.2533,
+    "decline_days": 26,
+    "rec_days": 1852,
+    "recovered": true
+   },
+   {
+    "peak": "2008-01-15",
+    "trough": "2008-11-04",
+    "rec": "2009-08-05",
+    "depth": -0.2065,
+    "decline_days": 294,
+    "rec_days": 568,
+    "recovered": true
+   },
+   {
+    "peak": "2010-12-21",
+    "trough": "2012-12-03",
+    "rec": "2013-11-15",
+    "depth": -0.1604,
+    "decline_days": 713,
+    "rec_days": 1060,
+    "recovered": true
+   },
+   {
+    "peak": "2007-05-29",
+    "trough": "2007-07-05",
+    "rec": "2007-12-25",
+    "depth": -0.1594,
+    "decline_days": 37,
+    "rec_days": 210,
+    "recovered": true
+   },
+   {
+    "peak": "2009-08-10",
+    "trough": "2009-08-19",
+    "rec": "2009-09-17",
+    "depth": -0.1455,
+    "decline_days": 9,
+    "rec_days": 38,
+    "recovered": true
+   },
+   {
+    "peak": "2020-09-08",
+    "trough": "2021-01-13",
+    "rec": "2021-09-13",
+    "depth": -0.1437,
+    "decline_days": 127,
+    "rec_days": 370,
+    "recovered": true
+   },
+   {
+    "peak": "2010-04-22",
+    "trough": "2010-05-17",
+    "rec": "2010-10-29",
+    "depth": -0.1274,
+    "decline_days": 25,
+    "rec_days": 190,
+    "recovered": true
+   },
+   {
+    "peak": "2022-01-12",
+    "trough": "2022-04-28",
+    "rec": "2023-02-13",
+    "depth": -0.1274,
+    "decline_days": 106,
+    "rec_days": 397,
+    "recovered": true
+   }
+  ],
+  "a15_ddc25": [
+   {
+    "peak": "2015-06-12",
+    "trough": "2015-07-08",
+    "rec": "2021-11-23",
+    "depth": -0.302,
+    "decline_days": 26,
+    "rec_days": 2356,
+    "recovered": true
+   },
+   {
+    "peak": "2008-01-15",
+    "trough": "2008-11-04",
+    "rec": "2009-06-24",
+    "depth": -0.2459,
+    "decline_days": 294,
+    "rec_days": 526,
+    "recovered": true
+   },
+   {
+    "peak": "2007-05-29",
+    "trough": "2007-07-05",
+    "rec": "2007-08-20",
+    "depth": -0.1682,
+    "decline_days": 37,
+    "rec_days": 83,
+    "recovered": true
+   },
+   {
+    "peak": "2010-12-21",
+    "trough": "2012-01-16",
+    "rec": "2013-05-21",
+    "depth": -0.1598,
+    "decline_days": 391,
+    "rec_days": 882,
+    "recovered": true
+   },
+   {
+    "peak": "2009-08-10",
+    "trough": "2009-08-19",
+    "rec": "2009-09-17",
+    "depth": -0.1455,
+    "decline_days": 9,
+    "rec_days": 38,
+    "recovered": true
+   },
+   {
+    "peak": "2022-01-12",
+    "trough": "2022-04-28",
+    "rec": "2023-02-13",
+    "depth": -0.1275,
+    "decline_days": 106,
+    "rec_days": 397,
+    "recovered": true
+   },
+   {
+    "peak": "2010-04-22",
+    "trough": "2010-05-17",
+    "rec": "2010-10-29",
+    "depth": -0.1274,
+    "decline_days": 25,
+    "rec_days": 190,
+    "recovered": true
+   },
+   {
+    "peak": "2013-05-27",
+    "trough": "2013-06-28",
+    "rec": "2013-09-16",
+    "depth": -0.1243,
+    "decline_days": 32,
+    "rec_days": 112,
+    "recovered": true
+   }
+  ]
+ },
+ "trap_def": "decline段内BUY, 至incumbent收复日收盘价(缺则谷日)<买入价占比; 缺价不计入分子(低估)",
+ "window": "locked 2006-01~2024-06"
+}

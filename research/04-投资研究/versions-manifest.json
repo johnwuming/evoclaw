@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T07:00:03",
+  "generated_at": "2026-08-19T07:30:02",
   "active": "a9_ranksum_raw",
   "versions": [
     {
@@ -613,6 +613,40 @@
         }
       },
       "files_note": "results/a15_ddc20_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a15_ddc25",
+      "strategy_prefix": "a15_ddc25",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.2048,
+          "max_drawdown": -0.302,
+          "sharpe": 1.3908,
+          "calmar": 0.6779,
+          "cumulative_return": 45.4725,
+          "monthly_win_rate": 0.6559,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1987,
+          "max_drawdown": -0.302,
+          "sharpe": 1.374,
+          "calmar": 0.6579,
+          "cumulative_return": 27.4888,
+          "monthly_win_rate": 0.6516,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a15_ddc25_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "a15_nh30",
