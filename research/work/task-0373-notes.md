@@ -34,3 +34,8 @@ C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON la
 - HP baostock login success；今日 08-19 股票(sz.000001 有 08-19 行)与指数(sh.000001 08-19=3894.42)数据均已可取
 - → 日更前提成立：baostock 在 HP 可用且当日数据收盘后可得（现 19:35 已可拿到当日）
 - 建议 cron 时点：数据日更 18:00（baostock 收盘数据约 17:30+ 到位），collect --daily 18:10
+
+## 4. 实施进度（19:50）
+- collect_qfq_baostock.py v2 已推送 HP（10406B，HP py_compile OK）：真增量(尾行拉取+重叠日除权跳变检测>0.5%自动全量)、--mode idx(指数日更)、--workers N(多进程并发)
+- 原件已备份 scripts/collect_qfq_baostock.py.bak.20260819 (4015B)
+- baostock 公共 API 无多连接类 → 并发用多进程(Linux fork，每 worker 独立 login)
