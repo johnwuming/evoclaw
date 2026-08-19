@@ -1,0 +1,135 @@
+{
+  "version": "a13_rsraw_e1f10dz",
+  "evaluated_at": "2026-08-19 09:27:52",
+  "oos_split": "2021-01",
+  "n_trials": 91,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.2202,
+    "max_drawdown": -0.3355,
+    "sharpe": 1.3561,
+    "calmar": 0.6562,
+    "cumulative_return": 38.5483,
+    "monthly_win_rate": 0.6516,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.94,
+    "monthly_turnover_est": 0.4537
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 2.0717,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.4719,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.04268,
+      "mean_ic_oos": 0.04197,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 2.6491
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.2066,
+      "worst_pair": [
+        "mom_pen_dz",
+        "roe_ttm"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "mom_pen_dz"
+      ],
+      "threshold": 0.7,
+      "corr_sources": {
+        "matrix": 0,
+        "catalog": 0,
+        "ic_monthly": 4
+      },
+      "guard_exempt_pairs": [
+        [
+          "mom_pen_dz",
+          "ret120"
+        ]
+      ],
+      "corr_policy": "D-20260819-G3CORR 护栏替身豁免（oos/dd 不豁免）"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9999,
+      "sr_period": 0.08543,
+      "sr0_expected_max": 0.025483,
+      "T": 4490,
+      "skew": -0.897,
+      "kurtosis": 9.221,
+      "n_trials": 91,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "E1因子化λ1.0死区: ranksum四因子排序分叠加动量惩罚 1.0*|clip(ret120,-1,0)| 仅 ret120<-30% 段计罚(旧闸门域), (-30%,0) 死区不计罚, 取代硬排除护栏"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "N/A",
+      "mdd_candidate": -0.3355,
+      "mdd_parent": -0.3355,
+      "mdd_deterioration_pp": 0.0,
+      "threshold_pp": 2.0,
+      "parent_version": "a9_ranksum_raw",
+      "disabled": true,
+      "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+    }
+  },
+  "verdict": "SCORED",
+  "notes": [
+    "门禁6 N/A：D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+  ],
+  "score": {
+    "score": 0.8781,
+    "components": {
+      "p": 1.0,
+      "dsr": 0.999,
+      "oos_calmar": 0.5148,
+      "oos_sharpe": 0.5117,
+      "is_calmar": 1,
+      "is_sharpe": 1,
+      "dd": 1.0,
+      "corr": 1.0,
+      "logic": 1.0
+    },
+    "missing_weight": 0.0,
+    "partial": false,
+    "stat_warn": false,
+    "flags": [],
+    "incumbent": "a9_ranksum_raw"
+  },
+  "holdout": {
+    "pass": true,
+    "nav_file": "results/a13_rsraw_e1f10dz_full_nav.csv",
+    "start_ym": "2024-07",
+    "segment": {
+      "annual_return": 0.258,
+      "max_drawdown": -0.1613,
+      "sharpe": 1.4974,
+      "n_days": 517,
+      "start": "2024-07-01",
+      "end": "2026-08-14"
+    },
+    "locked": {
+      "annual_return": 0.2202,
+      "max_drawdown": -0.3355
+    },
+    "checks": {
+      "ann_ratio_min": 0.6,
+      "ann_ok": true,
+      "mdd_extra_pp_max": 10.0,
+      "mdd_deterioration_pp": -17.42,
+      "mdd_ok": true
+    }
+  }
+}
