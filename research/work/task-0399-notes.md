@@ -24,3 +24,12 @@
 - full: ann 22.16% / mdd -33.55% / sharpe 1.3624 / calmar 0.6605
 - gate: icir_is 1.4651 / icir_oos 1.4298 / max_corr 0.6249 / dsr 0.9999
 - 因子: circ_mv, avg_amount_20d, pb_inv, roe_ttm, ret120
+
+## 14:36 核验点2：监控画像完成（results/monitor_signals/）
+- current.json: breadth 0.4537(2026-08-10), 20d均值0.5402 | size_rel_20d -0.0435(zz500-hs300, 08-07, 中证2000缺库降级) | amt20 23197亿元(全A含退市, 08-10)
+- 产物: breadth_monthly.csv / size_rel_monthly.csv / amt20_monthly.csv / current.json, 均短列名无横向滚动
+- 解读: 当前市场宽度中性偏弱、中盘显著弱于大盘(-4.35% 20日)、成交额2.3万亿高位
+
+## 状态
+- a15_run.py 已启动(PID 276383), 择时构建完成75s, 候选回测进行中
+- a15_score.py / a15_dd_segments.py 已上传 compile-ok, 待回测完成后串行运行
