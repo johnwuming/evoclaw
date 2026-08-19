@@ -1,9 +1,13 @@
 # 研究交付物
 
+## 2026-08-19 R-245 历妧20%+版本评分制v1.1集体重评（task-0386）
+- 11个老版本（locked年化≥20%，除在役a13基准）用已部署评分函数重算+registry补score/rescored+manifest重生成；全部 0.26-0.30 stat_warn，无一过线→无晋升候选维持原状；a9 0.867→0.7715系基准切换非退化；holdout段全过但敵不过全期深回撤+corr0.9437+DSR<0.65 → `05-量化投资/R-245-历史20pct版本评分制v1.1重评报告.md`
+
 ## 2026-08-19 R-246 因子治理A10-4：A7c画像月度自动更新+IC衰减监控（task-0370）
 - HP 新增 a10_monthly_profile_update（增量+幂等）与 a10_ic_decay_monitor（连续3期低于阈值→告警+建议降权系数）；17因子画像复现A7c一致（9稳定/7衰减/1反转），当前0告警；降权执行与crontab均为待批方案未安装 → `R-246-因子治理A10-4实施报告.md`
 
 ## 变更记录
+| 2026-08-19 | 新增 | R-245 | 历妧20%+版本评分制v1.1集体重评（task-0386；SCORE_CONFIG v1.1+a13在役基准：11个老版本重算score 0.2611-0.2988全stat_warn（dd恶化33-39pp/DSR 0.41-0.65/corr 0.9437/oos_calmar负增量），a9 0.7715 rank6*（基准切换+ret120vs在役mom_pen_dz 0.7555非对称豁免盲区，建议另派对称修正）；holdout段11/11 pass但无一过线→0晋升候选全维持原状不摘legacy；registry 11条目补score+rescored（tar备份registry.bak.20260819_t0386）+manifest重生成97版本；v3a_peg/v4d_mfu_raw/v3b_glm IC覆盖4/5,4/6,4/5已标注；抽查3版本registry vs summary MATCH×3） | 05-量化投资 | 05-量化投资/R-245-历史20pct版本评分制v1.1重评报告.md |
 | 2026-08-19 | 新增 | R-248 | a12月度evaluate机制（task-0381；a12_s2_reb轮动型evaluate路径确认原生可用(全程读registry+nav+IC文件不调引擎入口)；三层机制落地：L1月度evaluate+L3晋升守卫(clean_evals≥2转人工,防自动上岗链)+L2nav刷新接口(底表mtime检测式降级,task-0365底表非HP常态管线默认关)；HP脚本a12_monthly_evaluate.sh+a12_shadow_eval.py干跑通过(score=0.6666,holdout_ann=0.2538 pass=True,registry md5恢复一致)；cron行建议10 17 2 * *待用户批未安装） | 05-量化投资 | 05-量化投资/R-248-a12月度evaluate机制.md |
 | 2026-08-19 | 新增 | R-243 | A15风控组件对照批报告（task-0399；在役ranksum_raw血统验证：drawdown_control可行且ddc15/ddc20评分0.8834/0.8786超在役0.867、MDD压6.4-8.2pp但年化-2.5~-3.4pp收复变慢套牢率反升；nh30本血统三项全劣化判不可行(与v6a线结论相反)；监控画像3指标落盘monitor_signals/含中证2000缺库降级zz500口径） | 05-量化投资 | 05-量化投资/R-243-A15风控组件对照批报告.md |
 | 2026-08-19 | 新增 | R-242 | e1f10dz重评与corr口径复核（task-0395；双重计价判定成立：在役ret120为E1硬护栏登记项非排序因子(222期目标持仓护栏域占比恒0.0)，0.7555全部来自候选惩罚因子×护栏信号，与在役排序因子max|ρ|仅0.2066；按新在役ranksum_raw重评：未修正0.7781<0.867，护栏豁免0.8781>0.867 rank1无警示holdout PASS满足自动激活三条件；建议口径修正落地引擎后激活e1f10dz，两组合nav相关0.9992属低边际切换) | 05-量化投资 | 05-量化投资/R-242-e1f10dz重评与corr口径复核.md |
