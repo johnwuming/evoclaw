@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T02:30:02",
+  "generated_at": "2026-08-19T03:00:02",
   "active": "v5h_xsub",
   "versions": [
     {
@@ -375,6 +375,74 @@
         }
       },
       "files_note": "results/a12_s2_reb_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "a13_rsraw_e1f05",
+      "strategy_prefix": "a13_rsraw_e1f05",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.2228,
+          "max_drawdown": -0.3355,
+          "sharpe": 1.3687,
+          "calmar": 0.6641,
+          "cumulative_return": 62.1701,
+          "monthly_win_rate": 0.6437,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2192,
+          "max_drawdown": -0.3355,
+          "sharpe": 1.3514,
+          "calmar": 0.6534,
+          "cumulative_return": 37.9937,
+          "monthly_win_rate": 0.638,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a13_rsraw_e1f05_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a13x_equiv_v5h",
+      "strategy_prefix": "a13x_equiv_v5h",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1527,
+          "max_drawdown": -0.298,
+          "sharpe": 0.9861,
+          "calmar": 0.5124,
+          "cumulative_return": 17.6931,
+          "monthly_win_rate": 0.6113,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1574,
+          "max_drawdown": -0.298,
+          "sharpe": 0.9983,
+          "calmar": 0.5283,
+          "cumulative_return": 13.9047,
+          "monthly_win_rate": 0.6109,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a13x_equiv_v5h_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "a2_equivcheck",
