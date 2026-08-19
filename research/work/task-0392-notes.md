@@ -49,3 +49,45 @@
 - /api/quant/registry：n_versions=51，active_version_id=**v5h_xsub**（不再是旧 v1.4）✓
 - /api/quant/timing-config：active_version=v5h_xsub，source=registry/v5h_xsub ✓
 - /api/quant/pending：9 个 pending（v1k_q5z/v2a_deep 等字母命名可见；a12_s2_reb 为 candidate 状态故不在 pending 列表，属正常）✓
+
+## 浏览器实测（google-chrome headless + playwright-core，viewport 390×844）
+
+### 可见「模型」Tab（v5model → loadV5ModelQuant）
+- 页面无横向滚动：scrollWidth=390 = clientWidth，hasHScroll=false ✓（task-0326 加固层仍在）
+- 该 Tab 数据走 quant/active + version-options（main.json/manifest 源），本就显示 v5h_xsub，与修复后语义一致
+
+### renderModelsQuant 路径（任务书指定路径，页面上下文直调 loadModelsQuant({force:true})）
+- 当前生效卡：**「当前生效（作战室 · 控制面）🏛 v5h_xsub ACTIVE 在役」** ✓（修复前因旧正则只剩 v1.x → 恒显 v1.4）
+- 待确认 9（pending 端点数据）；模拟盘/择时层卡片正常渲染，textLen 31419
+- 贡献矩阵 caliber 显示 HP 数据文件自带文案（tm.caliber 非空，属数据内容，下次 HP 同步自然更新；渲染兜底已改动态）
+- 兜底文案函数单测（页面上下文）：
+  - renderTimingContributionMatrix({rows:[…]}, 'v5h_xsub') → 含「全部跑在 v5h_xsub 选股基线」✓
+  - 传 null → 「全部跑在 当前 registry active 选股基线」✓
+  - 输出不含硬编码 bt_v1.4 ✓
+
+### 数据源澄清（审查结论）
+- 可见模型 Tab = v5model（loadV5ModelQuant，quant/active 源）；renderModelsQuant 是 M2「选股·择时模型」旧页（quant-page-models，想法提交后 force 重渲染），两者并存，本次按任务书修的 renderModelsQuant 路径
+- /api/quant/version-options（v5 排行表）走 versions-manifest.json，不受正则影响
+- M3.0 版本切换器为 <select> 下拉，51 个 option 不改变布局宽度；排行表版本列有 max-width+ellipsis 截断
+
+## 服务状态
+- 重启两次（追加 registry active 指针修复前后），最终 is-active=active
+- journalctl 09:44 起无 error/fatal/exception
+- 备份：server.js.bak-task0392-20260819-094423（744856 字节，改动前原样）
+
+## 改动 diff 摘要（共 6 处，全部在 server.js）
+1. L2321 readRegistryVersions 正则放宽 `/^v[\d.]+\.json$/` → `/^[a-z][a-z0-9._]*\.json$/i`
+2. L2447 /api/quant/pending 回归共享 readRegistryVersions（删 task-0383 本地宽扫描）
+3. L10734 renderTimingContributionMatrix 加 activeVersionId 参数，caliber 兜底文案动态化
+4. L10877 调用点传入 activeReg.version_id
+5. L10790 renderModelsQuant activeReg 多 active 时按 created_at 取最新（对齐 readRegistryActive）
+6. L2410 /api/quant/registry active 指针改 readRegistryActive() 优先（多 active 时稳定报最新）
+
+## 验收对照
+- node --check：通过（两次）
+- systemctl is-active agent-dashboard：active
+- /api/quant/registry：n_versions=51（旧 4），a12_s2_reb/v5h_xsub/v6a_def 可见，active_version_id=v5h_xsub（非 v1.4）✓
+- /api/quant/timing-config：active_version=v5h_xsub，source=registry/v5h_xsub ✓
+- /api/quant/pending：9 个 pending，字母命名可见 ✓
+- /api/quant/btlc：active_version_id=v5h_xsub，available=true，归因层缺数据优雅降级 ✓
+- 390px 无横向滚动（真无头浏览器实测）✓
