@@ -29,3 +29,8 @@
 A. collect_qfq_baostock.py 真增量 --mode update（只拉缺失尾部+除权跳变检测→全量回退）+ 指数(hs300/zz500)日更
 B. collect_crowding.py 增加 --daily 模式（尾窗面板+追加历史+覆写JSON快照）
 C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON latest_date
+
+## 3. baostock 通道验证（19:35）
+- HP baostock login success；今日 08-19 股票(sz.000001 有 08-19 行)与指数(sh.000001 08-19=3894.42)数据均已可取
+- → 日更前提成立：baostock 在 HP 可用且当日数据收盘后可得（现 19:35 已可拿到当日）
+- 建议 cron 时点：数据日更 18:00（baostock 收盘数据约 17:30+ 到位），collect --daily 18:10
