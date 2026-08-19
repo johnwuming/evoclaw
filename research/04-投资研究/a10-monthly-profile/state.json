@@ -1,0 +1,16 @@
+{
+ "panel_md5": "c0a1db238d942b93e3e7f35caf268704",
+ "cat_md5": "992f31255fcf260942af65631245ff1b",
+ "as_of_ym": "2026-07",
+ "n_rows": 247,
+ "runs": [
+  {
+   "ts": "2026-08-19T12:02:51",
+   "as_of_ym": "2026-07",
+   "n_rows": 247,
+   "panel_md5": "c0a1db238d942b93e3e7f35caf268704",
+   "cat_md5": "992f31255fcf260942af65631245ff1b",
+   "forced": false
+  }
+ ]
+}
