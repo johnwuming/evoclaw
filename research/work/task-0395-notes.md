@@ -22,3 +22,11 @@
 - e1f10dz locked: 22.02%/-33.55%/1.3561/0.6562 → 新 oos_rel: calmar +1.19%、sharpe +0.94% → oos 分 ≈0.515/0.512（近零增量=0.5 基线）；新 dd=0.00pp→1.0（原 3.75pp→0.65）
 - mom_pen_dz 精确公式（a9_common.py PE2）：penalty=λ·|clip(ret120,-1,0)|，dz>0 时 (-dz,0] 段清零 → 仅 ret120<-30% 计罚=旧闸门域
 - holdings CSV：date,num_target,target(|分隔代码)，222 期，等权约 20 只
+## 3. P1 IC 口径复核结果（a13_corr_review.py，日志 logs/a13_corr_review.log）
+- 复现原评：mom_pen_dz vs v5h 因子集 max|ρ|=0.7555 ✓（worst pair mom_pen_dz×ret120）
+- vs 新在役 a9_ranksum_raw（未修正，护栏 ret120 计入因子集）：max|ρ|=0.7555 —— 与预期一致，
+  ranksum_raw 的 registry factors 同样含 ret120（护栏登记项），g3 逻辑不变则惩罚不变
+- **护栏豁免口径（在役仅排序因子 circ_mv/avg_amount_20d/pb_inv/roe_ttm）：max|ρ|=0.2066** → corr 分量 1.0
+- 结论（口径层）：0.7555 全部来自「mom_pen_dz × 在役护栏信号 ret120」这一对；候选动量惩罚因子与
+  在役四个排序因子的 IC 冗余度仅 0.2066，远低于 0.5 免罚线
+- mom_pen（非死区）双口径数值待日志确认（预期 uncorr≈0.9426 复现）
