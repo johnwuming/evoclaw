@@ -11,3 +11,8 @@
 - IC 口径（与 W1 一致）：有效IC = raw × (dir=='neg'?-1:1)；画像分类=稳定有效/衰减中/已失效反转/近期涌现
 - 15普查因子中17列可算（P0-1×4, P0-2×2, P0-6×3, F7低波×4, F13股息×1, F14壳×3）；P0-3/4/5 等数据缺口标 N/A
 - VPS python: /opt/finworker/bin/python；HP python: /home/noname/miniconda3/envs/quant/bin/python
+
+### 数据一致性核验（完成）
+- HP results/factor_ic_monthly.csv md5=c0a1db... 与 VPS 完全一致；factor_catalog_v3.json md5=992f31... 一致
+- HP 面板最新 ym=2026-07（247月）；列含 ym + 107 因子
+- 设计决策：新脚本产物写到独立目录 results/a10-monthly-profile/ 与 results/a10-ic-decay-alerts.*，不覆盖 a7c 原始产物（符合"新文件为主"）
