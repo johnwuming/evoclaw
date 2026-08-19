@@ -48,3 +48,36 @@
 - `listnetworks`：a581878f7dc4f35d 状态 OK，NAS=10.12.192.241/24（另有第二网络 noname_nas 60ee7c034a482681 / 192.168.191.241）
 - `peers`：全部 DIRECT；对 VPS 节点 c8012321a2 为 DIRECT 26ms（路径 82.156.124.186:9993）；对 HP（1cfed9bba2）DIRECT 4ms（LAN 192.168.3.138）→ NAS 与 HP 同局域网，NAS↔VPS 直连健康
 - 结论：NAS 侧 ZeroTier 无异常，佐证「丢 SYN 不在隧道，在 VPS 主机防火墙」
+
+## C. HP 推链路画像（grep scripts，2026-08-19 20:05）
+HP→VPS 四条推送路径：
+1. `cron_paper_daily.sh` / `cron_paper_rebalance.sh` / `sync_to_vps.sh`：`rsync → root@10.12.192.225` —— **陈旧 IP**（.225 死地址）→ 100% 失败
+2. `paper_engine.py`：`VPS_RSYNC_TARGET=root@10.12.192.98:...`（rsync over SSH 22）→ **UFW 无 22 放行** → 静默丢 SYN（dmesg 35 条铁证）
+3. `collect-metrics.sh`（每分钟）：HTTP → 公网 82.156.124.186:8055 → UFW 放行 8055 → 正常
+4. `heartbeat_selfheal.sh`：openclaw node → 10.12.192.98:12145 → UFW 放行 zt 12145 → 正常
+→ 「偶发不稳定」= 四条路径混用两种目标 IP 与四个端口，成功率取决于路径；ZeroTier 隧道本身无责。
+
+## D. qfq 数据现状（HP，2026-08-19 20:00）
+- 数据目录 `~/quant-evolve/data/all_stocks_qfq/`：5206 个 `{code}_daily_qfq.parquet`（消费者格式，共 1.1G）+ 242 个裸编号 parquet（akshare refresh_data.py 残留）
+- 数据新鲜度：600519 最新日期 **2026-08-14**（文件 mtime 8/15 17:04），今天 8/19 → 滞后 3 个交易日
+- 更新链路两条：
+  a) `refresh_data.py`（akshare/EastMoney）cron `0 20 * * 0` 周日 20:00：8/9-8/10 运行 6h+，5539 只中 **4714 错误（85%）** RemoteDisconnected —— 源已实质失效；且写裸编号文件名，与消费者格式不一致
+  b) `collect_qfq_baostock.py`（2026-08-15 新增，baostock 源）：写 `_daily_qfq.parquet` 原子替换、adjustflag=2 前复权、字段含 outstanding_share 反推；**无 cron，纯手动**，8/15 跑过一次
+- 消费者：base_strategy.py(优先 `*_daily_qfq` glob)、paper_trade.py、rebalance*.py —— paper 信号链每天 16:30 依赖此数据；另有 all_stocks_merged.parquet（304MB，8/11 01:46）被 evolution_pipeline/backtest 消费，更陈旧
+- `collect_qfq_baostock.py` 隐患：save() 为整文件替换且 fetch 起点取 --start（默认 2005-01-01）；若用短窗口 --start 调用会**截断历史**（无 merge 逻辑）；docstring 宣称的增量+跳变检测实际未实现
+- baostock 计时参考：单股查询 ~0.2-0.4s + sleep 0.4s；5206 股全量(2005→今) ≈ 60-80 分钟
+- HP cron 每分钟 metrics 推公网 8055 正常 → 日更任务日志/告警可复用该通道（不新增 ZT 依赖）
+
+## E. 方案要点（报告取材）
+### E1. ZeroTier 推链路修复（建议，不实施）
+- 立即止血（二选一，需用户批准后另立任务执行）：
+  A. `ufw allow in on ztfl6eg7ba from 10.12.192.0/24 to any port 22 proto tcp`（零重启，改一行规则即恢复 HP→VPS rsync）
+  B. 让 sshd 真正切到 22222：`systemctl restart ssh`（需控制台兜底，防止失联）→ HP 侧 rsync 加 `-p 22222`（UFW 已放行 zt+→22222）
+- 收敛 IP：HP 三个脚本 `root@10.12.192.225` → `10.12.192.98`；VPS/TOOLS.md 文档同步改
+- 长期：推送统一走已验证通道（公网 8055 / ZT 12145），SSH-rsync 仅做批量同步，且目标端口与 UFW/sshd 三方对齐（加配置自检脚本：比对 sshd 监听端口 vs UFW 规则 vs 脚本目标）
+### E2. qfq 日更方案（建议，不实施）
+- 载体：扩展 collect_qfq_baostock.py 新增 `--mode inc`（真增量）：读旧文件 last date → 拉 [last+1, today] → concat 去重排序 → 原子写回整文件（修复截断隐患）；跳变检测：新尾部 close 与旧尾部衔接处比率 |Δ|>8% 且非涨跌停 → 该股全量重拉（除权导致 qfx 因子变化）
+- 频率与时刻：每交易日 18:10（baostock 日线约 17:30-18:00 就绪；避开 16:30 paper cron 与 20:00 其他任务）
+- 规模/耗时/预算：5206 股 × 1 次 query（窗口≤10日）+ sleep 0.3 → 约 45-60 分钟单线程；外呼 ≈ 5210 次/日（baostock 免费）；login 1 次
+- 两阶段加速（可选）：先持仓+HS300（~320 股，5 分钟内）→ 再全市场
+- 兜底：失败清单重试一轮；错误率>10% 或 login 失败 → 走 metrics 通道告警；每周日保留一次 init 全量校验 + rebuild_merged 重建 merged 快照；实施时需改 HP crontab 加一行（本任务不实施，另立任务）
