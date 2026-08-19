@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-08-19T04:30:02",
-  "active": "v5h_xsub",
+  "generated_at": "2026-08-19T05:00:03",
+  "active": "a9_ranksum_raw",
   "versions": [
     {
-      "version_id": "v5h_xsub",
-      "strategy_prefix": "a7_v5h_xsub_formal",
+      "version_id": "a9_ranksum_raw",
+      "strategy_prefix": "a9_ranksum_raw",
       "status": "active",
-      "strategy": "dividend_quality_smallcap_seedB",
-      "registered_at": "2026-08-17 04:58:47",
+      "strategy": "raw_universe_ranksum4",
+      "registered_at": "2026-08-19 12:40:00",
       "windows": {
         "full": {
-          "annual_return": 0.1527,
-          "max_drawdown": -0.298,
-          "sharpe": 0.9861,
-          "calmar": 0.5124,
-          "cumulative_return": 17.6931,
-          "monthly_win_rate": 0.6113,
+          "annual_return": 0.2216,
+          "max_drawdown": -0.3355,
+          "sharpe": 1.3624,
+          "calmar": 0.6605,
+          "cumulative_return": 60.8746,
+          "monthly_win_rate": 0.6559,
           "period_start": "2006-01-04",
           "period_end": "2026-08-14",
           "years": 20.61,
           "num_rebalance": 248
         },
         "locked": {
-          "annual_return": 0.1574,
-          "max_drawdown": -0.298,
-          "sharpe": 0.9983,
-          "calmar": 0.5283,
-          "cumulative_return": 13.9047,
-          "monthly_win_rate": 0.6109,
+          "annual_return": 0.2176,
+          "max_drawdown": -0.3355,
+          "sharpe": 1.3435,
+          "calmar": 0.6485,
+          "cumulative_return": 37.0224,
+          "monthly_win_rate": 0.6516,
           "period_start": "2006-01-04",
           "period_end": "2024-06-28",
           "years": 18.48,
           "num_rebalance": 222
         }
       },
-      "files_note": "results/a7_v5h_xsub_formal_{full,locked}_metrics.json"
+      "files_note": "results/a9_ranksum_raw_{full,locked}_metrics.json"
     },
     {
       "version_id": "a11_base",
@@ -1227,40 +1227,6 @@
       "files_note": "results/a9_ranksum_quality_{full,locked}_metrics.json（未注册 registry）"
     },
     {
-      "version_id": "a9_ranksum_raw",
-      "strategy_prefix": "a9_ranksum_raw",
-      "status": "backtest-only",
-      "strategy": null,
-      "registered_at": null,
-      "windows": {
-        "full": {
-          "annual_return": 0.2216,
-          "max_drawdown": -0.3355,
-          "sharpe": 1.3624,
-          "calmar": 0.6605,
-          "cumulative_return": 60.8746,
-          "monthly_win_rate": 0.6559,
-          "period_start": "2006-01-04",
-          "period_end": "2026-08-14",
-          "years": 20.61,
-          "num_rebalance": 248
-        },
-        "locked": {
-          "annual_return": 0.2176,
-          "max_drawdown": -0.3355,
-          "sharpe": 1.3435,
-          "calmar": 0.6485,
-          "cumulative_return": 37.0224,
-          "monthly_win_rate": 0.6516,
-          "period_start": "2006-01-04",
-          "period_end": "2024-06-28",
-          "years": 18.48,
-          "num_rebalance": 222
-        }
-      },
-      "files_note": "results/a9_ranksum_raw_{full,locked}_metrics.json（未注册 registry）"
-    },
-    {
       "version_id": "a9_raw_universe",
       "strategy_prefix": "a9_raw_universe",
       "status": "backtest-only",
@@ -2011,7 +1977,7 @@
     {
       "version_id": "v2b_trr",
       "strategy_prefix": "a2c_v2b_trr",
-      "status": "sota",
+      "status": "retired",
       "strategy": "dividend_quality_smallcap_seedB",
       "registered_at": "2026-08-16 15:23:48",
       "windows": {
@@ -2981,6 +2947,40 @@
         }
       },
       "files_note": "results/a7_v5g_lim_formal_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "v5h_xsub",
+      "strategy_prefix": "a7_v5h_xsub_formal",
+      "status": "sota",
+      "strategy": "dividend_quality_smallcap_seedB",
+      "registered_at": "2026-08-17 04:58:47",
+      "windows": {
+        "full": {
+          "annual_return": 0.1527,
+          "max_drawdown": -0.298,
+          "sharpe": 0.9861,
+          "calmar": 0.5124,
+          "cumulative_return": 17.6931,
+          "monthly_win_rate": 0.6113,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1574,
+          "max_drawdown": -0.298,
+          "sharpe": 0.9983,
+          "calmar": 0.5283,
+          "cumulative_return": 13.9047,
+          "monthly_win_rate": 0.6109,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a7_v5h_xsub_formal_{full,locked}_metrics.json"
     },
     {
       "version_id": "v5i_comb",
