@@ -45,3 +45,13 @@ C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON la
 - --mode idx：hs300 08-07→08-19 (5003→5011行)、zz500 08-07→08-19 (5003→5011行) ✓
 - 核验：000001 parquet 末3日=08-17/18/19 ✓；hs300/zz500 末日=08-19 ✓
 - baostock 单查询约0.2s，6进程并发 → 5206只 2.8分钟，日更开销可忽略
+
+## 阶段 B 实施开始（22:48）
+- 脚本已全读：collect_crowding.py 21404B，结构=build_panel(全量)→四指标→全量覆写 CSV+JSON+eqw CSV；仅 --start-date 参数，无 --daily
+- 产物实际路径（非 notes 旧描述 results/crowding/）：results/crowding_history.csv（1849 行含头，止 08-14）、results/crowding-indicators.json（schema2/latest_date 08-14）、results/eqw_index_history.csv（止 08-14）
+- 基线 md5（08-19 22:48 实测）：
+  - crowding_history.csv = 2838f49a58973d6bcef27a60698f3210
+  - crowding-indicators.json = b5ca0a594a6b99be80d653587e683aac
+  - eqw_index_history.csv = 3fc773b6fb44f38787151466ed17485e
+- 数据现状：股票 qfq parquet 000001/600000/300001 max=2026-08-19（今日，已日更）；hs300/zz500 parquet mtime 08-19 15:01 但文件名写 20260808，需核实际 max date
+- 下一步：核指数 parquet 内 max date + 08-19 全市场股票覆盖度 → 决定 --daily 实跑是否含 08-19 行
