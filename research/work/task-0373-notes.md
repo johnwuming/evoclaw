@@ -15,3 +15,17 @@
 3. 实施 collect_crowding 日频模式（.bak 备份原件）
 4. 实跑验证：产物落盘+shape+max date
 5. 输出待批 crontab 行+回滚说明
+
+## 2. HP 现状盘点（2026-08-19 19:35 确认）
+- collect_crowding.py 21.4KB (mtime 08-18 08:39，含 task-0371 契约v2改动)，无 --daily 标志（grep daily 仅注释）；.bak.20260818 已存在
+- refresh_data.py(akshare源) 已死：cron_refresh.log 尾行 "Segmentation fault (core dumped)"，akshare 请求 ConnectionError(RemoteDisconnected)
+- 真正数据通道 = collect_qfq_baostock.py（baostock源，08-15 建），写 {code}_daily_qfq.parquet（含 outstanding_share/turnover），5206 只全部 08-15 写入
+- 但该脚本 --mode update 实际是全量重拉(start默认2005-01-01)，docstring 声称的"只拉缺失尾部+因子跳变检测"未实现 → 需实施真增量
+- 指数文件陈旧：hs300/zz500 parquet 均止于 2026-08-08（mtime 08-08 06:33），baostock 股票脚本不更新指数 → 日更需补指数通道
+- crontab(只读)：refresh_data 周日20:00、collect_crowding 周日07:00、risk_patrol 周1-5 16:45、paper_trade 16:30 等
+- 当前 crowding-indicators.json latest_date=08-14（R-237 记录），parquet 最新数据 08-14（08-15 周六跑）
+
+## 待实施
+A. collect_qfq_baostock.py 真增量 --mode update（只拉缺失尾部+除权跳变检测→全量回退）+ 指数(hs300/zz500)日更
+B. collect_crowding.py 增加 --daily 模式（尾窗面板+追加历史+覆写JSON快照）
+C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON latest_date
