@@ -49,3 +49,10 @@
 - 注意：0.8781 vs 0.867 的对比混合了两代在役基准（e1f10dz 评 vs ranksum_raw；ranksum_raw 当时评 vs v5h），序贯演化固有口径，报告需披露
 - 中间产物：HP results/a13_corr_review.json（4.6KB）/ a13_corr_review_series.csv（13.5KB，222 期月度序列）
 - 复核脚本：HP scripts/a13_corr_review.py（新文件，未动任何现有代码/registry）
+## 6. 交付与验证
+- 报告：shared/results/05-量化投资/R-242-e1f10dz重评与corr口径复核.md（6.2KB）
+- README.md 变更记录（顶部明细表+正式表）已加 R-242 行
+- 复核脚本 HP scripts/a13_corr_review.py 已跑通（75.8s，退出码 0），可重跑（幂等只读）
+- 约束遵守：未改 evolution_pipeline.py / a9_common.py / registry / paper_engine / HP crontab；HP 无进程被杀（nohup 自然结束）
+- 关键数字一览：corr 0.7555=全部来自护栏对；豁免口径 0.2066(roe_ttm)；score 0.7781/0.8781；ranksum_raw 0.867；
+  行为口径 r=0.7223；nav 相关 0.9992；Jaccard 0.954；在役护栏泄漏 0.0
