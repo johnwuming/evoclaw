@@ -28,3 +28,26 @@
 - 数值与 A7c 原表完全一致（avg_amount_20d full -0.103/-0.664 r24 -0.104/-0.561 等）→ 方法复现正确
 - 产物：results/a10-monthly-profile/{dynamic-ic-table.csv|json, rolling-ic-series.json, state.json, history/dynamic-ic-table-asof-202607.csv}
 - **幂等验证**：二跑 exit 0，输出 "[up-to-date] inputs unchanged... skip recompute"，产物 md5 未变（34ae240a/549ad672）✓
+
+## Step 3: ic_decay_monitor 验证（完成）
+- **真实数据**：exit 0，17 因子全部输出近3期IC+阈值判定，alerts=0（当前无连续3期低于阈值的因子；月度IC波动大 std~0.3，属正常）
+- 数据事实：面板最后一行 2026-07 多数因子 NaN，实际尾3期为 2026-04/05/06（last3_ym 字段透明标注）；div_yield_ttm 有 2026-07 值
+- 符号核验：avg_amount_20d raw 全周期 +0.1035、dir=neg → eff=-0.1035 与 A7c 表 -0.103 一致 ✓
+- **幂等**：连跑3次 md5 稳定（json 8269B csv 3305B md 3284B）✓
+- **合成测试**（A10_PANEL 注入 /tmp 合成面板：avg_amount_20d 近3期置 ±0.001）：exit 0，正确触发 ALERT_DECAY（below=3/3, th=0.0516），建议系数 k=0.66 = clamp(|r12_ICIR -0.447|/|full_ICIR -0.676|, 0.2, 0.8)，数值可溯源 ✓
+- 产物：results/a10-ic-decay-alerts.{json,csv,md}（原子写）；md 含全表+告警清单+待批执行方案（registry 降权步骤 + crontab 建议条目未安装）
+
+## 验收命令复现（给报告用）
+- `ssh noname@10.12.192.174 '/home/noname/miniconda3/envs/quant/bin/python ~/quant-evolve/scripts/a10_ic_decay_monitor.py; echo $?'` → 0
+- `head ~/quant-evolve/results/a10-ic-decay-alerts.md` → 含每因子近3期IC与阈值判定表
+- 幂等：连跑两次 md5sum 一致；profile 二跑输出 "[up-to-date] ... skip recompute"
+
+## 产物清单（HP 绝对路径）
+- /home/noname/quant-evolve/scripts/a10_monthly_profile_update.py
+- /home/noname/quant-evolve/scripts/a10_ic_decay_monitor.py
+- /home/noname/quant-evolve/results/a10-monthly-profile/dynamic-ic-table.{csv,json}（as_of=2026-07，17因子）
+- /home/noname/quant-evolve/results/a10-monthly-profile/rolling-ic-series.json
+- /home/noname/quant-evolve/results/a10-monthly-profile/state.json（md5+运行史）
+- /home/noname/quant-evolve/results/a10-monthly-profile/history/dynamic-ic-table-asof-202607.csv
+- /home/noname/quant-evolve/results/a10-ic-decay-alerts.{json,csv,md}
+- 未改任何现有文件（a7c 原产物保留；evolution_pipeline/registry/paper_engine/crontab 零触碰）
