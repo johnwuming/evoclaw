@@ -42,3 +42,9 @@
 - VPS 主动外连（VPS→HP/NAS）受 ESTABLISHED 回包放行 → 正常
 - HP→VPS 新建入站 SSH（ZT, :22）→ 必失败；经公网 443 网关类推送 → 正常
 - 推送走不同路径/不同端口时成败混合，观感即「偶发丢 SYN」
+
+## B. NAS 侧只读排查（2026-08-19 19:55）
+- 容器：`zerotier-zerotier-synology` Up 8 weeks（docker ps）
+- `listnetworks`：a581878f7dc4f35d 状态 OK，NAS=10.12.192.241/24（另有第二网络 noname_nas 60ee7c034a482681 / 192.168.191.241）
+- `peers`：全部 DIRECT；对 VPS 节点 c8012321a2 为 DIRECT 26ms（路径 82.156.124.186:9993）；对 HP（1cfed9bba2）DIRECT 4ms（LAN 192.168.3.138）→ NAS 与 HP 同局域网，NAS↔VPS 直连健康
+- 结论：NAS 侧 ZeroTier 无异常，佐证「丢 SYN 不在隧道，在 VPS 主机防火墙」
