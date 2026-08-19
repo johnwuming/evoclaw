@@ -6,10 +6,49 @@
 ## 步骤进度
 1. [x] 读 a10 两个脚本，确认数据依赖与定时依据
 2. [x] 设计 cron 行：`5 9 3 * *`（每月3日 09:05，依据见步骤1）
-3. [ ] 通知 wrapper：`scripts/a10_monthly_monitor.sh`（a12 同 schema append notifications-queue.jsonl）
-4. [ ] crontab 快照 + 追加安装 + 验证
-5. [ ] 手动触发 a10_ic_decay_monitor.py 全链路验证
-6. [ ] VPS 侧通知队列验证
+3. [x] 通知 wrapper：`scripts/a10_monthly_monitor.sh`（md5 8310c1d7，bash -n 通过，已部署 HP）
+4. [x] crontab 快照 + 追加安装 + 验证
+5. [x] 手动触发全链路验证（RC=0）
+6. [x] VPS 侧通知队列验证（已收到 hp-notify 条目）
+
+## 安装记录（2026-08-20 01:4x 北京时间）
+
+**前快照**：HP `/tmp/crontab-before-task0403-20260819-1729.txt`（25 行）；安装前 grep 确认无 a10/qfq/0402 行（无竞态冲突，当时 0402 尚未装行）
+
+**追加安装**（未动既有行）：
+```
+# task-0403 (A10-4) a10月度画像+IC衰减监控: 每月3日09:05 (notify→notifications-queue→auto_sync)
+5 9 3 * * cd /home/noname/quant-evolve && bash scripts/a10_monthly_monitor.sh >> /home/noname/quant-evolve/logs/a10-monthly-monitor.log 2>&1
+```
+安装后 `crontab -l | grep -n a10` → 26/27 行在位，总 27 行。与既有 16:30 调仓、1/15日 02:00 evolution、2日 17:10 a12、周六 09:00 cycle 全部错峰。
+
+**回滚命令**（推荐定向移除，不受 0402 后续装行影响）：
+```
+sshpass -p "$QUANT_SSH_PASSWORD" ssh noname@10.12.192.174 '(crontab -l | grep -v "a10_monthly_monitor.sh" | grep -v "task-0403 (A10-4)") | crontab -'
+# 可选：移除 wrapper：rm ~/quant-evolve/scripts/a10_monthly_monitor.sh
+# 全量回退（会连带移除快照后新增的他人行，慎用）：crontab /tmp/crontab-before-task0403-20260819-1729.txt
+```
+
+## 手动触发验证输出（2026-08-19 17:42 UTC）
+```
+[2026-08-19 17:42:41] === a10 月度监控开始 ===
+[up-to-date] inputs unchanged (panel_md5=c0a1db23...), outputs intact, as_of=2026-07, skip recompute   ← 幂等确认
+[ic-decay-monitor] as_of=2026-07 factors=17 alerts=0
+（17 因子全 OK k=1.0，无 ALERT/WARN）
+[notify:info] ✅ a10 月度监控完成：17 因子 0 告警（as_of 2026-07）
+RC=0
+```
+
+## 通知链路验证
+1. HP 队列 tail：`{"ts":"2026-08-19 17:42:42","level":"info","type":"a10_ic_decay","title":"✅ a10 月度监控完成：17 因子 0 告警…","_dedupe_key":"a10|2026-07"}` ✓
+2. VPS 手动跑 `auto_sync_notify.py --job-name task-0403-verify`（幂等，同 cron */30 逻辑）：
+   `.task-notifications.jsonl` 出现 `{"taskId":"hp-notify","type":"info","message":"✅ a10 月度监控完成：17 因子 0 告警…"}` ✓ 告警可达任务中心队列
+3. 附带同步 6 个结果文件到 VPS shared/results/04-投资研究/
+
+## 遗留/说明
+- IC 底表 `factor_ic_monthly.csv` 无 cron 更新（a2_ic_data.py/factor_ic_analysis.py 手动跑）；a10 月度行对 md5 变化自动重算，面板月中刷新会被下次月度跑拾取；若未来给 a2_ic_data 装 cron，建议 a10 时间在其后
+- wrapper 防重：同 as_of 同 dedupe key 只通知一次；失败发 red 通知（dedupe 按天）
+- 未改任何既有 cron 行/脚本本体；未杀任何进程
 
 ## 步骤2/3 设计（2026-08-20 00:3x）
 
