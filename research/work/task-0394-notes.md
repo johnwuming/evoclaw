@@ -23,3 +23,47 @@
   status 另有预存 bug: 台账统计行 KeyError 'type'（与本任务无关，激活前已存在）。真实验证以 main.json version + registry json status + decision-log 为准。
 - activate 语义(_do_activate): 旧active→sota(旧sota→retired), 目标→active+activated_at, 冻结 main.json 字节快照, 写 switch_log/history/decision-log(自动), rollback_condition 自动带 --to 旧版本
 - rollback 语义: 存在 {to}.main.json.snapshot → 字节级还原 main.json + 状态翻转 + decision-log；确切命令见下
+
+## 执行记录（2026-08-19 13:0x）
+
+### 1. 备份
+- `~/quant-evolve/model/registry.bak.20260819_t0394.tar.gz`（60 文件, 31719B, 激活前全目录）
+
+### 2. registry 条目（手工写 candidate → CLI activate）
+- HP `model/registry/a9_ranksum_raw.json`（4545B, schema 对齐 v5h_xsub）
+- selection.params = 回测 run config 原值（ext_mode=ranksum + 4因子 specs + raw_universe=1 + e1_guard/xsub365/n_hold20）
+- backtest_refs.metrics/metrics_full 全部取自 a9_ranksum_raw_{locked,full}_metrics.json 实际值（见上）
+- data_snapshot: kline_as_of=2026-08-10 hash=bcf45e9...（pipeline compute_data_snapshot 现算，与 v5h 登记一致）
+- params_hash=49e38fa47cfbc1c7；pipeline compute_holdout_metrics(entry)=pass:true（ann_ok, mdd det -17.42pp）
+- 激活命令: `cd ~/quant-evolve && python -m scripts.evolution_pipeline activate --version a9_ranksum_raw --reason "task-0394: ...用户2026-08-19 12:27拍板激活"`
+- 输出: `✅ activate: a9_ranksum_raw → active | main.json md5 1e1983f3→c58759da`
+
+### 3. 三处验证
+① HP 在役: main.json version=a9_ranksum_raw, params 已带 ranksum specs; registry a9 status=active (activated_at 2026-08-19 04:59:00 HP钟)
+   - status CLI 因 v*.json glob 不列非 v 前缀条目 + 预存台账 KeyError 'type' bug（激活前即崩），故以 main.json+registry json 为准确认（见发现2）
+② VPS: cron-auto-sync(*/30min) 已自动同步 → `/root/.openclaw/workspace-quant/model/registry/a9_ranksum_raw.json` status=active
+   - `curl -s http://127.0.0.1:8055/api/quant/registry` → ok:true, **active_version_id: a9_ranksum_raw**, n_versions=52, v5h_xsub→sota
+③ decision-log: `D-20260819-002 type=activate version=a9_ranksum_raw`（含 metrics/holdout_pass=true/gate_verdict=PASS/params_hash/rollback_condition）
+   - switch_log: model_switch v5h_xsub→a9_ranksum_raw (confirmed_by evolution_pipeline:activate)
+   - history.jsonl: op=activate + 完整 reason
+
+### 4. 状态流转核验（与备份 tar diff）
+- v5h_xsub.json: active→sota（保留可回退, v5h_xsub.main.json.snapshot 4175B 在位, md5 对应旧 main 1e1983f3）
+- v2b_trr.json: sota→retired（pipeline 旧 sota 降级, 预期行为）
+- a9_ranksum_raw.json: 新建 → active；无其他文件改动
+
+### 5. 回滚路径（一键回退 v5h_xsub）
+```
+cd ~/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python -m scripts.evolution_pipeline rollback --to v5h_xsub --reason "task-0394 回滚: <具体原因>"
+```
+- 字节级还原 main.json（md5 回到 1e1983f3）+ v5h→active/a9→sota + decision-log 自动追加 rollback 条目
+- 手工兜底: tar xzf model/registry.bak.20260819_t0394.tar.gz -C model/ （覆盖整个 registry 目录恢复激活前状态）
+- VPS 侧等 cron-auto-sync 下个 */30 周期自动跟上（或手动 scp model/registry/*.json + model/main.json）
+
+### 6. Dashboard 390x844 抽查（playwright headless chromium）
+- 点开量化页后 bodyScrollW=390 / docScrollW=390（无横向滚动）; #screen-quant scrollW=clientW=370
+- json 长串审查: 新条目最长无空格串 43 字符（q3z(win36,...)，与在役 a12/v5h 相同字段，非新增风险）
+
+### 7. 遗留风险（需后续任务处理，本任务禁改引擎）
+- ⚠️ paper_engine.py 未实现 ranksum/raw_universe 选股（仍是 circ_mv 单因子+默认质量闸门）；rebalance cron 自 08-16 PAUSED 无近期自动换仓，但**恢复 rebalance 前必须先给引擎适配 A9 patch**，否则实盘选股与回测口径不符
+- status/find_active 的 v*.json glob 不识别非 v 前缀 active（a12_s2_reb 同病）；paper_engine 防漂移 guard 因此对 a9 静默跳过（不误报也不保护）
