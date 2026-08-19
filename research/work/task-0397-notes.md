@@ -24,5 +24,14 @@
 2. cmd_status：`e['type']` → `e.get('type')`；decision-log 行 `e['decision_id']`→`e.get('decision_id','?')`、`e['type']`→`e.get('type','?')`
 3. 备份原文件 `evolution_pipeline.py.bak-task0397-*` 后再改
 
-## 验证（改后）
-（待填）
+## 验证（改后，全部通过）
+- 补丁脚本 /tmp/task0397_patch.py（用后已删），每处替换断言 count==1，备份 `scripts/evolution_pipeline.py.bak-task0397-20260819-060949`（copy2 保留原 mtime）
+- `py_compile` returncode=0
+- `python scripts/evolution_pipeline.py status` → exit=0，无 KeyError；rows 首次包含 a12_s2_reb 与 a9_ranksum_raw，a9_ranksum_raw 行：`"status": "active"`, gate_verdict=PASS
+- 防漂移自检：`main=ebeddc5a0a registry[active]=ebeddc5a0a → 一致 ✅`（证明找到的 active 与 main.json 匹配）
+- 台账行：`📒 台账: 95 条 (backtest 57)`（此前在此崩溃）
+- `find_active() -> a9_ranksum_raw | status: active | scanned 48`（46 个 v* + 2 个非 v 正式条目；.bak/.snapshot 未误入）
+- `e['type']` 直接下标在文件中剩余 0 处；crontab 未动、无进程被杀、scripts/ 其他文件 mtime 无变化
+
+## 结论
+改动仅 4 处：import re、registry_files（glob→正则）、status 台账 count `.get('type')`、decision-log 行防御性 `.get`。遗留 bug 修复完成，未做任何模型迭代。
