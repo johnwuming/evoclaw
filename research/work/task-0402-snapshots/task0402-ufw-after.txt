@@ -1,0 +1,24 @@
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 8051/tcp                   ALLOW IN    Anywhere                  
+[ 2] 8052/tcp                   ALLOW IN    Anywhere                  
+[ 3] 8060/tcp                   ALLOW IN    Anywhere                  
+[ 4] 22222/tcp on zt+           ALLOW IN    Anywhere                  
+[ 5] 12145/tcp on ztfl6eg7ba    ALLOW IN    Anywhere                  
+[ 6] 12145/tcp                  ALLOW IN    Anywhere                  
+[ 7] 80/tcp                     ALLOW IN    Anywhere                  
+[ 8] 443/tcp                    ALLOW IN    Anywhere                  
+[ 9] 6080/tcp                   ALLOW IN    Anywhere                  
+[10] 22/tcp on ztfl6eg7ba       ALLOW IN    10.12.192.0/24            
+[11] 8051/tcp (v6)              ALLOW IN    Anywhere (v6)             
+[12] 8052/tcp (v6)              ALLOW IN    Anywhere (v6)             
+[13] 8060/tcp (v6)              ALLOW IN    Anywhere (v6)             
+[14] 22222/tcp (v6) on zt+      ALLOW IN    Anywhere (v6)             
+[15] 12145/tcp (v6) on ztfl6eg7ba ALLOW IN    Anywhere (v6)             
+[16] 12145/tcp (v6)             ALLOW IN    Anywhere (v6)             
+[17] 80/tcp (v6)                ALLOW IN    Anywhere (v6)             
+[18] 443/tcp (v6)               ALLOW IN    Anywhere (v6)             
+[19] 6080/tcp (v6)              ALLOW IN    Anywhere (v6)             
+

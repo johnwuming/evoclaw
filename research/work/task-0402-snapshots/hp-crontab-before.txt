@@ -1,0 +1,25 @@
+# === 模拟实盘定时任务 ===
+PATH=/home/noname/miniconda3/envs/quant/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+30 16 * * 1-5 cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python3 scripts/paper_trade.py --action daily >> /home/noname/quant-evolve/logs/cron_daily.log 2>&1
+# task-0347 (R220-#37) 月首交易日口径: 每工作日16:30触发,gate自检月首才调仓 (旧: 30 16 25 * * 见 crontab.bak-r220n37-20260817)
+30 16 * * 1-5 cd /home/noname/quant-evolve && /home/noname/quant-evolve/scripts/cron_paper_rebalance.sh >> /home/noname/quant-evolve/logs/cron_rebalance.log 2>&1
+0 20 * * 0 cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python3 scripts/refresh_data.py >> /home/noname/quant-evolve/logs/cron_refresh.log 2>&1
+# === 半月度因子进化（每月1日和15日凌晨2点）===
+0 2 1,15 * * cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python3 scripts/p3_3_evolution_standalone.py --rounds 5 >> /home/noname/quant-evolve/logs/cron_evolution.log 2>&1
+# --- baseline paper_engine (task-0251) ---
+30 16 * * 1-5  cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/paper_engine.py --action daily >> ~/quant-evolve/logs/paper_daily.log 2>&1
+#PAUSED-20260816-seedB 0  15 * * 1-5  cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/paper_engine.py --action rebalance --check-month-start >> ~/quant-evolve/logs/paper_rebalance.log 2>&1
+0  20 * * 0    cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/paper_engine.py --action validate >> ~/quant-evolve/logs/paper_validate.log 2>&1
+* * * * * COLLECT_VPS_URL=http://82.156.124.186:8055 /home/noname/.openclaw/workspace-quant/scripts/collect-metrics.sh hp >/dev/null 2>&1
+30 6 * * 0  cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/fetch_valuation_data.py >> ~/quant-evolve/logs/valuation_fetch.log 2>&1
+# --- W7 risk module (task-0276) ---
+45 16 * * 1-5  cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/risk_patrol.py >> ~/quant-evolve/logs/risk_patrol.log 2>&1
+0  7  * * 0    cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/collect_crowding.py >> ~/quant-evolve/logs/collect_crowding.log 2>&1
+# --- evolution pipeline cycle (task-0275 W5) ---
+0  9 * * 6  cd ~/quant-evolve && ~/miniconda3/envs/quant/bin/python scripts/evolution_pipeline.py cycle >> ~/quant-evolve/logs/cycle.log 2>&1
+# --- W8 notify_hub 统一通知聚合器 (task-0279) ---
+10 * * * * cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python scripts/notify_hub.py >> /home/noname/quant-evolve/logs/notify_hub.log 2>&1
+0 6 1 * * cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python3 scripts/w6_collect_delisted.py >> results/w6-cron-delisted.log 2>&1 # W6-DELISTED-MONTHLY
+@reboot /home/noname/quant-evolve/scripts/reboot_autostart.sh >> /home/noname/quant-evolve/logs/reboot_autostart.log 2>&1
+*/5 * * * * /home/noname/quant-evolve/scripts/heartbeat_selfheal.sh >> /home/noname/quant-evolve/logs/heartbeat.log 2>&1
+10 17 2 * * cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python3 scripts/a12_monthly_evaluate.sh >> /home/noname/quant-evolve/logs/a12_monthly_eval.log 2>&1
