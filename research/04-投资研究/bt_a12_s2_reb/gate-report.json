@@ -1,0 +1,126 @@
+{
+  "version": "a12_s2_reb",
+  "evaluated_at": "2026-08-19 13:46:18",
+  "oos_split": "2021-01",
+  "n_trials": 91,
+  "audit_lock_end": "2024-06-30",
+  "backtest_metrics": {
+    "annual_return": 0.1447,
+    "max_drawdown": -0.2516,
+    "sharpe": 1.0777,
+    "calmar": 0.5751,
+    "cumulative_return": 11.151,
+    "years": 18.48
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "FAIL",
+      "icir_is_annualized": 0.151,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.0748,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.00384,
+      "mean_ic_oos": -0.01355,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": -0.7248
+    },
+    "g3_max_corr": {
+      "status": "FAIL",
+      "max_abs_corr": 0.9437,
+      "worst_pair": [
+        "roa_ttm",
+        "roe_ttm"
+      ],
+      "n_new_factors": 3,
+      "new_factors": [
+        "div_yield_ttm",
+        "roa_ttm",
+        "ret120"
+      ],
+      "threshold": 0.7,
+      "corr_sources": {
+        "matrix": 6,
+        "catalog": 0,
+        "ic_monthly": 9
+      }
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9986,
+      "sr_period": 0.06789,
+      "sr0_expected_max": 0.021884,
+      "T": 4490,
+      "skew": -0.783,
+      "kurtosis": 9.21,
+      "n_trials": 91,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "A12 S2 注册线: holdout ann 25.32% vs base 12.95%(+12.4pp) 且 MDD -8.20% vs -13.50% 改善; locked 近无损 -0.16pp(bloodline pass_mdd<=2pp_worse); 全样本 Calmar 0.6182>0.5871"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "N/A",
+      "mdd_candidate": -0.2516,
+      "mdd_parent": -0.3355,
+      "mdd_deterioration_pp": -8.39,
+      "threshold_pp": 2.0,
+      "parent_version": "a13_rsraw_e1f10dz",
+      "disabled": true,
+      "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+    }
+  },
+  "verdict": "SCORED",
+  "notes": [
+    "门禁6 N/A：D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+  ],
+  "score": {
+    "score": 0.6666,
+    "components": {
+      "p": 0.7496,
+      "dsr": 0.986,
+      "oos_calmar": 0.3455,
+      "oos_sharpe": 0.2434,
+      "is_calmar": 0.9585,
+      "is_sharpe": 0.8981,
+      "dd": 1.0,
+      "corr": 0,
+      "logic": 1.0
+    },
+    "missing_weight": 0.0,
+    "partial": false,
+    "stat_warn": false,
+    "flags": [],
+    "incumbent": "a13_rsraw_e1f10dz"
+  },
+  "holdout": {
+    "pass": true,
+    "nav_file": "results/a12_s2_reb_formal_full_nav.csv",
+    "start_ym": "2024-07",
+    "segment": {
+      "annual_return": 0.2538,
+      "max_drawdown": -0.082,
+      "sharpe": 1.8985,
+      "n_days": 517,
+      "start": "2024-07-01",
+      "end": "2026-08-14"
+    },
+    "locked": {
+      "annual_return": 0.1447,
+      "max_drawdown": -0.2516
+    },
+    "checks": {
+      "ann_ratio_min": 0.6,
+      "ann_ok": true,
+      "mdd_extra_pp_max": 10.0,
+      "mdd_deterioration_pp": -16.96,
+      "mdd_ok": true
+    }
+  }
+}

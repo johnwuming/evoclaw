@@ -1,0 +1,1577 @@
+{
+  "task": "task-0386 历史年化20%+版本评分制v1.1集体重评",
+  "scoring": "SCORE_CONFIG v1.1 (R-225), g6 disabled D-20260819-G6DEL, g3 D-20260819-G3CORR, oos/dd 基准=active",
+  "active": "a13_rsraw_e1f10dz",
+  "active_metrics": {
+    "annual_return": 0.2202,
+    "max_drawdown": -0.3355,
+    "sharpe": 1.3561,
+    "calmar": 0.6562,
+    "cumulative_return": 38.5483,
+    "monthly_win_rate": 0.6516,
+    "years": 18.48,
+    "num_rebalance": 222,
+    "avg_holdings": 19.94,
+    "monthly_turnover_est": 0.4537
+  },
+  "rescored_at": "2026-08-19 13:53:02",
+  "n_trials": 91,
+  "targets": [
+    "v1g_ivw",
+    "v1h_buf",
+    "v0_seed",
+    "v1c_liq",
+    "v1b_mvq",
+    "v3a_peg",
+    "a9_ranksum_raw",
+    "v1d_cv",
+    "v1a_score",
+    "v4d_mfu_raw",
+    "v3b_glm"
+  ],
+  "pool_after_merge_top10": [
+    [
+      "a13_rsraw_e1f10dz",
+      0.8781
+    ],
+    [
+      "v4a_mf0_trr",
+      0.8088
+    ],
+    [
+      "v5k_nh10",
+      0.8
+    ],
+    [
+      "v5i_comb",
+      0.7985
+    ],
+    [
+      "v5j_bl30",
+      0.7811
+    ],
+    [
+      "v5b_amt55",
+      0.7537
+    ],
+    [
+      "v5c_amt73",
+      0.7486
+    ],
+    [
+      "v1g_ivw",
+      0.2988
+    ],
+    [
+      "v1h_buf",
+      0.2979
+    ],
+    [
+      "v1c_liq",
+      0.2896
+    ]
+  ],
+  "results": [
+    {
+      "version_id": "v1g_ivw",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2732,
+        "max_drawdown": -0.6973,
+        "sharpe": 0.9204,
+        "calmar": 0.3918
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 2,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.6433,
+          "sr_period": 0.05798,
+          "sr0_expected_max": 0.052393,
+          "T": 4490,
+          "skew": -0.612,
+          "kurtosis": 6.413,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "方向b(组合构建): 持仓等权 -> 波动率倒数加权(重平衡日按1/vol20d归一); 个股波动差异大且具聚集性(可预测), 高波股自动降杠杆使组合σ与尾部风险下降, 风险预算均衡化提升单位风险收益; 与排序维度正交"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.6973,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 36.18,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2988,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0984,
+          "is_calmar": 0.653,
+          "is_sharpe": 0.767,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a2b_v1g_ivw_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2292,
+          "max_drawdown": -0.2068,
+          "sharpe": 1.0586,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2732,
+          "max_drawdown": -0.6973
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -49.05,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 4,
+        "n_ic_covered": 4,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 8
+    },
+    {
+      "version_id": "v1h_buf",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2699,
+        "max_drawdown": -0.6891,
+        "sharpe": 0.9155,
+        "calmar": 0.3917
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 2,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.6426,
+          "sr_period": 0.05767,
+          "sr0_expected_max": 0.052112,
+          "T": 4490,
+          "skew": -0.592,
+          "kurtosis": 6.219,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "方向c(换手治理): 排名缓冲带 top20进/top40出(hysteresis); 边际排名噪音引发的不必要换手被过滤, 成本v2冲击按换手近似线性下降, 净SR↑; 持仓延续性提升并保留小盘贝塔"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.6891,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 35.36,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2979,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0939,
+          "is_calmar": 0.6528,
+          "is_sharpe": 0.7629,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a2b_v1h_buf_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2691,
+          "max_drawdown": -0.2118,
+          "sharpe": 1.1723,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2699,
+          "max_drawdown": -0.6891
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -47.73,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 4,
+        "n_ic_covered": 4,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 9
+    },
+    {
+      "version_id": "v0_seed",
+      "status": "retired",
+      "prior_verdict": "legacy-grandfathered",
+      "locked_metrics": {
+        "annual_return": 0.2626,
+        "max_drawdown": -0.6949,
+        "sharpe": 0.885,
+        "calmar": 0.3779
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 2,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.564,
+          "sr_period": 0.05575,
+          "sr0_expected_max": 0.053301,
+          "T": 4490,
+          "skew": -0.601,
+          "kurtosis": 6.224,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "高股息(≥2%)+高ROE(>15%)+高ROA(>10%)质量过滤的小市值升序Top20等权组合：股息与盈利质量提供安全边际与低估值暴露，小市值提供A股长期规模溢价；全量池(存活∪退市)+成本v2+一字板不可买约束贴近真实可交易性"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.6949,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 35.94,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2908,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0658,
+          "is_calmar": 0.6298,
+          "is_sharpe": 0.7375,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/seedB_v0_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2626,
+          "max_drawdown": -0.2116,
+          "sharpe": 1.1329,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2626,
+          "max_drawdown": -0.6949
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -48.33,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 4,
+        "n_ic_covered": 4,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 10
+    },
+    {
+      "version_id": "v1c_liq",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2619,
+        "max_drawdown": -0.7036,
+        "sharpe": 0.8824,
+        "calmar": 0.3723
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 2,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.5573,
+          "sr_period": 0.05559,
+          "sr0_expected_max": 0.053394,
+          "T": 4490,
+          "skew": -0.602,
+          "kurtosis": 6.21,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "剔除20日均成交额<500万的极端不可交易标的, 降低冲击成本与一字板不可成交损耗; 本金1000万/20票=单票50万, 500万日额提供约10%日换手容量"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.7036,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 36.81,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2896,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0634,
+          "is_calmar": 0.6205,
+          "is_sharpe": 0.7353,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a2_v1c_liq_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2626,
+          "max_drawdown": -0.2116,
+          "sharpe": 1.133,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2619,
+          "max_drawdown": -0.7036
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -49.2,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 4,
+        "n_ic_covered": 4,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 10
+    },
+    {
+      "version_id": "v1b_mvq",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2475,
+        "max_drawdown": -0.6688,
+        "sharpe": 0.8735,
+        "calmar": 0.3701
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 2,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.6101,
+          "sr_period": 0.05502,
+          "sr0_expected_max": 0.050784,
+          "T": 4490,
+          "skew": -0.527,
+          "kurtosis": 6.402,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "保留小市值主贝塔(权重0.7)叠加质量/价值微调(合计0.3): 不放弃规模溢价的同时优化边际选股质量, 与v1a(质量主导)构成小盘/质量两极对照"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.6688,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 33.33,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2877,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0552,
+          "is_calmar": 0.6168,
+          "is_sharpe": 0.7279,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a2_v1b_mvq_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.272,
+          "max_drawdown": -0.2114,
+          "sharpe": 1.169,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2475,
+          "max_drawdown": -0.6688
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -45.74,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 4,
+        "n_ic_covered": 4,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 11
+    },
+    {
+      "version_id": "v3a_peg",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2472,
+        "max_drawdown": -0.721,
+        "sharpe": 0.8835,
+        "calmar": 0.3429
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv",
+        "peg_np"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 3,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm",
+            "peg_np"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          },
+          "unresolved_pairs": 5,
+          "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.6499,
+          "sr_period": 0.05566,
+          "sr0_expected_max": 0.049811,
+          "T": 4490,
+          "skew": -0.553,
+          "kurtosis": 6.803,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "林奇PEG进选股层(裸, parent=v0_seed): 在质量小盘过滤内(div>=2%, roe>15%, roa>10%, price<10) 用 0.5·(-z mv) + 0.5·(-z peg_np) 排序取Top20; 林奇'以合理价格买入成长'——PEG=PE_ttm/净利润同比(ttm代理), 低PEG=增长相对便宜; 前批已证该宇宙小市值溢价为主alpha源, 价值维度作辅, 本候选测纯选股层价值改造对年化/MDD的影响"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.721,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 38.55,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2861,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0644,
+          "is_calmar": 0.5715,
+          "is_sharpe": 0.7362,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a4d_v3a_peg_formal_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2992,
+          "max_drawdown": -0.1328,
+          "sharpe": 1.2995,
+          "n_days": 519,
+          "start": "2024-07-01 00:00:00.000000000",
+          "end": "2026-08-14 00:00:00.000000000"
+        },
+        "locked": {
+          "annual_return": 0.2472,
+          "max_drawdown": -0.721
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -58.82,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 5,
+        "n_ic_covered": 4,
+        "missing_ic_cols": [
+          "peg_np"
+        ]
+      },
+      "rank_in_pool": 12
+    },
+    {
+      "version_id": "a9_ranksum_raw",
+      "status": "sota",
+      "prior_verdict": "PASS",
+      "locked_metrics": {
+        "annual_return": 0.2176,
+        "max_drawdown": -0.3355,
+        "sharpe": 1.3435,
+        "calmar": 0.6485
+      },
+      "factors": [
+        "circ_mv",
+        "avg_amount_20d",
+        "pb_inv",
+        "roe_ttm",
+        "ret120"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 1.4651,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.4033,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.02912,
+          "mean_ic_oos": 0.02639,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": 1.4298
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.7555,
+          "worst_pair": [
+            "ret120",
+            "mom_pen_dz"
+          ],
+          "n_new_factors": 1,
+          "new_factors": [
+            "ret120"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 0,
+            "catalog": 0,
+            "ic_monthly": 5
+          }
+        },
+        "g4_dsr": {
+          "status": "PASS",
+          "dsr": 0.9999,
+          "sr_period": 0.08464,
+          "sr0_expected_max": 0.02546,
+          "T": 4490,
+          "skew": -0.897,
+          "kurtosis": 9.253,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "ranksum四因子翻案: 去四闸门后 log_mv/amt20 低流动性+pb_inv价值+roe质量 ranksum 合成, E1硬护栏保留"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.3355,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 0.0,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.7715,
+        "components": {
+          "p": 1.0,
+          "dsr": 0.999,
+          "oos_calmar": 0.4853,
+          "oos_sharpe": 0.4884,
+          "is_calmar": 1,
+          "is_sharpe": 1,
+          "dd": 1.0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": false,
+        "flags": [],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a9_ranksum_raw_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2584,
+          "max_drawdown": -0.1613,
+          "sharpe": 1.4961,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2176,
+          "max_drawdown": -0.3355
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -17.42,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": 0.867,
+      "ic_coverage": {
+        "n_factors": 5,
+        "n_ic_covered": 5,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 6
+    },
+    {
+      "version_id": "v1d_cv",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2158,
+        "max_drawdown": -0.7231,
+        "sharpe": 0.7916,
+        "calmar": 0.2984
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv",
+        "amount_cv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 1.025,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0552,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.02395,
+          "mean_ic_oos": 0.00786,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": 0.5281
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 3,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm",
+            "amount_cv"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 9,
+            "catalog": 0,
+            "ic_monthly": 6
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.4782,
+          "sr_period": 0.04986,
+          "sr0_expected_max": 0.050695,
+          "T": 4490,
+          "skew": -0.585,
+          "kurtosis": 6.647,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "成交额波动率低=资金进出节奏平稳、机构筹码稳定、无游资炒作痕迹; A1全池最强新因子(t=-11.8, 方向调整后ICIR年化2.64), 与市值水平(簇7)信息互补, 混合排序在保留小盘暴露同时规避炒作型小盘"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.7231,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 38.76,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2611,
+        "components": {
+          "p": 0.7104,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0,
+          "is_calmar": 0.4973,
+          "is_sharpe": 0.6597,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a2_v1d_cv_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2405,
+          "max_drawdown": -0.2109,
+          "sharpe": 1.0777,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2158,
+          "max_drawdown": -0.7231
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -51.22,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 5,
+        "n_ic_covered": 5,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 16
+    },
+    {
+      "version_id": "v1a_score",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2155,
+        "max_drawdown": -0.7017,
+        "sharpe": 0.8098,
+        "calmar": 0.3072
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 2,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          }
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.5599,
+          "sr_period": 0.05101,
+          "sr0_expected_max": 0.048729,
+          "T": 4490,
+          "skew": -0.513,
+          "kurtosis": 6.464,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "在质量过滤后的池内, 用股息率+ROE+ROA+市值的标准化合成(z div/roe/roa 正、mv 负)替代纯市值排序, 捕捉'便宜的高质量小盘'而非'最小盘', 降低纯壳股暴露, 提升组合质量与价值暴露"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.7017,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 36.62,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.269,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0,
+          "is_calmar": 0.512,
+          "is_sharpe": 0.6748,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a2_v1a_score_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2515,
+          "max_drawdown": -0.2109,
+          "sharpe": 1.1105,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2155,
+          "max_drawdown": -0.7017
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -49.08,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 4,
+        "n_ic_covered": 4,
+        "missing_ic_cols": []
+      },
+      "rank_in_pool": 13
+    },
+    {
+      "version_id": "v4d_mfu_raw",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2059,
+        "max_drawdown": -0.6927,
+        "sharpe": 0.7774,
+        "calmar": 0.2972
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv",
+        "roc",
+        "ev_ebit"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 4,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm",
+            "roc",
+            "ev_ebit"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          },
+          "unresolved_pairs": 10,
+          "note": "10个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.4906,
+          "sr_period": 0.04897,
+          "sr0_expected_max": 0.049325,
+          "T": 4490,
+          "skew": -0.508,
+          "kurtosis": 6.442,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "本地化神奇公式裸选股 (parent=v0_seed): v4b 无择时——归因对照, 分离'MF选股'与'v2b择时'各自贡献; 预期MDD -60~-70% (a2c已证纯选股裸奔MDD -70%), 纯归因用"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.6927,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 35.72,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2657,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0,
+          "is_calmar": 0.4953,
+          "is_sharpe": 0.6478,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/mf_v4d_mfu_raw_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2556,
+          "max_drawdown": -0.2108,
+          "sharpe": 1.1404,
+          "n_days": 517,
+          "start": "2024-07-01",
+          "end": "2026-08-14"
+        },
+        "locked": {
+          "annual_return": 0.2059,
+          "max_drawdown": -0.6927
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -48.19,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 6,
+        "n_ic_covered": 4,
+        "missing_ic_cols": [
+          "roc",
+          "ev_ebit"
+        ]
+      },
+      "rank_in_pool": 14
+    },
+    {
+      "version_id": "v3b_glm",
+      "status": "candidate",
+      "prior_verdict": "REJECT",
+      "locked_metrics": {
+        "annual_return": 0.2048,
+        "max_drawdown": -0.6776,
+        "sharpe": 0.7571,
+        "calmar": 0.3022
+      },
+      "factors": [
+        "div_yield_ttm",
+        "roe_ttm",
+        "roa_ttm",
+        "circ_mv",
+        "graham_score"
+      ],
+      "gates": {
+        "g1_icir_is": {
+          "status": "PASS",
+          "icir_is_annualized": 0.5994,
+          "n_months_is": 180,
+          "threshold": 0.5
+        },
+        "g2_icir_oos": {
+          "status": "PASS",
+          "p_one_sided": 0.0714,
+          "n_months_oos": 42,
+          "oos_end_ym": "2024-06",
+          "audit_lock_end_ym": "2024-06",
+          "mean_ic_is": 0.0165,
+          "mean_ic_oos": -0.00092,
+          "threshold_p": 0.05,
+          "icir_oos_annualized": -0.0525
+        },
+        "g3_max_corr": {
+          "status": "FAIL",
+          "max_abs_corr": 0.9437,
+          "worst_pair": [
+            "roa_ttm",
+            "roe_ttm"
+          ],
+          "n_new_factors": 3,
+          "new_factors": [
+            "div_yield_ttm",
+            "roa_ttm",
+            "graham_score"
+          ],
+          "threshold": 0.7,
+          "corr_sources": {
+            "matrix": 6,
+            "catalog": 0,
+            "ic_monthly": 4
+          },
+          "unresolved_pairs": 5,
+          "note": "5个组合无相关性数据（按未超限处理，待W1全量矩阵）"
+        },
+        "g4_dsr": {
+          "status": "FAIL",
+          "dsr": 0.4055,
+          "sr_period": 0.04769,
+          "sr0_expected_max": 0.051314,
+          "T": 4490,
+          "skew": -0.578,
+          "kurtosis": 6.496,
+          "n_trials": 91,
+          "threshold": 0.95
+        },
+        "g5_logic": {
+          "status": "PASS",
+          "logic": "格雷厄姆烟蒂分进选股层(裸): graham_score = -ln(PB)-ln(PE)+2·cash_to_asset-debt_to_asset, 低PB低PE高现金低杠杆=安全边际; 格雷厄姆'烟蒂股'买在净资产折扣; blend 0.5mv+0.5graham 测裸价值改造"
+        },
+        "g6_mdd_vs_parent": {
+          "status": "N/A",
+          "mdd_candidate": -0.6776,
+          "mdd_parent": -0.3355,
+          "mdd_deterioration_pp": 34.21,
+          "threshold_pp": 2.0,
+          "parent_version": "a13_rsraw_e1f10dz",
+          "disabled": true,
+          "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+        }
+      },
+      "score": {
+        "score": 0.2651,
+        "components": {
+          "p": 0.7428,
+          "dsr": 0,
+          "oos_calmar": 0.0,
+          "oos_sharpe": 0.0,
+          "is_calmar": 0.5037,
+          "is_sharpe": 0.6309,
+          "dd": 0,
+          "corr": 0,
+          "logic": 1.0
+        },
+        "missing_weight": 0.0,
+        "partial": false,
+        "stat_warn": true,
+        "flags": [
+          "stat_warn"
+        ],
+        "incumbent": "a13_rsraw_e1f10dz"
+      },
+      "holdout": {
+        "pass": true,
+        "nav_file": "results/a4d_v3b_glm_formal_full_nav.csv",
+        "start_ym": "2024-07",
+        "segment": {
+          "annual_return": 0.2716,
+          "max_drawdown": -0.2108,
+          "sharpe": 1.1896,
+          "n_days": 519,
+          "start": "2024-07-01 00:00:00.000000000",
+          "end": "2026-08-14 00:00:00.000000000"
+        },
+        "locked": {
+          "annual_return": 0.2048,
+          "max_drawdown": -0.6776
+        },
+        "checks": {
+          "ann_ratio_min": 0.6,
+          "ann_ok": true,
+          "mdd_extra_pp_max": 10.0,
+          "mdd_deterioration_pp": -46.68,
+          "mdd_ok": true
+        }
+      },
+      "notes": [],
+      "n_trials": 91,
+      "prior_score": null,
+      "ic_coverage": {
+        "n_factors": 5,
+        "n_ic_covered": 4,
+        "missing_ic_cols": [
+          "graham_score"
+        ]
+      },
+      "rank_in_pool": 15
+    }
+  ],
+  "recommendation": {
+    "promotion_candidates_rank1_holdout": [],
+    "watch_top3": [],
+    "policy": "本任务不自动激活；晋升决策保留给用户。过线者摘 legacy(=补 score)已由本次回写完成，status 变更（如 retired→candidate 复议）留给用户/后续任务。",
+    "note": "pool_after_merge 含本次重评版本（candidate/pending 且非 partial 才入池；retired 版本 rank 为并池假设值，仅参考）。"
+  }
+}
