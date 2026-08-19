@@ -32,3 +32,10 @@
 - 目标核验：0.8715 ∈ 0.867±0.01 ✓（推算 0.7715+0.10×1.0 与实测一致）
 - a9 g3 明细：max_abs_corr=0.3821（worst ret120×avg_amount_20d，来自月度IC 兜底源），guard_exempt_pairs=[["ret120","mom_pen_dz"]]，status PASS
 - a13_score.py 副本改路径后因 SUPP_IC 重新生成分支 merge 列重叠报错（副本路径改动副作用，非 pipeline 改动问题）；a13 评分改用直接调函数方式重验
+
+## 2026-08-20 00:28 步骤5：在役 a13 评分不变验证（A/B 对照）
+- registry 锁定值 a13 score=0.8781（未触碰，无 rescored 标记）
+- A/B：旧版（.bak-g3sym-20260820 加载）vs 新版，同一输入 gate_max_corr(a13, active=v5h_xsub)：
+  两侧完全一致：max_abs_corr=0.6249, worst (avg_amount_20d,circ_mv), exempt=[["mom_pen_dz","ret120"]]（正向豁免两侧同样生效）, corr_sources {matrix:4, ic_monthly:10}
+- registry 记录 0.2066 与重算 0.6249 的差异 = 数据源时变（a13 evaluate 时点 09:27 与现在 factor_ic_corr.csv 覆盖范围不同，现缺 mom_pen_dz 列走月度IC兜底），旧版跑同输入也得 0.6249 → 与本次改动无关
+- 完整评分链路不变性已由 rescore 干跑 10 个老候选逐位一致覆盖（score_composite+全部gates+holdout）
