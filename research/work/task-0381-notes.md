@@ -41,3 +41,19 @@
 - cmd_evaluate（L1005+）：**不重跑回测**；g1/g2 ICIR 走 load_ic_monthly（selection.factors=v5h_xsub 同款，数据在）；g3 corr 已含 task-0398 护栏豁免；g4 DSR 读 endtoend nav；g5 logic 读 reg.gate.logic；g6 数值保留判定禁用；score_composite 六分项=v1.1；compute_holdout_metrics 读 backtest_refs.nav 分段算指标
 - 产物：results/bt_{version}/gate-report.json + 回写 reg.gate（_shadow_update：stat_warn→清零，clean→+1，满 3 出影）
 - **轮动型兼容性结论**：evaluate 全程只读 registry + nav csv + factor_ic，不依赖选股引擎入口 → a12_s2_reb 可直接被 evaluate。gap 实质在于"nav 不会自动更新到最新月"——月度机制 = 先用 a12_rot_engine 重算 nav 再 evaluate（wrapper 职责=刷新 nav + 调 evaluate，不改 evolution_pipeline.py 本体）✅ 任务书要求"不改本体"可满足
+
+### 6. 引擎与底表调研（2026-08-19 20:5x）
+- a12_rot_engine.py（404 行）：一次性全量脚本（无 CLI 参数），跑四方案+敏感性；**实测 131.5s 完成**（logs/a12_rot_engine.log）；输出覆盖 timing_v2/a12_stats.json + a12_navs.csv + a12_pos_micro.csv；内置 anchor 对拍（vs a9_timing_MA15_on_f0_nav）
+- 底表依赖（read_parquet，非引擎生成）：
+  - timing_v2/a12_rot_series.parquet（RS/Mlarge/micro_state_ma60）= task-0365 VPS 侧 /root/sr365/（sr365_compute.py）基于 qfq 池计算 → **非 HP 常态化管线**
+  - timing_v2/signal_series.parquet（flag_REB_bottom/flag_C_crisis）= tv2_compute_v2.py（HP results/timing_v2 内有 17KB 计算脚本）
+- a12_formal_products.py（task-0384）：一次性脚本，从 timing_v2 复制 S2_reb 列到 results/a12_s2_reb_formal_{full,locked}_nav.csv，逐位校验；registry backtest_refs 指向 formal 文件
+- evolution_pipeline.py evaluate CLI：`--version --oos-start`，**无 --dry-run**；副作用=写 results/bt_{v}/gate-report.json + 回写 reg.gate + decision_log + 满足条件时 _do_activate（自动上岗）
+- **自动上岗风险**：clean_evals 推满 required(3) 出影后，若 rank=1 且 holdout pass=True → _do_activate 改 main.json。registry note 明示"观察期满由人工确认" → wrapper 必须**预检查拦截**：clean_evals >= required-1 时不自动 evaluate，改出人工评审通知
+- **stat_warn 语义**（_shadow_update）：True→进影/清零；False 且在影→+1。stat_warn = g2 p<0.01 或 DSR<0.90（SCORE_CONFIG.stat_warn）
+
+### 7. 机制设计定稿（三层）
+- L1 评估层（本任务落地自动化）：evolution_pipeline.py evaluate --version a12_s2_reb；IC 底表随半月度 evolution（每月1/15 02:00）自动更新 → g1/g2/g3/n_trials 每月有增量；g4/holdout 基于 nav（静态则不变）
+- L2 nav 刷新层（接口预留+检测式降级）：重跑 a12_rot_engine.py（131s）→ 重算 formal nav。**前置依赖**：a12_rot_series.parquet 需重新生成（当前为 VPS sr365 调研产物，非 HP 常态管线）→ wrapper 检测 parquet mtime，未更新则跳过引擎重跑并在结果中降级标注
+- L3 晋升守卫：出影前最后一步（clean_evals>=2）停止自动评估 → 通知人工评审（符合"观察期满由人工确认"）
+- cron 建议：`10 17 2 * *`（每月 2 日 17:10）：避开月首调仓（月首交易日 16:30 paper）与 1/15 日 02:00 evolution；月度 evaluate 与半月进化错开
