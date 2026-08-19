@@ -278,3 +278,4 @@
 | 2026-04-05 | 自动 | R-019 | AI助手变现方案 | 05-变现与增长 | shared/results/05-变现与增长/R-019-AI助手变现方案.md |
 | 2026-04-05 | 自动 | R-017 | 模型用量API限额调研 | 09-生活杂项 | shared/results/09-生活杂项/R-017-模型用量API限额调研.md |
 | 2026-04-05 | 自动 | R-004 | 深度研究Agent全景调研 | 09-生活杂项 | shared/results/09-生活杂项/R-004-深度研究Agent全景调研.md |
+- 2026-08-19 | R-244 | task-0380 | ZeroTier推链路丢SYN根因(VPS UFW静默丢包+sshd/UFW/IP三方错位,非隧道问题) + qfq日更方案(baostock增量merge,~45-60min/日) | work/task-0380-notes.md
