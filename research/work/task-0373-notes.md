@@ -55,3 +55,6 @@ C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON la
   - eqw_index_history.csv = 3fc773b6fb44f38787151466ed17485e
 - 数据现状：股票 qfq parquet 000001/600000/300001 max=2026-08-19（今日，已日更）；hs300/zz500 parquet mtime 08-19 15:01 但文件名写 20260808，需核实际 max date
 - 下一步：核指数 parquet 内 max date + 08-19 全市场股票覆盖度 → 决定 --daily 实跑是否含 08-19 行
+- 数据核验（22:50）：5206 只股票 qfq parquet max date 全部=2026-08-19（今日已日更就绪）；hs300/zz500 parquet 内 max date 也到 08-19（mtime 08-19 15:01）
+- CSV 止 08-14 → 预期 --daily 追加 08-17(Mon)/08-18(Tue)/08-19(Wed) 共 3 行
+- 实施策略：main() 主体逐位不动，仅加 --daily/--tail-days 两个 argparse 参数 + 解析后 if args.daily 提前分支到新增 run_daily()；周更路径 diff 仅见增量 → 零回归可证明
