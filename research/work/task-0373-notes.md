@@ -39,3 +39,9 @@ C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON la
 - collect_qfq_baostock.py v2 已推送 HP（10406B，HP py_compile OK）：真增量(尾行拉取+重叠日除权跳变检测>0.5%自动全量)、--mode idx(指数日更)、--workers N(多进程并发)
 - 原件已备份 scripts/collect_qfq_baostock.py.bak.20260819 (4015B)
 - baostock 公共 API 无多连接类 → 并发用多进程(Linux fork，每 worker 独立 login)
+
+## 5. 数据日更实测通过（19:56）
+- collect_qfq_baostock --mode update --workers 6：codes=5206 updated=5206 err=0 added_rows=42351 dur=168s ✓（日志 logs/qfq_update_20260819.log）
+- --mode idx：hs300 08-07→08-19 (5003→5011行)、zz500 08-07→08-19 (5003→5011行) ✓
+- 核验：000001 parquet 末3日=08-17/18/19 ✓；hs300/zz500 末日=08-19 ✓
+- baostock 单查询约0.2s，6进程并发 → 5206只 2.8分钟，日更开销可忽略
