@@ -16,3 +16,7 @@
 - HP results/factor_ic_monthly.csv md5=c0a1db... 与 VPS 完全一致；factor_catalog_v3.json md5=992f31... 一致
 - HP 面板最新 ym=2026-07（247月）；列含 ym + 107 因子
 - 设计决策：新脚本产物写到独立目录 results/a10-monthly-profile/ 与 results/a10-ic-decay-alerts.*，不覆盖 a7c 原始产物（符合"新文件为主"）
+
+### Dashboard 消费检查（完成）
+- Dashboard server.js 量化 Tab 读 factor_ic_monthly_v2.csv / QUANT_REPORTS_DIR/factor_ic_monthly.csv（W8 IC 曲线用），**不读 a7c-* 或本任务新产物**
+- 本任务新增产物（a10-monthly-profile/、a10-ic-decay-alerts.*）当前不被任何页面消费 → 无需无头浏览器抽查（无消费路径，不引入横向溢出风险）；待接线时再做 390x844 检查。已在报告中注明。
