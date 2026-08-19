@@ -61,3 +61,7 @@ C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON la
 - 本地补丁完成（22:55）：语法 OK，diff 0 行删除（纯增量 190 行），周更 main() 主体未动
 - HP 安装完成（22:56）：备份 collect_crowding.py.bak.20260819（21404B=原件）；新版 30878B 已装且 py_compile 通过
 - 实跑前基线：CSV 1849 行止 08-14；JSON latest_date 08-14；eqw 止 08-14
+- 首轮 --daily 实跑通过（22:58）：尾窗282交易日→CSV追加3行至08-19、eqw对齐至08-19、JSON latest_date=08-19、overall=red
+- **验收发现问题**：CSV 历史部分 md5 不一致（eea4d36≠基线2838f49）——根因=我用了全表 read_csv+整表重写，pandas float repr 改写历史行尾数字节（0.028141411197408657→0.0281414111974086，数值等价字节变）
+- 修复：CSV 改纯追加（只读 date 列判旧最大日期，新行 append 写入，历史字节逐位不变）；eqw CSV 前缀 md5 一致（3fc773b 匹配）因其用 round(x,4) 自写格式
+- 验证计划：跑修复版 → ①无新增日时 CSV md5 应完全不变 ②截断回 1849 行再跑 → 追加3行且 head-1849 md5 与截断态一致
