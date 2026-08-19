@@ -20,3 +20,8 @@
   3. gate_max_corr 调用处传 reg
   4. corr_policy 输出标注更新
 - 关键前置数据（已核实）：a9 e1_guard=1, factors 含 ret120（不在排序 specs, 属 new_factors vs a13）；a13 factors 含 mom_pen_dz（guard_avatars["ret120"] 成员）
+
+## 2026-08-20 00:17 步骤3：单元验证通过
+- G3 a9-vs-a13：exempt=[["ret120","mom_pen_dz"]]; max_abs_corr 0.7555→0.3821 (worst ret120×avg_amount_20d, ≤0.5 → corr 分量满档 1.0); status PASS; corr_policy 标注含 D-20260820-G3SYM
+- 旧签名两参调用 _guard_exempt_pairs(new_f, act) → 空集 = 旧行为（向后兼容锚点）
+- decision-log 已追加 D-20260820-G3SYM（HP 为 UTC 时区，条目时间 17:11 与既有条目格式一致）
