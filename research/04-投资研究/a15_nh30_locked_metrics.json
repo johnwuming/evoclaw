@@ -1,0 +1,26 @@
+{
+  "component": {
+    "experiment": "task-0399 A15 risk-component batch",
+    "base": "a9_ranksum_raw",
+    "specs": "[('log_mv', 1.0, -1), ('amt20', 1.0, -1), ('pb_inv', 0.7, 1.0), ('roe', 0.3, 1.0)]",
+    "universe": "raw+e1_guard+xsub365",
+    "timing": "q3z_x_EW-MA200 (incumbent)"
+  },
+  "n_hold": 30,
+  "drawdown_control": 0,
+  "dd_thresh": 0.2,
+  "dd_reduce": 0.5,
+  "dd_recover": 0.05,
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 29.9,
+  "monthly_turnover_est": 0.4285,
+  "cumulative_return": 32.7338,
+  "annual_return": 0.2097,
+  "max_drawdown": -0.3454,
+  "sharpe": 1.3137,
+  "calmar": 0.6071,
+  "monthly_win_rate": 0.6516
+}

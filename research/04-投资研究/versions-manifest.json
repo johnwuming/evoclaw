@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T06:30:03",
+  "generated_at": "2026-08-19T07:00:03",
   "active": "a9_ranksum_raw",
   "versions": [
     {
@@ -545,6 +545,142 @@
         }
       },
       "files_note": "results/a13x_equiv_v5h_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a15_ddc15",
+      "strategy_prefix": "a15_ddc15",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1901,
+          "max_drawdown": -0.2533,
+          "sharpe": 1.3669,
+          "calmar": 0.7506,
+          "cumulative_return": 35.1354,
+          "monthly_win_rate": 0.6478,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1839,
+          "max_drawdown": -0.2533,
+          "sharpe": 1.3554,
+          "calmar": 0.726,
+          "cumulative_return": 21.6527,
+          "monthly_win_rate": 0.6425,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a15_ddc15_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a15_ddc20",
+      "strategy_prefix": "a15_ddc20",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1992,
+          "max_drawdown": -0.2716,
+          "sharpe": 1.3735,
+          "calmar": 0.7334,
+          "cumulative_return": 41.2416,
+          "monthly_win_rate": 0.6559,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1925,
+          "max_drawdown": -0.2716,
+          "sharpe": 1.3541,
+          "calmar": 0.7087,
+          "cumulative_return": 24.8762,
+          "monthly_win_rate": 0.6516,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a15_ddc20_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a15_nh30",
+      "strategy_prefix": "a15_nh30",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.215,
+          "max_drawdown": -0.3454,
+          "sharpe": 1.337,
+          "calmar": 0.6223,
+          "cumulative_return": 54.285,
+          "monthly_win_rate": 0.6599,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2097,
+          "max_drawdown": -0.3454,
+          "sharpe": 1.3137,
+          "calmar": 0.6071,
+          "cumulative_return": 32.7338,
+          "monthly_win_rate": 0.6516,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a15_nh30_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "a15_nh30_ddc20",
+      "strategy_prefix": "a15_nh30_ddc20",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.1931,
+          "max_drawdown": -0.2772,
+          "sharpe": 1.3465,
+          "calmar": 0.6966,
+          "cumulative_return": 37.0355,
+          "monthly_win_rate": 0.664,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.1853,
+          "max_drawdown": -0.2772,
+          "sharpe": 1.3226,
+          "calmar": 0.6687,
+          "cumulative_return": 22.1582,
+          "monthly_win_rate": 0.6561,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/a15_nh30_ddc20_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "a2_equivcheck",
