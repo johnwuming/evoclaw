@@ -57,3 +57,11 @@
 - L2 nav 刷新层（接口预留+检测式降级）：重跑 a12_rot_engine.py（131s）→ 重算 formal nav。**前置依赖**：a12_rot_series.parquet 需重新生成（当前为 VPS sr365 调研产物，非 HP 常态管线）→ wrapper 检测 parquet mtime，未更新则跳过引擎重跑并在结果中降级标注
 - L3 晋升守卫：出影前最后一步（clean_evals>=2）停止自动评估 → 通知人工评审（符合"观察期满由人工确认"）
 - cron 建议：`10 17 2 * *`（每月 2 日 17:10）：避开月首调仓（月首交易日 16:30 paper）与 1/15 日 02:00 evolution；月度 evaluate 与半月进化错开
+
+### 8. 落地与验证结果（20:5x）
+- HP scripts/a12_monthly_evaluate.sh（flock+重试1次+exit42归一）+ scripts/a12_shadow_eval.py（预检查/幂等/L3守卫/dry-run备份恢复/通知）传输成功（scp -O，HP sshd 无 sftp）
+- bash -n + py_compile 全过
+- 干跑 --dry-run：evaluate 跑通 rank=8/池8 score=0.6666 holdout_ann=0.2538 pass=True；registry/decision-log md5 恢复一致；通知写入 notifications-queue.jsonl；rc=0
+- 补丁：dry-run 备份清单补 experiment-ledger.jsonl（干跑发现 evaluate 会写台账 ev_a12_s2_reb_20260819_1346）
+- 幂等验证：模拟 last_eval_ym=2026-08 → live 模式正确跳过；registry md5 全程 2be515e74b7d 未变
+- 报告 R-248 已写（5031B）；README 顶部变更记录已加；cron 建议行：10 17 2 * *（HP 本地，待用户批）
