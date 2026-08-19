@@ -33,3 +33,19 @@
 - status 分布：candidate 35 / active 2 / pending 9 / retired 3 / sota 2（共 52 个 .json）
 - 两个 active：v1.4(2026-08-15)、v5h_xsub(2026-08-17) → readRegistryActive 按 created_at 应返回 v5h_xsub
 - timing-matrix 数据文件自带 caliber 字段（HP 生成，含 v1.4 字样，属数据内容非渲染兜底，不在本次范围）
+
+## 验证记录（服务重启后实测）
+
+### 第一轮（仅正则修复后）
+- `node --check` 通过；`systemctl restart agent-dashboard` → `is-active` = active
+- /api/quant/registry：n_versions=51（旧正则下仅 4），a12_s2_reb / v5h_xsub / v6a_def 全部可见 ✓
+- 但 active_version_id=v1.4：暴露端点用 `versions.find(active)`（数组序）与 readRegistryActive（created_at 最新）不一致
+
+### 追加修复（第 6 处编辑）
+- /api/quant/registry 的 active 指针改 `readRegistryActive() || find(active)`，加注释
+
+### 第二轮（全部改动后）
+- node --check 通过，重启后 is-active=active
+- /api/quant/registry：n_versions=51，active_version_id=**v5h_xsub**（不再是旧 v1.4）✓
+- /api/quant/timing-config：active_version=v5h_xsub，source=registry/v5h_xsub ✓
+- /api/quant/pending：9 个 pending（v1k_q5z/v2a_deep 等字母命名可见；a12_s2_reb 为 candidate 状态故不在 pending 列表，属正常）✓
