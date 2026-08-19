@@ -31,3 +31,15 @@ HP 侧历史年化 20%+ 版本（locked 口径 metrics 筛选）逐个用已部�
 - v3b_glm 0.2048 candidate
 重评目标=除在役外的 11 个。registry 路径：~/quant-evolve/model/registry/（已有备份 registry.bak.20260818_s2shadow、registry.bak.20260819_t0394.tar.gz）
 manifest：~/quant-evolve/results/versions-manifest.json（100KB，keys: generated_at/active/versions）
+
+## 20:5x 干跑结果（--calc，results/rescore_20pct_v11_summary.json）
+脚本：~/quant-evolve/scripts/rescore_20pct_v11.py（复用部署函数 gate_icir/gate_max_corr/deflated_sharpe/gate_mdd_vs_parent/score_composite/compute_holdout_metrics/score_rank_pool；不 import 重回测）
+- 在役基准 a13_rsraw_e1f10dz（ann 0.2202 / mdd -0.3355 / sharpe 1.3561 / calmar 0.6562），池内分 0.8781 居首
+- 结果（score / rank / 关键分量）：
+  - a9_ranksum_raw 0.7715 rank=6（prior 0.867，差因基准换成 a13：oos_calmar 0.7844→0.4853；corr 0.6249→0.7555=ret120 vs 在役护栏替身 mom_pen_dz，G3CORR 豁免不覆盖该方向）stat_warn=False，holdout pass（ho ann 0.2584 与旧 summary 一致✓）
+  - v1g_ivw 0.2988 / v1h_buf 0.2979 / v0_seed 0.2908(retired,假设入池rank) / v1c_liq 0.2896 / v1b_mvq 0.2877 / v3a_peg 0.2861 / v1a_score 0.2690 / v4d_mfu_raw 0.2657 / v3b_glm 0.2651 / v1d_cv 0.2611
+  - 老版本共性：p=0.0714(分量0.74)、DSR 0.40-0.65(分量0)、dd恶化33-39pp(分量0)、corr 0.9437(分量0)、oos_calmar=0 → stat_warn=True，全部 holdout pass=True（ho段mdd普遍改善至-0.13~-0.21）
+- 池 top（并入后）：a13 0.8781 > v4a_mf0_trr 0.8088 > v5k_nh10 0.80 > v5i_comb 0.7985 > v5j_bl30 0.7811 > a9 0.7715
+- promo=[]（无 rank1+holdout+无警示者）→ 无晋升候选；老版本维持原状
+- IC 覆盖度：v3a_peg 缺 peg_np、v4d_mfu_raw 缺 roc/ev_ebit、v3b_glm 缺 graham_score（gate_icir 部署口径按可用子集合成，已在 summary+registry 标注 ic_coverage，不编造）
+- 修正过：排名并池只含 candidate/pending/active（v0_seed retired 为假设入池参考 rank）
