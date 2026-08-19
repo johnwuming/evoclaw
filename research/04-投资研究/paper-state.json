@@ -45,8 +45,8 @@
   "created_at": "2026-08-17T16:09:39",
   "initial_capital": 100000,
   "last_rebalance": "2026-08-14",
-  "last_daily": "2026-08-14",
-  "model_version": "v5h_xsub",
-  "updated_at": "2026-08-18T16:30:18.871040",
+  "last_daily": "2026-08-19",
+  "model_version": "a13_rsraw_e1f10dz",
+  "updated_at": "2026-08-19T16:30:02",
   "last_daily_update": "2026-08-18T16:30:18.871030"
 }
