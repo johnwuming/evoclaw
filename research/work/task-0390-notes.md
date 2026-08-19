@@ -53,3 +53,26 @@
 - 结论预判: E1 因子化在 λ∈{0.5..1.5} 全区间保留年化（21.63-22.02% vs 硬排除 21.76%），MDD 均 -33.55% 无恶化；
   死区变体 e1f10dz 年化最高 22.02% 且把动量惩罚集中在旧闸门域，是最优 E1 因子化形态
 - 下一步: 补 ledger IT-A13-01..04 + 跑 a13_score.py 评分 v1.1
+
+### 11:18 评分 v1.1 完成（n_trials=91，ledger IT-A13-01..04 已补，95 行）
+补充IC: a13_supp_ic_monthly.csv 260月，pb_inv 247/260 非空（末月2026-08 n=0 常数告警，非系统性问题）；ret120 253/260
+
+| 候选 | score | locked ann/MDD | holdout ann | g2p | DSR | corr(mc) | dd(pp) | rank_in_pool |
+|---|---|---|---|---|---|---|---|---|
+| **a9_ranksum_raw(翻案)** | **0.8670** | 21.76%/-33.55% | 25.84% | 0.4033 | 0.9999 | 0.6249 | 3.75 | **1** |
+| a13_rsraw_e1f10dz | 0.8337 | 22.02%/-33.55% | 25.80% | 0.4719 | 0.9999 | 0.7555 | 3.75 | 1 |
+| a13_rsraw_e1f05 | 0.8321 | 21.92%/-33.55% | 25.62% | 0.6562 | 0.9999 | 0.9426 | 3.75 | 1 |
+| a13_rsraw_e1f10 | 0.8279 | 21.63%/-33.55% | 26.28% | 0.6562 | 0.9999 | 0.9426 | 3.75 | 1 |
+| a13_rsraw_e1f15 | 0.8275 | 21.63%/-33.55% | 25.03% | 0.6562 | 0.9999 | 0.9426 | 3.75 | 1 |
+| a9_raw_universe(mv) | 0.8061 | 21.76%/-36.78% | 20.09% | 0.272 | 0.9991 | N/A | 6.98 | 2 |
+| a9_ranksum_quality(对照) | 0.7848 | 15.33%/-28.78% | 10.69% | 0.4033 | 0.9941 | 0.6249 | -1.02 | 4 |
+
+- 排名池 n=6（registry 有 gate.score 非 partial 的 candidate/pending/active）：v4a_mf0_trr 0.8088 / v5k_nh10 0.8 / v5i_comb 0.7985 / v5j_bl30 0.7811 / v5b_amt55 0.7537
+- **激活建议**：a9_ranksum_raw rank1(0.8670>0.8088)+stat_warn=False+holdout PASS → auto-activate 候选，建议激活（需用户确认）；未实际写 registry（激活权在主 agent/用户）
+- 关键解释：
+  - 四闸门去除的 alpha 主要来自 ranksum 四因子合成（ranksum_raw 0.867 vs mv-only raw 0.806：MDD 从 -36.78% 改善到 -33.55% 是决定性因素，dd 分 0.65 vs 0.004）
+  - E1 因子化在 λ∈{0.5..1.5} 全区间保留年化(21.63-22.02%)与 MDD(-33.55% 恒定)，equiv2 零回归；但 corr 分量被 mom_pen 与在役 ret120 的高相关(0.94)压低（hard-guard 版用 ret120 与在役同源反而 corr 仅 0.62）
+  - 死区变体 e1f10dz 是 E1 因子化最优形态（corr 0.7555 < 0.9426，score 0.8337 最高，locked ann 22.02% 最高）
+  - 对照 a9_ranksum_quality（闸门不去除）score 0.7848 显著低于 raw 系 → 四闸门去除本身是 A13 价值来源之一
+- 数据口径：metrics=locked 窗；DSR=locked 净值日收益×n_trials(91)；g3=月度IC序列Pearson；holdout=SHADOW_CONFIG(2024-07起)
+- 产物：HP results/a13_score_summary.json (23.7KB)、a13_supp_ic_monthly.csv、a13_rsraw_{e1f05,e1f10,e1f15,e1f10dz}_{full,locked}_*
