@@ -58,3 +58,6 @@ C. 实测：先日更数据→跑 --daily→验证 CSV shape/max(date)、JSON la
 - 数据核验（22:50）：5206 只股票 qfq parquet max date 全部=2026-08-19（今日已日更就绪）；hs300/zz500 parquet 内 max date 也到 08-19（mtime 08-19 15:01）
 - CSV 止 08-14 → 预期 --daily 追加 08-17(Mon)/08-18(Tue)/08-19(Wed) 共 3 行
 - 实施策略：main() 主体逐位不动，仅加 --daily/--tail-days 两个 argparse 参数 + 解析后 if args.daily 提前分支到新增 run_daily()；周更路径 diff 仅见增量 → 零回归可证明
+- 本地补丁完成（22:55）：语法 OK，diff 0 行删除（纯增量 190 行），周更 main() 主体未动
+- HP 安装完成（22:56）：备份 collect_crowding.py.bak.20260819（21404B=原件）；新版 30878B 已装且 py_compile 通过
+- 实跑前基线：CSV 1849 行止 08-14；JSON latest_date 08-14；eqw 止 08-14
