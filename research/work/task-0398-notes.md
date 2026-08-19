@@ -16,9 +16,14 @@
 
 ## 执行进度
 - [x] 读 R-242 报告
-- [ ] 读 evolution_pipeline.py g3/corr 代码路径
-- [ ] 备份 + decision-log D-20260819-G3CORR
-- [ ] 改造（向后兼容）
+- [x] 读 evolution_pipeline.py g3/corr 代码路径（gate_max_corr L393 / score_composite L736 消费 gates.g3_max_corr；a13_score.py 是复刻路径，正式路径走引擎 gate_max_corr）
+- [x] 备份 evolution_pipeline.py.bak-g3corr-20260819（md5 与原一致；注意 task-0397 曾于 06:09 改过此文件，备份基于其之后版本 72612B）
+- [x] decision-log 追加 D-20260819-G3CORR（type=gate_config_change）
+- [x] 改造完成（3 处 patch，py_compile OK，+4238 字符）：
+  1. GUARD_CORR_CONFIG：guard_col_default=[ret120]、guard_avatars={ret120:[mom_pen,mom_pen_dz]}、supp_ic_files=[a13_supp_ic_monthly.csv]
+  2. load_ic_monthly：左连接并入补充月度IC列（base 主表、仅新列、跳过 n_* 辅助列）→ 老版本复合 IC 逐位不变
+  3. gate_max_corr(reg, active=None)：新增 _guard_exempt_pairs 豁免（四条件：在役 e1_guard 为真+护栏列登记在 factors+不在排序 specs+候选因子在替身显式名单）；数据源加月度IC Pearson 兜底（矩阵→catalog→IC，≥24 月）；输出带 guard_exempt_pairs / corr_sources 审计字段
+- [x] 冒烟测试通过：豁免单元测试（替身命中/非替身不豁免/无 e1_guard 空集/护栏列参与排序不豁免）+ merged IC 112 列含 4 补充列 + 引擎 g3 for e1f10dz = 0.2066 worst(mom_pen_dz,roe_ttm) exempt(mom_pen_dz,ret120)——与 R-242 独立复核 0.2066 逐位一致
 - [ ] 兼容性验证（老候选 score 不变）
 - [ ] e1f10dz 正式重评（≈0.8781）
 - [ ] equiv 干跑
