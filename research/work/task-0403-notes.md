@@ -5,11 +5,21 @@
 
 ## 步骤进度
 1. [x] 读 a10 两个脚本，确认数据依赖与定时依据
-2. [ ] 设计 cron 行
-3. [ ] 通知 wrapper（参考 a12 notify 用法）
+2. [x] 设计 cron 行：`5 9 3 * *`（每月3日 09:05，依据见步骤1）
+3. [ ] 通知 wrapper：`scripts/a10_monthly_monitor.sh`（a12 同 schema append notifications-queue.jsonl）
 4. [ ] crontab 快照 + 追加安装 + 验证
 5. [ ] 手动触发 a10_ic_decay_monitor.py 全链路验证
 6. [ ] VPS 侧通知队列验证
+
+## 步骤2/3 设计（2026-08-20 00:3x）
+
+**通知链路实证**：VPS `crontab -l` 有 `*/30 auto_sync_notify.py`；该脚本 `forward_hp_notifications()` 把 HP `results/notifications-queue.jsonl` 水位后的新行 → VPS `/root/.openclaw/workspace/scripts/.task-notifications.jsonl`（幂等）。a12_shadow_eval.notify() 直接 append 队列（schema: ts/level/type/title/body/source/severity/_dedupe_key）→ 同样方式接入。
+
+**wrapper 设计**（新增 `scripts/a10_monthly_monitor.sh`，不动 a10 脚本本体）：
+- flock 防并发；依次跑 profile_update（幂等）+ ic_decay_monitor（原子写）
+- 任一非0 exit → red 通知；否则 n_alerts>0 → warn 通知、=0 → info 通知
+- dedupe key `a10|{as_of_ym}`，队列尾部同 key 已存在则跳过（防同月重复通知）
+- cron 行：`5 9 3 * *  cd /home/noname/quant-evolve && bash scripts/a10_monthly_monitor.sh >> logs/a10-monthly-monitor.log 2>&1`
 
 ## 步骤1 结论：数据依赖与定时依据（2026-08-20 00:2x）
 
