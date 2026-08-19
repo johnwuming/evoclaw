@@ -43,3 +43,12 @@ manifest：~/quant-evolve/results/versions-manifest.json（100KB，keys: generat
 - promo=[]（无 rank1+holdout+无警示者）→ 无晋升候选；老版本维持原状
 - IC 覆盖度：v3a_peg 缺 peg_np、v4d_mfu_raw 缺 roc/ev_ebit、v3b_glm 缺 graham_score（gate_icir 部署口径按可用子集合成，已在 summary+registry 标注 ic_coverage，不编造）
 - 修正过：排名并池只含 candidate/pending/active（v0_seed retired 为假设入池参考 rank）
+
+## 21:0x 验收与交付（已完成）
+- --write 执行：tar 备份 model/registry.bak.20260819_t0386.tar.gz（35.7KB）→ 11 条目回写 → manifest 重生成 rc=0（97 versions, active=a13）
+- 独立验收：v1g_ivw/v3b_glm/a9 registry gate.score vs summary MATCH×3；变更文件清单=11 registry+manifest+summary+备份，无无关改动；在役 a13 未动（无 rescored 块）
+- 确定性：两次干跑分数逐位一致
+- 注意：HP 系统时间比 GMT+8 慢 7h（rescored.at=13:53 为 HP 本地钟）
+- 排名口径备忘：a9(status=sota)/v0_seed(retired) 不在正式池（部署口径），rank 为假设入池参考值；重评后池首仍为 a13 0.8781
+- 报告：shared/results/05-量化投资/R-245-历史20pct版本评分制v1.1重评报告.md（R-244/R-246 被占、R-245 空闲）
+- README.md 顶部头条+变更记录表已更新
