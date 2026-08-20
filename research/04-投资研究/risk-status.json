@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19 16:45:01",
+  "generated_at": "2026-08-20 16:45:02",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
@@ -117,13 +117,13 @@
     "capacity": {
       "as_of": "last trading day",
       "method": "单日可买量=ADV20×参与率，策略容量=可买量÷持仓权重，取11票瓶颈(min)",
-      "conservative_5pct": 15885082.0,
-      "neutral_10pct": 31770164.0,
-      "optimistic_15pct": 47655247.0,
+      "conservative_5pct": 15630155.0,
+      "neutral_10pct": 31260309.0,
+      "optimistic_15pct": 46890464.0,
       "bottleneck_stock": "603551",
-      "mean_5pct": 339116817.0,
-      "mean_10pct": 678233633.0,
-      "mean_15pct": 1017350450.0
+      "mean_5pct": 337326465.0,
+      "mean_10pct": 674652930.0,
+      "mean_15pct": 1011979394.0
     }
   }
 }

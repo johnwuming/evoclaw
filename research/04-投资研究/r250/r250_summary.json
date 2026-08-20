@@ -1,0 +1,146 @@
+{
+ "script": "r250_profile.py",
+ "task": "task-0406",
+ "data": {
+  "a13_nav": [
+   "2006-01-04",
+   "2026-08-14",
+   5008
+  ],
+  "crowding": [
+   "2019-01-02",
+   "2026-08-19",
+   1851
+  ],
+  "signal_M_micro_ew": [
+   "2006-01-05 00:00:00",
+   "2026-08-10 00:00:00",
+   5003
+  ],
+  "pos_MA15_base": [
+   "2006-01-04",
+   "2026-08-14",
+   5008
+  ]
+ },
+ "dir3_crowding": {
+  "measure": "micro_turnover_share_roll20 expanding pct (min250d, PIT)",
+  "overlap_months": 80,
+  "first_month": "2020-01",
+  "profile": {
+   "high": {
+    "n": 5,
+    "mean": 0.0045,
+    "median": 0.0038,
+    "win": 0.8,
+    "std": 0.0107,
+    "worst": -0.0119,
+    "mdd_mean": -0.0206,
+    "crisis_n": 0
+   },
+   "mid": {
+    "n": 30,
+    "mean": 0.0097,
+    "median": 0.0092,
+    "win": 0.6,
+    "std": 0.0321,
+    "worst": -0.0501,
+    "mdd_mean": -0.0262,
+    "crisis_n": 0
+   },
+   "low": {
+    "n": 45,
+    "mean": 0.0136,
+    "median": 0.0207,
+    "win": 0.689,
+    "std": 0.0394,
+    "worst": -0.0629,
+    "mdd_mean": -0.0341,
+    "crisis_n": 0
+   }
+  },
+  "high_minus_low_mean": -0.0091,
+  "crisis_months_ret_lt10pct": {},
+  "state_counts": {
+   "low": 45,
+   "mid": 30,
+   "high": 5
+  }
+ },
+ "dir3_secondary_pct60": {
+  "high": {
+   "n": 16,
+   "mean": 0.0186,
+   "median": 0.0196,
+   "win": 0.688,
+   "std": 0.0368,
+   "worst": -0.0459,
+   "mdd_mean": -0.0271,
+   "crisis_n": 0
+  },
+  "mid": {
+   "n": 24,
+   "mean": 0.0162,
+   "median": 0.0169,
+   "win": 0.667,
+   "std": 0.0329,
+   "worst": -0.0509,
+   "mdd_mean": -0.027,
+   "crisis_n": 0
+  },
+  "low": {
+   "n": 16,
+   "mean": -0.0064,
+   "median": -0.004,
+   "win": 0.5,
+   "std": 0.0297,
+   "worst": -0.0629,
+   "mdd_mean": -0.0423,
+   "crisis_n": 0
+  }
+ },
+ "dir4_rv_timing": {
+  "measure": "RV20(M_micro_ew) trailing756d pct",
+  "months": 235,
+  "grid": {
+   "low|de_risk": {
+    "n": 235,
+    "mean": 0.0171,
+    "median": 0.0149,
+    "win": 0.647,
+    "std": 0.0516,
+    "worst": -0.1403,
+    "mdd_mean": -0.0342,
+    "crisis_n": 2
+   }
+  },
+  "gate_state_counts": {
+   "de_risk": 235
+  },
+  "rv_state_counts": {
+   "low": 235
+  }
+ },
+ "dir4_redundancy_ddc": {
+  "rv70_vs_dd15": {
+   "n_a": 1358,
+   "n_b": 552,
+   "n_ab": 347,
+   "p_b_given_a": 0.256,
+   "p_a_given_b": 0.629,
+   "jaccard": 0.222
+  },
+  "rv70_vs_dd20": {
+   "n_a": 1358,
+   "n_b": 197,
+   "n_ab": 168,
+   "p_b_given_a": 0.124,
+   "p_a_given_b": 0.853,
+   "jaccard": 0.121
+  },
+  "rvhi_days": 1358,
+  "total_days": 4734,
+  "mean_next20d_ret_given_rvhi": 0.0184,
+  "mean_next20d_ret_given_rvlo": 0.0147
+ }
+}
