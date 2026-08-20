@@ -32,3 +32,11 @@
 5. [01:53] 参照线再核: factor_ic_monthly.csv 全 247 月 (2006-01~2026-07)
    在役 ranksum4 中 catalog 可得: circ_mv ICIR .269 | roe_ttm ICIR -.092 | div_yield .261
    pb_inv/avg_amount_20d 待从 csv 列确认（avg_amount_20d 在列, pb_inv 不在 107 清单, 用 div_yield/roe/circ_mv + net_profit_yoy 作参照组）
+6. [02:10] ⚠️ 独立复算发现主脚本收益配对错位（验收机制起效）：
+   - 我的 RET[m]=close[m+1]/close[m]（领先存储），ic_series 却取 RET[:,m+1] → F[m] 实际对上了 m+1→m+2 收益
+   - v3ak 的 R[m]=close[m]/close[m-1]（滞后存储），取 R[m+1] 恰为前瞻 → W1 正确配对 = F[m] vs ret(m→m+1)
+   - 隔离测试证明 winsorize+zscore 不改变秩 IC（-0.0166 三态一致），排除处理因素
+   - 另发现 MASK 缺 W1 过滤：MIN_LISTED_DAYS=120 交易日 + mvol>0（近似=当月有K线行），MIN_PRICE=0 无实际门槛
+   - 已补丁：配对改 RET[:,m]、MASK 加 CDAY_CUM>=120、dump 增加 sue_std_p 列；重跑中
+   - 错误口径下 (m+1→m+2): sue_std IC .0106 ICIR .105 —— 该数字作废
+7. [02:12] 复算基准（正确 W1 配对, 2019-04 raw=-0.0166, 2021-10=-0.0453, 2025-06=-0.0108）将用于最终验证
