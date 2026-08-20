@@ -26,4 +26,34 @@
 3. 快照文件 results/crowding_snapshots.csv：7 行 # 注释（口径元数据）+ 1 表头 + 1 数据行；行：2026-07,2026-07-31,share_roll20=0.0243777058,epct=1.3609,roll3y=3.3113,pct60=51.6667,n_hist=1838,generated_at=2026-08-20 17:42:23。
 4. 幂等验证：同月复跑两次均 `[skip]`，数据行数=1，md5 前后一致（1886e0bdc156babd8b27e3adf736f769）→ 不增行、不覆盖 ✓。
 5. 历史一致性抽查（质量要求 5）：快照 2026-07 行 vs crowding_history.csv 当前的 7 月末行（同时刻同文件）→ share_roll20 0.0243777058358952 完全一致；epct 1.3609 与 R-250 今晨 r250_profile.py 算出的 crowding_monthly.csv 2026-07 行 epct=1.3609145345672293 完全一致。关系结论：快照=锁存时点的当前重算值，一致；「漂移」是指未来 qfq 刷新后重算历史会变，快照从此不再变——这正是机制目的。注：2026-07 值在 07-31→08-21 间可能已漂移过（无历史备份可验证，R-250 §2.2 已披露），从本月起新月度在月末后≤1 天内锁定。
-6. HP 系统时钟为 UTC（generated_at 2026-08-20 17:42 UTC = 北京 08-21 01:42）；cron 表这式按 HP 本地时间评估，19:35 HP-UTC = 北京 03:35 次日——避开了 HP 本地 18:00 qfq 行与全部既有行时点。
+## crontab 变更（HP）
+
+- 备份：`crontab -l > ~/crontab.backup.20260821`（31 行，4,212B）。
+- 追加（仅追加，diff 确认仅 2 新行，既有 31 行零改动）：
+  - `# --- task-0408 crowding 月度快照（R-250 §4.1a，锁存最近完整月，幂等 append-only）---`
+  - `35 19 1 * * cd /home/noname/quant-evolve && flock -n /tmp/snapshot_crowding.lock /home/noname/miniconda3/envs/quant/bin/python scripts/snapshot_crowding.py >> /home/noname/quant-evolve/logs/snapshot_crowding.log 2>&1`
+- 时点：每月 1 日 19:35（HP 本地 UTC = 北京次日 03:35），避开 HP 本地 18:00 qfq 日更与 20:00 周任务；flock 防重叠；日志 logs/snapshot_crowding.log（已由手动预跑创建，首两行见 [ok]/[skip]）。
+- 预计行为：每月 1 日锁存刚结束月份的最后一个可得数据行（crowding 源为周日 07:00 周采集，故月末值通常为该月最后一个周五/交易日）；同月重复触发一律 [skip]。
+- 回滚：`ssh HP 'crontab ~/crontab.backup.20260821'`（恢复 31 行）；如需彻底回退再删 scripts/snapshot_crowding.py、results/crowding_snapshots.csv、logs/snapshot_crowding.log（均为本任务新建文件，删除不影响任何既有机制）。
+
+## 验收自检（与主 agent 复跑命令一致）
+
+- `grep snapshot_crowding <(crontab -l)` → 1（任务行存在）；crontab 总行数 31→33，既有行 md5 语义未变（diff 仅追加）✓
+- 快照文件存在，数据行数=1（2026-07），字段 9 列完整 ✓
+- 幂等：直接复跑×2 + cron 原样命令（flock+重定向）复跑×1，均 [skip]，行数与 md5 不变 ✓
+- py_compile COMPILE_OK；未改 registry/pipeline/paper_engine；未杀任何进程（零进程操作）✓
+- cron 原样命令手动预跑成功，日志创建 ✓
+
+## 交付物清单
+
+- HP ~/quant-evolve/scripts/snapshot_crowding.py（5,103B，新建）
+- HP ~/quant-evolve/results/crowding_snapshots.csv（810B，新建：7 注释+1 表头+1 数据行）
+- HP ~/crontab.backup.20260821（4,212B，crontab 备份）+ crontab 新增 2 行（1 注释+1 任务）
+- HP ~/quant-evolve/logs/snapshot_crowding.log（新建，运行日志）
+- VPS 本任务笔记：shared/results/work/task-0408-notes.md；脚本底稿 /tmp/snapshot_crowding.py（VPS）
+
+## 结论
+
+R-250 §四结论 1a（E2 前置条件「crowding 月度快照机制」）已落地：月度 cron 锁存最近完整月的 share_roll20 主口径 expanding 分位（与 E1 画像逐字同式）+ roll3y 分位（E2 预注册口径）+ 参考列，append-only、同月幂等。首锁 2026-07，与 R-250 今晨重算值完全一致。漂移风险自本月起在月末后≤1 天内被锁定。后续 E2 预注册可直接消费 crowding_snapshots.csv（roll3y 列，60/40 阈值）。
+
+- 状态：完成，待主 agent 独立验收。2026-08-21 01:5x（北京）
