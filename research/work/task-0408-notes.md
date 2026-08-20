@@ -20,3 +20,10 @@
 6. 列设计：month,date,share_roll20,share_roll20_epct,share_roll20_roll3y_pct,micro_turnover_share,micro_turnover_pct60,n_hist,generated_at。roll3y(756d,min250) 列是 E2 预注册指定口径（R-250 §四1b），必须一并锁存。
 
 ## 实施
+
+1. 脚本落盘：HP ~/quant-evolve/scripts/snapshot_crowding.py（5,103B，VPS 本地底稿 /tmp/snapshot_crowding.py）。scp 无 SFTP 子系统，改用 cat 管道传输。py_compile COMPILE_OK。
+2. 首次运行：`[ok] locked month 2026-07 (data date 2026-07-31, epct=1.3609, roll3y=3.3113)`。
+3. 快照文件 results/crowding_snapshots.csv：7 行 # 注释（口径元数据）+ 1 表头 + 1 数据行；行：2026-07,2026-07-31,share_roll20=0.0243777058,epct=1.3609,roll3y=3.3113,pct60=51.6667,n_hist=1838,generated_at=2026-08-20 17:42:23。
+4. 幂等验证：同月复跑两次均 `[skip]`，数据行数=1，md5 前后一致（1886e0bdc156babd8b27e3adf736f769）→ 不增行、不覆盖 ✓。
+5. 历史一致性抽查（质量要求 5）：快照 2026-07 行 vs crowding_history.csv 当前的 7 月末行（同时刻同文件）→ share_roll20 0.0243777058358952 完全一致；epct 1.3609 与 R-250 今晨 r250_profile.py 算出的 crowding_monthly.csv 2026-07 行 epct=1.3609145345672293 完全一致。关系结论：快照=锁存时点的当前重算值，一致；「漂移」是指未来 qfq 刷新后重算历史会变，快照从此不再变——这正是机制目的。注：2026-07 值在 07-31→08-21 间可能已漂移过（无历史备份可验证，R-250 §2.2 已披露），从本月起新月度在月末后≤1 天内锁定。
+6. HP 系统时钟为 UTC（generated_at 2026-08-20 17:42 UTC = 北京 08-21 01:42）；cron 表这式按 HP 本地时间评估，19:35 HP-UTC = 北京 03:35 次日——避开了 HP 本地 18:00 qfq 行与全部既有行时点。
