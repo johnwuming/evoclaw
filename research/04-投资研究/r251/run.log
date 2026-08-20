@@ -1,4 +1,7 @@
 [1] ths panel (235170, 9), codes=5174
-[2] events=235170, sue_std cov=0.669, sue_pct cov=0.842, t=24s
-[3] kline codes=5020, t=67s
+[2] events=235170, sue_std cov=0.669, sue_pct cov=0.842, t=23s
+[3] kline codes=5020, t=68s
 [4] CLOSE (5020, 247), avg stocks/m=2845
+[5] factor panels ready, t=104s
+[6] IC done: {'sue_std': {'n_months': 240, 'mean_ic': 0.01167, 'icir': 0.115, 't': 1.78, 'ic_gt0_ratio': 0.508}, 'sue_pct': {'n_months': 240, 'mean_ic': 0.00634, 'icir': 0.074, 't': 1.15, 'ic_gt0_ratio': 0.512}}, t=115s
+R251_DONE 118.8 s
