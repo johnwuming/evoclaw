@@ -23,3 +23,12 @@
      roe_ttm: IC -.0130 ICIR -.092 t -1.45 | net_profit_yoy: IC -.013 ICIR -.209 t -3.24 (240月)
      → 参照线取在役可用因子：circ_mv ICIR≈0.27（最高）, div_yield≈0.26
    - 价格: data/all_stocks_qfq/*_daily_qfq.parquet 逐股日线
+4. [01:52] r251_sue_profile.py 已上 HP nohup（PID 503333，log=results/r251/run.log）
+   SUE 口径: sue_std=(E_q-E_{q-4})/std(ΔE_8q,min5) clip±15; sue_pct=(E_q-E_{q-4})/max(|E_{q-4}|,1e7) clip±10
+   PIT: avail_date→ym as-of + 同月多次披露取最新 + ffill（与 W1 fin 因子同机制）
+   事件表: 235170 事件, sue_std 覆盖率 0.669, sue_pct 覆盖率 0.842
+   冗余对照: roe_ttm(同面板 as-of) + net_profit_yoy(fin_deep_monthly_panel_ak, W1 同源)
+   新鲜度分层: 因子月序号 - avail 月序号 ∈ {0-2, 3-5, 6+} 三桶
+5. [01:53] 参照线再核: factor_ic_monthly.csv 全 247 月 (2006-01~2026-07)
+   在役 ranksum4 中 catalog 可得: circ_mv ICIR .269 | roe_ttm ICIR -.092 | div_yield .261
+   pb_inv/avg_amount_20d 待从 csv 列确认（avg_amount_20d 在列, pb_inv 不在 107 清单, 用 div_yield/roe/circ_mv + net_profit_yoy 作参照组）
