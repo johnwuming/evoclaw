@@ -1,0 +1,9 @@
+# crowding monthly snapshot (append-only) — task-0408 / R-250 §4.1a, R-237 drift fix
+# share_roll20 = micro_turnover_share_roll20 (amount-based, qfq-independent)
+# share_roll20_epct = expanding pct of share_roll20, min250d, (x[:-1]<=x[-1]).mean()*100
+#   (identical to r250_profile.py L40-42, R-250 E1 main caliber)
+# share_roll20_roll3y_pct = trailing 756d pct min250 (E2 prereg caliber, 60/40 thresholds)
+# rule: lock last COMPLETED calendar month's last available row; same-month rerun = skip
+# do NOT edit history rows manually; source: results/crowding_history.csv (weekly rebuilt)
+month,date,share_roll20,share_roll20_epct,share_roll20_roll3y_pct,micro_turnover_share,micro_turnover_pct60,n_hist,generated_at
+2026-07,2026-07-31,0.0243777058,1.3609,3.3113,0.0260531717,51.6667,1838,2026-08-20 17:42:23
