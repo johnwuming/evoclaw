@@ -36,3 +36,20 @@
 - 方向四：RV20=ln(M_micro_ew) 滚动20日std×√252 → trailing756d 分位 → × 择时态(MA15_base<0.99=de_risk) 3×2 网格；关键格=high-RV+full（门漏掉的高波月）。日频 forward20d 收益对照。
 - 冗余：rv_pct≥0.7 日 vs dd≤-15%/-20% 日重叠（Jaccard/条件概率）。
 - 产物：~/quant-evolve/results/r250/{crowding_monthly.csv, rv_monthly.csv, r250_summary.json}
+
+## 画像结果（v1+v2，产物 r250_summary.json / r250_v2_summary.json，已拉回 VPS work/r250/）
+### 方向三（拥挤度，80 个月样本 2020-01→2026-08）
+- 主口径 expanding pct 70/30：high n=5 / mid 30 / low 45；high 均值 0.45% vs low 1.36%（方向对，差 -0.91pp/月）但 n=5 <20 → 未达线。
+- 敏感性 roll3y(756d) pct 70/30：high n=15（<20），high 0.22% vs low 1.36%。
+- 敏感性 roll3y 60/40：high n=20（=20 临界），high 0.43% vs low 1.57%（差 -1.14pp/月），胜率 0.60 vs 0.70，月内MDD均值 -2.2% vs -3.4% → 方向正确、触发数临界达标。
+- 副口径 pct60：方向反转（low 月份均值 -0.64% vs high +1.86%）→ 单指标内部口径分歧，稳健性不足。
+- 旗舰案例：2023-09→2024-01 roll3y_pct 83-93 持续高位，2024-01 mkt_ret -24.2%（A13 仅 -4.2%，择时层护住）→ trailing3y 口径在 2024-01 踩踏前确实处于高位。
+- 判定：**有条件达线**（仅 roll3y 60/40 临界过线；主口径未过）→ E2 预注册建议附带两个前置条件（见报告）。
+### 方向四（RV×择时，235 个月样本 2007-01→2026-08）
+- 市场层 fwd20d（择时无关）：rvhi +2.10%（n=1358日）vs rvlo +0.77%（n=1500日）→ 高波后市场前向收益更高（均值回复），与「高波降仓」假设方向相反。
+- 3×3 网格关键格：rvhigh|poshigh n=7 均值 +7.72%（反弹月，砍仓即砍收益）；rvhigh|poslow n=26 均值 -0.51%（在役门已降仓的月）；rvlow|poshigh n=31 均值 +5.24% 胜率 96.8%（最佳格）。
+- 冗余度（日频）：dd≤-20% 日 197 天中 85.3% 处于 RV-high（rv_pct≥0.7，1358 天）；Jaccard 0.12/0.22 → ddc 深回撤触发几乎全被 RV-high 包含 → 真危机段高度冗余，而 RV-high 大部分时间不对应深回撤（p(dd20|rvhi)=12.4%）。
+- 判定：**未达线**（分段胜率方向不成立 + 与 ddc 深回撤段冗余 85%）→ 负结果如实记录；RV 冻结为状态监控变量。rvlow|poshigh 观察性亮点标注为事后格子挖掘，不作 E2 建议。
+### 计算/验证记录
+- HP 计算进程 PID 497026（v1）已自然退出 code 0；v2 同步跑完。未动 registry/pipeline/paper_engine/crontab，未杀任何既有进程。
+- 中间产物：HP ~/quant-evolve/results/r250/（5 文件）+ VPS shared/results/work/r250/（同 5 文件镜像）。
