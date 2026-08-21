@@ -28,3 +28,19 @@
 ### API 验证（20:27）
 - GET /api/metrics/system/current → 200，9.6ms
 - GET /api/metrics/system?hours=24 → 200，71ms，servers=[hp,vps]，各 287 个 5min 降采样点，字段完整（cpu/mem/disk/net/temp）→ 24h 趋势图数据完整
+
+### 增速回归验证（20:30-20:35，覆盖 20:30/20:32/20:34 三个 pull 周期）
+- t0 20:30:18 = 4,364 行 → t1 20:34:43 = 4,373 行：**+9 行/4.4 分钟 ≈ +2 行/分钟**（hp 1 + vps 1），修复前为 ~+1000 行/分钟（539 倍重复）
+- hp 12:24Z→12:34Z 每分钟恰好 1 行；hp_max/vps_max 均追平当前分钟；watermark 持续推进（12:34:01Z）
+- pull 日志最后一条错误停在 20:14（修复前），此后零错误
+- 终态：metrics.db 831,488B（0.83MB）+ WAL 0（checkpoint 后），integrity ok；prune 每小时滚动后会稳定在 ~2,880 行（24h×2 台×1 行/分钟）
+
+### 「只保持一条数据可以吗」评估结论
+**不建议。** 监控卡是 24h 趋势图（全部/VPS/HP 三种过滤），只留 1 条 = 趋势卡退化成静态数字卡，等于废掉监控功能。合理上限 = 1 行/分钟/台 × 24h × 2 台 ≈ 2,880 行 ≈ 1MB 以内。本次瘦身后实际 0.83MB/4,373 行，已在目标量级——**无需「只留一条」即可达标**。
+
+### 交付清单
+- 修复：scripts/pull-hp-metrics.sh（watermark 增量 + 密码外置 secrets.env + OR IGNORE 双保险；原版备份 /tmp/pull-hp-metrics.sh.orig-task0434）
+- 数据：去重 1,072,091+8,662 行，UNIQUE(timestamp,server) 索引，VACUUM 340MB→0.83MB
+- 备份：/root/metrics.db.bak-task0434-20260821（340MB，观察 24h 稳定后可删）
+- 未动：server.js、cron、HP 侧文件、服务进程（agent-dashboard 全程未重启）
+- 旁路发现（供主 agent 知悉，非本任务范围）：HP 直报通道（collect-metrics.sh POST /api/metrics/ingest）12:05Z 后疑似断流/重试补发，pull 通道已独立覆盖每分钟数据，监控无缺口；属 task-0433 改动面
