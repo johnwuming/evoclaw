@@ -44,5 +44,6 @@
 - 验证设计：先复现 r0419 原始 IC（应得 −0.0920/−0.796/251 月）+ 复现 ρ(F,vol120)≈0.442，两条通过才信残差结果。
 
 ## 待办
-- [ ] 单月独立抽验
-- [ ] R-260 报告 + README 更新 + completions
+- [x] 单月独立抽验：2015-06、2020-12 两个月独立代码路径复算 v2 残差 IC，diff=0.0（精确一致），脚本 r0422_spotcheck.py，md5 已入档
+- [x] R-260 报告（5,000 字节）+ README 顶部日志更新 + completions 待写
+- 镜像：VPS shared/results/work/r0422/ 六文件 md5 与 HP 逐一一致（ic/quintile/summary/md5/build.log/vol_panel 34MB）
