@@ -1,0 +1,36 @@
+{
+ "cfg_D": {
+  "num_leaves": 31,
+  "learning_rate": 0.05,
+  "n_estimators": 300,
+  "min_child_samples": 200,
+  "feature_fraction": 0.9,
+  "bagging_fraction": 0.8,
+  "bagging_freq": 1
+ },
+ "cfg_O": {
+  "num_leaves": 15,
+  "learning_rate": 0.03,
+  "min_child_samples": 200,
+  "feature_fraction": 1.0,
+  "n_estimators": 300,
+  "bagging_fraction": 0.8,
+  "bagging_freq": 1
+ },
+ "trials_O": 20,
+ "optuna_note": "optuna未安装,预登记随机搜索替代,seed42",
+ "results": {
+  "D": {
+   "n_months": 186,
+   "mean_ic": 0.08978570430107528,
+   "icir": 0.7504499117120134,
+   "ic_positive": 0.8118279569892473
+  },
+  "O": {
+   "n_months": 186,
+   "mean_ic": 0.09078287634408602,
+   "icir": 0.7167162349940703,
+   "ic_positive": 0.8010752688172043
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "ranksum4": {
+  "icir": 0.6892653084880767,
+  "mean_ic": 0.08615775833333333,
+  "n_months": 240,
+  "segments_icir": [
+   0.8597,
+   0.7176,
+   0.8556,
+   0.4981,
+   0.6014
+  ],
+  "quintiles_avg_nextret": [
+   0.00508,
+   0.01154,
+   0.01631,
+   0.02137,
+   0.02415
+  ],
+  "quintile_monotonic": true
+ },
+ "lgbm_D": {
+  "icir": 0.7504499117120134,
+  "mean_ic": 0.08978570430107528,
+  "n_months": 186,
+  "segments_icir": [
+   1.2344,
+   1.1887,
+   0.2976,
+   1.0808,
+   0.5803
+  ],
+  "quintiles_avg_nextret": [
+   0.0001,
+   0.00628,
+   0.01059,
+   0.01442,
+   0.01911
+  ],
+  "quintile_monotonic": true,
+  "delta_icir_vs_ranksum": 0.06118460322393671
+ },
+ "lgbm_O": {
+  "icir": 0.7167162349940703,
+  "mean_ic": 0.09078287634408602,
+  "n_months": 186,
+  "segments_icir": [
+   1.1701,
+   1.1438,
+   0.2189,
+   1.0828,
+   0.6008
+  ],
+  "quintiles_avg_nextret": [
+   0.00063,
+   0.00667,
+   0.01002,
+   0.01373,
+   0.02
+  ],
+  "quintile_monotonic": true,
+  "delta_icir_vs_ranksum": 0.027450926505993678
+ }
+}
