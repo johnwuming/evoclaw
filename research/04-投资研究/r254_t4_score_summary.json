@@ -1,0 +1,151 @@
+{
+  "task": "task-0412 R-254: T4(F2×λc=1.0) candidate 登记 + 评分制 v1.1",
+  "version_id": "a14_crowdf2",
+  "run_id": "bt_r252_t4_f2_l10_20260821",
+  "scoring": "SCORE_CONFIG v1.1 (R-225), g6 disabled D-20260819-G6DEL, g3 D-20260819-G3CORR + D-20260820-G3SYM, oos/dd 基准=active a13_rsraw_e1f10dz",
+  "active": "a13_rsraw_e1f10dz",
+  "n_trials": 95,
+  "scored_at": "2026-08-21 03:45:47",
+  "ic_note": "T4 因子集与在役相同(调制作用于组合构建层, 不改变因子定义), 因子级月度 IC 与 a13 同源同输入; 组合级调制后 IC 无法从既有产物直接导出, 沿部署函数口径用因子级复合 IC",
+  "metrics_note": "metrics=locked 窗(2006-01-04~2024-06-28, 与 a13 同窗) 保持 oos/is 分量 apples-to-apples; R-253 审计 full 数字(截 08-13: ann 0.221396/mdd -0.335542)在 metrics_full_r253_audit_t0813",
+  "locked_metrics": {
+    "annual_return": 0.2182,
+    "max_drawdown": -0.3355,
+    "sharpe": 1.3484,
+    "calmar": 0.6503
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 2.0717,
+      "n_months_is": 180,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.4719,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.04268,
+      "mean_ic_oos": 0.04197,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 2.6491
+    },
+    "g3_max_corr": {
+      "status": "N/A",
+      "max_abs_corr": null,
+      "worst_pair": null,
+      "note": "无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9999,
+      "sr_period": 0.08494,
+      "sr0_expected_max": 0.025582,
+      "T": 4490,
+      "skew": -0.9,
+      "kurtosis": 9.286,
+      "n_trials": 95,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "拥挤度高状态期(p>40 过渡带线性、>60 满幅)对选股层尺寸因子 log_mv 连续降权: 变换后列×(1-1.0*clip((p-40)/20,0,1)), 状态取上月已锁 roll3y 分位(月频 PIT); 机制=拥挤期收缩微盘暴露, 其余参数与在役 C4 逐字同(R-252 预注册, R-253 E2 四门 PASS 胜者)"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "N/A",
+      "mdd_candidate": -0.3355,
+      "mdd_parent": -0.3355,
+      "mdd_deterioration_pp": 0.0,
+      "threshold_pp": 2.0,
+      "parent_version": "a13_rsraw_e1f10dz",
+      "disabled": true,
+      "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+    }
+  },
+  "score": {
+    "score": 0.8584,
+    "components": {
+      "p": 1.0,
+      "dsr": 0.999,
+      "oos_calmar": 0.4888,
+      "oos_sharpe": 0.4929,
+      "is_calmar": 1,
+      "is_sharpe": 1,
+      "dd": 1.0,
+      "corr": null,
+      "logic": 1.0
+    },
+    "missing_weight": 0.1,
+    "partial": false,
+    "stat_warn": false,
+    "flags": [],
+    "incumbent": "a13_rsraw_e1f10dz"
+  },
+  "holdout": {
+    "pass": true,
+    "nav_file": "results/r252_t4_f2_l10_full_nav_t0813.csv",
+    "start_ym": "2024-07",
+    "segment": {
+      "annual_return": 0.2504,
+      "max_drawdown": -0.1613,
+      "sharpe": 1.4608,
+      "n_days": 516,
+      "start": "2024-07-01",
+      "end": "2026-08-13"
+    },
+    "locked": {
+      "annual_return": 0.2182,
+      "max_drawdown": -0.3355
+    },
+    "checks": {
+      "ann_ratio_min": 0.6,
+      "ann_ok": true,
+      "mdd_extra_pp_max": 10.0,
+      "mdd_deterioration_pp": -17.42,
+      "mdd_ok": true
+    }
+  },
+  "ic_coverage": {
+    "n_factors": 5,
+    "n_ic_covered": 5,
+    "missing_ic_cols": []
+  },
+  "rank_in_pool": 2,
+  "pool_top6_after_merge": [
+    [
+      "a13_rsraw_e1f10dz",
+      0.8781
+    ],
+    [
+      "a14_crowdf2",
+      0.8584
+    ],
+    [
+      "v4a_mf0_trr",
+      0.8088
+    ],
+    [
+      "v5k_nh10",
+      0.8
+    ],
+    [
+      "v5i_comb",
+      0.7985
+    ],
+    [
+      "v5j_bl30",
+      0.7811
+    ]
+  ],
+  "notes": [
+    "g3 N/A: 无新增因子（因子集与active一致），相关性门禁无信息量 → N/A"
+  ],
+  "verdict_three_conditions": {
+    "rank1": false,
+    "stat_warn": false,
+    "holdout_pass": true,
+    "pass_all": false
+  }
+}
