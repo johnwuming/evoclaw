@@ -1,0 +1,17 @@
+[7s] panel ready rows=1319115
+[11s] 2014 done days=245 med_nsel=425.0
+[14s] 2015 done days=244 med_nsel=432.0
+[18s] 2016 done days=244 med_nsel=480.0
+[22s] 2017 done days=244 med_nsel=567.0
+[26s] 2018 done days=243 med_nsel=630.0
+[31s] 2019 done days=244 med_nsel=679.0
+[36s] 2020 done days=243 med_nsel=729.0
+[42s] 2021 done days=243 med_nsel=833.0
+[48s] 2022 done days=242 med_nsel=909.0
+[55s] 2023 done days=242 med_nsel=972.5
+[61s] 2024 done days=242 med_nsel=1000.0
+[68s] 2025 done days=243 med_nsel=1017.0
+[72s] 2026 done days=145 med_nsel=1029.0
+[72s] daily pe rows=3064 nan=0
+{"n_days": 2873, "first_day": "2014-10-17", "last_day": "2026-08-10", "n_months": 106, "nan_pe_days": 0, "median_n_sel": 716.0}
+[72s] ALL DONE
