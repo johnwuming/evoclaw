@@ -16,3 +16,8 @@
 - feat_csad_sigma20 = CSAD 滚动20日 std（min 20 有效日, 停牌日 NaN）; 月末取值
 - PIT: 因子月 m 只用到 m 月末及以前数据（同伴群在 m-1 月末用 [m-1月末-120d, m-1月末] 窗定）; IC[ym]=spearman(F_ym, ret_ym→ym+1)
 - 脚本: r0419_csad.py (VPS work/ 与 HP scripts/ md5 一致 d0a000005d633971cc76364930d5fac3), HP nohup 启动
+
+## 运行记录
+- 16:27 首次启动失败（nohup 重定向目录不存在），mkdir 后重启 PID 621958 正常（HP 本地钟 08:27 UTC）
+- 预计: Phase A 加载 5448 parquet ~3-5min; Phase B 月循环 ~250 月 × ~2-3s; Phase C IC 画像
+- 报告骨架预置: 背景(小红书帖动机, OCR 置信中低不作依据) / 方法(构建口径+与帖子差异) / 核心发现(IC五要素+达线判定) / 结论 / 来源
