@@ -18,10 +18,30 @@
 
 ## 待办清单
 
-1. [ ] HP 实查 r263 产物文件名（bt 前缀）
-2. [ ] 读 r254_score_t4.py / rescore_20pct_v11.py 方式
-3. [ ] registry 写前 tar 备份
-4. [ ] 新增 candidate 条目
+1. [x] HP 实查 r263 产物文件名（bt 前缀）：run_id=bt_r263_m1_w03_20260821，产物前缀 r263_m1_w03_*（locked/full nav、metrics、holdings、trades）
+2. [x] 读 r254_score_t4.py + evolution_pipeline.py 部署函数（gate_icir/gate_max_corr/score_composite/compute_holdout_metrics/score_rank_pool/gate_mdd_vs_parent/deflated_sharpe 全文核读）
+3. [ ] registry 写前 tar 备份（registry.bak.20260821_task0427.tar.gz）
+4. [ ] 新增 candidate 条目（ver=a15_csad_resid，已确认库内无 a15_* 占用）
 5. [ ] 评分脚本 r265_score_m11.py + 两次干跑
-6. [ ] --write + manifest 重生成
-7. [ ] R-265 报告 + README + completions
+6. [ ] --write + manifest 重生成 + diff 校验
+7. [ ] R-265 报告（编号实查：全库最大 R-264 → 本报告 R-265）+ README + completions
+
+## 阶段 1：HP 实查事实（2026-08-21）
+
+- 在役 a13_rsraw_e1f10dz registry：factors=[circ_mv, avg_amount_20d, pb_inv, roe_ttm, mom_pen_dz]；ext_specs=[[log_mv,1.0,-1],[amt20,1.0,-1],[pb_inv,0.7,1.0],[roe,0.3,1.0]]；metrics(locked)=ann 0.2202/mdd −0.3355/sharpe 1.3561/calmar 0.6562；gate.score=0.8781, n_trial=91, max_corr 0.2066, dsr 0.9999, icir_is 2.0717/icir_oos 2.6491；score_holdout PASS(0.258/−0.1613, nav=full 未截断旧产物)。
+- M1.1 locked_metrics.json（HP 实读）：ann 0.2251/mdd −0.3423/sharpe 1.3386/calmar 0.6578/cum 41.6333/win 0.6606/years 18.48/reb 222/turnover 0.5995；panel_md5=416019cf…✓
+- M1.1 full_metrics.json：ann 0.2229/mdd −0.3423/sharpe 1.3143/calmar 0.6512/turnover 0.5965（终点 2026-08-14）。
+- e2_results.json（R-264 唯一取材源）：M1.1 full(t0813) ann 0.2229/mdd −0.3423/sharpe 1.314；holdout ann 0.2046/mdd −0.1780/sharpe 1.13（2024-07-01→2026-08-13, 516d）；vs 在役 pp：full_ann −0.10/full_mdd −0.68/holdout_ann −5.32；G2 locked ICIR 5f 0.6906 vs 4f 0.6451（Δ+0.0455）；5f IC: full n246 ICIR 0.6642/locked 0.6906/holdout 0.5009；4f: full 0.6211/locked 0.6451/holdout 0.4716；覆盖 mean 0.8003、有效权重份额 0.1469（名义 0.1836）；Jaccard mean 0.4837；换手 0.5965（+14.92pp vs g0_orig 0.4473）。
+- 台账：63 条 backtest；HISTORICAL_TRIAL_OFFSET=34 → n_trials_cum=97（部署口径实读）。
+- factor_ic_monthly.csv 有 circ_mv/avg_amount_20d/roe_ttm 列；pb_inv/mom_pen_dz 来自 a13_supp_ic_monthly.csv（load_ic_monthly 左连接）；无 csad_resid 列；factor_ic_corr.csv 无 csad 行（grep=0）。
+- r0422 ic_monthly_residual.csv：ym,n,n3,ic_raw,…,ic_res_v2 列（v2 残差 IC 序列 2005-08 起）→ g3 数据源。
+- ic_composite_r263_m1_w03.csv / ic_composite_4f.csv：date,ic,n,note（引擎复合 IC 月度序列，2006-02 起）→ g1/g2 数据源（任务书指定 dumps 口径）。
+- full_nav：5008 数据行（2006-01-04→2026-08-14）；截 08-13 → 5007 行；locked_nav 4491 数据行。
+
+## 评分实现决策（沿部署函数，零 pipeline 改动）
+
+- g1/g2：构造单列 ic_df（ym=date[:7], csad_m11_comp5f=引擎复合 IC），调 ep.gate_icir —— 单列 mean(axis=1)=复合 IC 本身；4f 序列同法作参考披露。csad_resid 无部署 IC 列，因子级等权复合会静默丢掉该因子，故用引擎复合（任务书指定）。
+- g3：脚本内 monkeypatch ep.load_ic_monthly（内存合并 csad_resid=ic_res_v2 列，不落盘、不落 supp 文件、用后恢复），调 ep.gate_max_corr —— 等价其第三数据源（月度 IC Pearson ≥24 月）。GUARD_CORR_CONFIG 不对称豁免不触发（csad_resid 非 ret120 替身名单），如实标注。
+- g4：locked nav rets + n_trials_cum()（97）。
+- g6/dd：metrics(locked mdd −0.3423) vs a13(−0.3355) → det 0.68pp（g6 disabled, 数值入 dd）。
+- holdout：compute_holdout_metrics 消费新建 r263_m1_w03_full_nav_t0813.csv（refs.nav 优先），段 2024-07 起。
