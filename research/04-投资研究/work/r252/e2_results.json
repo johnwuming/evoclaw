@@ -1,0 +1,114 @@
+{
+  "experiment": "R-252 拥挤度选股降权 E2 引擎级对照",
+  "task_id": "task-0411",
+  "generated_at": "2026-08-21 10:50",
+  "n_trials": 4,
+  "grid": [
+    {"run_id": "bt_r252_t1_f1_l05_20260821", "tag": "t1", "crowding_form": "F1", "lam_c": 0.5},
+    {"run_id": "bt_r252_t2_f1_l10_20260821", "tag": "t2", "crowding_form": "F1", "lam_c": 1.0},
+    {"run_id": "bt_r252_t3_f2_l05_20260821", "tag": "t3", "crowding_form": "F2", "lam_c": 0.5},
+    {"run_id": "bt_r252_t4_f2_l10_20260821", "tag": "t4", "crowding_form": "F2", "lam_c": 1.0}
+  ],
+  "data_snapshot": {
+    "kline_as_of": "2026-08-14",
+    "window_end_truncated_to": "2026-08-13",
+    "states_file": "results/work/r252/roll3y_states.csv",
+    "states_md5": "91b70df95013d24ba6b609e66fa8c06f",
+    "high_state_months_n": 20,
+    "note": "阶段A纪律：窗口终点统一截 2026-08-13，排除在役旧产物末日冻结行伪影；基准=r252_g0_orig（同数据同截断）"
+  },
+  "g0": {
+    "type": "实现层对拍（同数据同截断）",
+    "a": "r252_g0_lam0",
+    "b": "r252_g0_orig",
+    "max_abs_delta_nav": 0.0,
+    "n": 5008,
+    "result": "PASS 严格逐位一致",
+    "note": "R252 调制注入在 λ_c=0 下严格惰性；G0 不入台账，n_trials 保持 4"
+  },
+  "incumbent_reference": {
+    "in_service": "a13_rsraw_e1f10dz",
+    "w_full": {"ann": 0.2239, "mdd": -0.3355},
+    "w_crowd_2020to2026_08": {"ann": 0.1394, "mdd": -0.1613},
+    "w_crisis_2023_09_to_2024_02": {"window_ret": -0.0357, "mdd": -0.0957},
+    "w_holdout_2024_07_to_2026_08": {"ann": 0.2574, "mdd": -0.1613}
+  },
+  "four_windows": {
+    "w_full_2006_01_04_to_2026_08_13": {
+      "r252_g0_orig": {"n": 5007, "ann": 0.223936, "mdd": -0.335542, "sharpe": 1.3738},
+      "r252_g0_lam0": {"n": 5007, "ann": 0.223936, "mdd": -0.335542, "sharpe": 1.3738},
+      "r252_t1_f1_l05": {"n": 5007, "ann": 0.222949, "mdd": -0.335542, "sharpe": 1.3692},
+      "r252_t2_f1_l10": {"n": 5007, "ann": 0.222777, "mdd": -0.335542, "sharpe": 1.3699},
+      "r252_t3_f2_l05": {"n": 5007, "ann": 0.222080, "mdd": -0.335542, "sharpe": 1.3646},
+      "r252_t4_f2_l10": {"n": 5007, "ann": 0.221396, "mdd": -0.335542, "sharpe": 1.3631}
+    },
+    "w_crowd_2020_01_to_2026_08_13": {
+      "r252_g0_orig": {"n": 1603, "ann": 0.139497, "mdd": -0.161286, "sharpe": 1.0743},
+      "r252_g0_lam0": {"n": 1603, "ann": 0.139497, "mdd": -0.161286, "sharpe": 1.0743},
+      "r252_t1_f1_l05": {"n": 1603, "ann": 0.136634, "mdd": -0.161275, "sharpe": 1.0569},
+      "r252_t2_f1_l10": {"n": 1603, "ann": 0.136136, "mdd": -0.161273, "sharpe": 1.0591},
+      "r252_t3_f2_l05": {"n": 1603, "ann": 0.134120, "mdd": -0.161265, "sharpe": 1.0395},
+      "r252_t4_f2_l10": {"n": 1603, "ann": 0.132144, "mdd": -0.161258, "sharpe": 1.0332}
+    },
+    "w_crisis_2023_09_01_to_2024_02_29": {
+      "r252_g0_orig": {"n": 117, "window_ret": -0.035697, "ann": -0.070726, "mdd": -0.095673},
+      "r252_g0_lam0": {"n": 117, "window_ret": -0.035697, "ann": -0.070726, "mdd": -0.095673},
+      "r252_t1_f1_l05": {"n": 117, "window_ret": -0.035557, "ann": -0.070454, "mdd": -0.090690},
+      "r252_t2_f1_l10": {"n": 117, "window_ret": -0.032772, "ann": -0.065030, "mdd": -0.081173},
+      "r252_t3_f2_l05": {"n": 117, "window_ret": -0.035525, "ann": -0.070392, "mdd": -0.090670},
+      "r252_t4_f2_l10": {"n": 117, "window_ret": -0.032735, "ann": -0.064958, "mdd": -0.081138}
+    },
+    "w_holdout_2024_07_01_to_2026_08_13": {
+      "r252_g0_orig": {"n": 516, "ann": 0.257774, "mdd": -0.161286, "sharpe": 1.5233},
+      "r252_g0_lam0": {"n": 516, "ann": 0.257774, "mdd": -0.161286, "sharpe": 1.5233},
+      "r252_t1_f1_l05": {"n": 516, "ann": 0.256383, "mdd": -0.161275, "sharpe": 1.5155},
+      "r252_t2_f1_l10": {"n": 516, "ann": 0.251665, "mdd": -0.161273, "sharpe": 1.4929},
+      "r252_t3_f2_l05": {"n": 516, "ann": 0.257604, "mdd": -0.161265, "sharpe": 1.5212},
+      "r252_t4_f2_l10": {"n": 516, "ann": 0.249628, "mdd": -0.161258, "sharpe": 1.4845}
+    }
+  },
+  "four_gates": {
+    "thresholds": {
+      "G1": "W-crisis MDD >= -8.57%",
+      "G2": "W-crowd ann >= 12.44%",
+      "G3": "W-full MDD >= -35.55% AND W-crowd MDD >= -18.13% (W-full MDD 变动 >0.5pp = 实现缺陷警报)",
+      "G4": "W-holdout ann >= 24.24% AND MDD 恶化 <= 2pp"
+    },
+    "per_run": [
+      {"run": "t1_f1_l05", "G1": "FAIL", "G1_val": "-9.07%", "G2": "PASS", "G2_val": "13.66%", "G3": "PASS", "G4": "PASS", "G4_ann": "25.64%", "G4_mdd_delta_pp": 0.00, "overall": "FAIL"},
+      {"run": "t2_f1_l10", "G1": "PASS", "G1_val": "-8.12%", "G2": "PASS", "G2_val": "13.61%", "G3": "PASS", "G4": "PASS", "G4_ann": "25.17%", "G4_mdd_delta_pp": 0.00, "overall": "PASS"},
+      {"run": "t3_f2_l05", "G1": "FAIL", "G1_val": "-9.07%", "G2": "PASS", "G2_val": "13.41%", "G3": "PASS", "G4": "PASS", "G4_ann": "25.76%", "G4_mdd_delta_pp": 0.00, "overall": "FAIL"},
+      {"run": "t4_f2_l10", "G1": "PASS", "G1_val": "-8.11%", "G2": "PASS", "G2_val": "13.21%", "G3": "PASS", "G4": "PASS", "G4_ann": "24.96%", "G4_mdd_delta_pp": 0.00, "overall": "PASS"}
+    ],
+    "w_full_mdd_change_pp": 0.00,
+    "implementation_defect_alert": "无（W-full MDD 与基准差 0.00pp）"
+  },
+  "high_state_overlap_and_turnover": {
+    "high_state_months_n": 20,
+    "overlap_method": "full_holdings.csv held 列，高状态月 mean |cand∩base|/|base|",
+    "overlap": {
+      "r252_g0_lam0": {"mean": 1.0, "min": 1.0},
+      "r252_t1_f1_l05": {"mean": 0.9275, "min": 0.85},
+      "r252_t2_f1_l10": {"mean": 0.8325, "min": 0.60},
+      "r252_t3_f2_l05": {"mean": 0.9225, "min": 0.85},
+      "r252_t4_f2_l10": {"mean": 0.805, "min": 0.60}
+    },
+    "monthly_turnover_est": {
+      "r252_g0_orig": 0.4473,
+      "r252_t1_f1_l05": 0.4471,
+      "r252_t2_f1_l10": 0.4539,
+      "r252_t3_f2_l05": 0.4461,
+      "r252_t4_f2_l10": 0.4537
+    },
+    "turnover_increment_pp_vs_base": {
+      "t1": -0.02, "t2": 0.66, "t3": -0.12, "t4": 0.64
+    }
+  },
+  "conclusion": {
+    "gate_result": "2/4 过点（t2_f1_l10, t4_f2_l10）",
+    "winner": "T4 (F2 × lam_c=1.0, run bt_r252_t4_f2_l10_20260821)",
+    "selection_rule_applied": "危机窗 MDD 改善最大 → λ_c 小者 → F2 优先（T4 crisis MDD -8.1138% vs T2 -8.1173%，边际更优；λ_c 均 1.0 → F2 优先）",
+    "outcome": "拥挤度选股降权 E2 引擎级对照 PASS，T4 获得评分制 v1.1 资格（不激活、不动 registry）",
+    "action": "仅资格认定，零激活、零 registry/paper_engine/HP crontab 改动"
+  }
+}
