@@ -1,0 +1,297 @@
+{
+ "task": "task-0422",
+ "factor": "feat_csad_sigma20 (r0419)",
+ "built": "2026-08-21 08:46",
+ "verdict_threshold_abs_icir": 0.25,
+ "main_verdict_version": "v2 dual (vol20+vol120)",
+ "versions": {
+  "v1": "neutralize vol20",
+  "v2": "neutralize vol20+vol120 (主裁决)",
+  "v3": "neutralize vol20+vol120+idio120proxy (补充; 2006-03 前无市场数据缺月)"
+ },
+ "validation": {
+  "raw_ic_vs_r0419_ic_series_corr": 1.0,
+  "raw_ic_main": {
+   "n": 251,
+   "ic_mean": -0.09195,
+   "ic_std": 0.11548,
+   "icir": -0.796,
+   "t": -12.61,
+   "ic_neg_share": 0.805
+  },
+  "rho_factor_vol120_mean_p90": [
+   0.439,
+   0.568
+  ],
+  "rho_factor_vol20_mean": 0.725,
+  "target": "r0419 ic=-0.0920/icir=-0.796/n=251; xs rho vol120 mean 0.442 p90 0.574"
+ },
+ "raw_ic": {
+  "main": {
+   "n": 251,
+   "ic_mean": -0.09195,
+   "ic_std": 0.11548,
+   "icir": -0.796,
+   "t": -12.61,
+   "ic_neg_share": 0.805
+  },
+  "all": {
+   "n": 252,
+   "ic_mean": -0.09081,
+   "ic_std": 0.11666,
+   "icir": -0.778,
+   "t": -12.36,
+   "ic_neg_share": 0.802
+  }
+ },
+ "v1_vol20": {
+  "main_excl_2026-07": {
+   "n": 251,
+   "ic_mean": -0.0461,
+   "ic_std": 0.09946,
+   "icir": -0.464,
+   "t": -7.34,
+   "ic_neg_share": 0.637
+  },
+  "incl_partial_2026-07": {
+   "n": 252,
+   "ic_mean": -0.04686,
+   "ic_std": 0.09999,
+   "icir": -0.469,
+   "t": -7.44,
+   "ic_neg_share": 0.639
+  },
+  "segments": {
+   "seg1": {
+    "range": "2005-08~2009-09",
+    "n": 50,
+    "ic_mean": -0.08644,
+    "ic_std": 0.09363,
+    "icir": -0.923,
+    "t": -6.53,
+    "ic_neg_share": 0.8
+   },
+   "seg2": {
+    "range": "2009-10~2013-11",
+    "n": 50,
+    "ic_mean": -0.05599,
+    "ic_std": 0.0907,
+    "icir": -0.617,
+    "t": -4.37,
+    "ic_neg_share": 0.64
+   },
+   "seg3": {
+    "range": "2013-12~2018-01",
+    "n": 50,
+    "ic_mean": -0.04742,
+    "ic_std": 0.10149,
+    "icir": -0.467,
+    "t": -3.3,
+    "ic_neg_share": 0.64
+   },
+   "seg4": {
+    "range": "2018-02~2022-03",
+    "n": 50,
+    "ic_mean": -0.02544,
+    "ic_std": 0.08972,
+    "icir": -0.284,
+    "t": -2.0,
+    "ic_neg_share": 0.6
+   },
+   "seg5": {
+    "range": "2022-04~2026-06",
+    "n": 51,
+    "ic_mean": -0.01583,
+    "ic_std": 0.10833,
+    "icir": -0.146,
+    "t": -1.04,
+    "ic_neg_share": 0.51
+   }
+  },
+  "quintiles": {
+   "q_mean_next_ret": {
+    "Q1": 0.02107,
+    "Q2": 0.02039,
+    "Q3": 0.01887,
+    "Q4": 0.01517,
+    "Q5": 0.0088
+   },
+   "q5_q1_per_month": -0.01226,
+   "spread_t": -6.34,
+   "spread_neg_share": 0.659,
+   "n_months": 252
+  }
+ },
+ "v2_vol20_vol120": {
+  "main_excl_2026-07": {
+   "n": 251,
+   "ic_mean": -0.05281,
+   "ic_std": 0.08784,
+   "icir": -0.601,
+   "t": -9.53,
+   "ic_neg_share": 0.717
+  },
+  "incl_partial_2026-07": {
+   "n": 252,
+   "ic_mean": -0.05331,
+   "ic_std": 0.08801,
+   "icir": -0.606,
+   "t": -9.61,
+   "ic_neg_share": 0.718
+  },
+  "segments": {
+   "seg1": {
+    "range": "2005-08~2009-09",
+    "n": 50,
+    "ic_mean": -0.08898,
+    "ic_std": 0.08721,
+    "icir": -1.02,
+    "t": -7.21,
+    "ic_neg_share": 0.86
+   },
+   "seg2": {
+    "range": "2009-10~2013-11",
+    "n": 50,
+    "ic_mean": -0.05997,
+    "ic_std": 0.07962,
+    "icir": -0.753,
+    "t": -5.33,
+    "ic_neg_share": 0.8
+   },
+   "seg3": {
+    "range": "2013-12~2018-01",
+    "n": 50,
+    "ic_mean": -0.05469,
+    "ic_std": 0.09671,
+    "icir": -0.565,
+    "t": -4.0,
+    "ic_neg_share": 0.68
+   },
+   "seg4": {
+    "range": "2018-02~2022-03",
+    "n": 50,
+    "ic_mean": -0.03645,
+    "ic_std": 0.07147,
+    "icir": -0.51,
+    "t": -3.61,
+    "ic_neg_share": 0.66
+   },
+   "seg5": {
+    "range": "2022-04~2026-06",
+    "n": 51,
+    "ic_mean": -0.02453,
+    "ic_std": 0.09106,
+    "icir": -0.269,
+    "t": -1.92,
+    "ic_neg_share": 0.588
+   }
+  },
+  "quintiles": {
+   "q_mean_next_ret": {
+    "Q1": 0.02189,
+    "Q2": 0.02032,
+    "Q3": 0.01884,
+    "Q4": 0.01462,
+    "Q5": 0.00862
+   },
+   "q5_q1_per_month": -0.01327,
+   "spread_t": -7.21,
+   "spread_neg_share": 0.679,
+   "n_months": 252
+  }
+ },
+ "v3_with_idio_proxy": {
+  "main_excl_2026-07": {
+   "n": 243,
+   "ic_mean": -0.0513,
+   "ic_std": 0.08224,
+   "icir": -0.624,
+   "t": -9.72,
+   "ic_neg_share": 0.737
+  },
+  "incl_partial_2026-07": {
+   "n": 244,
+   "ic_mean": -0.05177,
+   "ic_std": 0.08241,
+   "icir": -0.628,
+   "t": -9.81,
+   "ic_neg_share": 0.738
+  },
+  "segments": {
+   "seg1": {
+    "range": "2006-04~2010-03",
+    "n": 48,
+    "ic_mean": -0.07884,
+    "ic_std": 0.08215,
+    "icir": -0.96,
+    "t": -6.65,
+    "ic_neg_share": 0.875
+   },
+   "seg2": {
+    "range": "2010-04~2014-03",
+    "n": 48,
+    "ic_mean": -0.0589,
+    "ic_std": 0.06375,
+    "icir": -0.924,
+    "t": -6.4,
+    "ic_neg_share": 0.854
+   },
+   "seg3": {
+    "range": "2014-04~2018-03",
+    "n": 48,
+    "ic_mean": -0.07173,
+    "ic_std": 0.09504,
+    "icir": -0.755,
+    "t": -5.23,
+    "ic_neg_share": 0.75
+   },
+   "seg4": {
+    "range": "2018-04~2022-03",
+    "n": 48,
+    "ic_mean": -0.02874,
+    "ic_std": 0.06691,
+    "icir": -0.43,
+    "t": -2.98,
+    "ic_neg_share": 0.604
+   },
+   "seg5": {
+    "range": "2022-04~2026-06",
+    "n": 51,
+    "ic_mean": -0.02022,
+    "ic_std": 0.08495,
+    "icir": -0.238,
+    "t": -1.7,
+    "ic_neg_share": 0.608
+   }
+  },
+  "quintiles": {
+   "q_mean_next_ret": {
+    "Q1": 0.02173,
+    "Q2": 0.0212,
+    "Q3": 0.01722,
+    "Q4": 0.015,
+    "Q5": 0.00995
+   },
+   "q5_q1_per_month": -0.01177,
+   "spread_t": -6.75,
+   "spread_neg_share": 0.676,
+   "n_months": 244
+  }
+ },
+ "regression_r2_mean": {
+  "r2_v1": 0.585,
+  "r2_v2": 0.599,
+  "r2_v3": 0.652
+ },
+ "ic_series_corr_vs_prod_factors": {
+  "res_v2_vs_volatility_20d": 0.402,
+  "res_v2_vs_idiosyncratic_vol": 0.236,
+  "res_v1_vs_idiosyncratic_vol": 0.429,
+  "res_v3_vs_idiosyncratic_vol": 0.379
+ },
+ "coverage": {
+  "months_ic": 252,
+  "mean_n": 2350.0,
+  "mean_n3": 2319.0
+ }
+}

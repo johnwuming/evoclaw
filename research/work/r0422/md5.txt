@@ -1,0 +1,8 @@
+3bcf930b19fdf310cdfbc4f9325ead76  /home/noname/quant-evolve/results/work/r0422/ic_monthly_residual.csv
+a0e8ac000509eae745b4fba85eb71eda  /home/noname/quant-evolve/results/work/r0422/quintile_monthly_residual.csv
+3ad82499f91ad9a678d5704cffb422a0  /home/noname/quant-evolve/results/work/r0422/vol_panel_monthly.csv
+61a8ae558c1da41ae22253bcdd658a65  /home/noname/quant-evolve/results/work/r0422/r0422_summary.json
+cc9d0d0dca8751545759a332bf862f7d  /home/noname/quant-evolve/scripts/r0422_csad_vol_neutral.py
+2f66c2cdd6b9b06438ecc5a03c387cca  /home/noname/quant-evolve/results/work/r0422/r0422_summary.json
+7d88561b8f21eaba81ecc15ffaff4cca  /home/noname/quant-evolve/scripts/r0422_fix_qstats.py
+c3dca4e6f88fc26aff138553a51cd684  /home/noname/quant-evolve/scripts/r0422_spotcheck.py
