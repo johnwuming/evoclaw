@@ -23,3 +23,15 @@
 - g3 预判：T4 因子集=在役因子集 → new_factors 空 → N/A（部署口径：无新增因子相关性无信息量）；GUARD_CORR_CONFIG 豁免（含对称修正）不触发，无 §3.3 不对称问题
 - registry 无 a14/a15 条目占用 → ver 名 a14_crowdf2 可用
 - 版本号确认：全库最大 R-253 → 本报告 R-254 ✓
+
+## 2026-08-21 11:58 评分结果（两次干跑，确定性验证 ✓）
+- 脚本：HP scripts/r254_score_t4.py（参照 rescore_20pct_v11.py，只调部署函数）；截 08-13 nav 副本 results/r252_t4_f2_l10_full_nav_t0813.csv（5007 行，md5 6cea402fd756270f37b211429814e46b；原件 5008 行 md5 0243a677f0d0b92223b796c51fafa7a7 与 R-253 来源清单一致 ✓）
+- 干跑#1=干跑#2（ex-timestamp 逐字节一致）✓
+- **总分 0.8584，池内 rank2**（a13 0.8781 rank1 / T4 0.8584 / v4a 0.8088 / v5k 0.80 / v5i 0.7985 / v5j 0.7811）
+- 分量：p=1.0（g2 p单侧 0.4719）/ dsr=0.999（DSR 0.9999, T=4490, n_trials=95）/ oos_calmar=0.4888（calmar 0.6503 vs a13 0.6562, rel -0.90%）/ oos_sharpe=0.4929（1.3484 vs 1.3561, rel -0.57%）/ is_calmar=1（0.6503/0.60 封顶）/ is_sharpe=1（1.3484/1.20 封顶）/ dd=1.0（mdd 同 -0.3355，恶化 0.00pp）/ corr=N/A（无新增因子，权重 0.10 重归一，missing_weight=0.1，非 partial）/ logic=1.0
+- 门禁：g1 PASS（icir_is 2.0717, 180 月）/ g2 PASS（OOS 42 月止 2024-06 审计锁内, icir_oos 2.6491）/ g3 N/A / g4 PASS / g5 PASS / g6 N/A(disabled, det 0.00pp)
+- holdout：PASS（nav=t0813 截断件, 2024-07-01→2026-08-13, ann 0.2504 / mdd -0.1613 / sharpe 1.4608 / 516 天；locked 0.2182 → ann_ok；mdd 恶化 -17.42pp → ok）
+  - 口径注：holdout ann 0.2504 用部署 _seg_nav_metrics 年化（244 交易日/年），R-253 W-holdout 0.2496 用 a9_common（365.25 天/年）；同一段数据、终点同截 08-13，仅年化惯例差
+- stat_warn=False（p 0.4719 ≥ 0.01, DSR 0.9999 ≥ 0.90）
+- **三条件裁决：rank1 ✗（rank2）+ 无 stat_warn ✓ + holdout PASS ✓ → 不过线**（差 rank1 一条；总分差 a13 -0.0197）
+- gap 归因：oos_calmar/oos_sharpe 两分量 ≈0.49（锁定窗年化 -0.20pp/sharpe -0.0077 的微小损耗映射到 ±40% 满档刻度 → ~0.5），is/dd/logic/p/dsr 全满分或近满分；corr N/A 少 0.10 权重重归一后实际上放大了满分量占比，仍不足以追平 a13（a13 当年评时 oos 增量为正）
