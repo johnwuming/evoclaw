@@ -37,3 +37,15 @@
 - 种子 42；试验计账：D=0 额外 trial，O=≤20
 - 基准：ranksum4 = Σ sign×rank_pct（log_mv/amt20 用负向, pb_inv/roe 正向）同口径重算 IC 序列
 - 达线：LGBM 复合 ICIR − ranksum ICIR ≥ +0.15 且五分段无方向翻转
+
+### T+45min 面板完成 + 基准落盘
+- panel.npz: (5206 codes, 247 月 2006-01~2026-07, 8 特征), mask=693,194 行月；md5 见 panel_meta.json
+- ranksum4 基准（同口径重算）: n=240 月, mean_ic=0.0862, **ICIR=0.6893**, ic>0 占比 76.3%
+  - 单因子参照（W1 catalog）: circ_mv 0.269 / div_yield 0.261 → 四因子 ranksum 复合远高于单因子，量级合理（复合效应）
+- 特征覆盖（mask 内）: panel_meta.json feature_coverage_in_mask 待写入报告
+
+### LGBM 运行（含波折，如实记录）
+- optuna 未装且不装（避免依赖升级动生产 env）→ O 组改为预登记随机搜索 20 trial（seed42，空间：num_leaves{15,31,63}×lr{0.03,0.05,0.10}×min_child{100,200,400}×ff{0.7,0.9,1.0}），计账口径同 Optuna ≤20
+- 运维教训×2：pkill -f 自匹配 kill 了自身 ssh shell（两次），后用分隔 ssh+方括号正则解决；quintile 需逐月 score 落盘，中途补 np.save 后重启（损失~3min）
+- D 组 walk-forward 中段观察：2018-2024 多个月 IC 为负（2018 -0.10 / 2020 -0.15 / 2024-01 -0.37），近年特征-收益关系弱化明显，与 2024 微盘股剧烈波动期吻合；如实进报告
+- O 组选定参数与 val_ic 见 lgbm_run.log / lgbm_summary.json
