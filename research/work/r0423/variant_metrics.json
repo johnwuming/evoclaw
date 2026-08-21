@@ -1,0 +1,228 @@
+{
+ "meta": {
+  "csv_md5": "d0775a569f80f4962d5717f380db4e37",
+  "convention": "month-end dedup keep-last (drop 2017-01-20 spurious row) + pct_change fill_method=None; n=247 hold months 2006-01~2026-07; R-258 anchors reproduced (tau .704/gross 2.84pp/net20 -0.90pp)",
+  "signal_pit": "t月持有用t-1月末及以前数据",
+  "cost_model": "cost(t)=2c*turnover, turnover=1-|H(t-1)&H(t)|/5, first month single-leg c",
+  "benchmark": "EW-all eligible (valid ret t-1 & t), cost-free reference",
+  "data_anomalies": {
+   "dup_month_rows": [
+    "2017-01-20"
+   ],
+   "coal_gap_months": 59
+  },
+  "new2021_industries": [
+   "石油石化",
+   "环保",
+   "美容护理"
+  ],
+  "n_cols_28": 28
+ },
+ "variants": {
+  "V0": {
+   "label": "V0",
+   "n_months": 247,
+   "tau": 0.7041,
+   "gross_ann": 13.28,
+   "ew_ann": 10.43,
+   "gross_excess_pp": 2.84,
+   "excess_mean_mo_pct": 0.286,
+   "excess_t": 1.32,
+   "net_excess_pp_c10": 0.96,
+   "net_ann_c10": 11.39,
+   "net_excess_pp_c20": -0.9,
+   "net_ann_c20": 9.53,
+   "five_seg_pct_mo": [
+    0.539,
+    0.136,
+    0.516,
+    0.515,
+    -0.425
+   ],
+   "five_seg_pos": 4,
+   "seg_bounds": [
+    "2006-01-25~2009-09-30",
+    "2009-10-30~2013-05-31",
+    "2013-06-28~2017-01-26",
+    "2017-02-28~2020-09-30",
+    "2020-10-30~2024-05-31"
+   ],
+   "locked_months": 221,
+   "holdout_mean_mo_pct": 0.526,
+   "holdout_net20_mean_mo_pct": 0.231,
+   "holdout_bounds": "2024-06-28~2026-07-31"
+  },
+  "V1": {
+   "label": "V1",
+   "n_months": 247,
+   "tau": 0.4106,
+   "gross_ann": 12.29,
+   "ew_ann": 10.43,
+   "gross_excess_pp": 1.86,
+   "excess_mean_mo_pct": 0.215,
+   "excess_t": 0.99,
+   "net_excess_pp_c10": 0.76,
+   "net_ann_c10": 11.2,
+   "net_excess_pp_c20": -0.32,
+   "net_ann_c20": 10.11,
+   "five_seg_pct_mo": [
+    0.624,
+    0.13,
+    0.011,
+    0.673,
+    -0.461
+   ],
+   "five_seg_pos": 4,
+   "seg_bounds": [
+    "2006-01-25~2009-09-30",
+    "2009-10-30~2013-05-31",
+    "2013-06-28~2017-01-26",
+    "2017-02-28~2020-09-30",
+    "2020-10-30~2024-05-31"
+   ],
+   "locked_months": 221,
+   "holdout_mean_mo_pct": 0.368,
+   "holdout_net20_mean_mo_pct": 0.187,
+   "holdout_bounds": "2024-06-28~2026-07-31",
+   "overlap_with_V0": 0.54
+  },
+  "V2": {
+   "label": "V2",
+   "n_months": 247,
+   "tau": 0.5919,
+   "gross_ann": 11.39,
+   "ew_ann": 10.43,
+   "gross_excess_pp": 0.96,
+   "excess_mean_mo_pct": 0.138,
+   "excess_t": 0.67,
+   "net_excess_pp_c10": -0.6,
+   "net_ann_c10": 9.83,
+   "net_excess_pp_c20": -2.14,
+   "net_ann_c20": 8.29,
+   "five_seg_pct_mo": [
+    0.251,
+    -0.18,
+    0.362,
+    0.54,
+    -0.503
+   ],
+   "five_seg_pos": 3,
+   "seg_bounds": [
+    "2006-01-25~2009-09-30",
+    "2009-10-30~2013-05-31",
+    "2013-06-28~2017-01-26",
+    "2017-02-28~2020-09-30",
+    "2020-10-30~2024-05-31"
+   ],
+   "locked_months": 221,
+   "holdout_mean_mo_pct": 0.507,
+   "holdout_net20_mean_mo_pct": 0.242,
+   "holdout_bounds": "2024-06-28~2026-07-31",
+   "overlap_with_V0": 0.881
+  },
+  "V3": {
+   "label": "V3",
+   "n_months": 247,
+   "tau": 0.2415,
+   "gross_ann": 9.26,
+   "ew_ann": 10.43,
+   "gross_excess_pp": -1.17,
+   "excess_mean_mo_pct": -0.046,
+   "excess_t": -0.24,
+   "net_excess_pp_c10": -1.81,
+   "net_ann_c10": 8.62,
+   "net_excess_pp_c20": -2.44,
+   "net_ann_c20": 7.99,
+   "five_seg_pct_mo": [
+    0.241,
+    -0.001,
+    -0.541,
+    0.334,
+    -0.07
+   ],
+   "five_seg_pos": 2,
+   "seg_bounds": [
+    "2006-01-25~2009-09-30",
+    "2009-10-30~2013-05-31",
+    "2013-06-28~2017-01-26",
+    "2017-02-28~2020-09-30",
+    "2020-10-30~2024-05-31"
+   ],
+   "locked_months": 221,
+   "holdout_mean_mo_pct": -0.381,
+   "holdout_net20_mean_mo_pct": -0.492,
+   "holdout_bounds": "2024-06-28~2026-07-31",
+   "tau_per_rebalance": 0.7244,
+   "rebalance_count": 83,
+   "overlap_with_V0": 0.513
+  },
+  "V4": {
+   "label": "V4",
+   "n_months": 247,
+   "tau": 0.3195,
+   "gross_ann": 10.96,
+   "ew_ann": 10.43,
+   "gross_excess_pp": 0.53,
+   "excess_mean_mo_pct": 0.112,
+   "excess_t": 0.52,
+   "net_excess_pp_c10": -0.31,
+   "net_ann_c10": 10.12,
+   "net_excess_pp_c20": -1.14,
+   "net_ann_c20": 9.29,
+   "five_seg_pct_mo": [
+    0.332,
+    0.128,
+    -0.012,
+    0.427,
+    -0.282
+   ],
+   "five_seg_pos": 3,
+   "seg_bounds": [
+    "2006-01-25~2009-09-30",
+    "2009-10-30~2013-05-31",
+    "2013-06-28~2017-01-26",
+    "2017-02-28~2020-09-30",
+    "2020-10-30~2024-05-31"
+   ],
+   "locked_months": 221,
+   "holdout_mean_mo_pct": 0.042,
+   "holdout_net20_mean_mo_pct": -0.115,
+   "holdout_bounds": "2024-06-28~2026-07-31",
+   "overlap_with_V0": 0.47
+  }
+ },
+ "optimal_variant": "V1",
+ "sens28": {
+  "label": "V1_28ind",
+  "n_months": 247,
+  "tau": 0.4065,
+  "gross_ann": 12.37,
+  "ew_ann": 10.54,
+  "gross_excess_pp": 1.83,
+  "excess_mean_mo_pct": 0.214,
+  "excess_t": 0.99,
+  "net_excess_pp_c10": 0.75,
+  "net_ann_c10": 11.29,
+  "net_excess_pp_c20": -0.32,
+  "net_ann_c20": 10.22,
+  "five_seg_pct_mo": [
+   0.624,
+   0.13,
+   0.011,
+   0.673,
+   -0.33
+  ],
+  "five_seg_pos": 4,
+  "seg_bounds": [
+   "2006-01-25~2009-09-30",
+   "2009-10-30~2013-05-31",
+   "2013-06-28~2017-01-26",
+   "2017-02-28~2020-09-30",
+   "2020-10-30~2024-05-31"
+  ],
+  "locked_months": 221,
+  "holdout_mean_mo_pct": 0.133,
+  "holdout_net20_mean_mo_pct": -0.049,
+  "holdout_bounds": "2024-06-28~2026-07-31"
+ }
+}
