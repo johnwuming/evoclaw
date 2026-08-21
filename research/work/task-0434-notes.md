@@ -11,3 +11,8 @@
 - cron 未动（*/2），server.js 未动
 
 ## 步骤2：metrics.db 瘦身
+- 20:10 备份：checkpoint(TRUNCATE) 后 WAL 262MB→0；cp 至 /root/metrics.db.bak-task0434-20260821（340MB，integrity_check=ok，1,176,214 行）
+- 20:15 发现并修复新脚本 bug：dot-command `.timeout` 不能放 SQL 参数串（20:00-20:14 七次合并失败）；改用 `sqlite3 -cmd ".timeout 5000"`，20:16 起恢复正常
+- 20:18 验证增量生效：watermark=2026-08-21T12:18:01Z，hp 12:06Z 起每分钟恰好 1 行（此前 539 倍重复 → 1 倍）
+- 旁路发现（非本任务改动面）：HP 直报通道 12:05Z 后断流（12:00-12:02 有 3/2/1 份重试补发重复），属 server.js/HP 侧（task-0433 并行范围），已在收尾原子事务中一并去重；唯一索引生效后双通道同分钟数据将由 OR IGNORE 幂等吸收
+- 保留集：4,321 组 (timestamp,server)（只读 GROUP BY 实测 0.6s）
