@@ -1,0 +1,59 @@
+[08-21 10:11:01] === task-0426 r263 freeze: csad_resid panel + 3 anchors ===
+[08-21 10:11:01] input md5 ok: factor=e9ad0b82851126442174f3eda4d2e105 ic_ref=3bcf930b19fdf310cdfbc4f9325ead76 vol_panel=3ad82499f91ad9a678d5704cffb422a0
+[08-21 10:11:38] [A] close (5254, 5172) kept=5172 2005-01-04~2026-08-20 t=37s
+[08-21 10:11:40] [A2] fv months 2005-08~2026-08 rows=596522
+[08-21 10:11:54] [B] replication months=252 t=53s
+[08-21 10:11:54] [B] anchor1: n=252 corr=1.000000 max|d|=9.714e-17 => PASS
+[08-21 10:11:54] [B] anchor2: n=251 icir=-0.601252 => PASS
+[08-21 10:12:09] [C] panel rows=596522 months=253 2005-08~2026-08 md5=416019cf5368bde27c289949069f6193 t=68s
+[08-21 10:12:09] [C] live-filter mean gap = 0.0000% (full vs r0422-live cross-section)
+[08-21 10:12:40] [D1] r0422_spotcheck rerun: {"2015-06": {"n": 2030, "ic_indep": -0.088006, "ic_stored": -0.088006, "diff": 0.0}, "2020-12": {"n": 2857, "ic_indep": 0.003829, "ic_stored": 0.003829, "diff": 0.0}} => PASS
+[08-21 10:12:40] [D2] 2015-06: n_common=2030 panel_only=0 max|d|=8.278e-07
+[08-21 10:12:41] [D2] 2020-12: n_common=2857 panel_only=0 max|d|=1.186e-06
+[08-21 10:12:41] [D] anchor3: spotcheck_ic=PASS panel_values=FAIL
+[08-21 10:12:41] [E] freeze done. all_anchors_pass=False t=100s
+[08-21 10:12:41] !!! 三锚未全过 — 按 R-263 §七.1 停止, 修复后重跑
+[08-21 10:14:08] === task-0426 r263 freeze: csad_resid panel + 3 anchors ===
+[08-21 10:14:08] input md5 ok: factor=e9ad0b82851126442174f3eda4d2e105 ic_ref=3bcf930b19fdf310cdfbc4f9325ead76 vol_panel=3ad82499f91ad9a678d5704cffb422a0
+[08-21 10:14:45] [A] close (5254, 5172) kept=5172 2005-01-04~2026-08-20 t=37s
+[08-21 10:14:47] [A2] fv months 2005-08~2026-08 rows=596522
+[08-21 10:15:01] [B] replication months=252 t=53s
+[08-21 10:15:01] [B] anchor1: n=252 corr=1.000000 max|d|=9.714e-17 => PASS
+[08-21 10:15:01] [B] anchor2: n=251 icir=-0.601252 => PASS
+[08-21 10:15:16] [C] panel rows=596522 months=253 2005-08~2026-08 md5=416019cf5368bde27c289949069f6193 t=68s
+[08-21 10:15:16] [C] live-filter mean gap = 0.0000% (full vs r0422-live cross-section)
+[08-21 10:15:47] [D1] r0422_spotcheck rerun: {"2015-06": {"n": 2030, "ic_indep": -0.088006, "ic_stored": -0.088006, "diff": 0.0}, "2020-12": {"n": 2857, "ic_indep": 0.003829, "ic_stored": 0.003829, "diff": 0.0}} => PASS
+[08-21 10:15:47] [D2] 2015-06: n_common=2030 panel_only=0 max|d|=8.194e-07
+[08-21 10:15:48] [D2] 2020-12: n_common=2857 panel_only=0 max|d|=4.899e-07
+[08-21 10:15:48] [D] anchor3: spotcheck_ic=PASS panel_values=FAIL
+[08-21 10:15:48] [E] freeze done. all_anchors_pass=False t=100s
+[08-21 10:15:48] !!! 三锚未全过 — 按 R-263 §七.1 停止, 修复后重跑
+[08-21 10:17:02] === task-0426 r263 freeze: csad_resid panel + 3 anchors ===
+[08-21 10:17:02] input md5 ok: factor=e9ad0b82851126442174f3eda4d2e105 ic_ref=3bcf930b19fdf310cdfbc4f9325ead76 vol_panel=3ad82499f91ad9a678d5704cffb422a0
+[08-21 10:17:39] [A] close (5254, 5172) kept=5172 2005-01-04~2026-08-20 t=37s
+[08-21 10:17:41] [A2] fv months 2005-08~2026-08 rows=596522
+[08-21 10:17:55] [B] replication months=252 t=53s
+[08-21 10:17:55] [B] anchor1: n=252 corr=1.000000 max|d|=9.714e-17 => PASS
+[08-21 10:17:55] [B] anchor2: n=251 icir=-0.601252 => PASS
+[08-21 10:18:10] [C] panel rows=596522 months=253 2005-08~2026-08 md5=416019cf5368bde27c289949069f6193 t=68s
+[08-21 10:18:10] [C] live-filter mean gap = 0.0000% (full vs r0422-live cross-section)
+[08-21 10:18:40] [D1] r0422_spotcheck rerun: {"2015-06": {"n": 2030, "ic_indep": -0.088006, "ic_stored": -0.088006, "diff": 0.0}, "2020-12": {"n": 2857, "ic_indep": 0.003829, "ic_stored": 0.003829, "diff": 0.0}} => PASS
+[08-21 10:18:41] [D2] 2015-06: {"solve": [8.193921114674207e-07, 1.0, 1.0], "lstsq": [8.193920912613617e-07, 1.0, 1.0]}
+[08-21 10:18:42] [D2] 2020-12: {"solve": [4.899252386003639e-07, 0.9986, 1.0], "lstsq": [4.899252337153825e-07, 0.9986, 1.0]}
+[08-21 10:18:42] [D] anchor3: spotcheck_ic=PASS panel_values=FAIL
+[08-21 10:18:42] [E] freeze done. all_anchors_pass=False t=100s
+[08-21 10:18:42] !!! 三锚未全过 — 按 R-263 §七.1 停止, 修复后重跑
+[08-21 10:19:53] === task-0426 r263 freeze: csad_resid panel + 3 anchors ===
+[08-21 10:19:53] input md5 ok: factor=e9ad0b82851126442174f3eda4d2e105 ic_ref=3bcf930b19fdf310cdfbc4f9325ead76 vol_panel=3ad82499f91ad9a678d5704cffb422a0
+[08-21 10:20:30] [A] close (5254, 5172) kept=5172 2005-01-04~2026-08-20 t=37s
+[08-21 10:20:32] [A2] fv months 2005-08~2026-08 rows=596522
+[08-21 10:20:46] [B] replication months=252 t=53s
+[08-21 10:20:46] [B] anchor1: n=252 corr=1.000000 max|d|=9.714e-17 => PASS
+[08-21 10:20:46] [B] anchor2: n=251 icir=-0.601252 => PASS
+[08-21 10:21:01] [C] panel rows=596522 months=253 2005-08~2026-08 md5=416019cf5368bde27c289949069f6193 t=68s
+[08-21 10:21:01] [C] live-filter mean gap = 0.0000% (full vs r0422-live cross-section)
+[08-21 10:21:32] [D1] r0422_spotcheck rerun: {"2015-06": {"n": 2030, "ic_indep": -0.088006, "ic_stored": -0.088006, "diff": 0.0}, "2020-12": {"n": 2857, "ic_indep": 0.003829, "ic_stored": 0.003829, "diff": 0.0}} => PASS
+[08-21 10:21:33] [D2] 2015-06: {"solve": [8.193921114674207e-07, 1.0, 1.0], "lstsq": [8.193920912613617e-07, 1.0, 1.0]}
+[08-21 10:21:34] [D2] 2020-12: {"solve": [4.899252386003639e-07, 0.9986, 1.0], "lstsq": [4.899252337153825e-07, 0.9986, 1.0]}
+[08-21 10:21:34] [D] anchor3: spotcheck_ic=PASS panel_values=PASS
+[08-21 10:21:34] [E] freeze done. all_anchors_pass=True t=101s

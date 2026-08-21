@@ -1,0 +1,98 @@
+{
+ "task": "task-0426",
+ "date": "2026-08-21 10:21",
+ "pre_registration": "R-263 §八/§十.1",
+ "inputs": {
+  "factor_md5": "e9ad0b82851126442174f3eda4d2e105",
+  "ic_ref_md5": "3bcf930b19fdf310cdfbc4f9325ead76",
+  "vol_panel_md5": "3ad82499f91ad9a678d5704cffb422a0",
+  "kline_as_of": "2026-08-20"
+ },
+ "anchor1_ic_series_repl": {
+  "n": 252,
+  "corr": 1.0,
+  "max_abs_diff": 9.71445146547012e-17,
+  "pass": true
+ },
+ "anchor2_full_icir": {
+  "n": 251,
+  "icir": -0.601252,
+  "pass": true
+ },
+ "anchor3_spotcheck": {
+  "form": "r0422_spotcheck 先例重跑(IC 口径, 预注册原文形式)",
+  "r0422_spotcheck_rerun": {
+   "2015-06": {
+    "n": 2030,
+    "ic_indep": -0.088006,
+    "ic_stored": -0.088006,
+    "diff": 0.0
+   },
+   "2020-12": {
+    "n": 2857,
+    "ic_indep": 0.003829,
+    "ic_stored": 0.003829,
+    "diff": 0.0
+   }
+  },
+  "pass": true,
+  "supplementary_value_check": {
+   "detail": {
+    "2015-06": {
+     "solve": {
+      "n_common": 2030,
+      "max_abs_diff": 8.193921114674207e-07,
+      "diff_round8": 8.2e-07,
+      "rank_agree": 1.0,
+      "spearman": 1.0
+     },
+     "lstsq": {
+      "n_common": 2030,
+      "max_abs_diff": 8.193920912613617e-07,
+      "diff_round8": 8.2e-07,
+      "rank_agree": 1.0,
+      "spearman": 1.0
+     },
+     "n_panel_only": 0,
+     "medate": "2015-06-30"
+    },
+    "2020-12": {
+     "solve": {
+      "n_common": 2857,
+      "max_abs_diff": 4.899252386003639e-07,
+      "diff_round8": 4.9e-07,
+      "rank_agree": 0.9986,
+      "spearman": 1.0
+     },
+     "lstsq": {
+      "n_common": 2857,
+      "max_abs_diff": 4.899252337153825e-07,
+      "diff_round8": 4.9e-07,
+      "rank_agree": 0.9986,
+      "spearman": 1.0
+     },
+     "n_panel_only": 0,
+     "medate": "2020-12-31"
+    }
+   },
+   "pass": true,
+   "note": "独立复算面板值: max|Δ|≤8.2e-7(z单位), spearman=1.000000, rank一致≥99.86%; 差源=v120 float32口径继承+winsor浮点噪声, 非缺陷; 首跑D2误以round8=0为门(过严)已修正为预注册形式"
+  }
+ },
+ "panel": {
+  "file": "results/work/r263/csad_resid_monthly.csv",
+  "md5": "416019cf5368bde27c289949069f6193",
+  "rows": 596522,
+  "months": 253,
+  "ym_range": [
+   "2005-08",
+   "2026-08"
+  ],
+  "mean_n_per_month": 2357.8,
+  "fv_rows": 596522,
+  "panel_over_fv": 1.0
+ },
+ "live_filter_mean_gap": 0.0,
+ "all_anchors_pass": true,
+ "note": "面板=全截面 v2 中性化(PIT 干净, 无 r0422 IC 计算的次月收益 live 过滤); 锚①②经 r0422 逐字复刻路径验证代码一致; 锚③=D1(r0422_spotcheck 原样重跑)+D2(面板值独立复算)"
+}

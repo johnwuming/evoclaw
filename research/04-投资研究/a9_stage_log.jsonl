@@ -50,3 +50,4 @@
 {"stage": "r252_t2_f1_l10", "ok": true, "full": {"annual_return": 0.223, "max_drawdown": -0.3355, "sharpe": 1.371, "calmar": 0.6645}, "locked": {"annual_return": 0.2195, "max_drawdown": -0.3355, "sharpe": 1.355, "calmar": 0.6542}}
 {"stage": "r252_t3_f2_l05", "ok": true, "full": {"annual_return": 0.2223, "max_drawdown": -0.3355, "sharpe": 1.3656, "calmar": 0.6625}, "locked": {"annual_return": 0.2181, "max_drawdown": -0.3355, "sharpe": 1.3458, "calmar": 0.65}}
 {"stage": "r252_t4_f2_l10", "ok": true, "full": {"annual_return": 0.2216, "max_drawdown": -0.3355, "sharpe": 1.3642, "calmar": 0.6604}, "locked": {"annual_return": 0.2182, "max_drawdown": -0.3355, "sharpe": 1.3484, "calmar": 0.6503}}
+{"stage": "r263_g0_w0", "ok": true, "full": {"annual_return": 0.2241, "max_drawdown": -0.3355, "sharpe": 1.3749, "calmar": 0.668}, "locked": {"annual_return": 0.2202, "max_drawdown": -0.3355, "sharpe": 1.3561, "calmar": 0.6562}}
