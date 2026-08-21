@@ -49,3 +49,12 @@
 - 运维教训×2：pkill -f 自匹配 kill 了自身 ssh shell（两次），后用分隔 ssh+方括号正则解决；quintile 需逐月 score 落盘，中途补 np.save 后重启（损失~3min）
 - D 组 walk-forward 中段观察：2018-2024 多个月 IC 为负（2018 -0.10 / 2020 -0.15 / 2024-01 -0.37），近年特征-收益关系弱化明显，与 2024 微盘股剧烈波动期吻合；如实进报告
 - O 组选定参数与 val_ic 见 lgbm_run.log / lgbm_summary.json
+
+### T+75min 最终数字与判定
+- 同窗186月: ranksum ICIR 0.667 / LGBM-D 0.750 (Δ+0.084) / LGBM-O 0.717 (Δ+0.050)
+- 五分段全正(无翻转)✓ 五分位单调✓ 但 Δ<0.15 → **未达线, 负结果归档, 不进E2**
+- IC序列相关 0.77/0.78 (22%正交信息未转化足够增量); 分组价差 LGBM≈ranksum (1.90 vs 1.91pp)
+- 验收四件套全过: V1 score↔csv 三月逐位一致 / V2 K线复算月收益+amt20 / V3 walk-forward边界实查 / V4 ranksum独立秩实现复算
+- md5: panel 738727d3, ranksum bf6e8336, D 80610b42, O 5a747bf3, analysis 5efbc7a9
+- 试验计账: D=0 组外trial, O=20 trial(随机搜索替代optuna, 已在报告如实记录偏差)
+- R-266 已写入 (5783B≥2KB), README 待更新, completions 待写
