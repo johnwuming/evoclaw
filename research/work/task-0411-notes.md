@@ -98,3 +98,12 @@
 - crisis MDD 改善：T2 9.5673→8.1173pp(改善1.45pp)；T4 9.5673→8.1138pp(改善1.45pp，边际更优 0.004pp)
 - λ_c 相等（均 1.0）→ F2 优先 → **胜者 = T4 (F2 × λ_c=1.0)**
 - 结论：**拥挤度选股降权 E2 引擎级对照 PASS，T4 获得评分制 v1.1 资格（不激活、不动 registry）**
+
+## 4e. 阶段B收口完成（2026-08-21 11:0x）
+- md5 勘误：§2 记 91b70d... 为列名规范化（date→month）前旧版本；HP 实测当前 roll3y_states.csv md5 = **ab4143123fefccc29a21ad6160577f16**，与台账 data_snapshot.states_md5 一致 → 以台账/实测为准
+- G0 文件级证据：g0_orig 与 g0_lam0 full_nav md5 相同（a761e3a86c04ce491ed683c5c1b5c97a），与 max|Δnav|=0 互证
+- e2_results.json 已落盘 HP results/work/r252/（6457B，JSON 校验 OK，md5=cbad380d83f48b7395da8d8717878eab）
+- 报告 R-253 已写 VPS 05-量化投资/（10140B，含四门判定+胜者+事故披露+来源md5清单）
+- README.md 顶部更新日志 + 变更记录表已更新（R-253 行）
+- 完成概要已写 .task-completions.jsonl（task-0411）
+- 全流程零新回测、零引擎/registry/paper_engine/HP crontab 改动；HP 已跑进程未动
