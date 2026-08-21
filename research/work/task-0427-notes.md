@@ -66,3 +66,18 @@
 - [ ] tar 备份 registry.bak.20260821_task0427.tar.gz
 - [ ] 写 a15_csad_resid.json + manifest 重生成
 - [ ] diff 校验：仅新增 candidate+manifest，active 逐字不变
+
+## 阶段 3：--write 完成与验收自检（2026-08-21）
+
+- tar 备份：model/registry.bak.20260821_task0427.tar.gz（39.2KB）✓
+- 写 a15_csad_resid.json（gate.score 0.8732/rank 2/components 与 summary 逐项一致）✓
+- manifest 重生成 rc=0：107 versions，active=a13_rsraw_e1f10dz ✓
+- diff 校验：写前 50 json md5 vs 写后 → 仅新增 a15_csad_resid.json 一行；a13 条目 md5 346450f739830c78bd485ba5869117b0 逐字未变 ✓
+- evolution_pipeline.py md5 写前后均 9c50b188cbc9007bf2e43bc55c6570ed（零改动）✓
+- R-265 报告 12.6KB 落盘 + README 顶部日志 + completions jsonl 写入 ✓
+- 未调 review 接口（主 agent 审核）、未动 paper_engine/crontab/active ✓
+
+## 最终结论
+
+三条件裁决=不过线（rank2，0.8732 vs a13 0.8781，−0.0049）；stat_warn 无、holdout PASS。
+a15_csad_resid 以 candidate 留档；csad 因子线（R-257→R-265）闭环；无激活动作。
