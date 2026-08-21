@@ -1,5 +1,8 @@
 # 研究交付物
 
+## 2026-08-21 R-266 LightGBM非线性组合E1画像（task-0414）
+- R-249 方向二阶段A收口（零回测零引擎改动）：数据债实查=fin_deep 无末端截断（2005-06~2026-08 全在，新鲜度呈财报季节性，R-235 末端缺失已不存在），真实债是现金流量表系列列广度仅 44.5%（利润表系 95%+），本试点 8 特征不含 fin_deep 影响为零。自建 W1 同口径月频面板（5206 股×247 月×8 特征，mask 693,194 行月，md5 738727d3，PIT=avail_date as-of 月 28 日锚保守处理）。**核心判定：walk-forward 186 月（训练窗 60 月月推进，边界实查无泄漏）LGBM-D ICIR 0.750 / O 0.717 vs ranksum4 同窗基准 0.667，增量 +0.084/+0.050 未达预登记门槛 +0.15 → 不进 E2，负结果归档**；五分段全正、五分位单调、IC 序列相关 0.77（22% 正交信息未转化增量）、分组价差 1.90pp≈基准 1.91pp。超参两组预登记冻结（D 默认 + O 随机搜索 20 trial seed42，optuna 未装以随机搜索替代如实记录），试验计账 20 trial 封顶。独立验收四件套（score↔csv 逐位/K线复算/walk-forward 边界/独立秩实现）全过 → `05-量化投资/R-266-LightGBM非线性组合E1画像.md`
+
 ## 2026-08-21 R-265 csad残差因子M1.1评分制收口（task-0427）
 - R-264 胜者 M1.1（csad_resid⁻ w=0.3）评分制 v1.1 收口（零回测零 pipeline 改动，只调部署函数）：registry 新增 candidate a15_csad_resid（写前 tar 备份，diff 校验仅新增一行，active a13 逐字未变，manifest rc=0）。**三条件裁决=不过线（差 rank1 一条）：0.8732 居 rank2 落后在役 a13 0.8781（−0.0049），stat_warn 无、holdout PASS（0.2052≫0.1351，mdd 改善 16.43pp）**。分量：p 1.0（0.6143）/dsr 0.999/oos_calmar 0.503/oos_sharpe 0.4839（locked ann +0.49pp 但 sharpe −1.29%，换手 +14.92pp 侵蚀信息率）/is 1×2/dd 1.0（0.68pp）/corr 1.0（max|ρ| 0.2932 vs mom_pen_dz，IC 序列口径，GUARD 豁免不触发）/logic 1.0。IC 口径如实标注：g1/g2 用引擎复合 IC（r263 dump 246 月，IS ICIR 2.4314 vs 4f 2.2338），g3 用 r0422 ic_res_v2 内存注入。**知情段：R-264 holdout −5.32pp 未直接入分（oos 分量=locked 窗口径，holdout 只进三条件门）但若为 rank1 将是激活决策首要逆风；post-hoc 自由度警示一并留档**。两次 E2 胜者同败 rank1（T4 −0.0197/M1.1 −0.0049）印证 R-263 §五.5 先验兑现，csad 因子线闭环归档 → `05-量化投资/R-265-csad因子M11评分制报告.md`
 
