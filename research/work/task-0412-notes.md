@@ -44,3 +44,8 @@
 - 零回测、零引擎/pipeline/paper_engine/crontab 改动（scripts/ 仅新增分析脚本 r254_score_t4.py，evolution_pipeline.py 未动）
 - 写后池：a13 0.8781 (rank1) > a14_crowdf2 0.8584 (rank2) > v4a_mf0_trr 0.8088
 - 交付路径：R-254 报告 → shared/results/05-量化投资/R-254-拥挤度降权T4评分制v1.1报告.md；summary → HP results/r254_t4_score_summary.json
+
+## 2026-08-21 12:10 交付收口
+- R-254 报告写入：shared/results/05-量化投资/R-254-拥挤度降权T4评分制v1.1报告.md（9040B ≥2KB ✓，结构含背景/方法/核心发现/结论/来源清单）
+- README.md 更新：顶部更新日志 + 变更记录表各加 R-254 条目 ✓
+- 最终裁决：不过线（rank2 0.8584 vs rank1 a13 0.8781；无 stat_warn ✓；holdout PASS ✓）→ 不激活，candidate a14_crowdf2 留档
