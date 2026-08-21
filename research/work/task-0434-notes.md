@@ -16,3 +16,15 @@
 - 20:18 验证增量生效：watermark=2026-08-21T12:18:01Z，hp 12:06Z 起每分钟恰好 1 行（此前 539 倍重复 → 1 倍）
 - 旁路发现（非本任务改动面）：HP 直报通道 12:05Z 后断流（12:00-12:02 有 3/2/1 份重试补发重复），属 server.js/HP 侧（task-0433 并行范围），已在收尾原子事务中一并去重；唯一索引生效后双通道同分钟数据将由 OR IGNORE 幂等吸收
 - 保留集：4,321 组 (timestamp,server)（只读 GROUP BY 实测 0.6s）
+
+### 手术执行（20:19-20:25）
+- keep 表放独立 attached 库 /tmp/t0434_keep.db（读写分离：只读扫主库、写只落附库，主库零长锁）；保留集 4,350 组，快照 MAXID_KEPT=8,276,635
+- 分批 DELETE：22 批 × 10 万行 id 区间，共删 1,072,091 行，每批短事务（~1s），服务写入无中断（vps ingest 期间持续正常）
+- 原子收尾（BEGIN IMMEDIATE 单事务 0.026s）：残余去重 0 行（分批已删净）+ CREATE UNIQUE INDEX idx_uniq_ts_server ON system_metrics(timestamp,server) 建成（unique=1，PRAGMA index_list 确认）——索引建成即证明零重复
+- checkpoint(TRUNCATE) + VACUUM(0.046s) + checkpoint：**metrics.db 340,303,872B → 823,296B（340MB→0.8MB，超额达标，目标 <5MB）**，WAL 262MB→0，integrity_check=ok
+- 终态行数：4,352（hp 2,184 + vps 2,168），时间跨度 08-20T00:00:01Z → 当前，每 (timestamp,server) 恰 1 行
+- keep 临时库已清理；备份保留 /root/metrics.db.bak-task0434-20260821（确认稳定后可删）
+
+### API 验证（20:27）
+- GET /api/metrics/system/current → 200，9.6ms
+- GET /api/metrics/system?hours=24 → 200，71ms，servers=[hp,vps]，各 287 个 5min 降采样点，字段完整（cpu/mem/disk/net/temp）→ 24h 趋势图数据完整
