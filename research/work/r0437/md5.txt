@@ -1,0 +1,4 @@
+27358ba721b3342944c1c8dd0cf22141  ic_monthly.csv
+7c30e911f74b39f3877a11ff6f154453  quintile_monthly.csv
+f3517449244705bcd7ac9aa72fd4f567  summary.json
+f38252eeb0708d5c8db11e54cfc51929  xs_corr_monthly.csv
