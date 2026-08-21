@@ -32,3 +32,14 @@
 ## 口径对照（验收数字）
 - CPU：同刻 top -bn2 -d5（第2轮=5s平均）42.1% idle ⇒ 57.9% busy；脚本 5s 窗读数 57.7% → 差 0.2pp（±10pp 内✓）。旧 1s 口径同场景读 95-100（单核峰值）。
 - 负载：vps loadavg_1=5.53、cores=2 → norm 2.765（确实过载，红得有依据）；hp loadavg_1=1.06、cores=4 → norm 0.265（旧口径 1.06 在两台机器上不可比，归一后可比）。
+
+## 合并/上报链路验证（16:58 UTC 复核）
+- HP→VPS pull（watermark 增量）：16:54-16:57 四行 hp 全带 cpu_cores=4/load_norm_1（watermark 推进到 16:57:01Z）；pull 日志今日（08-22）零新错误（tail 所见 error 为昨日 20:14 历史遗留）。
+- HP cron POST ingest 路径：重启后白名单生效，POST 行同样带新列（16:54 起 4/4）。
+- 趋势接口：vps/hp 最新 5 分钟桶均透传 cpu_cores/load_norm_1（旧桶 NULL，展示层折算回退）。
+- VPS 本身当前真过载（norm≈2.0，loadavg 4-5.5/2核；本会话自身+网关+看板所致），读数高是真实状态而非口径噪声；受控对照实验（57.7 vs 57.9）已证明测量准确。
+
+## 交付物
+- git：2df99b3（agent-dashboard 目录 3 文件：collect-metrics.sh/pull-hp-metrics.sh/server.js）
+- HP 备份：collect-metrics.sh.bak-task0439（不在 git，双端脚本同源）
+- 旧数据：零删除零修改，仅 ALTER ADD COLUMN
