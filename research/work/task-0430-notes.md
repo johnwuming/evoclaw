@@ -20,8 +20,13 @@
 - B 蒙西胡杨线（金橙）：南京-银川-额济纳-嘉峪关-兰州 全程硬驾 ~5050km，强度高，胡杨 10/1-10/15 正当时。
 - C 川西北环线（松绿）：南京-成都-九寨-若尔盖-唐克-理县 全程硬驾 ~4440km，强度中高，彩林前哨（巅峰 10 月中下旬）。
 
-## 验证记录
-- （待部署后补：curl 200 记录、路由互跳检查）
+## 验证记录（2026-08-21 19:41）
+- nginx -t 通过，reload 成功；原配置备份 /root/www-zhengqiangnan.bak.20260821-194056
+- HTTPS 域名路径 7 项全部 200：/triple/、/triple/index.html、a/b/c 三个方案页
+- IP 直连 200：http://82.156.124.186/triple/ 及子页（经 /var/www/html/triple 符号链接走 default 80 站点）
+- 内链检查：index ↔ a/b/c 五对链接全部指向存在文件，无断链
+- 既有服务未受影响：https://www.zhengqiangnan.cn/ （任务中心面板）仍 200；/df0s6p 网关块未动
+- 新增 80 口 server 块（zhanqiangnan.cn）为纯增量，域名 NXDOMAIN 下无实际流量
 
 ## 遗留/风险
 - zhanqiangnan.cn 域名不存在；若用户确有此域名需注册并解析到 82.156.124.186，80 口 server 块已备好。
