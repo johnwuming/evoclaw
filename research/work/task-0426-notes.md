@@ -2,13 +2,28 @@
 
 - 2026-08-21 17:58 开工。task-0426 已置 running。
 - 已读 R-263 预注册全文（21.3KB）、R-253（G0 改良版先例 + runner 补丁链）、R-260（v2 残差口径）。
-- 执行骨架（R-263 §十）：
-  1. 冻结残差面板 work/r263/csad_resid_monthly.csv + 三锚校验（IC 逐月一致 / ICIR −0.601 / 单月抽验 diff=0）
-  2. 台账 IT-R263-01/02（先登记后读结果）
-  3. G0 两跑：max|Δnav|<1e-12 + g0_orig 4dp 血统锚警报（vs 22.39%/−33.55%，容差 0.1pp）
-  4. M1.1 (w=0.3) / M1.2 (w=0.5)
-  5. 判门 G1/G2/G3 + e2_results.json
-  6. 结局处理 + R-264 报告
+- 执行骨架（R-263 §十）：冻结面板三锚 → 台账 IT-R263-01/02 → G0 两跑 → M1.1/M1.2 → 判门 → R-264。
 
 ## 环境事实
-- （待记录）
+- HP 输入 md5 三项全对 R-263 §八：factor e9ad0b82…、vol_panel 3ad82499…、ic_ref 3bcf930b…
+- kline 快照：2005-01-04~2026-08-20（5206 文件）→ data_snapshot.kline_as_of=2026-08-20
+- r252_g0_orig_full_nav.csv：5008 行（2006-01-04→08-14），在役 a13_rsraw_e1f10dz 产物齐全
+- 引擎细节确认：ranksum 分支 `_score = _con ... _score + _con`（新项追加末位）；`tdf = tdf[_ok]` 池过滤在评分前；w=0 → IEEE ±0.0 逐位不变
+- scp 需 `-O`（HP sshd 无 sftp 子系统）
+
+## 冻结脚本设计决策（重要，报告要披露）
+- r0422 存档计算含「次月收益可得」live 过滤（IC 计算需要）。直接沿用到引擎面板理论上违反 §二.3 PIT，故：锚①②走 r0422 逐字复刻路径；冻结面板 = 全截面版（无 live）。
+- **实证结果：live gap = 0.0000%**（252 个复刻月 n_live==n_full）——本宇宙上 live 过滤近似空操作，PIT 顾虑实证消除。fv 含 2026-08 月（253 月，§二.4 预注册已知），引擎最后调仓 08-03/04 用 2026-07 值，2026-08 行惰性（无 9 月调仓）。
+
+## 冻结执行记录
+- 首跑（18:0x）：锚① PASS（n=252, corr=1.000000, max|Δ|=9.714e-17）；锚② PASS（n=251, ICIR=−0.601252）；锚③a PASS（r0422_spotcheck 原样重跑 2015-06/2020-12 diff=0.0）；锚③b FAIL：面板值独立复算 max|Δ|=8.3e-07/1.19e-06，未达 round8=0。
+- 根因：D2 独立路径 v20 误用 float32 ret_np（冻结路径 v20 为 float64 rolling std）；v120 本就 float32（沿 r0422）。OLS lstsq vs solve 数值差 ~1e-12 量级不背锅。属实现缺陷（R-263 §七.1：修复重跑不计 n_trials，须披露）。
+- 修复：D2 的 v20 改用 float64 ret 矩阵。面板本身不受影响（生成路径未动）。
+- 面板：rows=596,522 = fv 全行，months=253（2005-08~2026-08），md5=416019cf5368bde27c289949069f6193
+
+## G0/M 跑设计
+- r263_run.py：R263 注入 = _fval 追加 csad_resid 分支（面板查 (code, prev_month(d))，缺失→0.0 永不 NaN）+ ranked 前全池 dump（G2 复合 IC 用，try/except 包裹）
+- specs5 = 4 在役 + ("csad_resid", w, -1)；FULL_RANGE 2006-01-01→2026-08-14；BASE/E1F10DZ 逐参照抄 r252_run.py
+- 台账：每点跑完立即登记（先登记后判定，沿 IT-R252 惯例）；G0 不入台账
+
+##（待续）
