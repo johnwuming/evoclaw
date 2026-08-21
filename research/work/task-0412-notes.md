@@ -35,3 +35,12 @@
 - stat_warn=False（p 0.4719 ≥ 0.01, DSR 0.9999 ≥ 0.90）
 - **三条件裁决：rank1 ✗（rank2）+ 无 stat_warn ✓ + holdout PASS ✓ → 不过线**（差 rank1 一条；总分差 a13 -0.0197）
 - gap 归因：oos_calmar/oos_sharpe 两分量 ≈0.49（锁定窗年化 -0.20pp/sharpe -0.0077 的微小损耗映射到 ±40% 满档刻度 → ~0.5），is/dd/logic/p/dsr 全满分或近满分；corr N/A 少 0.10 权重重归一后实际上放大了满分量占比，仍不足以追平 a13（a13 当年评时 oos 增量为正）
+
+## 2026-08-21 12:02 --write 回写与校验
+- 备份：model/registry.bak.20260821_task0412.tar.gz（37862B，命名带 task-0412+日期，沿 R-245 惯例）
+- 写入：model/registry/a14_crowdf2.json（md5 d8af25745926fe43b4208d87a331c9b2）；字段齐：gate.score 0.8584 / score_components / score_flags 空 / stat_warn False / rank_in_pool 2 / score_holdout(PASS, seg ann 0.2504 mdd -0.1613) / ic_coverage 5/5 / n_trial 95 / scored{task-0412, at, run_id, baseline_active} / verdict SCORED
+- **diff 校验**：写前 49 个 json md5 快照 vs 写后 → 仅新增 a14_crowdf2.json 一行，其余 49 个文件逐字节不变；a13_rsraw_e1f10dz.json md5 -c OK（active 逐字未动）✓
+- manifest：gen_versions_manifest.py rc=0，103 versions，active=a13_rsraw_e1f10dz ✓
+- 零回测、零引擎/pipeline/paper_engine/crontab 改动（scripts/ 仅新增分析脚本 r254_score_t4.py，evolution_pipeline.py 未动）
+- 写后池：a13 0.8781 (rank1) > a14_crowdf2 0.8584 (rank2) > v4a_mf0_trr 0.8088
+- 交付路径：R-254 报告 → shared/results/05-量化投资/R-254-拥挤度降权T4评分制v1.1报告.md；summary → HP results/r254_t4_score_summary.json
