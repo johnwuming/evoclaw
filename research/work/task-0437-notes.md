@@ -109,7 +109,7 @@ log_mv −0.054/−0.314、amt20 −0.104/−0.675、pb_inv −0.061/−0.565、
 
 ### 3.6 产物与 md5（HP results/work/r0437/）
 
-- ic_monthly.csv 27358ba721b3342944c1c8dd0cf22141；summary.json 33df6a1b5aa18da2303b38cc563f5b35
+- ic_monthly.csv 27358ba721b3342944c1c8dd0cf22141；summary.json f3517449244705bcd7ac9aa72fd4f567
 - factor_monthly.parquet（43MB，留 HP 不镜像）b41eea57f0ff646376b8e611c653aff6
 - quintile_monthly.csv / xs_corr_monthly.csv / build.log 同目录；脚本 scripts/r0437_valuation_quality.py（md5 与 VPS /tmp 同 574021d3…）
 
