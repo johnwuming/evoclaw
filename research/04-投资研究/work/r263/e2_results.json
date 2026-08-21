@@ -1,0 +1,305 @@
+{
+ "task": "task-0426",
+ "date": "2026-08-21",
+ "pre_registration": "R-263",
+ "n_trials": 2,
+ "engine": "a13/a15 runner 同参复用 + R263 第5因子注入(ext_specs 追加, 引擎文件零改动)",
+ "thresholds": {
+  "G1_full_ann_min": 0.2209,
+  "G1_full_mdd_min": -0.3455,
+  "G2_locked_icir_increment": ">0 (vs 4f)",
+  "G3_holdout_halve": 0.5
+ },
+ "window_convention": {
+  "nav_trunc_end": "2026-08-13",
+  "note": "R-253 纪律: 双方最后真实 mark 公共日; locked=2006-01~2024-06; holdout=2024-07-01→"
+ },
+ "reference": {
+  "in_service_tag": "a13_rsraw_e1f10dz",
+  "in_service_windows": {
+   "full": {
+    "start": "2006-01-04",
+    "end": "2026-08-13",
+    "n_days": 5007,
+    "total_ret": 63.3096,
+    "ann": 0.2239,
+    "mdd": -0.3355,
+    "mdd_date": "2015-07-08",
+    "sharpe": 1.374
+   },
+   "holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 0.6248,
+    "ann": 0.2578,
+    "mdd": -0.1613,
+    "mdd_date": "2026-07-22",
+    "sharpe": 1.523
+   }
+  },
+  "g0_orig_same_data": {
+   "full": {
+    "start": "2006-01-04",
+    "end": "2026-08-13",
+    "n_days": 5007,
+    "total_ret": 63.3096,
+    "ann": 0.2239,
+    "mdd": -0.3355,
+    "mdd_date": "2015-07-08",
+    "sharpe": 1.374
+   },
+   "holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 0.6248,
+    "ann": 0.2578,
+    "mdd": -0.1613,
+    "mdd_date": "2026-07-22",
+    "sharpe": 1.523
+   }
+  }
+ },
+ "reference_crosscheck_vs_R263": {
+  "pass": true,
+  "expect": {
+   "full_ann": 0.2239,
+   "full_mdd": -0.3355,
+   "holdout_ann": 0.2574
+  },
+  "note": "在役旧产物 qfq 微漂移 ≤1.4e-07(R-253 已证), 4dp 不变"
+ },
+ "g0": {
+  "basis": "同数据实现层对拍: R263注入(w=0) vs 原a9路径(r263_g0_orig), 同数据同截断",
+  "nav_md5_w0": "a761e3a86c04ce491ed683c5c1b5c97a",
+  "nav_md5_orig": "a761e3a86c04ce491ed683c5c1b5c97a",
+  "dates_equal": true,
+  "n_days": 5007,
+  "max_abs_nav_diff": 0.0,
+  "pass": true,
+  "bloodline_4dp": {
+   "g0_orig_ann": 0.2241,
+   "g0_orig_mdd": -0.3355,
+   "ann_diff_pp": 0.02,
+   "mdd_diff_pp": 0.0,
+   "alert": false
+  },
+  "drift_vs_old_artifact_max": 1.5500093297760031e-07,
+  "note": "G0 不入台账(R-253 先例); drift 量级沿 R-253 披露(qfq 重写微漂移+端点伪影)"
+ },
+ "ic_4f": {
+  "full": {
+   "n": 246,
+   "ic_mean": 0.09205,
+   "ic_std": 0.1482,
+   "icir": 0.6211
+  },
+  "locked": {
+   "n": 221,
+   "ic_mean": 0.09221,
+   "ic_std": 0.14293,
+   "icir": 0.6451
+  },
+  "holdout": {
+   "n": 25,
+   "ic_mean": 0.09066,
+   "ic_std": 0.19224,
+   "icir": 0.4716
+  }
+ },
+ "grid": [
+  {
+   "exp_id": "IT-R263-01",
+   "tag": "r263_m1_w03",
+   "trial": "M1.1",
+   "csad_w": 0.3,
+   "nav_md5": "67ca21d62df00a356ae67048997dde3f",
+   "windows": {
+    "full": {
+     "start": "2006-01-04",
+     "end": "2026-08-13",
+     "n_days": 5007,
+     "total_ret": 62.1527,
+     "ann": 0.2229,
+     "mdd": -0.3423,
+     "mdd_date": "2015-07-08",
+     "sharpe": 1.314
+    },
+    "holdout": {
+     "start": "2024-07-01",
+     "end": "2026-08-13",
+     "n_days": 516,
+     "total_ret": 0.4828,
+     "ann": 0.2046,
+     "mdd": -0.178,
+     "mdd_date": "2026-07-22",
+     "sharpe": 1.13
+    }
+   },
+   "vs_in_service_pp": {
+    "full_ann": -0.1,
+    "full_mdd": -0.68,
+    "holdout_ann": -5.32
+   },
+   "gates": {
+    "G1_full_ann_mdd": true,
+    "G1_margins": {
+     "ann": 0.002,
+     "mdd": 0.0032
+    },
+    "G2_locked_icir_increment": true,
+    "G2_detail": {
+     "icir_5f_locked": 0.6906,
+     "icir_4f_locked": 0.6451,
+     "delta_icir": 0.0455,
+     "delta_ic_mean_locked": 0.00516
+    },
+    "G3_holdout_redflag": false,
+    "G3_detail": {
+     "holdout_icir_5f": 0.5009,
+     "full_icir_5f": 0.6642,
+     "halve_line": 0.3321
+    },
+    "all_pass_G1G2": true
+   },
+   "ic_5f": {
+    "full": {
+     "n": 246,
+     "ic_mean": 0.09716,
+     "ic_std": 0.14627,
+     "icir": 0.6642
+    },
+    "locked": {
+     "n": 221,
+     "ic_mean": 0.09737,
+     "ic_std": 0.14098,
+     "icir": 0.6906
+    },
+    "holdout": {
+     "n": 25,
+     "ic_mean": 0.09533,
+     "ic_std": 0.19032,
+     "icir": 0.5009
+    }
+   },
+   "pool_coverage": {
+    "mean": 0.8003,
+    "effective_weight_share": 0.1469,
+    "nominal_weight_share": 0.1836
+   },
+   "holdings_jaccard_vs_inservice": {
+    "n_dates": 247,
+    "jaccard_mean": 0.4837,
+    "jaccard_min": 0.0811,
+    "overlap_over_base_mean": 0.6433
+   },
+   "turnover": {
+    "monthly_turnover_est": 0.5965,
+    "vs_g0_orig_pp": 14.92
+   }
+  },
+  {
+   "exp_id": "IT-R263-02",
+   "tag": "r263_m1_w05",
+   "trial": "M1.2",
+   "csad_w": 0.5,
+   "nav_md5": "0ebda96e17e82a5306af5650ed130776",
+   "windows": {
+    "full": {
+     "start": "2006-01-04",
+     "end": "2026-08-13",
+     "n_days": 5007,
+     "total_ret": 60.6158,
+     "ann": 0.2214,
+     "mdd": -0.3344,
+     "mdd_date": "2015-07-08",
+     "sharpe": 1.287
+    },
+    "holdout": {
+     "start": "2024-07-01",
+     "end": "2026-08-13",
+     "n_days": 516,
+     "total_ret": 0.3855,
+     "ann": 0.1666,
+     "mdd": -0.2058,
+     "mdd_date": "2026-07-22",
+     "sharpe": 0.937
+    }
+   },
+   "vs_in_service_pp": {
+    "full_ann": -0.25,
+    "full_mdd": 0.11,
+    "holdout_ann": -9.12
+   },
+   "gates": {
+    "G1_full_ann_mdd": true,
+    "G1_margins": {
+     "ann": 0.0005,
+     "mdd": 0.0111
+    },
+    "G2_locked_icir_increment": true,
+    "G2_detail": {
+     "icir_5f_locked": 0.7195,
+     "icir_4f_locked": 0.6451,
+     "delta_icir": 0.0744,
+     "delta_ic_mean_locked": 0.00755
+    },
+    "G3_holdout_redflag": false,
+    "G3_detail": {
+     "holdout_icir_5f": 0.5209,
+     "full_icir_5f": 0.6918,
+     "halve_line": 0.3459
+    },
+    "all_pass_G1G2": true
+   },
+   "ic_5f": {
+    "full": {
+     "n": 246,
+     "ic_mean": 0.09953,
+     "ic_std": 0.14387,
+     "icir": 0.6918
+    },
+    "locked": {
+     "n": 221,
+     "ic_mean": 0.09976,
+     "ic_std": 0.13865,
+     "icir": 0.7195
+    },
+    "holdout": {
+     "n": 25,
+     "ic_mean": 0.09756,
+     "ic_std": 0.18729,
+     "icir": 0.5209
+    }
+   },
+   "pool_coverage": {
+    "mean": 0.8003,
+    "effective_weight_share": 0.2379,
+    "nominal_weight_share": 0.2972
+   },
+   "holdings_jaccard_vs_inservice": {
+    "n_dates": 247,
+    "jaccard_mean": 0.3619,
+    "jaccard_min": 0.0811,
+    "overlap_over_base_mean": 0.5229
+   },
+   "turnover": {
+    "monthly_turnover_est": 0.6649,
+    "vs_g0_orig_pp": 21.76
+   }
+  }
+ ],
+ "verdict": {
+  "outcome": "PASS",
+  "winner": {
+   "exp_id": "IT-R263-01",
+   "tag": "r263_m1_w03",
+   "csad_w": 0.3
+  },
+  "rule": "R-263 §五: W-full ann 最高 → w 较小 → MDD 较优",
+  "next": "获评分制 v1.1 资格(不激活/不动 registry active; 另任务)",
+  "g3_redflag_trials": [],
+  "g3_redflag_note": "红旗不自动否决; 进评分制前须用户知情确认(R-263 §五.4/§七.4)"
+ }
+}
