@@ -35,12 +35,14 @@
 7. [16:51] 残差 IC 序列 vs 在役因子 IC 序列相关（诊断）：res_v2 vs volatility_20d 0.402、vs idiosyncratic_vol 0.236（原始因子为 −0.833/−0.846）→ 中性化后时序冗余大幅下降但仍非零。
 8. [16:52] v3 分段（弱尾段警示）：seg4 2018-04~2022-03 ICIR −0.430；seg5 2022-04~2026-06 ICIR −0.238（IC<0 60.8%）——近四年残差信息明显衰减，报告必须披露。
 
-## 待办
-- [x] 单月独立抽验（见下）
-- [ ] R-260 报告 + README 更新 + completions
+## 方法决策（披露）
 
 - vol20：月末截断 trailing 20 交易日日收益 std，min_periods=15（不足 NaN）。
 - vol120：完全复刻 r0419 内部口径（okm mask + NaN→0 + std），以便对拍 ρ≈0.442。
 - idio120（补充参照）：trailing 120d，市场收益（szzs→cal 对齐）非 NaN 日，NaN→0，beta=cov/var，残差 std。与生产 idiosyncratic_vol 因子口径差异：生产版引擎内实现未公开细节，本代理为标准 CAPM 残差波动近似。
 - 中性化回归：逐月截面 OLS，回归前对 F 与 vol 代理各做 1%/99% winsorize（OLS 残差对回归量的线性重标不变，zscore 与否不影响残差，只 winsorize 即可）；残差 e 再 winsorize 1%/99% + zscore 后做 spearman IC（spearman 秩基础，主要防极端值扰动分组）。
 - 验证设计：先复现 r0419 原始 IC（应得 −0.0920/−0.796/251 月）+ 复现 ρ(F,vol120)≈0.442，两条通过才信残差结果。
+
+## 待办
+- [ ] 单月独立抽验
+- [ ] R-260 报告 + README 更新 + completions
