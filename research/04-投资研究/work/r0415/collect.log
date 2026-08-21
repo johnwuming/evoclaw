@@ -1,0 +1,34 @@
+n_industries: 31
+FAIL 农林牧渔 name 'date' is not defined
+FAIL 基础化工 name 'date' is not defined
+FAIL 钢铁 name 'date' is not defined
+FAIL 有色金属 name 'date' is not defined
+FAIL 电子 name 'date' is not defined
+FAIL 汽车 name 'date' is not defined
+FAIL 家用电器 name 'date' is not defined
+FAIL 食品饮料 name 'date' is not defined
+FAIL 纺织服饰 name 'date' is not defined
+FAIL 轻工制造 name 'date' is not defined
+FAIL 医药生物 name 'date' is not defined
+FAIL 公用事业 name 'date' is not defined
+FAIL 交通运输 name 'date' is not defined
+FAIL 房地产 name 'date' is not defined
+FAIL 商贸零售 name 'date' is not defined
+FAIL 社会服务 name 'date' is not defined
+FAIL 银行 name 'date' is not defined
+FAIL 非银金融 name 'date' is not defined
+FAIL 综合 name 'date' is not defined
+FAIL 建筑材料 name 'date' is not defined
+FAIL 建筑装饰 name 'date' is not defined
+FAIL 电力设备 name 'date' is not defined
+FAIL 机械设备 name 'date' is not defined
+FAIL 国防军工 name 'date' is not defined
+FAIL 计算机 name 'date' is not defined
+FAIL 传媒 name 'date' is not defined
+FAIL 通信 name 'date' is not defined
+FAIL 煤炭 name 'date' is not defined
+FAIL 石油石化 name 'date' is not defined
+FAIL 环保 name 'date' is not defined
+FAIL 美容护理 name 'date' is not defined
+SAVED /home/noname/quant-evolve/results/work/r0415/sw_industry_monthly.csv shape (322, 31) md5 d0775a569f80f4962d5717f380db4e37
+FAILS [('农林牧渔', "name 'date' is not defined"), ('基础化工', "name 'date' is not defined"), ('钢铁', "name 'date' is not defined"), ('有色金属', "name 'date' is not defined"), ('电子', "name 'date' is not defined"), ('汽车', "name 'date' is not defined"), ('家用电器', "name 'date' is not defined"), ('食品饮料', "name 'date' is not defined"), ('纺织服饰', "name 'date' is not defined"), ('轻工制造', "name 'date' is not defined"), ('医药生物', "name 'date' is not defined"), ('公用事业', "name 'date' is not defined"), ('交通运输', "name 'date' is not defined"), ('房地产', "name 'date' is not defined"), ('商贸零售', "name 'date' is not defined"), ('社会服务', "name 'date' is not defined"), ('银行', "name 'date' is not defined"), ('非银金融', "name 'date' is not defined"), ('综合', "name 'date' is not defined"), ('建筑材料', "name 'date' is not defined"), ('建筑装饰', "name 'date' is not defined"), ('电力设备', "name 'date' is not defined"), ('机械设备', "name 'date' is not defined"), ('国防军工', "name 'date' is not defined"), ('计算机', "name 'date' is not defined"), ('传媒', "name 'date' is not defined"), ('通信', "name 'date' is not defined"), ('煤炭', "name 'date' is not defined"), ('石油石化', "name 'date' is not defined"), ('环保', "name 'date' is not defined"), ('美容护理', "name 'date' is not defined")]
