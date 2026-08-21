@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T11:00:02",
+  "generated_at": "2026-08-21T11:30:03",
   "active": "a13_rsraw_e1f10dz",
   "versions": [
     {
@@ -545,6 +545,40 @@
         }
       },
       "files_note": "results/r252_t4_f2_l10_{full,locked}_metrics.json"
+    },
+    {
+      "version_id": "a15_csad_resid",
+      "strategy_prefix": "r263_m1_w03",
+      "status": "candidate",
+      "strategy": "raw_universe_ranksum4",
+      "registered_at": "2026-08-21 11:01:37",
+      "windows": {
+        "full": {
+          "annual_return": 0.2229,
+          "max_drawdown": -0.3423,
+          "sharpe": 1.3143,
+          "calmar": 0.6512,
+          "cumulative_return": 62.2349,
+          "monthly_win_rate": 0.664,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.2251,
+          "max_drawdown": -0.3423,
+          "sharpe": 1.3386,
+          "calmar": 0.6578,
+          "cumulative_return": 41.6333,
+          "monthly_win_rate": 0.6606,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/r263_m1_w03_{full,locked}_metrics.json"
     },
     {
       "version_id": "a15_ddc15",
@@ -1973,40 +2007,6 @@
         }
       },
       "files_note": "results/r263_g0_w0_{full,locked}_metrics.json（未注册 registry）"
-    },
-    {
-      "version_id": "r263_m1_w03",
-      "strategy_prefix": "r263_m1_w03",
-      "status": "backtest-only",
-      "strategy": null,
-      "registered_at": null,
-      "windows": {
-        "full": {
-          "annual_return": 0.2229,
-          "max_drawdown": -0.3423,
-          "sharpe": 1.3143,
-          "calmar": 0.6512,
-          "cumulative_return": 62.2349,
-          "monthly_win_rate": 0.664,
-          "period_start": "2006-01-04",
-          "period_end": "2026-08-14",
-          "years": 20.61,
-          "num_rebalance": 248
-        },
-        "locked": {
-          "annual_return": 0.2251,
-          "max_drawdown": -0.3423,
-          "sharpe": 1.3386,
-          "calmar": 0.6578,
-          "cumulative_return": 41.6333,
-          "monthly_win_rate": 0.6606,
-          "period_start": "2006-01-04",
-          "period_end": "2024-06-28",
-          "years": 18.48,
-          "num_rebalance": 222
-        }
-      },
-      "files_note": "results/r263_m1_w03_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "r263_m1_w05",

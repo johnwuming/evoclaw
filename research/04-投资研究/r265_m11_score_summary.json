@@ -1,0 +1,210 @@
+{
+  "task": "task-0427 R-265: M1.1(csad_resid, w=0.3) candidate 登记 + 评分制 v1.1",
+  "version_id": "a15_csad_resid",
+  "run_id": "bt_r263_m1_w03_20260821",
+  "scoring": "SCORE_CONFIG v1.1 (R-225), g6 disabled D-20260819-G6DEL, g3 D-20260819-G3CORR + D-20260820-G3SYM, oos/dd 基准=active a13_rsraw_e1f10dz",
+  "active": "a13_rsraw_e1f10dz",
+  "n_trials": 97,
+  "scored_at": "2026-08-21 11:01:37",
+  "ic_note": "g1/g2 输入=引擎复合 IC 月序列(R-264 r263 dump 口径, 246 有效月), 非部署因子级等权复合——csad_resid 无 factor_ic_monthly 列, 因子级口径会静默丢失该因子; g3 数据源=r0422 ic_res_v2 残差 IC 序列经脚本内内存注入(不落盘/不改 pipeline/调用后恢复), 方法=部署函数第三数据源(月度 IC Pearson>=24月); GUARD_CORR_CONFIG 豁免不触发(csad_resid 非 ret120 替身名单成员, 无不对称豁免问题)",
+  "metrics_note": "metrics=locked 窗(2006-01-04~2024-06-28, 与 a13 同窗) 保持 oos/is 分量 apples-to-apples; R-264 审计 full 数字(截 08-13)在 metrics_full_r263_audit_t0813; holdout 消费 full_nav_t0813 副本(终点截断纪律 R-253/R-264)",
+  "locked_metrics": {
+    "annual_return": 0.2251,
+    "max_drawdown": -0.3423,
+    "sharpe": 1.3386,
+    "calmar": 0.6578,
+    "monthly_turnover_est": 0.5995
+  },
+  "gates": {
+    "g1_icir_is": {
+      "status": "PASS",
+      "icir_is_annualized": 2.4314,
+      "n_months_is": 179,
+      "threshold": 0.5
+    },
+    "g2_icir_oos": {
+      "status": "PASS",
+      "p_one_sided": 0.6143,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.09588,
+      "mean_ic_oos": 0.10368,
+      "threshold_p": 0.05,
+      "icir_oos_annualized": 2.2459
+    },
+    "g3_max_corr": {
+      "status": "PASS",
+      "max_abs_corr": 0.2932,
+      "worst_pair": [
+        "csad_resid",
+        "mom_pen_dz"
+      ],
+      "n_new_factors": 1,
+      "new_factors": [
+        "csad_resid"
+      ],
+      "threshold": 0.7,
+      "corr_sources": {
+        "matrix": 0,
+        "catalog": 0,
+        "ic_monthly": 5
+      }
+    },
+    "g4_dsr": {
+      "status": "PASS",
+      "dsr": 0.9999,
+      "sr_period": 0.08432,
+      "sr0_expected_max": 0.02667,
+      "T": 4490,
+      "skew": -0.88,
+      "kurtosis": 8.899,
+      "n_trials": 97,
+      "threshold": 0.95
+    },
+    "g5_logic": {
+      "status": "PASS",
+      "logic": "csad 羊群分化残差因子: CSAD 截面分散度对 vol20/vol120 双中性化残差(v2口径, R-260)取 z, 以负权第5因子(w=0.3)进入在役 a13 ext ranksum 排序——低残差分化(羊群化异常)优先, 缺失置0中性贡献; 机制=横截面羊群行为定价, 与在役四因子截面秩相关全部|rho|<0.6(R-257), locked 复合 ICIR 增量 +0.0455(R-264 G2)"
+    },
+    "g6_mdd_vs_parent": {
+      "status": "N/A",
+      "mdd_candidate": -0.3423,
+      "mdd_parent": -0.3355,
+      "mdd_deterioration_pp": 0.68,
+      "threshold_pp": 2.0,
+      "parent_version": "a13_rsraw_e1f10dz",
+      "disabled": true,
+      "note": "D-20260819-G6DEL：门禁6硬判定已禁用（用户拍板），数值仅入评分 dd 项，不再产生 FAIL"
+    }
+  },
+  "score": {
+    "score": 0.8732,
+    "components": {
+      "p": 1.0,
+      "dsr": 0.999,
+      "oos_calmar": 0.503,
+      "oos_sharpe": 0.4839,
+      "is_calmar": 1,
+      "is_sharpe": 1,
+      "dd": 1.0,
+      "corr": 1.0,
+      "logic": 1.0
+    },
+    "missing_weight": 0.0,
+    "partial": false,
+    "stat_warn": false,
+    "flags": [],
+    "incumbent": "a13_rsraw_e1f10dz"
+  },
+  "holdout": {
+    "pass": true,
+    "nav_file": "results/r263_m1_w03_full_nav_t0813.csv",
+    "start_ym": "2024-07",
+    "segment": {
+      "annual_return": 0.2052,
+      "max_drawdown": -0.178,
+      "sharpe": 1.112,
+      "n_days": 516,
+      "start": "2024-07-01",
+      "end": "2026-08-13"
+    },
+    "locked": {
+      "annual_return": 0.2251,
+      "max_drawdown": -0.3423
+    },
+    "checks": {
+      "ann_ratio_min": 0.6,
+      "ann_ok": true,
+      "mdd_extra_pp_max": 10.0,
+      "mdd_deterioration_pp": -16.43,
+      "mdd_ok": true
+    }
+  },
+  "ref_gate_4f_composite": {
+    "g1": {
+      "status": "PASS",
+      "icir_is_annualized": 2.2338,
+      "n_months_is": 179,
+      "threshold": 0.5
+    },
+    "g2": {
+      "status": "PASS",
+      "p_one_sided": 0.6847,
+      "n_months_oos": 42,
+      "oos_end_ym": "2024-06",
+      "audit_lock_end_ym": "2024-06",
+      "mean_ic_is": 0.08975,
+      "mean_ic_oos": 0.10266,
+      "threshold_p": 0.05
+    },
+    "error": null
+  },
+  "corr_detail_csad_vs_active": {
+    "circ_mv": {
+      "n_months": 247,
+      "pearson": -0.1186
+    },
+    "avg_amount_20d": {
+      "n_months": 240,
+      "pearson": 0.0911
+    },
+    "pb_inv": {
+      "n_months": 247,
+      "pearson": 0.1247
+    },
+    "roe_ttm": {
+      "n_months": 247,
+      "pearson": 0.1759
+    },
+    "mom_pen_dz": {
+      "n_months": 230,
+      "pearson": -0.2932
+    }
+  },
+  "ic_coverage": {
+    "n_factors": 6,
+    "n_ic_covered": 5,
+    "missing_ic_cols": [
+      "csad_resid"
+    ],
+    "note": "csad_resid 无部署 factor_ic_monthly/a13_supp IC 列(缺失如实标注, 未编造): g1/g2 用引擎复合 IC(r263 dump 口径), g3 用 r0422 ic_res_v2 序列; 面板对引擎池覆盖 80.03%(R-264)"
+  },
+  "rank_in_pool": 2,
+  "pool_top6_after_merge": [
+    [
+      "a13_rsraw_e1f10dz",
+      0.8781
+    ],
+    [
+      "a15_csad_resid",
+      0.8732
+    ],
+    [
+      "a14_crowdf2",
+      0.8584
+    ],
+    [
+      "v4a_mf0_trr",
+      0.8088
+    ],
+    [
+      "v5k_nh10",
+      0.8
+    ],
+    [
+      "v5i_comb",
+      0.7985
+    ]
+  ],
+  "notes": [
+    "g1/g2 输入=引擎复合 IC 月序列(R-264 r263 dump 口径, 246 有效月), 非部署因子级等权复合——csad_resid 无 factor_ic_monthly 列, 因子级口径会静默丢失该因子",
+    "g3 数据源=r0422 ic_res_v2 残差 IC 序列经脚本内内存注入(不落盘/不改 pipeline/调用后恢复), 方法=部署函数第三数据源(月度 IC Pearson>=24月); GUARD_CORR_CONFIG 豁免不触发(csad_resid 非 ret120 替身名单成员, 无不对称豁免问题)"
+  ],
+  "verdict_three_conditions": {
+    "rank1": false,
+    "stat_warn": false,
+    "holdout_pass": true,
+    "pass_all": false
+  },
+  "nav_t0813_md5": "9f1e28a509abc598a03866af21a99431"
+}

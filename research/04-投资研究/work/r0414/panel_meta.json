@@ -1,0 +1,18 @@
+{
+ "n_codes": 5206,
+ "n_month": 247,
+ "mask_rows": 693194,
+ "feature_coverage_in_mask": {
+  "log_mv": 1.0,
+  "log_amt20": 0.9999653776576254,
+  "pb_inv": 0.9975519118745979,
+  "roe_ttm": 0.9975519118745979,
+  "ret_20d": 1.0,
+  "ret_60d": 1.0,
+  "vol_60d": 1.0,
+  "turn_20d": 0.9931721855642144
+ },
+ "md5_panel": "738727d38aec682da725db7ba8be0391",
+ "months": "2006-01~2026-07",
+ "runtime_sec": 90.8
+}
