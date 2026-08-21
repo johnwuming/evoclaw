@@ -1,0 +1,152 @@
+{
+ "task": "task-0419",
+ "factor": "feat_csad_sigma20",
+ "built": "2026-08-21 08:31",
+ "params": {
+  "W_CORR": 120,
+  "W_SIGMA": 20,
+  "TOPN": 20,
+  "CORR_MIN": 0.5,
+  "MIN_PEERS": 5,
+  "MIN_VALID": 100,
+  "corr_approx": "nan->0 standardized inner product (valid>=100/120 in window)"
+ },
+ "coverage": {
+  "factor_months": 253,
+  "ic_months": 252,
+  "mean_n": 2350,
+  "mean_nan_share": 0.0,
+  "ic_ym_range": "2005-08~2026-07",
+  "peer_mean": 16.1,
+  "peer_ge5_share": 0.845,
+  "pool_n_first_last": [
+   1156,
+   5167
+  ]
+ },
+ "ic_profile": {
+  "ic_mean": -0.09195,
+  "ic_std": 0.11666,
+  "icir": -0.796,
+  "t": -12.61,
+  "ic_neg_share": 0.805,
+  "note": "main=excl_partial; headline uses 251 full months 2005-08~2026-06"
+ },
+ "segments5": {
+  "seg1": {
+   "ym": "2005-08~2009-09",
+   "ic": -0.09455,
+   "icir": -1.317,
+   "neg_share": 0.9,
+   "n": 50
+  },
+  "seg2": {
+   "ym": "2009-10~2013-11",
+   "ic": -0.07158,
+   "icir": -0.687,
+   "neg_share": 0.74,
+   "n": 50
+  },
+  "seg3": {
+   "ym": "2013-12~2018-01",
+   "ic": -0.107,
+   "icir": -0.951,
+   "neg_share": 0.88,
+   "n": 50
+  },
+  "seg4": {
+   "ym": "2018-02~2022-03",
+   "ic": -0.09169,
+   "icir": -0.683,
+   "neg_share": 0.74,
+   "n": 50
+  },
+  "seg5": {
+   "ym": "2022-04~2026-05",
+   "ic": -0.08929,
+   "icir": -0.609,
+   "neg_share": 0.75,
+   "n": 52
+  }
+ },
+ "tertile": {
+  "early": {
+   "ic": -0.08732,
+   "icir": -1.022
+  },
+  "mid": {
+   "ic": -0.09656,
+   "icir": -0.847
+  },
+  "late": {
+   "ic": -0.08855,
+   "icir": -0.614
+  }
+ },
+ "quintiles": {
+  "mean_ret": {
+   "Q1": 0.022,
+   "Q2": 0.02106,
+   "Q3": 0.01893,
+   "Q4": 0.0148,
+   "Q5": 0.0075
+  },
+  "spread_mean": -0.0145,
+  "spread_t": -5.83,
+  "spread_neg_share": 0.714
+ },
+ "redundancy_xs": {
+  "amt20": {
+   "mean_rho": 0.27,
+   "p90_abs": 0.429
+  },
+  "beta120": {
+   "mean_rho": 0.061,
+   "p90_abs": 0.244
+  },
+  "log_mv": {
+   "mean_rho": -0.101,
+   "p90_abs": 0.209
+  },
+  "pb_inv": {
+   "mean_rho": -0.178,
+   "p90_abs": 0.297
+  },
+  "roe_ttm": {
+   "mean_rho": -0.044,
+   "p90_abs": 0.152
+  },
+  "vol120": {
+   "mean_rho": 0.442,
+   "p90_abs": 0.574
+  }
+ },
+ "ic_series_corr": {
+  "market_cap_log": 0.277,
+  "avg_amount_20d": -0.372,
+  "roe_ttm": 0.029,
+  "volatility_20d": -0.833,
+  "idiosyncratic_vol": -0.846,
+  "amihud_illiquidity": -0.056,
+  "crowding_level": 0.109
+ },
+ "gate": {
+  "threshold": "|ICIR|>=0.25 & segment-stable sign & |rho|<0.6 vs in-service",
+  "icir_pass": true
+ },
+ "ic_profile_variants": {
+  "incl_partial_2026-07": {
+   "n": 252,
+   "ic": -0.09081,
+   "icir": -0.778,
+   "t": -12.36
+  },
+  "excl_partial(main)": {
+   "n": 251,
+   "ic": -0.09195,
+   "icir": -0.796,
+   "t": -12.61
+  }
+ },
+ "deliverable_md5": "e9ad0b82851126442174f3eda4d2e105"
+}
