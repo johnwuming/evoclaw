@@ -33,7 +33,34 @@
 - 预注册要素：假设先行/信号定义逐字复刻/PIT 规则分段/网格+n_trials 上限/判胜门槛先定后跑/一经登记不可改
 - task-0421(R-258) 将为 B 写 E2 预注册——本设计只引用其「判胜门槛」占位，不替定数字
 
-## 2. 待补查
-- task-0418 crowding 快照 cron+锁存+告警模式（§5 B 数据运维参照）
-- registry 目录实况（engines.json 迁移路径设计输入）
-- pull-hp-metrics.sh 数据流（NAV 管道现状）
+## 2. 补查结论（16:40 前）
+
+### task-0408 crowding 快照先例（cron+锁存+告警模板）
+- cron `35 19 1 * *` + `flock -n /tmp/snapshot_crowding.lock` + append-only 同月幂等 [skip] + 锁「最近完整月」
+- 通知走 notifications-queue.jsonl → notify_hub → auto_sync → VPS
+- 采集源周频（周日 07:00 collect_crowding.py），qfq 日更工作日 18:00
+- 注：任务书提的 task-0418 实为媒体解析任务，快照先例真身是 task-0408（R-252 上游链路确认）
+
+### HP registry 实况（ssh noname@10.12.192.174:22）
+- model/registry/ 含 a13_rsraw_e1f10dz.json（A 在役）、a12_s2_reb.json（版本内影子）、a14_crowdf2.json、a9_ranksum_raw.json、v0_seed.json + v1/v2 历史线 + *.main.json.snapshot 备份
+- HP crontab 关键行：a12 evaluate 每月2日17:10；a10 monitor 每月3日09:05；qfq 日更工作日18:00；qfq 周日 init+rebuild 18:00；crowding 快照 1日19:35；notify_hub 每小时10分；W6 退市 1日06:00
+
+### server.js 锚点复核（grep，未全读）
+- D-1 七条 quantDeprecated：L1833/1834/1835/1836/2663/2664/3508（fn L1829）✓
+- D-2 连字符四条：**L2015/2032/2056/2085（R-256 行号勘误：实际在文件前部）**；斜杠版 L3553/3585/3645/3677 ✓
+- D-3：L2751 baseline/nav、L2773 baseline/yearly ✓；D-4 endtoend L3924 ✓
+- 隐藏页 div：L6854 quant-page-models、L6855 quant-page-btlc ✓；_V5_TABS L8897（六 Tab）✓
+- **重大发现：server.js 未被 git 跟踪**（git ls-files 报错 + status 显示 `??` untracked，仓库末次提交 2026-08-02）→ R-256 的 git 分支回滚设想当前不可直接用，S0 需先建基线（本设计新增 S0.0）
+- 量化 GET 路由计数：54 条；agent-dashboard.service systemd 在役 ✓
+
+## 3. 设计决策（边写边记）
+1. engines.json 放 HP registry 同目录（选型 b），VPS 侧经 pull-hp-metrics 扩展同步至 workspace-quant/model/registry/，看板启动读取、缺失降级硬编码单引擎 A
+2. 跨引擎影子状态记 engines.json，不进 registry gate.shadow_watch（保 a12 版本内影子语义纯净，两机制正交并存）
+3. 中央风控初值全部留白（⏳ 标注）；配置器 ERC 框架+伪代码；组合门与引擎内择时协调三规则（先动顺序/总敞口下限/恢复独立计时）
+4. 组合 NAV：月频再平衡窗口、w 阶梯函数、无外部现金流假设、对账三校验+命令设计 portfolio_recon.py
+5. B 数据运维：月1日19:05 采集+19:35 快照错峰（不对——采集19:05与快照19:35同日不冲突，错峰30min）；断供预案重试3次+跨日至3日+备用源人工补数
+6. S0 顺序：S0.0 基线 git 化 → S0.5 隐藏页拍板（影响 S0.4）→ D-1/D-2/D-3 各一组一 commit → S0.4 endtoend（依赖 H2 复活决策）→ S0.6 冒烟+路由数对账 54→41
+7. 隐藏页推荐选项甲（复活）：论据=H2 是影子前台唯一消费点，选乙则 S2 要重建前台
+
+## 4. 工具输出累计
+~85KB（受控）
