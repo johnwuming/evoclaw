@@ -45,3 +45,24 @@
 - g4：locked nav rets + n_trials_cum()（97）。
 - g6/dd：metrics(locked mdd −0.3423) vs a13(−0.3355) → det 0.68pp（g6 disabled, 数值入 dd）。
 - holdout：compute_holdout_metrics 消费新建 r263_m1_w03_full_nav_t0813.csv（refs.nav 优先），段 2024-07 起。
+
+## 阶段 2：评分结果（两次干跑逐位一致，确定性 PASS）
+
+- nav t0813 副本：results/r263_m1_w03_full_nav_t0813.csv（5007 行，md5 9f1e28a509abc598a03866af21a99431）
+- g1：IS 复合 ICIR 年化 2.4314（179 月，引擎复合 IC 口径）PASS（4f 参考：2.2338）
+- g2：OOS p=0.6143（42 月，2021-01~2024-06，mean IC OOS 0.10368 > IS 0.09588），icir_oos 2.2459 PASS（4f 参考 p=0.6847）
+- g3：max|ρ|=0.2932（csad_resid vs mom_pen_dz，230 月 Pearson；其余 circ_mv −0.1186/avg_amount_20d 0.0911/pb_inv 0.1247/roe_ttm 0.1759）→ corr 分量 1.0（≤0.5 满档）；豁免不触发（csad_resid 非替身名单），无 R-245 §3.3 不对称问题
+- g4：DSR 0.9999（T=4490，n_trials=97=34+63 台账口径）
+- g6/dd：locked mdd −0.3423 vs a13 −0.3355 → 恶化 0.68pp ≤2pp → dd 分量 1.0
+- 总分 0.8732：p 1.0 / dsr 0.999 / oos_calmar 0.503（0.6578 vs 0.6562，rel +0.24%）/ oos_sharpe 0.4839（1.3386 vs 1.3561，rel −1.29%）/ is_calmar 1 / is_sharpe 1 / dd 1.0 / corr 1.0 / logic 1.0；missing_weight 0.0、flags 空、stat_warn 无
+- holdout（部署函数，t0813 副本）：ann 0.2052（≥0.6×0.2251=0.1351 ✓）/ mdd −0.1780（较 locked 改善 16.43pp ✓）→ PASS（注：0.2052 为 _seg_nav_metrics 244d 年化口径，R-264 口径 0.2046，差异为年化方法，部署口径为评分权威）
+- rank_in_pool=2：a13 0.8781 > **a15_csad_resid 0.8732** > a14_crowdf2 0.8584 > v4a_mf0_trr 0.8088 > v5k_nh10 0.80 > v5i_comb 0.7985
+- **三条件裁决：不过线（差 rank1 一条，−0.0049）**；stat_warn 无 ✓、holdout PASS ✓
+- 差距归因：非 oos 分量两版同为满档（a13 的 p/dsr/is/dd/corr/logic 与 a15 同满档，a13 旧格式无分量明细，按恒等式反解其 oos 合计 0.1283，单分量≈0.511）；M1.1 差距全部来自 oos 两分量——locked ann +0.49pp 但 sharpe −1.29%（换手+14.9pp 抬高日波动）、calmar +0.24% 的近零增量
+- holdout 弱势与评分制关系（知情义务核心）：holdout −5.32pp 未直接进入总分（评分 OOS 分量=locked 窗相对增量；holdout 只进三条件门且宽裕通过 0.2052≫0.1351）；若 M1.1 是 rank1，−5.32pp 将是激活决策的首要逆风——本次以 rank2 归档，该逆风留在档案供复看
+
+## 阶段 3：--write 待办
+
+- [ ] tar 备份 registry.bak.20260821_task0427.tar.gz
+- [ ] 写 a15_csad_resid.json + manifest 重生成
+- [ ] diff 校验：仅新增 candidate+manifest，active 逐字不变
