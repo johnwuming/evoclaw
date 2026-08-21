@@ -1,0 +1,6 @@
+ym,code,feat_csad_sigma20
+2005-08,000001,0.0062112834217555
+2005-08,000002,0.0070320910132963
+-rw-r--r--  1 noname noname     2704 Aug 21 08:32 r0419_summary.json
+-rw-r--r--  1 noname noname     1287 Aug 21 08:30 run.out
+-rw-r--r--  1 noname noname    53097 Aug 21 08:30 xs_corr_monthly.csv
