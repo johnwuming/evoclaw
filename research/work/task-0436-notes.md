@@ -64,6 +64,55 @@
 - quantTplTrading：签名加 selParams（mj 缺字段时 fallback cost_model/limit_board）；月频调仓条目
 - quantExplainVersion：trading 调用传 selParams
 
-## 5. 验证记录
+## 5. 验证记录（全部通过）
 
-（待改后补充）
+- `node --check server.js`：SYNTAX OK（改后多次复查）
+- 本地渲染（/tmp/t0436_after_a13.txt，脚本 /tmp/t0436_render.js 喂 a13 registry+locked metrics）：见下方「新文案」
+- 服务重启：`systemctl restart agent-dashboard` → active
+- 线上 `/api/quant/active`：active=a13_rsraw_e1f10dz，explanation 含 ranksum/市值/低PB/E1 守卫/q3z/0.3~1.0 全部关键字
+- 历史版本线上抽查：`?version=v5h_xsub` 闸门条目保留（该版本确实启用）、老 ext schema「低成交额（权重 1/0）」正常、老剔除护栏正常；`?version=v1i_q3z` ok
+- 本地兼容矩阵（/tmp/t0436_compat.js）：v1i_q3z（mv+单信号兜底）、v2b_trr（mv+双信号）、v5h_xsub（ext 老 schema+e1_guard 老剔除）、a9（ranksum+raw+老剔除护栏）全部按各自血统正确渲染，无回归
+- 未触碰 usage/接口代码（task-0433 区域），git 分 hunk 提交隔离
+
+### 新文案（a13 在役渲染，全量）
+
+```
+== selection ==
+  [股票池] 原始全市场宇宙（不预筛市值/估值/流动性，质量约束内嵌于排序因子）
+  [排序] 复合排序（ranksum）：市值[权重1.0·越小越好] + 20日均成交额[权重1.0·越小越好] + 低PB(倒数)[权重0.7·越大越好] + ROE(TTM)[权重0.3·越大越好]，各因子截面排名加权求和后取前 N
+  [因子缺值] 任一排序因子缺值的股票整体剔除（ext_filter_all）
+  [持仓] 每月选前 20 只等权持有
+  [护栏 E1] E1 守卫（因子化）：暴跌股惩罚因子以 λ=1.0 权重计入排序总分，死区 30%（回看期跌幅 30% 以内不罚，超出部分计罚）——软约束压排名，不再整只剔除
+  [次新剔除] 上市不足 365 天的次新股不参与（基本面不足、波动极端）
+== timing ==
+  [信号 A · 估值仓位] q3z 估值分位信号：q3z(win36,zscore,hi1.0,cut0.40,w_min0.3)，估值越低仓位系数越高（区间 0.3~1.0）
+  [信号 B · 趋势仓位] 池内等权指数(含退市)月末收盘 vs MA200, 破位×0.6，跌破趋势线时仓位 ×0.6
+  [合成] 月度乘法合成, 无重裁剪(自然下限0.18)
+  [仓位下限] 乘法合成后仓位自然下限 约 0.18（0.3 × 0.6），不清仓
+  [说明] q3z × 趋势二信号 [v2b_trr 血统]
+  [信号定义] EW指数月末<MA200 → ×0.6; 与q3z仓位系数相乘
+== trading ==
+  [成本模型] v2：买卖双边计入佣金+印花税+冲击成本
+  [一字板约束] 一字涨停不追买、一字跌停不强卖，该笔放弃成交（保守口径）
+  [调仓节奏] 月频调仓（18.5 年 222 次）
+  [换手] 月均换手约 45%
+  [平均持仓] 平均持仓 19.9 只
+  [初始资金] 1000 万
+```
+
+### 旧 vs 新关键对照
+
+- 4 个假闸门（股息/盈利/资产/价格）→ 消失，替换为「原始全市场宇宙」条目（依据 mj `gates:OFF` + selParams.raw_universe=1）
+- 「按扩展因子排序：复合因子」→「复合排序（ranksum）：市值[权重1.0·越小越好] + 20日均成交额[权重1.0·越小越好] + 低PB(倒数)[权重0.7·越大越好] + ROE(TTM)[权重0.3·越大越好]」+ ext_filter_all 条目
+- E1 条目从无 → 「E1 守卫（因子化）：λ=1.0，死区 30%」（e1f10dz 血统核心特征）
+- timing「区间约 0.6~1.0」→「区间 0.3~1.0」（q_key w_min0.3 动态解析，不再写死）
+- trading 新增「月频调仓（18.5 年 222 次）」；cost_model/limit_board 增加 registry 回退
+
+## 6. git 提交
+
+- commit `bc89c31`（仅模板区 68 insertions/16 deletions，server.js L3043-3165）
+- 与并行 task-0433 隔离：工作区混有其未提交改动（L5359+/L7033/L13433 区域，usage/接口），用 `git apply --cached` 分 hunk 只提交自己的部分；0433 随后自行提交 `5f93320`，历史无交叉
+
+## 7. 结论
+
+10 个过时/失真点全部处理；老版本（v1i/v2b/v5h/a9）兼容验证通过；服务 active；线上 API 关键字验证通过。
