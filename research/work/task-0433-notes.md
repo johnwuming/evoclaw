@@ -20,23 +20,30 @@
 - 响应体积估算：288×2 行 × ~200B ≈ 120-160KB < 200KB 目标。
 - 密封边界留 2 桶（10min）滞后余量容忍迟到样本；>10min 迟到样本不入聚合（HP 推送间隔 1min，可接受）。
 
-## 实施内容
+## 实施内容（最终）
 
-1. 后端 L5363 起 `/api/metrics/system` 重写（见 server.js diff）：
-   - hours≤48 且无自定义粒度 → 增量路径（smAggServer）；
-   - hours>48 或 gran 参数 → 全量 GROUP BY 路径（30min 桶 / 指定粒度），同样走 30s 响应缓存；
-   - 数据形状保持 `{timestamp, cpu_pct, ...}`，前端 loadSystemMetrics 零改动。
-2. 前端：
-   - USAGE_CARDS 恢复 sysmon 行（volc/hp 维持注释）；
-   - showPage('usage') 恢复 loadSystemMetrics() 调用（volc/hp 刷新维持移除）；
-   - `_sysMonDisabled = false`（保留守卫作应急开关）。
-3. metrics.db：零写操作（连接只读测试；服务自身 ingest/prune 行为未动）。
+1. 后端 `/api/metrics/system` 重写（server.js，git 5f93320）：
+   - 5 分钟桶 GROUP BY（SUM/COUNT 精确累加，输出均值，保留 1-2 位小数）；可选 `gran=1/2/5/10/15/30/60` 参数（非 5 时走全量扫描路径）；hours>48 默认 30min 桶。
+   - 密封桶增量缓存：完整历史桶只算一次，每次请求只重扫最近 ~10 分钟；启动后台分片预热（1h/片 + setImmediate 让出），启动窗口请求实测 <0.1s 且数据完整。
+   - 响应级 30s 缓存（Age 头）+ X-Downsample-Bucket-Min 头；数据形状不变。
+   - 开发中修过一个 bug：首次构建曾只扫密封边界后数据（返回 876B），已改为 fullBuild 时从 buildFrom 全量扫描。
+2. 前端：USAGE_CARDS 恢复 sysmon（volc/hp 维持注释）；showPage('usage') 恢复 loadSystemMetrics()；_sysMonDisabled=false（30s 轮询恢复，保留应急开关）。
+3. metrics.db：零写操作；服务重启未动 prune/ingest 行为。
 
-## 验证（待补，完成后填数字）
+## 验证结果（全部实测）
 
-- [ ] node --check
-- [ ] 服务重启 active
-- [ ] curl 计时 /api/metrics/system?hours=24（冷/热/缓存命中）
-- [ ] 响应体积
-- [ ] 用量页 200 + sysmon 卡 HTML 存在 + volc/hp 卡不存在
-- [ ] git 单 commit
+- node --check ✓；服务 active（重启多次，当前正常运行）
+- **性能前后对比（主验收项）**：
+  - 修前：8.6s / 115.9MB（上轮实测，SELECT * 全量）
+  - 修后稳态（TTL 过期增量重建）：**0.034s / 113.9KB**（288 点/服务器，覆盖完整 24h）
+  - 响应缓存命中：0.003-0.02s；重启后启动窗口首次请求：0.10s（分片预热生效，数据完整）
+  - 冷全量扫描（无预热理论上限）：~11-13s，仅发生在预热被旁路时，用户路径不可达
+- 聚合正确性抽验：hp 2026-08-21T06:00 桶 API 值 cpu=28.6/load=1.08 与 SQL 直查 AVG 精确一致（无重复计数）
+- 页面：GET / 200；USAGE_CARDS 实际返回四卡 zhipu/volcCoding/deepseek/sysmon（sysmon 行生效）；volc/hp 行维持注释；_sysMonDisabled=false；loadSystemMetrics() 调用恢复
+- git：单 commit 5f93320，仅 server.js（155+/10-），无无关文件（untracked 的 db/bak/png 均未提交）
+- .task-completions.jsonl 已写入
+
+## 遗留发现（建议后续任务，本轮按约束未动）
+
+1. **pruneSystemMetrics 从未生效**（pre-existing）：`metricsDb.run is not a function`（node:sqlite DatabaseSync 无裸 .run），24h 滚动清理自迁移以来一直报错，DB 无限膨胀至 340MB+WAL 262MB。修复≈一行（改 prepare().run()），但修复后首次重启会触发 117 万行 DELETE（分钟级阻塞+WAL 膨胀），需与 WAL checkpoint/vacuum 瘦身一起规划。
+2. HP 采集端疑似补发旧时间戳数据（~10 行/秒夹杂旧 ts），密封桶设计对 >10min 迟到样本不回补（趋势图历史段均值基于当时已到数据，当前实时段准确）；修好 prune+HP 采集节奏后此问题自然消失。
