@@ -22,3 +22,15 @@
 
 ## 核验点记录
 （边查边写）
+
+## 预登记解释权（跑数前写定，2026-08-22 00:15）
+- 代理验证判定式（R-270 §二.3.b 的口径落地）：主判定 V1 = 自算微盘等权 PE 构造的同式价差信号 [trail_pct(ln(PE_micro_eq/PE300))，w=756，(x[-1]>=x).mean()] 月末值 vs S1 月末值（monthly_panel.s1_pct）的 Spearman 秩相关，共同窗 2017-11→共同末日。理由：E2 实际使用的是含 PE300 分母的价差信号，代理有效性问题=信号层面等价性。
+- 辅助披露（不作门）：V2 = 各自估值水平自身 roll3y 分位（ln(PE_micro_eq) pct vs ln(PE1000) pct）秩相关；V3 = ln 价差水平 Pearson 相关。
+- V1 ≥ 0.6 → 代理有效继续；< 0.6 → 预登记停止路径，如实停。
+- 自算微盘等权 PE 构造：HP factor_registry_financial_panel（PIT：pit_disclosure_map usable_from + 法披期限回退，merge_asof backward）取 np_ttm = roe_ttm×equity、total_shares（月度，code 内 ffill）；merged（amount/volume=未复权 VWAP）月内逐日 rawpx；MC = rawpx×total_shares；每日市值后 20%（≤当日 20% 分位）股票的 EP=np_ttm/MC 取中位数倒数 = PE_eq。主板前缀过滤 {00,30,60,68}。TTM 口径来自面板 roe_ttm。
+- 数据端点实查（与 R-270 预注册披露不同处，如实记）：hs300 parquet 实际至 2026-08-20（文件名 20260808）；merged 至 2026-08-10；引擎 NAV 至 2026-08-14 → E2 共同窗 = 2006-01-04→2026-08-14（引擎端为限制端），hs300 多出 08-15..20 四个交易日不进回测，披露。
+- 判定锚：在役 full_metrics.json ann=0.2239/MDD=−0.3355（R-252 同源），我的指标代码须在同窗复现 ≈22.4%/−33.6%（容差 ±0.3pp）方可用作基准。
+
+## 触发月核对（2026-08-22 00:12）
+- monthly_panel s1=True 共 34 月（含 2026-08 部分月），2017-11→2026-07 窗内 33 月 = R-268 ✓
+- s2（拥挤 ≥0.60）19 月 ✓；T3 用 s2 月末值 → 次月权重。
