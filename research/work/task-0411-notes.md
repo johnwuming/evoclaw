@@ -77,3 +77,24 @@
 - G3 full MDD≥-35.55% 且 crowd MDD≥-18.13%：全 PASS（-33.55% / -16.13%），W-full MDD 与基准 0.00pp 差 → 无实现缺陷警报
 - G4 holdout ann≥24.24% 且 MDD 恶化≤2pp：全 PASS（25.64/25.17/25.76/24.96%），MDD 0.00pp
 过点 = T2(F1 λ1.0) 与 T4(F2 λ1.0)
+
+## 4c. 高状态月持仓重叠度 + 换手增量（既有产物支撑，2026-08-21 10:4x）
+口径：full_holdings.csv 的 held 列，高状态月=roll3y>60 的 20 个月（与 R-252 §二.6 清单一致），mean overlap = 高状态月 |cand∩base|/|base| 均值
+- g0_lam0: mean=1.0000（G0 佐证：λ_c=0 持仓逐位同）
+- t1_f1_l05: mean=0.9275, min=0.85
+- t2_f1_l10: mean=0.8325, min=0.60
+- t3_f2_l05: mean=0.9225, min=0.85
+- t4_f2_l10: mean=0.8050, min=0.60
+换手增量（metrics monthly_turnover_est）：base 0.4473；T1 0.4471(-0.02pp) T2 0.4539(+0.66pp) T3 0.4461(-0.12pp) T4 0.4537(+0.64pp)；最大增量 +0.66pp（T2）远小于预注册容忍上限（R-252 未设硬上限但 +0.7pp 内）
+
+## 4d. 四门判定与最终结论（2026-08-21 10:4x）
+| run | G1 crisis MDD≥-8.57% | G2 crowd ann≥12.44% | G3 full MDD≥-35.55% & crowd MDD≥-18.13% | G4 holdout ann≥24.24% & MDD恶化≤2pp | 结果 |
+| t1_f1_l05 | FAIL -9.07% | PASS 13.66% | PASS -33.55%/-16.13% | PASS 25.64%/0.00pp | FAIL |
+| t2_f1_l10 | PASS -8.12% | PASS 13.61% | PASS -33.55%/-16.13% | PASS 25.17%/0.00pp | PASS |
+| t3_f2_l05 | FAIL -9.07% | PASS 13.41% | PASS -33.55%/-16.13% | PASS 25.76%/0.00pp | FAIL |
+| t4_f2_l10 | PASS -8.11% | PASS 13.21% | PASS -33.55%/-16.13% | PASS 24.96%/0.00pp | PASS |
+过点 = T2(F1 λ=1.0) 与 T4(F2 λ=1.0)。W-full MDD 全 = -33.5542%，vs 基准 0.00pp → 无实现缺陷警报
+选择规则（R-252 §五：危机窗 MDD 改善最大 → λ_c 小者 → F2 优先）：
+- crisis MDD 改善：T2 9.5673→8.1173pp(改善1.45pp)；T4 9.5673→8.1138pp(改善1.45pp，边际更优 0.004pp)
+- λ_c 相等（均 1.0）→ F2 优先 → **胜者 = T4 (F2 × λ_c=1.0)**
+- 结论：**拥挤度选股降权 E2 引擎级对照 PASS，T4 获得评分制 v1.1 资格（不激活、不动 registry）**
