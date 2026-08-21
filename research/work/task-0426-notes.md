@@ -33,3 +33,6 @@
 
 ## 回测执行记录
 - 18:24 启动 r263_run.py（nohup, logs/r263_run.log）：市场加载+择时 76s（mean=0.516 与 r252 同量级）→ G0W0 开跑
+- **G0W0**（415.6s）：full ann=0.2241 mdd=−0.3355 sharpe=1.375 | locked ann=0.2202 mdd=−0.3355；dump 247 调仓日×628,625 行
+- **G0B/门**（761.5s）：g0_orig full ann=0.2241 mdd=−0.3355（同参）；**G0 对拍门 PASS：max|Δnav|=0.000e+00（n=5008，严格逐位一致，优于 <1e-12 门槛）**；4dp 血统锚 ann Δ0.020pp / mdd Δ0.000pp（≤0.1pp 无警报）；drift-vs-old-artifact max=2.567e-01（与 R-253 端点伪影同量级，预期内）
+- 18:47 M11 (w=0.3) 开跑
