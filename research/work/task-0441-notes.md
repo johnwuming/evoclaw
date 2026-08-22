@@ -25,3 +25,14 @@ R-269（05-量化投资/R-269，约8KB）：
 - C2: 净增量IC>0（对在役四因子截面残差化后 mean IC，按惩罚方向取号）
 - C3: Q5−Q1 价差同向（惩罚组−非惩罚组 <0，t≥2参照R-269 spread门）
 任一卡不满足 → 如实关闭。目标量级：ICIR 0.3+ 且净正。
+
+## §2 HP 部署与计算启动（16:02）
+- registry 只读确认：active 引擎 a12_s2_reb + a13_rsraw_e1f10dz；a13 = ranksum4（log_mv/amt20/pb_inv/roe），与 R-251/R-269 记载一致 → 在役四因子=log_mv/amt20/pb_inv/roe
+- 数据源列核验：all_stocks_merged(date,code,close,volume,amount)；fundamentals_monthly(code,date,circ_mv,div_yield...)；ths_ttm_panel 8列含 avail_date
+- 脚本已传 HP:~/quant-evolve/scripts/r273_pead_penalty.py（12,283B，本地留底 /tmp/r273_pead_penalty.py），语法过
+- nohup 后台运行中，日志 results/r273/build.log；产物 results/r273/{summary.json, ic_*.csv, spread_monthly.csv}
+- 脚本设计（计算前登记）：
+  - PEN=1{sue_std<0 且 STALE≤2}（主）；敏感性：PEN_SIG=sue_std 负部、pen_pct2（sue_pct口径）、pen_std1（≤1月）
+  - 自洽校验：复现 R-251 sue_std 全样本 ICIR 0.115 与 0-2月新鲜窗 0.261
+  - C2 净增量：G=−PEN 对四因子 zscore 截面 OLS 残差化 → 残差 IC 均值>0 为净正；另组合诊断 comp4+w·G 的 ΔIC（w=0.1/0.2，按各因子自身IC有利方向合成，标注为诊断口径非在役复刻）
+  - C3：Q5−Q1 = PEN=1组 − PEN=0组 月均价差（pp），t 检验
