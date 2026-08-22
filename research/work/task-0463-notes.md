@@ -46,3 +46,8 @@
 - 判门：G1 超额≥+5.0pp；G2 MDD≤20%；G3 分段两窗超额均>0；G4 月均单边换手≤40%；G5 容量中位数≥2000万（ADV20×10% 参与率，仅入选券补采日线）
 - IC 监控：过滤后 universe 重算 dual_low/price_only 月度 IC；双低连续 6 个月<0 → 复看（price_only 同规则附加）
 - n_trials=1（V1 唯一）；V2=无黑名单敏感性披露（非试验）；锚校验非试验
+
+## 取证（2026-08-23 01:20）
+- R-285 报告 sha256 a560e9d1037d6c116d1523617e7fde34e857b842a764fd05be433405b48beaee（mtime 01:20:33）
+- e2_prereg.json sha256 bcd2fe4fa1da6a72a7092e9d90753fc53f5ce2aef9c5d3975c31a8d5c5446da8（mtime 01:19:49）
+- 此后无任何 E2 回测计算（本任务全程零回测）。
