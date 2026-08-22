@@ -67,3 +67,9 @@
 - 输出目录：/root/.openclaw/workspace/shared/results/work/r275/
 - [23:01] VPS 本地重采启动：r275_collect.py（r275/chunks/，每表每期一 parquet，幂等）。接口列名实测修正：xjll OCF=「经营性现金流-现金流量净额」、zcfz/yjbb 公告日=「公告日期」/「最新公告日期」。1.2s 限速，258 期预计 ~10 分钟。
 - [23:05] IC 脚本备好：r275_ic.py。口径：A 股前缀过滤(00/30/60/68系)→Sloan TTM=(NP_4Q−OCF_4Q)/TA(当期)，TTM 需 4 期连续(跨度 363-367d)且≥5 个观测；PIT usable=max(法定披露期限, pubDate)+1；月频全市场 spearman(F_m, R_m→m+1)，MAD3 去极值+zscore，上市≥120 日，n≥200；代理=roe/gp_margin/revenue_yoy/net_profit_yoy(同月 spearman)。
+- [23:05-23:13] 本地重采完成：三表×86期=258 chunks 全 DONE（A 股口径 yjbb 288,275 行 / zcfz 280,143 / xjll 288,715，1.2s 限速无 FAIL）。
+- [23:13-23:25] r275_ic.py 五轮迭代（修复 4 个 bug：PhaseB net_profit 列缺失、TTM 跨度 363→270-278（4 个季度=273-275 天）、scipy 缺失→rank+pearson 等价、set_index(pcol)[pcol]→set_index("code")、PIT 选择 usable 优先→statDate 优先）。
+- 【核心结论1·数据债修正口径】A 股真宇宙（前缀 00/001/002/003/300/301/302/600/601/603/605/688/689）三要素（NP∧OCF∧TA 同期齐全）覆盖率：全史 96.6%，近3年 99.4%；xjll OCF 覆盖近3年 99.9%。44.5% = yjbb 把新三板(83/87/43/92)+B股(900/200)+老三板(40/42) 带入分母的宇宙污染（复现前序 5244/11765=44.57%），A 股真现金流数据债≈0-3.4%（仅早年 2005-2011 有 807 例=0.28% 期缺）。按年齐全率明细 → r275/breadth_a_share.csv。
+- 【核心结论2·Sloan 面板】TTM 应计观测 240,255 条（2006Q1~2026Q2），accrual=(NP_4Q−OCF_4Q)/TA_当期；usable=max(法定期限,pubDate)+1 首年 2006。
+- 【核心结论3·严格 PIT 下 IC（48 有效月）】EM 老期 pubDate 为库回填日 → usable 晚 1-2 年 → 400d staleness 门把历史月份几乎全灭，仅 4/10 月（年报/三季报后）+2025-09 后月份有效。IC=0.0105（应计方向，高应计→高收益偏差为正? 注意方向），ICIR=0.138，t=0.956 不显著；五分组月均收益 q1(低应计)0.03008 > q5(高应计)0.02605 单调递减 ✓ 与 Sloan 一致但幅度弱；代理相关 max|corr|=gp_margin 0.1024（roe 0.079/revenue_yoy 0.088/NP_yoy 0.039，均低冗余）。
+- 待办：deadline-PIT（法披期限+1，免回填污染）全月覆盖重跑 → 决策级 IC。
