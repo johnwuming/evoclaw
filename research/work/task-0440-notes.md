@@ -29,3 +29,14 @@
 - PCR：option_sse_daily(trade_date) 按日全量合约 → 仅月末 ~140 次调用聚合 call/put 成交量与持仓
 - 两融：stock_margin_sse(start,end) 上交所融资余额日频（2010-03 起）；深交所 per-date 太贵，用上交所作全市场代理并披露偏差
 - RV/收益/仓位：全部在库复用，不重复采集
+
+## 数据可得性核查结果（16:00，HP 实测）
+| 数据 | 接口(akshare 1.18.83) | 覆盖 | 结论 |
+|---|---|---|---|
+| QVIX50/300 | index_option_50etf_qvix/300etf | 2015-02-09→2026-08-22，2796日，无缺口待查null | ✅ 可得，IV代理首选 |
+| PCR 月末 | option_daily_stats_sse(date) | 2015-09-30（仅50ETF 1行）→2024-09-30（5标的）历史全深度实测OK | ✅ 可得；月末~140次调用采集中 |
+| 两融 | stock_margin_sse(start,end) | 单次上限2000行，需3段分页；起点2010-03 | ✅ 可得（仅上交所，作全市场代理，披露偏差） |
+| PCR字段 | 认沽/认购（成交量比）+ 未平仓认购/认沽数（可算持仓PCR） | — | 两口径都采 |
+- option_sse_daily 接口不存在（任务书笔误），实际为 option_daily_stats_sse，含官方PCR列
+- QVIX300 与 QVIX50 2019-12 前 identical 待核（probe2因接口名中断，采集后核）
+- 后台采集：HP ~/quant-evolve/results/r272/collect.py，nohup pid 814753，log=collect.log
