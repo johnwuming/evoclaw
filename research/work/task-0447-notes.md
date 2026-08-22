@@ -20,10 +20,21 @@
 - 修复方式 = merge 前前缀过滤，一处改动，无采集成本 ✓（与本 diff 一致）
 - 注释里 "44.57%%" 双百分号：py 普通字符串中 %% 无影响（此处是注释，非 print 格式串），不改
 
-## 3. 待完成验证
+## 3. 验证结果（23:52 完成，真实输出）
 
-- [ ] py_compile
-- [ ] dry-run（HP /tmp/ 独立脚本，单期 20251231）：过滤前 yjbb 行数 / 过滤后行数 / A 股前缀零丢失断言
+- `py_compile`：**PASS**
+- dry-run 脚本：HP `/tmp/task0447_dryrun.py` + `/tmp/t0447_p.py`（参数化期别），未污染管线目录
+- **20251231 期（任务书参照）**：yjbb_before=11,518 → after=**5,215**（预期 ~5,2xx ✓），dropped=6,303
+  - dropped 前缀构成：83:2781 / 87:2603 / 92:339 / 43:339（新三板 6,062）+ 40:148 / 42:14（老三板 162）+ 90:41 / 20:38（B 股 79）+ 其他——与 R-275 定性完全吻合
+  - 同期 xjll=5,228 / zcfz=5,228 → 过滤后同量级 ✓
+  - **A 股前缀零丢失断言 PASS**（被剔除行中 00/30/60/68 前缀数=0；行数守恒）
+- **20260630 期（数据最新期，披露季中）**：1,123 → 429，xjll=429 精确匹配，断言 PASS
+
+## 4. 交付物与回执
+
+- 改动：factor_expansion_v3ak.py 仅 +3 行（diff 1 hunk，≤20 行 ✓）；备份已存在（前次尝试 15:44 完成）：`factor_expansion_v3ak.py.bak-task0447-20260822-154431`
+- 未改 evolution_pipeline.py / registry / paper_engine / crontab / 采集脚本；未触发重采或重建；未杀任何 HP 进程
+- 结论：前次尝试已落盘正确改动但未做验证与回执，本次补齐验证（compile+dry-run×2 期）+ 回执
 - [23:5x] 补丁落地：
   - 备份 scripts/factor_expansion_v3ak.py.bak-task0447-20260822-154431
   - diff（183a184,186，load_ak_wide 循环内 zfill 后）：
