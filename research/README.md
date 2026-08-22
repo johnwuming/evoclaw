@@ -1,5 +1,8 @@
 # 研究交付物
 
+## 2026-08-23 运维 task-0461 paper 调仓 cron 恢复 + timing_ratio 展示 bug 修复（运维型，用户 01:24 批准）
+- ①HP crontab 月度调仓行去 `#PAUSED-20260816-seedB` 注释（9 月首交易日自然生效，diff 仅该行 11c11 变化）；②paper_engine.py init 路径补写 `state["timing_ratio"]`（diff 仅 1 行新增，py_compile ✓）；③live state 回填展示字段 timing_ratio=0.617398（audit log 实锤 2026-08-14 init 实际系数，display-only，holdings/cash 零改动）。**验证**：`--action daily` exit 0（NAV 0.989890/8 只），summary timing_ratio 由 1.0 默认→0.617398，`crontab -l | grep -c PAUSED`=0。回滚= /tmp/crontab.bak-20260823-0128 + scripts/paper_engine.py.bak-20260823 + /tmp/paper-state.json.bak-20260823-0128 → 笔记 `work/task-0461-notes.md`
+
 ## 2026-08-23 R-286 T4 影子叠加启动实施（task-0464，批准点④）
 - 用户 01:24 拍板「都推进」= R-267/R-282 批准点④（影子叠加启动），前提 task-0458 已验收（a14_crowdf2 → shadow_overlay_eligible，O1b/O2/O3 全过）。**四件套全就位（纯新增，在役/评分冻结/paper_engine/HP crontab 零改动）**：①model/registry/engines.json 新建（schema_version=1，A active + A2 shadow cross_engine，R-282 §六草案落地，shadow.since=2026-08-23/min 3/max 6/termination 四条/R-273 判据入 note）；②影子 NAV 管道 results/engines/a2/shadow_nav.csv（初始=task-0458 overlay_combo_a14_w050_nav.csv 历史基线段 4491 行）+ scripts/engines_shadow_nav_append.py（幂等 init+append）；③scripts/engines_shadow_evaluate.py（读 A2 影子 NAV+A 在役 NAV → ann/MDD/Calmar/corr(A,A2)/滚动12月 → append evals[] → clean_evals 计数；termination 数值标注「R-282 冻结+用户确认时点」）；④hp-cron-pending/a2_shadow_evaluate.cron（每月 3 日 09:35，**未安装**，安装属不可自动清单）。**首月基线快照实跑通过**：ann 0.21920118/mdd −0.33554161/calmar 0.65327569 与 R-282 O2 冻结口径逐位一致，corr(A,A2)=0.999851（n=221），clean_evals=0（影子期起点正确）。回滚=registry_backup_task0464_20260823.tar.gz（67 项）+删条目/脚本/engines 目录 → `05-量化投资/R-286-T4影子叠加启动实施.md`（任务书预定 R-285 但被 task-0463 占用，改用 R-286），笔记 `work/task-0464-notes.md`
 
