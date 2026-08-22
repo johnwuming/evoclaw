@@ -12,3 +12,28 @@
 ## 备份
 
 （进行中）
+
+## 改动 1：spawn-task.md 完成回报段（高-1）
+
+diff（53a54,58）：
+```
+> 随后 MUST 将任务状态回写为待审（completions→pending_review 闭环）：
+> ```
+> curl -s -X PUT http://127.0.0.1:8055/api/tasks/task-XXXX -H 'Content-Type: application/json' -d '{"status":"pending_review"}' | head -c 2000
+> ```
+```
+
+## 白名单集合依据（高-2）
+
+grep 统计：前端 TASK_STATUS(:7184) 9 态 = pending/running/done/failed/paused/cancelled/pending_review/rejected/failed_final；stats 循环 6 态是子集；审计建议 9 态一致。DB 无 CHECK 约束。addEvent 存在于 :363。事件名沿用小写下划线惯例（如 reviewed_approved/session_key），新增 'status_changed'。
+
+## 改动 2+3：server.js（node --check 已过 SYNTAX OK）
+
+diff 摘要：
+- :944-947 新增 STATUS_WHITELIST（9 态）+ 非法值 return 400
+- :954 pending_review 分支补 addEvent 'status_changed'（审计指出原来无事件痕迹）
+- :956 非 paused 来源退回 pending 补 addEvent（僵尸退回留痕）
+- :1059 session-key 端点 pending 分支 UPDATE 补 spawn_owner='main'
+- :1063 session-key 端点 else 分支 UPDATE 补 spawn_owner='main'
+
+服务重启与四条实测：见下节。
