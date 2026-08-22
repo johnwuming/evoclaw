@@ -59,3 +59,9 @@
 - 面板构建逻辑（factor_expansion_v3ak.py load_ak_wide）：yjbb 为主表 outer merge 四表 → 宇宙并集=11,765 含非 A 股；修复只需在 merge 前过滤 code 前缀/参照宇宙
 - PIT 现状：usable_from = max(pit_map, 法披期限+1, pubDate+1)；实测 xjll 老期 pubDate 多为 EM 库最后更新日（2015 年报 pubDate 集中在 2017）→ 保守（晚可见），无前视但可用性滞后
 - Sloan 应计 TTM 季度观测 287,016 条已构建成功（crash 前输出）；IC 段因 month_end 构造笔误（"-28"*247）崩溃，修复重跑中
+
+## §4 阶段B（22:55 续作，VPS 本地）
+- [22:58] 环境核查：前序 287,016 条应计面板与 r274_audit.py 均在 HP（results/work/r274/），VPS 侧未找到（任务书"面板已同步"前提不成立）。遵守"禁止 SSH HP"硬约束，放弃取回。
+- 替代路径：VPS 本地重建。价格数据已确认齐全：/root/sr365/qfq/ 5,448 只个股日频 qfq parquet，2005-01-04 ~ 2026-08-14（8-18 从 HP rsync，含 close/volume/amount/outstanding_share）。
+- 财务四表：VPS akshare 1.18.94 可用，用同款 EM 接口（stock_yjbb_em / stock_zcfz_em / stock_xjll_em，按报告期全市场截面）本地重采 2005Q1~2026Q2，与 HP 采集脚本 collect_fin_deep_ak.py 同源（该脚本在 workspace/tmp_hp/ 有副本，列映射可复用）。
+- 输出目录：/root/.openclaw/workspace/shared/results/work/r275/
