@@ -14,7 +14,7 @@ LOG = open("/root/.openclaw/workspace/shared/results/work/r275/collect.log", "a"
 TABLES = {"yjbb": ak.stock_yjbb_em, "zcfz": ak.stock_zcfz_em, "xjll": ak.stock_xjll_em}
 KEEP = {
     "yjbb": ["股票代码", "净利润-净利润", "净资产收益率", "销售毛利率", "营业总收入-同比增长", "净利润-同比增长", "最新公告日期"],
-    "zcfz": ["股票代码", "资产-总资产", "最新公告日期"],
+    "zcfz": ["股票代码", "资产-总资产", "公告日期"],
     "xjll": ["股票代码", "经营性现金流-现金流量净额", "公告日期"],
 }
 RENAME = {

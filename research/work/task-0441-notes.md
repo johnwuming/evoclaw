@@ -53,3 +53,8 @@ R-269（05-量化投资/R-269，约8KB）：
 - **替代面板路线**：akshare 1.18.94 在 VPS 可用；ak.stock_yjbb_em(报告期) 逐期返回全市场 净利润(累计)+最新公告日期 → 自建 PIT 事件面板（code/report_date/avail_date/np_cum → TTM 换算）。与 R-251 ths_ttm_panel 口径差异：起点 2006（ths 1997 起）→ SUE 事件窗前段缩短，IC 窗约 2008+ 起；其余口径（TTM 同构、Foster 型 SUE、clip、PIT as-of、W1 IC）逐一复刻
 - 产物目录：/root/.openclaw/workspace/shared/results/work/r274/（新目录）；原始采集 /tmp/r274_vps/
 - 四因子代理（a13 ranksum4 复刻口径）：log_mv=log(close×outstanding_share)、amt20=20日均额、pb_inv=bps/close（yjbb 每股净资产 PIT）、roe=yjbb 净资产收益率 PIT；对 R-269 自查 IC 量级校准
+### 4.2 采集与计算（23:15 启动）
+- ak.stock_yjbb_em 逐报告期采集 2005Q4-2026Q2（86期），列：股票代码/净利润-净利润(累计)/最新公告日期/每股净资产/净资产收益率；Q4期含预告+实报混合行（如20161231 9540行），dedup 规则=同code同report_date取avail_date最新（实报覆盖预告）
+- 采集脚本 /tmp/r274_vps/collect_yjbb.py（重试3次+断点续采），主计算 /tmp/r274_vps/r274_compute.py（语法已过）；VPS 仅 3GB 内存 → K线流式按股聚合月度，不 concat 全量
+- 主计算口径：TTM=Q4年报直取/Q1-Q3=上年年报+当期累计-上年同期；sue_std Foster 型 clip±15、dE 仅取季距=1 的相邻季差；PIT=ym_avail as-of+同月最新+按月ffill；PEN=1{sue_std<0 且 stale≤2月(60.9天)}；G=−PEN；IC=W1口径 spearman min_obs=20 去极值+zscore；池=td_cum≥120+当月有收盘
+- 产物将落 shared/results/work/r274/{events_sue.parquet, kline_monthly.parquet, summary.json, spread_monthly.csv, ic_*.csv, pen_coverage.csv}
