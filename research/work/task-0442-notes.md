@@ -65,3 +65,5 @@
 - 替代路径：VPS 本地重建。价格数据已确认齐全：/root/sr365/qfq/ 5,448 只个股日频 qfq parquet，2005-01-04 ~ 2026-08-14（8-18 从 HP rsync，含 close/volume/amount/outstanding_share）。
 - 财务四表：VPS akshare 1.18.94 可用，用同款 EM 接口（stock_yjbb_em / stock_zcfz_em / stock_xjll_em，按报告期全市场截面）本地重采 2005Q1~2026Q2，与 HP 采集脚本 collect_fin_deep_ak.py 同源（该脚本在 workspace/tmp_hp/ 有副本，列映射可复用）。
 - 输出目录：/root/.openclaw/workspace/shared/results/work/r275/
+- [23:01] VPS 本地重采启动：r275_collect.py（r275/chunks/，每表每期一 parquet，幂等）。接口列名实测修正：xjll OCF=「经营性现金流-现金流量净额」、zcfz/yjbb 公告日=「公告日期」/「最新公告日期」。1.2s 限速，258 期预计 ~10 分钟。
+- [23:05] IC 脚本备好：r275_ic.py。口径：A 股前缀过滤(00/30/60/68系)→Sloan TTM=(NP_4Q−OCF_4Q)/TA(当期)，TTM 需 4 期连续(跨度 363-367d)且≥5 个观测；PIT usable=max(法定披露期限, pubDate)+1；月频全市场 spearman(F_m, R_m→m+1)，MAD3 去极值+zscore，上市≥120 日，n≥200；代理=roe/gp_margin/revenue_yoy/net_profit_yoy(同月 spearman)。
