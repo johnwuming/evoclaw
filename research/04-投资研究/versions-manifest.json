@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T17:30:02",
+  "generated_at": "2026-08-22T18:00:02",
   "active": "a13_rsraw_e1f10dz",
   "versions": [
     {
@@ -1701,6 +1701,15 @@
         }
       },
       "files_note": "results/a9x_equiv_v5h_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "engines",
+      "strategy_prefix": null,
+      "status": "registered",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {},
+      "files_note": "registry only（无回测文件）"
     },
     {
       "version_id": "mfx_equiv",
