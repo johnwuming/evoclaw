@@ -30,3 +30,18 @@ server.js `app.get('/api/tasks')` 处理器支持 `?limit` / `?offset`；不带 
 ## 验证记录
 - `node --check server.js` → SYNTAX_OK ✅
 - （重启与接口验证见下文追加）
+
+## 验证结果（重启 agent-dashboard.service → is-active=active 之后实测）
+| # | 命令 | 实际输出 | 判定 |
+|---|---|---|---|
+| 1 | `?limit=5` | count=5，ids=[task-0460,0455,0456,0457,0458]（与全量前5一致） | ✅ |
+| 2 | `?limit=5&offset=5` | count=5，first id=**task-0459** = 全量列表第 6 条 | ✅ |
+| 3 | 无参全量 | count=**388** = 修复前基线 388，前 5 条 id 逐一相同 | ✅ 兼容 |
+| 4 | `?status=running&limit=2` | count=2，statuses={'running'}，组合过滤生效 | ✅ |
+| 5 | `?limit=abc` | count=388（全量回退，无报错） | ✅ 非法忽略 |
+
+（响应均先落盘 /tmp/t0450-v*.json 后 python 抽取，原始文件保留可复查）
+
+## 结论
+改动仅 server.js `/api/tasks` 处理器内新增 8 行（limit/offset 校验与 LIMIT/OFFSET 追加），
+node --check 通过，服务重启 active，5 项验收全过，无默认上限引入，裸调全量行为不变。
