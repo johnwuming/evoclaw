@@ -9,7 +9,7 @@ df['hs_ret'] = df.hs300.pct_change()
 df['excess'] = (df.micro_ret - df.hs_ret).fillna(0.0)
 H = [21, 42, 63]
 for h in H:
-    df[f'fwd{h}'] = (1 + df.excess).shift(-1).rolling(h).apply(lambda x: np.prod(1+x), raw=True).shift(-(h-1)) - 1
+    df[f'fwd{h}'] = (1 + df.excess).shift(-1).rolling(h).apply(lambda x: np.prod(x), raw=True).shift(-(h-1)) - 1
     # 上式等价 prod(1+excess[t+1..t+h])-1
 
 def census(sub, label):
@@ -64,7 +64,7 @@ print(json.dumps(r15, ensure_ascii=False, indent=1))
 
 # PIT 月度：月末定值，次月超额
 m = df.resample('ME').last().copy()
-m['next_m_excess'] = (1 + df.excess).resample('ME').apply(lambda x: np.prod(1 + x) - 1).shift(-1)
+m['next_m_excess'] = (1 + df.excess).resample('ME').apply(lambda x: np.prod(x) - 1).shift(-1)
 m['red_me'] = m.flag == 'red'
 m19 = m[m.index >= '2019-01-01']
 pit = {'n_months': int(len(m19)), 'n_red_me': int(m19.red_me.sum()),
