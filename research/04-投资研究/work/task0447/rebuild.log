@@ -1,0 +1,21 @@
+  构建财务深因子月度面板 (akshare PIT asof) ...
+  yjbb: 287201 rows, 5226 stocks
+  zcfz: 279074 rows, 5244 stocks
+  xjll: 287642 rows, 5244 stocks
+  lrb: 288443 rows, 5244 stocks
+  wide(before-derive): (288490, 39)
+    asof 1000/5244 codes, 5s
+    asof 2000/5244 codes, 9s
+    asof 3000/5244 codes, 13s
+    asof 4000/5244 codes, 17s
+    asof 5000/5244 codes, 21s
+  财务深面板(ak): (1337220, 24), 用时 23s
+[rebuild] DONE shape=(1337220, 24) codes=5244 secs=38
+[after] rows=1337220 codes=5244 ym 2005-06->2026-08
+  accrual_quality nonnull all=0.6231 recent3y=0.9918
+  cf_or_ratio nonnull all=0.6228 recent3y=0.9914
+  cf_np_ratio nonnull all=0.6231 recent3y=0.9918
+  ocf_stability nonnull all=0.5976 recent3y=0.9902
+[after] recent12m(ym>=2025-09) accrual_quality nonnull=
+  accrual_quality=0.9971 cf_or_ratio=0.9969 ocf_stability=0.9967 (rows=62928)
+[ALL-DONE]
