@@ -58,3 +58,9 @@ R-269（05-量化投资/R-269，约8KB）：
 - 采集脚本 /tmp/r274_vps/collect_yjbb.py（重试3次+断点续采），主计算 /tmp/r274_vps/r274_compute.py（语法已过）；VPS 仅 3GB 内存 → K线流式按股聚合月度，不 concat 全量
 - 主计算口径：TTM=Q4年报直取/Q1-Q3=上年年报+当期累计-上年同期；sue_std Foster 型 clip±15、dE 仅取季距=1 的相邻季差；PIT=ym_avail as-of+同月最新+按月ffill；PEN=1{sue_std<0 且 stale≤2月(60.9天)}；G=−PEN；IC=W1口径 spearman min_obs=20 去极值+zscore；池=td_cum≥120+当月有收盘
 - 产物将落 shared/results/work/r274/{events_sue.parquet, kline_monthly.parquet, summary.json, spread_monthly.csv, ic_*.csv, pen_coverage.csv}
+### 4.3 v1 面板缺陷与修复（23:25-23:35）
+- v1 自洽校验失败：sue_std 全样本 IC −0.0105/ICIR −0.147（R-251 为 +0.0117/+0.115，符号翻转）→ 触发排查
+- **根因**：akshare stock_yjbb_em 的「最新公告日期」不是原始披露日，而是东财回填的「含该期比较数据的最新公告日」（000001 2024Q4 行=2026-03-21 即 2025 年报公告日；全表滞后 p50：2024Q4=479 天、2025Q1=393 天 ≈ 次年同期报告公告日）→ 整面板晚 12 个月，PEN「披露≤2月」完全错位，v1 全部 C1-C3 作废
+- **修复 v2**：avail_date 改用法定披露期限上界代理（Q1→4/30、H1→8/31、Q3→10/31、年报→次年4/30）。性质：只可能晚于真实披露（绝不前视）；对效应方向的偏置=因子更陈旧→对 C1-C3 不利（保守门）；预登记门槛不变
+- v2 复用缓存 events_sue.parquet + kline_monthly.parquet，不再重采；bps/roe 经 report_date join 重取（期限代理同口径）
+- v1 残留结果备份在 summary.json（如需对照），v2 落 summary_v2.json
