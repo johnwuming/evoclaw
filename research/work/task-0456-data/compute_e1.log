@@ -5,3 +5,5 @@ read 4000/5205 stocks=4000
 read 5000/5205 stocks=5000
 panel stocks=5205 rows=10,819,439
 micro flag done
+trading days=2818 2015-01-05->2026-08-07
+saved /root/.openclaw/workspace/shared/results/work/task-0456-data/excess_decay_daily.csv rows=2818 red_days=989
