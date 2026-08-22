@@ -1,0 +1,5 @@
+read 1000/5205 stocks=1000
+read 2000/5205 stocks=2000
+read 3000/5205 stocks=3000
+read 4000/5205 stocks=4000
+read 5000/5205 stocks=5000
