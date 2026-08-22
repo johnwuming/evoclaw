@@ -1,0 +1,107 @@
+{
+  "task_id": "task-0463",
+  "report_id": "R-285",
+  "prereg_date": "2026-08-23",
+  "track": "convertible_bond_rotation_shadow",
+  "upstream_e1_report": "R-281-可转债轮动E1画像.md",
+  "zero_change_promise": {
+    "no_registry_change": true,
+    "no_paper_engine_change": true,
+    "no_hp_access": true,
+    "no_active_engine_change": true,
+    "no_real_money": true,
+    "no_backtest_at_prereg": true
+  },
+  "benchmark": {
+    "index_code": "000832",
+    "index_name": "中证转债指数",
+    "e1_frozen_stats_daily_2018_01_to_2026_08_21": {"ann_ret": 0.0647, "mdd": -0.170, "ann_vol": 0.103, "cum_ret": 0.718},
+    "aligned_monthly_window": "2018-02..2026-07",
+    "aligned_monthly_stats_recomputed_2026_08_23": {"n_months": 102, "cum_ret": 0.653, "ann_ret": 0.0609}
+  },
+  "universe_filters": {
+    "base_panel": "东财 bond_zh_cov_value_analysis 逐只全史（/tmp/r281/va/，1034 只；重拉脚本 /tmp/r281/fetch_va2.py）",
+    "month_end_snapshot_rule": "每券每月最后可得收盘观测（E1 compute_ic.py 同构，groupby(code,ym).tail(1)）",
+    "min_listed_calendar_days": 25,
+    "credit_rating_floor": "AA-",
+    "credit_rating_source": "bond_zh_cov 信用评级列（2026-08 当前快照，非 PIT，已声明）",
+    "rating_parse_rule": "regex ^[ABC]{1,3}[+-]? 于清洗后取主体评级（AA+sti→AA+）；无法解析或缺失→剔除",
+    "blacklist_rule": "发行人关键字匹配剔除（全历史剔除，含前视成分，V2 敏感性披露对冲）",
+    "blacklist_issuers": ["搜特", "蓝盾", "鸿达", "正邦", "全筑", "帝欧", "岭南", "中装", "起步", "花王", "普利", "广汇"],
+    "blacklist_codes_reference": {"搜特": "128100", "蓝盾": "123015", "鸿达": "128085", "正邦": "128114", "全筑": "113578", "帝欧": "127047", "岭南": "128044", "中装转2": "127033", "中装转债": "128060", "起步": "113576", "花王": "113595", "普利": "123099", "广汇": "110072"},
+    "min_issue_size_yi": 2.0,
+    "min_month_end_candidates_n": 30,
+    "if_below_n_min": "该月不调仓，持有现组合并记录（安全阀，2018-01=33/2018-02=48 均过线，主窗内预计不触发）"
+  },
+  "factors_and_score": {
+    "price_pct_rank_P": "横截面百分位排名(-收盘价)，并列取平均名次",
+    "dual_low_pct_rank_D": "横截面百分位排名(-(收盘价+转股溢价率%))",
+    "momentum_pct_rank_M": "横截面百分位排名(20交易日动量=close/close.shift(20)-1)",
+    "composite_score": "S = 0.7*P + 0.3*D - 0.1*M",
+    "weights": {"price": 0.7, "dual_low": 0.3, "momentum_reverse_penalty": -0.1},
+    "nan_handling": "P/D/M 任一缺失→该分量取 0.5（中性）",
+    "no_prem_only_leg": true
+  },
+  "portfolio_construction": {
+    "top_n": 15,
+    "weighting": "等权 1/15",
+    "rebalance_frequency": "月频",
+    "rebalance_timing": "每月最后一个交易日收盘（月末快照日收盘价成交，信号与成交同收盘价，等效收盘成交近似）",
+    "keep_buffer_rank": 25,
+    "turnover_brake_rule": "已持有券当月末综合得分 S 的横截面排名 ≤ 25 → 留仓；跌出 25 名才卖出，空位按 S 从高到低从非持有候选补足至 15 只",
+    "suspended_holding_rule": "持有券月末无观测（停牌）→ 以最后可得收盘价估值持有，恢复后正常处理",
+    "delisting_rule": "持有券面板最大日期早于当前月末 → 视为摘牌，于最后可得收盘价全额变现（计单边成本），收益计入变现月（E1 近似口径继承）",
+    "no_redemption_call_selling": true,
+    "coupon_cashflow_modeled": false
+  },
+  "cost_model": {
+    "buy_side": 0.001,
+    "sell_side": 0.001,
+    "stamp_duty": 0.0,
+    "t_plus": "T+0",
+    "cost_decomposition": "佣金及规费 0.02% + 冲击滑点 0.08%（单边合计 0.10%，买卖均计）"
+  },
+  "backtest_windows": {
+    "main_window_formations": "2018-01-31..2026-06-30（103 个调仓月）",
+    "main_window_returns": "2018-02..2026-07（102 个月度收益）",
+    "mandatory_split_point": "2022-08-01（沪深交易所可转债交易新规：±20% 涨跌幅等）",
+    "segment_pre_returns": "2018-02..2022-07（54 个月度收益）",
+    "segment_post_returns": "2022-08..2026-07（48 个月度收益）",
+    "nav_frequency": "月频"
+  },
+  "gates": {
+    "G1_excess_annual_return": {"metric": "组合年化收益 − 000832 同窗年化收益（月频几何年化，102 月对齐窗）", "threshold_pp": 5.0, "pass": ">="},
+    "G2_max_drawdown": {"metric": "主窗组合月频净值 MDD", "threshold": 0.20, "pass": "<="},
+    "G3_segment_positive": {"metric": "前窗与后窗年化超额（各自对 000832 同段）", "threshold": "两窗均 > 0", "pass": "strictly_both_positive"},
+    "G4_turnover": {"metric": "月均单边换手率 = 0.5*Σ|Δw| 月度均值（等权下=月均卖出只数/15）", "threshold": 0.40, "pass": "<="},
+    "G5_capacity": {"metric": "Cap_m = Σ_{入选券}(0.10×入选月末前20交易日日均成交额)；主窗月度 Cap_m 中位数", "threshold_yuan": 20000000, "pass": ">=", "data_source": "bond_zh_hs_cov_daily 仅对入选过的券补采", "missing_rule": "缺失月不计入中位数但披露缺失占比；主窗 >30% 月份缺成交额数据 → G5 判 FAIL（数据不足）"}
+  },
+  "ic_decay_monitoring": {
+    "universe": "信用过滤后月末截面（与本预注册过滤链完全一致）",
+    "ic_method": "月频 RankIC（spearman），口径与 E1 compute_ic.py 逐字一致",
+    "dual_low_rule": "连续 6 个月 IC<0 → 触发复看（强制）",
+    "price_only_rule": "连续 6 个月 IC<0 → 触发复看（附加，主引擎监控）",
+    "e2_report_time_check": "E2 报告须计算截至 2026-07 的滚动 6 个月 IC 并明示是否触发",
+    "shadow_phase_monitor": "影子观察期每月末更新同口径 IC，触发即复看"
+  },
+  "frozen_anchors_pre_execution": {
+    "source": "E1 报告数字；本预注册日 compute_ic.py 重建复验一致",
+    "price_only_ic_mean": {"value": 0.1033, "tolerance": 0.01},
+    "dual_low_ic_mean": {"value": 0.0584, "tolerance": 0.01},
+    "n_months": 107,
+    "action_if_drift": "停止并排查数据源变更；冻结新快照重跑锚并披露新旧差值；判门阈值一律不动"
+  },
+  "trials": {
+    "n_trials": 1,
+    "V1_primary": "本文件全部锁定参数的唯一判胜试验",
+    "V2_disclosure_only": "同参数但剔除黑名单（仅评级 AA-+ 过滤）——仅披露年化/超额/MDD/换手，不设门、不得作为翻案依据",
+    "anchor_check": "执行前锚校验，非试验，不计 trial"
+  },
+  "change_policy": "本文件全部参数一次性锁定；执行阶段（E2）不得改动任何参数与判门标准；任何改动 = 重开新预注册（新编号+独立计块+报告明示 post-hoc）",
+  "e2_execution_outputs_planned": {
+    "work_dir": "shared/results/work/r281/",
+    "e2_run_script": "e2_run.py（新建，只读消费 E1 面板数据）",
+    "e2_outputs": ["e2_nav_monthly.csv", "e2_trades.jsonl", "e2_gates_result.json", "e2_ic_filtered_universe.csv"],
+    "report": "R-2xx-可转债轮动E2执行报告.md（编号届时由任务中心分配）"
+  }
+}
