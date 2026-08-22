@@ -13,9 +13,16 @@
 5. 修复C：server.js :921-960 PUT handler 加状态白名单
 6. node --check → 重启 → 验收（400/200/session-key 翻转/无扰动）
 
-## 2. 定位与改动（边查边记）
-
-（进行中）
+## 2. 关键发现：前次执行已部分落地（23:41–23:43）
+- 改前真备份：项目目录 `server.js.bak-20260822-2340`（23:41，760,669B=R-276 记录的改前大小）；我的 `/tmp/server.js.bak-task0446`（23:44）实为前次改动后状态，仅作「本次注释改动前」回滚点
+- diff(bak-2340 → 当前) 已落地：
+  1. 修复C 白名单：`STATUS_WHITELIST`（9 态，非法 400）:944-947 ✅（前次还额外加了 pending_review/pending 的 addEvent，属 R-276 §五.2 完整建议范围，保留）
+  2. 修复B SQL：session-key 端点两个分支（pending→running 分支 :1059 与仅回写 key 分支 :1063）均已加 `spawn_owner='main'` ✅
+  3. 修复A：spawn-task.md（mtime 23:41:44）完成回报段已含「随后 MUST 将任务状态回写为待审（completions→pending_review 闭环）」+ curl 示例 ✅
+- 服务已于 23:43:27 重启（晚于 server.js mtime 23:43:10），白名单/SQL 已在运行进程内
+- 子 agent 列表：无并发兄弟（前次执行死在验收前，未写 jsonl 回执）
+- **剩余工作**：①修复B 注释 :275-276（唯一未落地改动）②node --check+重启 ③全套验收 ④笔记/回执/PUT pending_review
+- 改前基线 status 分布（只读）：done 372 / running 3 / rejected 2 / pending 1（共 378）
 
 ## 验证记录（重启后实测，2026-08-22 23:43-23:46）
 
