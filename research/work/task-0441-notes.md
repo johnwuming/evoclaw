@@ -42,3 +42,14 @@ R-269（05-量化投资/R-269，约8KB）：
 - 第二跑：all_stocks_merged.code 为 categorical，sort_values 报 categories 不唯一 → astype(str) 修复
 - 第三跑（16:14 起）正常推进：[1] events=235,170/5,174 codes；[2] 池 5,020 只，月均 2,845（与 R-251 一致）；[3] PEN 月均覆盖 674 只（负惊喜新鲜票规模充足）
 - BUG 修复两次，均未影响既有进程；脚本产物只写 results/r273/ 新目录
+
+## §4 阶段B（22:55 起，VPS 本地收口）
+### 4.1 断点接管与数据盘点（23:05 完成）
+- HP 第三跑产物未同步 VPS（本地仅空 build.log）；HP results/r273/ 不可访问（本阶段禁 SSH HP）→ 按「参数重建」路线收口
+- R-251 断点产物 VPS 侧：evolving-claw-repo/research/04-投资研究/r251/{sue_summary.json, sue_ic_monthly.csv}（校准目标：sue_std 全样本 ICIR 0.115 / 0-2月窗 IC 0.0266 ICIR 0.261）
+- VPS 数据盘点：
+  - K线 data/all_stocks_qfq/*.parquet 5,205 只（000001 验证 2006-01-04~2026-08-07，含 amount/outstanding_share/close）→ 与 R-251 K线库同源，池/收益完全可复刻
+  - all_stocks_merged 仅 2020-2025（不可用）；financial-ths CSV 无披露日列；fin_deep(baostock) 仅 20 股完成（不可用）→ ths_ttm_panel 无法原样重建
+- **替代面板路线**：akshare 1.18.94 在 VPS 可用；ak.stock_yjbb_em(报告期) 逐期返回全市场 净利润(累计)+最新公告日期 → 自建 PIT 事件面板（code/report_date/avail_date/np_cum → TTM 换算）。与 R-251 ths_ttm_panel 口径差异：起点 2006（ths 1997 起）→ SUE 事件窗前段缩短，IC 窗约 2008+ 起；其余口径（TTM 同构、Foster 型 SUE、clip、PIT as-of、W1 IC）逐一复刻
+- 产物目录：/root/.openclaw/workspace/shared/results/work/r274/（新目录）；原始采集 /tmp/r274_vps/
+- 四因子代理（a13 ranksum4 复刻口径）：log_mv=log(close×outstanding_share)、amt20=20日均额、pb_inv=bps/close（yjbb 每股净资产 PIT）、roe=yjbb 净资产收益率 PIT；对 R-269 自查 IC 量级校准
