@@ -73,3 +73,7 @@
 - 【核心结论2·Sloan 面板】TTM 应计观测 240,255 条（2006Q1~2026Q2），accrual=(NP_4Q−OCF_4Q)/TA_当期；usable=max(法定期限,pubDate)+1 首年 2006。
 - 【核心结论3·严格 PIT 下 IC（48 有效月）】EM 老期 pubDate 为库回填日 → usable 晚 1-2 年 → 400d staleness 门把历史月份几乎全灭，仅 4/10 月（年报/三季报后）+2025-09 后月份有效。IC=0.0105（应计方向，高应计→高收益偏差为正? 注意方向），ICIR=0.138，t=0.956 不显著；五分组月均收益 q1(低应计)0.03008 > q5(高应计)0.02605 单调递减 ✓ 与 Sloan 一致但幅度弱；代理相关 max|corr|=gp_margin 0.1024（roe 0.079/revenue_yoy 0.088/NP_yoy 0.039，均低冗余）。
 - 待办：deadline-PIT（法披期限+1，免回填污染）全月覆盖重跑 → 决策级 IC。
+- 【核心结论4·deadline-PIT 全月覆盖（241 月, 2006-07~2026-07）】usable=法披期限+1：应计方向 IC=-0.0087, ICIR=-0.112, t=-1.738（不显著）；质量方向(低应计) IC=+0.0087, ICIR=0.112, 命中率 54.4%；五分组月均 [1.598,1.514,1.607,1.697,1.686]% 不单调。avg_n=2630。
+- 【关键】两 PIT 口径符号翻转：严格 PIT（48 月）应计 IC=+0.0105（反 Sloan），deadline-PIT（241 月）=-0.0087（顺 Sloan 但弱）→ 结论对 PIT 假设不稳健，|IC|≤0.011 / |t|<1.8 均不显著。
+- 【判定】三选一 → 维持关闭。理由：①IC 幅度 ~0.01、ICIR 0.11-0.14、t<1.8 全样本不显著；②分组不单调（deadline-PIT）；③两 PIT 口径符号翻转不稳健；④与在役质量/成长代理相关性虽低（max |corr|=gp_margin 0.102）但自身无独立 alpha。数据债本身已修复（宇宙过滤），不影响未来其他财务因子复用 fin_deep。
+- 产物清单：r275/{r275_collect.py, r275_collect_one.py, r275_ic.py, r275_ic_dl.py, r275_diag.py, chunks/(258), breadth_a_share.csv, ic_monthly.csv, corr_proxies.csv, ic_by_year.csv, summary.json, ic2_monthly.csv, corr2_proxies.csv, ic2_by_year.csv, summary_deadline.json, ic.log}
