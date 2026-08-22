@@ -8,3 +8,20 @@
 - [ ] 对在役四因子净增量IC
 - [ ] 三卡判定
 - [ ] 报告落盘+README更新
+
+## §1 前置报告要点（15:48 完成）
+R-251（05-量化投资/R-251-SUE财报事件因子IC画像.md, 7647B）：
+- 面板：HP ~/quant-evolve/data/derived/ths_ttm_panel.parquet（235,170行×8，含 avail_date 披露日）
+- R-251 脚本/产物：HP scripts/r251_sue_profile.py；results/r251/{sue_summary.json,sue_ic_monthly.csv,sue_events.parquet}
+- IC口径：IC[m]=spearman(F_m,R_{m→m+1})，月频全市场 min_obs=20，去极值1%/99%+zscore；池=在市+上市满120交易日+当月有交易；K线 data/all_stocks_qfq/*.parquet
+- sue_std=Foster型 (E_q−E_{q−4})/std(ΔE_{q−7..q},min5) clip±15；全样本 ICIR 0.115；0-2月新鲜窗 IC 0.0266/ICIR 0.261；与roe_ttm截面ρ=0.599、IC序列相关0.886
+- PIT：ym_avail=avail_date所在月 as-of 映射+同月取最新+按月ffill；严禁report_date直接join（中位滞后62天）
+R-269（05-量化投资/R-269，约8KB）：
+- 教训：EP_stab形式过ICIR门(0.297)但Q5−Q1=−0.02pp(t=−0.07) → 达线判定必须同时含ICIR门+spread门(Q5−Q1 t≥2方向一致)
+- 在役四因子自查IC：log_mv −0.054/−0.314、amt20 −0.104/−0.675、pb_inv −0.061/−0.565、roe_ttm −0.011/−0.085（口径量级参考）
+- 在役=a13 ranksum4：log_mv/amt20/pb_inv/roe（R-251记法）
+三卡判定预登记（计算前写定，禁事后调线）：
+- C1: 负惊喜子集因子（PEN=1{SUE<0 且 披露≤2月}，期望负向）|ICIR|≥0.25 且方向=负
+- C2: 净增量IC>0（对在役四因子截面残差化后 mean IC，按惩罚方向取号）
+- C3: Q5−Q1 价差同向（惩罚组−非惩罚组 <0，t≥2参照R-269 spread门）
+任一卡不满足 → 如实关闭。目标量级：ICIR 0.3+ 且净正。
