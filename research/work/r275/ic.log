@@ -23,3 +23,11 @@
 [23:18:14] [C] Sloan TTM 观测 240255 条, 2006-03-31~2026-06-30 t=5s
 [23:18:14] [C] usable_from 首年分布: {2006: 10, 2007: 3497, 2008: 4945}
 [23:18:56] [D] close 5250d x 5206codes, 2005-01-04~2026-08-14; months=260 t=47s
+[23:24:01] === r275_ic start ===
+[23:24:03] [A] yjbb=288275 zcfz=280143 xjll=288715 (A股口径) t=3s
+[23:24:03] [B] A股三要素齐全率 全史=0.966 近3年=0.994; xjll覆盖(近3年)=0.999
+[23:24:06] [C] Sloan TTM 观测 240255 条, 2006-03-31~2026-06-30 t=6s
+[23:24:06] [C] usable_from 首年分布: {2006: 10, 2007: 3497, 2008: 4945}
+[23:25:00] [D] close 5250d x 5206codes, 2005-01-04~2026-08-14; months=260 t=59s
+[23:25:37] [F] summary={"n_months": 48, "period": ["2007-04", "2026-07"], "ic_mean": 0.0105, "ic_std": 0.0757, "icir": 0.138, "t_stat": 0.956, "ic_pos_rate": 0.5208, "quality_ic_mean": -0.0105, "quality_icir": -0.138, "avg_n": 2410, "q_monotonic": true, "q_means": [0.03008, 0.02982, 0.02836, 0.02638, 0.02605], "corr_proxies_avg": {"roe": 0.0788, "gp_margin": 0.1024, "revenue_yoy": 0.0879, "net_profit_yoy": 0.0386}, "breadth_a_all": 0.966, "breadth_a_recent3y": 0.9939, "accrual_obs": 240255, "first_usable_year": 2006}
+[23:25:37] === done t=96s ===

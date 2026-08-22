@@ -123,9 +123,9 @@ me_ns = me_dates
 for k, m_end in enumerate(me_dates):
     if m_end <= pd.Timestamp("2006-06-30"): continue
     if k + 1 >= len(me_dates): break
-    # accrual 因子: 每股取 usable<=m_end 的最新观测 (staleness<=400d)
+    # accrual 因子: PIT 可用行中取报告期最新 (statDate 优先, 防 EM 回填老期 pubDate 挤出新报告)
     a = acc[acc["usable"] <= m_end]
-    a = a.sort_values("usable").groupby("code").tail(1)
+    a = a.sort_values(["statDate", "usable"]).groupby("code").tail(1)
     a = a[(m_end - a["dt"]).dt.days <= 400]
     a = a.set_index("code")["accrual"]
     # 去极值 MAD3 + zscore
@@ -146,7 +146,7 @@ for k, m_end in enumerate(me_dates):
     crow = {"ym": str(m_end)[:7]}
     for pcol, pq in proxies.items():
         p = pq[pq["usable"] <= m_end]
-        p = p.sort_values("usable").groupby("code").tail(1)
+        p = p.sort_values(["dt", "usable"]).groupby("code").tail(1)
         p = p[(m_end - p["dt"]).dt.days <= 400].set_index("code")[pcol]
         pc = p.index.intersection(f.index)
         if len(pc) >= 200:
@@ -176,7 +176,7 @@ summary = {
     "q_means": [round(ic_df[f"q{i}"].mean(), 5) for i in range(1, 6)],
     "corr_proxies_avg": {c: round(cr_df[c].abs().mean(), 4) for c in ["roe", "gp_margin", "revenue_yoy", "net_profit_yoy"] if c in cr_df},
     "breadth_a_all": round(float(all_rate), 4), "breadth_a_recent3y": round(float(recent), 4),
-    "accrual_obs": int(len(acc)), "first_usable_year": int(acc["usable"].dt.min().year),
+    "accrual_obs": int(len(acc)), "first_usable_year": int(acc["usable"].min().year),
 }
 # 分年 IC
 ic_df["yr"] = ic_df["ym"].str[:4]
