@@ -1,0 +1,43 @@
+/home/noname/quant-evolve/results/work/r274/r274_audit.py:35: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  byy=cov.groupby("yr").apply(lambda d:{"期数":len(d),"triple":int(d.triple.sum()),"分母":int(d[["np","ocf","ta"]].max(axis=1).sum()),"cov%":round(100*d.triple.sum()/max(d[["np","ocf","ta"]].max(axis=1).sum(),1),1)})
+A股参照宇宙 r0414 panel: 5206 prefix: {'00': 1494, '30': 1401, '600': 747, '603': 615, '688': 611, '601': 225, '605': 112, '689': 1}
+A股口径行数: yjbb 286975 xjll 286180 zcfz 277655
+=== 逐期A股三要素覆盖(按年) ===
+2005 {'期数': 4, 'triple': 5023, '分母': 5188, 'cov%': np.float64(96.8)}
+2006 {'期数': 4, 'triple': 5417, '分母': 5704, 'cov%': np.float64(95.0)}
+2007 {'期数': 4, 'triple': 6112, '分母': 6400, 'cov%': np.float64(95.5)}
+2008 {'期数': 4, 'triple': 6671, '分母': 6860, 'cov%': np.float64(97.2)}
+2009 {'期数': 4, 'triple': 7177, '分母': 7878, 'cov%': np.float64(91.1)}
+2010 {'期数': 4, 'triple': 8132, '分母': 8797, 'cov%': np.float64(92.4)}
+2011 {'期数': 4, 'triple': 9477, '分母': 9869, 'cov%': np.float64(96.0)}
+2012 {'期数': 4, 'triple': 10225, '分母': 10344, 'cov%': np.float64(98.8)}
+2013 {'期数': 4, 'triple': 10756, '分母': 10977, 'cov%': np.float64(98.0)}
+2014 {'期数': 4, 'triple': 11457, '分母': 12040, 'cov%': np.float64(95.2)}
+2015 {'期数': 4, 'triple': 12322, '分母': 12960, 'cov%': np.float64(95.1)}
+2016 {'期数': 4, 'triple': 13403, '分母': 14421, 'cov%': np.float64(92.9)}
+2017 {'期数': 4, 'triple': 14868, '分母': 15349, 'cov%': np.float64(96.9)}
+2018 {'期数': 4, 'triple': 15563, '分母': 15997, 'cov%': np.float64(97.3)}
+2019 {'期数': 4, 'triple': 16365, '分母': 17374, 'cov%': np.float64(94.2)}
+2020 {'期数': 4, 'triple': 17859, '分母': 18853, 'cov%': np.float64(94.7)}
+2021 {'期数': 4, 'triple': 19169, '分母': 19832, 'cov%': np.float64(96.7)}
+2022 {'期数': 4, 'triple': 19936, '分母': 20432, 'cov%': np.float64(97.6)}
+2023 {'期数': 4, 'triple': 20366, '分母': 20524, 'cov%': np.float64(99.2)}
+2024 {'期数': 4, 'triple': 20532, '分母': 20707, 'cov%': np.float64(99.2)}
+2025 {'期数': 4, 'triple': 20747, '分母': 20811, 'cov%': np.float64(99.7)}
+2026 {'期数': 2, 'triple': 5628, '分母': 5629, 'cov%': np.float64(100.0)}
+20260630单期: [{'p': '20260630', 'np': 423, 'ocf': 423, 'ta': 424, 'triple': 423, 'cov': 99.8, 'yr': '2026'}]
+yjbb有净利但xjll无该行(A股,全86期): 807 例; 按年: {'2005': 149, '2006': 94, '2019': 73, '2021': 71, '2009': 52, '2007': 40, '2022': 38, '2008': 34, '2011': 33, '2010': 32}
+Sloan应计(TTM/滞后TA)季度观测: 287016
+Traceback (most recent call last):
+  File "/home/noname/quant-evolve/results/work/r274/r274_audit.py", line 88, in <module>
+    qmap={c:g[["usable_from","acc"]].sort_values("usable_from") for c,g in q.groupby("code")}
+                                                                           ^^^^^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/pandas/core/frame.py", line 9210, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/pandas/core/groupby/groupby.py", line 1331, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/pandas/core/groupby/grouper.py", line 1043, in get_grouper
+    raise KeyError(gpr)
+KeyError: 'code'

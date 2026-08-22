@@ -1,0 +1,18 @@
+分层(每年3例)样本: 63 覆盖年份: ['2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+0 002080 20050930 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+6 601696 20070630 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+12 601108 20090630 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+18 601577 20110630 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+24 601211 20130630 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+30 601108 20150930 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+36 002958 20170930 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+42 688378 20190331 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+48 301548 20210930 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+54 301687 20230331 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+60 688806 20250630 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+CTL 600463 20070331 -1776337.7 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+CTL 300056 20120630 10677688.3 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+CTL 002470 20170930 -432540028.7 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+CTL 600219 20220331 337202400.5 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+CTL 002947 20250630 64341044.5 ERR:AttributeError("module 'akshare' has no attribute 'stock_cash_flow_she
+DONE-SAMPLE
