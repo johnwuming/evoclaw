@@ -1,5 +1,8 @@
 # 研究交付物
 
+## 2026-08-23 R-286 T4 影子叠加启动实施（task-0464，批准点④）
+- 用户 01:24 拍板「都推进」= R-267/R-282 批准点④（影子叠加启动），前提 task-0458 已验收（a14_crowdf2 → shadow_overlay_eligible，O1b/O2/O3 全过）。**四件套全就位（纯新增，在役/评分冻结/paper_engine/HP crontab 零改动）**：①model/registry/engines.json 新建（schema_version=1，A active + A2 shadow cross_engine，R-282 §六草案落地，shadow.since=2026-08-23/min 3/max 6/termination 四条/R-273 判据入 note）；②影子 NAV 管道 results/engines/a2/shadow_nav.csv（初始=task-0458 overlay_combo_a14_w050_nav.csv 历史基线段 4491 行）+ scripts/engines_shadow_nav_append.py（幂等 init+append）；③scripts/engines_shadow_evaluate.py（读 A2 影子 NAV+A 在役 NAV → ann/MDD/Calmar/corr(A,A2)/滚动12月 → append evals[] → clean_evals 计数；termination 数值标注「R-282 冻结+用户确认时点」）；④hp-cron-pending/a2_shadow_evaluate.cron（每月 3 日 09:35，**未安装**，安装属不可自动清单）。**首月基线快照实跑通过**：ann 0.21920118/mdd −0.33554161/calmar 0.65327569 与 R-282 O2 冻结口径逐位一致，corr(A,A2)=0.999851（n=221），clean_evals=0（影子期起点正确）。回滚=registry_backup_task0464_20260823.tar.gz（67 项）+删条目/脚本/engines 目录 → `05-量化投资/R-286-T4影子叠加启动实施.md`（任务书预定 R-285 但被 task-0463 占用，改用 R-286），笔记 `work/task-0464-notes.md`
+
 ## 2026-08-23 R-285 可转债轮动 E2 预注册（task-0463）
 - 基于 R-281 E1 画像一次性锁死 E2 形态：低价主(0.7)+双低辅(0.3)−动量反向(0.1) 综合得分、Top-15 等权月频、留仓缓冲带 Top-25 刹车、信用过滤（评级 AA- 下限+12 发行人违约黑名单+发行规模≥2亿+上市满25自然日）、单边 0.10% 成本、主窗 2018-02..2026-07(102月)+2022-08 强制分段。判门 G1 超额≥+5pp / G2 MDD≤20% / G3 两段超额均正 / G4 月均单边换手≤40% / G5 容量中位数≥2000万 + IC 衰减监控（双低连续 6 个月<0 复看）。n_trials=1 无网格，E1 全部口径缺口显式继承（源方 PIT 溢价率/评级黑名单快照前视+V2 披露对冲/摘牌近似等）。执行锚校验已预登记（price IC 0.1033±0.01、双低 0.0584±0.01，本日 compute_ic.py 重建逐位复验）。机器可读锁 work/r281/e2_prereg.json（sha256 bcd2fe4f…）。零回测、零引擎改动、零真金。
 ## 2026-08-23 R-279 PCR 情绪确认项/降权调制 E2 执行与关闭归档（task-0455，R-277 Top5·S1）
