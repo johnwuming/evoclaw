@@ -1,0 +1,251 @@
+[    0.0s] frozen pcr_oi states loaded: n=248 md5=19c57c12aeea6227d784a6f7c62cd8d7
+[    0.0s] patch ok (a9 chain + R278 modulation) {'orig_len': 16899, 'patched_len': 24158} | orig {'orig_len': 16899, 'patched_len': 23007}
+[    0.0s] 加载全量池市场(数分钟)...
+加载退市索引...
+退市A股(post-2006): 301
+加载ST标记...
+加载退市股未复权收盘(用于价格口径缩放)...
+raw_close 可用退市股: 301
+加载月度因子面板(主+退市)...
+panel codes: main=5032 +delisted=299
+全量池: 5505 (存活+退市有财务)
+加载个股K线...
+构建交易日历...
+交易日 5255 (2005-01-04 ~ 2026-08-21), 月度调仓 260
+[   70.0s] 市场加载完成 codes=5505
+[   70.0s] market trade_dates end=2026-08-21 (kline_as_of 披露)
+[pb merge] panel rows=751250 pb coverage=94.1%
+加载指数...
+  基准指数: 2006-01-04 ~ 2026-08-21
+加载宏观...
+计算市场宽度（可能较慢）...
+✅ 信号已保存: results/timing_signals.csv (248 个月)
+  估值基准: pe, 2005-04-08 ~ 2026-08-14
+  ⚠️ 去行业化 Tier-1（指数中位数/等权PE 分位）
+  ⚠️ 信号 f_val_q3 变化不足: nunique=1, min=1.000
+  ⚠️ 信号 f_val_q5 变化不足: nunique=1, min=1.000
+  ⚠️ 信号 f_val_deind 变化不足: nunique=1, min=1.000
+✅ 信号已保存: /home/noname/quant-evolve/results/timing_signals_iter2.csv (248 个月)
+  ==== f_val 统计（确认非恒1.0）====
+  f_val_q3: mean=1.000 min=1.000 n_low(<1.0)=0 nunique=1
+  f_val_q5: mean=1.000 min=1.000 n_low(<1.0)=0 nunique=1
+  f_val_abs: mean=0.936 min=0.600 n_low(<1.0)=145 nunique=125
+  f_val_deind: mean=1.000 min=1.000 n_low(<1.0)=0 nunique=1
+✅ 信号已保存: /home/noname/quant-evolve/results/timing_signals_iter4.csv (248 个月)
+
+  ==== v4 信号统计（关键月触发值 = 遗留问题①证据）====
+  信号                 mean    min   降仓月 |  v2007峰值 v2015泡沫顶   v2018初 v2021抱团顶
+  f_val_abs_v2      0.936  0.600   145 |    0.600    0.897    0.920    0.903 ✅
+  f_val_abs_s1      0.930  0.550   222 |    0.550    0.908    0.922    0.912 ✅
+  f_val_abs_s2      0.887  0.450   223 |    0.450    0.846    0.870    0.853 ✅
+  f_val_abs_s3      0.837  0.350   223 |    0.350    0.745    0.791    0.757 ✅
+  f_val_abs_s4      0.882  0.400   222 |    0.400    0.845    0.891    0.857 ✅
+  f_q_q3r60         0.901  0.600   101 |    0.600    0.656    0.683    0.628 ✅
+  f_q_q3r70         0.916  0.600    76 |    0.600    0.674    0.711    0.637 ✅
+  f_q_q5r60         0.932  0.600    76 |    1.000    0.633    0.650    0.617 ✅
+  f_q_q5r70         0.945  0.600    61 |    1.000    0.644    0.667    0.622 ✅
+  f_q_q3m60         0.932  0.600    62 |    0.600    0.655    0.820    0.614 ✅
+  f_q_q5m60         0.971  0.600    36 |    1.000    0.655    0.761    0.614 ✅
+  f_q_q3z           0.965  0.600    50 |    0.867    0.708    0.905    0.736 ✅
+  f_q_q5z           0.985  0.671    35 |    1.000    0.835    0.880    0.712 ✅
+  f_q_q8r60         0.961  0.631    60 |    1.000    0.923    0.704    0.642 ✅
+  pe_hs300          14.70   7.96     - |    47.84    16.11    15.19    15.87
+✅ 信号统计已保存: timing_iter4_signal_stats.csv
+[   76.1s] q3z_tr 择时构建完成: mean=0.516
+<a9_patched_run_backtest>:412: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+/home/noname/quant-evolve/scripts/a9_common.py:304: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  mret = nav.resample("M").last().pct_change().dropna()
+======================================================================
+回测: r278_g0_orig_full [2006-01-01 ~ 2026-08-14]
+配置: {"sort": "ext", "div_min": 0.02, "roe_min": 0.15, "roa_min": 0.1, "n_hold": 20, "price_cap": 10.0, "min_amt": 0.0, "drawdown_control": 0, "cost_model": "v2", "limit_board": "on", "capital_base": 10000000.0, "dd_thresh": 0.2, "dd_reduce": 0.5, "dd_recover": 0.05, "cost_rate": 0.001, "limit_up_pct": 0.098, "ext_mode": "ranksum", "ext_specs": [["log_mv", 1.0, -1], ["amt20", 1.0, -1], ["pb_inv", 0.7, 1.0], ["roe", 0.3, 1.0]], "ext_filter_all": 1, "raw_universe": 1, "e1_guard": 0, "xsub_days": 365.0, "e1_lambda": 1.0, "e1_deadzone": 0.3, "force_save_artifacts": 1}
+======================================================================
+==== 回测完成 ====
+sort: ext
+cost_model: v2
+limit_board: on
+capital_base: 10000000.0
+div_min: 0.02
+roe_min: 0.15
+roa_min: 0.1
+score_weights: 0.400,0.300,0.300,0.300
+n_hold: 20
+price_cap: 10.0
+min_amt: 0.0
+drawdown_control: 0
+dd_thresh: 0.2
+dd_reduce: 0.5
+period_start: 2006-01-04
+period_end: 2026-08-14
+years: 20.61
+num_rebalance: 248
+avg_holdings: 19.94
+monthly_turnover_est: 0.4473
+cumulative_return: 63.5663
+annual_return: 0.2241
+max_drawdown: -0.3355
+sharpe: 1.3749
+calmar: 0.668
+monthly_win_rate: 0.6559
+benchmark_cumulative_return: None
+benchmark_annual_return: None
+benchmark_max_drawdown: None
+[  422.4s] r278_g0_orig: full ann=0.2241 mdd=-0.3355 sharpe=1.375 | locked ann=0.2202 mdd=-0.3355 sharpe=1.356
+<a9_patched_run_backtest>:439: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+/home/noname/quant-evolve/scripts/a9_common.py:304: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  mret = nav.resample("M").last().pct_change().dropna()
+======================================================================
+回测: r278_g0_lam1_full [2006-01-01 ~ 2026-08-14]
+配置: {"sort": "ext", "div_min": 0.02, "roe_min": 0.15, "roa_min": 0.1, "n_hold": 20, "price_cap": 10.0, "min_amt": 0.0, "drawdown_control": 0, "cost_model": "v2", "limit_board": "on", "capital_base": 10000000.0, "dd_thresh": 0.2, "dd_reduce": 0.5, "dd_recover": 0.05, "cost_rate": 0.001, "limit_up_pct": 0.098, "ext_mode": "ranksum", "ext_specs": [["log_mv", 1.0, -1], ["amt20", 1.0, -1], ["pb_inv", 0.7, 1.0], ["roe", 0.3, 1.0]], "ext_filter_all": 1, "raw_universe": 1, "e1_guard": 0, "xsub_days": 365.0, "e1_lambda": 1.0, "e1_deadzone": 0.3, "force_save_artifacts": 1}
+======================================================================
+==== 回测完成 ====
+sort: ext
+cost_model: v2
+limit_board: on
+capital_base: 10000000.0
+div_min: 0.02
+roe_min: 0.15
+roa_min: 0.1
+score_weights: 0.400,0.300,0.300,0.300
+n_hold: 20
+price_cap: 10.0
+min_amt: 0.0
+drawdown_control: 0
+dd_thresh: 0.2
+dd_reduce: 0.5
+period_start: 2006-01-04
+period_end: 2026-08-14
+years: 20.61
+num_rebalance: 248
+avg_holdings: 19.94
+monthly_turnover_est: 0.4473
+cumulative_return: 63.5663
+annual_return: 0.2241
+max_drawdown: -0.3355
+sharpe: 1.3749
+calmar: 0.668
+monthly_win_rate: 0.6559
+benchmark_cumulative_return: None
+benchmark_annual_return: None
+benchmark_max_drawdown: None
+[  770.1s] r278_g0_lam1: full ann=0.2241 mdd=-0.3355 sharpe=1.375 | locked ann=0.2202 mdd=-0.3355 sharpe=1.356
+[  770.1s] G0 parity: max|dnav| = 0.000000e+00 (n=5008)
+[  770.1s] disclosure: vs 旧在役产物 max|dnav| = 2.567e-01 (qfq 重写漂移, R-253 同源)
+[  770.1s] G0 PASS (逐位一致)
+<a9_patched_run_backtest>:439: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+/home/noname/quant-evolve/scripts/a9_common.py:304: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  mret = nav.resample("M").last().pct_change().dropna()
+======================================================================
+回测: r278_t1_l07_full [2006-01-01 ~ 2026-08-14]
+配置: {"sort": "ext", "div_min": 0.02, "roe_min": 0.15, "roa_min": 0.1, "n_hold": 20, "price_cap": 10.0, "min_amt": 0.0, "drawdown_control": 0, "cost_model": "v2", "limit_board": "on", "capital_base": 10000000.0, "dd_thresh": 0.2, "dd_reduce": 0.5, "dd_recover": 0.05, "cost_rate": 0.001, "limit_up_pct": 0.098, "ext_mode": "ranksum", "ext_specs": [["log_mv", 1.0, -1], ["amt20", 1.0, -1], ["pb_inv", 0.7, 1.0], ["roe", 0.3, 1.0]], "ext_filter_all": 1, "raw_universe": 1, "e1_guard": 0, "xsub_days": 365.0, "e1_lambda": 1.0, "e1_deadzone": 0.3, "force_save_artifacts": 1}
+======================================================================
+==== 回测完成 ====
+sort: ext
+cost_model: v2
+limit_board: on
+capital_base: 10000000.0
+div_min: 0.02
+roe_min: 0.15
+roa_min: 0.1
+score_weights: 0.400,0.300,0.300,0.300
+n_hold: 20
+price_cap: 10.0
+min_amt: 0.0
+drawdown_control: 0
+dd_thresh: 0.2
+dd_reduce: 0.5
+period_start: 2006-01-04
+period_end: 2026-08-14
+years: 20.61
+num_rebalance: 248
+avg_holdings: 19.94
+monthly_turnover_est: 0.4473
+cumulative_return: 63.8536
+annual_return: 0.2244
+max_drawdown: -0.3355
+sharpe: 1.3764
+calmar: 0.6688
+monthly_win_rate: 0.6599
+benchmark_cumulative_return: None
+benchmark_annual_return: None
+benchmark_max_drawdown: None
+[ 1119.7s] r278_t1_l07: full ann=0.2244 mdd=-0.3355 sharpe=1.376 | locked ann=0.2204 mdd=-0.3355 sharpe=1.357
+[ 1119.7s] ledger + bt_r278_t1_lam07_20260823
+<a9_patched_run_backtest>:439: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+/home/noname/quant-evolve/scripts/a9_common.py:304: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  mret = nav.resample("M").last().pct_change().dropna()
+======================================================================
+回测: r278_t2_l08_full [2006-01-01 ~ 2026-08-14]
+配置: {"sort": "ext", "div_min": 0.02, "roe_min": 0.15, "roa_min": 0.1, "n_hold": 20, "price_cap": 10.0, "min_amt": 0.0, "drawdown_control": 0, "cost_model": "v2", "limit_board": "on", "capital_base": 10000000.0, "dd_thresh": 0.2, "dd_reduce": 0.5, "dd_recover": 0.05, "cost_rate": 0.001, "limit_up_pct": 0.098, "ext_mode": "ranksum", "ext_specs": [["log_mv", 1.0, -1], ["amt20", 1.0, -1], ["pb_inv", 0.7, 1.0], ["roe", 0.3, 1.0]], "ext_filter_all": 1, "raw_universe": 1, "e1_guard": 0, "xsub_days": 365.0, "e1_lambda": 1.0, "e1_deadzone": 0.3, "force_save_artifacts": 1}
+======================================================================
+==== 回测完成 ====
+sort: ext
+cost_model: v2
+limit_board: on
+capital_base: 10000000.0
+div_min: 0.02
+roe_min: 0.15
+roa_min: 0.1
+score_weights: 0.400,0.300,0.300,0.300
+n_hold: 20
+price_cap: 10.0
+min_amt: 0.0
+drawdown_control: 0
+dd_thresh: 0.2
+dd_reduce: 0.5
+period_start: 2006-01-04
+period_end: 2026-08-14
+years: 20.61
+num_rebalance: 248
+avg_holdings: 19.94
+monthly_turnover_est: 0.4473
+cumulative_return: 63.7552
+annual_return: 0.2243
+max_drawdown: -0.3355
+sharpe: 1.3759
+calmar: 0.6685
+monthly_win_rate: 0.6599
+benchmark_cumulative_return: None
+benchmark_annual_return: None
+benchmark_max_drawdown: None
+[ 1471.1s] r278_t2_l08: full ann=0.2243 mdd=-0.3355 sharpe=1.376 | locked ann=0.2203 mdd=-0.3355 sharpe=1.357
+[ 1471.1s] ledger + bt_r278_t2_lam08_20260823
+<a9_patched_run_backtest>:439: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+/home/noname/quant-evolve/scripts/a9_common.py:304: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  mret = nav.resample("M").last().pct_change().dropna()
+======================================================================
+回测: r278_t3_v20_full [2006-01-01 ~ 2026-08-14]
+配置: {"sort": "ext", "div_min": 0.02, "roe_min": 0.15, "roa_min": 0.1, "n_hold": 20, "price_cap": 10.0, "min_amt": 0.0, "drawdown_control": 0, "cost_model": "v2", "limit_board": "on", "capital_base": 10000000.0, "dd_thresh": 0.2, "dd_reduce": 0.5, "dd_recover": 0.05, "cost_rate": 0.001, "limit_up_pct": 0.098, "ext_mode": "ranksum", "ext_specs": [["log_mv", 1.0, -1], ["amt20", 1.0, -1], ["pb_inv", 0.7, 1.0], ["roe", 0.3, 1.0]], "ext_filter_all": 1, "raw_universe": 1, "e1_guard": 0, "xsub_days": 365.0, "e1_lambda": 1.0, "e1_deadzone": 0.3, "force_save_artifacts": 1}
+======================================================================
+==== 回测完成 ====
+sort: ext
+cost_model: v2
+limit_board: on
+capital_base: 10000000.0
+div_min: 0.02
+roe_min: 0.15
+roa_min: 0.1
+score_weights: 0.400,0.300,0.300,0.300
+n_hold: 20
+price_cap: 10.0
+min_amt: 0.0
+drawdown_control: 0
+dd_thresh: 0.2
+dd_reduce: 0.5
+period_start: 2006-01-04
+period_end: 2026-08-14
+years: 20.61
+num_rebalance: 248
+avg_holdings: 19.7
+monthly_turnover_est: 0.4435
+cumulative_return: 63.7137
+annual_return: 0.2243
+max_drawdown: -0.3355
+sharpe: 1.375
+calmar: 0.6684
+monthly_win_rate: 0.6478
+benchmark_cumulative_return: None
+benchmark_annual_return: None
+benchmark_max_drawdown: None
+[ 1821.3s] r278_t3_v20: full ann=0.2243 mdd=-0.3355 sharpe=1.375 | locked ann=0.2201 mdd=-0.3355 sharpe=1.355
+[ 1821.3s] ledger + bt_r278_t3_veto20_20260823
+[ 1821.3s] ALL RUNS DONE g0=True t1/t2/t3 ok
