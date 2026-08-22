@@ -77,3 +77,4 @@
 - 【关键】两 PIT 口径符号翻转：严格 PIT（48 月）应计 IC=+0.0105（反 Sloan），deadline-PIT（241 月）=-0.0087（顺 Sloan 但弱）→ 结论对 PIT 假设不稳健，|IC|≤0.011 / |t|<1.8 均不显著。
 - 【判定】三选一 → 维持关闭。理由：①IC 幅度 ~0.01、ICIR 0.11-0.14、t<1.8 全样本不显著；②分组不单调（deadline-PIT）；③两 PIT 口径符号翻转不稳健；④与在役质量/成长代理相关性虽低（max |corr|=gp_margin 0.102）但自身无独立 alpha。数据债本身已修复（宇宙过滤），不影响未来其他财务因子复用 fin_deep。
 - 产物清单：r275/{r275_collect.py, r275_collect_one.py, r275_ic.py, r275_ic_dl.py, r275_diag.py, chunks/(258), breadth_a_share.csv, ic_monthly.csv, corr_proxies.csv, ic_by_year.csv, summary.json, ic2_monthly.csv, corr2_proxies.csv, ic2_by_year.csv, summary_deadline.json, ic.log}
+- [23:34] 产物修复：deadline 变体的文件名替换未生效（f-string 内无引号），曾覆盖严格 PIT 同名产物——已将 deadline 产物改名（ic2_monthly/corr2_proxies/ic2_by_year/summary_deadline.json）并重跑严格 PIT 恢复 ic_monthly.csv/summary.json（23:34:47 done t=55s，数字与首轮逐字一致：48 月 IC=+0.0105/t=0.956）。最终核验：strict 48 月 / deadline 241 月两套产物并存，报告引用文件名与实际一致。
