@@ -13,7 +13,15 @@
 5. 修复C：server.js :921-960 PUT handler 加状态白名单
 6. node --check → 重启 → 验收（400/200/session-key 翻转/无扰动）
 
-## 2. 关键发现：前次执行已部分落地（23:41–23:43）
+## 3. 修复B 注释部分（本次执行）
+- :275-276 旧注释 `// spawn_owner：spawn 归属。'web' = dispatch 自动调度（Web 入口 / cron 定时任务）；// 'main' = 主 agent 原生 spawn（登记后由主 agent sessions_spawn 并回写 agent_session_key，dispatch 跳过）`
+- 新注释：`'web' = 登记时未声明 main 的缺省值（含网页/cron/心跳lane；dispatch 自动调度已于 2026-08-14 停用）；'main' = 主 agent 原生 spawn（session-key 回写端点会同步翻转 spawn_owner='main'，task-0446/R-276 中-1）`
+- `node --check server.js` → SYNTAX-OK；`systemctl restart agent-dashboard` → active；GET /api/tasks/task-0446 正常返回（截断 300 字符内拿到 id/title/status）
+
+## 4. 事件表时间线（task_events，改后新增事件验证）
+- 23:44 session_key 回写（本会话）→ 23:45 status_changed「→ pending_review（原 running）」（新 addEvent 格式，证明前次白名单+事件补丁已生效）→ 23:46 reviewed_approved（主 agent 独立复测：SYNTAX-OK/400 用 task-0449 测/200/模板 diff/白名单 9 态落位/测试任务已清理）
+- **即：主 agent 已在 23:46 将 task-0446 审批为 done**；本次注释修复（23:47）属审批后补充，行为零影响（纯注释）
+- 处置：不将 done 翻回 pending_review（避免推翻主 agent审批决定制造复审振荡），一切差异写入 jsonl 回执与最终报告由主 agent 裁夺
 - 改前真备份：项目目录 `server.js.bak-20260822-2340`（23:41，760,669B=R-276 记录的改前大小）；我的 `/tmp/server.js.bak-task0446`（23:44）实为前次改动后状态，仅作「本次注释改动前」回滚点
 - diff(bak-2340 → 当前) 已落地：
   1. 修复C 白名单：`STATUS_WHITELIST`（9 态，非法 400）:944-947 ✅（前次还额外加了 pending_review/pending 的 addEvent，属 R-276 §五.2 完整建议范围，保留）
