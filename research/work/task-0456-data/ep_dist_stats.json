@@ -1,0 +1,49 @@
+{
+ "from_ep_start": {
+  "fwd21": {
+   "n": 21,
+   "mean": 0.0163,
+   "med": 0.0223,
+   "win": 0.714,
+   "min": -0.1759,
+   "max": 0.109
+  },
+  "fwd42": {
+   "n": 21,
+   "mean": 0.0084,
+   "med": 0.0245,
+   "win": 0.619,
+   "min": -0.1508,
+   "max": 0.1236
+  },
+  "fwd63": {
+   "n": 21,
+   "mean": -0.0096,
+   "med": 0.0054,
+   "win": 0.524,
+   "min": -0.2932,
+   "max": 0.1163
+  },
+  "worst_dd63_from_start": {
+   "n": 21,
+   "mean": -0.1164,
+   "med": -0.0903,
+   "win": 0.0,
+   "min": -0.3593,
+   "max": -0.0374
+  }
+ },
+ "episode_2026": {
+  "fwd21": -0.0247,
+  "fwd42": -0.1456,
+  "fwd63": -0.2382,
+  "dd_from_start_so_far": -0.3014,
+  "peak_0511_to_trough_0722_excess": -0.2944,
+  "micro_peak_trough": -0.3217,
+  "hs_peak_trough": -0.0474
+ },
+ "episode_2024": {
+  "micro_20240102_0208": -0.3701,
+  "red_start_20240125_vs_crash_start": "red 起于 crash 开始后 17 个交易日"
+ }
+}
