@@ -32,3 +32,9 @@
 - T1=新入场降权λ0.7；T2=λ0.8；T3=确认项否决 added 中排名最弱 ⌈20%×len(added)⌉ 只；G0=λ1 恒不触发（逐位对拍，不计 trial）→ n_trials=3≤4
 - 实现锚点（引擎源码原样区，A9 补丁不触碰）：①权重块 `w = 1.0 / len(new_pool)...pending_holdings`；②`added = [c for c in target_pool if c not in holdings]`（veto 注入点）；③成本v2 买入 `order_amt = port_val * w_each`（降权月买 entrance 用实际权重 w_each×wbuy，wbuy=1.0 时位不变）
 - G0 结构保证：inactive/λ=1 走原字面分支 → IEEE 逐位一致
+
+## 预注册取证（先写后算时序锚）
+- R-278-PCR情绪E2预注册.md 落盘：2026-08-23 00:38 前后（stat 时间戳为准）
+- sha256：见下（取证行）
+- 此后才开始：冻结（r278_freeze.py）→ G0 对拍 → T1/T2/T3 网格 → 判门
+7d7f3b42d1a9ee339f9c67ce124d3bbf8fef646ec2b780b230480c8a32a43593  R-278-PCR情绪E2预注册.md
