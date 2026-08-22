@@ -1,0 +1,133 @@
+{
+  "tool": "overlay_adjudicate.py (scoring v1.2 overlay track, R-267/R-282)",
+  "candidate": "a15_csad_resid",
+  "arm": "info",
+  "w": 0.3,
+  "config_version": "1.2.0",
+  "frozen_at": "2026-08-23T00:14+08:00",
+  "crisis_windows": [
+    "2023-09-01~2024-02-29"
+  ],
+  "nav_sources": {
+    "incumbent": "results/a13_rsraw_e1f10dz_locked_nav.csv",
+    "candidate": "results/r263_m1_w03_locked_nav.csv"
+  },
+  "o1": {
+    "arm": "info",
+    "pass": false,
+    "delta_icir_locked": 0.0455,
+    "delta_icir_source": "R-264 §G2：ICIR(5f) 0.6906 − ICIR(4f) 0.6451",
+    "delta_to": 0.1492,
+    "delta_to_source": "R-265/R-264：月换手 0.5965 − 0.4473",
+    "turnover_scale": 1.492,
+    "line_wide": 0.04476,
+    "line_strict": 0.06714,
+    "line_applied": 0.06714,
+    "line_applied_basis": "strict(post_hoc x1.5)",
+    "margin_vs_applied_line": -0.02164,
+    "checks": {
+      "delta_icir_vs_line": [
+        0.0455,
+        ">=",
+        0.06714,
+        false
+      ]
+    }
+  },
+  "o2": {
+    "arm": "info",
+    "w": 0.3,
+    "w_source": "R-263 预注册因子权重（ext_specs csad_resid 0.3）",
+    "recon_pass": true,
+    "combo_metrics": {
+      "start": "2006-01-04",
+      "end": "2024-06-28",
+      "n_days": 4491,
+      "total_ret": 39.55229171,
+      "ann": 0.22183201,
+      "mdd": -0.33757423,
+      "mdd_date": "2015-07-08",
+      "calmar": 0.65713552,
+      "sharpe": 1.357453,
+      "crisis_windows": {
+        "2023-09-01~2024-02-29": {
+          "ann": -0.07225614,
+          "mdd": -0.10022257,
+          "mdd_date": "2024-02-07"
+        }
+      },
+      "normal_ex_crisis": {
+        "ann_over_locked_years": 0.22429171,
+        "total_ret": 41.08782133,
+        "n_days_excluded": 116
+      }
+    },
+    "incumbent_metrics": {
+      "ann": 0.22017563,
+      "mdd": -0.33554161,
+      "calmar": 0.65617981,
+      "sharpe": 1.356098
+    },
+    "candidate_metrics": {
+      "ann": 0.22514513,
+      "mdd": -0.34227617,
+      "calmar": 0.65778792,
+      "sharpe": 1.338569
+    },
+    "calmar_ratio": 1.00145648,
+    "mdd_worsen_pp": 0.203262,
+    "ann_delta_pp": 0.165638,
+    "checks": {
+      "l1_calmar_ratio": [
+        1.00145648,
+        ">=",
+        1.005,
+        false
+      ],
+      "l2_mdd_worsen_pp": [
+        0.203262,
+        "<=",
+        0.2,
+        false
+      ],
+      "l3_ann_floor_pp": [
+        0.165638,
+        ">=",
+        -0.3,
+        true
+      ]
+    },
+    "pass": false
+  },
+  "o3": {
+    "dsr_min": 0.9,
+    "dsr_archived": 0.9999,
+    "dsr_archived_source": "R-265（T=4490, n_trials=97）",
+    "dsr_recomputed_n_trials": 99,
+    "dsr_recomputed": {
+      "dsr": 0.9999,
+      "sr_period": 0.08432,
+      "T": 4490,
+      "skew": -0.88,
+      "kurtosis": 8.899,
+      "n_trials": 99
+    },
+    "dsr_recompute_err": null,
+    "g2_p": 1.0,
+    "g2_p_pass": true,
+    "holdout": "PASS",
+    "holdout_source": "R-265：holdout ann 0.2046 ≥ 0.6×locked 0.1351；vs 在役 −5.32pp 逆风已披露",
+    "stat_warn": false,
+    "registry_partial": false,
+    "dsr_pass": true,
+    "checks_pass": true,
+    "pass": true
+  },
+  "trials_counted": 1,
+  "verdict": "fail_archive",
+  "verdict_pass": false,
+  "adjudicated": {
+    "task": "task-0458",
+    "at": "2026-08-23T01:05+08:00"
+  }
+}

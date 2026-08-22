@@ -1,0 +1,86 @@
+{
+  "tool": "combo_sim.py (scoring v1.2 overlay O2, R-267/R-282)",
+  "nav_a": "results/a13_rsraw_e1f10dz_locked_nav.csv",
+  "nav_b": "results/r263_m1_w03_locked_nav.csv",
+  "w": 0.3,
+  "rebalance": "monthly_first_trading_day_within_month_weights_frozen",
+  "leg_a": {
+    "start": "2006-01-04",
+    "end": "2024-06-28",
+    "n_days": 4491,
+    "total_ret": 38.54827698,
+    "ann": 0.22017563,
+    "mdd": -0.33554161,
+    "mdd_date": "2015-07-08",
+    "calmar": 0.65617981,
+    "sharpe": 1.356098,
+    "crisis_windows": {
+      "2023-09-01~2024-02-29": {
+        "ann": -0.0707259,
+        "mdd": -0.09567321,
+        "mdd_date": "2024-02-07"
+      }
+    },
+    "normal_ex_crisis": {
+      "ann_over_locked_years": 0.22257797,
+      "total_ret": 40.01228074,
+      "n_days_excluded": 116
+    }
+  },
+  "leg_b": {
+    "start": "2006-01-04",
+    "end": "2024-06-28",
+    "n_days": 4491,
+    "total_ret": 41.63332081,
+    "ann": 0.22514513,
+    "mdd": -0.34227617,
+    "mdd_date": "2015-07-08",
+    "calmar": 0.65778792,
+    "sharpe": 1.338569,
+    "crisis_windows": {
+      "2023-09-01~2024-02-29": {
+        "ann": -0.07585665,
+        "mdd": -0.11079348,
+        "mdd_date": "2024-02-07"
+      }
+    },
+    "normal_ex_crisis": {
+      "ann_over_locked_years": 0.22773951,
+      "total_ret": 43.33299436,
+      "n_days_excluded": 116
+    }
+  },
+  "combo": {
+    "start": "2006-01-04",
+    "end": "2024-06-28",
+    "n_days": 4491,
+    "total_ret": 39.55229171,
+    "ann": 0.22183201,
+    "mdd": -0.33757423,
+    "mdd_date": "2015-07-08",
+    "calmar": 0.65713552,
+    "sharpe": 1.357453,
+    "crisis_windows": {
+      "2023-09-01~2024-02-29": {
+        "ann": -0.07225614,
+        "mdd": -0.10022257,
+        "mdd_date": "2024-02-07"
+      }
+    },
+    "normal_ex_crisis": {
+      "ann_over_locked_years": 0.22429171,
+      "total_ret": 41.08782133,
+      "n_days_excluded": 116
+    }
+  },
+  "recon": {
+    "decomposition_max_err": 3.3306690738754696e-16,
+    "decomposition_pass": true,
+    "endpoint_recompute": 40.552291712981166,
+    "endpoint_rel_err": 2.886579864025407e-15,
+    "endpoint_pass": true,
+    "weight_sum": 1.0,
+    "weight_pass": true,
+    "n_months": 222
+  }
+}
