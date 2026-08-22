@@ -24,4 +24,20 @@
 
 - shared/results/05-量化投资/ 现有最大 = R-272(情绪维度E1画像)。R-272 已占 → 本任务正式报告用 **R-273**。
 
-(待续:快照盘点)
+## A2. 拥挤度指标精确定义(摘自 R-250 + R-252 预注册)
+
+- **底层指标** share_roll20 = 微盘成交额/全A成交额 20日均值(amount 口径,不受 qfq 复权改写,PIT 稳健)。微盘=每日按总市值(收盘×总股本)后20%。
+- **状态变量** p(t) = share_roll20 的 trailing 756 交易日(roll3y, min250)分位,逐字式 `shr.rolling(756,min250).apply(lambda x:(x[:-1]<=x[-1]).mean()*100,raw=True)`。
+- **T4 调制** m(t)=clip((p-40)/20,0,1)×λ_c=1.0 → **p<40 时 m=0,T4 与在役 C4 完全等价**(同一因子集、同一调仓、同一 nav)。
+- **快照机制**(task-0408 已落地):HP results/crowding_snapshots.csv append-only 月锁,首锁 2026-07 roll3y=3.3113;2026-08 起实盘/影子状态以快照为准;E2 历史段消费冻结文件 roll3y_states.csv(双锚 2023-09=92.848 / 2026-07=3.3113)。
+- **状态序列事实**(R-252 §二.6,n=80 月 2020-01→2026-08):high(>60) 共 20 个月,最后一个=**2025-05**;2025-06 起全部低位;2026-07=3.31。
+- VPS 数据现状:crowding_history.csv(HP 日频)**未同步** VPS(auto_sync include 仅 crowding-indicators.json);roll3y_states.csv 也在 HP。VPS 有:crowding_monthly.csv(月度镜像至 2026-08,crowding-indicators.json(2026-08-19 生成)、r252 E2 全部 nav/metrics 产物。
+
+## A3. 快照/监控数据盘点
+
+- crowding-indicators.json(9149B):generated_at 2026-08-19 18:00,latest_date 2026-08-19,schema v2。4 指标:micro_turnover_share(latest 0.02901,60日分位 90,yellow)、micro_turnover_pctile(63.3,green)、excess_decay(latest -0.001889,t=-4.643,**red**)、snowball_knockin(green);overall_flag=**red**。microcap_eqw_index 90 点(2026-04-10→2026-08-19,748.96→612.84)。
+- VPS freshness 机制:crowding-freshness-check.sh 每日一查(generated_at>192h=red,latest 滞后>5交易日=yellow),task-0371 落地。
+- crowding_monthly.csv(12863B,HP 镜像,2026-08-21 生成):月度 shr_roll20/epct(全史expanding分位)/pct60/snowball/nav_end/ret/crow_state,2020-01→2026-08。
+- 快照历史缺口:crowding-indicators.json 为覆盖式快照,无逐日历史;月度锁存 2026-07 才首锁,历史段(2020-01→2026-06)仍依赖 HP qfq 全量重算(R-252 §8.1 已知残余风险)。
+
+(待续:判据计算)
