@@ -1,5 +1,8 @@
 # 研究交付物
 
+## 2026-08-22 R-276 任务状态三端口径一致性审计（task-0445）
+- dashboard/心跳契约/任务中心三端只读审计（今日两起口径事故复盘：spawn_owner='web' 误读 + 0441/0442 卡 running 6.5h）。**冲突 8 条：高2/中3/低3**。最关键发现：**running→pending_review 的写入方未成文**——server.js 对 .task-completions.jsonl 零引用、heartbeat.sh sync_completions 已空操作、spawn-task.md 模板无 PUT pending_review 步骤，现行协议全靠主 agent 任务书 ad-hoc 指令，断线即悬挂只能等 90min 僵尸兜底；其他：PUT 无状态白名单且 pending_review/退回无事件（task-0442 现状即证据）、spawn_owner 语义已死（有 session_key 任务中 130/148=88% 错标 'web'，session-key 端点不翻转 owner）、僵尸退回不清 dispatched_at、updated_at 可被无关编辑洗白、HEARTBEAT ?limit=100 被服务端忽略、前端筛选缺 paused/cancelled。修复最小改动：模板补一行 PUT 步骤 + session-key 端点补 spawn_owner='main' → `16-安全研究/R-276-任务状态三端口径一致性审计.md`，过程证据 `work/task-0445-notes.md`
+
 ## 2026-08-22 R-275 应计质量Sloan前置核查+现金流数据债定性（task-0442）
 - 前序面板未同步且禁 SSH HP → VPS 本地全链路重建（akshare EM 三表 258 期重采 + /root/sr365/qfq 5,206 只 A 股价格），零回测零引擎改动。**数据债定论：44.5% = yjbb 把新三板/B股带入分母的宇宙污染（5244/11765=44.57% 精确复现，A 股前缀缺失=0），A 股真宇宙三要素（NP∧OCF∧TA）齐全率全史 96.6%/近3年 99.4%，修复=merge 前前缀过滤，成本≈0，无需补采**；Sloan TTM 应计面板 240,255 条（2006Q1~2026Q2，TTM 跨度 270-278d 校正）。**IC 双 PIT 口径（W1：月频全市场 spearman/MAD3/zscore）：严格 PIT（48 有效月，EM 老期 pubDate 回填致历史月坍缩）应计 IC=+0.0105/t=0.956 反 Sloan 且分组单调；deadline-PIT（241 月全覆盖）应计 IC=−0.0087/t=−1.738 顺 Sloan 但分组不单调——符号随 PIT 假设翻转，|IC|≤0.011/|t|<1.8 均不显著**；与在役财务代理 max|corr|=gp_margin 0.102 低冗余但无独立 alpha。**三选一判定=维持关闭**；Sloan 可用起始 2006 年；管线建议：宇宙过滤修复登记为 fin_deep 管线任务（非本因子），应计特征留作未来财务组合因子候选正交分量 → `05-量化投资/R-275-应计质量Sloan与现金流数据债核查.md`，产物 work/r275/
 ## 2026-08-22 R-274 PEAD负惊喜软惩罚净增量验证（task-0441 阶段B）
