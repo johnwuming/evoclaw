@@ -3,3 +3,5 @@ read 2000/5205 stocks=2000
 read 3000/5205 stocks=3000
 read 4000/5205 stocks=4000
 read 5000/5205 stocks=5000
+panel stocks=5205 rows=10,819,439
+micro flag done
