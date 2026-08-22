@@ -1,5 +1,8 @@
 # 研究交付物
 
+## 2026-08-23 R-277 全体系收益提升路径地图（task-0453）
+- 回答「还有什么方法能提高整个模型收益，不局限微盘」：五层（信号/组合/配置/新赛道/执行）假设地图，纯梳理零回测零 SSH HP，全部结论引用报告编号可溯源。**关键判断：选股层连续 6 条负结果（A4D/A9/A4b+R-266/274/275）后，短期内年化大幅上修的高置信候选不存在**；增量集中在防御侧（S1 PCR E2 唯一达线活线索 −2.04pp/胜率 33.3%、S2 excess_decay t=−4.643 提前示警、P1 评分制 v1.2 待批解锁 T4/M1.1 重评、C1 ddc15/20 MDD 压 6.4-8.2pp）+ 新赛道（N1 可转债轮动 R-217 3.90 首选，2-3 人日最小验证）+ paper 口径工程（C2 40.4% 现金/8 只持仓 vs 回测 20 只、E1 #37 月末 vs 月首调仓 bug 级、E3 成本实测对账）。Top5 优先级：①PCR E2（预注册可自动）②v1.2 批准（用户拍板）③ddc 上岗（用户拍板）④excess_decay E1（零回测可自动）⑤可转债 E1（零回测可自动，真金需拍板）→ `05-量化投资/R-277-全体系收益提升路径地图.md`，笔记 `work/task-0453-notes.md`
+
 ## 2026-08-22 R-276 任务状态三端口径一致性审计（task-0445）
 - dashboard/心跳契约/任务中心三端只读审计（今日两起口径事故复盘：spawn_owner='web' 误读 + 0441/0442 卡 running 6.5h）。**冲突 8 条：高2/中3/低3**。最关键发现：**running→pending_review 的写入方未成文**——server.js 对 .task-completions.jsonl 零引用、heartbeat.sh sync_completions 已空操作、spawn-task.md 模板无 PUT pending_review 步骤，现行协议全靠主 agent 任务书 ad-hoc 指令，断线即悬挂只能等 90min 僵尸兜底；其他：PUT 无状态白名单且 pending_review/退回无事件（task-0442 现状即证据）、spawn_owner 语义已死（有 session_key 任务中 130/148=88% 错标 'web'，session-key 端点不翻转 owner）、僵尸退回不清 dispatched_at、updated_at 可被无关编辑洗白、HEARTBEAT ?limit=100 被服务端忽略、前端筛选缺 paused/cancelled。修复最小改动：模板补一行 PUT 步骤 + session-key 端点补 spawn_owner='main' → `16-安全研究/R-276-任务状态三端口径一致性审计.md`，过程证据 `work/task-0445-notes.md`
 
