@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/root/.openclaw/workspace/shared/results/work/r275/r275_ic.py", line 179, in <module>
+    "accrual_obs": int(len(acc)), "first_usable_year": int(acc["usable"].dt.min().year),
+                                                           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DatetimeProperties' object has no attribute 'min'

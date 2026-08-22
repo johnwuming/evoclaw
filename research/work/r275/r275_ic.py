@@ -37,7 +37,7 @@ xj = load("xjll", ["ocf"])
 log(f"[A] yjbb={len(yj)} zcfz={len(zc)} xjll={len(xj)} (A股口径) t={time.time()-t0:.0f}s")
 
 # ---- Phase B: A股真宇宙三要素齐全率 (修正44.5%数据债结论) ----
-per = yj[["code", "statDate"]].merge(zc[["code", "statDate", "total_asset"]], on=["code", "statDate"], how="left")
+per = yj[["code", "statDate", "net_profit"]].merge(zc[["code", "statDate", "total_asset"]], on=["code", "statDate"], how="left")
 per = per.merge(xj[["code", "statDate", "ocf"]], on=["code", "statDate"], how="left")
 per["ok3"] = per["net_profit"].notna() & per["total_asset"].notna() & per["ocf"].notna()
 per["year"] = per["statDate"].str[:4]
@@ -57,13 +57,13 @@ q = q.merge(zc[["code", "statDate", "total_asset"]], on=["code", "statDate"], ho
 q = q.dropna(subset=["net_profit", "ocf", "total_asset"])
 q["dt"] = pd.to_datetime(q["statDate"], format="%Y%m%d")
 q = q.sort_values(["code", "dt"]).reset_index(drop=True)
-# TTM: 4 个连续季度 (间隔 363~367 天)
+# TTM: 4 个连续季度 (t-3→t 跨度 273~275 天, 宽容至 270~278)
 grp = q.groupby("code", sort=False)
 q["np4"] = grp["net_profit"].rolling(4).sum().reset_index(0, drop=True)
 q["ocf4"] = grp["ocf"].rolling(4).sum().reset_index(0, drop=True)
 q["ta0"] = grp["total_asset"].shift(0)
 q["d0"] = grp["dt"].shift(3)
-q["span_ok"] = (q["dt"] - q["d0"]).dt.days.between(363, 367)
+q["span_ok"] = (q["dt"] - q["d0"]).dt.days.between(270, 278)
 q["nrows"] = grp.cumcount() + 1
 acc = q[(q["span_ok"]) & (q["nrows"] >= 5) & (q["ta0"] > 0)].copy()
 acc["accrual"] = (acc["np4"] - acc["ocf4"]) / acc["ta0"]
@@ -137,7 +137,8 @@ for k, m_end in enumerate(me_dates):
     common = [c for c in common if lst.get(c, 0) >= 120]
     if len(common) < 200: continue
     f = az[common]; rr = r1[common]
-    ic = pd.Series(f).corr(pd.Series(rr), method="spearman")
+    # spearman = pearson on ranks (scipy 不可用, 用 pandas rank 等价实现)
+    ic = pd.Series(f).rank().corr(pd.Series(rr).rank())
     # 分组 (quintile of -accrual = 质量)
     quints = pd.qcut(-f, 5, labels=False, duplicates="drop")
     gret = pd.Series(rr.values).groupby(quints.values).mean()
@@ -146,10 +147,10 @@ for k, m_end in enumerate(me_dates):
     for pcol, pq in proxies.items():
         p = pq[pq["usable"] <= m_end]
         p = p.sort_values("usable").groupby("code").tail(1)
-        p = p[(m_end - p["dt"]).dt.days <= 400].set_index(pcol)[pcol]
+        p = p[(m_end - p["dt"]).dt.days <= 400].set_index("code")[pcol]
         pc = p.index.intersection(f.index)
         if len(pc) >= 200:
-            crow[pcol] = round(pd.Series(f[pc]).corr(pd.Series(p[pc]), method="spearman"), 4)
+            crow[pcol] = round(pd.Series(f[pc]).rank().corr(pd.Series(p[pc]).rank()), 4)
     ic_rows.append({"ym": str(m_end)[:7], "ic_accrual": round(ic, 4), "n": len(common),
                     **{f"q{i+1}": round(gret.get(i, np.nan), 5) for i in range(5)}})
     corr_rows.append(crow)
