@@ -1,30 +1,30 @@
 {
- "n_months": 241,
+ "n_months": 48,
  "period": [
-  "2006-07",
+  "2007-04",
   "2026-07"
  ],
- "ic_mean": -0.0087,
- "ic_std": 0.0776,
- "icir": -0.112,
- "t_stat": -1.738,
- "ic_pos_rate": 0.4564,
- "quality_ic_mean": 0.0087,
- "quality_icir": 0.112,
- "avg_n": 2630,
- "q_monotonic": false,
+ "ic_mean": 0.0105,
+ "ic_std": 0.0757,
+ "icir": 0.138,
+ "t_stat": 0.956,
+ "ic_pos_rate": 0.5208,
+ "quality_ic_mean": -0.0105,
+ "quality_icir": -0.138,
+ "avg_n": 2410,
+ "q_monotonic": true,
  "q_means": [
-  0.01598,
-  0.01514,
-  0.01607,
-  0.01697,
-  0.01686
+  0.03008,
+  0.02982,
+  0.02836,
+  0.02638,
+  0.02605
  ],
  "corr_proxies_avg": {
-  "roe": 0.0876,
-  "gp_margin": 0.1016,
-  "revenue_yoy": 0.0827,
-  "net_profit_yoy": 0.0446
+  "roe": 0.0788,
+  "gp_margin": 0.1024,
+  "revenue_yoy": 0.0879,
+  "net_profit_yoy": 0.0386
  },
  "breadth_a_all": 0.966,
  "breadth_a_recent3y": 0.9939,
