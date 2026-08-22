@@ -38,3 +38,10 @@
 - sha256：见下（取证行）
 - 此后才开始：冻结（r278_freeze.py）→ G0 对拍 → T1/T2/T3 网格 → 判门
 7d7f3b42d1a9ee339f9c67ce124d3bbf8fef646ec2b780b230480c8a32a43593  R-278-PCR情绪E2预注册.md
+
+## 执行进度（00:29-00:40）
+- 冻结完成：work/r278/pcroi_states.csv md5=19c57c12aeea6227d784a6f7c62cd8d7；双锚过（n=27、next-mkt −1.9826% vs E1 −1.98%）
+- r278_run.py 已启动（nohup，HP logs/r278_run.log）：G0×2 → T1(λ0.7)/T2(λ0.8)/T3(veto20%)，FULL_RANGE 2006-01-01→2026-08-14，指标截 08-13
+- 择时 mean=0.516（q3z 在役口径）
+- 台账：各 trial 跑完即登记 IT（bt_r278_*_20260823）；G0 不入台账
+- r278_eval.py 已 scp 待跑（G0-G3 判门+胜者五门评分 v1.1 部署函数只读调用）
