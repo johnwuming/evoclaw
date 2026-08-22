@@ -24,3 +24,16 @@
 
 - [ ] py_compile
 - [ ] dry-run（HP /tmp/ 独立脚本，单期 20251231）：过滤前 yjbb 行数 / 过滤后行数 / A 股前缀零丢失断言
+- [23:5x] 补丁落地：
+  - 备份 scripts/factor_expansion_v3ak.py.bak-task0447-20260822-154431
+  - diff（183a184,186，load_ak_wide 循环内 zfill 后）：
+    ```
+    +        # [task-0447/R-275] merge 前按 A 股前缀过滤(00/30/60/68系), 剔除 yjbb 引入的新三板(83/87/43/92)/
+    +        # 老三板(40/42)/B股(200/900)/北交所(8/4/9开头) 等非主板代码, 修复宇宙污染(44.57%缺失率假象, R-275 A股真宇宙口径)
+    +        df = df[df["code"].str[:2].isin(("00", "30", "60", "68"))].copy()
+    ```
+  - py_compile OK；四表统一过滤（xjll/zcfz/lrb 本就纯 A 股，过滤为 no-op，future-proof）
+- 原表过滤后三要素覆盖（HP results/work/task0447/breadth.py 实测，口径=yjbb 过滤后行 left join xjll/zcfz）：
+  - universe codes：yjbb 5,226 / zcfz 5,244 / xjll 5,244 / lrb 5,244（对照污染口径 11,765→5,226）
+  - 三要素(net_profit∧ocf∧total_asset) 按年齐全率：2005 96.7% ... 2009 最低 91.1% ... 2023 99.2% / 2024 99.2% / 2025 99.6% / 2026 100%
+  - **全史 pooled 96.59%（R-275 基准 96.6% ✓）；2023 起 99.39%（基准 99.4% ✓）；2024 起 99.46%**
