@@ -1,0 +1,9 @@
+{
+ "n_overlap_months": 24,
+ "red_months": 10,
+ "corr_red_vs_posratio": 0.264,
+ "red_and_lowpos": 1,
+ "red_and_highpos": 9,
+ "mean_next_excess_red_lowpos": NaN,
+ "mean_next_excess_red_highpos": 1702683.0204
+}
