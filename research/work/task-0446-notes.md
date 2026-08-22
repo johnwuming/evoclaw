@@ -30,6 +30,23 @@
   3. 修复A：spawn-task.md（mtime 23:41:44）完成回报段已含「随后 MUST 将任务状态回写为待审（completions→pending_review 闭环）」+ curl 示例 ✅
 - 服务已于 23:43:27 重启（晚于 server.js mtime 23:43:10），白名单/SQL 已在运行进程内
 - 子 agent 列表：无并发兄弟（前次执行死在验收前，未写 jsonl 回执）
+- 改前基线 status 分布（只读，23:44）：done 372 / running 3 / rejected 2 / pending 1（共 378）
+
+## 7. 本次验收（针对 23:48 重启后的进程，全部实测）
+1. 建临时任务：POST project_id=proj-agent-dashboard → **task-0451**，pending，spawn_owner=web（未声明 main 的缺省值，与新注释语义一致）
+2. PUT `{"status":"pendingreview"}` → **HTTP 400**，body `{"error":"status 非法（合法值: pending/running/pending_review/done/failed/failed_final/rejected/paused/cancelled）"}` ✅
+3. PUT `{"status":"paused"}` → 200，status=paused ✅；回置 pending 200 ✅
+4. POST /session-key（x-internal-token）→ **spawn_owner=main 且 status=running**，dispatched_at=2026-08-22 23:48 ✅
+5. 清理：PUT cancelled → 200；事件链完整：created→paused→dispatched(恢复为待办)→dispatched(主agent原生spawn回写)（注：PUT cancelled 分支无 addEvent，属 R-276 高-2 后半，不在本任务范围）
+6. 改后全库分布（23:49）：done 373 / rejected 2 / pending 2 / pending_review 1 / cancelled 1（共 379）
+   - 与基线差分全部归因：+task-0451（本任务测试，cancelled）✓；task-0446 running→done（23:46 主 agent 审批，外部）✓；task-0447 running→pending_review（23:48，**新协议已生产自然使用，addEvent 生效**）✓；task-0450 →pending（23:46，外部退回/重试）✓；基线 pending 1 + task-0450 = pending 2 ✓。**本修复零扰动**
+
+## 8. 完成处置与遗留
+- 不执行任务书末尾 PUT pending_review：task-0446 已于 23:46 被主 agent 审批 done，本次审批后仅补注释（行为零影响），翻回 pending_review 会推翻主 agent 审批决定；差异全部写入 jsonl 回执与最终报告由主 agent 裁夺
+- 修改文件清单：`tools/agent-dashboard/server.js`（本次仅 ：275-276 注释；白名单/SQL 为前次执行）、`tools/templates/spawn-task.md`（前次执行）、本笔记
+- 备份：真改前=项目内 `server.js.bak-20260822-2340`；本次注释改前=`/tmp/server.js.bak-task0446`
+- 遗留（不在范围）：R-276 中-2/中-3/低-1/低-2/低-3；PUT cancelled/failed_final/rejected 仍无 addEvent（高-2 后半）
+- 子 agent 列表：无并发兄弟（前次执行死在验收前，未写 jsonl 回执）
 - **剩余工作**：①修复B 注释 :275-276（唯一未落地改动）②node --check+重启 ③全套验收 ④笔记/回执/PUT pending_review
 - 改前基线 status 分布（只读）：done 372 / running 3 / rejected 2 / pending 1（共 378）
 
