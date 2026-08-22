@@ -1,7 +1,7 @@
 #!/bin/bash
 # rdagent-fix-conda.sh - RD-Agent Conda 模式修复脚本
 # 在 HP 电脑上执行：bash rdagent-fix-conda.sh
-# 用法：sshpass -p '123456' ssh noname@10.12.192.174 'bash -s' < rdagent-fix-conda.sh
+# 用法：sshpass -p "$QUANT_SSH_PASSWORD" ssh noname@10.12.192.174 'bash -s' < rdagent-fix-conda.sh
 
 set -e
 
