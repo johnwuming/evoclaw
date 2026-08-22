@@ -48,3 +48,47 @@
   - universe codes：yjbb 5,226 / zcfz 5,244 / xjll 5,244 / lrb 5,244（对照污染口径 11,765→5,226）
   - 三要素(net_profit∧ocf∧total_asset) 按年齐全率：2005 96.7% ... 2009 最低 91.1% ... 2023 99.2% / 2024 99.2% / 2025 99.6% / 2026 100%
   - **全史 pooled 96.59%（R-275 基准 96.6% ✓）；2023 起 99.39%（基准 99.4% ✓）；2024 起 99.46%**
+
+## 重建结果（HP results/work/task0447/rebuild.log，38s 完成）
+
+- driver：results/work/task0447/rebuild_panel.py（import 模块 + monkeypatch FIN_PANEL_CACHE → 新文件，不改产物路径；nohup 后台跑）
+- **新产物：data/derived/fin_deep_monthly_panel_ak.ashare.parquet（58.5MB, 1,337,220 × 24, codes 5,244, ym 2005-06→2026-08）**
+- 旧面板 data/derived/fin_deep_monthly_panel_ak.parquet 零改动（73,980,207B, Aug 16 02:40，在役消费方不受影响）
+
+## 前后对照表（口径一致：同一构建代码，唯一差异=宇宙过滤）
+
+| 指标 | BEFORE（旧面板/原表） | AFTER（新面板/过滤后原表） | 基准 |
+|---|---|---|---|
+| 面板宇宙 codes | 11,783 | **5,244**（yjbb 原表过滤后 5,226） | ~5,100-5,200 ✓ |
+| 面板行数 | 3,004,665 | 1,337,220（剔除 55.5% 非A股行） | — |
+| accrual_quality 近12月(2025-09~2026-08) nonnull | 44.38%（缺失 55.62%） | **99.71%（缺失 0.29%）** | 从 44.57% 大幅下降 ✓ |
+| cf_or_ratio / ocf_stability 近12月 nonnull | 44.37% / 44.36% | 99.69% / 99.67% | ✓ |
+| accrual_quality 全史 nonnull | 27.73% | 62.31% | — |
+| 三要素(NP∧ocf∧TA) 全史 pooled（原表口径） | — | **96.59%** | R-275: 96.6% ✓ |
+| 三要素 近3年(2023起) pooled | — | **99.39%**（2024起 99.46%） | R-275: 99.4% ✓ |
+| 三要素缺失率 | （污染口径缺失 44.57%） | 全史 3.4% / 近3年 0.6% | <5% ✓ |
+
+- 面板全史 62.31% 的剩余缺失为 PIT 可见性结构（早年 EM pubDate 回填 → usable_from 晚 1-2 年 + TTM/滚动列热身期），分年 nonnull：2005 0.1% → 2015 63.0% → 2023 97.9% → 2026 99.9%，与 R-275 PIT 诊断一致，非数据债。
+- 原表分年三要素齐全率（2009 最低 91.1%，2023-2025 99.2-99.6%）逐项对上 R-275 breadth_a_share.csv。
+
+## 复算命令（HP）
+```bash
+grep -n "task-0447" ~/quant-evolve/scripts/factor_expansion_v3ak.py   # 插入位置 L184-186（load_ak_wide 内 zfill 后）
+/home/noname/miniconda3/envs/quant/bin/python -c "
+import pandas as pd
+p=pd.read_parquet('/home/noname/quant-evolve/data/derived/fin_deep_monthly_panel_ak.ashare.parquet')
+rec=p[p.ym>='2025-09']
+print(p.shape,'codes',p.code.nunique(),'all',round(p.accrual_quality.notna().mean(),4),'rec12m',round(rec.accrual_quality.notna().mean(),4))"
+# 输出: (1337220, 24) codes 5244 all 0.6231 rec12m 0.9971
+/home/noname/miniconda3/envs/quant/bin/python ~/quant-evolve/results/work/task0447/breadth.py | tail -4
+# 输出: OVERALL all-history pooled = 0.9659 / recent ym>=2023 pooled = 0.9939 (n=67750) / recent ym>=2024 pooled = 0.9946
+```
+
+## 结论
+- R-275 定性的宇宙污染债已在生产脚本修复（一处过滤，3 行，merge 前生效于全部四表）；A 股真宇宙三要素缺失率 0.6-3.4% <5%，与 R-275 基准逐位一致。
+- 新面板落 .ashare.parquet 供对照；在役 canonical 面板未动（切换属后续决策）。备份：scripts/factor_expansion_v3ak.py.bak-task0447-20260822-154431。
+- 未触碰 evolution_pipeline.py / registry / paper_engine / crontab；未杀任何已跑进程。
+
+## 产物清单
+- HP: scripts/factor_expansion_v3ak.py（已修补+编译验证）；scripts/factor_expansion_v3ak.py.bak-task0447-20260822-154431；data/derived/fin_deep_monthly_panel_ak.ashare.parquet；results/work/task0447/{breadth.py,rebuild_panel.py,rebuild.log}
+- VPS: shared/results/work/task-0447-notes.md（本文件）
