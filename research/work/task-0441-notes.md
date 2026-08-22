@@ -36,3 +36,9 @@ R-269（05-量化投资/R-269，约8KB）：
   - 自洽校验：复现 R-251 sue_std 全样本 ICIR 0.115 与 0-2月新鲜窗 0.261
   - C2 净增量：G=−PEN 对四因子 zscore 截面 OLS 残差化 → 残差 IC 均值>0 为净正；另组合诊断 comp4+w·G 的 ΔIC（w=0.1/0.2，按各因子自身IC有利方向合成，标注为诊断口径非在役复刻）
   - C3：Q5−Q1 = PEN=1组 − PEN=0组 月均价差（pp），t 检验
+
+## §3 运行纪要（16:20）
+- 第一跑：monthly_asof("net_profit_ttm") 占位行 KeyError → 删除
+- 第二跑：all_stocks_merged.code 为 categorical，sort_values 报 categories 不唯一 → astype(str) 修复
+- 第三跑（16:14 起）正常推进：[1] events=235,170/5,174 codes；[2] 池 5,020 只，月均 2,845（与 R-251 一致）；[3] PEN 月均覆盖 674 只（负惊喜新鲜票规模充足）
+- BUG 修复两次，均未影响既有进程；脚本产物只写 results/r273/ 新目录
