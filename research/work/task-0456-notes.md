@@ -14,8 +14,18 @@
 - crowding-indicators.json（9149B, generated 2026-08-19）：microcap_eqw_index 仅 90 日（2026-04-10→08-19），峰 793.09(05-11)→谷 538.36(07-22) = −32.12%（R-273 §三.1）。
 - 微盘等权指数全历史需重算（脚本内部有 eqw 全序列，仅存 90 日）。
 
+## A4. 重算结果（compute_e1.py → excess_decay_daily.csv）
+- 面板：5205 只、10,819,439 行、2818 交易日 2015-01-05→2026-08-07（**VPS parquet 止于 08-07；监控 JSON 08-19 为 HP 侧数据，t=−4.643 的最新点不在 VPS 重算范围，缺口如实记录**）。
+- 口径复刻：micro=每日市值后20%（lexsort 截断）、等权日收益（nan→0 计入分母）、excess=micro−hs300、log 累计、60d OLS slope/tstat、red=slope<0且t<−2（同 collect_crowding.py 行160-207/424-433）。
+- 初步：red 日 989/2818（35.1%）——触发频繁，需 episode 化统计。
+- 验证：eqw 序列与 task-0413 microcap_idx_90d.csv 对照（待做，择机抽 3 点）。
+
+## A5. q3z 状态可用性
+- timing_layer_prod.json：仅 monthly_series_tail 24 个月（2024-09→2026-08，pos_ratio 0.503-0.818，当前 0.522）；全套 248 个月需 index_valuation.parquet，**VPS 无 data/macro/（缺口）**。
+- 已存 q3z_pos_ratio_tail24.csv。正交性分析以 2024-10→2026-07（tail 内有效月）重叠段 + in-sample 记录（R-222：q3z off 纯趋势 MDD −38~−52%）为准，标注缺口。
+
 ## A3. 待办
-- [ ] 重算 2019→2026 日频 slope/tstat 序列 → 触发普查
-- [ ] 触发后 1/2/3 月微盘 vs hs300 超额收益、胜率
-- [ ] q3z 正交性（先找 q3z 状态序列是否在 VPS）
+- [x] 重算 2019→2026 日频 slope/tstat 序列（实际 2015 起，2019+ 为主窗口）
+- [ ] 触发普查 + 1/2/3 月前瞻超额胜率
+- [ ] q3z 重合度（tail 24 个月）
 - [ ] R-280 报告 + README 更新
