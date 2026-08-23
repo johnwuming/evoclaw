@@ -76,3 +76,6 @@
 - [x] playwright 390x844：影子卡渲染曲线（canvas 像素 7752）、bodyScrollW=390、console 无 error
 - [x] fake 引擎自动出第二张卡（chartCount=2）
 - [x] A 在役链路零回归（active/paper 端点未动）
+
+## 14:55 完成回报
+- 全部验收项通过；fake 验证完成并清理；engines.json 已还原 ['A','A2']。
