@@ -83,3 +83,13 @@
 - 终止判据四条（c1 连续N月低于门槛/c2 corr 超上限/c3 断供≥K/c4 用户手动），数值全占位。
 - 观察判据（R-273）：T4 低拥挤时代行为≡在役（nav 比值极差 1.3e-04）；p<40 时 A2≈A 属预期不算跟踪失败；clean_evals 剔无区分月或按高位月延长影子期；月度 eval 须实测两腿换手叠加与拉回成本。
 - 回滚：删 engines.json 条目+两脚本+results/engines/a2/ 即完全回退；A 引擎零依赖（缺失降级硬编码 A）。
+
+## 3. 看板现状实查（grep server.js 只读，2026-08-23 17:2x）
+- server.js 现 778,323 字节（R-256 时 745,742；期间新增 task-0465 等）。文件仍未被 git 跟踪（R-259 S0.0 未执行——看板代码仍无版本控制基线）。
+- task-0465 跨引擎影子消费端已落地（R-259 §4.2+§5.3 只读）：
+  - GET /api/quant/engines（L3680）：读 QUANT_REPORTS_DIR/engines.json，未同步/解析失败返回 {ok,available:false,engines:[],note} 空态降级。
+  - GET /api/quant/engines/:id/shadow-nav（L3742）：按引擎 shadow.nav_path 映射 VPS 侧，缺失回退平铺 shadow_nav.csv（source 标注），空态降级。
+  - GET /api/quant/engines/shadow-nav（L3786）：flat 兼容别名。
+  - 前端 paper 页 L12502-12541：quantSig 含 engines+shadowNav；renderCrossEngineShadowCard L12913（task-0465 跨引擎影子卡）。
+- a12 版本内影子 shadow_watch 在 lifecycle 端点（L2496-2511 sw 抽取 + L2634-2657 清单）——与跨引擎影子正交并存（R-259 §5.1 已设计）。
+- 结论：R-259 设想的 /api/quant/engines 两个端点已实现且数据驱动（沿 engines.json 遍历，不硬编码引擎 ID）——这是 S2 影子通道泛化「看板侧」的落地部分。
