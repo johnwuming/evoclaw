@@ -28,3 +28,7 @@
 - 任务设计：V2 冻结形态基础上新增「正股行业暴露中性化」腿；n_trials≤4；独立性门 corr(A,组合)<0.5（77月重叠 a13 口径 + 102月 i3 口径披露）
 - akshare 可用行业映射函数盘点：sw_index_third_cons / index_component_sw / stock_industry_category_cninfo / stock_industry_clf_hist_sw / stock_board_industry_cons_em(EM被封) / stock_board_industry_info_ths
 - 下一探针：stock_industry_clf_hist_sw（申万历史分类单调用）与 stock_industry_category_cninfo（巨潮）与 stock_zh_a_spot_em 重试
+- sw_index_third_cons / index_component_sw / sw_index_third_info 存在（申万源）
+- stock_industry_clf_hist_sw SSL 失败（swsresearch 不可达）
+- 候选映射路线：A) 申万三/一级成分（sw_index_third_info 全量 + sw_index_third_cons 每指数成分）B) EM spot 单调用（被封，可重试）C) cninfo
+- 正股行业用途：仅中性化腿（去相关），TAXONOMY 需在预注册写明；优先申万（R-255/262 遗产同源，便于对照）
