@@ -69,3 +69,14 @@ efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 
 2. 读 v5VersionSelHtml / quantConceptBadge / esc / fmtID 等前端辅助（复用）
 3. 设计并实现 renderV5Btlc 升级：引擎切换器 + 因子/模型区块 + 层级标注 + 5 生命周期区块（按引擎过滤）
 4. 验证
+
+## 2026-08-23 继续（重试后第四轮）
+- 当前状态：server.js 无改动（git diff 空），基线 efe8142 已建。
+- 已确认：decisions 有 version 字段（v0_seed/v1a_score/a13_rsraw_e1f10dz/a14_crowdf2 等），per-engine 过滤依据可用 version 字段；ledger 无 strategy 匹配 a14；shadow_watch 只有 a12_s2_reb（A 引擎管道）。
+- a14_crowdf2.json 顶层有 overlay 字段（A2 的 registry 条目含 overlay），/api/quant/engines 端点不透传 overlay → 需在引擎端点补充 overlay，或前端直接从 /api/quant/registry 的对应版本对象读 overlay。
+- 实施计划：
+  1. server.js 后端 /api/quant/engines 补 overlay 透传（enghgine.overlay）。
+  2. 前端 renderV5Btlc 顶部加引擎切换器（从 /api/quant/engines 遍历，默认 A）。
+  3. 每引擎因子/模型区块（registry 条目 selection.params.ext_specs + selection + timing + A2 overlay + 层级标注）。
+  4. 5 生命周期区块按引擎过滤（管线/影子/决策/台账/散点）——决策按 version 匹配引擎 registry entry 前缀。
+  5. 兼容降级 + bodyScrollW=390 + console 零 error。
