@@ -105,3 +105,8 @@ efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 
   - 切 A2：overlay / parent=A / w=0.5 / 叠加臂 / 层1 / 层2风控 / a14 / 因子模型 / log_mv·低值优先 全 True
   - bodyScrollW=390（无横滚）✓，console 零 error ✓
 - 说明：此前两轮 playwright 失败根因=未先切「量化」页+点击了错误的「回测」文本（dashboard 页面默认不在 quant 视图）；改为 showPage('quant') → switchQuantTab('v5btlc') 后全绿。
+
+## 2026-08-24 01:2x 提交与收尾
+- git 状态澄清：task-0473 改动（+220/-8）已含于 HEAD bc6307b（并行 task-0476 提交时一并带入），server.js 工作区 clean；`git diff efe8142(baseline pre-0473)..HEAD server.js` 可审，含 v5EngineSwitcherHtml/v5EngineRegionHtml 等 18 处命中。
+- service active；/api/quant/engines 正常返回 A + A2(overlay.w=0.5)。
+- 验收全绿：node --check ✓ / engines 端点 ✓ / playwright（切换器、A2 overlay+parent+层级标注、bodyScrollW=390、console 零 error）✓ / A 在役链路 lifecycle+registry 端点零回归 ✓。
