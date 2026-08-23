@@ -40,3 +40,9 @@
 - 设计：服务端新增 GET /api/quant/engines/:id/shadow-nav（读 engines.json 找引擎 → shadow.nav_path 映射 VPS → 兜底平铺 shadow_nav.csv，source 标注）；旧 /api/quant/engines/shadow-nav 保留兼容别名；/api/quant/engines 输出补 parent/type 字段。
 - 前端：loadPaperQuant 改按 shadow 引擎列表逐请求；renderCrossEngineShadowCard 遍历 cross_engine 引擎渲染多卡。
 
+
+## 13:55 进度（resume，多次超时后）
+- 服务端改动已完成：/api/quant/engines 输出补 parent/type；新增 parseShadowNavCsv + GET /api/quant/engines/:id/shadow-nav（读 engines.json 找引擎 → nav_path 映射 VPS → 兜底平铺 shadow_nav.csv，source 标注）；旧 /api/quant/engines/shadow-nav 保留兼容别名（source:'flat' + note）。
+- 前端 loadPaperQuant 已完成：改按 shadow 引擎列表逐个请求 /api/quant/engines/:id/shadow-nav，shadowNav 变 map（engine_id → 响应）。
+- 剩余：renderCrossEngineShadowCard 泛化（遍历 cross_engine 引擎，逐卡渲染 parent NAV vs 该引擎影子 NAV）+ 验证。
+- 当前 git diff：server.js +76/-8；node --check 通过。
