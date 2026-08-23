@@ -16,3 +16,5 @@
 - 回测窗口过滤 universe：675 唯一 bond（2018-01..2026-06），月均约 37 券
 - 需 akshare 采集：bond→正股代码→申万/东财行业
 - R-281 面板无正股代码列（只 code/date/close/prem/convval/dbval/ym/债券简称/list_dt/发行规模/信用评级/issue_sz/mdate/mom...）
+- bond_zh_cov_info_ths() 无参返回当前全部转债 957 行，含 正股代码/正股简称 → 可作 bond→正股映射（但仅当前在册）
+- 回测窗口 675 唯一券（2018-01..2026-06 过滤后）；需评估当前快照覆盖率，缺口用 bond_zh_cov_info(symbol) 单券补
