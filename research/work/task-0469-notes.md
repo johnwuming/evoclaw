@@ -28,3 +28,14 @@
 
 ## 基线提交
 - cd tools/agent-dashboard && git add server.js && git commit -m "baseline: pre-0469" → 3451812
+
+## 改动实施（17:2x）
+- loadPaperQuant：+activeCurves var（L12504）；Promise.all +api('quant/active/curves'+v5QuantVersionQ())（L12529）；sig 数组 +activeCurves（L12531）；renderPaperQuant 传 activeCurves（L12541）。
+- renderCrossEngineShadowCard：签名 +activeCurves（L12913）；activeEngId/fullByMonth 预聚合（L12917-12926）；parentIsActive 判断（active 引擎或 parentId===activeEngId，零硬编码）→ aByMonth 用 fullByMonth，否则 navPoints 兜底（L12996-13005）。
+- renderPaperQuant：destructure activeCurves（L13049）；调用传 activeCurves（L13134）。
+- node --check server.js：SYNTAX OK。
+
+## 待办
+- 重启 agent-dashboard 服务。
+- playwright 390x844 模拟实盘页抽查：A 在役线可见、无横滚、console 零 error。
+- 完成后提交 git + 写完成回报。
