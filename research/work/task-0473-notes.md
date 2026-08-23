@@ -48,3 +48,24 @@ efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 
 ## 2026-08-23 继续（重试后第二轮）
 - loadV5BtlcQuant：Promise.all 拉 active/curves/version-options → renderV5Btlc。renderV5Btlc 输出 版本选择器/标题/指标卡/nav曲线/排行表。
 - quantLifecycleRoot 在哪里被渲染？需要 grep 确认 v5btlc Tab 里生命周期层如何嵌入（可能独立 region，或需在 renderV5Btlc 内追加）。
+
+## 2026-08-23 继续（重试后第三轮）
+【关键发现】当前 UI 的「回测」Tab = quant-page-v5btlc → loadV5BtlcQuant → renderV5Btlc（版本选择器/指标卡/nav/排行表），**不含生命周期层**。quantLifecycleRoot 只在旧版 renderBtlcPage（quant-page-btlc，L7187/L11894）里，而 quant-page-btlc 不在 _V5_TABS 中（_V5_TABS=[data,factor,v5model,v5btlc,paper,v5hist]），实际 UI 不展示生命周期层。
+- 结论：任务要求「在现有回测 Tab 上升级为引擎级生命周期视图」= 把生命周期层（5 区块）+ 引擎切换器 + 因子/模型区块整合进 renderV5Btlc（当前回测 Tab）。
+- playwright 验证：v5btlc 页 bodyScrollW=390（无横滚）、console 零 error；页面文本无「生命周期/决策时间线/实验台账/影子观察/迭代轨迹/培育管线」→ 确认当前不含生命周期层。
+
+## registry 数据结构（a13_rsraw_e1f10dz.json / a14_crowdf2.json）
+- 顶层：version_id/status/created_at/main_alias/selection/timing/data_snapshot/code_ref/backtest_refs/gate/provenance/activated_at（A2 另有 overlay）
+- selection: {strategy, params, factors}
+- selection.params: {sort, ext_mode, ext_specs, ext_filter_all, raw_universe, e1_guard, e1_lambda, e1_deadzone, xsub_days, n_hold, cost_model, limit_board, min_amt, div_min, roe_min, roa_min, price_cap, capital_base, (A2 另有 crowding_mod)}
+- selection.params.ext_specs: [["log_mv",1.0,-1],["amt20",1.0,-1],["pb_inv",0.7,1.0],["roe",0.3,1.0]] → [因子, 权重, 方向]
+- selection.params.sort="ext"; n_hold=20
+- timing: {enabled:true, type:"q3z_x_ew_trend_overlay", params:{layer,q_key,trend,combine}, description, ...}
+- /api/quant/registry 返回 versions = readRegistryVersions() 完整 JSON 对象（含 selection/timing/overlay）
+- engines.json layer1.registry.entry 与 registry 文件名一致（a13_rsraw_e1f10dz / a14_crowdf2）
+
+## 下一步
+1. 读 decision-log.jsonl / experiment-ledger.jsonl 结构（per-engine 过滤依据）
+2. 读 v5VersionSelHtml / quantConceptBadge / esc / fmtID 等前端辅助（复用）
+3. 设计并实现 renderV5Btlc 升级：引擎切换器 + 因子/模型区块 + 层级标注 + 5 生命周期区块（按引擎过滤）
+4. 验证
