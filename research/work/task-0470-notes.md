@@ -37,3 +37,32 @@
 - 迭代：头部新鲜度一致性（N≥2 按引擎分列）、迭代历史（per-engine 时间线）、registry 双目录（引擎→registry 线显式映射）、影子观察后端（跨引擎+前台复活）、H1/H2 复活。
 - 新增（全等触发）：N1 引擎B全链路实例化（触发：B过E2+批准上影子）；N2 中央风控仪表（触发：S4 第二引擎真金上线）；N3 组合净值聚合页（触发：S4）；N4 引擎清单元数据 engines 概念（触发：S2 影子通道实例化时一并落地，最大结构缺口）。
 - S0-S4 路线图：S0 路由清障+隐藏页处置（无前置）；S1 B 过 E2（纯文档）；S2 影子通道通用接入首实例（N4+B 影子，B过E2+批准）；S3 影子期 3-6 月；S4 中央风控激活（N2+N3，影子期满+真金批准）。
+
+## 2.2 R-259 阅读笔记（2026-08-21，task-0420，施工图）
+### engines.json schema（缺口1，R-256 N4 补全）
+- 选型 b：真源 HP ~/quant-evolve/model/registry/engines.json（与 registry 同目录）→ pull-hp-metrics 扩展同步到 VPS → server.js 启动读取，缺失/解析失败降级硬编码单引擎 A（看板永不因 engines.json 启动失败）。
+- schema_version=1；引擎字段：engine_id/name/status(active|shadow|off)/layer1.registry(hp_dir,entry,version_line)/layer1.nav_source(kind,path_hp,frequency,sync)/layer1.signal_desc/layer1.timing_internal/layer3.tabs/api_prefix/shadow.mode(none|cross_engine)/shadow.since/nav_path/required_clean_evals/audit(created_at,by,changes append-only)。
+- 单引擎→N 迁移：一次性初始化脚本（S2 首步）从实况生成 A 条目，校验 engine_id=A 与 registry active 一致才落盘；看板降级切换文件驱动对 A 零变化。B/C 接入=append+audit，纯增量。
+
+### 影子通道跨引擎泛化（缺口2）
+- 与 a12 版本内影子正交并存：跨引擎影子记 engines.json shadow.mode；版本内影子留 registry gate.shadow_watch（晋升语义）。a12 机制不动。
+- 通用影子接入契约四条件：①E2 预注册判胜门槛过②评分制 v1.1 过③用户显式批准④engines.json 登记+影子 NAV 管道+数据管道连续 2 月度点无断供（先空跑）。
+- 影子数据管道：HP b_shadow_engine.py 月频「真数据假交易」；落 HP results/engines/b/shadow_nav.csv（month,nav,ret,weights_json）；每月 2 日 19:35 更新；看板端点 /api/quant/engines（清单+状态）+/api/quant/engines/B/shadow-nav；前台=H2 内影子清单复活+paper 页并列。
+- 影子期治理：engines_shadow_evaluate.py 每月 3 日 09:35 跑 → shadow.evals[] → clean_evals 计数。终止判据：连续 N 月低于门槛/corr(A,B) 超上限/数据断供≥K 月/用户手动。晋升一律人工确认，不设自动上岗。
+
+### 中央风控三组件参数化（缺口3，初值全 ⏳ 留白）
+- 战略配置器：风险贡献法 ERC（输入各引擎月收益，W 建议36月，σ/corr 窗口；等波动起步迭代收敛；clip+归一；季度重算，**重算结果须用户确认才生效**）。极端规则：N=1→w=1；N=2 且 |corr|>0.85 切换等波动封顶+告警+人工；新引擎历史<12月用影子数据补窗口标「影子混合估计」；off 剔除重算。
+- 再平衡带宽：相对+绝对双规则（|w_actual−w_target|/w_target>band_rel 或 >band_abs）；漂移公式 w_actual_i(t)=w_i(t−1)(1+r_i(t))/Σ...；机械执行：触发→下月调仓窗口一次性拉回，不分批不追表现。
+- 组合回撤门：组合净值峰值回撤>gate_dd → 整体降仓系数 φ 等比缩放全部引擎敞口（层2 唯一仓位动作）；恢复=收复至峰值×(1−gate_dd×recov_ratio)或最长降仓期。
+- 与引擎内风控协调三规则：①先动层级（引擎内先动、组合门兜底；多数引擎已自降则门照常叠加）②总敞口下限 floor_exposure 防过度叠加③恢复独立（引擎内各自恢复、组合门独立计时）。
+
+### 组合 NAV 对账（缺口4）
+- NAV_p(t)=Σ w_i(t)×NAV_i(t)，w 为阶梯函数（相邻再平衡点间固定）；再平衡=每月首个交易日；月内冻结；封闭式无外部申赎；影子期可选「影子参考组合」仅展示不入对账。
+- 对账三校验：①逐月分解一致性 NAV_p(t)/NAV_p(t−1)=Σ w_i×(NAV_i(t)/NAV_i(t−1)) tol 1e-6 ②端点手工重算③权重守恒 Σw=1。命令 portfolio_recon.py。
+
+### S0 执行清单（缺口6）+ 回滚验收（缺口7）
+- S0.0 基线（server.js 未被 git 跟踪实锤，必须先 git add 基线或 .bak）；S0.5 隐藏页拍板（先于删路由）；S0.1 删 D-1（7 桩+L1829 fn）；S0.2 删 D-2（L2015/2032/2056/2085）；S0.3 删 D-3（L2751/2773）；S0.4 endtoend 依赖 S0.5（H2 复活→保留，e2e-curves 是 H2 数据源）；S0.6 全局验证（node --check、restart、4 端点冒烟、路由数 54→41）。
+- 隐藏页两选项：甲复活（推荐，H2 是影子前台唯一既有消费点，乙会与 S2 冲突=重复建设）；乙下线（S2 前台改 paper 页内嵌）。
+- S2 回滚：删 engines.json B 条目即回单引擎，看板读不到自动降级硬编码 A。
+- S4 回滚：三组件独立开关 engines.json layer2.enabled=false；权重回退=audit 上一目标。
+- 与 R-256 冲突 4 条：D-2 行号勘误、S0.0 基线新增、隐藏页明确推荐甲、engines.json 初始化加校验+降级。
