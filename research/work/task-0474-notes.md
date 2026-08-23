@@ -45,3 +45,14 @@
 ## 重试恢复点2
 - 11 券逐券补全：110030→600185珠免 / 110031→600271航天信息 / 110032→600031三一 / 110033→600755厦门国贸 / 110034→600998九州通 / 113008→601727上海电气 / 113009→601238广汽 / 113010→601199江南水务 / 123001→300058蓝色光标 / 127003→000861海印 / 128010→002245蔚蓝锂芯 → work/r474/bond_stock_lookup.json
 - bond→stock 合并后应覆盖全部 675 回测券；stock 集合待合并计数
+## 重试恢复点3
+- bond→stock 合并 968 券/885 正股 → work/r474/bond_stock_map.parquet；回测窗口 675 券全部覆盖（11 券缺口已补）；67 未覆盖均为 2018 前历史券（不在回测窗）
+- 下一步：stock→申万一级行业。路线：sw_index_first_info()（31 个申万一级指数代码）→ index_component_sw(symbol) 逐一级行业拉成分 → 建 stock→行业 映射
+PYEOF
+timeout 120 python3 -c "
+import akshare as ak, inspect
+print('sw_index_first_info sig:', inspect.signature(ak.sw_index_first_info))
+df = ak.sw_index_first_info()
+print('first_info cols:', list(df.columns), 'shape', df.shape)
+print(df.head(35).to_string())
+" 2>&1 | grep -v "it/s" | head -45
