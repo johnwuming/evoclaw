@@ -20,3 +20,10 @@
 - renderCrossEngineShadowCard 双线图 L12905-12940：A 在役 NAV 月度化（navPoints by date.slice(0,7)）vs shadowPoints，写死 label "A 在役 NAV"/"A2 影子 NAV"。调用点 L13035 renderPaperQuant 内。
 - 空态：hasEngines=false → 「影子管道待同步」；无 shadowPoints → 「影子 NAV 待同步」。
 
+## 13:34 关键发现：VPS 平铺 shadow_nav.csv 是日频数据（date,nav 列）
+- /root/.openclaw/workspace-quant/results/shadow_nav.csv = 109543 字节，列头 date,nav（日频），首行 2006-01-04,1.0。
+- 即当前「平铺 shadow_nav.csv」= A 的日频 NAV（或 A2 的日频 NAV 副本），非 R-259 §5.3 的月频 B 影子（month,nav,ret,weights_json）。
+- 现有 /api/quant/engines/shadow-nav 解析器按 /month|nav/i 跳过列头，把 date 当 month 字段用——当前前端影子卡实际画的是一条日频曲线。
+- QUANT_REPORTS_DIR='/root/.openclaw/workspace-quant/results'（server.js L2119）。
+- results/engines/ 目录在 VPS 不存在（未同步）。
+
