@@ -61,3 +61,18 @@
 - 已向 engines.json append FAKE 引擎（shadow.mode=cross_engine, parent=A, nav_path=results/engines/fake/shadow_nav.csv）+ 落临时 shadow_nav.csv（4 行）。
 - GET /api/quant/engines/FAKE/shadow-nav → ok:true, source:"nav_path", pts:4, parent:A → **nav_path 映射分支生效**（非回退平铺）。
 - 下一步：playwright 确认第二张卡出现 → 清理 fake（还原 engines.json + 删临时文件）。
+
+## 14:45 fake 验证完成 + 清理完毕（全部 PASS）
+- playwright（390x844）：append FAKE 后 chartCount=2（ceShadowChart_1=A2, ceShadowChart_2=FAKE），bodyScrollW=390，console 零 error → **数据驱动遍历生效：新引擎=append engines.json + 落 shadow_nav.csv 即自动出卡，零代码**。
+- 清理：engines.json 已还原（engines=['A','A2']），results/engines/fake/ 临时文件已删除。
+- 最终 git diff：server.js +129/-52（仅新增/改端点 + 渲染函数，无无关改动）；node --check 通过；服务 active。
+- 回滚：git checkout -- server.js 即可回到 5fb12c6 基线。
+
+## 验收对照（task-0468 要求）
+- [x] node --check server.js 通过
+- [x] git log --oneline -1 = 5fb12c6 baseline: pre-0468
+- [x] curl /api/quant/engines 返回合法 JSON（含 parent/type）
+- [x] curl /api/quant/engines/A2/shadow-nav → points 4491 + source:"flat"
+- [x] playwright 390x844：影子卡渲染曲线（canvas 像素 7752）、bodyScrollW=390、console 无 error
+- [x] fake 引擎自动出第二张卡（chartCount=2）
+- [x] A 在役链路零回归（active/paper 端点未动）
