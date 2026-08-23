@@ -24,3 +24,5 @@
 - stock_zh_a_spot_em() 首试连接错误 → 重试；备选 stock_individual_info_em(symbol) 单股行业
 - 东财 EM 接口（stock_zh_a_spot_em / stock_individual_info_em）连续 ConnectionError（可能限流/封禁）
 - bond_zh_cov_info_ths（同花顺源）可用；转测行业源：THS 行业板块 / cninfo / 申万
+- THS 行业板块 stock_board_industry_name_ths() 可用（90 个 881xxx）；EM 板块接口被封 → 行业映射优先 THS 源（akshare stock_board_industry_cons_ths）
+- 任务设计：V2 冻结形态基础上新增「正股行业暴露中性化」腿；n_trials≤4；独立性门 corr(A,组合)<0.5（77月重叠 a13 口径 + 102月 i3 口径披露）
