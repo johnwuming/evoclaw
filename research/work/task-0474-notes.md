@@ -13,3 +13,6 @@
 - a13 locked nav 止于 2024-06-28（与 2018-02..2026-07 重叠=77 月）；i3 覆盖全窗（102月）
 - e2v2_backtest.py 逻辑已读：Top-30 sqrt 梯度、规模中性化 OLS、BUFFER=50、成本 0.001 单边、基准 /tmp/r281/csi_cb_index.parquet
 - akshare 1.18.94 可用；panel 1001 唯一 bond code
+- 回测窗口过滤 universe：675 唯一 bond（2018-01..2026-06），月均约 37 券
+- 需 akshare 采集：bond→正股代码→申万/东财行业
+- R-281 面板无正股代码列（只 code/date/close/prem/convval/dbval/ym/债券简称/list_dt/发行规模/信用评级/issue_sz/mdate/mom...）
