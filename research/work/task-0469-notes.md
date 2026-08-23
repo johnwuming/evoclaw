@@ -48,3 +48,16 @@
 - agent-dashboard active；root 页面 HTTP 200。
 - node --check server.js：SYNTAX OK（上一步已验证）。
 - 待跑：playwright 390x844 模拟实盘页。
+
+## 核验点 6（17:4x）：playwright 390x844 抽查结果（通过）
+- canvasCount=1（ceShadowChart_1）；Chart 实例 id=1 两条数据集：
+  - "A 在役 NAV"：222/222 非 null，firstNonNull=1
+  - "A2 影子 NAV"：222/222 非 null，firstNonNull=1
+  - labelsCount=222（2006-01→2024-06 共 222 个唯一月份，与 4491 日频点月度化一致）
+- bodyScrollW=390 / docScrollW=390 / clientW=390 → 无横向滚动。
+- pixelInfo：canvas 295x200，非零像素 18916 → 像素非空，A 线已画出。
+- console errors：[] 零 error。
+- 结论：A 在役 NAV 蓝色线在 2006-2024 段可见、与 A2 影子橙线同图对比正确；零回归。
+
+## git 提交
+- cd tools/agent-dashboard && git add server.js && git commit -m "task-0469: shadow card A active NAV line switches to active/curves full (monthly) with navPoints fallback"
