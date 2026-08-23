@@ -46,3 +46,7 @@
 - 前端 loadPaperQuant 已完成：改按 shadow 引擎列表逐个请求 /api/quant/engines/:id/shadow-nav，shadowNav 变 map（engine_id → 响应）。
 - 剩余：renderCrossEngineShadowCard 泛化（遍历 cross_engine 引擎，逐卡渲染 parent NAV vs 该引擎影子 NAV）+ 验证。
 - 当前 git diff：server.js +76/-8；node --check 通过。
+
+## 14:10 代码改动全部完成
+- renderCrossEngineShadowCard 已泛化：遍历 engines 中所有 shadow.mode=cross_engine 引擎，每引擎一张卡（该引擎影子 NAV vs parent 在役 NAV，parent 读 engines.json parent 字段从 engines 数组找）；无影子引擎 → 「暂无影子引擎」占位。无硬编码 A/A2。
+- 全部代码改动后 git diff：server.js +129/-52；node --check 通过。
