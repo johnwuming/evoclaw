@@ -19,3 +19,12 @@
 - renderCrossEngineShadowCard：L12910，签名 (enginesData, shadowNav, navPoints)；parent 查找 parentEng 在 forEach 内；aByMonth 由 navPoints 构建；调用处 L13112。
 - api() L7293、v5QuantVersionQ L9390（active/curves 已有 L9518 用法：api('quant/active/curves'+v5QuantVersionQ())）。
 - 计划：loadPaperQuant 补拉 active/curves → 传入 renderPaperQuant → 传 renderCrossEngineShadowCard；parent 为 active 引擎时用 curves full 月度化，否则 navPoints 兜底。
+
+## 核验点 3（17:17）：数据实证
+- /tmp/engines.json：2 个引擎；A（status=active, parent=None, shadow.mode=none）、A2（status=shadow, parent=A, shadow.mode=cross_engine）。
+- /tmp/shadow.json：A2 shadow-nav 4491 点，month=2006-01-04→2024-06-28，nav=1→38.97，source=flat。
+- /tmp/curves.json：active/curves strategy.full dates 1003（2006-01-04→2026-08-14），values 1003（1→64.31）。字段名 values（非 nav）。
+- 修复方案：loadPaperQuant 补拉 active/curves；renderCrossEngineShadowCard 新增参数 activeCurves；parent 为 active 引擎时用 full 月度化（month 键=最后观测），否则 navPoints 兜底。
+
+## 基线提交
+- cd tools/agent-dashboard && git add server.js && git commit -m "baseline: pre-0469" → 3451812
