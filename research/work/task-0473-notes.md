@@ -44,3 +44,7 @@ efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 
 - qLifecycle 状态：_qLifecycle = { caliber, data, expandD }；loadQuantLifecycleLayer() 调 api('quant/lifecycle') → renderLifecycleLayer(data) + drawLifecycleScatter(data)。
 - renderLifecycleLayer = 标题 + desc + qLifecyclePipeline + qLifecycleShadow + qLifecycleTimeline + qLifecycleLedgerTable + qLifecycleScatterSection。
 - renderCrossEngineShadowCard（模拟实盘页）遍历 engines 渲染徽标 + 影子卡，是 task-0468 遍历先例。
+
+## 2026-08-23 继续（重试后第二轮）
+- loadV5BtlcQuant：Promise.all 拉 active/curves/version-options → renderV5Btlc。renderV5Btlc 输出 版本选择器/标题/指标卡/nav曲线/排行表。
+- quantLifecycleRoot 在哪里被渲染？需要 grep 确认 v5btlc Tab 里生命周期层如何嵌入（可能独立 region，或需在 renderV5Btlc 内追加）。
