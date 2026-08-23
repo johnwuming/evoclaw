@@ -75,3 +75,11 @@
 - 批准点④启动条件 6 条：①用户批准④ ②engines.json 存在 ③A 链路零回归 ④影子 NAV 双腿管道 ⑤数据管道连续 2 月度点 ⑥影子期判据适配（低拥挤时段两腿区分度恒为零，clean_evals 剔无区分月/延长影子期；月度 eval 必须实测两腿换手叠加与再平衡拉回成本）。
 - engines.json A2 条目草案：engine_id=A2, parent=A, type=sub_engine_overlay, status=shadow, registry_ref=a14_crowdf2, overlay{w:0.5, w_source:冻结配置迁移}, shadow{mode:cross_engine, min3/max6, eval_rule:剔低拥挤零区分月+实测换手叠加与拉回成本}, promotion=真金权重分配用户人工门（批准点⑤）永不自动化。
 - 硬红线：evolution_pipeline.py 零改动（md5 9c50b188…）；registry 仅 a14/a15 新增 overlay 块（73 行纯新增 0 删）；a13 条目 md5 346450f7… 不变；n_trials 97→99。
+
+## 2.4 R-286 阅读笔记（2026-08-23，task-0464，批准点④执行）
+- 四件套纯新增：①engines.json（schema_version=1，A active + A2 shadow cross_engine，R-282 §六草案落地）②影子 NAV 管道 results/engines/a2/shadow_nav.csv（初始=task-0458 overlay_combo_a14_w050_nav.csv 历史基线段 4491 行，2006-01-04→2024-06-28）+ scripts/engines_shadow_nav_append.py（幂等 init+append）③scripts/engines_shadow_evaluate.py（读 A2 影子 NAV+A 在役 NAV→ann/MDD/Calmar/corr(A,A2)/rolling12→append evals[]→clean_evals 计数；termination 数值标注 R-282 冻结+用户确认时点）④待装 cron hp-cron-pending/a2_shadow_evaluate.cron（每月 3 日 09:35，未安装，安装属不可自动清单）。
+- 首月基线快照：ann 0.21920118/mdd −0.33554161/calmar 0.65327569 逐位复现 R-282；corr(A,A2)=0.999851（n=221）；rolling12_ann −0.02721；clean_evals=0（影子期起点正确）。
+- A2 条目要点：parent=A, type=sub_engine_overlay, registry_ref=a14_crowdf2, overlay.w=0.5（冻结配置迁移）, shadow.mode=cross_engine, started_at=2026-08-23, min3/max6, promotion=真金权重分配用户人工门永不自动化。
+- 终止判据四条（c1 连续N月低于门槛/c2 corr 超上限/c3 断供≥K/c4 用户手动），数值全占位。
+- 观察判据（R-273）：T4 低拥挤时代行为≡在役（nav 比值极差 1.3e-04）；p<40 时 A2≈A 属预期不算跟踪失败；clean_evals 剔无区分月或按高位月延长影子期；月度 eval 须实测两腿换手叠加与拉回成本。
+- 回滚：删 engines.json 条目+两脚本+results/engines/a2/ 即完全回退；A 引擎零依赖（缺失降级硬编码 A）。
