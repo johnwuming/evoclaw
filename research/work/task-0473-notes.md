@@ -32,3 +32,5 @@
 
 ## 基线
 - git 基线已建：baseline: pre-0473（server.js 提交前快照，便于回滚）
+=== baseline confirmed ===
+efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 diff）
