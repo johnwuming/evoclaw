@@ -96,3 +96,6 @@ print(df.head(35).to_string())
 ## 恢复点（续）
 - V3 选中券 315 个，/tmp/r286_daily 覆盖 245，缺 70 → 增量补采（akshare bond_zh_hs_cov_daily 限频 0.5s）
 - 需补：G5 容量、IC 监控、死因核验
+## 恢复点续2
+- 70 缺口成交额已补采成功（/tmp/r286_daily 现 376 文件，0 fail）
+- 下一步：G5 容量复算（V3 全持仓口径）+ IC 监控 + 死因核验
