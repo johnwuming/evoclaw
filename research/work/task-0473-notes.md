@@ -80,3 +80,16 @@ efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 
   3. 每引擎因子/模型区块（registry 条目 selection.params.ext_specs + selection + timing + A2 overlay + 层级标注）。
   4. 5 生命周期区块按引擎过滤（管线/影子/决策/台账/散点）——决策按 version 匹配引擎 registry entry 前缀。
   5. 兼容降级 + bodyScrollW=390 + console 零 error。
+
+## 2026-08-24 00:2x 实现落地（本轮）
+- 应用 12 处 edit：node --check 通过（SYNTAX_OK），git diff +220/-8。
+- 改动清单：
+  1. /api/quant/engines 透传 registry_ref + overlay（A2 overlay{w,parent} 前端可用）
+  2. loadV5BtlcQuant Promise.all 增拉 engines/lifecycle/registry；默认引擎=首个 active（零硬编码）
+  3. renderV5Btlc 顶部插入引擎切换器 + #quantV5EngineRegion + v5DrawEngineScatter
+  4. 新增 v5 系列函数：v5EngineEntryPrefix/v5AllPrefixes/v5FilterLcForEngine/v5LayerAnnotation/v5EngineFactorModelBlock/v5EngineSwitcherHtml/v5EngineRegionHtml/v5SetEngine/v5DrawEngineScatter
+  5. _v5State 增 engine/lcFiltered；新增 _v5Engines/_v5Lc/_v5Reg
+  6. _qLifecycle 增 engineLabel/scatterChart（防重复创建 Chart）
+  7. qLifecycleSetCaliber/qLifecycleToggleD 优先重渲染 v5 区
+  8. qLifecyclePipeline/renderLifecycleLayer 标题引擎参数化
+  9. drawLifecycleScatter 销毁旧 Chart 实例
