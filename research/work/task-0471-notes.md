@@ -64,3 +64,10 @@
 - E1 产物落盘：work/r281/panel_daily.parquet（772k行）、month_end_panel.parquet（37k行）、ic_*.csv、ic_summary.json。
 - 风险：纯低价裸奔不可行（搜特/鸿达违约尾部）；2025-07估值高位；强赎潮抬换手。
 
+
+## 核验点 8 (20:58) — R-259 §七 引擎 B 数据运维方案（已读 §七）
+- 参照 task-0408 crowding 快照三件套（cron+锁存+告警）：采集 collect_sw_industry.py（akshare sw_index_first_info+index_hist_sw(period=month)，限速0.4s，31行业）；每月1日19:05采集（与既有 cron 错峰）；落点 HP results/engines/b/sw_industry_monthly.csv（append-only、同月幂等[skip]）；锁存只锁刚结束完整月、不做全量重算（防历史回填漂移）；告警=连续性校验失败→notifications-queue；断供预案=重试3次→跨日重试→人工升级（备用源乐咕/东财）。
+- cron 纪律：只出建议行待用户批准，不出手安装。
+- S1（B 过 E2）纯文档+回测不动在役；S2 engines.json 落地+B 影子接入；S3 影子期3-6月（含 corr(A,B) 实测=层2初值数据来源）；S4 中央风控激活+N3组合页。
+- 注意：§七 数据运维方案是围绕原 B（行业轮动 sw_industry）写的；若 B 换赛道（如可转债），数据运维需相应改（可转债面板已在 VPS work/r281 落盘，采集源不同）。
+
