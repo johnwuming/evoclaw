@@ -34,3 +34,9 @@
 - 服务 unit：agent-dashboard.service（active running）。
 - 基线 commit：5fb12c6 "baseline: pre-0468"。
 
+## 13:40 实施开始（resume）
+- 基线 commit 已建：5fb12c6 "baseline: pre-0468"（git log -1 确认）。
+- 服务 unit：agent-dashboard.service。
+- 设计：服务端新增 GET /api/quant/engines/:id/shadow-nav（读 engines.json 找引擎 → shadow.nav_path 映射 VPS → 兜底平铺 shadow_nav.csv，source 标注）；旧 /api/quant/engines/shadow-nav 保留兼容别名；/api/quant/engines 输出补 parent/type 字段。
+- 前端：loadPaperQuant 改按 shadow 引擎列表逐请求；renderCrossEngineShadowCard 遍历 cross_engine 引擎渲染多卡。
+
