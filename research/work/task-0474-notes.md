@@ -56,3 +56,6 @@ df = ak.sw_index_first_info()
 print('first_info cols:', list(df.columns), 'shape', df.shape)
 print(df.head(35).to_string())
 " 2>&1 | grep -v "it/s" | head -45
+## 重试恢复点3
+- bond→stock 合并 968 券/885 正股 → work/r474/bond_stock_map.parquet；回测窗口 675 券全部覆盖（11 券缺口已补）；67 未覆盖均为 2018 前历史券（不在回测窗）
+- 下一步：stock→申万一级行业。路线：sw_index_first_info()（31 个申万一级指数代码）→ index_component_sw(symbol) 逐一级行业拉成分 → 建 stock→行业 映射
