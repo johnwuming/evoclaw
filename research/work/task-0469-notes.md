@@ -39,3 +39,7 @@
 - 重启 agent-dashboard 服务。
 - playwright 390x844 模拟实盘页抽查：A 在役线可见、无横滚、console 零 error。
 - 完成后提交 git + 写完成回报。
+
+## 核验点 4（17:2x）：服务重启
+- systemctl restart agent-dashboard → active；curl active/curves OK（截断 200B 确认响应正常）。
+- 下一步：playwright 390x844 抽查模拟实盘页。
