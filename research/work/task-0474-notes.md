@@ -20,3 +20,5 @@
 - 回测窗口 675 唯一券（2018-01..2026-06 过滤后）；需评估当前快照覆盖率，缺口用 bond_zh_cov_info(symbol) 单券补
 - bond_zh_cov_info(symbol, '基本信息') 单券可回历史：110002→正股600219(南山铝业, 2009已退市) → 映射能力 OK
 - 计划：① 用 bond_zh_cov_info_ths() 全量 957 当前券建 bond→正股映射 ② 对回测窗口 675 券中未覆盖的历史券按需 bond_zh_cov_info() 补 ③ 正股→行业 用 akshare 全A股所属行业（stock_zh_a_spot_em 含行业列 或 stock_individual_info_em 单股）
+- task中心 expected_output 确认 R-293 编号（路径 01-AI行业研究 疑笔误，正文按 05-量化投资 落盘 R-293 预注册 + R-294 执行报告）
+- stock_zh_a_spot_em() 首试连接错误 → 重试；备选 stock_individual_info_em(symbol) 单股行业
