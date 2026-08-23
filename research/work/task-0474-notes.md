@@ -22,3 +22,5 @@
 - 计划：① 用 bond_zh_cov_info_ths() 全量 957 当前券建 bond→正股映射 ② 对回测窗口 675 券中未覆盖的历史券按需 bond_zh_cov_info() 补 ③ 正股→行业 用 akshare 全A股所属行业（stock_zh_a_spot_em 含行业列 或 stock_individual_info_em 单股）
 - task中心 expected_output 确认 R-293 编号（路径 01-AI行业研究 疑笔误，正文按 05-量化投资 落盘 R-293 预注册 + R-294 执行报告）
 - stock_zh_a_spot_em() 首试连接错误 → 重试；备选 stock_individual_info_em(symbol) 单股行业
+- 东财 EM 接口（stock_zh_a_spot_em / stock_individual_info_em）连续 ConnectionError（可能限流/封禁）
+- bond_zh_cov_info_ths（同花顺源）可用；转测行业源：THS 行业板块 / cninfo / 申万
