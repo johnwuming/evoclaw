@@ -93,3 +93,15 @@ efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 
   7. qLifecycleSetCaliber/qLifecycleToggleD 优先重渲染 v5 区
   8. qLifecyclePipeline/renderLifecycleLayer 标题引擎参数化
   9. drawLifecycleScatter 销毁旧 Chart 实例
+
+## 2026-08-24 00:3x 验证通过
+- node --check server.js：SYNTAX_OK（+220/-8，12 处 edit）
+- systemctl restart agent-dashboard：active
+- curl /api/quant/engines：A active（registry_ref=a13_rsraw_e1f10dz）+ A2 shadow（parent=A, registry_ref=a14_crowdf2, overlay.w=0.5 透传成功）
+- curl /api/quant/lifecycle + /api/quant/registry：正常（A 在役链路零回归）
+- playwright（python 1.58，390x844，正确导航 量化→回测 tab）：
+  - SWITCHER_TITLE: 🧭 引擎级生命周期视图 ✓
+  - A 视图：层1/层2 中央风控/因子模型/在役 全 True
+  - 切 A2：overlay / parent=A / w=0.5 / 叠加臂 / 层1 / 层2风控 / a14 / 因子模型 / log_mv·低值优先 全 True
+  - bodyScrollW=390（无横滚）✓，console 零 error ✓
+- 说明：此前两轮 playwright 失败根因=未先切「量化」页+点击了错误的「回测」文本（dashboard 页面默认不在 quant 视图）；改为 showPage('quant') → switchQuantTab('v5btlc') 后全绿。
