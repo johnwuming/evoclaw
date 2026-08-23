@@ -82,3 +82,8 @@ print(df.head(35).to_string())
 - 状态完好：设计 V3/V4/V5 已冻结，G0 锚 0.583 已复现，映射完备（675 券行业覆盖 100%）
 - 现在写 R-293 预注册 md + 锁 json，sha256 落盘后才允许回测
 - G5 容量：/tmp/r286_daily 覆盖 304/675 过滤券（45%）→ 新变体选中但未落盘券增量补采（复用 g5_fetch2.py 模式，akshare 限频 0.5s）
+## 预注册取证（先写后算 ✅）
+- 时间戳 2026-08-24 00:18:08 / 00:18:32（R-293 md / e3_prereg.json）
+- sha256: R-293 md = fb785665e6553b8e0bbf35a2f56b092e35a34c21ffa573c4521a395ce6fcd83b
+- sha256: e3_prereg.json = 1d86498e767205491534507c319e0a0615be148d8796f6824e09d33f9854bb67
+- 预注册早于任何回测计算（r474 无 backtest 产物）；现在写 e3_backtest.py
