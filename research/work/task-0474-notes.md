@@ -32,3 +32,6 @@
 - stock_industry_clf_hist_sw SSL 失败（swsresearch 不可达）
 - 候选映射路线：A) 申万三/一级成分（sw_index_third_info 全量 + sw_index_third_cons 每指数成分）B) EM spot 单调用（被封，可重试）C) cninfo
 - 正股行业用途：仅中性化腿（去相关），TAXONOMY 需在预注册写明；优先申万（R-255/262 遗产同源，便于对照）
+- sw_index_third_info() 可用（335 个申万三级行业）；sw_index_third_cons(symbol) 可拉每指数成分 → 可构建 正股→申万三级/一级 映射
+- index_component_sw(symbol='801001') 待测（申万一级成分）
+- 设计：V3 主试验=行业权重上限（暴露中性化）；V4=行业残差化；V5=降权低价腿；G0=V2 对拍。n_trials=3（≤4）
