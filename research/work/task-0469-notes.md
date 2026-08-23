@@ -43,3 +43,8 @@
 ## 核验点 4（17:2x）：服务重启
 - systemctl restart agent-dashboard → active；curl active/curves OK（截断 200B 确认响应正常）。
 - 下一步：playwright 390x844 抽查模拟实盘页。
+
+## 核验点 5（17:3x）：服务状态确认（重试后）
+- agent-dashboard active；root 页面 HTTP 200。
+- node --check server.js：SYNTAX OK（上一步已验证）。
+- 待跑：playwright 390x844 模拟实盘页。
