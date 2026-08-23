@@ -35,3 +35,6 @@
 - sw_index_third_info() 可用（335 个申万三级行业）；sw_index_third_cons(symbol) 可拉每指数成分 → 可构建 正股→申万三级/一级 映射
 - index_component_sw(symbol='801001') 待测（申万一级成分）
 - 设计：V3 主试验=行业权重上限（暴露中性化）；V4=行业残差化；V5=降权低价腿；G0=V2 对拍。n_trials=3（≤4）
+- bond→stock 快照映射完成：957 当前券（874 唯一正股）→ work/r474/bond_stock_snapshot.parquet；panel 1001 券中 78 缺口
+- 下一步：① 78 缺口用 bond_zh_cov_info(symbol,'基本信息') 逐券补（仅需回测窗口过滤 universe 675 券中的缺口）② stock→行业 用申万 sw_index_third_cons 构建
+- 设计定稿前需写 R-293 预注册 + 锁 json + sha256（先写后算）
