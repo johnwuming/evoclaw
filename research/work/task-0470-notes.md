@@ -66,3 +66,12 @@
 - S2 回滚：删 engines.json B 条目即回单引擎，看板读不到自动降级硬编码 A。
 - S4 回滚：三组件独立开关 engines.json layer2.enabled=false；权重回退=audit 上一目标。
 - 与 R-256 冲突 4 条：D-2 行号勘误、S0.0 基线新增、隐藏页明确推荐甲、engines.json 初始化加校验+降级。
+
+## 2.3 R-282 阅读笔记（2026-08-23，task-0458，批准点②③执行）
+### A2 = sub_engine_overlay 资格来源（本任务核心引用）
+- a14_crowdf2（防御臂 overlay，w=0.5）：O1b✓+O2✓+O3✓ → shadow_overlay_eligible（影子叠加资格）。O2 三线实算：Calmar 0.9955742 压线过（余量 5.7e-4）/危机窗混合 MDD 改善 +0.7826pp/年化地板 −0.0974pp。
+- a15_csad_resid（信息臂 w=0.3）：O1a✗+O2✗ → fail_archive。死因=信息增量组合层不可 monetizable。
+- a14 是 overlay 组件型（w=0.5 来自 scoring_v12_frozen.json 迁移条款），资格不回授替代轨（不 claim rank1）；v1.1 排名池格局保留（a13 0.8781 > a15 0.8732 > a14 0.8584 > v4a 0.8088）。
+- 批准点④启动条件 6 条：①用户批准④ ②engines.json 存在 ③A 链路零回归 ④影子 NAV 双腿管道 ⑤数据管道连续 2 月度点 ⑥影子期判据适配（低拥挤时段两腿区分度恒为零，clean_evals 剔无区分月/延长影子期；月度 eval 必须实测两腿换手叠加与再平衡拉回成本）。
+- engines.json A2 条目草案：engine_id=A2, parent=A, type=sub_engine_overlay, status=shadow, registry_ref=a14_crowdf2, overlay{w:0.5, w_source:冻结配置迁移}, shadow{mode:cross_engine, min3/max6, eval_rule:剔低拥挤零区分月+实测换手叠加与拉回成本}, promotion=真金权重分配用户人工门（批准点⑤）永不自动化。
+- 硬红线：evolution_pipeline.py 零改动（md5 9c50b188…）；registry 仅 a14/a15 新增 overlay 块（73 行纯新增 0 删）；a13 条目 md5 346450f7… 不变；n_trials 97→99。
