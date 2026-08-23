@@ -12,3 +12,10 @@
 - strategy.full: dates 1003 点（2006-01-04 → 2026-08-14），values 1003 个。
 - strategy.locked: dates 899 点，values 899 个。
 - 字段名是 values 不是 nav。
+
+## 核验点 2（17:15）：代码区段定位
+- loadPaperQuant：L12495；取数 Promise.all 在 L12511-12530；renderPaperQuant 调用 L12538；quantSigOf L12535。
+- renderPaperQuant：L13023；destructure 在 L13025-13026；renderCrossEngineShadowCard 调用 L13112（传 engines, shadowNav, navPoints）。
+- renderCrossEngineShadowCard：L12910，签名 (enginesData, shadowNav, navPoints)；parent 查找 parentEng 在 forEach 内；aByMonth 由 navPoints 构建；调用处 L13112。
+- api() L7293、v5QuantVersionQ L9390（active/curves 已有 L9518 用法：api('quant/active/curves'+v5QuantVersionQ())）。
+- 计划：loadPaperQuant 补拉 active/curves → 传入 renderPaperQuant → 传 renderCrossEngineShadowCard；parent 为 active 引擎时用 curves full 月度化，否则 navPoints 兜底。
