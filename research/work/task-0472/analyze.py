@@ -22,9 +22,9 @@ def monthly_ret(nav):
 a_nav_m = load_daily_nav(f"{BASE}/04-投资研究/a13_rsraw_e1f10_full_nav.csv")
 # ---- A2 影子 NAV（日频→月频） ----
 a2_nav_m = load_daily_nav(f"{BASE}/04-投资研究/engines/a2/shadow_nav.csv")
-# ---- E2 可转债（已是月频） ----
+# ---- E2 可转债（已是月频，把月初日期对齐到月末） ----
 e2 = pd.read_csv(f"{BASE}/work/r281/e2_nav_monthly.csv")
-e2['ym'] = pd.to_datetime(e2['ym'], format='%Y-%m')
+e2['ym'] = pd.to_datetime(e2['ym'], format='%Y-%m') + pd.offsets.MonthEnd(0)
 e2 = e2.set_index('ym')['nav']
 
 a_r = monthly_ret(a_nav_m)
@@ -65,6 +65,10 @@ def corr_df(cols):
 print("=== 相关性（月度） ===")
 c_aa2, n_aa2 = corr_df(['A','A2'])
 print(f"A-A2 corr={c_aa2.loc['A','A2']:.6f} (n={n_aa2})")
+# NAV 水平相关性（R-282 corr=0.999851 口径核验：应是对数 NAV 水平相关）
+lv = df[['A','A2']].dropna()
+ln_corr = np.log(lv['A']).corr(np.log(lv['A2']))
+print(f"A-A2 log-NAV 水平 corr={ln_corr:.6f} (n={len(lv)})")
 c_ae2, n_ae2 = corr_df(['A','E2'])
 print(f"A-E2 corr={c_ae2.loc['A','E2']:.6f} (n={n_ae2})")
 c_a2e2, n_a2e2 = corr_df(['A2','E2'])
