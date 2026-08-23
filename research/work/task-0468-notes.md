@@ -56,3 +56,8 @@
 - GET /api/quant/engines/A2/shadow-nav → ok:true, available:true, source:"flat", resolved_path:/root/.openclaw/workspace-quant/results/shadow_nav.csv, points:4491（2006-01-04→2024-06-28），parent:A, type:sub_engine_overlay。
 - 旧 /api/quant/engines/shadow-nav 兼容别名正常（source:'flat'）。
 - 服务已重启（agent-dashboard.service active），node --check 通过。
+
+## 14:40 fake 引擎零代码接入验证中
+- 已向 engines.json append FAKE 引擎（shadow.mode=cross_engine, parent=A, nav_path=results/engines/fake/shadow_nav.csv）+ 落临时 shadow_nav.csv（4 行）。
+- GET /api/quant/engines/FAKE/shadow-nav → ok:true, source:"nav_path", pts:4, parent:A → **nav_path 映射分支生效**（非回退平铺）。
+- 下一步：playwright 确认第二张卡出现 → 清理 fake（还原 engines.json + 删临时文件）。
