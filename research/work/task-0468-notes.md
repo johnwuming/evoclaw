@@ -16,3 +16,7 @@
 - 端点位置：/api/quant/engines L3680（已通用，遍历 engines.json 输出 engine_id/name/status/layer1/layer3/shadow{mode,since,nav_path,required_clean_evals,evals,clean_evals}/audit，文件缺失返回 available:false）；/api/quant/engines/shadow-nav L3716（硬编码读 QUANT_REPORTS_DIR/shadow_nav.csv 单文件平铺，列 month,nav,ret,weights_json）。
 - 前端：loadPaperQuant L12439-12488（api('quant/engines') + api('quant/engines/shadow-nav') 单请求，L12466 硬编码）；renderCrossEngineShadowCard L12850（已有引擎徽标行通用，但明细+双线图写死 A vs A2 单图）。
 - 双线图区段 L12905 起：A 在役 NAV 月度化（navPoints by date.slice(0,7)） vs shadowPoints。
+## 13:33 图表区段读完 + VPS 数据布局确认
+- renderCrossEngineShadowCard 双线图 L12905-12940：A 在役 NAV 月度化（navPoints by date.slice(0,7)）vs shadowPoints，写死 label "A 在役 NAV"/"A2 影子 NAV"。调用点 L13035 renderPaperQuant 内。
+- 空态：hasEngines=false → 「影子管道待同步」；无 shadowPoints → 「影子 NAV 待同步」。
+
