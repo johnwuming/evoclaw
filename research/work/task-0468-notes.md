@@ -50,3 +50,9 @@
 ## 14:10 代码改动全部完成
 - renderCrossEngineShadowCard 已泛化：遍历 engines 中所有 shadow.mode=cross_engine 引擎，每引擎一张卡（该引擎影子 NAV vs parent 在役 NAV，parent 读 engines.json parent 字段从 engines 数组找）；无影子引擎 → 「暂无影子引擎」占位。无硬编码 A/A2。
 - 全部代码改动后 git diff：server.js +129/-52；node --check 通过。
+
+## 14:30 API 验证已通过（curl）
+- GET /api/quant/engines → ok:true, available:true；A 有 parent:null,type:engine；A2 有 parent:"A",type:"sub_engine_overlay"。
+- GET /api/quant/engines/A2/shadow-nav → ok:true, available:true, source:"flat", resolved_path:/root/.openclaw/workspace-quant/results/shadow_nav.csv, points:4491（2006-01-04→2024-06-28），parent:A, type:sub_engine_overlay。
+- 旧 /api/quant/engines/shadow-nav 兼容别名正常（source:'flat'）。
+- 服务已重启（agent-dashboard.service active），node --check 通过。
