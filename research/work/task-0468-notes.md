@@ -27,3 +27,10 @@
 - QUANT_REPORTS_DIR='/root/.openclaw/workspace-quant/results'（server.js L2119）。
 - results/engines/ 目录在 VPS 不存在（未同步）。
 
+## 13:36 关键核实：VPS 平铺 shadow_nav.csv = A2 影子日频 NAV（不是 A 在役）
+- head: 2006-01-04,1.0；tail: 2024-06-28,38.96 → 区间 2006-01-04→2024-06-28 = A2 base_segment（task-0458 O2 锁定窗）→ 平铺文件即 A2 影子 NAV 日频副本。
+- 列头 date,nav（日频）；现有解析器 parts[0]→month 字段，前端 slice(0,7) 月度化。
+- results/engines/ VPS 目录不存在（A2 nav_path 映射文件缺失 → 需回退平铺）。
+- 服务 unit：agent-dashboard.service（active running）。
+- 基线 commit：5fb12c6 "baseline: pre-0468"。
+
