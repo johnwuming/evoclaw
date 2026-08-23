@@ -59,3 +59,7 @@ print(df.head(35).to_string())
 ## 重试恢复点3
 - bond→stock 合并 968 券/885 正股 → work/r474/bond_stock_map.parquet；回测窗口 675 券全部覆盖（11 券缺口已补）；67 未覆盖均为 2018 前历史券（不在回测窗）
 - 下一步：stock→申万一级行业。路线：sw_index_first_info()（31 个申万一级指数代码）→ index_component_sw(symbol) 逐一级行业拉成分 → 建 stock→行业 映射
+## 重试恢复点4
+- sw_index_first_info() 31 个申万一级行业可用；index_component_sw(symbol='801001') 返回成分（含证券代码）→ 31 次调用构建 stock→申万一级 映射
+- 已确认：bond→stock 968 券映射完成；885 唯一正股
+- 下一步：① 31 个一级行业拉成分建 stock→industry ② 写 R-293 预注册+锁 json+sha256（先写后算）③ 回测 ④ R-294
