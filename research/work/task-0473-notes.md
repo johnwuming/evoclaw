@@ -34,3 +34,13 @@
 - git 基线已建：baseline: pre-0473（server.js 提交前快照，便于回滚）
 === baseline confirmed ===
 efe8142 baseline: pre-0473 已建（--allow-empty 因为 server.js 与 HEAD 无 diff）
+
+## 2026-08-23 继续（重试后）
+- renderV5Btlc 结构：版本选择器 + 标题 + 指标卡 + nav 曲线 + 全版本排行表；body.innerHTML = html; 然后 v5DrawNav / quantHScrollGuard()。
+- /api/quant/lifecycle 返回 {ok, decisions, ledger, n_trials, decision_source, shadow_watch, registry{active,versions,baseline_version,archived_count}, note}。
+- /api/quant/engines 返回 {ok, available, engines:[{engine_id,name,status,parent,type,layer1,layer3,shadow{...},audit}]}（不含 overlay！/engines 映射里没 overlay）。注意：engines 端点未透传 overlay，需补充或从 layer1 取。
+- /api/quant/engines/:id/shadow-nav 返回 points + parent + type + shadow。
+- /api/quant/registry 返回 {ok, available, versions, active_version_id, pending_versions, n_versions}。
+- qLifecycle 状态：_qLifecycle = { caliber, data, expandD }；loadQuantLifecycleLayer() 调 api('quant/lifecycle') → renderLifecycleLayer(data) + drawLifecycleScatter(data)。
+- renderLifecycleLayer = 标题 + desc + qLifecyclePipeline + qLifecycleShadow + qLifecycleTimeline + qLifecycleLedgerTable + qLifecycleScatterSection。
+- renderCrossEngineShadowCard（模拟实盘页）遍历 engines 渲染徽标 + 影子卡，是 task-0468 遍历先例。
