@@ -1,0 +1,109 @@
+{
+  "total_rows": 15161564,
+  "n_stocks": 273,
+  "date_min": "2006-01-04",
+  "date_max": "2026-08-21",
+  "file_size_mb": 823.1,
+  "columns": [
+    "date",
+    "symbol",
+    "open",
+    "close",
+    "high",
+    "low",
+    "volume",
+    "amount",
+    "amplitude",
+    "pct_change",
+    "change",
+    "turnover",
+    "outstanding_share"
+  ],
+  "chinese_col_files_count": 273,
+  "year_distribution": {
+    "2006": {
+      "n_stocks": 0,
+      "n_rows": 285382
+    },
+    "2007": {
+      "n_stocks": 0,
+      "n_rows": 311437
+    },
+    "2008": {
+      "n_stocks": 0,
+      "n_rows": 344615
+    },
+    "2009": {
+      "n_stocks": 0,
+      "n_rows": 352646
+    },
+    "2010": {
+      "n_stocks": 0,
+      "n_rows": 407367
+    },
+    "2011": {
+      "n_stocks": 0,
+      "n_rows": 485921
+    },
+    "2012": {
+      "n_stocks": 0,
+      "n_rows": 533082
+    },
+    "2013": {
+      "n_stocks": 0,
+      "n_rows": 534625
+    },
+    "2014": {
+      "n_stocks": 0,
+      "n_rows": 564762
+    },
+    "2015": {
+      "n_stocks": 0,
+      "n_rows": 609577
+    },
+    "2016": {
+      "n_stocks": 0,
+      "n_rows": 648230
+    },
+    "2017": {
+      "n_stocks": 0,
+      "n_rows": 742611
+    },
+    "2018": {
+      "n_stocks": 0,
+      "n_rows": 800373
+    },
+    "2019": {
+      "n_stocks": 0,
+      "n_rows": 835130
+    },
+    "2020": {
+      "n_stocks": 61,
+      "n_rows": 909677
+    },
+    "2021": {
+      "n_stocks": 90,
+      "n_rows": 1033352
+    },
+    "2022": {
+      "n_stocks": 148,
+      "n_rows": 1135087
+    },
+    "2023": {
+      "n_stocks": 202,
+      "n_rows": 1224783
+    },
+    "2024": {
+      "n_stocks": 218,
+      "n_rows": 1268651
+    },
+    "2025": {
+      "n_stocks": 239,
+      "n_rows": 1298446
+    },
+    "2026": {
+      "n_stocks": 273,
+      "n_rows": 835810
+    }
+  }
+}
