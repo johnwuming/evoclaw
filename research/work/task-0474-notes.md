@@ -38,3 +38,7 @@
 - bond→stock 快照映射完成：957 当前券（874 唯一正股）→ work/r474/bond_stock_snapshot.parquet；panel 1001 券中 78 缺口
 - 下一步：① 78 缺口用 bond_zh_cov_info(symbol,'基本信息') 逐券补（仅需回测窗口过滤 universe 675 券中的缺口）② stock→行业 用申万 sw_index_third_cons 构建
 - 设计定稿前需写 R-293 预注册 + 锁 json + sha256（先写后算）
+## 重试恢复点 2026-08-23
+- bond→stock：957 当前券快照已存 work/r474/bond_stock_snapshot.parquet；回测窗口 675 券中仅 11 券缺映射 ['110030','110031','110032','110033','110034','113008','113009','113010','123001','127003','128010']
+- EM 接口被封（stock_zh_a_spot_em/individual_info_em ConnectionError）；THS 行业 90 板块可用；申万 sw_index_third_info 335 三级行业可用 + sw_index_third_cons 逐指数成分
+- 下一步：① 11 券逐券补 bond→stock ② stock→行业（申万一级 via sw_index_third_cons 或 EM cons 试） ③ 写 R-293 预注册+锁 json+sha256（先写后算）④ 回测 ⑤ R-294
