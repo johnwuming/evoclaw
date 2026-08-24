@@ -36,3 +36,14 @@
 ## E4 执行启动（18:44）
 - 18:43 sha256 复验 e4_prereg.json = 58f4d28e...58ff（与冻结一致）；mktcap 面板 (425,885) 可读
 - 18:44 nohup 启动 e4_backtest.py → work/r474/e4_run.log；流程 G0(锚 0.5829611184870819, |Δ|<1e-9) → G0_FAIL 则 sys.exit 不进判门
+
+## E4 核心回测完成（18:46，耗时约 2 分钟）
+- G0 对拍 PASS：corr=0.5829611184870819，与锚 0.5829611184870819 完全一致（Δ=0<1e-9），无环境漂移
+- 主窗 102 月（2018-02..2026-07），基准年化 6.09%；a13 重叠 78 月（2018-01..2024-06）
+- V6(市值中性化)：G1 超额 +2.49pp FAIL；G2 MDD −9.19% PASS；G3 前后窗 +2.20/+2.81pp PASS；G4 换手 15.8% PASS；G6 corr=0.5068 FAIL（差 0.0068 临界）
+- V7(V6+close≥105)：G1 +1.23pp FAIL；G2 −9.36% PASS；G3 +1.43/+1.02pp PASS；G4 12.5% PASS；G6 corr=0.5240 FAIL
+- S1(110)：G1 +0.53pp FAIL；G2 −8.48% PASS；G3 +0.16/+0.93pp PASS；G4 10.9% PASS；G6 corr=0.5225 FAIL
+- S2(交叉降权)：G1 +2.37pp FAIL；G2 −9.56% PASS；G3 +1.99/+2.78pp PASS；G4 15.9% PASS；G6 corr=0.49075 PASS（四轮唯一 <0.5）
+- IC 监控（信用过滤 universe）：见 gates JSON dual_low_mean/price_mean
+- 结合表：V6/V7 G6 均 FAIL → comb={} 空（符合预注册仅 G6 PASS 触发条件）
+- 初步判门：无变体六门全过（S2 过 G6 但 G1 差 2.6pp）；四试验 = 2 正结果失败 + 负结果归档方向
