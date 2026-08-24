@@ -1,0 +1,320 @@
+{
+ "task": "task-0478",
+ "report": "R-297",
+ "ts": "2026-08-24 06:07:35",
+ "G0": {
+  "max_abs_dnav": 0.0,
+  "n_days": 5007,
+  "index_equal": true,
+  "pass": true
+ },
+ "forms": {
+  "F1": {
+   "exp_id": "IT-R297-01",
+   "tag": "r297_f1_top20",
+   "n_hold": 20,
+   "full": {
+    "start": "2006-01-04",
+    "end": "2026-08-13",
+    "n_days": 5007,
+    "total_ret": 9.1222,
+    "ann": 0.1189,
+    "mdd": -0.7005,
+    "sharpe": 0.493,
+    "calmar": 0.17
+   },
+   "locked": {
+    "start": "2006-01-04",
+    "end": "2024-07-01",
+    "n_days": 4492,
+    "total_ret": 4.1417,
+    "ann": 0.0926,
+    "mdd": -0.7005,
+    "sharpe": 0.432,
+    "calmar": 0.132
+   },
+   "holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 0.9686,
+    "ann": 0.3772,
+    "mdd": -0.3607,
+    "sharpe": 0.944,
+    "calmar": 1.046
+   },
+   "near": {
+    "start": "2022-04-01",
+    "end": "2026-08-13",
+    "n_days": 1059,
+    "total_ret": 0.2933,
+    "ann": 0.0607,
+    "mdd": -0.6209,
+    "sharpe": 0.355,
+    "calmar": 0.098
+   },
+   "monthly_corr_vs_a13_full": 0.635804800132355,
+   "monthly_corr_vs_a13_near": 0.27098409720114447,
+   "monthly_corr_vs_a13_pre": 0.7086074961593378,
+   "n_months": 247
+  },
+  "F2": {
+   "exp_id": "IT-R297-02",
+   "tag": "r297_f2_top30",
+   "n_hold": 30,
+   "full": {
+    "start": "2006-01-04",
+    "end": "2026-08-13",
+    "n_days": 5007,
+    "total_ret": 12.6727,
+    "ann": 0.1353,
+    "mdd": -0.6956,
+    "sharpe": 0.534,
+    "calmar": 0.195
+   },
+   "locked": {
+    "start": "2006-01-04",
+    "end": "2024-07-01",
+    "n_days": 4492,
+    "total_ret": 5.3952,
+    "ann": 0.1056,
+    "mdd": -0.6956,
+    "sharpe": 0.465,
+    "calmar": 0.152
+   },
+   "holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 1.138,
+    "ann": 0.432,
+    "mdd": -0.33,
+    "sharpe": 1.042,
+    "calmar": 1.309
+   },
+   "near": {
+    "start": "2022-04-01",
+    "end": "2026-08-13",
+    "n_days": 1059,
+    "total_ret": 0.5994,
+    "ann": 0.1135,
+    "mdd": -0.5857,
+    "sharpe": 0.479,
+    "calmar": 0.194
+   },
+   "monthly_corr_vs_a13_full": 0.6426816323569733,
+   "monthly_corr_vs_a13_near": 0.2917520404374141,
+   "monthly_corr_vs_a13_pre": 0.7136985488131529,
+   "n_months": 247
+  },
+  "F3": {
+   "exp_id": "IT-R297-03",
+   "tag": "r297_f3_top50",
+   "n_hold": 50,
+   "full": {
+    "start": "2006-01-04",
+    "end": "2026-08-13",
+    "n_days": 5007,
+    "total_ret": 17.9126,
+    "ann": 0.1534,
+    "mdd": -0.6853,
+    "sharpe": 0.583,
+    "calmar": 0.224
+   },
+   "locked": {
+    "start": "2006-01-04",
+    "end": "2024-07-01",
+    "n_days": 4492,
+    "total_ret": 8.5434,
+    "ann": 0.1298,
+    "mdd": -0.6853,
+    "sharpe": 0.529,
+    "calmar": 0.189
+   },
+   "holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 0.9817,
+    "ann": 0.3815,
+    "mdd": -0.3348,
+    "sharpe": 0.991,
+    "calmar": 1.14
+   },
+   "near": {
+    "start": "2022-04-01",
+    "end": "2026-08-13",
+    "n_days": 1059,
+    "total_ret": 0.3851,
+    "ann": 0.0775,
+    "mdd": -0.5564,
+    "sharpe": 0.395,
+    "calmar": 0.139
+   },
+   "monthly_corr_vs_a13_full": 0.6746535846859592,
+   "monthly_corr_vs_a13_near": 0.30849026990304923,
+   "monthly_corr_vs_a13_pre": 0.7423370051040477,
+   "n_months": 247
+  }
+ },
+ "gates": {
+  "F1": {
+   "G1_quality": {
+    "pass": false,
+    "ann": 0.1189,
+    "mdd": -0.7005,
+    "th": [
+     0.08,
+     -0.4
+    ]
+   },
+   "G2_indep": {
+    "pass": false,
+    "corr": 0.635804800132355,
+    "th": 0.5
+   },
+   "G3_near": {
+    "near_ann": 0.0607,
+    "near_mdd": -0.6209,
+    "corr_near": 0.27098409720114447,
+    "note": "近段(2022-04起) ICIR -0.269 贴门槛事实显性化; NAV 近段 ann/MDD 如实披露"
+   },
+   "G4_holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 0.9686,
+    "ann": 0.3772,
+    "mdd": -0.3607,
+    "sharpe": 0.944,
+    "calmar": 1.046
+   }
+  },
+  "F2": {
+   "G1_quality": {
+    "pass": false,
+    "ann": 0.1353,
+    "mdd": -0.6956,
+    "th": [
+     0.08,
+     -0.4
+    ]
+   },
+   "G2_indep": {
+    "pass": false,
+    "corr": 0.6426816323569733,
+    "th": 0.5
+   },
+   "G3_near": {
+    "near_ann": 0.1135,
+    "near_mdd": -0.5857,
+    "corr_near": 0.2917520404374141,
+    "note": "近段(2022-04起) ICIR -0.269 贴门槛事实显性化; NAV 近段 ann/MDD 如实披露"
+   },
+   "G4_holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 1.138,
+    "ann": 0.432,
+    "mdd": -0.33,
+    "sharpe": 1.042,
+    "calmar": 1.309
+   }
+  },
+  "F3": {
+   "G1_quality": {
+    "pass": false,
+    "ann": 0.1534,
+    "mdd": -0.6853,
+    "th": [
+     0.08,
+     -0.4
+    ]
+   },
+   "G2_indep": {
+    "pass": false,
+    "corr": 0.6746535846859592,
+    "th": 0.5
+   },
+   "G3_near": {
+    "near_ann": 0.0775,
+    "near_mdd": -0.5564,
+    "corr_near": 0.30849026990304923,
+    "note": "近段(2022-04起) ICIR -0.269 贴门槛事实显性化; NAV 近段 ann/MDD 如实披露"
+   },
+   "G4_holdout": {
+    "start": "2024-07-01",
+    "end": "2026-08-13",
+    "n_days": 516,
+    "total_ret": 0.9817,
+    "ann": 0.3815,
+    "mdd": -0.3348,
+    "sharpe": 0.991,
+    "calmar": 1.14
+   }
+  }
+ },
+ "combined": {
+  "win_form": "F3",
+  "n_hold": 50,
+  "blends": {
+   "0_100": {
+    "w_csad": 0,
+    "w_a13": 100,
+    "corr_csad_a13": 0.6746535846859592,
+    "n_months": 247,
+    "ann": 0.2251,
+    "mdd": -0.1912,
+    "sharpe": 1.213,
+    "calmar": 1.177,
+    "total_ret": 63.2798
+   },
+   "25_75": {
+    "w_csad": 25,
+    "w_a13": 75,
+    "corr_csad_a13": 0.6746535846859592,
+    "n_months": 247,
+    "ann": 0.2173,
+    "mdd": -0.3253,
+    "sharpe": 1.023,
+    "calmar": 0.668,
+    "total_ret": 55.3134
+   },
+   "50_50": {
+    "w_csad": 50,
+    "w_a13": 50,
+    "corr_csad_a13": 0.6746535846859592,
+    "n_months": 247,
+    "ann": 0.2028,
+    "mdd": -0.4427,
+    "sharpe": 0.824,
+    "calmar": 0.458,
+    "total_ret": 43.0815
+   },
+   "75_25": {
+    "w_csad": 75,
+    "w_a13": 25,
+    "corr_csad_a13": 0.6746535846859592,
+    "n_months": 247,
+    "ann": 0.182,
+    "mdd": -0.5446,
+    "sharpe": 0.67,
+    "calmar": 0.334,
+    "total_ret": 29.8393
+   },
+   "100_0": {
+    "w_csad": 100,
+    "w_a13": 0,
+    "corr_csad_a13": 0.6746535846859592,
+    "n_months": 247,
+    "ann": 0.1552,
+    "mdd": -0.6329,
+    "sharpe": 0.557,
+    "calmar": 0.245,
+    "total_ret": 18.2563
+   }
+  },
+  "monthly_corr": 0.6746535846859592
+ }
+}

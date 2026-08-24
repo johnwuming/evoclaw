@@ -66,3 +66,6 @@
 {"stage": "r297_g0_w0", "ok": true, "full": {"annual_return": 0.0758, "max_drawdown": -0.8199, "sharpe": 0.3976, "calmar": 0.0925}, "locked": {"annual_return": 0.0684, "max_drawdown": -0.8199, "sharpe": 0.3748, "calmar": 0.0834}}
 {"stage": "r297_g0_null", "ok": true, "full": {"annual_return": 0.0758, "max_drawdown": -0.8199, "sharpe": 0.3976, "calmar": 0.0925}, "locked": {"annual_return": 0.0684, "max_drawdown": -0.8199, "sharpe": 0.3748, "calmar": 0.0834}}
 {"stage": "R297_G0_gate_impl_parity", "ok": true, "max_abs_nav_diff": 0.0}
+{"stage": "r297_f1_top20", "ok": true, "full": {"annual_return": 0.1201, "max_drawdown": -0.7005, "sharpe": 0.4953, "calmar": 0.1714}, "locked": {"annual_return": 0.0905, "max_drawdown": -0.7005, "sharpe": 0.427, "calmar": 0.1293}}
+{"stage": "r297_f2_top30", "ok": true, "full": {"annual_return": 0.1366, "max_drawdown": -0.6956, "sharpe": 0.537, "calmar": 0.1964}, "locked": {"annual_return": 0.1034, "max_drawdown": -0.6956, "sharpe": 0.46, "calmar": 0.1487}}
+{"stage": "r297_f3_top50", "ok": true, "full": {"annual_return": 0.1547, "max_drawdown": -0.6853, "sharpe": 0.5865, "calmar": 0.2257}, "locked": {"annual_return": 0.1276, "max_drawdown": -0.6853, "sharpe": 0.524, "calmar": 0.1862}}
