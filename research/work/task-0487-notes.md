@@ -39,3 +39,17 @@
 - VPS `shared/results/04-投资研究/paper-nav.csv`（329B）mtime=2026-08-25 01:40:02 +0800（R-308 纠错时最后一次同步，早于 R-309 开始 05:50）；另有 R-308 留下的 `paper-nav.csv.bak-task0486-20260825`
 - 依据：paper_engine.py `rsync_to_vps()`（L1080-1085）仅同步 SUMMARY/NAV/TRADES/PORTFOLIO/STATE/VALIDATION 六个在役文件（baseline-paper-* + paper-state.json），不含旧链文件；HP 侧源文件已归档 → VPS 旧链文件 mtime 永久冻结
 - 在役 baseline-paper-nav.csv 于 05:54 +0800 daily 运行时被 rsync 重推（内容幂等，rsync 保留原 mtime 01:44:56 +0800），属正常在役链行为
+
+## 6. 验收清单复核（2026-08-25 05:56 GMT+8 前完成，全部 ✅）
+1. HP `crontab -l | grep -c "paper_trade\|cron_paper_rebalance"` = 0 ✅
+2. crontab before(36行)/after(34行) 干净落盘 diff：恰好 2 删（3d2、5d3）0 增，其余逐字不变 ✅（初测的 add=2 系表头污染，重采后 add=0）
+3. archive/ 含 paper-nav.csv.r309-retired、paper-summary.json.r309-retired、README-r309.md、crontab.bak.r309-202608242151 ✅
+4. baseline-paper-nav.csv 末行 = `2026-08-24,0.98319` ✅
+5. validate 6/6 PASS（超预期，K线新鲜度也 PASS）✅
+6. daily 幂等：8 行不变、无重复、state 三字段不变 ✅
+7. VPS 旧链文件 mtime 冻结（rsync 范围证据见 5.3）✅
+
+## 7. 交付物
+- 报告：/root/.openclaw/workspace/shared/results/05-量化投资/R-309-模拟实盘单引擎收敛实施.md
+- 本笔记：shared/results/work/task-0487-notes.md
+- 未修改任何无关文件（HP 侧仅动：crontab -2 行、archive/ 新增、results/ 两个旧链文件移走、两个 cron 脚本首行注释）
