@@ -72,6 +72,35 @@ Ubuntu 官方源 **Debian cron 3.0pl1**（vixie-cron 血统），非 cronie。
 - collect-metrics.sh 每分钟上报 VPS:8055（心跳/metrics）；若其时间字段为 `date +%s`（epoch）则 TZ 无关，若为格式化时间需 VPS 侧核对——实施前列为检查项（本任务未验证其字段格式）。
 - hp_api_server.py 已跑 7 天，glibc 会在 /etc/localtime 变更后自动重读（进程无需重启即感知新 TZ）；其对外时间戳语义从 UTC 变北京，下游若有假设需核查。
 
-## E5 结论草案
+## E5 结论草案（初轮）
 - B（CRON_TZ）实证不可用；C（UTC 写死+注释）是现状且心智已分裂（E2/E3 证据）；推荐 A（系统时区→Asia/Shanghai + 同批按北京心智重写表达式 + restart cron），脚本层已审计安全。
 - 不可自动项：timedatectl、restart cron、crontab 写入均属用户批准范围，本任务仅出草案。
+
+## E6 合并前轮结论（本轮发现 README 已有 R-311 条目后的修复）
+
+发现 README 顶部已存在前轮 R-311/task-0489 条目（含本轮未覆盖的深入结论），本轮初稿曾覆写报告——处置：逐条实证前轮主张后产出合并定稿（超集）。
+
+### E6.1 paper_engine.py 墙钟门控（前轮主张，已实证）
+命令：`grep -n "15:05\|_now_min\|905" paper_engine.py; sed 1354-1358`
+```
+1354: # 2) 当日行：交易日且已收盘(>=15:05) → 东财快照取当日真实收盘价
+1357: _now_min = datetime.now().hour * 60 + datetime.now().minute
+1358: if str(d) == str(today) and _now_min >= 15 * 60 + 5:
+```
+- CST 语义（15:05 收盘）按 UTC 时钟执行；现状 16:30 UTC 触发 _now_min=990≥905 恒过。
+- 路径 C 若改 `30 8`（=16:30 CST），_now_min=510<905 FAIL → 当日行退化 T-1 → **C 对 paper daily 不可行**（修复须改引擎=红线）。
+
+### E6.2 date.today()（已实证）
+`grep -n "date\.today()" paper_engine.py` → L342、L1327 共 2 处（前轮记 3 处，本轮 grep 计 2 处，报告按 2 处陈述）。
+
+### E6.3 crontab md5（已实证，零改动验收）
+`crontab -l | md5sum` = `3983e350b74051d45860502954270ab1`（与前轮记录一致，两轮调研间 crontab 零漂移）。paper_engine.py mtime 2026-08-24 22:27 UTC（R-310 改动所致，本轮未触碰）；paper_engine_gold.py 16:55 UTC。
+
+### E6.4 三组分类（采纳前轮口径，与本轮 E2 证据自洽）
+- CST 意图 15 条（#1-5,7-10,12,15-19）；UTC 显式黄金 4 条（#20-23，40 7=15:40 CST 系 R-306/R-312 按效果倒推设计）；时区无关 4 条（#6,11,13,14）。合计 23 ✓
+- 推荐改写规则：CST 15 条表达式不动（切后自动回归设计时刻）；黄金 4 条 +8h 等效改写（40 15 / 0 11 / 38 17 / 40 17）保持现网绝对行为；无关 4 条不动。
+- 切换窗口：避开 9/1 黄金首月结账，推荐 9/5 周六白天。
+
+## E7 最终交付
+- 报告：shared/results/05-量化投资/R-311-HP时区统一专项评估.md（合并定稿，含 23 条全量表+三路径+实施草案）
+- README 更新日志：前轮已写入 R-311 条目且与本定稿一致，不重复追加（保持"不改其他内容"纪律）
