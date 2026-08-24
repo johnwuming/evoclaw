@@ -33,3 +33,14 @@
 - R-289 可转债判门量级: G1 超额门(主窗毛年化超额 vs 基准≥5pp), G2 回撤门(MDD≤20%), G3 分段门(两窗>0), G4 holdout, G5 容量
 - 但 csad 是股票多头引擎(非可转债), 与 a13 同池; G1 质量门参照 R-263 思路: 独立引擎自身质量(ann/MDD), 冻结于预注册
 - R-255 corr<0.5 独立性门槛(G2 核心); R-263 G3 holdout 红旗条款; R-260 近段 ICIR -0.269 显性化
+
+## 6. 预注册锁落盘 (13:42)
+- prereg_r297.md sha256 = ec1fc12337121cc2748b07bc8bad484fea8c8ab016ba488dfac536f18c639824
+- lock JSON: shared/results/work/task-0478/prereg_r297.lock.json
+- 形态: F1(top20)/F2(top30)/F3(top50), 唯一排序核 csad_resid 负向, 等权多头, 池同 a13, 满仓
+- 判门: G0 惰性对拍(w=0 vs null, <1e-12), G1(ann≥8% & mdd≥-40%), G2(corr<0.5), G3 近段, G4 holdout
+
+## 7. HP 回测启动 (13:45)
+- r297_run.py 上传+启动, 市场 5505 codes, pb 94.1%, 满仓择时 248 交易日
+- 5 跑: G0W0/G0N/F1/F2/F3, 预算 ~25-30min (参照 r263 4跑24.3min)
+- r297_eval.py 已上传 HP scripts/
