@@ -84,3 +84,9 @@
 - R-298 md 3.5KB（18:29:51）+ e4_prereg.json（18:30:04，sha256 58f4d28e…）→ R-299 md 5.7KB + README 更新日志置顶
 - 时序：预注册 18:30 < e4_gates_result.json 18:47:04（首跑）✅ 先写后算
 - 交付物清单核对：R-298≥1.5KB✓ R-299≥2KB✓ mktcap parquet+md5✓ e4_prereg.json✓ README✓ notes✓
+
+## IC 对拍差异核验（18:52）
+- e3_ic_filtered_universe.csv 均值 dual_low 0.04511 / price 0.09658；e4 复算 0.04517 / 0.09565
+- dual_low 均值 4 位小数一致（Δ6e-5）；price 差 9.3e-4；逐月 maxdiff 0.063/0.074，|diff|>0.01 的月份少数
+- 反推 3 种 universe 变体（去黑名单/去发行规模门/去评级门）均不能逐位复刻 e3 → e3 的 IC 侧为未持久化 inline 脚本，口径不可完全重建（疑 fwd_ret 对停牌月处理差异）
+- 结论：G0 硬判据（corr |Δ|<1e-9）逐位通过；IC 对拍按「均值同数量级同号、dual_low 4dp 一致、price 差 ~0.001」如实披露为监控口径微差，不影响任何判门结论（IC 仅监控不判门）
