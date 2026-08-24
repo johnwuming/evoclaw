@@ -8,3 +8,9 @@
 - 零引擎/registry/paper_engine/HP crontab 改动
 
 ## 1. 执行日志 (append)
+
+## 2. 探测记录 (2026-08-24 13:30)
+- HP 连接 OK (10.12.192.174, QUANT_SSH_PASSWORD)
+- a13_rsraw_e1f10dz_full_nav.csv: date,nav,num_held, 5009 行 (2006-01-04 起, 日频)
+- csad_resid_monthly.csv: ym,code,resid_z, 596523 行, md5 416019cf5368bde27c289949069f6193 ✓ (与任务书一致)
+- r263 脚本目录 scripts_r263 未在 results/work/r263/ 下找到, 需确认位置 (VPS 镜像 work/r263/scripts_r263/)
