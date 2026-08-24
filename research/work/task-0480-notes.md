@@ -15,3 +15,18 @@
 
 ## 2. 接口实测记录
 (待填)
+
+### 接口实测结果（2026-08-24，akshare 1.18.94，VPS 本地）
+| 接口 | 结果 | 判定 |
+|---|---|---|
+| index_stock_cons_csindex(H30269/000922/000015/930955) | ✅ 50/100/50/100 行，成分并集 176 只 | 可用（当前快照非PIT） |
+| stock_zh_index_hist_csindex(H30269/000922) | ✅ 各 3076 行 2014-01→2026-08-24 | 可用，作基准 |
+| stock_a_indicator_lg | ❌ 本版本无此函数 | 弃用 |
+| stock_zh_valuation_baidu(股息率TTM) | ❌ NoneType 报错（token 失效） | 弃用 |
+| stock_zh_a_hist(东财行情) | ❌ RemoteDisconnected×2 | 本 VPS 不通，弃用 |
+| stock_zh_a_daily(新浪, qfq/raw) | ✅ 601288 3074 行 2014→2026-08；600900 spot 正常 | **主行情源** |
+| stock_history_dividend_detail(新浪,分红) | ✅ 601288 19 行全史；派息列单位=元/10股（长江电力 2025 派息7.33↔0.733元/股 核验一致） | **股息源** |
+
+- 股息率口径改为自算：dv_ttm(t) = Σ(除权除息日∈(t-365d,t] 的派息/10) / raw_close(t)。
+- 波动率：qfq 日收益 60/120 日滚动 std×√252。
+- 批量：176 只 ×（qfq+raw+分红）3 请求，sleep 0.5s，重试≤2，失败登记不阻塞。
