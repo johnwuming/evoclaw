@@ -1,0 +1,17 @@
+{
+  "file": "prereg_r297.md",
+  "sha256": "ec1fc12337121cc2748b07bc8bad484fea8c8ab016ba488dfac536f18c639824",
+  "created_at": "2026-08-24 13:42:15 +0800",
+  "forms": [
+    "F1_top20",
+    "F2_top30",
+    "F3_top50"
+  ],
+  "gates": [
+    "G0_parity",
+    "G1_quality",
+    "G2_indep<0.5",
+    "G3_nearterm",
+    "G4_holdout"
+  ]
+}
