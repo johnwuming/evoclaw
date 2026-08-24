@@ -20,3 +20,11 @@
 - a9_common.py: PB ext 排序分支 (ext_mode=zscore|ranksum, ext_specs=[(factor,weight,sign),...]); PC e1_guard + xsub_days; PA raw_universe 四闸门可关
 - r263_eval.py: G0/G1/G2/G3 判门, e2_results.json, 复合 IC 用 dump 的引擎排序分
 - 关键: 独立引擎形态 = ext_specs 仅含 csad_resid (唯一排序核) 而非 4因子+csad 第5因子 — 需确认引擎权重分配
+
+## 4. 引擎机制确认 (13:52)
+- ext ranksum 评分: 每 spec (name,wgt,sgn), _col.rank(pct=True) → _con = wgt*sgn*_tr → 求和
+  → 单因子 ext_specs=[("csad_resid",1.0,-1)] 即 csad_resid_z 唯一排序核(负向=低残差分化优先) ✓
+- ext_filter_all=1: wgt≠0 或 _fa 时要求因子非缺失 (独立引擎需 csad 非缺失, NaN 政策=冻结面板缺失置0 → 实际上缺失行会被 _fa 过滤掉, 需确认)
+- 引擎等权 (w=1.0/len(new_pool)); 梯度需自定义补丁, 时间预算内优先等权 Top-N
+- a13 引擎: raw_universe=1(四闸门关), e1_guard=0, xsub_days=365, e1_lambda=1.0, e1_deadzone=0.30, n_hold=20, cost v2
+- 独立引擎决策: 候选池同 a13 (raw_universe=1, xsub=365, 四闸门关), 排序=纯 csad (e1_lambda=0 保持唯一排序核), 等权 Top-N
