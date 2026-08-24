@@ -33,3 +33,32 @@
 - STATE: results/paper-state.json；last_daily=2026-08-24，model_version=a13_rsraw_e1f10dz
 - NAV: results/baseline-paper-nav.csv（末行 2026-08-24,0.98319）
 - 补丁方式：按 `def fetch_spot_closes` → `def load_st_flags` 边界整段替换（规避全角引号精确匹配陷阱）+ hashlib 后插一行 `import re`
+
+## 06:31 补丁与实测结果（全部 PASS）
+
+### 改动（HP scripts/paper_engine.py，66959→70504 bytes）
+- 备份：`scripts/paper_engine.py.bak.r310_202608242223`（66959 bytes）
+- L52 新增 `import re`（首轮 heredoc 转义 bug 漏插，已修复；regex/replace 逐行目检无误）
+- L349-350：SPOT_TIMEOUT=10 / SPOT_BATCH_MAX=40
+- L353-360 `_mkt_sym`：6→sh；0/1/2/3→sz；其余(北交所)返回 None（两备用源不覆盖，由现有"不全则弃用"门兜底）
+- L362-364 `_err_brief`：异常摘要截 120 字符
+- L366-392 `_spot_from_sina`：hq.sinajs.cn，Referer 头，GBK，逗号索引3=最新价
+- L395-421 `_spot_from_tencent`：qt.gtimg.cn，GBK，~索引3=最新价
+- L423-469 `fetch_spot_closes` 重写：东财→新浪→腾讯→空dict回退 parquet；每级失败仅一行 log；成功即返回
+- 其余函数/NAV 口径/append 门/append_nav 零改动（diff hunk 全落 347-467+52）
+
+### 实测证据（HP 本地时间 2026-08-24 22:29-22:31 UTC）
+1. **真实东财现状**：akshare stock_zh_a_spot_em → `Connection aborted, RemoteDisconnected`（HP→东财确挂）
+2. **备用源直连**：新浪 8/8、腾讯 8/8，8 只持仓两源价格完全一致（如 600867=7.95、601600=9.5）
+3. **降级链（mock 东财）**：log `源1/3 东财失败` → `源2/3 新浪 取价成功 8/8`，返回值=新浪直连，一致 ✅
+4. **三源全挂**：4 行 log 链完整（源1/2/3 失败+全源失败回退 parquet），返回空 dict ✅
+5. **parquet 口径**：8/8 全等（08-24 收盘，如 000848=8.43 三方 EQ），CONSISTENCY_BAD_COUNT=0
+6. **生产级真实 daily 运行（非 mock）**：
+   - run1: `源1/3 东财(akshare) 失败: Connection aborted, RemoteDisconnected` → `源2/3 新浪 取价成功 8/8` → NAV 0.983190
+   - run2（幂等）：同上
+   - 前后对比：nav.csv 8 行不变、末行 `2026-08-24,0.98319` 不变、无重复日期（uniq -d=0）、last_daily=2026-08-24 / model_version=a13_rsraw_e1f10dz / last_data_date=2026-08-24 均不变
+7. py_compile PASS ×2（补丁后+加 import re 后）
+
+### 未动清单
+- crontab（6 条 paper_engine 引用原样）、paper_engine_gold.py、registry、evolution_pipeline.py、NAV/append 逻辑、其他函数
+- scripts/ 目录仅 paper_engine.py + 备份变化；results/ 4 文件为 daily 常规重写（值不变）
