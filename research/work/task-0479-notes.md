@@ -20,3 +20,6 @@
 - G5 容量公式验证通过：Cap_m=Σ 0.1×mean20d(close×volume)，无 ×100（2018-01 重建 14179.8万 vs csv 14179.8万 逐位一致；2020-06 一致；2018-06/2024-06 差~2%系 trades 重建 holdings 误差→e4 改为回测内直接 dump e4_holdings_*.jsonl 消除该误差源）
 - IC 监控口径：信用过滤后 universe（filter_universe 无价格门）逐月 rank IC of f_dual_low / −close vs fwd_ret，n≥30
 - e4_backtest.py 已写（py_compile OK）：G0→V6/V7/S1/S2→IC→结合表（仅 G6 PASS 触发）
+
+## 正股市值采集完成（18:43）
+- 885/885 全成功、0 fail、725.4s；月度面板 stock_mktcap_monthly.parquet：425月(1991-04..2026-08)×885股，回测窗覆盖见 md5+coverage 校验输出（补记于下）
