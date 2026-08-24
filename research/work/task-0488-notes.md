@@ -24,3 +24,12 @@
 - fetch_spot_closes：L348-374（东财单源，异常仅 log 一行回退）
 - 调用方：L1263 `overrides = fetch_spot_closes(...)`；L1264-1269 不全则弃用（口径全量一致门）
 - REFERENCE_CODES L98；返回键= zfill(6) 的 6 位码
+
+## 06:07 改造前代码事实
+
+- holdings 键格式：zfill(6) 字符串，8 只：300824/002107/603551/000848/300009/600867/002027/601600（全沪深，无北交所）
+- holdings_value_at(state,d,overrides)：`code in overrides` 直接按 holdings 键匹配 → 新源返回键同样 zfill(6) 即可
+- 模块级 imports（L42-54）无 re/requests；quant env requests=2.34.2 可用 → 顶部加 `import re`，requests 在函数内惰性 import
+- STATE: results/paper-state.json；last_daily=2026-08-24，model_version=a13_rsraw_e1f10dz
+- NAV: results/baseline-paper-nav.csv（末行 2026-08-24,0.98319）
+- 补丁方式：按 `def fetch_spot_closes` → `def load_st_flags` 边界整段替换（规避全角引号精确匹配陷阱）+ hashlib 后插一行 `import re`
