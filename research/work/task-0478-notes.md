@@ -44,3 +44,22 @@
 - r297_run.py 上传+启动, 市场 5505 codes, pb 94.1%, 满仓择时 248 交易日
 - 5 跑: G0W0/G0N/F1/F2/F3, 预算 ~25-30min (参照 r263 4跑24.3min)
 - r297_eval.py 已上传 HP scripts/
+
+## 8. 回测完成 (06:07 UTC = 14:07 +0800)
+- G0 惰性对拍 PASS: max|Δnav|=0.0 (n=5007) — 实现无缺陷
+- 形态 NAV (满仓无择时):
+  - F1 top20: ann 11.89% / MDD -70.05% / Sharpe 0.493 / Calmar 0.170 / cum 9.12x
+  - F2 top30: ann 13.53% / MDD -69.56% / Sharpe 0.534 / Calmar 0.195 / cum 12.67x
+  - F3 top50: ann 15.34% / MDD -68.53% / Sharpe 0.583 / Calmar 0.224 / cum 17.91x
+  - a13 对照: ann 22.39% / MDD -33.55% / Sharpe 1.374 / Calmar 0.667
+- 判门: G0 PASS; G1 FAIL(三形态 MDD -68~-70% 破 -40%); **G2 FAIL(三形态 corr 0.636/0.643/0.675 > 0.5)**; G3 近段 ann 6~11% MDD -56~-62%; G4 holdout ann 37~43% 但 MDD -33~-36%
+- 关键结论: R-294 quintile corr≤0.17 不迁移到真实多头满仓 NAV (市场 beta 继承, 与 a13 corr 0.64-0.67)
+- 结合收益 (F3 胜出): a13 纯引擎最优 (Sharpe 1.213/Calmar 1.177); 掺 csad 单调摊薄 → 结合=摊薄非增强
+- e2_results.json md5 68fde2962f7aa161a81de5833ae728b8
+- 台账 IT-R297-01/02/03 已登记
+
+## 9. 结论 (14:10 +0800)
+- csad 独立引擎化不能 monetize (G1 MDD 失控 + G2 corr>0.5 双 FAIL)
+- 与 R-282 判负殊途同归: csad 信息增量既不能叠加进 a13 也不能单独成引擎
+- 不进入评分制/影子观察; B 槽位聚焦可转债去相关 (task-0474)
+- 报告 R-297 已写入 shared/results/05-量化投资/
