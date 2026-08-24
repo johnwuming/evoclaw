@@ -29,3 +29,8 @@
 - 命令：`quant/bin/python scripts/paper_engine.py --action validate`（2026-08-24 21:52 UTC）
 - 结果 **6 PASS / 0 FAIL，退出码 0**（预期 5/6，K线新鲜度预期 FAIL 为已知环境问题——实际当日 K 线已采集，最新交易日 2026-08-24 距今 0 天，PASS；优于预期）
 - 明细：K线新鲜度 P / 因子面板覆盖率 P（5028只，非空率全1.0）/ 持仓K线完整 P（8只0异常）/ 价格合理 P（209抽样0异常）/ 分红连续 P（4461条）/ 调仓选股 P（20只）
+
+### 5.2 daily 幂等 ✅（2026-08-24 21:54 UTC）
+- pre 基线：baseline-paper-nav.csv 8 行，末行 `2026-08-24,0.98319`；paper-state.json last_daily=2026-08-24、model_version=a13_rsraw_e1f10dz
+- 执行 `--action daily`：日志「spot 收盘价拉取失败（回退 parquet 口径）」→ 优雅降级重算；「✅ rsync 到 VPS 完成」「净值更新: 总资产 ¥98,319.00 | NAV 0.983190 | 持仓 8 只 | 模型 a13_rsraw_e1f10dz」退出码 0
+- post：仍 8 行（未追加、无重复），末行/last_daily/model_version 逐字不变 → 幂等正确（HP 为 UTC，2026-08-24 行已存在，重算值与既有值一致）
