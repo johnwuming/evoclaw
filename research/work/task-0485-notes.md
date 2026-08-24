@@ -24,3 +24,10 @@
 - 单测（VPS 离线合成数据）：①正常月结 net=gross−cost 逐位 ✓ ②MMF 断供→估计路径有限值 ✓ ③mmf_est 月推送到达后重述+NAV 链重算 ✓ ④月中标记有限值 ✓。
 - 冻结口径重要发现（如实披露不改）：月末标签 reindex 精确匹配——非交易日月末（周末）SMA200=NaN→dir=0→w=0；实测冻结数据 158 月末标签中 61 个非交易日月末，dir200 非零=64，恰等于 R-305「在场 64/157 月」。此为 E1/E2/影子链一致行为，paper 引擎逐位复刻（一致性优先），已在报告风险节披露。
 - 当前信号预核（冻结数据）：2026-07-31（周五交易日）px 8.4330 < SMA200 9.4791 → 8 月 w=0（与 seed 一致）；2026-08-31 为周一交易日，9-01 调仓将按届时数据算信号（8-24 px 9.564 已逼近 SMA200 ~9.48）。
+
+## 步骤2：registry 激活（HP）
+
+- 前置 tar：model/registry_backup_task0485_20260825.tar.gz（67 项，sha256 e8b7347c262fb100a317…）。
+- 写前 sha 83c47f3a6529a574（12908B，= R-306 baseline 后链续）→ 写后 sha 0f2148a8e614650f（14649B）。
+- 变更：gold status shadow→active、type standalone_shadow→standalone_active、name 去「影子观察」、layer1.registry.note 更新、新增 promotion 节（activated_at 2026-08-25T00:35+08:00、批准人、影子期豁免语境、baseline_evals 全部取自 shadow.evals[0] 落盘值零手抄：corr −0.040013346299740626 n=131、ann 0.07590979342570381、mdd −0.05901780820812119、calmar 1.286218443728281、157 月；scope 显式「真金分配不在本次范围」；monitoring_note=evaluate 语义转正式监控）。
+- 写后三重校验全过：A_deep_equal=True、A2_deep_equal=True、gold_active=True、json 合法、engines=[A,A2,gold_trend_sma200]。
