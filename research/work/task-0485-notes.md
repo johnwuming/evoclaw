@@ -14,3 +14,13 @@
   - 执行：w = w_sig.shift(1)（t 月末信号 → t+1 月执行）；gross = w×mr + (1−w)×mmf_m；cost=|Δw|×0.0013，首月建仓也计成本
   - mmf_m = 000198 万份收益→日ret→resample ME 复利
 - E2 关键数字（e2_gates_result.json 落盘，禁止心算）：V1_net ann=0.07590979342573179, mdd=−0.05901780820817082, calmar=1.2862184437276736；G6 corr=−0.0400（n=131）；cost_model="abs(dw)*0.0013 per month (one-way 0.10% + spread 0.03%, frozen)"。
+
+## 步骤1：paper_engine_gold.py（自包含 paper 引擎）
+
+- 写 VPS scripts/paper_engine_gold.py（本地留档）→ scp 子系统被 HP 拒（subsystem request failed），改 ssh cat 管道落 HP ~/quant-evolve/scripts/paper_engine_gold.py。
+- md5 双侧一致：5cfddb6cd763029bd9a140aac3a73d80；HP py_compile OK（16474B）。
+- 设计：--action init/daily/monthly/verify；state=results/engines/gold/paper_state.json；NAV=1.0 激活新链（理由：157 月模拟史由 shadow 监控链继续承载，两链并存互证；避免 shadow 8-31 部分月（至 8-24）存根混接双记账；paper 增量全部可归因）。
+- 信号代码与 engines_shadow_nav_gold.py / r483 e2_backtest.py 逐行同构（fetch_gold_daily / compute_signals 原样复制）。
+- 单测（VPS 离线合成数据）：①正常月结 net=gross−cost 逐位 ✓ ②MMF 断供→估计路径有限值 ✓ ③mmf_est 月推送到达后重述+NAV 链重算 ✓ ④月中标记有限值 ✓。
+- 冻结口径重要发现（如实披露不改）：月末标签 reindex 精确匹配——非交易日月末（周末）SMA200=NaN→dir=0→w=0；实测冻结数据 158 月末标签中 61 个非交易日月末，dir200 非零=64，恰等于 R-305「在场 64/157 月」。此为 E1/E2/影子链一致行为，paper 引擎逐位复刻（一致性优先），已在报告风险节披露。
+- 当前信号预核（冻结数据）：2026-07-31（周五交易日）px 8.4330 < SMA200 9.4791 → 8 月 w=0（与 seed 一致）；2026-08-31 为周一交易日，9-01 调仓将按届时数据算信号（8-24 px 9.564 已逼近 SMA200 ~9.48）。
