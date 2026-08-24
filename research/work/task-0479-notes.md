@@ -22,4 +22,4 @@
 - e4_backtest.py 已写（py_compile OK）：G0→V6/V7/S1/S2→IC→结合表（仅 G6 PASS 触发）
 
 ## 正股市值采集完成（18:43）
-- 885/885 全成功、0 fail、725.4s；月度面板 stock_mktcap_monthly.parquet：425月(1991-04..2026-08)×885股，回测窗覆盖见 md5+coverage 校验输出（补记于下）
+- 885/885 全成功、0 fail、725.4s；月度面板 stock_mktcap_monthly.parquet：425月(1991-04..2026-08)×885股，md5=1311ef16cabbad45ed40b430de6c616f；窗102月，覆盖率均值89.3%、最低66.7%@2018-01(早期)、末月99.2%；fillna 0.5 兜底
