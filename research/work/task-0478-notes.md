@@ -28,3 +28,8 @@
 - 引擎等权 (w=1.0/len(new_pool)); 梯度需自定义补丁, 时间预算内优先等权 Top-N
 - a13 引擎: raw_universe=1(四闸门关), e1_guard=0, xsub_days=365, e1_lambda=1.0, e1_deadzone=0.30, n_hold=20, cost v2
 - 独立引擎决策: 候选池同 a13 (raw_universe=1, xsub=365, 四闸门关), 排序=纯 csad (e1_lambda=0 保持唯一排序核), 等权 Top-N
+
+## 5. 判门参照确认 (13:58)
+- R-289 可转债判门量级: G1 超额门(主窗毛年化超额 vs 基准≥5pp), G2 回撤门(MDD≤20%), G3 分段门(两窗>0), G4 holdout, G5 容量
+- 但 csad 是股票多头引擎(非可转债), 与 a13 同池; G1 质量门参照 R-263 思路: 独立引擎自身质量(ann/MDD), 冻结于预注册
+- R-255 corr<0.5 独立性门槛(G2 核心); R-263 G3 holdout 红旗条款; R-260 近段 ICIR -0.269 显性化
