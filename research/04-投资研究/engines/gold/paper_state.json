@@ -1,0 +1,66 @@
+{
+ "engine_id": "gold_trend_sma200",
+ "task_ref": "task-0485 / R-307",
+ "status": "active_paper",
+ "created_at": "2026-08-24T16:57:57+00:00",
+ "activation": {
+  "approved_by": "user 2026-08-25 00:35（微信主会话，影子期豁免）",
+  "registry": "model/registry/engines.json gold 条目 shadow→active",
+  "real_money": "未涉及——真金分配为独立人工门"
+ },
+ "frozen_form": {
+  "sma_n": 200,
+  "vol_n": 60,
+  "vol_target": 0.1,
+  "cost_per_absdw": 0.0013,
+  "freq": "monthly(first trading day)",
+  "mmf": "000198 monthly push",
+  "prereg": "R-304 sha256 40ae2657…"
+ },
+ "nav_policy": {
+  "base": 1.0,
+  "basis_date": "2026-08-24",
+  "note": "激活日新链 NAV=1.0；157 月模拟史由 shadow_nav.csv 监控链继续承载"
+ },
+ "open": {
+  "month": "2026-08",
+  "w": 0.0,
+  "price_ref": 9.564,
+  "basis_date": "2026-08-24",
+  "nav_open": 1.0,
+  "cost_pending": 0.0,
+  "mmf_daily_est": 2.316385105032258e-05,
+  "mmf_est_source": "2026-07-31",
+  "stub": true
+ },
+ "current_weight": 0.0,
+ "last_rebalance": "2026-08",
+ "last_signal": {
+  "month_end": "2026-07-31",
+  "px": 8.433,
+  "sma200": 9.479099999999999,
+  "vol60_ann": 0.22011098479222824,
+  "w_signal": 0.0
+ },
+ "months": [],
+ "marks": [
+  {
+   "date": "2026-08-24",
+   "px": 9.564,
+   "nav": 1.0
+  }
+ ],
+ "audit": [
+  {
+   "ts": "2026-08-24T16:57:57+00:00",
+   "event": "init",
+   "w_cur": 0.0,
+   "signal_month_end": "2026-07-31",
+   "px_basis": 9.564,
+   "basis_date": "2026-08-24",
+   "stub_month": true,
+   "note": "仓位=上月末冻结信号（PIT）；init 不触发交易（与当月已应用信号一致），成本 0"
+  }
+ ],
+ "updated_at": "2026-08-24T16:58:00+00:00"
+}
