@@ -3,91 +3,91 @@
     "300824": {
       "shares": 900,
       "cost": 7.74,
-      "weight": 0.069371,
+      "weight": 0.068837,
       "name": "北鼎股份",
-      "price": 7.63,
-      "price_date": "2026-08-21",
-      "pnl_amount": -99.0,
-      "pnl_pct": -0.014212
+      "price": 7.52,
+      "price_date": "2026-08-24",
+      "pnl_amount": -198.0,
+      "pnl_pct": -0.028424
     },
     "002107": {
       "shares": 1200,
       "cost": 6.41,
-      "weight": 0.075766,
+      "weight": 0.074452,
       "name": "沃华医药",
-      "price": 6.25,
-      "price_date": "2026-08-21",
-      "pnl_amount": -192.0,
-      "pnl_pct": -0.024961
+      "price": 6.1,
+      "price_date": "2026-08-24",
+      "pnl_amount": -372.0,
+      "pnl_pct": -0.048362
     },
     "603551": {
       "shares": 800,
       "cost": 9.4,
-      "weight": 0.074917,
+      "weight": 0.075102,
       "name": "奥普科技",
-      "price": 9.27,
-      "price_date": "2026-08-21",
-      "pnl_amount": -104.0,
-      "pnl_pct": -0.01383
+      "price": 9.23,
+      "price_date": "2026-08-24",
+      "pnl_amount": -136.0,
+      "pnl_pct": -0.018085
     },
     "000848": {
       "shares": 900,
       "cost": 8.32,
-      "weight": 0.075281,
+      "weight": 0.077167,
       "name": "承德露露",
-      "price": 8.28,
-      "price_date": "2026-08-21",
-      "pnl_amount": -36.0,
-      "pnl_pct": -0.004808
+      "price": 8.43,
+      "price_date": "2026-08-24",
+      "pnl_amount": 99.0,
+      "pnl_pct": 0.013221
     },
     "300009": {
       "shares": 800,
       "cost": 8.95,
-      "weight": 0.072493,
+      "weight": 0.069081,
       "name": "安科生物",
-      "price": 8.97,
-      "price_date": "2026-08-21",
-      "pnl_amount": 16.0,
-      "pnl_pct": 0.002235
+      "price": 8.49,
+      "price_date": "2026-08-24",
+      "pnl_amount": -368.0,
+      "pnl_pct": -0.051397
     },
     "600867": {
       "shares": 900,
       "cost": 8.57,
-      "weight": 0.073735,
+      "weight": 0.072773,
       "name": "通化东宝",
-      "price": 8.11,
-      "price_date": "2026-08-21",
-      "pnl_amount": -414.0,
-      "pnl_pct": -0.053676
+      "price": 7.95,
+      "price_date": "2026-08-24",
+      "pnl_amount": -558.0,
+      "pnl_pct": -0.072345
     },
     "002027": {
       "shares": 1500,
       "cost": 5.08,
-      "weight": 0.074251,
+      "weight": 0.074452,
       "name": "分众传媒",
-      "price": 4.9,
-      "price_date": "2026-08-21",
-      "pnl_amount": -270.0,
-      "pnl_pct": -0.035433
+      "price": 4.88,
+      "price_date": "2026-08-24",
+      "pnl_amount": -300.0,
+      "pnl_pct": -0.03937
     },
     "601600": {
       "shares": 800,
       "cost": 9.26,
-      "weight": 0.07613,
+      "weight": 0.077299,
       "name": "中国铝业",
-      "price": 9.42,
-      "price_date": "2026-08-21",
-      "pnl_amount": 128.0,
-      "pnl_pct": 0.017279
+      "price": 9.5,
+      "price_date": "2026-08-24",
+      "pnl_amount": 192.0,
+      "pnl_pct": 0.025918
     }
   },
   "cash": 40393.0,
-  "total_value": 98989.0,
-  "holdings_value": 58596.0,
-  "total_asset": 98989.0,
-  "total_pnl": -1011.0,
+  "total_value": 98319.0,
+  "holdings_value": 57926.0,
+  "total_asset": 98319.0,
+  "total_pnl": -1681.0,
   "price_basis": "qfq",
-  "updated_at": "2026-08-24T16:30:02",
+  "updated_at": "2026-08-24T17:37:39",
   "model_version": "a13_rsraw_e1f10dz",
   "timing_layer": "timing_v4_i4_q3z",
   "timing_ratio": 0.617398
