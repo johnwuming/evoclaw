@@ -80,3 +80,49 @@ HP: scripts/paper_trade.py.bak-task0486-20260825 (31768B, md5 2b96a20c 与原文
   - last_daily=2026-08-24；v3 独有字段(model_version_from_v3_test)写后保留
   - last_data_date=2026-08-24（部分日更文件已含当日数据）
 - py_compile 通过（本地+HP 双侧）
+
+## 阶段2: HP 侧根因诊断（01:05-01:10）
+
+### 引擎与 cron 结构（HP crontab）
+- **paper_engine.py（新链路, task-0251）**：16:30 daily / 15:00 rebalance --check-month-start / 周日20:00 validate
+  - 写 baseline-paper-{nav,portfolio,summary,trades,validation} + paper-state.json，自带 rsync 到 VPS
+- **paper_trade.py（旧链路）**：16:30 daily（cron_daily.log），写 paper-{nav,summary,portfolio}.csv/json + cron_paper_rebalance.sh
+- **数据管道**：cron_qfq_daily.py 18:00(1-5) 增量刷 data/all_stocks_qfq/（stage1=持仓+hs300 294只~71s；stage2=全市场~894s）；周日18:00 collect_qfq_baostock --mode init + rebuild_merged；周日20:00 refresh_data.py
+
+### 根因（追加门 bug 定位，已复现于日志+代码）
+1. **action_daily() 行日期 = get_latest_trade_date() = parquet 数据最大日期**（paper_engine.py L1191: d=get_latest_trade_date() → L1199 append_nav(str(d))）
+2. **数据时序错位**：引擎 16:30 跑，但 qfq 数据 18:00 才刷新 → 引擎永远用 T-1 数据 → 行日期永远滞后
+3. **叠加数据管道缺勤**：cron_qfq_daily.log 最后一次成功=08-21 18:16（数据到 08-21）；**08-24(周一) 18:00 无任何日志行=未运行**；parquet 实测 max date=2026-08-21（000001/300824/601600/002027 全部）
+4. 结果：08-24 16:30 引擎用 08-21 数据算 NAV(98,989/0.98989) → append_nav upsert 行日期 08-21（该行系 08-24 运行写入）→ 08-24 行缺失，last_daily 停在 08-21
+5. **历史缺口同因**：08-17、08-18 行缺失（08-17 周一 18:00 qfq 刷新未跑 + 结构性滞后）；已存在行 08-19/08-20/08-21 分别由 08-20/08-21/08-24 的运行写入（NAV 值与逐日日志完全吻合，已交叉验证）
+6. append_nav 本身是 upsert（按日期去重后重写），不会产生重复行；问题不在去重，在行日期取的是"数据日期"而非"运行交易日"
+
+### 旧引擎（paper_trade.py）状态
+- 16:30 照跑（cron_daily.log 08-24 有完整运行），但 NAV 恒 0.9996/99960 冻结在成本价（pnl=0，加载 6089 文件后价格未生效）→ 价格查找静默失败回退 cost
+- 其输出 paper-nav/paper-summary 与新链路并存 = 双引擎现象
+
+### 待办
+- [ ] 消费者排查：谁读 baseline-paper-* vs paper-*
+- [ ] akshare 可用性
+- [ ] cron_qfq_daily.py 参数（能否只跑 stage1）
+
+## 阶段3: 回填与生产应用（已完成）
+1. 生产 dry：08-24 17:23 用补丁版跑 --action daily（写前已 cp 备份 nav/state 各 .bak-task0486-20260825）
+   → 08-24 行 = 0.9899/58596/98989（市值计价，与 v3 同日独立计算 98,989 完全一致）
+2. 回填 08-17/08-18 行：值取 cron_daily.log 当日 run 输出（99960/59567/40393/0.9996，成本价口径），python 插入+排序+断言无重复
+3. CSV 终态 7 数据行（08-14/17/18/19/20/21/24），cash+hv=total 校验通过
+4. state: last_daily=08-24, last_data_date=08-24, model_version 保留（合并写生效）
+5. summary 刷新：nav_per_unit 0.9899, last_update 08-24
+6. VPS 镜像：HP→VPS rsync 255 失败（ssh subsystem 关闭），改 VPS 侧 pull 成功；paper-nav.csv(329B)/state(1135B)/summary(1306B) 均为最新
+
+## 阶段4: 审计补充
+- backup_paper_state_20260812/: 旧 v1 schema（current_capital/factor_model/rebalance_schedule，无 cash/holdings），与现行 state 完全不同代际，对当前引擎不可作回滚点（仅历史考古价值）；其 paper-nav.csv 仅 2 行
+- qfq 日更 cron（R-244, 18:00 两阶段）最后成功 08-21 18:16；HP 当前时间 17:25 08-24（周一），今日 18:00 尚未到——非故障
+- 周日批：collect_qfq_baostock init + rebuild_merged（20:00 周日）→ 5254 文件 mtime 08-23 20:00，数据尾=08-21
+- 无关文件零改动；crontab 未动；gold/registry/engines/evolution_pipeline 未触碰
+
+## cron/链路待办（交主 agent，本任务不改 crontab）
+1. paper_trade.py 与 paper_engine.py 同刻 16:30 双跑：建议错峰（如 paper_trade 16:35）或收敛单引擎（见报告权威源建议）
+2. VPS 镜像 paper-trades.csv/paper-portfolio.json 停在 08-12（rebalance 日才 rsync paper-*；08-14/17 调仓未同步）——建议 daily 后也同步这两个文件
+3. HP→VPS root rsync 当前 255（io/subsystem），v3 的 rsync_to_vps 在 16:30 却显示成功——两者路径/方式不同，需核对（可能 v3 走了别的用户/端口）
+4. 000001_daily_qfq.parquet 与 000001.parquet 双源并存：合并口径已由本补丁在 paper_trade 侧处理；上游 rebuild_merged 归一时点（周日）与日更的关系建议复核
