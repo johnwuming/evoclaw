@@ -29,3 +29,8 @@ ii  cron-daemon-common 3.0pl1-200ubuntu1 all
 结论：Ubuntu 官方源 **Debian cron 3.0pl1**（vixie-cron 血统），非 cronie。CRON_TZ 支持性待 E3 实证。
 
 （后续证据继续追加）
+
+## 6. 持久化
+
+- 映射表持久化副本：`shared/results/work/task-0489-crontab-map.md`（/tmp 副本 r311_crontab_map.md）。
+- 零改动终验：crontab md5 前后均 3983e350b74051d45860502954270ab1；paper_engine.py/gold mtime 未变；/usr/share/zoneinfo/Asia/Shanghai 存在（TZDATA_OK，路径 A 前置条件满足）。
