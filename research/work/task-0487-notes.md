@@ -23,3 +23,9 @@
 - scripts/cron_paper_daily.sh 与 cron_paper_rebalance.sh 未删除，均在文件首行插入：
   `# RETIRED by task-0487 R-309 2026-08-25: crontab 已移除引用，旧链退役留档，勿再启用`
 - 其余内容未动；crontab 已无任何引用，纯留档
+
+## 5. 在役链冒烟验证（步骤4）
+### 5.1 validate ✅
+- 命令：`quant/bin/python scripts/paper_engine.py --action validate`（2026-08-24 21:52 UTC）
+- 结果 **6 PASS / 0 FAIL，退出码 0**（预期 5/6，K线新鲜度预期 FAIL 为已知环境问题——实际当日 K 线已采集，最新交易日 2026-08-24 距今 0 天，PASS；优于预期）
+- 明细：K线新鲜度 P / 因子面板覆盖率 P（5028只，非空率全1.0）/ 持仓K线完整 P（8只0异常）/ 价格合理 P（209抽样0异常）/ 分红连续 P（4461条）/ 调仓选股 P（20只）
