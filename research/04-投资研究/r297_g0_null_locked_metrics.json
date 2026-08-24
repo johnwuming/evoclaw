@@ -1,0 +1,38 @@
+{
+  "sort": "ext",
+  "cost_model": "v2",
+  "limit_board": "on",
+  "capital_base": 10000000.0,
+  "div_min": 0.02,
+  "roe_min": 0.15,
+  "roa_min": 0.1,
+  "n_hold": 20,
+  "price_cap": 10.0,
+  "min_amt": 0.0,
+  "raw_universe": 1,
+  "e1_guard": 0,
+  "e1_lambda": 0.0,
+  "e1_deadzone": 0.0,
+  "xsub_days": 365.0,
+  "ext_specs": [
+    [
+      "csad_resid",
+      0.0,
+      -1
+    ]
+  ],
+  "experiment": "R-297 E2",
+  "panel_md5": "416019cf5368bde27c289949069f6193",
+  "period_start": "2006-01-04",
+  "period_end": "2024-06-28",
+  "years": 18.48,
+  "num_rebalance": 222,
+  "avg_holdings": 19.34,
+  "monthly_turnover_est": 1.0139,
+  "cumulative_return": 2.3957,
+  "annual_return": 0.0684,
+  "max_drawdown": -0.8199,
+  "sharpe": 0.3748,
+  "calmar": 0.0834,
+  "monthly_win_rate": 0.5475
+}

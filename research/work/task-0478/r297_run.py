@@ -65,6 +65,9 @@ def _get(code, d):
 _R297.get = _get
 
 # ---------------- 链式补丁: a9 patch 源码 + R297 csad 唯一因子注入 ----------------
+# G0 设计(R-253/R-264 改良版): G0W0(w=0 注入, 读面板) vs G0N(null, csad_resid 分支返回常量 0.0 不读面板)
+#  两者 w=0 → 贡献均严格 0.0, 全池全 0 分 → 同稳定序 → NAV 须逐位一致(max|Δnav|<1e-12)
+#  null 分支存在(避免 ext_filter_all 过滤掉全池), 但值恒定 0.0 → 唯一差异 = 面板读取路径
 R297_INJECT = '''    # ---- R297 (task-0478): csad_resid 唯一排序核分支 ----
     OLD_FV = \'\'\'elif _name == "amihud20":\'\'\'
     NEW_FV = \'\'\'elif _name == "csad_resid":
@@ -73,15 +76,23 @@ R297_INJECT = '''    # ---- R297 (task-0478): csad_resid 唯一排序核分支 -
     assert SRC.count(OLD_FV) == 1, "R297 fval anchor=%d" % SRC.count(OLD_FV)
     SRC = SRC.replace(OLD_FV, NEW_FV)
 '''
+R297_INJECT_NULL = '''    # ---- R297 null (task-0478): csad_resid 常量 0.0(不读面板, 惰性对照) ----
+    OLD_FV = \'\'\'elif _name == "amihud20":\'\'\'
+    NEW_FV = \'\'\'elif _name == "csad_resid":
+                            _v = 0.0
+                        elif _name == "amihud20":\'\'\'
+    assert SRC.count(OLD_FV) == 1, "R297-null fval anchor=%d" % SRC.count(OLD_FV)
+    SRC = SRC.replace(OLD_FV, NEW_FV)
+'''
 
 def build_patched_engine(engine, null_inject=False):
     psrc = inspect.getsource(A9.patch_engine)
     a1 = '    mod = types.ModuleType("a9_engine")'
     a2 = "    mod.__dict__.update(engine.__dict__)"
     assert psrc.count(a1) == 1 and psrc.count(a2) == 1, "chain anchors"
-    if not null_inject:
-        psrc = psrc.replace(a1, R297_INJECT + a1)
-        psrc = psrc.replace(a2, a2 + '\n    mod.__dict__["_R297"] = _R297')
+    inj = R297_INJECT_NULL if null_inject else R297_INJECT
+    psrc = psrc.replace(a1, inj + a1)
+    psrc = psrc.replace(a2, a2 + '\n    mod.__dict__["_R297"] = _R297')
     g = dict(globals())
     exec(compile(psrc, "<patch_engine_r297>", "exec"), g)
     return g["patch_engine"](engine)

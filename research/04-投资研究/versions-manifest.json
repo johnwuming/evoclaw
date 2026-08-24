@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T05:30:02",
+  "generated_at": "2026-08-24T06:00:02",
   "active": "a13_rsraw_e1f10dz",
   "versions": [
     {
@@ -2220,6 +2220,74 @@
         }
       },
       "files_note": "results/r278_t3_v20_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "r297_g0_null",
+      "strategy_prefix": "r297_g0_null",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.0758,
+          "max_drawdown": -0.8199,
+          "sharpe": 0.3976,
+          "calmar": 0.0925,
+          "cumulative_return": 3.5079,
+          "monthly_win_rate": 0.5466,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.0684,
+          "max_drawdown": -0.8199,
+          "sharpe": 0.3748,
+          "calmar": 0.0834,
+          "cumulative_return": 2.3957,
+          "monthly_win_rate": 0.5475,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/r297_g0_null_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "r297_g0_w0",
+      "strategy_prefix": "r297_g0_w0",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.0758,
+          "max_drawdown": -0.8199,
+          "sharpe": 0.3976,
+          "calmar": 0.0925,
+          "cumulative_return": 3.5079,
+          "monthly_win_rate": 0.5466,
+          "period_start": "2006-01-04",
+          "period_end": "2026-08-14",
+          "years": 20.61,
+          "num_rebalance": 248
+        },
+        "locked": {
+          "annual_return": 0.0684,
+          "max_drawdown": -0.8199,
+          "sharpe": 0.3748,
+          "calmar": 0.0834,
+          "cumulative_return": 2.3957,
+          "monthly_win_rate": 0.5475,
+          "period_start": "2006-01-04",
+          "period_end": "2024-06-28",
+          "years": 18.48,
+          "num_rebalance": 222
+        }
+      },
+      "files_note": "results/r297_g0_w0_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "v0_seed",
