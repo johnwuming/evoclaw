@@ -12,3 +12,9 @@
 - 移除方式：`crontab -l | grep -v "scripts/paper_trade.py --action daily" | grep -v "scripts/cron_paper_rebalance.sh" | crontab -`（未用 crontab -r）
 - 验证：写回后 34 行；`grep -c "paper_trade\|cron_paper_rebalance"` = 0
 - diff 备份 vs 现状：仅 `3d2`（paper_trade daily 行）与 `5d3`（cron_paper_rebalance.sh 行）两个删除，无任何其他行变化 → 恰好少 2 行 ✅
+
+## 3. 旧链产物归档（步骤2）✅
+- results/paper-nav.csv（329B, 2026-08-24 17:40Z）→ archive/paper-nav.csv.r309-retired
+- results/paper-summary.json（1307B）→ archive/paper-summary.json.r309-retired
+- mv 前用 lsof 确认无进程持有两文件（输出为空）
+- results/ 下原路径已不存在（ls 报 No such file）；archive/ 内 r309 三件套 + README-r309.md（1251B，含退役原因+指向 R-308/R-309 报告）齐备
