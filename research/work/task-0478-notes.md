@@ -14,3 +14,9 @@
 - a13_rsraw_e1f10dz_full_nav.csv: date,nav,num_held, 5009 行 (2006-01-04 起, 日频)
 - csad_resid_monthly.csv: ym,code,resid_z, 596523 行, md5 416019cf5368bde27c289949069f6193 ✓ (与任务书一致)
 - r263 脚本目录 scripts_r263 未在 results/work/r263/ 下找到, 需确认位置 (VPS 镜像 work/r263/scripts_r263/)
+
+## 3. 探测记录-续 (13:45)
+- r263_run.py 机制理解: a9_common.patch_engine 链式补丁, ext_specs 注入第5因子 csad_resid 负权 (NaN→0)
+- a9_common.py: PB ext 排序分支 (ext_mode=zscore|ranksum, ext_specs=[(factor,weight,sign),...]); PC e1_guard + xsub_days; PA raw_universe 四闸门可关
+- r263_eval.py: G0/G1/G2/G3 判门, e2_results.json, 复合 IC 用 dump 的引擎排序分
+- 关键: 独立引擎形态 = ext_specs 仅含 csad_resid (唯一排序核) 而非 4因子+csad 第5因子 — 需确认引擎权重分配
