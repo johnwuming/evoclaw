@@ -18,3 +18,8 @@
 - results/paper-summary.json（1307B）→ archive/paper-summary.json.r309-retired
 - mv 前用 lsof 确认无进程持有两文件（输出为空）
 - results/ 下原路径已不存在（ls 报 No such file）；archive/ 内 r309 三件套 + README-r309.md（1251B，含退役原因+指向 R-308/R-309 报告）齐备
+
+## 4. cron 脚本处置（步骤3）✅
+- scripts/cron_paper_daily.sh 与 cron_paper_rebalance.sh 未删除，均在文件首行插入：
+  `# RETIRED by task-0487 R-309 2026-08-25: crontab 已移除引用，旧链退役留档，勿再启用`
+- 其余内容未动；crontab 已无任何引用，纯留档
