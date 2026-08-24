@@ -59,3 +59,24 @@
 ### 08-14 行真相
 当前 CSV 的 08-14 行是 08-17 run 写入（成本价 59567），覆盖了 08-14 当日 run 的真实估值行（11持仓/95124/NAV0.9999，见 cron_daily.log L68）→ 历史真实数据已被覆盖，只能标注
 
+
+## 阶段2: 修复实施与验证（已完成）
+
+### 补丁内容（paper_trade.py, +2.4KB, 4处）
+1. L80 代码匹配: basename 去 .parquet 后再去 `_daily_qfq` 后缀 → 持仓纯代码可命中日更文件价格
+2. L146-156 双源去重: 同代码 {code}.parquet(批量) vs {code}_daily_qfq.parquet(日更) 保留数据日期更新行
+3. L473-487 save_state 写前重读合并 {**disk, **state} → 缓解与 v3 同刻写共享 paper-state.json 的 lost-update
+4. L626-644 NAV 行日期=运行日(工作日)；周末手动运行回退数据日期防误写；数据滞后降级为告警；state 新增 last_daily+last_data_date
+
+### 备份
+HP: scripts/paper_trade.py.bak-task0486-20260825 (31768B, md5 2b96a20c 与原文件一致)
+本地: /tmp/paper_trade_orig.py
+
+### 验证（沙箱 /tmp/t486，未触生产文件）
+- 干跑 action_daily（真实数据+复刻 state）两次，结果一致：
+  - NAV csv 追加 `2026-08-24,0.9899,40393.0,58596.0,98989.0`（旧代码会写 08-21 行=覆盖）
+  - 持仓市值 58596 ≠ 成本 59567 → 价格命中（修复前恒成本）
+  - **交叉验证**: 98,989.00 与 v3 paper_engine 08-24 16:30:05 独立计算的总资产完全一致（两引擎估值收敛）
+  - last_daily=2026-08-24；v3 独有字段(model_version_from_v3_test)写后保留
+  - last_data_date=2026-08-24（部分日更文件已含当日数据）
+- py_compile 通过（本地+HP 双侧）
