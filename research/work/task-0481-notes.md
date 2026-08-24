@@ -10,3 +10,14 @@
 
 ## 步骤1：PIT 成分史可得性实测（21:58 开始）
 待测：akshare index_stock_hist（新浪历史成分）、index_detail_hist_cni（国证历史成分）、中证官网 closeweight 文件。
+
+## 步骤1结论：PIT 不可得（22:00-22:04 实测）
+- akshare 1.18.94 无 index_stock_hist；cons_csindex 仅当前快照；index_detail_hist_cni 实测仅最新单期截面（399324 → 40 行全 2026-07-31）且国证族无对应指数；官网历史成分=逐期公告 PDF 超预算；全市场 fallback 外推 >1.5h 超硬上限。
+- 处置：折中口径=176 快照池+月度 PIT 规则，预注册冻结+硬披露，G6 终止开关不放宽。
+
+## 步骤2：预注册落盘（22:07）
+- work/r481/e2_prereg.json（4122B）+ R-301 报告（3244B）已写；sha256+时间戳见上命令输出（转录至下）：
+  - e2_prereg.json sha256 已记（见 md5 段）
+- 冻结要点：Top-20 等权月频；风险层=H30269<200DMA→次月半仓；成本单边 0.10%；基准=价格+池中位股息/12 自建 TR；G1 净超额≥+2.5pp（理由：E1 毛超额+3.0、死亡线+2、成本-0.4）；G2 MDD≤20%；G3 两段均正；G4 换手≤40%；G5 容量≥2000万（全持仓 10%×ADV20）；G6 corr(a13)<0.5 终止开关。
+- 后台进行中：fetch_adv.py（135 只 ever-held 成交额，/tmp/r481/fetch_adv.log）
+11097197a4b881d30ef4a5c3b8a1595bd5d60229c0a4f956153afbde19f2b750  work/r481/e2_prereg.json
