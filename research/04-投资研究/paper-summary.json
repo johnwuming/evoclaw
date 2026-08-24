@@ -1,68 +1,68 @@
 {
-  "nav": 99960.0,
-  "nav_per_unit": 0.9996,
-  "total_return": -0.04,
+  "nav": 98989.0,
+  "nav_per_unit": 0.9899,
+  "total_return": -1.01,
   "holdings_count": 8,
   "cash": 40393.0,
-  "holdings_value": 59567.0,
-  "last_update": "2026-08-21",
+  "holdings_value": 58596.0,
+  "last_update": "2026-08-24",
   "status": "running",
   "holdings_detail": {
     "300824": {
       "shares": 900,
       "cost": 7.74,
-      "current_price": 7.74,
-      "value": 6966.0,
-      "pnl": 0
+      "current_price": 7.63,
+      "value": 6867.0,
+      "pnl": -99.0
     },
     "002107": {
       "shares": 1200,
       "cost": 6.41,
-      "current_price": 6.41,
-      "value": 7692.0,
-      "pnl": 0
+      "current_price": 6.25,
+      "value": 7500.0,
+      "pnl": -192.0
     },
     "603551": {
       "shares": 800,
       "cost": 9.4,
-      "current_price": 9.4,
-      "value": 7520.0,
-      "pnl": 0
+      "current_price": 9.27,
+      "value": 7416.0,
+      "pnl": -104.0
     },
     "000848": {
       "shares": 900,
       "cost": 8.32,
-      "current_price": 8.32,
-      "value": 7488.0,
-      "pnl": 0
+      "current_price": 8.28,
+      "value": 7452.0,
+      "pnl": -36.0
     },
     "300009": {
       "shares": 800,
       "cost": 8.95,
-      "current_price": 8.95,
-      "value": 7160.0,
-      "pnl": 0
+      "current_price": 8.97,
+      "value": 7176.0,
+      "pnl": 16.0
     },
     "600867": {
       "shares": 900,
       "cost": 8.57,
-      "current_price": 8.57,
-      "value": 7713.0,
-      "pnl": 0
+      "current_price": 8.11,
+      "value": 7299.0,
+      "pnl": -414.0
     },
     "002027": {
       "shares": 1500,
       "cost": 5.08,
-      "current_price": 5.08,
-      "value": 7620.0,
-      "pnl": 0
+      "current_price": 4.9,
+      "value": 7350.0,
+      "pnl": -270.0
     },
     "601600": {
       "shares": 800,
       "cost": 9.26,
-      "current_price": 9.26,
-      "value": 7408.0,
-      "pnl": 0
+      "current_price": 9.42,
+      "value": 7536.0,
+      "pnl": 128.0
     }
   }
 }
