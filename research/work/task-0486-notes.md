@@ -126,3 +126,42 @@ HP: scripts/paper_trade.py.bak-task0486-20260825 (31768B, md5 2b96a20c 与原文
 2. VPS 镜像 paper-trades.csv/paper-portfolio.json 停在 08-12（rebalance 日才 rsync paper-*；08-14/17 调仓未同步）——建议 daily 后也同步这两个文件
 3. HP→VPS root rsync 当前 255（io/subsystem），v3 的 rsync_to_vps 在 16:30 却显示成功——两者路径/方式不同，需核对（可能 v3 走了别的用户/端口）
 4. 000001_daily_qfq.parquet 与 000001.parquet 双源并存：合并口径已由本补丁在 paper_trade 侧处理；上游 rebuild_merged 归一时点（周日）与日更的关系建议复核
+
+## 阶段3: 修复实施（01:20-01:38 HP/UTC=08-24 17:20-17:38）
+
+### 关键时区发现
+- **HP 系统时区=UTC**。paper cron「16:30 1-5」实际= CST 次日 00:30；qfq 数据 cron「18:00」= CST 02:00。
+- 即引擎运行时当日收盘数据还要 1.5h 才入库 → 行日期永远取到 T-1 → 最新交易日缺行（结构性根因）。
+- 2026-08-24(周一) 18:00 UTC 的 qfq 刷新按计划在 CST 周二 02:00 才到（尚未发生），非"缺勤"；但 08-17/08-18 两次确属未运行（缺口实锤）。
+
+### 修改文件与备份（全部先备份后修改）
+1. `scripts/paper_engine.py`（在役引擎，63,225B→65,xxx）
+   - 备份：`scripts/paper_engine.py.bak.task0486_08251733`（原版完整备份）
+   - 改动① fetch_spot_closes()：盘后(≥15:05)东财快照取持仓当日真实收盘（akshare 1.18.83）；失败回退 parquet
+   - 改动② action_daily()：行日期修复（交易日+收盘后=当日；否则=数据日期）+ 缺口回填（首行以来所有缺失交易日，parquet 当日 qfq 收盘逐日估值，append_nav 按日 upsert）
+   - 改动③ holdings_value_at/write_summary/write_portfolio 增加 overrides 透传（spot 价与 price_date 元数据一致落盘）
+   - 改动④ state 新增 last_data_date 审计字段
+   - py_compile PASS
+2. `scripts/paper_trade.py`（旧链路；此前 08-24 17:18 已有一次 task-0486 中断尝试的修改：文件名匹配修复+state 合并，本任务验证保留）
+   - 备份：`scripts/paper_trade.py.bak-task0486-20260825`（改动前原版）+ `scripts/paper_trade.py.bak.task0486b_08251739`（本次改动前）
+   - 改动① 行日期=数据日期（防"今天日期+昨天价格"错配行）
+   - 改动② daily 不再写 state.last_daily（在役引擎独家维护，防同刻竞写口径漂移）
+   - 改动③ **action_rebalance 冻结**：旧链按 v5h 选股会改写共享 paper-state 的 holdings/cash，9/1 月首交易日必触发在役 a13 持仓被覆盖 → 数据完整性事故，冻结为 log+exit 0
+
+### 回填溯源（08-24 行 + 08-17/18 行）
+- 数据源：HP `data/all_stocks_qfq/{code}_daily_qfq.parquet`（baostock qfq 官方日线）
+- 08-24 数据获取命令：`nohup python scripts/cron_qfq_daily.py --only-stage1 >> logs/qfq_stage1_task0486.log`（stage1=持仓+hs300 294 只，61s 完成，GATE ref=2026-08-24 fresh=5/5）
+- 08-17/18 数据：parquet 历史本就完整，直接按当日收盘估值
+- 回填执行：修复后的 `paper_engine.py --action daily` 自动回填，日志「↩️ 回填缺口 NAV 行: 2026-08-24」→「↩️ 回填缺口 NAV 行: 2026-08-17,2026-08-18」
+
+### 验证记录（可复现）
+- baseline-paper-nav.csv 终态 7 行：08-14,17,18,19,20,21,24（= 起始以来全部交易日）
+- 断言脚本 PASS：无重复日期 / 与 000001 parquet 日历连续性（missing=[]）/ last_daily==NAV末行==price_date==2026-08-24 / summary.total(98319)==NAV行(0.98319)
+- 双向用例：连跑 3 次 daily → 行数恒 7、无重复（重复→拒绝 ✓）；首跑即补 08-24（缺失→追加 ✓）
+- 旧链 rebalance 冻结验证：`--action rebalance` → "⛔ 已冻结" exit 0 ✓
+- 双链估值一致：两链 08-24 总资产均 ¥98,319 ✓
+- VPS 副本：md5 与 HP 一致（baseline-paper-nav a14b3e0d / paper-state bb6be83e）；引擎 push 目标=本 VPS(10.12.192.98) workspace-quant/results/，已复制到 shared/results/04-投资研究/
+
+### 已知限制
+- HP→东财 spot 端点当前 RemoteDisconnected（重试 2 次失败）→ 当日行降级为 T+1 回填写入（完整性不变，延迟+1 运行日）；待用户决策是否加备用行情源
+- 旧链 paper-nav 历史行(08-17~21)仍是冻结成本价错误值（旧 bug 时期产物），08-24 起才正确 → 处置建议见报告
