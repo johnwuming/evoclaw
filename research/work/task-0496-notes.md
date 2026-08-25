@@ -27,3 +27,15 @@
 - 当时选了 B（决策B常备已闭环）；本次 F6 拍板 = 选项 A 的正式激活路径。
 - 0459 附带发现：ddc 价值集中在 2008/2015 深熊，不在 v1.2 冻结危机清单；O1b 叠加轨三线全败。
 - 还有 task-0461「paper 修复」已完成——需查 memory 确认修了什么（可能与本方案有关）。
+
+## [00:40] HP 实查 #1：基线 mtime（零改动声明 BEFORE 基准）
+- scripts/paper_engine.py = 70504B, mtime 2026-08-24 22:27:57 UTC（task-0461 paper 修复所致）
+- scripts/paper_engine_gold.py = 16474B, mtime 2026-08-24 16:55:31 UTC
+- model/registry/engines.json = 14649B, mtime 2026-08-24 16:56:23 UTC
+- scripts/backtest_dividend_quality_iter.py = 36116B（ddc 语义参照）
+- crontab（只读列出，未改）：
+  - A 链：30 16 * * 1-5 daily；0 15 * * 1-5 rebalance --check-month-start；0 20 * * 0 validate
+  - gold 链：40 7 * * 1-5 paper_engine_gold.py daily；0 3 * * 0 verify
+  - gold 影子月任务：38 9 3 * * append shadow_nav；40 9 3 * * evaluate
+- registry engines.json：top=[schema_version, engines(list)]；3 引擎：A a13_rsraw_e1f10dz=active；T4 crowdf2=shadow；gold（SMA200×波动目标10%×月频×现金增强）=active（=正式监控态）
+- 无 active_paper 键（任务书描述"active_paper w=0"应指 gold 引擎 paper state 内字段，下一步实查）
