@@ -18,3 +18,14 @@ task-0491 notes init
 - GET /api/quant/engines → ok:true, 3 引擎含 gold（active, evals=1）✓
 - GET /api/quant/engines/gold_trend_sma200/shadow-nav → ok, source=nav_path, points=157, 末点 2026-08-31 ✓，**但 nav 全错（读到第2列 w_applied=0）→ 必须增强 parseShadowNavCsv 按表头定位 nav 列**（已批准例外：server.js 新增端点+解析器增强）
 - paper_state.json：marks=1 条 {date:2026-08-24, px:9.564, nav:1.0}，months=[]，无 updated_at 字段（用文件 mtime）
+
+## 09:40 server.js 改动完成（语法 OK，服务重启 active）
+1. parseShadowNavCsv 表头驱动列定位（nav 列按表头名找，兼容 gold 第7列 + a2 date,nav 第2列；无表头保持原行为）
+2. 新端点 GET /api/quant/engines/:id/paper（路径由 shadow.nav_path 目录推导 paper_state.json；缺文件 ok:false；返回 status/current_weight/last_signal{px,sma200,vol60}/marks/open/months_closed/activated_at(registry promotion)/updated_at）
+3. loadPaperQuant：shList filter 加 standalone_b；enginePaper fetch + sig + 传参
+4. renderCrossEngineShadowCard：standalone_b 单线图 + 已激活徽标 + eval 摘要（ann/mdd/calmar/corr_*）+ paper 实时小区块（激活日期/仓位 w/mark NAV/marks 数/已结月）
+5. 调用处 13346 传 enginePaper
+
+## 09:42 端点实测（改码+重启后）
+- GET /api/quant/engines/gold_trend_sma200/shadow-nav → ok, source=nav_path, points=157（2013-08-31 nav=1.0038 … 2026-08-31 nav=2.6046），nonzero=157 ✓
+- GET /api/quant/engines/gold_trend_sma200/paper → ok, available, status=active_paper, current_weight=0, months_closed=0, activated_at=2026-08-25T00:35:00+08:00, last_signal{month_end:2026-07-31, px:8.433, sma200:9.4791, vol60_ann:0.2201, w_signal:0}, marks=1 {date:2026-08-24, nav:1, px:9.564}, open{month:2026-08, w:0, nav_open:1} ✓
