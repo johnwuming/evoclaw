@@ -62,9 +62,8 @@
 - gold 月度化 157 点归一尾值 2.595（手算期望 2.594 ✓）；A2 月度化 222 点归一尾值 38.969（=38.97 ✓）。
 - `node --check` 通过；改动未触碰数据层/同步链/HP。
 
-### 截图（4 张，tools/agent-dashboard/）
-- `r315-after-390x844-collapsed.png` / `r315-after-390x844-expanded.png`（折叠/展开对比）
-- `r315-after-1440x900-collapsed.png` / `r315-after-1440x900-expanded.png`
+### 截图（8 张，tools/agent-dashboard/r315-{390x844,1440x900}-{front,scrolled,collapsed,expanded}.png）
+- front：首屏（评估指标徽标行 + A2/gold 对比图前置可见）；scrolled：滚动中（底部导航固定 viewport 底部）；collapsed：滚到生命周期面板处折叠态（一行式头）；expanded：同位置展开态（决策时间线/实验台账/迭代轨迹完整可见）
 
 ## 四、遗留与说明
 - A2 与 gold 曲线纵轴为各自归一净值（首月=1），量级差异大（A2 终值 38.97 vs gold 2.60）属真实历史收益差异，如实展示；如需对数轴可在后续迭代调整。
