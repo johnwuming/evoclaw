@@ -72,8 +72,8 @@
 - /api/quant/engines/gold_trend_sma200/paper：ok，status=active_paper
 
 ### 截图（4 张，tools/agent-dashboard/）
-- r315-after-390x844-collapsed.png / r315-after-390x844-expanded.png
-- r315-after-1440x900-collapsed.png / r315-after-1440x900-expanded.png
+- 最终 8 张：r315-{390x844,1440x900}-{front,scrolled,collapsed,expanded}.png（front=首屏前置区块；scrolled=滚动中 nav 固定；collapsed/expanded=滚到生命周期面板处折叠/展开对比，头高 69/41px vs 面板 9335/6669px）
+- 首批 4 张 after-* 因面板在视口外未体现差异已删除重截
 
 ### 离线单测（/tmp/r315-unit.js + 补充）
 - gold 月度化 157 点归一尾值 2.595（期望 2.594 ✓）；A2 月度化 222 点归一尾值 38.969（=38.97 ✓）
