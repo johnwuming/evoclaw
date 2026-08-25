@@ -29,3 +29,12 @@ task-0491 notes init
 ## 09:42 端点实测（改码+重启后）
 - GET /api/quant/engines/gold_trend_sma200/shadow-nav → ok, source=nav_path, points=157（2013-08-31 nav=1.0038 … 2026-08-31 nav=2.6046），nonzero=157 ✓
 - GET /api/quant/engines/gold_trend_sma200/paper → ok, available, status=active_paper, current_weight=0, months_closed=0, activated_at=2026-08-25T00:35:00+08:00, last_signal{month_end:2026-07-31, px:8.433, sma200:9.4791, vol60_ann:0.2201, w_signal:0}, marks=1 {date:2026-08-24, nav:1, px:9.564}, open{month:2026-08, w:0, nav_open:1} ✓
+
+## 10:15-10:25 auto_sync 同步链根因修复 + 截图/DOM 验证
+- **根因**：VPS 侧 `/root/.openclaw/workspace-quant/scripts/auto_sync_notify.py`（cron */30 分钟 + 每天 3 点全量）MIRROR_INCLUDES 清单缺 engines.json + engines/ 目录 → 这就是 workspace-quant/results/engines.json 停在 8/23、engines/ 为空的根因。
+- 已备份 `auto_sync_notify.py.bak-task0491-20260825-101326`，MIRROR_INCLUDES 补 `--include=engines.json` / `--include=engines/` / `--include=engines/**`（最小 diff 3 行），语法 OK。
+- dry-run 实测（手动执行同款 rsync）：输出含 engines、engines/a2、engines/gold/{mmf_monthly_push,paper_state,shadow_nav,shadow_nav_seed} → include 生效 ✓
+- HP 侧 `sync_to_vps.sh`（→shared/results/04-投资研究/）本身 include *.json/*.csv + */ 已天然覆盖 gold 四件套与 engines.json，无需改动；已备份副本到 /tmp/task0491/hp/sync_to_vps.sh（md5 3e93e0ac…）。
+- **下次同步触发时点**：HP 数据更新后 VPS auto_sync_notify cron 每 30 分钟自动镜像（含 engines.json + engines/gold/）；每天 03:00 --force-notify 全量兜底。manual: `python3 auto_sync_notify.py`。
+- **截图（tools/agent-dashboard/）**：r313-quant-390x844.png（bodyScrollW=390, scrollW=390, quantScrollW=370 ✓ 无横向滚动）、r313-quant-1440x900.png（bodyScrollW=1440 ✓）；page errors none。
+- **DOM 验证（390 档）**：跨引擎区块渲染 gold 引擎卡（✅ 已激活（影子期豁免）+ eval 摘要 ann/mdd/calmar/corr(A,gold)）+ paper 实时小区块（paper 实时 / active_paper / 激活 2026-08-25 / 当前仓位 w=0.0（全现金 MMF）/ 信号(2026-07): px 8.433 / SMA200 9.479 / vol60 22.0% / 最新 mark 2026-08-24 NAV 1.0000 / marks 1 · 已结月 0）；canvasCount=3（A2+gold 影子曲线已绘制）。
