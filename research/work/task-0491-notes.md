@@ -38,3 +38,9 @@ task-0491 notes init
 - **下次同步触发时点**：HP 数据更新后 VPS auto_sync_notify cron 每 30 分钟自动镜像（含 engines.json + engines/gold/）；每天 03:00 --force-notify 全量兜底。manual: `python3 auto_sync_notify.py`。
 - **截图（tools/agent-dashboard/）**：r313-quant-390x844.png（bodyScrollW=390, scrollW=390, quantScrollW=370 ✓ 无横向滚动）、r313-quant-1440x900.png（bodyScrollW=1440 ✓）；page errors none。
 - **DOM 验证（390 档）**：跨引擎区块渲染 gold 引擎卡（✅ 已激活（影子期豁免）+ eval 摘要 ann/mdd/calmar/corr(A,gold)）+ paper 实时小区块（paper 实时 / active_paper / 激活 2026-08-25 / 当前仓位 w=0.0（全现金 MMF）/ 信号(2026-07): px 8.433 / SMA200 9.479 / vol60 22.0% / 最新 mark 2026-08-24 NAV 1.0000 / marks 1 · 已结月 0）；canvasCount=3（A2+gold 影子曲线已绘制）。
+
+## 10:30 交付物完成
+- 正式报告：shared/results/05-量化投资/R-313-看板黄金引擎呈现实施.md（3894B ≥2KB）
+- README.md 顶部更新日志已插入 R-313 条目
+- 截图：tools/agent-dashboard/r313-quant-390x844.png + r313-quant-1440x900.png（均已在位）
+- 验收标准全部满足：3 条 curl 关键字段正确 / 截图两档 / VPS engines.json 备份 + HP 脚本备份在位
