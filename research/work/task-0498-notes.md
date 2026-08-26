@@ -97,3 +97,32 @@ data/code_name_map.csv、data/graycards_cache.json、data/model/main.json、data
 - timing_iter3_*.csv（TIMING_ITER3_* L4126-4128 引用）：**已不存在**于 workspace-quant/results/ → endtoend 端点 (L4190) 是读空文件的僵尸，385 行 handler 可整删
 - timing_matrix：VPS results/ 下无此目录，仅 shared/results/04-投资研究/timing_matrix/（HP 同步落盘）存在 → 死岛A删除后该数据亦无消费方
 - VPS workspace-quant 体积：2.1G = venv 1.1G + data 913M + results 38M；data/ 是 HP 全量数据副本（dashboard 不读，需确认 VPS 上是否还有脚本读）
+
+## 5. 补取证 B：HP 主机（2026-08-27 01:55 取证，SSH 只读）
+
+### 5.1 目录布局（与 TOOLS.md 记载不同——实际主力目录是 quant-evolve）
+- ~/quant-evolve：**主力**，4.1G = data 3.6G + results 551M(1428文件) + scripts 213个(50387行) + logs 22M + model 1.2M
+- ~/quant：220K（仅 qlib-verify，疑废弃）
+- ~/quant-backups：9.9M；~/openclaw-backup：43M；backup_paper_state_20260812：28K
+- ~/.openclaw/workspace-quant：424K（metrics.db + collect-metrics.sh），仅指标采集用
+- 注意：VPS 侧 /root/.openclaw/workspace-quant 是另一份 2.1G 副本（venv 1.1G + data 913M + results 38M），与 HP 的 quant-evolve 是两套
+
+### 5.2 crontab：36 行（24 活行），零死行（所有引用脚本均存在）
+分类：
+- 数据链 6 行：refresh_data(周日20:00)、fetch_valuation(周日06:30)、cron_qfq_daily(工作日18:00)、collect_qfq_baostock+rebuild_merged(周日18:00)、w6_collect_delisted(每月1日)
+- paper 链 5 行：paper_engine daily(工作日16:30)/rebalance(工作日15:00)/validate(周日20:00)、paper_engine_gold daily(工作日07:40)/verify(周日03:00)
+- 进化链 2 行：p3_3_evolution_standalone(1/15日02:00,5轮)、evolution_pipeline cycle(周六09:00)
+- 影子链 2 行：engines_shadow_nav_gold append(3日09:38)、engines_shadow_evaluate_gold(3日09:40)
+- 风控 3 行：risk_patrol(工作日16:45)、collect_crowding(周日07:00)、snapshot_crowding(1日19:35)
+- 基建 6 行：collect-metrics.sh(每分钟→VPS:8055)、notify_hub(每小时)、reboot_autostart(@reboot)、heartbeat_selfheal(5min)、a12_monthly_evaluate(2日17:10)、a10_monthly_monitor(3日09:05)
+
+### 5.3 脚本分类（213 个 / 50387 行）
+- 在役（cron 22 + hp_api_server + reboot/heartbeat 引用 2）：约 24 个
+- paper_engine.py 1759 行、evolution_pipeline.py 1605 行为最大在役单体
+- 其余 ~189 个为研究一次性/历史迭代脚本（前缀聚类：a2/a4/a9/a10/a12/q4b/r251/iter2/macro/tm/backtest*/collect* 等）
+- __pycache__ 46 项
+- 同步机制：sync_to_vps.sh + cron_paper_daily/rebalance.sh 内嵌 rsync → VPS shared/results/04-投资研究（239M）
+
+### 5.4 HP 侧结论
+- crontab 健康，无需清死行；脚本目录是主要瘦身对象（~189 个一次性脚本 + __pycache__）
+- ~/quant(qlib-verify)、quant-backups、openclaw-backup、backup_paper_state_20260812 为归档候选
