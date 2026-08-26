@@ -18,3 +18,20 @@
 
 ## 取证记录
 
+### T1. v5model Tab（loadV5ModelQuant L9658-9755）模块清单
+| 模块 | 组件函数 | 端点 | 行区间 |
+|---|---|---|---|
+| M1 版本选择器 | v5VersionSelHtml L9613（模型/回测共用，task-0349） | version-options | L9613-9639+9703 |
+| M2 头卡（版本名+ACTIVE/历史徽章+数据源角标+策略一句话） | renderV5Model | active?v= | L9698-9723 |
+| M3 指标卡×6（年化/回撤/夏普/卡玛/月度胜率/月换手）+窗口chips（locked/full） | v5MetricCardsHtml L9579 + v5WinChips L9599 | active.windows | L9724-9726 |
+| M4 模型解释三层卡（选股/择时/交易） | v5ExplainHtml L9640 | active.explanation | L9727-9729 |
+| M5 择时仓位趋势图（月度仓位系数线图） | v5DrawPos L9732 | active/pos | L9730-9755 |
+
+注：指标卡组件 v5MetricCardsHtml 是共享件（v5btlc 也会用）→ 指标卡类重叠的第一现场。
+
+### T0. 顶部横件（量化页全局）
+| 模块 | 函数 | 端点 | 行 |
+|---|---|---|---|
+| 数据更新条（🔄 生成时间/同步/版本数） | loadQuantFreshness | freshness | L9389-9403 |
+| 一致性自检状态点（绿/黄/红，点开明细） | loadQuantConsistency + renderQuantConsistDot/Detail | consistency | L9405-9440 附近 |
+
