@@ -20,3 +20,8 @@ task-0497 notes init 2026-08-26 12:27:07
 - task-0494/out/f6_monthly_th20_rd50.csv：月度**收益率**列 (date,wA_bar,rA_dd,rG,fill_f,cost_gold,F6)，F6=月收益，需累乘成 NAV；156 行(2013-08..2026-07)
 - task-0495/out/f7_nav_curves.csv：**已是 NAV** (date,F1,F7a,F7b,A,gold)，A 终值 9.53、gold 终值 2.60、F1 5.23 —— A单独/gold单独直接可用
 - R-316 口径：F6 终值 9.72（月收益累乘）；与 f7_nav_curves 的 A=9.53 同窗一致可互验
+
+## 服务与回归基线 (12:45)
+- agent-dashboard.service pid 912019，监听 127.0.0.1:8055（与任务中心同端口/同进程树）
+- 回归基线：/api/quant/e2e-curves?versions=v1.4 → 200 ok; /api/quant/engines/A2/shadow-nav → 200 ok
+- csv 对齐格式：date,nav（对齐 nav_v1.4.csv）；指数列 date,close
