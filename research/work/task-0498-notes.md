@@ -25,3 +25,32 @@ factor-catalog 1990, factor-ic-series 2006, paper-summary 2036, paper-nav 2053, 
 
 - quantTabMode 默认 'factor'，五个子 Tab：数据 | 因子 | 模型 | 回测·生命周期 | 模拟实盘（task-0280 起，server.js:9377）
 - localStorage quantTab 持久化
+
+## E4. 前端调用方式与精确 FE 使用矩阵（2026-08-27 核验）
+
+- 前端 helper：api('quant/xxx') / post('quant/action')，HTML 内嵌于 server.js（offset 283800，HTML+JS 约 480KB）
+- 量化子 Tab（6 个按钮，L7408-7413）：数据|因子|模型(v5model)|回测(v5btlc)|模拟实盘·灰度(paper)|迭代历史(v5hist)
+- quant-page div 共 8 个（7425-7426 两孤儿）：quant-page-models、quant-page-btlc 无任何 Tab 按钮入口，switchQuantTab(L9484-9498) 只路由 6 个新 Tab
+- 孤儿页 loader：loadModelsQuant L11377（渲染 quant-page-models，仅 L11696 自身 action 刷新链调用）、loadBtlcQuant L11887（渲染 quant-page-btlc，仅 L11952 版本切换器内部调用）→ 死 UI/死代码候选（v5model/v5btlc 为替代新实现）
+
+FE 零调用端点（精确 grep api('...')，14 个）：
+1. /api/quant/summary L1854（deprecated 桩）
+2. /api/quant/nav L1855（deprecated 桩）
+3. /api/quant/factors L1856（deprecated 桩）
+4. /api/quant/evolution L1857（deprecated 桩）
+5. /api/quant/paper-summary L2036
+6. /api/quant/paper-nav L2053
+7. /api/quant/paper-trades L2077
+8. /api/quant/paper-portfolio L2106
+9. /api/quant/microcap/status L2684（deprecated 桩）
+10. /api/quant/microcap/phases L2685（deprecated 桩）
+11. /api/quant/baseline/nav L2772
+12. /api/quant/baseline/yearly L2794
+13. /api/quant/evolution/summary L3581（deprecated 桩）
+14. /api/quant/endtoend L4190
+
+FE 使用的端点（api('quant/x') grep 计数>0）：registry3/lifecycle3/engines6/version-options2/timing2/reports4/paper·summary2/models2/evolution·models2/data-health2/active·curves2/active2/timing-matrix/timing-config/run-status/risk-status/pending/paper·trades/paper·portfolio/paper·nav/ledger/ideas/history·:id/gates/freshness/factor-catalog/dsr/decisions/data-assets/crowding/consistency/btlc/active·pos/action-queue/baseline·summary2/q4b-contrast/factor-ic-series2/e2e-curves/f6-curves/action(POST·post()helper L11687)
+
+## E5. 后端读的数据源（workspace-quant 镜像，VPS 侧）
+
+data/code_name_map.csv、data/graycards_cache.json、data/model/main.json、data/stock_info/stock_info.csv、ideas/、model/decision-log.jsonl、model/main.json、model/registry/v1.1.json、models/main.json、results/factor_catalog{,_v2,_v3}.json、results/factor_ic_monthly_v2.csv、results/factor_ic_summary.json、results/model/、results/q4b/、scripts/.sync-state.json
