@@ -80,3 +80,58 @@
 - renderFactorTable (L11247-11322) 被注释「M1.2 核心重构：替换 renderFactorTable」→ 新版 renderFactorRegistry 上位。旧链 buildMergedFactorSummary L11189/factorRowsFromSummary L11211/factorFilterRows L11231/renderFactorTable L11247/onFactorSearch L11323/onFactorPage L11227/factorTableRoot L11317 依赖 DOM id=factorTableRoot（新版 DOM 是 factorRegistryRoot）→ 整链死代码（~190 行）。
 - renderFactorIcChart L11348-11375 零调用（grep 仅定义行）→ 死函数。
 - **附带功能 bug 实锤**：新版 renderFactorRegistry 分组头 onclick=onFactorGroupToggle（L10927）→ onFactorGroupToggle L11330 只更新 factorTableRoot（不存在）→ 点击新版分组头：状态翻转但无重渲染，折叠功能静默失效（除非 root 存在）。P0 删除时应把 onFactorGroupToggle 重写为更新 factorRegistryRoot 或触发 loadFactorQuant(force)。
+### T6. paper Tab（loadPaperQuant L13152-13743，renderPaperQuant L13744-13912）自上而下模块
+| # | 模块 | 组件函数 | 数据源 |
+|---|---|---|---|
+| P0 | paper↔active 行为一致性徽标（task-0352） | 内联 | paper/summary.rules_align |
+| P1 | 策略描述行（动态闸门拼装 task-0387） | quantSelDescParts | registry/evolution/models |
+| P2 | 指标卡×6：当前净值/累计收益/当月收益/下次调仓日/运行天数/持仓数 | 内联 stat-card | paper/summary |
+| P3 | 运行状态条（产物 mtime 红绿灯） | renderRunStatusBar L13237 | run-status |
+| P4 | 净值曲线（择时仓位双轴或纯净值） | renderNavWithPosChart L13507 / renderNavChart L13987 | paper/nav + timing |
+| P5 | 跨引擎影子卡（每影子引擎一张：影子NAV vs parent在役NAV 双线；gold 单线+激活徽章+paper 实时小区块） | renderCrossEngineShadowCard L13574（R-259/R-313） | engines + engines/:id/shadow-nav + engines/:id/paper + active/curves |
+| P6 | 当前持仓可解释表（入选理由展开+组合概览） | renderHoldingsExplainable L13294 | paper/portfolio + summary |
+| P7 | 最近交易记录表 | 内联 | paper/trades |
+| P8 | 运行模型版本卡（registry active 一致性徽章+择时层状态） | 内联 | evolution/models + registry |
+| P9 | 微盘拥挤度卡 | renderCrowdingCard L13379 | crowding |
+| P10 | 退出纪律卡 | renderRiskCharterCard L13469 | risk-status |
+| P11 | 策略参数&采纳因子 | renderAdoptedFactors L7510 | evolution/models |
+
+paper loader 并行拉 16 类数据（L13166-13205）：paper四件+models+baseline/summary?version+run-status+crowding+risk-status+registry+timing+engines(→每影子引擎 shadow-nav+paper)+active/curves。
+**关键：active/curves 在 v5btlc(B6) 与 paper(P5 parent线) 双拉；registry 在 v5btlc/paper 双拉；engines 在 v5btlc(2次)/paper(1+n) 多拉。**
+
+### T7. 死岛 A（loadModelsQuant L11377-11885，quant-page-models 无入口）模块清单（供复活评估）
+| 模块 | 函数 | 独占端点 |
+|---|---|---|
+| A1 当前生效·作战室控制面 | renderActiveOverviewCard L11422 | —（registry/paper-summary） |
+| A2 决策时间线（ADR） | renderDecisionTimeline L11485 | decisions |
+| A3 Pending 确认（人工决策点） | renderPendingConfirm L11527 | pending |
+| A4 想法池（ideas 入口+提交按钮） | renderIdeasPool L11604 | ideas |
+| A5 试验台账（n_trials 过拟合治理） | renderLedger L264→L11642 | ledger |
+| A6 择时版本×SOTA选股 贡献矩阵 | renderTimingContributionMatrix L11718 | timing-matrix |
+| A7 选股模型（Alpha层） | renderModelsQuant L11764 内 | — |
+| A8 择时模型（仓位层）+择时仓位系数图 | 同上 | timing-config |
+| A9 报告库入口卡 | L11388 | reports（列表） |
+| 动作链 | quantEnqueueAction L11685（rollback/confirmPending/rejectPending/submitIdea） | POST action + action-queue |
+
+### T8. 死岛 B（loadBtlcQuant L11887-12830，quant-page-btlc 无入口）模块清单
+| 模块 | 函数 | 独占端点 |
+|---|---|---|
+| B'1 版本切换器+四层归因链（版本绑定同口径） | renderBtlcAttributionChain | btlc |
+| B'2 端到端vs基线对照（M3.1）+净值对比图（M3.2 危机底色） | renderBtlcNavChart | btlc |
+| B'3 分年度收益（M3.3 基线+沪深300+超额） | renderBtlcYearly | btlc |
+| B'4 危机段回撤实测（M3.4） | renderBtlcCrisis | btlc |
+| B'5 Walk-forward 样本外（M3.5 三窗OOS） | renderBtlc 内 | btlc |
+| B'6 历代最优对比（M3.6 过拟合直觉化） | renderBtlcGenerations L12190 | btlc |
+| B'7 报告库（M3.7 代际分组+搜索） | renderBtlc L12239 附近 | reports |
+| B'8 E2E 多版本净值对比+指数叠加（5指数可选） | btlcE2E* L12251-12445 | e2e-curves |
+| B'9 基线卡（版本切换） | loadQuantBaselineCard L12446 | models + baseline/meta |
+| B'10 模型层·版本切换器（选股/择时版本列表+WF/DSR 摘要） | loadQuantModelLayer L12656 | models |
+| B'11 验证层·五门禁面板 + DSR 折扣曲线（示意阶梯）+ A/B/C/BUB 口径对照 | loadQuantValidationLayer L12729 + renderValidationLayer L12741 + drawDsrCurve L12801 | gates + dsr + q4b-contrast |
+| B'12 生命周期层薄壳 | loadQuantLifecycleLayer L12836 | lifecycle（活版 renderLifecycleLayer 被 v5btlc 用，仅薄壳死） |
+
+### T9. e2e-curves 归属修正（对任务描述的修正）
+任务描述称「loadV5BtlcQuant …含 e2e-curves 死调用」——实测 grep e2e-curves 前端消费点全部位于 L12251-12445（死岛 B btlcE2E* 系列），v5btlc 段（L9756-10409）零引用。e2e-curves 属死岛 B 独占（与 R-320 结论一致）。
+openQuantReportDetail L14029 全部 4 个调用点（L12205/12239/12598/12599）均在死岛 B → reports/:id 亦死树独占（R-320 报告正文口径正确，notes E4.2「活」为早期误记，E10/E11 已修正）。
+
+### T10. qLifecycleShadow（v5btlc B8 内）内容确认
+L12952：影子观察中（shadow_watch）进度卡——版本级：每版本 clean_evals 进度（第N/需M期）+since+note。与 paper P5 影子卡（引擎级 NAV 曲线+paper 实时）粒度不同：B8=版本级观察进度，P5=引擎级曲线对照。信息有交集（clean_evals 进度两处都出现：P5 影子卡脚注也含 clean_evals 进度，R-320 notes 已记）。
