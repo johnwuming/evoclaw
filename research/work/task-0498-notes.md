@@ -56,3 +56,25 @@
 POST：action（写操作统一队列，L11668 注释）
 
 **结论（初步）**：60 端点中 15 个零前端调用（7 deprecated + 8 死端点）= 25% 可删。
+
+## 2. 前端模块结构（01:20 取证）
+
+**量化Tab 实际 6 个子Tab**（_V5_TABS L9468：data/factor/v5model/v5btlc/paper/v5hist），UI 按钮 L7408-7413：
+数据 | 因子 | 回测 | 模拟实盘·灰度 | 迭代历史（+因子默认）
+
+**孤儿 div（死 UI）**：`quant-page-models`（L7425）、`quant-page-btlc`（L7426）——不在 _V5_TABS、无对应 qseg 按钮、无 renderer 写入（grep 引用=仅自身定义行）→ 纯死代码，删除证据确凿。
+
+**各 loader 行区间（估模块体量）**：
+- loadV5ModelQuant L9658-9755（模型，98 行）
+- loadV5BtlcQuant L9756-10409（回测·生命周期，653 行，含 F6 模块 L10008 起=R-319、e2e-curves、timing-matrix、q4b-contrast L12735 附近实际在 factor 段）
+- loadV5HistQuant L10410-10602（迭代历史，193 行）
+- loadDataQuant L10603-10749（数据，147 行）
+- loadFactorQuant L10750-13151（因子，~2400 行，最大段：因子目录/IC/corr/择时）
+- loadPaperQuant L13152-13800+（模拟实盘，engines+shadow-nav+paper 实时，R-313/R-315）
+
+**顶栏横件**：quantConsistDot 一致性自检（task-0359，consistency API）、quantFreshness 新鲜度。
+
+## 3. 关键定位复核
+- L2863-2866：q4b-contrast 的 A/B 存活池 legacy 标签（q4b-contrast 前端在用 L12735，属 factor 段）→ 不是死代码，但 A/BUB legacy 口径可讨论退役
+- L3378 quantIsLegacyVersion：在役（task-0359），判定 v0_/v1 系为旧周期，渲染时灰显
+- TIMING_ITER3 常量 3 个（L4126-4128）仅被 endtoend（L4190）使用 → endtoend 删则常量随删
