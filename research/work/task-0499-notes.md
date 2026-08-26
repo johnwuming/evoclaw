@@ -35,3 +35,21 @@
 | 数据更新条（🔄 生成时间/同步/版本数） | loadQuantFreshness | freshness | L9389-9403 |
 | 一致性自检状态点（绿/黄/红，点开明细） | loadQuantConsistency + renderQuantConsistDot/Detail | consistency | L9405-9440 附近 |
 
+### T2. v5btlc Tab（loadV5BtlcQuant L9756-10409）renderV5Btlc L9829 自上而下模块
+| # | 模块 | 组件函数 | 数据源 | 行 |
+|---|---|---|---|---|
+| B1 | 引擎评估指标徽标行（每引擎年化/回撤/Calmar/corr 来源） | v5EngineEvalFrontHtml ① | engines.evals（A类回退versionOptions.windows） | L9921-9965 |
+| B2 | 影子回测趋势对比图（A2+gold 同图，月度化，首月=1） | v5EngineEvalFrontHtml ② | engines + engines/:id/shadow-nav | L9966-10011（内联script重放） |
+| B3 | F6 组合回测趋势图（F6主线/A单独/gold单独/a_dd/F1/F7/指数虚线） | v5F6CurveHtml（R-319/task-0497） | f6-curves?indexes=hs300,szzs&f7=1 | L10014-10066 |
+| B4 | 版本选择器（与 v5model 共用组件） | v5VersionSelHtml | version-options | L9835 |
+| B5 | 指标卡×6 + curveWin 窗口chips（与 v5model 同组件同源 active.windows） | v5MetricCardsHtml | active?v=/curves.strategy_metrics | L9838-9841 |
+| B6 | 回测趋势·策略vs基准净值图（全期/3y/1y chips） | v5DrawNav L10330 | active/curves?v= | L9842-9861 |
+| B7 | 全版本排行表（四指标排序，点击联动版本选择器） | v5RankTableHtml L10265（task-0382） | version-options | L9862 |
+| B8 | 引擎级生命周期折叠面板（默认折叠；引擎切换器+因子模型卡+生命周期层+迭代轨迹散点） | r315LcPanelHtml L9887 / v5EngineSwitcherHtml L10187 / v5EngineRegionHtml L10204 / v5EngineFactorModelBlock L10139 / renderLifecycleLayer L13139 / drawLifecycleScatter L13082 | engines+lifecycle+registry | L9863-9867 |
+
+关键重叠证据（趋势图类）：
+- A 引擎（a13 现役）净值曲线出现于：B6（策略vs基准主图）；F6 图中「A单独(a_alone)+A降仓(a_dd)」序列（B3，月频口径）；paper Tab 需查。
+- gold 净值出现于：B2（gold 影子）；B3（gold_alone 序列）；paper Tab 需查。
+- 指数叠加（沪深300/上证）出现于：B3 F6 图（indexes 参数）；B6 v5DrawNav 需查 datasets；paper Tab 需查。
+- B2 图脚注原文（L10003 附近）：「注：A 引擎（a13）等价长回测 nav 未并入本图，见下方『回测趋势 · 策略 vs 基准』」→ 设计者已知分段问题。
+- 指标卡类：v5MetricCardsHtml 被 v5model(M3)+v5btlc(B5) 同组件复用，同源 active.windows；B1 徽标行的 A 引擎年化/回撤/Calmar 又取 versionOptions.windows = 第 3 处。
