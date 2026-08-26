@@ -135,3 +135,41 @@ openQuantReportDetail L14029 全部 4 个调用点（L12205/12239/12598/12599）
 
 ### T10. qLifecycleShadow（v5btlc B8 内）内容确认
 L12952：影子观察中（shadow_watch）进度卡——版本级：每版本 clean_evals 进度（第N/需M期）+since+note。与 paper P5 影子卡（引擎级 NAV 曲线+paper 实时）粒度不同：B8=版本级观察进度，P5=引擎级曲线对照。信息有交集（clean_evals 进度两处都出现：P5 影子卡脚注也含 clean_evals 进度，R-320 notes 已记）。
+
+### T11. 死岛端点数据源活跃度（决定复活/埋掉）
+- btlc 端点（L4575）：btlcResolveLayers L4270 + btlcBuildYearly L4401 + btlcBuildCrisis L4433 + btlcBuildGenerations L4487 均**动态计算**，读 model/main.json 真源（QUANT_MODEL_DIR=/root/.openclaw/workspace-quant/model，L3579）→ 深度分析（分年度/危机/WF/历代最优）有数据支撑，非死数据；但 v5btlc 活页只展示总量指标+净值曲线，未展示这些深度分析 → **独有信息，是否复活待评估**。
+- gates 端点（L2915）：读 results/model/v0_seed.json（MODEL_REGISTRY_DIR L2853，8月16日文件）→ 绑定旧周期 v0_seed 基线「无候选裁决」中性态 → **死数据**。
+- dsr 端点（L2943）：同理 v0_seed 系；drawDsrCurve L12801 的「示意阶梯」是硬编码假数据（L12806-12816 常量步骤 0.90→0.93→0.95）→ 非实时。
+- reports 列表（L2143）：读 QUANT_REPORTS_DIR=workspace-quant/results 下 .md，实测仅 3 个历史 md（a7-iteration-report / factor-expansion-report / R-188-quant-evolve-Phase1）→ 非活跃产出。
+- q4b-contrast（L2870）：Q4B 一次性研究池对比 → 研究产物。
+- e2e-curves（L4689）：读 timing_iter3 CSV（已不存在，R-320 E4.6 僵尸）→ 确认死。
+
+### T12. 复活评估结论（定稿）
+- 高优先复活：**无**。决策/台账/裁决/gate verdict 核心信息活 UI 已全覆盖（B8 生命周期层 + H3 详情 Gate 评估 + B8 影子观察）。
+- 可选复活（P1.5/P2，低优先，均需用户拍板）：
+  1. gate 明细折叠：H3 详情「Gate 评估」区扩展为五门禁 g1-g5 逐项（数据源改 lifecycle/registry 真源，不沿用 gates 端点旧 v0_seed）。不复活也损失不大（verdict 已在）。
+  2. DSR 文本摘要：B8 台账区加一行「DSR 门槛 ≥0.95 @174 trials」文本（不画曲线——示意阶梯是硬编码假数据）。
+  3. 报告原文链接：v5hist 详情抽屉加 md 报告查看（保留 openQuantReportDetail 组件 + reports/:id 端点）。当前 reports 仅 3 个历史 md，价值低。
+- 随死岛埋掉：A1-A9（含 A6 择时矩阵——timing_matrix 数据无消费方）、B'1-B'6（归因/年度/危机/WF/历代最优——深度分析虽动态但 v5btlc 已定位为「总览页」，深度分析属研究回顾，埋掉后可随 P2 按需在 v5hist 详情补）、B'7-B'12、q4b、e2e、DSR 曲线、五门禁面板（v0_seed 死数据）。
+
+### T13. 重叠矩阵核心数字（供报告引用）
+- A 引擎净值曲线：活 UI 3 处 = B6(active/curves 日频全期) + B3(f6-curves a_alone/a_dd 月频) + P5(active/curves strategy.full 月度化 parent 线)。+死岛 2 处(B'2 btlc、B'8 e2e)。
+- gold 净值：活 3 处 = B2(shadow-nav gold) + B3(gold_alone) + P5(gold 卡+paper 实时)。死岛 0。
+- A2 净值：活 2 处 = B2 + P5。死岛 0。
+- 指数叠加(hs300/szzs)：活 2 处 = B6(hs300 线) + B3(hs300+szzs 虚线)。死岛 2 处(B'3 年度表基准列、B'8 e2e 5指数)。
+- 指标数字(年化/回撤/Sharpe/Calmar)：活 9 个渲染点 = M3卡 / B1徽标行 / B5卡 / B3脚注 / B7排行表 / H1行内 / H3 locked卡 / H3 full卡 / B8台账+散点。同源(active.windows/engines evals/version-options windows)至少 6 处。
+- 版本全量列表：3 处 = M1/B4 下拉(交互控件,非冗余) + B7 排行表(version-options) + H1 分页列表(history)。数据源 2 个。
+- 影子观察进度(clean_evals)：2 处 = B8 qLifecycleShadow(版本级,lifecycle) + P5 影子卡徽标(引擎级,engines evals)。
+- 仓位系数：活 2 处 = M5(active/pos 独立图) + P4(paper/nav+timing 双轴)。死岛 A8 1 处。
+- 决策记录：活 2 处 = B8 qLifecycleTimeline(全局) + H3 详情(单版本)。死岛 A2 1 处。
+- 持仓/交易：仅 P6/P7 各 1 处，无重复。
+- 因子展示：3 粒度 F2(全库) / P11(在役采纳) / B8(引擎绑定)，无实质重复。
+
+### T14. 端点跨 Tab 重复拉取
+- registry：v5btlc + paper
+- active/curves：v5btlc(B6) + paper(P5 parent 线)
+- engines：v5btlc(loader 内 2 次) + paper(1 主拉 + 每影子引擎 shadow-nav+paper 共 2n)
+- version-options：v5model + v5btlc
+- shadow-nav：v5btlc(B2) + paper(P5)
+- data-health：data + factor(F3)
+→ 同会话切换 Tab 重复拉取同一端点，建议 P1.5 会话级缓存（TTL 30s）。
