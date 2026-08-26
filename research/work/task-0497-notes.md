@@ -52,3 +52,9 @@ task-0497 notes init 2026-08-26 12:27:07
   - 有数据：FRONTEND_SIM_OK，输出含 ×9.72、new Chart
   - 空数据（available:false）：EMPTY_OK，显示「待同步」占位，无 chart
 - 全部验收命令通过：node --check / f6-curves 200 / e2e-curves 200 / shadow-nav 200 / systemctl active
+
+## 交付完成 (13:15)
+- 报告 R-319-F6组合回测趋势可视化实施.md 4422B（≥2KB ✓）写入 05-量化投资/
+- README.md 顶部更新日志已加 R-319 条目
+- 数据文件清单：04-投资研究/f6_curves/{f6_nav,a_alone_nav,gold_alone_nav,a_dd_nav,f1_nav,f7a_nav,f7b_nav}.csv
+- 改动文件仅：tools/agent-dashboard/server.js（备份 .bak-task0497-20260826）+ 新增数据/报告/笔记文件，无无关文件修改
