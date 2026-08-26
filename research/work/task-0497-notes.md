@@ -25,3 +25,9 @@ task-0497 notes init 2026-08-26 12:27:07
 - agent-dashboard.service pid 912019，监听 127.0.0.1:8055（与任务中心同端口/同进程树）
 - 回归基线：/api/quant/e2e-curves?versions=v1.4 → 200 ok; /api/quant/engines/A2/shadow-nav → 200 ok
 - csv 对齐格式：date,nav（对齐 nav_v1.4.csv）；指数列 date,close
+
+## 数据落盘完成 (12:50)
+- 新目录 /root/.openclaw/workspace/shared/results/04-投资研究/f6_curves/ 共 7 个 csv（date,nav 格式，对齐 nav_v1.4.csv）
+- f6_nav 156点 2013-08→2026-07 终值 9.7173（=R-316 的 9.72 ✓）
+- a_dd_nav 8.2376（R-316 口径1 8.24 ✓）a_alone 9.5263（9.53 ✓）gold_alone 2.6032（2.60 ✓）f1 5.2295 f7a 5.2509 f7b 5.0451
+- server.js 已备份 server.js.bak-task0497-20260826（813136B）
