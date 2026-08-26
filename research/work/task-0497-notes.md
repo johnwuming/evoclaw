@@ -14,3 +14,9 @@ task-0497 notes init 2026-08-26 12:27:07
 - HP 侧 find ~ -maxdepth 5 未找到 f6_results.json / task-0494 / task-0495 目录
 - HP 主仓库 = ~/quant-evolve（无 work/ 子目录，无 f6 产物）
 - 待查：VPS 侧是否已有 F6 同步镜像（R-316/R-317 报告引用的数据源）
+
+## 数据源定位修正 (12:40) ★关键
+- 任务书说 HP ~/workspace-quant/work/task-0494|0495 → 实际数据在 **VPS 本地** /root/.openclaw/workspace/work/task-0494/out/ 与 task-0495/out/（task-0494/0495 在 VPS 执行，无需 scp HP）
+- task-0494/out/f6_monthly_th20_rd50.csv：月度**收益率**列 (date,wA_bar,rA_dd,rG,fill_f,cost_gold,F6)，F6=月收益，需累乘成 NAV；156 行(2013-08..2026-07)
+- task-0495/out/f7_nav_curves.csv：**已是 NAV** (date,F1,F7a,F7b,A,gold)，A 终值 9.53、gold 终值 2.60、F1 5.23 —— A单独/gold单独直接可用
+- R-316 口径：F6 终值 9.72（月收益累乘）；与 f7_nav_curves 的 A=9.53 同窗一致可互验
