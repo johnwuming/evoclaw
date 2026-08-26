@@ -187,3 +187,11 @@ data/code_name_map.csv、data/graycards_cache.json、data/model/main.json、data
 
 - 新 v5 系（v5model/v5btlc/v5hist，L9658/9756/10410 起）与旧系（models/btlc 页 + 层加载器，L11377-12836+）功能域高度重叠：版本切换器、归因链、净值图、年度表、危机段、生命周期、报告库——两套实现并存，旧套零入口
 - 同数据多 Tab 拉取：registry 被 v5btlc+paper 双拉；active/curves 被 v5btlc+paper 双拉；timing 仅 paper 活用
+
+## E13. 修正（终检，2026-08-27 02:2x）
+
+- models 端点：api('quant/models') 调用点 L12455（loadQuantBaselineCard）与 L12659（loadQuantModelLayer）均在死树 → models 死树独占
+- baseline/meta：L12469（loadQuantBaselineCard 死树）→ 死树独占；baseline/summary L13171 在 loadPaperQuant（活）→ 保留
+- 死端点终数：29/60（14 零引用 + 15 死树独占），活 31
+- VPS workspace-quant 总 2.1G，其中 data/ 913M（上一轮 R-320 条目称 venv 1.1G 无消费方——本轮 du 未见 venv 目录，以 data/ 913M 为准，归属 P0 盘点项）
+- README 顶部已有前一轮 R-320 条目（前次运行未落正式报告即中断）；本轮为交付版，README 追加本轮条目置顶
