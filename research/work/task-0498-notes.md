@@ -162,3 +162,28 @@ data/code_name_map.csv、data/graycards_cache.json、data/model/main.json、data
 - 核心数字：60 端点 → 删 31（52%）；死代码 ~3000 行 ≈ server.js 20%；VPS 释放 ~2.0G；HP crontab 24 行零死行不动
 - 重大修正 vs 前笔记：①孤儿 div 实为「有 loader 但永不可达」的整页死 UI（~1453 行）；②死链独占端点 16 个（非 0）；③q4b-contrast/gates/dsr 属死岛 B；④action 队列无生产者无消费者（heartbeat.sh 无 quant 引用、HP 无 api/quant 引用）；⑤timing_iter3 CSV 已不存在，endtoend 是读空文件的僵尸
 - README 更新日志已插顶部一行
+
+## E10. 死 UI 集群确认（关键发现，证据链完整）
+
+旧「模型」「回测」页（quant-page-models / quant-page-btlc，L7425-7426）无 Tab 入口（switchQuantTab L9484-9498 只路由 6 个新 Tab）。死树包含（均为 server.js 内嵌函数，行号）：
+- loadModelsQuant 11377 / renderModelsQuant 11764 / renderDecisionTimeline / renderPendingConfirm / renderIdeasPool（11510/11543/11614 按钮）
+- loadBtlcQuant 11887 / renderBtlcPage 12544 / renderBtlcVersionSwitcher / renderBtlcAttributionChain / renderAttribution* / renderBtlcCompareCards / renderBtlcNavChart / renderBtlcYearly / renderBtlcCrisis / renderBtlcGenerations 12190 / renderBtlcE2E 12260 / btlcE2E* handlers / btlcOnVersionChange
+- 层加载器（仅 renderBtlcPage 调用 12564-12607）：loadQuantBaselineCard 12446 / loadQuantModelLayer 12656 / loadQuantValidationLayer 12729 / loadQuantLifecycleLayer 12836
+- openQuantReportDetail 14029（onclick 仅由上述死树生成）
+- 动作链：quantEnqueueAction 11685（POST quant/action）+ quantRollbackConfirm/quantConfirmPending/quantRejectPending/quantSubmitIdea 11701-11714（按钮仅死树）+ renderActionQueueBadge/quantRefreshQueueBadge 11664/11669（仅 renderModelsQuant 11870/11877）
+- **动作队列无消费者**：/api/quant/action 写 QUANT_ACTION_QUEUE jsonl；HEARTBEAT.md v3 心跳契约无 quant action 步骤且明文"心跳 lane 禁止 SSH HP"；heartbeat.sh 无 action-queue 逻辑 → 队列疑似无人消费（待确认：可能主会话手动处理过）
+
+## E11. 端点消费归属最终矩阵
+
+仅死 UI 消费（= 有效死端点候选，加上 E4 的 14 个零引用）：
+- E4 零引用 14 个 + 死树独占 13 个：btlc(11898)、e2e-curves(12356)、reports(11388/11899)、reports/:id(14042/14065)、dsr(12734)、gates(12733)、q4b-contrast(12735)、timing-config(11386)、timing-matrix(11390)、decisions(11393)、pending(11394)、ideas(11395)、ledger(11396)
+- 合计 27/60 端点为死（45%）【btlc 路由 L4575 是最大单体 handler 之一】
+- POST /api/quant/action + action-queue：入口死 + 队列无消费者 → 双死（但 idea 类型会同步写 ideas/pool.jsonl，HP 半月度 runner 消化——池本身有独立价值）
+
+活跃端点（33 个）：factor-catalog、factor-ic-series、paper/summary、paper/nav、paper/trades、paper/portfolio、timing、data-health、data-assets、registry、lifecycle、baseline/summary、models、active、active/pos、active/curves、version-options、history、history/:id、freshness、consistency、evolution/models、engines、engines/:id/shadow-nav、engines/shadow-nav、engines/:id/paper、run-status、crowding、risk-status、btlc?否、f6-curves
+（注：btlc 归死树；f6-curves/e2e 归 v5btlc 活页）
+
+## E12. 双 Tab 渲染体系并存（前端重复核心）
+
+- 新 v5 系（v5model/v5btlc/v5hist，L9658/9756/10410 起）与旧系（models/btlc 页 + 层加载器，L11377-12836+）功能域高度重叠：版本切换器、归因链、净值图、年度表、危机段、生命周期、报告库——两套实现并存，旧套零入口
+- 同数据多 Tab 拉取：registry 被 v5btlc+paper 双拉；active/curves 被 v5btlc+paper 双拉；timing 仅 paper 活用
