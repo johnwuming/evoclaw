@@ -126,3 +126,31 @@ data/code_name_map.csv、data/graycards_cache.json、data/model/main.json、data
 ### 5.4 HP 侧结论
 - crontab 健康，无需清死行；脚本目录是主要瘦身对象（~189 个一次性脚本 + __pycache__）
 - ~/quant(qlib-verify)、quant-backups、openclaw-backup、backup_paper_state_20260812 为归档候选
+
+## E6. HP 侧盘点（2026-08-27 SSH 实查）
+
+- ~/quant-evolve/scripts/ 共 182 个 py/sh（ls 实数；含 __pycache__ 目录另计）
+- crontab 24 条有效行（PATH 行 + 23 任务）。核心 cron：refresh_data(周日20:00)、p3_3_evolution_standalone(1,15日02:00,5轮)、paper_engine daily(一二三四五16:30)/rebalance(15:00)/validate(周日20:00)、collect-metrics hp(每分钟,push VPS:8055)、fetch_valuation(周日06:30)、risk_patrol(一二三四五16:45)、collect_crowding(周日07:00)、evolution_pipeline cycle(周六09:00)、notify_hub(每小时:10)、w6_collect_delisted(每月1日)、reboot_autostart、heartbeat_selfheal(*/5)、a12_monthly_evaluate(每月2日17:10)、a10_monthly_monitor(每月3日09:05)、cron_qfq_daily(18:00工作日)、collect_qfq_baostock+rebuild_merged(周日18:00)、snapshot_crowding(每月1日19:35)、engines_shadow_nav_gold+evaluate_gold(每月3日)、paper_engine_gold daily(工作日07:40)/verify(周日03:00)
+- 进程：hp_api_server.py 常驻（Flask 0.0.0.0:8060，398行，API key 鉴权；路由 /health /run /backtest /reports /report/<f> /data/status /sync）；**VPS 侧 grep hp_api_server/8060 引用=0**（dashboard 不调；动作走 action-queue→主agent心跳 SSH；数据走文件同步）→ 待确认死服务
+- 双进化系统并存：p3_3_evolution_standalone.py（939行，旧"VPS本地自包含因子进化"，采样100股2.5年） vs evolution_pipeline.py（1605行，registry 驱动统一 Runner R-207/task-0275，--cycle 七步编排）——两者都在 crontab；p3_3 产出是否仍被消费待确认
+- 双模拟盘引擎：paper_engine.py（1759行，registry 版本驱动） vs paper_engine_gold.py（365行，gold 金属引擎独立 cron）——gold 为独立赛道设计并存合理但代码路径重复
+- 严格孤儿脚本（无 cron、无 HP 内部引用、无 import）：107/182（清单 /tmp/hp-orphans.txt）。代表：a2*/a2b*/a2c* 候选三套、iter2_evolution* 4个、generate_timing_report* 4个迭代版、macro_timing_layer* 4个、r25x/r26x/r27x/r29x 研究一次性、t0396/task03xx 一次性、cron_paper_daily.sh/cron_paper_rebalance.sh/cron_refresh.sh（被直接 cron 行替代）、rebalance.py/risk_control.py（paper_engine 内联实现，未 import）、engines_shadow_evaluate.py/engines_shadow_nav_append.py（被 *_gold 版替代）、evolution_engine.py/evolution_review.py（被 evolution_pipeline 替代）、sync_to_vps.sh（被 VPS 侧 auto_sync_notify.py 替代）
+- 注意：107 孤儿是"无调度/无程序化消费"，主 agent 可能 SSH 手动调用（研究线），方案中一律标"待确认"不直接删
+
+## E7. HP→VPS 数据同步路径（5 条，重复核心证据）
+
+1. push 指标：HP collect-metrics.sh(每分钟) → POST VPS:8055 /api/metrics/ingest（server.js L5959-5960 确认存在）
+2. pull 指标：VPS pull-hp-metrics.sh(每2分钟) SSH 拉 HP metrics.db watermark 增量合并——与①同一数据双通道（task-0434 重构遗留并存）
+3. VPS auto_sync_notify.py（*/30分钟 + 每日3点全量）SSH 检查 HP results 新文件 rsync 回传 → VPS workspace-quant 镜像（dashboard /api/quant/* 全部读该镜像）
+4. VPS sync_timing_matrix.sh（task-0288）单独拉 HP timing_matrix → 双目的地
+5. HP sync_to_vps.sh（孤儿）+ hp_api_server.py /sync 端点（无调用方）——历史同步机制残留
+
+## E8. VPS 侧 dashboard→HP 动作链
+
+- dashboard POST /api/quant/action（L4053）→ 写队列 → 前端提示"由主 agent 心跳在 HP 侧实际执行（跨机）"（L11685 注释）→ 心跳 SSH 执行。与 hp_api_server.py /run+/backtest 能力重复（第三套编排通道）
+- fetchHpStats（L1697-1760）：dashboard 经 SSH top/free/df 实时采 HP 主机状态（30s 缓存）——与 metrics.db 指标通道功能重叠（实时性 vs 历史曲线，算并存理由但需明确定位）
+
+## E9. VPS workspace-quant 镜像
+
+- /root/.openclaw/workspace-quant/scripts/ 241 个文件（含 auto_sync_notify.py 等）；镜像由 HP 同步而来，与 HP 侧存在版本漂移风险（如 collect-metrics.sh 两份）
+- dashboard 后端 31 处引用 workspace-quant 路径读数据
