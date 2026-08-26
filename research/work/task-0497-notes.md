@@ -38,3 +38,11 @@ task-0497 notes init 2026-08-26 12:27:07
 - f6 终值 9.7173 ann 19.12% mdd -13.96% sharpe 1.197 ←与 R-316 表格逐项一致 ✓
 - a_alone 9.5263/18.9%/-16.95% ✓ gold 2.6032/7.6%/-5.9% ✓ a_dd 8.2376/17.6%/-14.2% ✓ f1 5.2295/13.6%/-8.3% ✓ f7a 5.2509 f7b 5.0451
 - hs300 叠加（2013-07-31 基点=1）：终值 2.14 / mdd -40.6%
+
+## 前端+全量验证 (13:00)
+- 前端模块 v5F6CurveHtml() 插入 v5EngineEvalFrontHtml ③（影子趋势图之后）；数据缓存 _v5F6Curves 在 loadV5Btlc Promise.all 拉取（indexes=hs300,szzs&f7=1），计入 quantSigOf
+- 图例 chips：各序列 YYYY-MM 起→止 + ×终值倍数；脚注：年化/回撤/Sharpe + 基点口径说明（F6 终值≈×9.72 与 R-316 一致）
+- 指数叠加虚线 #8b93a3（沪深300/上证 默认拉取）
+- 验证：node --check OK；restart 后 active；/api/quant/f6-curves 200（默认5序列 timeline 157，f6_final 9.7173）
+- 回归：e2e-curves?versions=v1.4 → 200；engines/A2/shadow-nav → 200
+- 首页 HTML 含「F6 组合回测」×6；zz500 叠加终值 2.3261 正常
