@@ -154,3 +154,11 @@ data/code_name_map.csv、data/graycards_cache.json、data/model/main.json、data
 
 - /root/.openclaw/workspace-quant/scripts/ 241 个文件（含 auto_sync_notify.py 等）；镜像由 HP 同步而来，与 HP 侧存在版本漂移风险（如 collect-metrics.sh 两份）
 - dashboard 后端 31 处引用 workspace-quant 路径读数据
+## 2026-08-26 R-319 F6组合回测趋势图可视化（task-0497，量化Tab回测页新增F6模块，与R-316口径逐项一致，零生产改动）
+（上行为插入前的 README 首行）
+
+## 6. 报告完成（01:58）
+- 正式报告落盘：shared/results/05-量化投资/R-320-量化系统抽象合并精简方案.md（8.4KB，五部分齐）
+- 核心数字：60 端点 → 删 31（52%）；死代码 ~3000 行 ≈ server.js 20%；VPS 释放 ~2.0G；HP crontab 24 行零死行不动
+- 重大修正 vs 前笔记：①孤儿 div 实为「有 loader 但永不可达」的整页死 UI（~1453 行）；②死链独占端点 16 个（非 0）；③q4b-contrast/gates/dsr 属死岛 B；④action 队列无生产者无消费者（heartbeat.sh 无 quant 引用、HP 无 api/quant 引用）；⑤timing_iter3 CSV 已不存在，endtoend 是读空文件的僵尸
+- README 更新日志已插顶部一行
