@@ -46,3 +46,9 @@ task-0497 notes init 2026-08-26 12:27:07
 - 验证：node --check OK；restart 后 active；/api/quant/f6-curves 200（默认5序列 timeline 157，f6_final 9.7173）
 - 回归：e2e-curves?versions=v1.4 → 200；engines/A2/shadow-nav → 200
 - 首页 HTML 含「F6 组合回测」×6；zz500 叠加终值 2.3261 正常
+
+## 前端仿真验证 (13:05)
+- 从实际下发页面提取 v5F6CurveHtml 源码，node 仿真执行：
+  - 有数据：FRONTEND_SIM_OK，输出含 ×9.72、new Chart
+  - 空数据（available:false）：EMPTY_OK，显示「待同步」占位，无 chart
+- 全部验收命令通过：node --check / f6-curves 200 / e2e-curves 200 / shadow-nav 200 / systemctl active
