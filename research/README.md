@@ -1,3 +1,6 @@
+## 2026-08-27 R-321 前端可视化模块级精简方案（task-0499，R-320 增补·纯方案零代码改动）
+- 用户 02:25 指出 R-320 缺前端可视化层面精简。**结论**：逐 Tab 取证 6 Tab 36 个可见模块全清单（函数/端点/行号）+2 顶部横件；重叠矩阵量化（A 引擎净值 3 处活、gold 3 处、指数 2 处、指标数字 9 渲染点同源 6 处、版本列表 3 处）；活 UI 内死码簇（factor 旧因子库链 ~190 行 + renderFactorIcChart 零调用，附 onFactorGroupToggle 折叠 bug 实锤）；死岛复活评估：无高优先复活项，DSR 曲线硬编码假数据不复活；合并方案 B1 徽标瘦身 + B2 影子图并入 B8 折叠 + 会话缓存 TTL30s，删死岛沿用 R-320 P0，新增 P1.5 前端合并期；含 390x844 回归/数据一致性验收与 git 回滚。验收：server.js 零改动（mtime 未变）、行号抽验全中。→ `05-量化投资/R-321-前端可视化模块精简方案.md`，笔记 `work/task-0499-notes.md`
+
 ## 2026-08-27 R-320 量化系统与 Dashboard 抽象合并精简方案·交付版（task-0498 重跑交付，纯方案零代码改动）
 - 前次同号条目因报告未落盘中断，本条为正式交付。**结论**：60 个 /api/quant/* 端点中 29 个死（14 前端零引用 + 15 死 UI 树独占，models/baseline-meta 经调用点核验亦属死树 L12455/12659/12469）；server.js 内嵌前端存在新旧双渲染体系（旧 models/btlc 页 L11377-12836 无 Tab 入口，约 1500 行死码 + 动作队列无消费者双死）；HP→VPS 5 条同步通道中 push/pull 指标双写互为重复、hp_api_server.py(:8060) VPS 零引用且无自启；HP 182 脚本 107 个孤儿（移档不删）；双进化系统并存（p3_3 vs evolution_pipeline，待用户裁决）。**分期**：P0 删 29 死端点+死树+40 个 .bak 归档（git 快照回滚）→ P1 停 pull-hp-metrics/hp_api_server 观察、孤儿移档、动作队列裁决 → P2 因子目录 v3 单源、paper/gold 公共层、v5 组件化（390x844 无横向溢出入验收）。红线：registry active/paper_engine/HP cron 在役项零改动，全部删除项先证据后动手。→ `05-量化投资/R-320-量化系统抽象合并精简方案.md`，笔记 `work/task-0498-notes.md`+`work/task-0498-hp-orphans.txt`
 
