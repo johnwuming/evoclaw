@@ -71,3 +71,37 @@
 ## §0b 中央状态字典（合并自 registry+engines.json+manifest）
 - 版本状态：backtest-only → candidate → (shadow_watch active/clean_evals N/N) → active（registry entry + main.json 同步）→ 回退 rollback（switch_log）
 - 引擎状态：active / shadow / sub_engine_overlay / active_paper（gold 例）
+
+## §证据源2：方案层既有设计提取
+
+### R-203 五层架构（被 R-223 引用为现行）
+L1 因子层(72因子字典+IC/ICIR) → L2 选股层(三重gate+WF) → L3 择时层 → L4 模拟盘(paper cron全自动) → L5 进化闭环
+
+### R-223（流程总纲，当时评分制未实施；现代码已升级为 SCORED）
+一轮迭代生命周期六环节：①候选设计(parent只改一维度,g5预埋,先算通过线,ext runner源码字符串插入引擎零改动) ②回测新基建(全量池含退市+成本v2+一字板不可成交+AUDIT_LOCK_END=2024-06-30+ST区间表,full+locked双窗口) ③等价校验EQUIV(patch全关复跑parent逐位一致diffs={}才挂新分支) ④门禁评估/评分→PASS自动activate(R220#8移除人工确认) ⑤记录规范(decision-log.jsonl trigger/action/backup/params/rollback_condition/expected_impact/phash/data_snapshot + experiment-ledger.jsonl experiment_id=IT-批次-序号) ⑥rollback安全网(冻结registry/{version}.main.json.snapshot字节快照)
+口径：locked=2006-01-01~2024-06-30(18.48y/222调仓,audit_lock.py统一clamp)；OOS split=2021-01；DSR n_trials跨批累计防多重检验
+
+### R-206 模块编号体系（五Tab+版本体系v4）
+- Tab数据：M1.1数据健康看板 M1.6数据资产盘点
+- Tab因子：M1.1(重复列出!) M1.2因子注册表 M1.3在役IC监控 M1.4相关性热力图 M1.5月度体检
+- Tab模型：M2.1当前生效总览卡 M2.2选股模型卡 M2.3择时模型卡 M2.4仓位系数图 M2.5决策时间线 M2.6Pending确认卡(人工决策点——R220后已过时) M2.7想法池 M2.8生命周期进化历史 M2.9试验台账
+- Tab回测：M3.0版本绑定器+四层归因链 M3.1对照卡 M3.2净值对比 M3.3分年度 M3.4危机段回撤 M3.5WF样本外 M3.6历代最优对比 M3.7报告库 M3.8DSR校准曲线
+- Tab模拟实盘：M4.1净值曲线 M4.2持仓 M4.3交易记录 M4.4运行状态条 M4.5运行版本卡 M4.6月度复盘入口 M4.7微盘风控卡 M4.8退出纪律卡
+- ⚠️设计文档内部即有重复编号：M1.1 同时挂在Tab1与Tab2下
+- v4后端版本体系：「三张皮」问题(main.json/pending/R-report各说各话)→版本对象Versioned Model Object+registry五操作(bootstrap/fork/backtest/evaluate/activate)+防漂移校验(drift signature/phash)
+
+### R-320 抽象合并精简方案（task-0498，已有完整重复矩阵 D1-D11）
+D1 模型/版本展示两套UI(死loadModelsQuant L11377 vs v5model L9658)；D2 回测归因两套(死renderBtlc* vs v5btlc)；D3 指标采集双通道(collect-metrics push vs pull-hp-metrics 写同一metrics.db)；D4 结果同步三套(auto_sync_notify在用,sync_to_vps.sh孤儿,hp_api_server /sync无调用方)；D5 跨机动作编排两套均无人消费(quant/action队列+hp_api_server /run)；D6 因子进化双cron并行(p3_3_evolution_standalone 939行旧 vs evolution_pipeline.py registry版)；D7 paper_engine vs paper_engine_gold 有意隔离建议抽公共层；D8 影子净值双路由(engines/:id/shadow-nav L3800 vs engines/shadow-nav L3756)+生产者×2(_gold在用,_append孤儿)；D9 报告库双层死；D10 factor_catalog v1/v2/v3三代并存(L1862-1864降级链)；D11 主机监控SSH实时vs metrics.db历史
+死码清单：29后端路由死、UI死树L11377-12836+14029(-1500行)、HP孤儿脚本107/182(含evolution_engine/evolution_review被pipeline替代,risk_control.py被paper_engine内联替代,a12_rot_engine?,4×iter2_evolution,4×macro_timing_layer…)
+分期：P0清死码/P1通道收敛/P2抽象重构(quant_common.py公共层,v5组件化)
+
+### R-321 前端可视化精简（活UI模块全景+信息重叠矩阵）
+六Tab活UI模块带行号：v5model(M1版本选择器/M2头卡/M3指标卡×6/M4解释三层卡/M5仓位图) v5btlc(B1引擎评估徽标/B2影子对比图/B3F6组合图/B4版本选择器/B5指标卡×6/B6策略vs基准净值/B7全版本排行/B8引擎生命周期面板) v5hist(H1分页列表/H2legacy开关/H3详情抽屉含Gate评估区) data(D1健康校验+PIT等4卡) factor(F1类型栏/F2注册表14列+36月IC/F3在役IC监控/F4相关性簇) paper(P0一致性徽标/P1策略描述/P2指标卡/P3运行状态条/P4净值+仓位双轴/P5跨引擎影子卡/P6持仓可解释/P7交易记录/P8运行版本卡/P9微盘拥挤度/P10退出纪律/P11参数&采纳因子)；全局横件 quantConsistDot(L7416)+quantFreshness(L7417)
+信息重复矩阵（活UI）：
+- 净值曲线类：A引擎回测净值3处活(B6主图/B3 F6 a_alone/P5 parent线)+死岛2处；gold影子净值3处活(B2/B3 gold_alone/P5)；A2影子2处；指数叠加2处(+死岛2处)；paper实际净值仅P4一处
+- 指标卡类：同源指标数字≥9渲染点(v5MetricCardsHtml组件渲染点M3/B5/H3×2×6卡+B1徽标行+F6脚注+B7排行4列+H1行内+B8台账)，B1的A类回退指标与M3/B5完全同值=最高优先级去重点
+- 影子观察进度clean_evals 2处(B8版本级lifecycle.shadow_watch L12963 vs P5引擎级engines.evals L13560)，粒度不同建议保留两级
+- 版本列表3处非实质重复/引擎列表2处视角不同保留/单值徽章2处语义不同保留
+- 无重复：持仓仅P6/交易仅P7
+- 跨Tab端点重复拉取6组(registry/active-curves/engines/version-options/shadow-nav/data-health)
+- 死岛复活结论：无高优复活项；DSR折扣曲线是硬编码假数据(L12806-12816)；五门禁面板读8月16日中性态假数据；verdict/gate核心信息已在H3 Gate评估区呈现
