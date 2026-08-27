@@ -260,7 +260,7 @@ def stage_full():
             d = src.sort_values(["code", "statDate"]).reset_index(drop=True)
             h = pd.util.hash_pandas_object(d.astype({"code": str}), index=False).values.tobytes()
             return hashlib.md5(h).hexdigest()
-        same = _hashframe(pre[cols]) == _hashframe(pst[cols])
+        same = _hashframe(pre[pre.code.map(is_a)][cols]) == _hashframe(pst[cols])
         # 抽样 md5 明细 (150 行)
         pre_a = pre[pre.code.map(is_a)].sort_values(["code", "statDate"])
         smp = pre_a.sample(n=min(150, len(pre_a)), random_state=42)

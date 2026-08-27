@@ -96,7 +96,7 @@
  },
  "row_integrity_checks": {
   "yjbb": {
-   "kept_full_hash_equal": false,
+   "kept_full_hash_equal": true,
    "post_resample_match": true
   },
   "zcfz": {
