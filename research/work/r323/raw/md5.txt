@@ -1,0 +1,7 @@
+{
+ "sh000300_sina.csv": "57458ed67933",
+ "sh513100_sina.csv": "34ef9c84da66",
+ "sh513300_sina.csv": "1e7f7b395cf4",
+ "sh513500_sina.csv": "f8d73b276232",
+ "sz159941_sina.csv": "63a1e024c385"
+}

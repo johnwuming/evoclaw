@@ -1,0 +1,10 @@
+{
+ "sh513100_sina": "rows=3178 2013-07-31..2026-08-26 cols=['date', 'open', 'high', 'low', 'close', 'volume', 'amount', 'postVol', 'postAmt']",
+ "sh513500_sina": "rows=3066 2014-01-15..2026-08-26 cols=['date', 'open', 'high', 'low', 'close', 'volume', 'amount', 'postVol', 'postAmt']",
+ "sz159941_sina": "rows=2704 2015-07-13..2026-08-26 cols=['date', 'open', 'high', 'low', 'close', 'volume', 'amount', 'postVol', 'postAmt']",
+ "sh513300_sina": "rows=1410 2020-11-05..2026-08-26 cols=['date', 'open', 'high', 'low', 'close', 'volume', 'amount', 'postVol', 'postAmt']",
+ "sh000300_sina": "rows=5979 2002-01-04..2026-08-26 cols=['date', 'open', 'high', 'low', 'close', 'volume', 'amount']",
+ "513100_em": "FAIL ('Connection aborted.', RemoteDisconnected('Remote end closed connection without",
+ "513500_em": "FAIL ('Connection aborted.', RemoteDisconnected('Remote end closed connection without",
+ "mmf_000198": "FAIL fund_money_fund_info_em() got an unexpected keyword argument 'fund'"
+}
