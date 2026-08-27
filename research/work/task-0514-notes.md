@@ -20,5 +20,25 @@
 - M1-M5 迁移步；M4 paper 指针切换需用户批准；红线：registry active / paper_engine / HP crontab 零擅动
 - 在役基线数字：F7a 年化13.61% / Sharpe1.483 / Calmar2.001 / mdd−6.80% / 月胜率69.2%；两腿 corr≈0.03
 
-## 现状画像（task-0501-notes 摘取，待补）
-（待填）
+## 现状画像（已摘取）
+- D6 双cron：p3_3_evolution_standalone(939行旧)半月 vs evolution_pipeline(1605行)周六；HP 182脚本中 107 孤儿
+- GATE_CONFIG：icir_is≥0.5 / oos_p<0.05(split 2021-01) / max_corr≤0.7 / DSR≥0.95 / logic非空 / MDD恶化≤2pp一票否决 = g1-g6；STATUS_ENUM candidate→pending→active→sota→retired
+- 6种留痕载体散装：decision-log/ledger/history/switch_log/n_trials_ledger/cycle-report + engines.audit → 事件化改造的起点
+- engines.json 快照缺 gold 引擎 = 状态滞后风险
+
+## R-333 审计结论（直接引用）
+- 成本 v2 = 佣金0.10%+价差0.03% = 13bp/边（R-304 冻结）；实记账滑点≡0（收盘回填），v2建仓实付4.00bp（¥5最小佣金），无卖出侧样本
+- 三情景年化偏差：A记账延续 −0.9pp 低于带；B可实现中间态(万2.5佣金+tick半价差+印花税摊≈11.5bp/边) −0.21pp 落在 ±0.1~0.3pp 预期带；C小微资金 +1.0pp 超上界
+- 一字板不可成交实证：v1 组 300862 四连一字板；当前规模参与率≈0.002~0.007%，冲击成本可忽略，603551 低成交额票最先触线
+- 判定：±0.1~0.3pp 预期带仅在「比例佣金可得+收盘竞价可成交」下成立
+
+## R-334 复用结论（不重查）
+- qlib qrun 第二裁判双轨（先验 cn_data bin 就绪性）；PIT：R-328 NOTICE_DATE 细则、000001 滞后371天反例；复权：R-330 F4 唯一 qfq、513100 假 MDD −85% 反例；Mask-First：R-333 一字板实证支撑
+- GM→标准名映射素材：GM4(进化单轨)/GM6(门禁schema)/GM7(影子合一)/GM9(quant_common)/GM13(同步总线)/GM15(engines.json单落点)
+- 辩论代理→Alpha Layer 候选供给；ICIR+HMM→择时模块
+
+## 报告决策
+- 编号 R-336；文件名 R-336-破而后立目标架构与迁移方案.md
+- 标准术语：portfolio_version / sleeve / signal / gate / promotion(shadow→paper→canary→live) / retirement / event_log
+- GLOSSARY.md 全文放报告附录；门禁阈值全部带数字并标「初版建议值」
+- paper 指针语义切换（Phase C）标红需用户批准
