@@ -145,9 +145,11 @@ def simulate_unfiltered(fin_dir=TMPDIR):
 def table_stats(tabs):
     out = {}
     for t, df in tabs.items():
+        m = df.code.map(is_a)
+        n_a = int(df.loc[m, "code"].nunique()) if len(df) else 0
         out[t] = {"rows": int(len(df)), "stocks": int(df.code.nunique()),
-                  "stocks_a": int(df.code.map(is_a).sum() > 0 and df[df.code.map(is_a)].code.nunique()),
-                  "rows_nonA": int((~df.code.map(is_a)).sum())}
+                  "stocks_a": n_a,
+                  "rows_nonA": int((~m).sum()) if len(df) else 0}
     return out
 
 
