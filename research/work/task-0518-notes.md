@@ -25,3 +25,16 @@ P1-3 → §4.4 加运行时相关性行（引用 §7.5.4 为定义出处），§
 小修2 → G-L1 调仓周期机器定义（月频=1自然月，自进入状态首个调仓日起算）
 小修3 → §4.3 标题/§1.2⑥/§7.2/GLOSSARY 全部改串行三段式表述
 文档头 → 一句话版本后加修订记录表
+
+## 执行结果（2026-08-28）
+- python 精准替换 17 对（old/new），全部 count==1 命中，无 sed 盲改
+- 文档 469→492 行，41.8KB→~47KB；新增「修订记录」节（一句话版本之后）
+- P0-1：§7.5.3 重写为三段式（熔断硬上限>组合级>单腿级+五情形表+v1.1 修订说明）；§1.1 总图⑦/§1.2⑦/§4.4「裁决顺序」行同步；grep「组合级 > 策略级」「两层关系」「单腿级优先（熔断」零残留
+- P0-2：§1.2⑤ risk_control={drawdown_gates,vol_target,backfill_rule}，sleeve ddc 下沉+sleeve 级（§4.4 行注明），可选 per_sleeve_risk_cap（封顶语义）；GLOSSARY 补旧名 risk_control.sleeve_ddc→per_sleeve_risk_cap 行
+- P1-1：§1.2⑤ backfill_rule 显式定义（禁回填未来信息统计量）+归 G-B 类正确性门禁（与 §5.1 A1 同口径）；GLOSSARY 补行
+- P1-2：§1.2⑤ 状态机补 live→shadow（漂移超标）/live→gated（严重问题回滚）+触发条件+event_log append-only 声明；§3.2 新增 promotion.downgraded 事件
+- P1-3：核实 §7.5.4 确已有运行时监控（0.85/0.90）但未入 §4.4 → 已并入 §4.4（组合级行，声明 §7.5.4 为定义出处），§7.5.4 加交叉引用，无双定义
+- 小修1：paper_since→paper_entered_at+paper_duration（§1.2⑤+GLOSSARY 旧名行）
+- 小修2：G-L1 调仓周期机器定义（月频=1自然月，自进入状态首个调仓日起算）
+- 小修3：§4.3 标题/§1.2⑥/§7.2/GLOSSARY canary 行全部改串行三段式；L147 promotion.requested 事件目标枚举（shadow/paper/canary/live）为合法目标列表非路径表述，保留
+- README.md（197KB 未全读）顶部 R-336 最新条目下插入 v1.1 修订说明一行
