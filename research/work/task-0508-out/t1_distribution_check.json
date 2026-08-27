@@ -1,0 +1,19 @@
+{
+ "hist_equal": {
+  "neg": true,
+  "0-30": true,
+  "31-62": true,
+  "63-90": true,
+  "91-120": true,
+  "121-150": true,
+  "151-180": true,
+  "181-365": true,
+  ">365": true
+ },
+ "src_equal": {
+  "real": true,
+  "fallback_missing": true,
+  "fallback_anom": true
+ },
+ "real_cover_now": 0.8169
+}
