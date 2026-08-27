@@ -1,0 +1,20 @@
+{
+ "yjbb": {
+  "rows": 453749,
+  "stocks": 11733,
+  "periods": 86,
+  "md5_keys": "7e929359637c8624982056a4c4e4c3c1"
+ },
+ "zcfz": {
+  "rows": 280143,
+  "stocks": 5247,
+  "periods": 86,
+  "md5_keys": "681d14fc8e7cb97c37e1bf8ccd994c76"
+ },
+ "xjll": {
+  "rows": 288715,
+  "stocks": 5247,
+  "periods": 86,
+  "md5_keys": "0bae667fb68500f1b68063e3925ce1fc"
+ }
+}

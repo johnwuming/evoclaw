@@ -279,6 +279,7 @@ def stage_full():
     det = ypre[ypre.code.isin(pick)][["code", "statDate", "net_profit"]].copy()
     det["family"] = det.code.map(prefix_family)
     det["rule_verdict"] = "剔除(A股白名单外)"
+    removal_sample = det.head(30).to_dict("records")
 
     # --- A股三要素齐全率 (修复后口径, 应≈R-275 96.6%/99.4%) ---
     rate = three_element_rates({**tabs_post})
