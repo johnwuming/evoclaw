@@ -128,3 +128,47 @@
 4. **N9 同步通道收敛**：5+1条通道中有效仅auto_sync_notify+push指标2条(R-320 D3/D4+rsync_to_vps)。候选：`sync_channel`=notify镜像(结果)+metrics push(指标)，删pull/rsync/sync_to_vps/hp_api_server
 5. **N5≡C5 退化判据同源**：门禁(静态单轮g1-g6)与劣化检测(滚动60日)同为「业绩退化量化」。候选：评分制落地时抽 `scoring_core(gate=入场版, patrol=运营版)` 共用指标计算与阈值语义
 6. **step6_notify≡C8**：notify()入队 vs notify_hub hub。候选：所有告警唯一出口 notify_hub，pipeline只投递
+
+## [分析-Q2] 「每节点=通用模块」重复建设盘点与合并抽象候选
+
+| 节点 | R-206 规划 | 死岛实现(旧) | v5活实现(新) | 后端/HP侧 | 重复判定 | 合并抽象候选 |
+|---|---|---|---|---|---|---|
+| 数据关 N2/C-共用 | M1.1健康看板/M1.6资产盘点 | —(无死岛复本) | D1/D2卡 | data_validator+data-health/data-assets端点 | 无UI重复；通道层push/pull双写metrics.db(R-320 D3) | `data_gate`：校验+快照+漂移标注单入口；指标通道收敛为push |
+| 因子库 L1 | M1.2注册表/M1.3 IC监控/M1.4相关簇/M1.5月度体检 | factorTableRoot旧链~190行+renderFactorIcChart死函数(L11189-11375,不可达) | F1-F4活 | factor_catalog v1/v2/v3三代文件降级链(R-320 D10) | 前端死簇+数据三代冗余 | 删旧链(P0)；catalog v3单源保留v2降级开关；M1.5未建(规划缺口非重复) |
+| 版本/回测呈现 | M3.0-M3.8四层归因链+版本绑定器 | loadModelsQuant/loadBtlcQuant全簇L11377-12830(decisions/pending/ideas/ledger/timing-matrix/reports/btlc/e2e/dsr/gates/q4b-contrast独占15端点) | M1-M5/B4-B7(v5btlc/v5model) | active/version-options/curves/f6-curves/btlc(旧动态计算仍活着可读main.json真源) | 两代渲染体系并存=最大面积重复(R-320 D1/D2)；v5指标数字9渲染点(R-321 2.2) | 单一渲染体系v5系+组件化(v5MetricCards/v5AlignSeries已具组件雏形)；深度分析(年度/危机/WF/历代最优)不复活整页，P2并入H3折叠区(btlcBuild*产物复用) |
+| 门禁评估 N5 | M2.6 Pending确认卡+五门禁面板 | B'gates端点(读8/16 v0_seed中性态死数据)+B'dsr假数据曲线L12806-12816 | H3「Gate评估」区(verdict+holdout) | GATE_CONFIG单点✓ verdict写入registry.gate | 面板三处：死gates端点/DSR曲线/H3——活UI已收敛于H3 | gate唯一可视化出口=H3；`scoring_core`落地评分制时统一(现一票否决vs已定案评分制脱节) |
+| 激活/裁决 N6 | M2.6人工Pending | quantEnqueueAction→quant/action队列+hp_api_server/run+backtest 双死(R-320 D5) | registry一致性徽标M2/P8 | _do_activate自动(task-0345)；override TTL | 动作入口两套均零消费 | 队列整链下线或迁心跳契约(待用户裁决)；干预只留 override/rollback 两CLI原语 |
+| 留痕 N7/C1 | M2.5决策时间线/M2.9试验台账/M2.8进化历史 | A2decisions/A5ledger/A9历史 旧版页 | B8内qLifecycleTimeline+qLifecycleLedger+迭代轨迹散点 | decision-log/ledger/history/switch_log/n_trials_ledger/cycle-report 六种载体 | 新旧两代生命周期视图+6种留痕形态 | B8为唯一生命周期视图(已收敛)；后端抽`event_bus`统一事件schema，查询端点一条 |
+| 影子观察 N8/C2 | (R-206未细化,R-315补) | engines_shadow_nav_append.py孤儿(HP) | B2图+P5跨引擎影卡+lifecycle.shadow_watch | paper--shadow(v2遗留)/shadow_nav_append/shadow_nav_gold 三后端 | 后端3实现前端3视图同信息(R-321 2.1影子净值2-3处) | `shadow_service`引擎无关化;B2移入B8折叠(R-321合并②)；gold=A2仅参数差异 |
+| 模拟盘 C4/L4 | M4.1-M4.8十二项 | paper-summary旧四件端点(L2036-2106被paper/替代) | P0-P11全活 | paper_engine(A股)/paper_engine_gold隔离设计 | 前端唯一性良好;引擎双轨 | 保持gold隔离+抽`quant_common`公共函数(R-320 P2)；check-degradation与risk_patrol并档核实 |
+| 同步 N9/C— | —(隐含自动同步) | sync_to_vps.sh孤儿+hp_api_server/sync | — | auto_sync_notify(用)+pull-hp-metrics(双写)+collect-metrics push(用)+paper rsync内置 | 6条通道2条有效(R-320 D3/D4) | `sync_channel`=结果镜像+指标push；其余停/删 |
+| 通知/想法入口 C8 | M2.7想法池🔴新建 | ideas入口死树(池jsonl仍被HP runner消化) | 无(心跳契约无消费步骤) | notify()入队 vs notify_hub cron hub | 入口与消费方错位 | 想法池入口另立(routed to runner)；告警唯一出口notify_hub |
+
+**横切结论**：
+- 重复建设的根源模式三种：①两代渲染体系并存（模型/回测/生命周期全中招）②多通道做同一件事（同步×6、指标回传×2、影子×3）③留痕载体碎片化（×6）。
+- 「每节点=通用模块」最值得抽取的通用件按 ROI 排序：scoring_core(门禁/巡逻共用判据) > shadow_service > event_bus(留痕统一) > data_gate > sync_channel > quant_common(paper/gold公共函数)。全部候选均属 R-320/R-321 已有分期(P0-P2)的自然延伸，无一需要新起炉灶。
+
+## [分析-Q3] 逐节点可视化必要性与处置建议
+
+判定依据：人工决策频率（当前真实人工门仅剩：激活类变更批准、override/rollback、队列去留裁决、对外发送批准）×异常排查价值。
+
+| 节点 | 可视化必要性 | 依据 | 处置建议（若保留→重复模块处置） |
+|---|---|---|---|
+| N2 数据校验 | **高**（排查价值：数据坏→全线停，fail-fast中止时第一现场） | cycle step0中止逻辑+D1缓存回退灰卡 | 保留D1卡(已是唯一)；metrics通道路径收敛不动UI |
+| N3 回测 | 中高（决策支持：激活前对照） | B7排行表/H3 locked&full卡高频引用 | 保留v5btlc骨架；9处指标渲染点收敛至M3==B5==H3==B7四点互验(R-321验收2)，删B1数字徽标 |
+| N4 EQUIV等价校验 | 低（纯工程闸门，批级证据不需常驻UI） | 逐位diffs={}，批次任务书内闭环 | 不建独立视图；证据留在ledger事件里(event_bus查询即可) |
+| N5 门禁评估 | **高**（人工复核p<0.01/DSR<0.90警示线必须可见） | R-220 g2/g4警示线要求人工复核标签 | 唯一出口=H3 Gate区；死gates端点+DSR假数据曲线随P0删 |
+| N6 激活/干预 | **高**（残余人工门的操作面） | activate需用户批准=R0门；rollback条件预写 | M2头卡ACTIVE徽标+P8 registry一致性徽标保留；动作队列死链删除，触发走对话/审批流而非UI按钮 |
+| N7 留痕 | 中（排查价值高、日常低频） | 决策时间线是审计需求非运营需求 | B8折叠面板承载(默认折叠✓现状即合理)；6种台账后端归一后history/lifecycle端点合一 |
+| N8 影子观察 | 中高（激活前对照直接服务决策） | P5双线NAV+B8 shadow_watch clean_evals门槛 | P5首屏保留；B2移入B8(R-321②)；clean_evals进度以B8为准、P5徽标留存 |
+| C3 拥挤度 | 高（微盘风控核心信号，主动看板） | A2臂存在动机=crowdf2防御;P9卡为唯一消费 | 保留P9；snapshot/collect双cron保留(频率不同语义不同) |
+| C4/C5 巡逻劣化 | **高**（出事时的第一入口） | risk-status红绿灯+退出纪律卡 | 保留P3运行状态条+P10纪律卡；check-degradation若未并入risk_patrol则归档避免双份告警 |
+| C6 择时运维 | 低中（诊断工具属性，M5/P4已覆盖仓位可见性） | timing action输出文本诊断 | 不新增UI;timing_matrix报告页维持埋葬(消费方已不存在,R-321§3.1) |
+| N9/C8 同步通知 | 低（通知是推送不是页面） | freshness/consistency横件已覆盖"数据到了吗" | 量化头部两横件保留；notify_hub不做页面化 |
+| 死岛A1-A9/B'群 | 零必要 | R-320/321全面判定（作战室/pending/timing矩阵/报告库/DSR假曲线…） | 全部随P0埋掉；唯一可选复活=v5hist加「回测深度分析」折叠(P2,用户拍板) |
+
+**总体判断**：36个活模块中真正贴着「人工门+排障刚需」的约12-14个(D1,F2-F3,M2-M3,B5-B7,H1,H3,P0,P3,P5,P6,P9,P10+横件2)，其余靠折叠降噪。这与 R-321「不减模块数、折叠瘦身去重」路线一致；节点化视角的增量贡献是把「保留哪些」的理由从 UI 层面上升到了流程职责层面。
+
+## 附：本次执行事故记录
+- 初次落盘时误覆盖了前一运行的 task-0501-notes.md(27KB，完成记录见 .task-completions.jsonl 09:4x 条目)。本文件为从原始来源(task-0498 notes/R-203/205/206/223/320/321/tmp-w5代码副本/engines.json)完整重建的版本，证据均重新取证；丢失的是HP crontab逐行与server.js路由抽查细节，已通过引用 task-0498-notes.md E2/E6/E11 补回指针。
+- 教训：写笔记前应先探明同路径既有交付物。
