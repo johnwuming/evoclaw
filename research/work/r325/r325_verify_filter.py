@@ -44,6 +44,16 @@ def prefix_family(c):
     return f"A股或未知({c})"
 
 
+# 生产 schema 中存在但 r275 本地子集未采的派生源列：以 NaN 补齐（不造数，仅供结构验证）
+REQ_FILL = {
+    "yjbb": ["revenue", "eps", "bps", "cfps"],
+    "zcfz": ["equity", "cash", "inventory", "ar", "total_asset_yoy",
+             "total_liability", "debt_to_asset"],
+}
+LRB_FILL_COLS = ["code", "report_period", "pubDate", "total_profit", "revenue",
+                 "net_profit", "net_profit_yoy", "revenue_yoy"]
+
+
 # ---------------------------------------------------------------- Stage: build
 def stage_build():
     os.makedirs(TMPDIR, exist_ok=True)
@@ -61,12 +71,21 @@ def stage_build():
                 d["pubDate"] = pd.to_datetime(d["pubDate"], errors="coerce")
             frames.append(d)
         full = pd.concat(frames, ignore_index=True)
+        for c in REQ_FILL.get(t, []):
+            if c not in full.columns:
+                full[c] = np.nan
         out = os.path.join(TMPDIR, f"{t}.parquet")
         full.to_parquet(out, index=False)
         h = hashlib.md5(full.sort_values(["code", "report_period"])
                         [["code", "report_period"]].astype(str).to_csv(index=False).encode()).hexdigest()
         fp[t] = {"rows": int(len(full)), "stocks": int(full.code.nunique()),
                  "periods": int(full.report_period.nunique()), "md5_keys": h}
+    # lrb 空壳（零行）: HP 生产有 lrb 表, 本地子集未采；提供 schema 使真函数可端到端跑通,
+    # 零行=外连不改行集, lrb 源派生值为 NaN 不构成伪造。
+    lr = pd.DataFrame({c: pd.Series(dtype="float64" if c not in ("code", "report_period") else str)
+                       for c in LRB_FILL_COLS})
+    lr.to_parquet(os.path.join(TMPDIR, "lrb.parquet"), index=False)
+    fp["_lrb_filler"] = {"rows": 0, "note": "zero-row schema stub, 无伪数据"}
     json.dump(fp, open(f"{OUT}/inputs_fingerprint.json", "w"), ensure_ascii=False, indent=1)
     print(json.dumps(fp, ensure_ascii=False, indent=1))
 
