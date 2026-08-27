@@ -105,3 +105,22 @@ D1 模型/版本展示两套UI(死loadModelsQuant L11377 vs v5model L9658)；D2 
 - 无重复：持仓仅P6/交易仅P7
 - 跨Tab端点重复拉取6组(registry/active-curves/engines/version-options/shadow-nav/data-health)
 - 死岛复活结论：无高优复活项；DSR折扣曲线是硬编码假数据(L12806-12816)；五门禁面板读8月16日中性态假数据；verdict/gate核心信息已在H3 Gate评估区呈现
+
+### server.js 数据通道实查（2026-08-27 抽查，行号为当前版本）
+- 文件 718178B；60 个 /api/quant 路由；QUANT_DIR=shared/results/04-投资研究（仅 5 处引用）
+- workspace-quant 硬编码路径 30 处：QUANT_REPORTS_DIR=workspace-quant/results（L2120，engines/risk-status/f6-curves/shadow-nav 读这里）、QUANT_MODEL_REGISTRY_DIR=workspace-quant/model/registry（L2711）、decision-log(L2562)、ideas(L2522)、factor_catalog v1/v2/v3 三代并存(L1860-1862)、results/model 又一个 registry 别名(L2853, L1866)
+- ⚠️ 中央注册表 engines.json 双落盘：workspace-quant/model/registry/engines.json 与 workspace-quant/results/engines.json 同内容同日期（08-25）各一份
+- 五门禁字段前端消费点：L2470-2513（版本对象 gate 段→H3 详情）；verdict 归一化 L2596-2606
+- clean_evals 前端三处消费：L10151（引擎评估徽标区）、L11381（B8 生命周期）、L11978 注释处（P5 影子卡徽标）
+- renderCrowdingCard L11797、renderRiskCharterCard L11887、v5EngineEvalFrontHtml L9964、quantConsistDot L7416——与 R-321 行号有漂移（R-315/R-319 实施后位移），模块本体俱在
+- paper_engine.py 内置 rsync_to_vps()（L558）：summary/nav/trades/portfolio/state/validation 六文件主动 push VPS；VPS 侧另有 pull(auto_sync_notify)；R-320 D4 三套同步机制中此为第三套的代码证据
+
+## §2 多引擎统一视角证据
+
+- engines.json schema_v1 引擎对象：engine_id/name/status(A=active,A2=shadow,gold=active_paper)/layer1{registry entry+nav_source{kind,frequency,path_hp,sync}}/layer3{tabs,api_prefix}/shadow{mode:none|cross_engine,since,min_months,clean_evals,evals[],termination,monitoring}/audit{changes[]}
+- 引擎生命周期（实证汇总）：idea(E1画像 R-300/R-303) → E2预注册(R-301/R-304 锁 sha256) → E2执行回测(R-302/R-305) → 判门(G0-G6 预注册门,可 PARTIAL_DISCLOSURE_USER_ADJUDICATION) → shadow 登记(R-306 影子期豁免可用户批) → 激活(R-307 用户批准 registry 条目 shadow→active；真金分配独立人工门) → active_paper(paper_engine_gold daily+verify) → 退出(risk-charter 规则触发降仓/观察/review)
+- 微盘血统(版本线)：candidate 设计→backtest(full+locked)→EQUIV等价校验→evaluate g1-g6+SCORED 评分→rank==1 自动 activate→shadow_watch(clean_evals N/N 出影,a12 另有 L3 守卫 required-1 停自动转人工)→active→降级候选：rollback(TTL override/字节快照)
+- A2 叠加臂：sub_engine_overlay w=0.5,parent=A,shadow mode=cross_engine min_months=3,nav_source=monthly_shadow_script(results/engines/a2/shadow_nav.csv)
+- 中央风控插入点（生产者 cron）：risk_patrol 工作日16:45→risk-status.json(读 charter rules×track/paper/bench/micro NAV)；collect_crowding 周日07:00+snapshot_crowding 月度19:35→拥挤度;underperform_discipline「暂停模型升级」作用于进化循环；drawdown_circuit_breaker level1 降仓至50%作用于 paper 层
+- 「influence 二层激活判据」：grep R-290/R-314/R-29x 及 engines.json 无 influence 关键字实据；最接近的是 A2 overlay 的 w_source=scoring_v12_frozen migration(R-267 §4.2 组件型建议值)与 F6 中央风控层2 wi 计算框架(R-259 §6.1 战略配置器)。阶段B 需向用户确认所指
+- R-320 D7 定性：paper_engine vs paper_engine_gold 有意隔离(gold 冻形态)，建议抽 quant_common 公共层而非合并
