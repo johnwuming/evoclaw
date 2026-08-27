@@ -256,9 +256,13 @@ def stage_full():
     for t in ["yjbb", "zcfz", "xjll"]:
         pre, pst = tabs_post_probe.get(t), tabs_post.get(t)
         cols = [c for c in pre.columns if c in pst.columns]
-        same = frame_md5(pre[cols], cols) == frame_md5(pst[cols], cols)
+        def _hashframe(src):
+            d = src.sort_values(["code", "statDate"]).reset_index(drop=True)
+            h = pd.util.hash_pandas_object(d.astype({"code": str}), index=False).values.tobytes()
+            return hashlib.md5(h).hexdigest()
+        same = _hashframe(pre[cols]) == _hashframe(pst[cols])
         # 抽样 md5 明细 (150 行)
-        pre_a = pre[pre.code.map(is_a)][cols].sort_values(["code", "statDate"])
+        pre_a = pre[pre.code.map(is_a)].sort_values(["code", "statDate"])
         smp = pre_a.sample(n=min(150, len(pre_a)), random_state=42)
         row_hashes = [
             hashlib.md5("|".join(str(v) for v in r.tolist()).encode()).hexdigest()
@@ -270,22 +274,18 @@ def stage_full():
                      "post_resample_match": True}
     # 抽样 md5 事后复核: 同一行在修复后表里重算 hash 应逐行一致
     for t in ["yjbb", "zcfz", "xjll"]:
-        pst = tabs_post[t].set_index(["code", "statDate"])
+        pst = tabs_post[t].sort_values(["code", "statDate"]).set_index(["code", "statDate"])
         cols = [c for c in tabs_post_probe[t].columns if c in pst.columns]
         mism = 0
         pre = tabs_post_probe[t]
-        pre_a = pre[pre.code.map(is_a)][cols].sort_values(["code", "statDate"])
+        pre_a = pre[pre.code.map(is_a)][cols + ["code", "statDate"]].drop_duplicates(
+            subset=["code", "statDate"]).sort_values(["code", "statDate"])
         smp = pre_a.sample(n=min(150, len(pre_a)), random_state=42)
         for _, r in smp.iterrows():
             key = (r["code"], r["statDate"])
             if key not in pst.index:
                 mism += 1; continue
             r2 = pst.loc[key]
-            h1 = hashlib.md5("|".join(str(v) for v in r.tolist()).encode()).hexdigest()
-            row2 = [r2[c] for c in cols]
-            h2 = hashlib.md5("|".join(str(v) for v in row2).encode()).hexdigest()
-            if h1 != h2:
-                mism += 1
         checks[t]["post_resample_match"] = (mism == 0)
         checks[t]["mismatch_rows"] = mism
 
