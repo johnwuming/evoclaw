@@ -32,6 +32,14 @@
 - 待测 A3 已做：kzz/detail/{code}.html 为 JS 骨架页无余额文本；`bond_zh_cov_info(基本信息)` 全列拿到：仅 `ACTUAL_ISSUE_SCALE`（实际发行规模，静态）；已退市券（吉视转债 113017, LISTING 2018-01-15, DELIST 2023-12-27）也可查 → 覆盖退市券 +。
 - **A 结论：东财系无任何「剩余余额/转股进度」字段；仅有静态发行规模 + 实时行情快照 ❌**
 
+## §B 集思录
+
+### B1 未登录实测（curl/python POST cb_list_new，2026-08-27）
+- `POST https://www.jisilu.cn/data/cbnew/cb_list_new/` 无 cookie 可用！未拦截、无验证码。
+- 但 rp=999 仍只返回 **30 行**（分页墙）→ 免费墙是条数限制而非登录墙；网页版 data/cb/list 为 JS 骨架页（3898B）。
+- 字段证据（原文摘录）：`"curr_iss_amt":5.5,"year_left":5.981,"maturity_dt":"2032-08-18","orig_iss_amt":...` → **剩余规模✅ 存在**，30/30 行有值；样例落盘 /tmp/jsl_cells.json。
+- **关键限制：该端点仅为当前快照，无任何历史参数**（请求体只有筛选器，无日期维度）→ 自身历史深度 = 0。
+- PIT 风险评级：低（快照实时），但对回填无用——过去某月末的余额无法从此端点取。
 ## §C akshare
 
 - 本机版本：**akshare 1.18.94**（python3.12, /usr/local/lib）。
@@ -45,11 +53,4 @@
 - `web.archive.org` CDX API 连 sanity 检查（url=baidu.com）都返回空且进程超时退出 → **本机到 archive.org 不通/被阻断，通道在本环境不可达**（不排除海外代理下可用，但当日桌面环境无法验证；存档是否覆盖 jsl cb_list_new JSON 亦无从谈起——spider 通常不会 POST 该端点）。
 - 结论 D1：回填 2019 历史 ❌（本环境）。
 
-
-### B1 未登录实测（curl/python POST cb_list_new，2026-08-27）
-- `POST https://www.jisilu.cn/data/cbnew/cb_list_new/` 无 cookie 可用！未拦截、无验证码。
-- 但 rp=999 仍只返回 **30 行**（分页墙）→ 免费墙是条数限制而非登录墙；网页版 data/cb/list 为 JS 骨架页（3898B）。
-- 字段证据（原文摘录）：`"curr_iss_amt":5.5,"year_left":5.981,"maturity_dt":"2032-08-18","orig_iss_amt":...` → **剩余规模✅ 存在**，30/30 行有值；样例落盘 /tmp/jsl_cells.json。
-- **关键限制：该端点仅为当前快照，无任何历史参数**（请求体只有筛选器，无日期维度）→ 自身历史深度 = 0。
-- PIT 风险评级：低（快照实时），但对回填无用——过去某月末的余额无法从此端点取。
 
