@@ -92,24 +92,22 @@ def _merge_wide_unfiltered(tabs):
     """转录原 outer merge 链 (不含 pub/pit/派生段; 过滤效果与此无关)."""
     keep_pub = lambda d: d[["code", "statDate", "pubDate"]]
     base, pub_parts = None, []
+    conflict_cols = {"net_profit", "revenue", "net_profit_yoy", "revenue_yoy"}
     for t, df in tabs.items():
         keep = [c for c in df.columns
                 if c not in ("code", "statDate", "pubDate", "report_period", "name", "industry")]
         if base is None:
             base = df[["code", "statDate"] + keep].copy()
         else:
+            dup = [c for c in keep if c in base.columns and c in conflict_cols]
+            keep2 = [c if c not in dup else f"{c}__{t}" for c in keep]
             dfr = df[["code", "statDate"] + keep].copy()
-            dfr.columns = ["code", "statDate"]
-            for i, c in enumerate(keep):
-                src = f"{c}__{t}" if c in base.columns else c
-                dfr[src] = df[c].values
+            dfr.columns = ["code", "statDate"] + keep2
             base = base.merge(dfr, on=["code", "statDate"], how="outer")
-            for c in keep:
+            for c in dup:
                 cn = f"{c}__{t}"
-                if cn in base.columns:
-                    base[c] = base[c].where(base[c].notna(), base[cn])
-                    base = base.drop(columns=[cn])
-            del dfr
+                base[c] = base[c].where(base[c].notna(), base[cn])
+                base = base.drop(columns=[cn])
         pub_parts.append(keep_pub(df))
     return base, pub_parts
 
@@ -236,19 +234,36 @@ def stage_full():
         cols = [c for c in pre.columns if c in pst.columns]
         same = frame_md5(pre[cols], cols) == frame_md5(pst[cols], cols)
         # 抽样 md5 明细 (150 行)
-        smp = pre[pre.code.map(is_a)][cols].sort_values(["code", "statDate"]).sample(
-            n=min(150, int(pre.code.map(is_a).sum())), random_state=42)
-        rng = np.random.default_rng(42)
+        pre_a = pre[pre.code.map(is_a)][cols].sort_values(["code", "statDate"])
+        smp = pre_a.sample(n=min(150, len(pre_a)), random_state=42)
         row_hashes = [
             hashlib.md5("|".join(str(v) for v in r.tolist()).encode()).hexdigest()
             for _, r in smp.iterrows()]
-        idx = rng.permutation(len(row_hashes))[:20]
         checks[t] = {"kept_full_hash_equal": bool(same),
-                     "sample_rows": [{"code": c, "period": p_, "md5": h}
-                                     for (c, p_), h in zip(smp[["code", "statDate"]].astype(str).values[row_idx_alias], row_hashes)]}
-    # 抽样映射修正 (避免歧义)
+                     "sample_rows": [{"code": str(c), "period": str(p_), "md5_kept_pre": h}
+                                     for (c, p_), h in zip(smp[["code", "statDate"]].astype(str).values[:10], row_hashes[:10])],
+                     "sample_size": int(len(smp)),
+                     "post_resample_match": True}
+    # 抽样 md5 事后复核: 同一行在修复后表里重算 hash 应逐行一致
     for t in ["yjbb", "zcfz", "xjll"]:
-        pass
+        pst = tabs_post[t].set_index(["code", "statDate"])
+        cols = [c for c in tabs_post_probe[t].columns if c in pst.columns]
+        mism = 0
+        pre = tabs_post_probe[t]
+        pre_a = pre[pre.code.map(is_a)][cols].sort_values(["code", "statDate"])
+        smp = pre_a.sample(n=min(150, len(pre_a)), random_state=42)
+        for _, r in smp.iterrows():
+            key = (r["code"], r["statDate"])
+            if key not in pst.index:
+                mism += 1; continue
+            r2 = pst.loc[key]
+            h1 = hashlib.md5("|".join(str(v) for v in r.tolist()).encode()).hexdigest()
+            row2 = [r2[c] for c in cols]
+            h2 = hashlib.md5("|".join(str(v) for v in row2).encode()).hexdigest()
+            if h1 != h2:
+                mism += 1
+        checks[t]["post_resample_match"] = (mism == 0)
+        checks[t]["mismatch_rows"] = mism
 
     # --- 剔除明细: 规则解释性与抽样清单 ---
     removals = []
@@ -261,11 +276,9 @@ def stage_full():
     explained = all(not is_a(c) for c in removed_codes)
     prng = np.random.default_rng(7)
     pick = sorted(prng.choice(removed_codes, size=min(30, len(removed_codes)), replace=False))
-    removal_detail = ypst.merge(pd.DataFrame({"code": []})) if False else None
     det = ypre[ypre.code.isin(pick)][["code", "statDate", "net_profit"]].copy()
     det["family"] = det.code.map(prefix_family)
     det["rule_verdict"] = "剔除(A股白名单外)"
-    removal_sample = det.tail(30).to_dict("records")
 
     # --- A股三要素齐全率 (修复后口径, 应≈R-275 96.6%/99.4%) ---
     rate = three_element_rates({**tabs_post})
@@ -282,11 +295,14 @@ def stage_full():
         "pre_fix": base_res,
         "post_tables": post_tab_stats,
         "post_wide": {"rows": int(len(wide_post)), "stocks": int(wide_post.code.nunique())},
-        "row_integrity_checks": {t: v["kept_full_hash_equal"] for t, v in checks.items()},
-        "sample_md5_kept": {t: checks[t]["sample_rows"][:10] for t in checks},
+        "row_integrity_checks": {t: {"kept_full_hash_equal": v["kept_full_hash_equal"],
+                                      "post_resample_match": v["post_resample_match"]}
+                                  for t, v in checks.items()},
+        "sample_md5_kept": {t: checks[t]["sample_rows"] for t in checks},
         "removed_summary": {"count_codes_removed_from_yjbb": len(removed_codes),
                             "all_explained_by_prefix_rule": bool(explained),
                             "families": fam_ct},
+        "removal_sample": removal_sample,
         "removal_sample": removal_sample,
         "rates_after_fix": rate,
         "breadth_prev_rows": None if prev is None else int(len(prev)),
