@@ -42,3 +42,15 @@
 - 标准术语：portfolio_version / sleeve / signal / gate / promotion(shadow→paper→canary→live) / retirement / event_log
 - GLOSSARY.md 全文放报告附录；门禁阈值全部带数字并标「初版建议值」
 - paper 指针语义切换（Phase C）标红需用户批准
+
+## 增补建议（23:39 用户转外部，source-advice-portfolio-construction.md，2.0KB 已读全文）
+- 六层改七层：Alpha 与 Portfolio 之间新增 Portfolio Construction Layer（组合构建层）；职责=给定风险预算求 sleeve 权重；求解器可插拔分阶段：①等波动率 ②风险预算/ERC（协方差 Ledoit-Wolf 收缩）；明确不用 MVO（收益预测误差敏感）
+- 解耦铁律：portfolio_version 存配置（sleeve 指针/风控参数/求解器选型+参数），构建层输出权重求解结果；禁止在 vC 上直接加 model_weights
+- 门禁追加组合级回撤分级闸门：<5% 正常 / 5-10% 提级审查 / 10-15% 降仓×0.5 / >15% 熔断；波动率目标化参数位；层级关系：分级闸门=组合级、ddc=sleeve 级，两层独立触发，组合级>策略级裁决
+- 再平衡协调协议：sleeve 内重大调仓后组合层冷却期 1 个完整调仓周期，期间不因 RC 变化反向加仓；防减仓→RC骤降→反向加仓横跳
+- 相关性用持仓相关性 holding-based（非仅净值），同源信号>0.75 告警，危机期趋近1=分散失效
+- P2/P3 降级为演进方向不现在做：约束体系、分层风险预算、HRP、体制切换
+- 外部优先级：P0=组合构建器+波动率目标化+回撤分级闸门；P1=相关性筛查+ERC+Ledoit-Wolf；P2=约束+分层预算+退役；P3=HRP/体制切换
+
+## 撰写状态
+- [x] 证据全部落笔记；[ ] R-336 报告主体；[ ] README 顶部日志；[ ] 完成回报
