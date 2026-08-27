@@ -22,3 +22,8 @@
 - sina 列含 volume/amount → 成交额可直接用于容量，em 源可弃
 - em fund_etf_hist_em ×2 RemoteDisconnected FAIL（QDII 数据常规断连）→ 重试 1 次，再败则用 sina.amount
 - mmf fund_money_fund_info_em(fund=) 参数签名不符 → inspect 后重调
+
+## [12:26] 快检
+- gold_alone_nav 月度曲线核对: ann=7.66% MDD=-5.9% Calmar=1.297 ← 与任务书参照(7.6%/1.29)一致, n月=155
+- 成交额单位核验(sina amount, 最近250交易日): 513100 中位5.56亿/日; 513500 3.35亿; 159941 11.03亿 → 单位=元
+- mmf_000198 拉取成功: 4835行 2013-05-30..2026-08-26 (每万份收益)
