@@ -188,8 +188,11 @@ def load_patched_module():
             m = types.ModuleType(name)
             sys.modules[name] = m
     sys.modules["scipy.stats"].spearmanr = lambda *a, **k: None
-    sys.modules["scipy.cluster.hierarchy"] = getattr(sys.modules["scipy.cluster"], "hierarchy",
-                                                     types.ModuleType("scipy.cluster.hierarchy"))
+    m_cl = types.ModuleType("scipy.cluster"); m_h = types.ModuleType("scipy.cluster.hierarchy")
+    sys.modules["scipy.cluster"] = m_cl
+    sys.modules["scipy.cluster.hierarchy"] = m_h
+    sys.modules["scipy"].cluster = m_cl
+    m_cl.hierarchy = m_h
     fe = types.ModuleType("factors_ext")
     sys.modules["factors_ext"] = fe
     src_dir = "/root/.openclaw/workspace/scripts/task-0285"
