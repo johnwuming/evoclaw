@@ -37,9 +37,12 @@
 - 本笔记
 - README.md 顶部更新日志加一行（含 R-328 与标题），写后重新 grep 确认仍在
 
+## sha256 锁（先写后算惯例，沿 R-304）
+- R-328 正文 sha256：3054c9ed80f33d6ab6bf03098690356771eac259b9ca5f4a04cda99f2a5e0483
+
 ## 状态
 - [x] 输入读取与数字抽验
 - [x] 模板与惯例取证
-- [ ] R-328 正文落盘 + sha256 记录到本笔记
+- [x] R-328 正文落盘（8,109B ≥6KB）；抽验 5 处数字全 PASS（C2 +0.0266/4.35、real_cover 81.7%、strict +0.0249/3.85、C3 −0.061pp、自洽 +0.0128，均与 summary_r324.json/R-324 原文一致）
 - [ ] README 日志行 + grep 复核
 - [ ] .task-completions.jsonl 写入 + PUT pending_review
