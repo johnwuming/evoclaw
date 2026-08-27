@@ -59,3 +59,15 @@
 - GATE_CONFIG 含 oos_split_ym=2021-01；GUARD_CORR_CONFIG 护栏vs替身豁免（D-20260819-G3CORR/G3SYM）
 - _shadow_update 影子状态机：stat_warn→进影清零；clean_evals+1 满 SHADOW_CONFIG.watch_periods 出影（reg.gate.shadow_watch）
 - cmd_cycle 七步：Step0 数据校验(data_validator.run_all fail-fast)→Step0b 新鲜度+漂移→Step1 快照登记→Step2 想法消化(ideas/pool.jsonl)→Step3 因子迭代(W1占位)→Step4/5 候选backtest+evaluate→Step6 通知→Step7 门禁PASS自动activate(R220移除人工确认)
+
+### 关键脚本解剖（HP 实查）
+- **risk_patrol.py**（21KB）：按 config/risk-charter.json 退出纪律章程逐规则算当前值vs阈值→ results/risk-status.json 供页面 M4.8 消费；规则三类：drawdown_circuit_breaker(HWM回撤25%→降仓至50%)、underperform_discipline(rolling_6m_excess<-10%→观察+暂停模型升级)、live_vs_backtest(live sharpe/backtest<0.5 持6月→策略失效review)；含 run_replay 2015 演练模式
+- **engines_shadow_evaluate_gold.py**：读 B 影子NAV(monthly) + A 在役NAV(a13锁定) 对比 → append engines.json B条目 shadow.evals[]，维护 clean_evals/monitoring/termination；零改动原则（A/A2字节级不动）
+- **a12_monthly_evaluate.sh**：A12 影子月评包装（flock 幂等+重试1次）；**L3晋升守卫：clean_evals≥required-1 时停止自动评估→出人工评审通知**；通知走 results/notifications-queue.jsonl
+- **model_manager.py**（VPS镜像34KB）：旧一代模型管理层——evaluate_candidate/register_candidate/run_versioned_backtest/write_pending/merge_candidate/reject_candidate/rollback/check_degradation/action_status；维护 pending.json/factor_pool.json/switch_log.jsonl/history.jsonl
+- **gen_versions_manifest.py**：读 model/registry/* + results 指标 → results/versions-manifest.json（task-0329 看板去硬编码）
+- **data_validator.py** 6项校验：kline_freshness/panel_coverage/holdings_kline/price_reasonable/dividend_continuity/selection_count
+
+## §0b 中央状态字典（合并自 registry+engines.json+manifest）
+- 版本状态：backtest-only → candidate → (shadow_watch active/clean_evals N/N) → active（registry entry + main.json 同步）→ 回退 rollback（switch_log）
+- 引擎状态：active / shadow / sub_engine_overlay / active_paper（gold 例）
