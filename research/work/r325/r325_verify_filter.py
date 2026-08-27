@@ -48,7 +48,9 @@ def prefix_family(c):
 REQ_FILL = {
     "yjbb": ["revenue", "eps", "bps", "cfps"],
     "zcfz": ["equity", "cash", "inventory", "ar", "total_asset_yoy",
-             "total_liability", "debt_to_asset"],
+             "total_liability", "debt_to_asset",
+             # 本地子集未采 lrb 表: 其派生源列以 NaN 挂靠在 zcfz（外连等价, 零伪数据）
+             "total_profit", "op_profit"],
 }
 LRB_FILL_COLS = ["code", "report_period", "pubDate", "total_profit", "revenue",
                  "net_profit", "net_profit_yoy", "revenue_yoy"]
@@ -82,10 +84,8 @@ def stage_build():
                  "periods": int(full.report_period.nunique()), "md5_keys": h}
     # lrb 空壳（零行）: HP 生产有 lrb 表, 本地子集未采；提供 schema 使真函数可端到端跑通,
     # 零行=外连不改行集, lrb 源派生值为 NaN 不构成伪造。
-    lr = pd.DataFrame({c: pd.Series(dtype="float64" if c not in ("code", "report_period") else str)
-                       for c in LRB_FILL_COLS})
-    lr.to_parquet(os.path.join(TMPDIR, "lrb.parquet"), index=False)
-    fp["_lrb_filler"] = {"rows": 0, "note": "zero-row schema stub, 无伪数据"}
+    # 注: 不再创建零行 lrb stub —— pandas3 空 parquet 往返在真函数内丢 schema,
+    # 且 HP 生产本就有 lrb 数据; 本地缺表时走原版 [WARN] 跳过分支, 派生源列由 REQ_FILL 补齐。
     json.dump(fp, open(f"{OUT}/inputs_fingerprint.json", "w"), ensure_ascii=False, indent=1)
     print(json.dumps(fp, ensure_ascii=False, indent=1))
 
