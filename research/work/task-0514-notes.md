@@ -1,56 +1,81 @@
-# task-0514 破而后立目标架构与迁移方案 — 工作笔记
+# task-0514 过程笔记 — R-336x 破而后立目标架构与迁移方案
 
-- 编号核对：05-量化投资/ 下最大 R 号 = R-335 → 本报告 = **R-336**
-- 产出路径：/root/.openclaw/workspace/shared/results/05-量化投资/R-336-破而后立目标架构与迁移方案.md
-- 输入：source-review-r335-external.md (5.0KB)；R-335 (26.8KB)；R-333 (paper真实成本对账审计，直接引用)；R-334 (既有结论复用)；task-0501-notes.md (22.3KB)
+## 输入清单（已核验大小）
+- source-review-r335-external.md = 5020B（全读，2026-08-27 23:30 用户定调原文在内）
+- R-335-组合版本统一迭代架构方案.md = 26761B（全读）
+- 背景：R-334 / R-320 / R-322（按需抽读 header，不全读）
 
-## 外部评审核心问题（已读完，要点）
-- 判定：治理骨架（版本对象+状态机+对账）= 机构级主流，保留；工程落地 = 个人历史包袱（术语/隐式状态/未审计回测/主观门禁/无退役/弱对账/零兜底）
-- P0：门禁量化硬阈值；回测引擎正确性审计（前视/复权/退市/滑点冲击成本 Almgren-Chriss 类）；安全兜底三件套（断路器/checkpoint/仓位对账）
-- P1：append-only 事件日志；影子 4 维漂移监控（日P&L、Sharpe、成交率、滑点，信号对齐率>95%、执行质量>90%）；客观退役规则；GLOSSARY 术语表
-- P2：Qlib 解耦对接；容器化双机冗余
-- 金句：严格门禁建立在错误回测上，越严格越危险
+## 外部评审逐条提取（回应表素材）
 
-## R-335 骨架（保留思想、重述术语）
-- vC-x.y 组合版本对象（components: equity registry_ref + gold engine_ref；risk_control: ddc 0.20/0.5/0.05 + layer2 补位 + weighting F7a + timing）
-- 状态机 candidate→组合回测→组合门禁→影子(可选)→用户批准→paper 指针→归档
+### 定性
+- 治理骨架机构级（组合一等对象/版本化不可变/状态机晋升/双层门禁/三方对账=主流思想）
+- 工程落地带个人历史包袱（A腿/gold腿术语、GM编号层、零常驻服务、F6/F7打补丁式改造）
+
+### 优点（保留清单）
+1. vC-x.y 不可变版本对象（可追溯可回滚可归因）
+2. 一切变更统一流水线、无旁路
+3. 结构化成绩单+逐条不通过原因
+4. 增量重构承诺兼容（对单兵现实）
+5. 三方对账+paper一致性徽标防漂移
+
+### 缺点/风险（7条）
+1. 术语代号强耦合 → GLOSSARY.md+标准术语(leg/hedge/signal)
+2. 状态机隐式、无事件溯源（JSON可变状态，误改无法重放）→ append-only 日志
+3. 门禁指标未量化（毕业标准须硬阈值：夏普/IS-OOS/参数扰动高原）
+4. 回测引擎基于旧脚本改造，若含前视/缺滑点冲击成本 → 门禁越严越危险 → 单独回测正确性审计
+5. 缺退役机制（历史最大回撤倍数、停滞期自动停用）
+6. 影子/paper 对账指标偏弱 → 4维漂移（日P&L/Sharpe/成交率/平均滑点），信号对齐率>95%、执行质量>90%才晋升
+7. 零常驻服务=无灾备 → 断路器+checkpoint+仓位对账
+
+### P0（上线前必做）
+- P0-1 门禁量化：每层毕业硬阈值（夏普、最大回撤、IS/OOS比、参数扰动、成本后收益）
+- P0-2 回测引擎正确性审计：无前视、复权口径、退市股、滑点/冲击成本（Almgren-Chriss类）
+- P0-3 安全兜底：断路器（单日亏损/回撤/报错率上限）+ 状态checkpoint + 定时仓位对账
+
+### P1（半年内）
+- P1-1 状态机显式化+append-only事件日志（重放与审计）
+- P1-2 影子阶段业绩漂移监控：shadow vs research、live vs shadow 分层归因，四指标
+- P1-3 退役规则：客观自动化淘汰条件
+- P1-4 术语表+通用命名
+
+### P2（演进方向）
+- P2-1 组合层与回测引擎解耦，考虑 Qlib 对接
+- P2-2 容器化+双机冗余（从零常驻走向高可用）
+
+## R-335 关键事实吸收（目标架构的"存量"）
+- vC-x.y schema：components{equity:registry_ref, gold:engine_ref} + risk_control{ddc/layer2/weighting/timing} + status + parent_composite + backtest_report_ref + gate_report + paper_since
+- 状态机：candidate→组合回测→组合门禁→影子(可选)→用户批准→paper指针→归档
 - 六种迭代类型：smallcap_factor_iter / engine_upgrade / new_engine / risk_param_tune / weight_rebalance / unified_model
-- 组合门禁 = 组件级 g1-g6（ICIR_IS≥0.5 / ICIR_OOS p<0.05 / max_corr≤0.7 / DSR≥0.95 / logic 非空 / MDD 恶化≤2pp 一票否决）+ 组合级（mdd 优于 parent、Calmar≥parent、两腿 corr≤0.3）
-- F6/F7 选择器化 = 现成组合回测；R-317 156 月统一口径 + F1 基线 md5 复现 + PIT assert（2015-06/07、2020-06/07）
-- M1-M5 迁移步；M4 paper 指针切换需用户批准；红线：registry active / paper_engine / HP crontab 零擅动
-- 在役基线数字：F7a 年化13.61% / Sharpe1.483 / Calmar2.001 / mdd−6.80% / 月胜率69.2%；两腿 corr≈0.03
+- 组件级门禁 g1-g6 实测（ICIR_IS≥0.5 / ICIR_OOS p<0.05 / max_corr≤0.7 / DSR≥0.95 / logic非空 / MDD恶化≤2pp一票否决）；任务书"五门禁"是早期口径
+- 组合级门禁草案：mdd优于parent / Calmar≥parent / 两腿corr≤0.3（F7a参照：年化13.61% Sharpe1.483 Calmar2.001 mdd-6.80%）
+- 迁移 M1建快照→M2回测选择器化→M3前端卡→M4 paper指针(需批准)→M5旧入口降级
+- 三方对账：composites.json ↔ registry ↔ engines.json
+- 红线：registry active / paper_engine / HP crontab 零擅动；M4=改active语义需批准
+- 落点取舍：现阶段 composites.json 并行文件（选A），远期GM15收敛时并入
+- 风险表5条：门禁职责重叠/双版本线过渡/口径不一致(易错点:补位吃整体月收益不乘内部仓位、择时闲置现金不补黄金)/用户心智成本/样本n=1 episode
 
-## 现状画像（已摘取）
-- D6 双cron：p3_3_evolution_standalone(939行旧)半月 vs evolution_pipeline(1605行)周六；HP 182脚本中 107 孤儿
-- GATE_CONFIG：icir_is≥0.5 / oos_p<0.05(split 2021-01) / max_corr≤0.7 / DSR≥0.95 / logic非空 / MDD恶化≤2pp一票否决 = g1-g6；STATUS_ENUM candidate→pending→active→sota→retired
-- 6种留痕载体散装：decision-log/ledger/history/switch_log/n_trials_ledger/cycle-report + engines.audit → 事件化改造的起点
-- engines.json 快照缺 gold 引擎 = 状态滞后风险
+## 在役基线事实（写报告引用，勿凭记忆）
+- A腿: paper_engine.py(70504B) + registry a13_rsraw_e1f10dz + timing_internal=true
+- gold腿: paper_engine_gold.py(16474B) active_paper(08-25批准)
+- 中央风控: ddc 0.20/降0.5/回补0.05 + 层2补位 + 权重口径F6/F7待拍板
+- 双轨cron: p3_3_evolution_standalone.py 半月 vs evolution_pipeline.py 周六（R-320 D6）
+- R-317: 156月统一口径，F1基线md5=915e446388…，PIT断言(2015-06 FULL/2015-07 REDUCE/2020-06 REDUCE/2020-07 FULL)
+- F6成本: 双腿0.13%；ddc语义在 backtest_dividend_quality_iter.py:528-540
 
-## R-333 审计结论（直接引用）
-- 成本 v2 = 佣金0.10%+价差0.03% = 13bp/边（R-304 冻结）；实记账滑点≡0（收盘回填），v2建仓实付4.00bp（¥5最小佣金），无卖出侧样本
-- 三情景年化偏差：A记账延续 −0.9pp 低于带；B可实现中间态(万2.5佣金+tick半价差+印花税摊≈11.5bp/边) −0.21pp 落在 ±0.1~0.3pp 预期带；C小微资金 +1.0pp 超上界
-- 一字板不可成交实证：v1 组 300862 四连一字板；当前规模参与率≈0.002~0.007%，冲击成本可忽略，603551 低成交额票最先触线
-- 判定：±0.1~0.3pp 预期带仅在「比例佣金可得+收盘竞价可成交」下成立
+## 报告骨架计划（R-336x）
+1. 标题+task-0514+2026-08-27
+2. 背景与目标（破而后立定调 + 评审来源）
+3. 方法与数据来源
+4. 核心内容：
+   a. 评审总判定吸收（保留什么/推倒什么）——破立边界
+   b. 标准术语表（旧→新映射）：A腿→Equity Sleeve/Leg-1；gold腿→Hedge Sleeve/Leg-2(Gold)；vC-x.y→Portfolio Version(PV-x.y)；g1-g6→Component Gate(CG-1..6)；组合门禁→Portfolio Gate(PG)；paper→Paper Trading(Paper Stage)；门禁→Quality Gate；影子→Shadow Trading；registry→Model Registry；engines.json→Runtime Engine State；composites.json→Portfolio Registry；ddc→Drawdown Controller(DDC)；层2补位→Overlay/Backfill Module；F6/F7→Composite Backtest Spec；GM编号→Milestone Ref(仅内部)
+   c. 分层架构图（mermaid）：Data Layer → Research/Backtest Layer → Portfolio Construction Layer → Risk/Overlay Layer → Deployment/Paper Layer → Governance Layer（每层职责+接口契约+数据流）
+   d. P0审计先行方案：①回测正确性审计清单（前视/复权/退市/成本模型/成交约束），审计=只读验证产出审计报告；②门禁量化（毕业标准硬阈值表，分组件级/组合级/paper晋升级）；③安全兜底（断路器阈值表+checkpoint+仓位对账）——注意：这些设计为纯方案，实施另立项
+   e. 迁移路径：Phase 0 审计先行（P0三件套方案+审计执行）→ Phase 1 术语与文档层（GLOSSARY，零风险）→ Phase 2 组合版本对象落地（R-335 M1-M3 并行期）→ Phase 3 治理强化（事件日志/退役规则/漂移监控，P1）→ Phase 4 paper指针切换（需批准）→ Phase 5 演进（Qlib解耦/容器化，P2）。每阶段：进入条件/退出条件/回退方案/是否并行/停机窗口
+   f. 评审逐条回应表（P0×3采纳并前置、P1×4采纳/部分缓、P2×2部分采纳缓）
+5. 结论建议
+6. 来源清单
 
-## R-334 复用结论（不重查）
-- qlib qrun 第二裁判双轨（先验 cn_data bin 就绪性）；PIT：R-328 NOTICE_DATE 细则、000001 滞后371天反例；复权：R-330 F4 唯一 qfq、513100 假 MDD −85% 反例；Mask-First：R-333 一字板实证支撑
-- GM→标准名映射素材：GM4(进化单轨)/GM6(门禁schema)/GM7(影子合一)/GM9(quant_common)/GM13(同步总线)/GM15(engines.json单落点)
-- 辩论代理→Alpha Layer 候选供给；ICIR+HMM→择时模块
-
-## 报告决策
-- 编号 R-336；文件名 R-336-破而后立目标架构与迁移方案.md
-- 标准术语：portfolio_version / sleeve / signal / gate / promotion(shadow→paper→canary→live) / retirement / event_log
-- GLOSSARY.md 全文放报告附录；门禁阈值全部带数字并标「初版建议值」
-- paper 指针语义切换（Phase C）标红需用户批准
-
-## 增补建议（23:39 用户转外部，source-advice-portfolio-construction.md，2.0KB 已读全文）
-- 六层改七层：Alpha 与 Portfolio 之间新增 Portfolio Construction Layer（组合构建层）；职责=给定风险预算求 sleeve 权重；求解器可插拔分阶段：①等波动率 ②风险预算/ERC（协方差 Ledoit-Wolf 收缩）；明确不用 MVO（收益预测误差敏感）
-- 解耦铁律：portfolio_version 存配置（sleeve 指针/风控参数/求解器选型+参数），构建层输出权重求解结果；禁止在 vC 上直接加 model_weights
-- 门禁追加组合级回撤分级闸门：<5% 正常 / 5-10% 提级审查 / 10-15% 降仓×0.5 / >15% 熔断；波动率目标化参数位；层级关系：分级闸门=组合级、ddc=sleeve 级，两层独立触发，组合级>策略级裁决
-- 再平衡协调协议：sleeve 内重大调仓后组合层冷却期 1 个完整调仓周期，期间不因 RC 变化反向加仓；防减仓→RC骤降→反向加仓横跳
-- 相关性用持仓相关性 holding-based（非仅净值），同源信号>0.75 告警，危机期趋近1=分散失效
-- P2/P3 降级为演进方向不现在做：约束体系、分层风险预算、HRP、体制切换
-- 外部优先级：P0=组合构建器+波动率目标化+回撤分级闸门；P1=相关性筛查+ERC+Ledoit-Wolf；P2=约束+分层预算+退役；P3=HRP/体制切换
-
-## 撰写状态
-- [x] 证据全部落笔记；[ ] R-336 报告主体；[ ] README 顶部日志；[ ] 完成回报
+## 写作纪律
+- 只从本笔记+上述已读材料取材，不再扩散读取
+- ≥8KB；零代码；交付后更新 README.md 更新日志一行 + completions + PUT pending_review
