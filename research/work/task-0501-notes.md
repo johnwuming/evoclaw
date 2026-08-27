@@ -124,3 +124,71 @@ D1 模型/版本展示两套UI(死loadModelsQuant L11377 vs v5model L9658)；D2 
 - 中央风控插入点（生产者 cron）：risk_patrol 工作日16:45→risk-status.json(读 charter rules×track/paper/bench/micro NAV)；collect_crowding 周日07:00+snapshot_crowding 月度19:35→拥挤度;underperform_discipline「暂停模型升级」作用于进化循环；drawdown_circuit_breaker level1 降仓至50%作用于 paper 层
 - 「influence 二层激活判据」：grep R-290/R-314/R-29x 及 engines.json 无 influence 关键字实据；最接近的是 A2 overlay 的 w_source=scoring_v12_frozen migration(R-267 §4.2 组件型建议值)与 F6 中央风控层2 wi 计算框架(R-259 §6.1 战略配置器)。阶段B 需向用户确认所指
 - R-320 D7 定性：paper_engine vs paper_engine_gold 有意隔离(gold 冻形态)，建议抽 quant_common 公共层而非合并
+
+## §1 单模型一轮迭代统一时序（综合证据：HP crontab 实查×脚本解剖×R-223）
+
+**外环（研究/进化，agent 主导 + cron 兜底）**
+1. 想法入口：ideas/pool.jsonl（cycle Step2 消化；VPS action 队列 idea 类型也写池但入口死树 R-320-C）；用户对话/任务中心 spawn 研究（E1 画像→E2 预注册→执行）
+2. 候选设计 fork：evolution_pipeline.py fork --from --as --set（registry 副本+params_hash+decision_log 预写 trigger）【失败：无候选则 cycle Step4/5 跳过】
+3. 数据准备：refresh_data.py(周日20:00)+cron_qfq_daily.py(工作日18:00)+collect_qfq_baostock(周日03:00 init)+rebuild_merged.py+w6_collect_delisted(月度退市股)+fetch_valuation_data(周日06:30)【失败：heartbeat_selfheal */5 自愈；cycle Step0 fail-fast】
+4. 数据校验：data_validator.run_all 6项(kline_freshness/panel_coverage/holdings_kline/price_reasonable/dividend_continuity/selection_count)；paper_engine validate(周日20:00) 同函数；cycle Step0 fail-fast 中止本轮
+5. 回测 backtest：evolution_pipeline backtest 两腿(端到端选股×择时+同口径基线)，全量池含退市/成本v2/一字板不可成交/AUDIT_LOCK clamped full+locked 双窗【失败：artifacts 移交 leg 目录，报告留痕】
+   - 并行旧系统：p3_3_evolution_standalone --rounds 5 月1/15日仍 cron 在跑（R-320 D6 双轨待裁决）
+6. 等价校验 EQUIV：patch 全关复跑 parent diffs={} 逐位一致才挂新分支；锚点校验同机制
+7. 门禁评估 evaluate：g1_icir_is≥0.5/g2_icir_oos p>0.05(oos split 2021-01)/g3_max_corr≤0.7(护栏豁免 GUARD_CORR_CONFIG)/g4_dsr≥0.95(n_trials_cum 跨批防多重检验)/g5_logic 必填/g6_mdd 已禁用只入评分
+8. 评分合成 SCORED：weights{p.175/dsr.175/oos_calmar.125/oos_sharpe.125/is_calmar.075/is_sharpe.075/dd.10/corr.10/logic.05} 分段线性映射；score_rank_pool rank==1 才有上岗资格
+9. 影子观察 _shadow_update：stat_warn→进影清零；无警示在影 clean_evals+1 满 watch_periods 出影(reg.gate.shadow_watch)；a12_s2_reb 特例 a12_monthly_evaluate.sh(月2日17:10,flock+重试,L3守卫 required-1 转人工)；gold 引擎特例 engines_shadow_evaluate_gold(月3日09:40,engines.json B条目 shadow.evals)
+10. activate：门禁 PASS 自动(R220#8)；_do_activate 写 registry entry+build_main_from_registry→main.json+冻结 {version}.main.json.snapshot 字节快照+switch_log.jsonl；rollback --to --reason 字节级还原；override TTL 临时覆盖
+11. paper 上岗：paper_engine init/daily(工作日16:30 净值)/rebalance(--check-month-start 工作日15:00,rebalance_gate.py task-0347 修月首判定)/validate(周日20:00)；择时系数 q3z×EW-MA200 内化；产出 summary/nav/trades/portfolio/state/validation 六件套→rsync_to_vps push
+    - gold 平行链：paper_engine_gold daily(工作日07:40)+verify(周日03:00)+engines_shadow_nav_gold(月3日09:38 append 影子NAV)
+12. 中央风控巡检：risk_patrol.py 工作日16:45 读 config/risk-charter.json 三规则(HWM回撤25%降半仓/rolling_6m_excess<-10%观察暂停升级/live_sharpe<0.5×backtest 6月失效review)→results/risk-status.json（每规则 current/threshold/color/margin）；输入=track_nav+paper_nav+hs300+microcap_eqw 四净值源
+13. 拥挤度监控：collect_crowding.py 周日07:00→crowding-indicators.json(micro_turnover_share 等 flag red)；snapshot_crowding.py 月度快照
+14. 记录与审计：decision-log.jsonl(decision_id/phash/data_snapshot/rollback_condition)+experiment-ledger.jsonl(experiment_id=IT-批次-序号,n_trials)+switch_log.jsonl+audit.changes[]；历史归档 registry_backup_taskXXXX.tar.gz
+15. 同步回传：auto_sync_notify(VPS pull */30 + 周3全量,白名单 include) + paper_engine rsync push(六件套) + collect-metrics.sh(HP→VPS:8055 每分钟) 【三通道并存 R-320 D3/D4】
+16. 通知呈现：notify_hub.py(HP 小时 + VPS 侧另一实例) 监视 risk-status 新 generated_at 红黄告警/拥挤度红橙/paper 异常→notifications-queue.jsonl/auto-sync 回传→主会话转述+dashboard quantFreshness/quantConsistDot(L7416)
+
+**内环（模拟盘运行，无学习）**：daily→rebalance(月首)→validate 循环，全程状态落 paper-state.json；P0 一致性徽标对比 paper vs active rules_align
+
+## §3 节点→模块对照表（重复判定）
+
+| 流程节点 | 实现物1 | 实现物2 | 实现物3 | 重复判定 |
+|---|---|---|---|---|
+| 想法收集 | ideas/pool.jsonl(cycle消费) | VPS action队列idea类型(入口死) | M2.7想法池(前端pending卡片死岛) | 入口三处一处在用 |
+| 数据采集 | refresh_data+cron_qfq_* | w6_collect_delisted | fetch_valuation | 各管一类不重复 |
+| 数据校验 | data_validator.run_all(cycle Step0内联import) | paper_engine --action validate(委托同一validator) | data Tab D1健康卡(读产物) | 合理分层非重复 |
+| 进化循环 | evolution_pipeline cycle(周六) | p3_3_evolution_standalone(月1/15,旧registry前) | evolution_engine/evolution_review/iter2_evolution×4(孤儿107清单内) | **严重重复:D6,双cron并行** |
+| 回测引擎 | engine.run_backtest(ext runner字符串注入零改动) | run_versioned_backtest(model_manager旧路径) | e2_backtest.py(新赛道E2一次性) | 两代并存+赛道专用，语义不同暂可接受 |
+| 门禁计算A版 | evolution_pipeline g1-g6+SCORED | — | — | 唯一权威(微盘线) |
+| 门禁计算B版 | E2预注册 G0-G6(gold:corr/G1a/G1b/G2/G4容量/G5/G6) 写进各预注册文档按文档手判 | a12_shadow_eval(复核pipeline的gate.shadow_watch) | rebalance_gate(月首交易日门) | **多套判据体系并存,字段名不相容(G0-G6 vs g1-g6)** |
+| 影子观察 | pipeline _shadow_update(版本级 gate.shadow_watch) | engines_shadow_evaluate_gold(引擎级 shadow.evals,clean_evals) | a12_shadow_eval(a12专用包装) | **同类逻辑三处实现,R-259原设计通用版engines_shadow_evaluate反成孤儿被_gold替代** |
+| 激活切换 | evolution_pipeline activate/_do_activate(自动PASS) | model_manager merge_candidate/reject(pending.json旧流程,M2.6Pending卡对应物已过时) | engines.json人工条目变更(gold shadow→active,user批准,audit留痕) | 三代机制并存,仅1/3全自动 |
+| paper运行 | paper_engine(A微盘) | paper_engine_gold(B黄金冻形态) | 定时净值的F6组合账本(R-318层2,规划中) | 有意隔离,D7建议抽公共层 |
+| 风控退出 | risk_patrol(risk-status.json,charter章程) | risk_control.py(孤儿,paper_engine已内联同功能) | underperform_discipline 反作用回进化层 | D类孤儿实证 |
+| 结果同步 | auto_sync_notify pull(*\/30) | paper_engine rsync_to_vps push | sync_to_vps.sh+hp_api_server /sync(死) | **D4三套一套在用** |
+| 指标上报 | collect-metrics.sh push ingest | pull-hp-metrics.sh pull | fetchHpStats SSH实时 | D3双写同库 |
+| 中央注册表 | model/registry/*.json+main.json(pipeline读写) | engines.json(引擎中央表,model/registry与results双落盘) | versions-manifest.json(gen_versions_manifest生成,看板只读投影) + factor_pool/sota/history | 投影合理,**engines.json双落盘冗余** |
+| 版本展示API | /api/quant/active?v=(活) | /api/quant/models(死岛) | version-options+history+:id | D1/D2两代UI |
+
+## §4 可视化现状矩阵（节点×可视化）
+- 数据校验→data Tab D1（唯一）
+- 因子目录/IC/相关性→factor Tab F1-F4（唯一）；在役采纳因子另 P11、引擎绑定因子 B8 展开行——三粒度非实质重复(R-321 §2.5)
+- 回测净值→B6策略vs基准主图+B3 F6组合图+B5指标卡+B7排行+B8生命周期折叠（v5btlc 五模块），A曲线三处出现(B6/B3/P5 parent线)
+- 影子观察→B2影子对比图+B8 lifecycle进度+P5跨引擎影子卡——clean_evals 数字三处消费(L10151/L11381/L11978)，粒度两级(R-321建议保留但以B8为准)
+- 门禁评估→H3详情抽屉 Gate 评估区(唯一活)；五门禁面板+DSR折扣曲线是假数据死岛(R-321 §3.4 不复活)
+- 决策记录→B8 qLifecycleTimeline全局+H3单版本(两处粒度不同保留)
+- 运行状态→P3 mtime红绿灯+quantFreshness横幅+quantConsistDot自检点(三处运维可视,定位不同)
+- paper结果→P0-P11 十二模块：P4净值唯一,P6持仓唯一,P7交易唯一
+- 微盘拥挤度→P9卡(读crowding-indicators)+risk-status 内嵌 crowding_reference(P10退出纪律卡亦显示)
+- 退出纪律→P10 renderRiskCharterCard 读 risk-status.json(唯一前端);服务器另有告警走微信(notify_hub),页面只显当前色阶
+
+### 重复建设 Top 清单（按实据置信排序）
+1. 进化循环双轨在跑：evolution_pipeline(周六cron,registry版1605行) vs p3_3_evolution_standalone(月1/15 cron,939行旧版)——同功能两条 cron（D6实锤）+ 孤儿 evolution_engine/evolution_review/iter2×4
+2. 指标数字渲染 ≥9 点/同源 6 处（B1徽标行与M3/B5完全同值=最高优去重，R-321 §2.2 表全行号）
+3. 影子观察三处实现+_gold替代通用版（_shadow_update/a12_shadow_eval/engines_shadow_evaluate_gold vs 孤儿通用版）：同一判据(clean_evals计数)三种落点
+4. 同步通道三套(auto_sync pull/paper_engine push/sync_to_vps.sh死)+指标采集双写(D3)：HP→VPS 共 5 条通道仅 2 条必要
+5. 净值曲线绘制逻辑多处：active 曲线端点被 B6/B3/P5 三图各画一遍,且 F6 图内置 a_alone/a_dd/gold_alone 序列再画一遍；v5DrawNav/v5DrawPos/v5F6CurveHtml/renderNavWithPosChart 多个绘制器未共用组件（R-321 2.1 表+设计者脚注自证知道该统一）
+6. 门禁判据体系两代(G0-G6 E2预注册 vs g1-g6+SCORED pipeline)字段不相容,跨赛道无法统一评分；另 rebalance_gate/a12 L3守卫等小门槛各自实现
+7. engines.json 中央表双落盘(model/registry/+results/)且 60 API 中 30 处硬编码 workspace-quant 路径 vs QUANT_DIR 双根数据源——一处更新另一处陈旧风险(现08-25同步一致)
+8. 因子目录三代文件 v1/v2/v3 降级链共存(L1860-1864)+注册表读取三个别名(QUANT_REGISTRY_DIR/QUANT_MODEL_REGISTRY_DIR/MODEL_REGISTRY_DIR→results/model)
+9. 版本选择器组件三处实例(M1/B4 下拉+H1列表+B7排行,R-321 判定交互控件非实质重复,保留但 H1/B7 可合视图)
+10. 死 UI 树 ~1500 行(models/btlc 旧页 L11377-12836+14029 对应 15 个独占后端端点)——删除即最大瘦身项
