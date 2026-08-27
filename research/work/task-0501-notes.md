@@ -60,3 +60,71 @@
 
 ### 效果图关键架构洞察（节点化视角）
 生命周期层已形成流程叙事：「管线 → 影子观察中 → 决策时间线 → 实验台账 → 迭代轨迹散点」= 把进化迭代流程映射成了 UI 序列。v5hist 详情抽屉 = 单轮迭代的完整报告（参数/Gate/Locked/Full/机制/决策）。这两者是「节点化」现状最好的前端载体。
+
+## [证据3] 当前实现抽取（本地副本，禁止 SSH HP）
+
+### 来源
+- /root/.openclaw/workspace/tmp/w5/evolution_pipeline.py（1605行副本；docstring 自证=R-207 W5/task-0275 统一Runner）
+- /root/.openclaw/workspace/tmp/w5/paper_engine.py（46KB副本，v3 含择时层）
+- work/task-0464/engines.json（多引擎状态机本地快照，schema_version 1）
+- shared/results/05-量化投资/R-223-量化迭代流程与规则总纲.md §二/§3.1（2026-08-17 现读，权威）
+- shared/results/05-量化投资/R-203-量化系统流程梳理与自动化改造设计.md §1/§4.1（2026-08-15 设计稿）
+
+### evolution_pipeline 全貌
+- 五操作：backtest / evaluate / activate / rollback / override(+status/bootstrap/fork)；--cycle 七步编排
+- GATE_CONFIG(L57-65现读)：icir_is_min=0.5、oos_p_min=0.05(split 2021-01)、max_corr_max=0.7、dsr_min=0.95(N=n_trials_cum)+g5 logic非空+g6 MDD恶化≤2pp一票否决 ⇒ 实为 g1-g6
+- STATUS_ENUM：candidate→pending→active→sota→retired
+- cycle 实际骨架（cmd_cycle L995-1107）：step0 数据校验fail-fast(data_validator.run_all) → step0b/1 数据快照+active漂移标注(stale_snapshot) → step2 想法消化(仅统计pool.jsonl open项，「LLM假设卡消化待对接W8」) → step3 因子迭代【占位符:待W1因子注册表对接】 → step45 候选检查【骨架版不自动回测，提示人工命令】 → step6 notify入队 → 尾注「Step7 activate 为人工确认操作(本骨架不自动激活)」
+
+### paper_engine v3 全貌
+- 六action：init/daily/rebalance/validate(委托data_validator 6项)/shadow(--candidate 参数选股对比)/timing(择时诊断)
+- guard_override_and_drift() 进程内防漂移+TTL override执行；timing_layer_prod 复算 q3z×trendvol；rebalance=选股→模拟交易→trades/portfolio；rsync_to_vps() 为引擎内置的第6条HP→VPS同步通道
+- paper_engine_gold.py 另立黄金赛道（有意隔离）
+
+### engines.json 多引擎状态机（task-0464快照）
+- engine A: status=active，layer1.registry.entry=a13_rsraw_e1f10dz，nav_source=paper_engine_daily(sync标 pull-hp-metrics)，timing_internal=true
+- engine A2: parent=A，type=sub_engine_overlay（a14_crowdf2 w=0.5 拥挤度防御叠加臂），status=shadow，registry_ref=a14_crowdf2
+- layer3.tabs=[v5model,v5btlc,v5hist,paper]+api_prefix=/api/quant —— engines.json 直接声明了「引擎→UI Tab」的映射关系
+- gold 引擎不在该快照清单（按 R-320：paper_engine_gold 三cron + engines_shadow_nav_gold 在 crontab 运营）⇒ 状态机文件与真实在役引擎集合存在滞后风险
+
+### 关键口径漂移发现（重要）
+1. 任务书/AGENTS 所述「五门禁 IC/ICIR/turnover/容量/相关性」与 pipeline 现读 g1-g6（ICIR_IS/ICIR_OOS/max_corr/DSR/logic/MDD_vs_parent）**不一致**——早期口径（或另一份规划）与在役代码口径冲突，节点化梳理必须以 g1-g6 为准并显式更名
+2. pipeline 代码注释仍称「Step7 activate 人工确认」，而 R-223 记载 task-0345 已实施 PASS 自动 activate（R-220#8 移除人工确认）——**代码注释与生效规则脱节**
+3. R-203 §4.1 设计稿八步含「⑦人工Dashboard确认→confirm」「②LLM因子引擎补位」均未实现：现状=cycle骨架占位+W1因子注册表独立承接迭代生成；「事实上的迭代主链」已从 R-203 设计迁移到 R-223/ext runner 批次任务制
+4. 台账/留痕载体碎片化：decision-log.jsonl + experiment-ledger.jsonl + history.jsonl + switch_log.jsonl + results/n_trials_ledger.csv(05目录根另有986B副本) + cycle-report-{ts}.json/md —— 至少 6 种留痕形态并存
+
+## [分析-Q1] 两流程节点序列对照与可合并点
+
+### 流程甲：单模型一轮迭代（evolution 主线，来源：R-223§二 现行 + pipeline 代码核对）
+| 节点 | 名称 | 实现 | 自动化 |
+|---|---|---|---|
+| N1 | 候选设计与想法消化 | 批次任务书(ext runner源码串插桩)＋fork --set；ideas/pool 仅统计 | 半自动(LLM外置) |
+| N2 | 数据校验+快照防漂移 | data_validator.run_all + compute_data_snapshot + stale标注 | 自动(fail-fast) |
+| N3 | 版本化回测 | fork→backtest，full+locked双窗口，AUDIT_LOCK_END clamp，候选注册不切役 | cron周六触发骨架/批次手动驱动 |
+| N4 | 等价校验 EQUIV | patch开关全关复跑parent逐位diffs={} | 批次任务内置 |
+| N5 | 门禁评估 | evaluate→g1-g6→verdict(PASS/REJECT一票否决；评分制已定案未实施) | 自动 |
+| N6 | 上岗激活 | PASS⇒_do_activate 自动(R-220#8/task-0345)；override TTL 兜底 | 自动(残余人工门：registry变更批准) |
+| N7 | 留痕版本化 | decision-log+ledger+main.json字节快照(registry/*.snapshot) | 自动 |
+| N8 | 影子观察 | paper_engine--shadow/v2遗留；engines_shadow_nav_append月度NAV；clean_evals门槛 | 半自动 |
+| N9 | 同步上云 | auto_sync_notify镜像+collect-metrics push(+pull/paper rsync冗余) | 自动×多通道 |
+| N10 | 呈现 | v5hist详情/v5btlc/B8生命周期/history端点 | 自动 |
+
+### 流程乙：多模型中央风控（跨引擎运营线；来源：HP crontab[R-320/notes E6] + engines.json + P9/P10模块）
+| 节点 | 名称 | 实现 |
+|---|---|---|
+| C1 | 多引擎状态登记 | engines.json(active/shadow/overlay子引擎)+audit链 |
+| C2 | 影子净值采集 | engines_shadow_nav_append + *_gold 月度 |
+| C3 | 拥挤度监控 | collect_crowding(周)+snapshot_crowding(月)→crowding端点→P9卡 |
+| C4 | 风险巡逻 | risk_patrol cron 工作日16:45→risk-status→P10退出纪律卡 |
+| C5 | 劣化检测 | check-degradation 滚动60日超标→建议回退(R-203 L4,需现读核实是否并入risk_patrol) |
+| C6 | 择时层运维 | timing_layer_prod+timing诊断action+timing_matrix专线 |
+| C7 | 干预手段 | override TTL / rollback字节还原 / 快照冻结 |
+| C8 | 一致性与告警 | paper↔active一致徽标+quantConsistDot+notify_hub每小时 |
+
+### 可合并点（甲∩乙 同构节点）
+1. **N2≡各处数据关**：data_validator 被 pipeline.evaluate/backtest、paper validate、data-health API 三方共用——已是事实通用件；剩余合并项是「数据面 UI」归一(D1卡即唯一出口，R-321 无重复✓)。候选抽象：`data_gate` 模块=校验+快照+漂移标注单一入口
+2. **N7≡C1 留痕/登记**：6种留痕载体(decision-log/ledger/history/switch_log/n_trials_ledger/cycle-report)+engines.audit。候选抽象：统一 `event_bus`/单一台账 schema(types=backtest|evaluate|activate|rollback|risk_action)，registry 与 engines.json 各持状态、事件流共享
+3. **N8≡C2 影子链路**：后端3实现(paper--shadow/shadow_nav_append/shadow_nav_gold)+前端3视图(B2图/P5卡/lifecycle.shadow_watch/B8嵌入)。候选抽象：单一 `shadow_service`(引擎无关)：采样→NAV序列→clean_evals判定，gold/A2仅参数差异
+4. **N9 同步通道收敛**：5+1条通道中有效仅auto_sync_notify+push指标2条(R-320 D3/D4+rsync_to_vps)。候选：`sync_channel`=notify镜像(结果)+metrics push(指标)，删pull/rsync/sync_to_vps/hp_api_server
+5. **N5≡C5 退化判据同源**：门禁(静态单轮g1-g6)与劣化检测(滚动60日)同为「业绩退化量化」。候选：评分制落地时抽 `scoring_core(gate=入场版, patrol=运营版)` 共用指标计算与阈值语义
+6. **step6_notify≡C8**：notify()入队 vs notify_hub hub。候选：所有告警唯一出口 notify_hub，pipeline只投递
