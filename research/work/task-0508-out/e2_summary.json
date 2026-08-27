@@ -34,104 +34,186 @@
  "G2_delta": {
   "V1_vs_V4": {
    "label": "lambda0.15 mixed vs base",
-   "n": 0,
-   "d_mean": NaN,
+   "n": 147,
+   "d_mean": -0.00057,
    "ic_sum_a_vs_b_mean": [
-    NaN,
-    NaN
+    0.09375,
+    0.09432
    ],
-   "d_std": NaN,
-   "d_t": null,
-   "pos_years_ratio": null,
-   "yearly_sign": {},
+   "d_std": 0.0084,
+   "d_t": -0.82,
+   "pos_years_ratio": 0.3,
+   "yearly_sign": {
+    "2007": -0.0075,
+    "2008": -0.011,
+    "2009": -0.023,
+    "2010": 0.0307,
+    "2011": -0.0025,
+    "2012": 0.0115,
+    "2013": 0.0223,
+    "2014": -0.0256,
+    "2015": -0.0181,
+    "2016": -0.0342,
+    "2017": 0.0451,
+    "2018": -0.0084,
+    "2019": 0.0036,
+    "2020": -0.0002,
+    "2021": -0.0421,
+    "2022": -0.0102,
+    "2023": -0.0212,
+    "2024": -0.001,
+    "2025": -0.0212,
+    "2026": 0.0297
+   },
    "seg_before_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 96,
+    "mean": -0.00024,
+    "t": -0.3
    },
    "seg_after_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 51,
+    "mean": -0.00117,
+    "t": -0.9
    }
   },
   "V2_vs_V4": {
    "label": "lambda0.30 mixed vs base",
-   "n": 0,
-   "d_mean": NaN,
+   "n": 147,
+   "d_mean": -0.00363,
    "ic_sum_a_vs_b_mean": [
-    NaN,
-    NaN
+    0.09069,
+    0.09432
    ],
-   "d_std": NaN,
-   "d_t": null,
-   "pos_years_ratio": null,
-   "yearly_sign": {},
+   "d_std": 0.01706,
+   "d_t": -2.58,
+   "pos_years_ratio": 0.2,
+   "yearly_sign": {
+    "2007": -0.0265,
+    "2008": -0.0456,
+    "2009": -0.0651,
+    "2010": 0.0413,
+    "2011": -0.0187,
+    "2012": 0.0074,
+    "2013": -0.0005,
+    "2014": -0.0706,
+    "2015": -0.0682,
+    "2016": -0.0917,
+    "2017": 0.0895,
+    "2018": -0.0432,
+    "2019": -0.0156,
+    "2020": -0.0167,
+    "2021": -0.0974,
+    "2022": -0.0264,
+    "2023": -0.0711,
+    "2024": -0.0093,
+    "2025": -0.0739,
+    "2026": 0.0688
+   },
    "seg_before_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 96,
+    "mean": -0.0032,
+    "t": -2.05
    },
    "seg_after_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 51,
+    "mean": -0.00444,
+    "t": -1.58
    }
   },
   "V3_vs_baseStrict_internal": {
    "label": "lambda0.15 strict vs strict base",
-   "n": 0,
-   "d_mean": NaN,
+   "n": 133,
+   "d_mean": -0.00056,
    "ic_sum_a_vs_b_mean": [
-    NaN,
-    NaN
+    0.09244,
+    0.093
    ],
-   "d_std": NaN,
-   "d_t": null,
-   "pos_years_ratio": null,
-   "yearly_sign": {},
+   "d_std": 0.00758,
+   "d_t": -0.85,
+   "pos_years_ratio": 0.353,
+   "yearly_sign": {
+    "2010": 0.0239,
+    "2011": -0.0113,
+    "2012": 0.0088,
+    "2013": 0.0209,
+    "2014": -0.0264,
+    "2015": -0.0174,
+    "2016": -0.0349,
+    "2017": 0.0375,
+    "2018": -0.0083,
+    "2019": -0.0023,
+    "2020": -0.0031,
+    "2021": -0.0414,
+    "2022": -0.0097,
+    "2023": -0.0205,
+    "2024": 0.0019,
+    "2025": -0.0204,
+    "2026": 0.0281
+   },
    "seg_before_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 81,
+    "mean": -0.00013,
+    "t": -0.17
    },
    "seg_after_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 52,
+    "mean": -0.00123,
+    "t": -1.05
    }
   },
   "V3_vs_V4_cross": {
    "label": "lambda0.15 strict vs mixed base",
-   "n": 0,
-   "d_mean": NaN,
+   "n": 133,
+   "d_mean": -0.00022,
    "ic_sum_a_vs_b_mean": [
-    NaN,
-    NaN
+    0.09244,
+    0.09266
    ],
-   "d_std": NaN,
-   "d_t": null,
-   "pos_years_ratio": null,
-   "yearly_sign": {},
+   "d_std": 0.01144,
+   "d_t": -0.22,
+   "pos_years_ratio": 0.529,
+   "yearly_sign": {
+    "2010": 0.0538,
+    "2011": 0.005,
+    "2012": 0.013,
+    "2013": 0.0327,
+    "2014": -0.0326,
+    "2015": -0.0314,
+    "2016": -0.0358,
+    "2017": 0.0582,
+    "2018": -0.0109,
+    "2019": 0.0163,
+    "2020": 0.0039,
+    "2021": -0.0556,
+    "2022": -0.0082,
+    "2023": -0.0326,
+    "2024": 0.0072,
+    "2025": -0.0441,
+    "2026": 0.0325
+   },
    "seg_before_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 81,
+    "mean": 0.00066,
+    "t": 0.62
    },
    "seg_after_2019H2": {
-    "n": 0,
-    "mean": null,
-    "t": null
+    "n": 52,
+    "mean": -0.00158,
+    "t": -0.82
    }
   }
  },
  "ic_V1_lam015_mixed": {
-  "n": 0,
-  "insufficient": true
+  "n": 147,
+  "mean": 0.0938,
+  "icir": 0.77,
+  "t": 9.34
  },
  "ic_V2_lam030_mixed": {
-  "n": 0,
-  "insufficient": true
+  "n": 147,
+  "mean": 0.0907,
+  "icir": 0.775,
+  "t": 9.4
  },
  "ic_V4_base_lam0": {
   "n": 232,
@@ -146,21 +228,23 @@
   "t": 10.09
  },
  "ic_V3_lam015_strict": {
-  "n": 0,
-  "insufficient": true
+  "n": 133,
+  "mean": 0.0924,
+  "icir": 0.767,
+  "t": 8.85
  },
- "G3_pass": true,
+ "G3_pass": false,
  "G4_turnover": {
   "definition": "(TO_V1-TO_V4)/TO_V4, top-N=100 main",
-  "TO_V1": NaN,
+  "TO_V1": 0.2452,
   "TO_V4": 0.177,
-  "increase_pct": NaN,
+  "increase_pct": 0.3853,
   "pass_threshold_le_010": null,
   "pass": false
  },
  "G5_capacity": {
   "definition": "10%*median ADV20 of holdings, yuan",
-  "V1_cap_median": NaN,
+  "V1_cap_median": 3193089.0,
   "threshold_ge_20m": true,
   "pass": false
  },
@@ -184,56 +268,56 @@
   },
   "V1": {
    "100": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.2452,
+    "cap_median": 3193089.0,
+    "cap_min": 500529.0
    },
    "50": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.2922,
+    "cap_median": 3299345.0,
+    "cap_min": 409102.0
    },
    "20": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.3935,
+    "cap_median": 3273898.0,
+    "cap_min": 389821.0
    }
   },
   "V2": {
    "100": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.2923,
+    "cap_median": 3389193.0,
+    "cap_min": 500529.0
    },
    "50": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.3375,
+    "cap_median": 3389264.0,
+    "cap_min": 409102.0
    },
    "20": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.411,
+    "cap_median": 3217882.0,
+    "cap_min": 342389.0
    }
   },
   "V3": {
    "100": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.255,
+    "cap_median": 3267666.0,
+    "cap_min": 648485.0
    },
    "50": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.3032,
+    "cap_median": 3341168.0,
+    "cap_min": 571988.0
    },
    "20": {
-    "to_mean": NaN,
-    "cap_median": NaN,
-    "cap_min": NaN
+    "to_mean": 0.4095,
+    "cap_median": 3281399.0,
+    "cap_min": 652760.0
    }
   }
  },
- "G6_corr_layer_mean": null,
+ "G6_corr_layer_mean": 0.9798,
  "G6_note": "shadow-period formal test deferred per preregistration"
 }
