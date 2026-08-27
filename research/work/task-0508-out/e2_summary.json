@@ -1,0 +1,239 @@
+{
+ "G0_selfcheck": {
+  "n": 232,
+  "mean": 0.0128,
+  "icir": 0.131,
+  "t": 2.0,
+  "corr_vs_r324_csv": 1.0,
+  "anchor_ref": {
+   "n": 232,
+   "mean": 0.0128,
+   "icir": 0.131,
+   "t": 2.0
+  },
+  "rel_dev": 0.00022,
+  "pass": true
+ },
+ "G1_gresid_mixed": {
+  "n": 147,
+  "mean": 0.0266,
+  "icir": 0.359,
+  "t": 4.35
+ },
+ "G1_pass": true,
+ "gresid_strict": {
+  "n": 133,
+  "mean": 0.0249,
+  "icir": 0.334,
+  "t": 3.85
+ },
+ "T2_dual_caliber": {
+  "fail": false,
+  "note": "T2 fail if sign flip or any t<2"
+ },
+ "G2_delta": {
+  "V1_vs_V4": {
+   "label": "lambda0.15 mixed vs base",
+   "n": 0,
+   "d_mean": NaN,
+   "ic_sum_a_vs_b_mean": [
+    NaN,
+    NaN
+   ],
+   "d_std": NaN,
+   "d_t": null,
+   "pos_years_ratio": null,
+   "yearly_sign": {},
+   "seg_before_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   },
+   "seg_after_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   }
+  },
+  "V2_vs_V4": {
+   "label": "lambda0.30 mixed vs base",
+   "n": 0,
+   "d_mean": NaN,
+   "ic_sum_a_vs_b_mean": [
+    NaN,
+    NaN
+   ],
+   "d_std": NaN,
+   "d_t": null,
+   "pos_years_ratio": null,
+   "yearly_sign": {},
+   "seg_before_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   },
+   "seg_after_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   }
+  },
+  "V3_vs_baseStrict_internal": {
+   "label": "lambda0.15 strict vs strict base",
+   "n": 0,
+   "d_mean": NaN,
+   "ic_sum_a_vs_b_mean": [
+    NaN,
+    NaN
+   ],
+   "d_std": NaN,
+   "d_t": null,
+   "pos_years_ratio": null,
+   "yearly_sign": {},
+   "seg_before_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   },
+   "seg_after_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   }
+  },
+  "V3_vs_V4_cross": {
+   "label": "lambda0.15 strict vs mixed base",
+   "n": 0,
+   "d_mean": NaN,
+   "ic_sum_a_vs_b_mean": [
+    NaN,
+    NaN
+   ],
+   "d_std": NaN,
+   "d_t": null,
+   "pos_years_ratio": null,
+   "yearly_sign": {},
+   "seg_before_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   },
+   "seg_after_2019H2": {
+    "n": 0,
+    "mean": null,
+    "t": null
+   }
+  }
+ },
+ "ic_V1_lam015_mixed": {
+  "n": 0,
+  "insufficient": true
+ },
+ "ic_V2_lam030_mixed": {
+  "n": 0,
+  "insufficient": true
+ },
+ "ic_V4_base_lam0": {
+  "n": 232,
+  "mean": 0.0978,
+  "icir": 0.739,
+  "t": 11.26
+ },
+ "ic_V3_base_strict": {
+  "n": 221,
+  "mean": 0.0988,
+  "icir": 0.679,
+  "t": 10.09
+ },
+ "ic_V3_lam015_strict": {
+  "n": 0,
+  "insufficient": true
+ },
+ "G3_pass": true,
+ "G4_turnover": {
+  "definition": "(TO_V1-TO_V4)/TO_V4, top-N=100 main",
+  "TO_V1": NaN,
+  "TO_V4": 0.177,
+  "increase_pct": NaN,
+  "pass_threshold_le_010": null,
+  "pass": false
+ },
+ "G5_capacity": {
+  "definition": "10%*median ADV20 of holdings, yuan",
+  "V1_cap_median": NaN,
+  "threshold_ge_20m": true,
+  "pass": false
+ },
+ "portfolio_detail_all_N": {
+  "V4": {
+   "100": {
+    "to_mean": 0.177,
+    "cap_median": 2978325.0,
+    "cap_min": 459817.0
+   },
+   "50": {
+    "to_mean": 0.1952,
+    "cap_median": 3037410.0,
+    "cap_min": 389821.0
+   },
+   "20": {
+    "to_mean": 0.2411,
+    "cap_median": 3069737.0,
+    "cap_min": 371490.0
+   }
+  },
+  "V1": {
+   "100": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   },
+   "50": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   },
+   "20": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   }
+  },
+  "V2": {
+   "100": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   },
+   "50": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   },
+   "20": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   }
+  },
+  "V3": {
+   "100": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   },
+   "50": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   },
+   "20": {
+    "to_mean": NaN,
+    "cap_median": NaN,
+    "cap_min": NaN
+   }
+  }
+ },
+ "G6_corr_layer_mean": null,
+ "G6_note": "shadow-period formal test deferred per preregistration"
+}
