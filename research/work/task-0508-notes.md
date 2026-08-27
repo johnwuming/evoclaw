@@ -47,3 +47,12 @@
 ## 执行流水记录
 
 [13:49] G0 判定开始：复算管线跑通前先建清单如上。
+
+[13:55-14:00] 第一次运行 /tmp/r328_e2.py（数据层逐行复刻 r324_compute.py；扩展=strict 面板+组合层）。前置门结果：
+- **T1 PASS**：`t1_distribution_check.json` 直方 9 桶与 src_counts 三类全部逐项相等基线 disclosure_dist.json；real_cover_now=0.8169 == 基线。缓存未变质。
+- **G0 PASS**：复算 ic_sue n=232 mean=0.0128 icir=0.131 t=2.00，对锚相对偏差 0.022%（≤5%），与落盘 r324/ic_selfcheck_sue.csv 序列 corr=1.000000（≥0.999）。（原始输出 `out/g0_ic_selfcheck.csv`）
+- **G1 PASS（主判据）**：mixed G_resid n=147 mean=+0.0266 ICIR=0.359 t=4.35 —— mean>0 ✓、t≥2 ✓、与铏 +0.0152 同号 ✓，且与 summary_r324.json C2_resid_ic 逐位一致。（原始输出 `out/g1_gresid_mixed.csv`）
+- **T2 未触发**：strict only-real G_resid n=133 mean=+0.0249 ICIR=0.334 t=3.85 —— 双口径同号且均 t≥2。（原始输出 `out/gresid_strict.csv`）
+- 数字溯源核对：上述四项与 R-324 正文表「C2 mixed +0.0266/4.35(n147) | strict +0.0249/3.85(n133)」完全一致 → 数据层复刻无漂移。
+
+[14:00] 发现 bug：composite_panel 中 pd.DataFrame(zs_list).T 维度转置错误 → V1/V2/V3 变体面板全 NaN → G2/G3/G4/G5/G6 空数据假象（G3 曾误判 true——空段 mean=None 使 not(and)<0 恒真）。已修：去掉 .T + G3 加 insufficient 防呆（任一段空判 FAIL 并标 note）。14:01 起全量重跑验证。
