@@ -65,3 +65,30 @@
 - 组合层四门FAIL：G2 ΔIC(V1−V4)=-0.00036/t-0.82/n232，分年正占比仅30% → FAIL；V2(λ0.30) ΔIC=-0.0023/t-2.56 显著为负（λ越大越伤）；G3 两半段ΔIC全负(-0.00016/-0.0007) → FAIL；G4 换手TO_V1=0.2055 vs TO_V4=0.1770 增幅+16.1%>10% → FAIL；G5 V1容量中位数3,048,708元<<2000万 → FAIL（基准V4自身~297万级，满range小票栈朴素topN实现的性质）
 - G6 打分层秩corr均值0.9874（影子期正式检验deferred）；T1 PASS / T3 N/A
 - 变体IC(clean同池)：V1 0.0975(n232)/V2 0.0955(n232)/V4 0.0978(n232)/V3 0.0984(n221)/base_strict 0.0988(n221)
+
+[14:26] 交付落盘与验证：
+- R-329 报告 `shared/results/05-量化投资/R-329-PEAD负惊喜软惩罚线E2执行判门.md` 落盘（6,851B ≥6KB ✓），正文 sha256=2e3a8b092e4cd837d534e0a4bde1673b235705ed514f6350c8151e7cb6f38c8a（此后不再修改）
+- README.md 更新日志顶部插入 R-329 一行，grep 复核在位
+- 判定终局：G0 PASS / G1 PASS / T1 PASS / T2 未触发 / T3 N-A / **G2 FAIL / G3 FAIL / G4 FAIL / G5 FAIL** / G6 deferred → 线归档为负结果，无影子资格建议
+
+## 数字抽验记录（报告 ↔ 机读源）
+- G1 +0.0266/t4.35/n147 = e2_summary.json G1_gresid_mixed = summary_r324.json C2_resid_ic ✓ 三方一致
+- strict +0.0249/3.85/n133 = gresid_strict 字段 ✓ 且= R-324 正文 §四表 ✓
+- ΔIC V1 −0.00036/t−0.82/n232 = G2_delta.V1_vs_V4 ✓；d_mean 恒等式核对：ic_V1.mean(0.0975)−ic_V4.mean(0.0978)=−0.0003≈d_mean（位数舍入）✓
+- G4：TO 0.2055−0.1770=+0.0285 → /0.1770=16.10% ✓ 与 increase_pct=0.161 ✓
+- G5：V1 cap_median=3,048,708 元=304.9 万 <2000 万 FAIL ✓
+- yearly_sign V1 正年数=6（2010/2012/2013/2017/2019/2026）/20=30.0% ✓
+- 全部数字由 python 直读 JSON 抄录，非对话记忆复述。
+
+## 验收命令自检
+- ls -la R-329*.md && sha256sum ✓（见上）
+- grep -c "G[0-6]" work/task-0508-notes.md：需 ≥7 → 运行确认
+
+## 状态
+- [x] 预注册书精读+sha256 校验
+- [x] 判门清单先于计算登记
+- [x] T1/G0/G1/T2 因子层判定
+- [x] 组合层两轮 bug 定位修复（notes 全程留痕）+ 第四次 clean 重跑
+- [x] G2~G6 判定 + portfolio N 敏感性
+- [x] R-329 报告 + README 日志 + sha256 锁
+- [ ] .task-completions.jsonl + PUT pending_review
