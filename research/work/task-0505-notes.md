@@ -28,3 +28,19 @@
 - 修复前宽表仿真（原 load_ak_wide 外连语义转录）：wide 455,037 行/11,751 股，其中非 A 股行 165,474（36.4%）
 - 20251231 单期：yjbb 11,486 vs xjll 5,231 → 45.54%；缺失 6,268 全部为非 A 股前缀（83x/87x/43x/920=新三板~6,072、40x/42x=老三板两网 164、900/20x=B股 78）；**A 股主流前缀缺失=0**（a_prefix_missing=0）
 - 输入指纹 md5 已落盘 inputs_fingerprint.json；未过滤 yjbb 关键列帧 hash c61bc784…315（修复后保留行须与此恒等）
+
+## 补丁落地（12:47~12:58）
+1. `scripts/task-0285/factor_expansion_v3ak.py`：load_ak_wide 读表循环 zfill 后加 `is_a_share_code` 前缀过滤（merge 前）；新增 `A_SHARE_PREFIXES`（13 前缀，与 R-275/r275_ic 逐字一致）+ helper。lrb 缺表 WARN 分支原样保留。
+2. `tmp_hp/collect_fin_deep_ak.py`：process() 内 zfill 后同款过滤（采集源头）；helper 同口径。
+3. 验证脚本 `work/r325/r325_verify_filter.py`：build/baseline/full 三阶段。全程未动 engine/registry/crontab/HP 文件；py_compile 通过。
+   - 过程坑位记录：①本地子集缺 lrb 表→曾造零行 stub，但 pandas3 空 parquet 在真函数内丢 schema，改为把 lrb 派生源列(total_profit/op_profit)以 NaN 挂靠 zcfz + 走原版 WARN 跳过分支（等价且更诚实）；②抽验逻辑两处自我修正（排序先后、pre 侧需先限 A 股子集再比 hash）。
+
+## 最终验证结果（r325/verify_output.json @ stage full，真模块实跑）
+- 真函数 load_ak_wide 端到端：yjbb 过滤日志 `453749 -> 288275 (-165474)`，宽表 (289563, 22)；断言无任何非 A 股代码残留通过
+- 行数锚点三连（vs R-275 记录）：yjbb 288,275 =✓ / zcfz 280,143 =✓ / xjll 288,715 =✓（精确一致）
+- 宇宙对照：宽表股票数修复前 11,751 → 修复后 5,247；yjbb 股票 11,733→5,229
+- **污染比：本地 44.72%（5247/11733）↔ R-275 HP 锚点 44.57%（5244/11765）**，快照漂移 +0.15pp
+- **修复后三要素齐全率：全史 0.966 / 近 3 年 0.9939 ↔ R-275 锚点 96.6% / 99.4%** ✓
+- md5 抽验：①三表「保留行」全量帧哈希修复前后恒等（kept_full_hash_equal=true×3）；②每表 150 行抽样按同行键重算 md5 逐一相等（post_resample_match=true×3, mismatch=0）
+- 剔除明细：6,504 只 code 全部被白名单规则解释（all_explained=true）：新三板/北交所 6,134 + 老三板/两网退市 291 + B股 79；样本如 200761(深B)、430047(新三板) 等 30 条入 verify_output.json removal_sample
+- 结论：复现成功，补丁生效，与 R-275 数字对得上；报告编号 R-325（避让并行 R-323/R-324）
