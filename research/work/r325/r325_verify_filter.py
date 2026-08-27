@@ -175,7 +175,7 @@ def stage_baseline():
         "missing": len(miss), "missing_families": fams,
         "a_prefix_missing": len([c for c in miss if is_a(c)])}
     res["pollution_ratio_r275_style"] = round(
-        100 * min(tabs["zcfz"].code.nunique(), ) / max(tabs["yjbb"].code.nunique(), ), 2)
+        100 * tabs["zcfz"].code.nunique() / tabs["yjbb"].code.nunique(), 2)
     res["unfiltered_hash_yjbb_np"] = frame_md5(y25, ["code", "statDate", "net_profit", "roe", "gp_margin"])
     json.dump(res, open(f"{OUT}/pre_baseline.json", "w"), ensure_ascii=False, indent=1)
     print(json.dumps(res, ensure_ascii=False, indent=1))
