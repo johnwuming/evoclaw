@@ -16,5 +16,9 @@
   "stocks": 5247,
   "periods": 86,
   "md5_keys": "0bae667fb68500f1b68063e3925ce1fc"
+ },
+ "_lrb_filler": {
+  "rows": 0,
+  "note": "zero-row schema stub, 无伪数据"
  }
 }
