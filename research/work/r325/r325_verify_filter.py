@@ -286,6 +286,10 @@ def stage_full():
             if key not in pst.index:
                 mism += 1; continue
             r2 = pst.loc[key]
+            h1 = hashlib.md5("|".join(str(v) for v in r[cols].tolist()).encode()).hexdigest()
+            h2 = hashlib.md5("|".join(str(v) for v in r2[cols].tolist()).encode()).hexdigest()
+            if h1 != h2:
+                mism += 1
         checks[t]["post_resample_match"] = (mism == 0)
         checks[t]["mismatch_rows"] = mism
 
