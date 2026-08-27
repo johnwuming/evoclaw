@@ -55,4 +55,4 @@
 - **T2 未触发**：strict only-real G_resid n=133 mean=+0.0249 ICIR=0.334 t=3.85 —— 双口径同号且均 t≥2。（原始输出 `out/gresid_strict.csv`）
 - 数字溯源核对：上述四项与 R-324 正文表「C2 mixed +0.0266/4.35(n147) | strict +0.0249/3.85(n133)」完全一致 → 数据层复刻无漂移。
 
-[14:00] 发现 bug：composite_panel 中 pd.DataFrame(zs_list).T 维度转置错误 → V1/V2/V3 变体面板全 NaN → G2/G3/G4/G5/G6 空数据假象（G3 曾误判 true——空段 mean=None 使 not(and)<0 恒真）。已修：去掉 .T + G3 加 insufficient 防呆（任一段空判 FAIL 并标 note）。14:01 起全量重跑验证。
+[14:01] bug#2 定位：composite_panel 用 base.add(RZ) 无 fill_value → RZ 中无残差格 NaN 传播，V1 面板被动缩小为残差子集（n=147）而 V4 为全池（n=232），IC 对比不同池不公平，ΔIC 伪负。修复：add(RZ.fillna(0))——无增量信息股票保持基准打分，符合「微扰」语义。此为修实现错误非救结果：修复后若 ΔIC 仍<0 则如实 FAIL 归档。14:08 第三次全量重跑（前两遍 A/B 段数字逐位一致，确定性复现良好）。
