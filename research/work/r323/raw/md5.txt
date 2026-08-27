@@ -1,4 +1,5 @@
 {
+ "mmf_000198.csv": "5370ce9d566f",
  "sh000300_sina.csv": "57458ed67933",
  "sh513100_sina.csv": "34ef9c84da66",
  "sh513300_sina.csv": "1e7f7b395cf4",
