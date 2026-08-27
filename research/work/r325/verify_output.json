@@ -270,29 +270,9 @@
   "count_codes_removed_from_yjbb": 6504,
   "all_explained_by_prefix_rule": true,
   "families": {
-   "A股或未知(200)": 37,
-   "A股或未知(201)": 1,
-   "A股或未知(400)": 270,
-   "A股或未知(420)": 21,
-   "A股或未知(430)": 342,
-   "A股或未知(830)": 102,
-   "A股或未知(831)": 395,
-   "A股或未知(832)": 376,
-   "A股或未知(833)": 292,
-   "A股或未知(834)": 282,
-   "A股或未知(835)": 262,
-   "A股或未知(836)": 261,
-   "A股或未知(837)": 280,
-   "A股或未知(838)": 282,
-   "A股或未知(839)": 297,
-   "A股或未知(870)": 314,
-   "A股或未知(871)": 323,
-   "A股或未知(872)": 431,
-   "A股或未知(873)": 670,
-   "A股或未知(874)": 787,
-   "A股或未知(875)": 97,
-   "A股或未知(900)": 41,
-   "A股或未知(920)": 341
+   "B股": 79,
+   "老三板/两网退市": 291,
+   "新三板/北交所": 6134
   }
  },
  "removal_sample": [
@@ -300,210 +280,210 @@
    "code": "200761",
    "statDate": "2005-03-31 00:00:00",
    "net_profit": 194824360.87,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2005-06-30 00:00:00",
    "net_profit": 521248064.05,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2005-09-30 00:00:00",
    "net_profit": 540158975.72,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2005-12-31 00:00:00",
    "net_profit": 632216696.89,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2006-03-31 00:00:00",
    "net_profit": 102452896.67,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2006-06-30 00:00:00",
    "net_profit": 301318703.59,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2006-09-30 00:00:00",
    "net_profit": 894212535.96,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2006-12-31 00:00:00",
    "net_profit": 1625954120.51,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2007-03-31 00:00:00",
    "net_profit": 314569075.35,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2007-06-30 00:00:00",
    "net_profit": 904777735.83,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2007-09-30 00:00:00",
    "net_profit": 1232538470.53,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2007-12-31 00:00:00",
    "net_profit": 1592000891.26,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2008-03-31 00:00:00",
    "net_profit": 402286898.67,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2008-06-30 00:00:00",
    "net_profit": 1015441808.47,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2008-09-30 00:00:00",
    "net_profit": 1416335499.67,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2008-12-31 00:00:00",
    "net_profit": 165089865.35,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2009-03-31 00:00:00",
    "net_profit": 43834535.9,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2009-06-30 00:00:00",
    "net_profit": -909886400.39,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2009-09-30 00:00:00",
    "net_profit": -1433242891.18,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2009-12-31 00:00:00",
    "net_profit": -1545191032.37,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2010-03-31 00:00:00",
    "net_profit": 372266276.54,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2010-06-30 00:00:00",
    "net_profit": 688606765.04,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2010-09-30 00:00:00",
    "net_profit": 860121829.72,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2010-12-31 00:00:00",
    "net_profit": 925366759.73,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2011-03-31 00:00:00",
    "net_profit": 304933261.12,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2011-06-30 00:00:00",
    "net_profit": 595456110.27,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2011-09-30 00:00:00",
    "net_profit": 779730654.32,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2011-12-31 00:00:00",
    "net_profit": 795825189.21,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2012-03-31 00:00:00",
    "net_profit": 88094799.55,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   },
   {
    "code": "200761",
    "statDate": "2012-06-30 00:00:00",
    "net_profit": 145181307.69,
-   "family": "A股或未知(200)",
+   "family": "B股",
    "rule_verdict": "剔除(A股白名单外)"
   }
  ],

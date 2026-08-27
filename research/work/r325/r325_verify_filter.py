@@ -34,14 +34,14 @@ def is_a(c):
 
 
 def prefix_family(c):
-    c = str(c)[:3]
-    if c in ("083", "087", "043", "092"):
-        return "新三板"
-    if c in ("040", "042"):
+    c = str(c)[:2]
+    if c in ("83", "87", "43", "92"):
+        return "新三板/北交所"
+    if c in ("40", "42"):
         return "老三板/两网退市"
-    if c in ("090", "020"):
+    if c in ("90", "20"):
         return "B股"
-    return f"A股或未知({c})"
+    return f"其他({c})"
 
 
 # 生产 schema 中存在但 r275 本地子集未采的派生源列：以 NaN 补齐（不造数，仅供结构验证）
