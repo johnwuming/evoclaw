@@ -1,0 +1,515 @@
+{
+ "anchor_R275": {
+  "hp_baseline": "yjbb 451669行/11765股 vs zcfz/xjll/lrb 各5244股 → 5244/11765=44.57%",
+  "expect_rates": {
+   "all": 0.966,
+   "recent3y": 0.994
+  },
+  "expect_local_rows_A": {
+   "yjbb": 288275,
+   "zcfz": 280143,
+   "xjll": 288715
+  }
+ },
+ "pre_fix": {
+  "tables": {
+   "yjbb": {
+    "rows": 453749,
+    "stocks": 11733,
+    "stocks_a": 5229,
+    "rows_nonA": 165474
+   },
+   "zcfz": {
+    "rows": 280143,
+    "stocks": 5247,
+    "stocks_a": 5247,
+    "rows_nonA": 0
+   },
+   "xjll": {
+    "rows": 288715,
+    "stocks": 5247,
+    "stocks_a": 5247,
+    "rows_nonA": 0
+   }
+  },
+  "wide_pre_rows": 455037,
+  "wide_pre_stocks": 11751,
+  "wide_nonA_codes": 165474,
+  "p20251231": {
+   "yjbb_stocks_raw": 11486,
+   "xjll_stocks_raw": 5231,
+   "ratio_pct": 45.54,
+   "missing": 6268,
+   "missing_families": {
+    "A股或未知(200)": 37,
+    "A股或未知(201)": 1,
+    "A股或未知(400)": 150,
+    "A股或未知(420)": 14,
+    "A股或未知(430)": 336,
+    "A股或未知(830)": 99,
+    "A股或未知(831)": 381,
+    "A股或未知(832)": 367,
+    "A股或未知(833)": 286,
+    "A股或未知(834)": 274,
+    "A股或未知(835)": 256,
+    "A股或未知(836)": 257,
+    "A股或未知(837)": 275,
+    "A股或未知(838)": 275,
+    "A股或未知(839)": 290,
+    "A股或未知(870)": 310,
+    "A股或未知(871)": 312,
+    "A股或未知(872)": 420,
+    "A股或未知(873)": 665,
+    "A股或未知(874)": 785,
+    "A股或未知(875)": 96,
+    "A股或未知(900)": 41,
+    "A股或未知(920)": 341
+   },
+   "a_prefix_missing": 0
+  },
+  "pollution_ratio_r275_style": 44.72,
+  "unfiltered_hash_yjbb_np": "c61bc7845fb4ac28c9b4c28a39f8a315"
+ },
+ "post_tables": {
+  "yjbb": {
+   "rows": 288275,
+   "stocks": 5229,
+   "stocks_a": 5229,
+   "rows_nonA": 0
+  },
+  "zcfz": {
+   "rows": 280143,
+   "stocks": 5247,
+   "stocks_a": 5247,
+   "rows_nonA": 0
+  },
+  "xjll": {
+   "rows": 288715,
+   "stocks": 5247,
+   "stocks_a": 5247,
+   "rows_nonA": 0
+  }
+ },
+ "post_wide": {
+  "rows": 289563,
+  "stocks": 5247
+ },
+ "row_integrity_checks": {
+  "yjbb": {
+   "kept_full_hash_equal": false,
+   "post_resample_match": true
+  },
+  "zcfz": {
+   "kept_full_hash_equal": true,
+   "post_resample_match": true
+  },
+  "xjll": {
+   "kept_full_hash_equal": true,
+   "post_resample_match": true
+  }
+ },
+ "sample_md5_kept": {
+  "yjbb": [
+   {
+    "code": "300500",
+    "period": "2024-03-31",
+    "md5_kept_pre": "f31fa9782e6637fa871fc7adbdc239c8"
+   },
+   {
+    "code": "300171",
+    "period": "2018-09-30",
+    "md5_kept_pre": "f641478a4fbea9adc9387baea1286af1"
+   },
+   {
+    "code": "300983",
+    "period": "2025-12-31",
+    "md5_kept_pre": "092af305f5a033e1ccf23e8140fddcdf"
+   },
+   {
+    "code": "002526",
+    "period": "2025-12-31",
+    "md5_kept_pre": "e1d0ec7755eb40ad6f3fe2ecb30d5423"
+   },
+   {
+    "code": "601311",
+    "period": "2024-12-31",
+    "md5_kept_pre": "61df58b65eafe7c8f69881e7bd268777"
+   },
+   {
+    "code": "002030",
+    "period": "2012-09-30",
+    "md5_kept_pre": "2ac5c27be36cbc0c1233079082069c9a"
+   },
+   {
+    "code": "002171",
+    "period": "2015-06-30",
+    "md5_kept_pre": "720198232bf88de1c94d497e1ab82a16"
+   },
+   {
+    "code": "300394",
+    "period": "2024-09-30",
+    "md5_kept_pre": "c185f3227fb4afa82a21f7467e9b0a87"
+   },
+   {
+    "code": "300386",
+    "period": "2015-03-31",
+    "md5_kept_pre": "8590352682ae64b429df24052e69a216"
+   },
+   {
+    "code": "002940",
+    "period": "2022-03-31",
+    "md5_kept_pre": "da243ba80cce9d4b5302d721af64638a"
+   }
+  ],
+  "zcfz": [
+   {
+    "code": "002541",
+    "period": "2021-03-31",
+    "md5_kept_pre": "4b534798b9181c7a8353e12e70527fc2"
+   },
+   {
+    "code": "300847",
+    "period": "2021-12-31",
+    "md5_kept_pre": "c96149bbac77c6e00d89e141b93fc99d"
+   },
+   {
+    "code": "600309",
+    "period": "2005-12-31",
+    "md5_kept_pre": "cfd3772921154117c2177c56c16c5021"
+   },
+   {
+    "code": "600233",
+    "period": "2017-09-30",
+    "md5_kept_pre": "a8d18ad4ac188d05b753e5225da6e97c"
+   },
+   {
+    "code": "300239",
+    "period": "2013-12-31",
+    "md5_kept_pre": "982a250d53917c1494bde11885113b9a"
+   },
+   {
+    "code": "300086",
+    "period": "2019-06-30",
+    "md5_kept_pre": "c09a5113e3fe8fb228f27cdff181c3c3"
+   },
+   {
+    "code": "600791",
+    "period": "2022-09-30",
+    "md5_kept_pre": "086832f33dd79eadf7c488057561ecb3"
+   },
+   {
+    "code": "600588",
+    "period": "2020-06-30",
+    "md5_kept_pre": "7e02b747d51d52729cd74eeab9d7b2a7"
+   },
+   {
+    "code": "002228",
+    "period": "2014-12-31",
+    "md5_kept_pre": "7f7db108b6bd8d43dcc1377a837eaa4a"
+   },
+   {
+    "code": "601086",
+    "period": "2018-03-31",
+    "md5_kept_pre": "1928f9a9037a7c54af121d9157908aeb"
+   }
+  ],
+  "xjll": [
+   {
+    "code": "600176",
+    "period": "2021-03-31",
+    "md5_kept_pre": "9c4b83eeabbd1ae602d12e4d5f0f8427"
+   },
+   {
+    "code": "603150",
+    "period": "2015-12-31",
+    "md5_kept_pre": "e41e6126569f68081b12472d84a5c0f6"
+   },
+   {
+    "code": "300512",
+    "period": "2018-06-30",
+    "md5_kept_pre": "a31d85d1175f698723f27125e1483682"
+   },
+   {
+    "code": "000543",
+    "period": "2015-06-30",
+    "md5_kept_pre": "113d19dc9e7d908cc115ae3a16bbcbce"
+   },
+   {
+    "code": "600192",
+    "period": "2016-06-30",
+    "md5_kept_pre": "72b7cf54474e2b38cdc7c1435c1cbcee"
+   },
+   {
+    "code": "300411",
+    "period": "2016-06-30",
+    "md5_kept_pre": "08eb89b2a8026a60a340fa772713b10c"
+   },
+   {
+    "code": "300919",
+    "period": "2019-12-31",
+    "md5_kept_pre": "27b927514cc85dcfe1f73628d23bba4f"
+   },
+   {
+    "code": "601633",
+    "period": "2013-03-31",
+    "md5_kept_pre": "18fd0f0b41a65322aeabe24b295aafea"
+   },
+   {
+    "code": "300010",
+    "period": "2010-06-30",
+    "md5_kept_pre": "4a5ac9d824894796d9299a17efb3757d"
+   },
+   {
+    "code": "002664",
+    "period": "2019-12-31",
+    "md5_kept_pre": "92b29cebfd5db893fd748c1f1f5b905f"
+   }
+  ]
+ },
+ "removed_summary": {
+  "count_codes_removed_from_yjbb": 6504,
+  "all_explained_by_prefix_rule": true,
+  "families": {
+   "A股或未知(200)": 37,
+   "A股或未知(201)": 1,
+   "A股或未知(400)": 270,
+   "A股或未知(420)": 21,
+   "A股或未知(430)": 342,
+   "A股或未知(830)": 102,
+   "A股或未知(831)": 395,
+   "A股或未知(832)": 376,
+   "A股或未知(833)": 292,
+   "A股或未知(834)": 282,
+   "A股或未知(835)": 262,
+   "A股或未知(836)": 261,
+   "A股或未知(837)": 280,
+   "A股或未知(838)": 282,
+   "A股或未知(839)": 297,
+   "A股或未知(870)": 314,
+   "A股或未知(871)": 323,
+   "A股或未知(872)": 431,
+   "A股或未知(873)": 670,
+   "A股或未知(874)": 787,
+   "A股或未知(875)": 97,
+   "A股或未知(900)": 41,
+   "A股或未知(920)": 341
+  }
+ },
+ "removal_sample": [
+  {
+   "code": "200761",
+   "statDate": "2005-03-31 00:00:00",
+   "net_profit": 194824360.87,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2005-06-30 00:00:00",
+   "net_profit": 521248064.05,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2005-09-30 00:00:00",
+   "net_profit": 540158975.72,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2005-12-31 00:00:00",
+   "net_profit": 632216696.89,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2006-03-31 00:00:00",
+   "net_profit": 102452896.67,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2006-06-30 00:00:00",
+   "net_profit": 301318703.59,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2006-09-30 00:00:00",
+   "net_profit": 894212535.96,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2006-12-31 00:00:00",
+   "net_profit": 1625954120.51,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2007-03-31 00:00:00",
+   "net_profit": 314569075.35,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2007-06-30 00:00:00",
+   "net_profit": 904777735.83,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2007-09-30 00:00:00",
+   "net_profit": 1232538470.53,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2007-12-31 00:00:00",
+   "net_profit": 1592000891.26,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2008-03-31 00:00:00",
+   "net_profit": 402286898.67,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2008-06-30 00:00:00",
+   "net_profit": 1015441808.47,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2008-09-30 00:00:00",
+   "net_profit": 1416335499.67,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2008-12-31 00:00:00",
+   "net_profit": 165089865.35,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2009-03-31 00:00:00",
+   "net_profit": 43834535.9,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2009-06-30 00:00:00",
+   "net_profit": -909886400.39,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2009-09-30 00:00:00",
+   "net_profit": -1433242891.18,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2009-12-31 00:00:00",
+   "net_profit": -1545191032.37,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2010-03-31 00:00:00",
+   "net_profit": 372266276.54,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2010-06-30 00:00:00",
+   "net_profit": 688606765.04,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2010-09-30 00:00:00",
+   "net_profit": 860121829.72,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2010-12-31 00:00:00",
+   "net_profit": 925366759.73,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2011-03-31 00:00:00",
+   "net_profit": 304933261.12,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2011-06-30 00:00:00",
+   "net_profit": 595456110.27,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2011-09-30 00:00:00",
+   "net_profit": 779730654.32,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2011-12-31 00:00:00",
+   "net_profit": 795825189.21,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2012-03-31 00:00:00",
+   "net_profit": 88094799.55,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  },
+  {
+   "code": "200761",
+   "statDate": "2012-06-30 00:00:00",
+   "net_profit": 145181307.69,
+   "family": "A股或未知(200)",
+   "rule_verdict": "剔除(A股白名单外)"
+  }
+ ],
+ "rates_after_fix": {
+  "all": 0.966,
+  "recent3y": 0.9939
+ },
+ "breadth_prev_rows": 22
+}
