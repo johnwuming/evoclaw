@@ -22,3 +22,12 @@
 - G0 双层校验: Part A (E2 复现 E1) + Part B (E1 实现 vs 声明口径独立复算)
 
 ## 检查点 1: HP 勘察开始 (02:35)
+
+## 检查点 2: ①roe/roa 构建器核验 (prep_dividend_roa.py, 396行)
+- 真正构建器 = prep_dividend_roa.py（fetch_valuation_data.py 只读该面板用于行业PE, L41/L380）→ 解释 R-345 grep 未命中（查错文件+实现不用 shift/asof 关键词）
+- L195-206 disclosure_available(): 报告期→法定披露截止日映射 (Q1→4/30, 中报→8/31, Q3→10/31, 年报→次年4/30) — 保守(截止日), PIT 安全方向
+- L252: fin["avail_date"]=report_date.map(disclosure_available)
+- L275-343 面板构建: date=MonthEnd(收盘取当月最后交易日); div_yield_ttm=searchsorted ex_date∈(mend-365d, mend] 累计/c月末 — 无前视
+- L344-380 PIT join: bisect_right(av_dates, d)-1 → 只取 avail_date ≤ 月末d 的最后一条 roe/roa — 真 as-of backward, 无报告期直 join
+- 边界: d==avail_date 当日即用（法定截止日收盘前必须披露, 安全）; drop_duplicates keep=last
+- 初步结论: 构建器无前视。待查下游消费对齐。
