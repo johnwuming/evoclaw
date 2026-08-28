@@ -300,7 +300,10 @@ flowchart TB
 ### 4.7 过渡策略（并行新建→验收→切换）
 
 1. **并行新建（Phase B）**：新 Dashboard 独立端口/子域部署，读同一镜像目录与账本；旧 agent-dashboard 照常在役，观测能力不断档；新前端区块⑥直接把「双看板并行对照」列为验收证据项。
-2. **验收（Phase B 退出前）**：双看板对照 ≥1 个完整月频调仓周期——NAV 口径一致、事件覆盖一致、旧看板无仅存能力（清单化）；390px 截图基线全绿。
+2. **验收（Phase B 退出前）**：双看板对照 ≥1 个完整月频调仓周期——NAV 口径一致、事件覆盖一致、旧看板无仅存能力（清单化）；390px 截图基线全绿。量化契约（v1.2 补，写成可执行契约测试条款，任一不满足即验收 FAIL）：
+   - **T1 NAV 一致性**：对照期内新旧看板 NAV 逐日差 ≤1bp（成本口径按 R-333 冻结三情景，两侧同配置）；
+   - **T2 事件一致性**：对照期内事件总数与事件类型集合两侧完全一致（逐 type 计数比对）；
+   - **T3 指针一致性**：active portfolio_version_id 指针两侧一致（含切换窗口后复验）。
 3. **切换（Phase C 内、指针切换获用户批准后）**：nginx 路由级切换（新路径升级为主域，旧看板降级到 `/legacy` 保留 ≥1 个调仓周期）；回退=改回 nginx 路由，秒级。旧服务物理下线与代码归档在 Phase D（§8 Phase D 动作 1/2：旧名退役、归档目录保留可回跑）。
 4. **新旧分工边界（按 R-344 对齐 §5）**：旧看板任务中心/用量/报告三大非量化 Tab 不迁移——`/legacy` 全功能保留至 Phase D 退役；新看板零写面一律不承接，任务/审核类操作始终走任务中心。
 
@@ -308,14 +311,14 @@ flowchart TB
 
 ### 5.1 排期骨架
 
-排期以 R-336 §8 四阶段为唯一主干，本设计按依赖关系插入工程批次。工作量为相对单位（半周=1 单位），供排期参考，不构成承诺。
+排期以 R-336 §8 四阶段为唯一主干，本设计按依赖关系插入工程批次。工作量为相对单位（半周=1 单位），供排期参考，不构成承诺。相对周数（v1.2 补）=批次序（Wn≈第 n 个半周），阶段映射：A 期 W1-W3、B 期 W4-W6、C 期 W7-W8、D 期 W9。
 
 | 批次 | 内容 | 所属阶段 | 依赖前置 | 并行可能 |
 |---|---|---|---|---|
 | W1 | 事件流水读取层：BFF 账本 tail+重放+SQLite 物化（§3.3/§4.6） | A 期并行 | 无（读侧纯新增文件，零接触在役） | 与 Phase A 审计六项、GLOSSARY 落库全并行 |
 | W2 | 只读 API v1：`/api/v1/events`、`/portfolios`、`/health` | A 期并行 | W1 | 同上 |
 | W3 | 前端骨架+区块④事件流水+区块⑥迁移进度（Phase A 自身就需要进度可视） | A 期并行 | W2 | 同上 |
-| W4 | **Dashboard 重建主体**：区块①驾驶舱+②引擎卡片+③版本状态机视图（消费 Phase B 落地的 portfolio_version） | B 期 | Phase B 动作 1（vC-0 快照）、W2 | 与 Phase B 动作 2/3（求解器、回测插件化）并行——前端不阻塞 HP 侧 |
+| W4 | **Dashboard 重建主体**：区块①驾驶舱+②引擎卡片+③版本状态机视图（消费 Phase B 落地的 portfolio_version）；状态迁移守护者（state guardian，§2.3，HP 侧） | B 期 | Phase B 动作 1（vC-0 快照）、W2 | 与 Phase B 动作 2/3（求解器、回测插件化）并行——前端不阻塞 HP 侧 |
 | W5 | 区块⑤风控闸门（回撤带/相关性三档/漂移 D1-D4）+ 对账徽标 | B 期 | Phase B 动作 4/5（影子双轨、漂移监控启用）、W4 | 与 Phase B 动作 6/7（协方差对比、MVO 跑批）并行 |
 | W6 | 双看板验收：对照 ≥1 个调仓周期+390px 截图基线 | B 期末 | W4/W5 + Phase B 退出条件达成 | — |
 | W7 | 切换准备：nginx 新路由、旧看板 `/legacy` 降级预案、回退演练 | C 期前段 | Phase C 用户批准（唯一红线，改 active） | 与 Phase C 动作 1（事件溯源切换写路径）并行 |
@@ -347,15 +350,40 @@ flowchart TB
 | Dashboard 零写入口、人工门走任务中心 | §4.3 G-L4 用户批准唯一人工门；§8 Phase C 指针切换需批准 | 一致（前端不提供任何写路径，人工门语义不变） |
 | BFF SQLite 物化=可删重建缓存 | §3.1 表「JSON 降级为投影缓存」、§3.3 重放+sha256 校验 | 一致（物化不承载唯一状态，source of truth=账本） |
 | 轮询不做 SSE/WebSocket | §3.3 单机无消息队列/常驻服务约束的精神延伸 | 一致（不新增常驻推送基础设施） |
-| 状态机视图含 canary 灰显 | §1.2⑥ canary 未启用、启用须先定义期限与失效自动降级 | 一致（仅可视预留，不启用） |
+| 状态机主图止于 approved→paper→live，canary 入「未来扩展」 | §1.2⑥ canary 未启用、启用须先定义期限与失效自动降级 | 一致（枚举与字段零删改，仅渲染口径调整，R-344 v1.1 裁决） |
 | 既有 experiment-ledger/risk-events 并入账本 | §3.2 事件枚举、append-only 原则 | 一致（历史行不重写，仅 import 标记） |
 | 阈值/事件类型/字段名全部原文引用 | §1.2、§3.2、§4.4、§7.2、§7.5.3、§7.5.4 | 一致（零改写、零新造术语） |
 
 *本报告纯设计零代码。设计仅覆盖 R-336 v1.2 已冻结条款的实施映射；R-336 附录 B backlog 项不在本文范围。*
+
+### 附：BFF 重放幂等伪代码（自包含版，v1.2 补；不依赖 R-336 §3.3 原文即可实施）
+
+```text
+输入：events/iteration-ledger-*.jsonl（按文件名序+行序拼接 = 事件序）
+1  projection = 空投影对象（registry/engines/composites 三类语义对象）
+2  seen = 空集合                       # 幂等键集合
+3  for line in 账本行:
+4      evt = parse(line); key = evt.seq（无 seq 时用 文件名+行号 兕底）
+5      if key in seen: continue         # 幂等：重复行跳过，重放可安全重入
+6      seen.add(key)
+7      dispatch(evt, projection)        # 按 §3.2 枚举 v1 全集分派，纯函数无外部 IO：
+8          version.created → 建版本对象(status=candidate)
+9          promotion.executed → 移 active 指针至 target 版本
+10         promotion.downgraded → 回退状态位(shadow/gated)
+11         weight.solved / gate.evaluated / risk.action → 追加明细记录（其余枚举按 §3.2 语义落位）
+12 for obj in projection: obj.sha256 = hash(canonical_json(obj))
+13 原子写投影文件（tmp+rename，头部带各对象 sha256）
+校验：重放完成后重读投影文件逐对象比对 sha256；任一不一致 → reconciliation.failed（§3.3 语义）
+```
+
+### 附：R-336 修订建议（仅登记，不在本文实施，v1.2 补）
+
+- 建议 R-336 未来修订时考虑：为 promotion.requested 增加超时自动治理语义（如超 1 个调仓周期未决自动转 promotion.rejected 或升级提醒）——当前 R-336 未定义该超时行为，本文仅在呈现层打标「待决超期」（§4.3），不自行扩展事件语义。
 
 ---
 
 ## 修订记录
 
 - **v1.0**（2026-08-28，task-0529）：首版。
+- **v1.2**（2026-08-28，task-0534）：二轮评审架构项 + 第三轮残值 + R-344 v1.1 对齐（用户裁决链第二阶段「先产品后架构」）——①新增 §2.3 状态迁移守护者 state guardian（HP 侧，消费漂移/对账失败/断路器，产出 promotion.downgraded，日频轻巡+月频后置检，排期入 W4）；②§3.3 状态机主图止于 approved→paper→live、canary 入「未来扩展」（§1.2⑥ 枚举零删改，R-344 v1.1 裁决；§4.3/§1.2/自检表同步）；③§3.1 补 vC-0 构建规程（T-1 交易日 cutoff、git sha+registry 快照双锚、变更=重打快照结论、签名与 built_ts）；④/health 增 pending_risks 聚合（R-344 §2.2 角标口径）；⑤§4.7 双看板验收量化契约 T1-T3（NAV ≤1bp/事件集合/指针）；⑥§4.4 SSE 措辞修正（不引入常驻推送基础设施）；⑦§3.4 部署暴露面矩阵（nginx 0.0.0.0+TLS+白名单+敏感口径引 R-344 §6.3）；⑧§3.2 灾备最小条款（每日异地副本+sync_lag SOP+reconciliation.failed P0）；⑨§4.1 业务正确性指标与容量公式（重放耗时/tail lag/sha256 失败→503/P95）；⑩§4.3 promotion.requested 待决超期打标+文末 R-336 修订建议；⑪新鲜度口径改「≥2 个交易日」+A 股日历顺延规则；⑫附录补 BFF 重放幂等伪代码自包含版；⑬P2 小项：排期相对周数、390×844 截图入库约定、ECharts/mermaid 图分工。净增约 50 行零结构变更。
 - **v1.1**（2026-08-28，task-0530）：并入用户反馈 9 项——①§3.2 retention_policy（近 12 个月热数据+gzip 冷档，BFF 启动重放热数据+合并冷档索引）；②§4.1 BFF 可用性四件套（SIGTERM 优雅关闭 / systemd 自动重启 / 单请求 5s 超时 / SQLite 超时保护）；③§4.3 驾驶舱数据新鲜度告警（sync_lag 超 2 个自然日顶部红横幅+用户通知路径）；④§4.4 document.visibilityState 节流；⑤§4.6 数据源表增「降级策略」列；⑥§3.4 无鉴权=显式设计决策安全备注；⑦§3.3 启动重放 ≤3s 且不阻塞 API；⑧§3.2 flock 锁文件路径（events/.ledger.lock）与模式（LOCK_EX|LOCK_NB）；⑨§3.4 API 版本策略（Breaking Change 升 /api/v2/，旧版本保留 ≥1 个调仓周期）——以及 R-344 PRD 对齐 4 处（Tab 归并 5 Tab 导航 / 引擎卡片事件驱动刷新 / 待处理事项前端聚合视图 / 新旧分工边界 legacy 至 Phase D）；全部小改零结构变更。P0-2「migration 响应截断」经实查 L191 为完整结构，属评审端误报，不采纳。
