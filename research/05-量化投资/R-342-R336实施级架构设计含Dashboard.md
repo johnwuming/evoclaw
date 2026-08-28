@@ -230,9 +230,11 @@ stateDiagram-v2
 - 放弃 B（SvelteKit）：单仓库诱人，但现有 agent-dashboard v4 已是 Express+node:sqlite（零原生依赖），BFF 层可直接继承基建与部署心智，换框架省下的复杂度 < 迁移成本。
 - 放弃 C（Next.js）：SSR/ISR 能力对「数据 60-300s 轮询、内容按事件驱动」的月频看板无增益，构建链与内存占用在单 VPS 上纯属负担。
 
-图表库：ECharts（备选 Recharts——放弃理由：状态机图/关系图需自绘，Recharts 偏统计图表）。构建期 TypeScript。
+图表库：ECharts（备选 Recharts——放弃理由：状态机图/关系图需自绘，Recharts 偏统计图表）。构建期 TypeScript。图分工约定（v1.2 补）：关系图/版本树/NAV 曲线用 ECharts；状态机主图的布局源=本文件 §3.3 mermaid（构建期同步），运行时渲染为横向胶囊流。
 
 BFF 可用性四件套：① 收到 SIGTERM 优雅关闭（停止接新请求、在途请求处理完再退出）；② systemd 单元 `Restart=always` 自动重启；③ 上游读操作单请求 5s 超时（文件读/SQLite 查询均受控），防悬挂拖垮单进程；④ SQLite 操作带 busy_timeout 超时保护，超时拒绝该次操作并记日志告警、不长持锁。
+
+BFF 业务正确性指标与容量规划（v1.2 补，随健康条/日志暴露）：①全量重放耗时趋势（基线 ≤3s，§3.3）；②增量 tail lag（最新事件 ts 与物化完成 ts 之差，秒级）；③projection sha256 校验失败次数（>0 即告警，且相关端点返回 **503** 而非空数据/旧数据假装正常）；④endpoint P95 延迟（受单请求 5s 超时上限约束）。容量规划最小公式：热数据行数 ≈ 12 个月 × 月均事件行数；存储 ≈ 行数 × 单行均长 × 1.5（含索引系数）；超限（SQLite 物化 >500MB 或重放 P95 >3s）即触发按年切分/预物化视图。
 
 ### 4.2 信息架构（六区块）
 
@@ -258,17 +260,17 @@ flowchart TB
 |---|---|---|---|---|
 | ① 总览驾驶舱 | NAV 曲线（30/90/1Y 切换）、日变动、MDD/当前回撤带位、在役 PV 卡（id+status+权重饼）、三方对账徽标（§6.3 语义，绿=reconciliation ok） | 点引擎卡→区块②；点 PV→区块③；对账徽标点开看差异明细 | `/api/v1/overview` | 60s |
 | ② 引擎卡片 | 每 sleeve 一卡：status（shadow/paper/live/archived）、IC 最新值+3 月趋势（联动 RET-3 老化预警）、ICIR_OOS、最近信号日、paper/shadow 天数（自 paper_entered_at 推导） | 点卡片展开 signal 明细 drawer | `/api/v1/engines` | 事件驱动刷新+300s 兜底（按 R-344 对齐：跟随事件流水节奏，状态变化本质由事件驱动） |
-| ③ 组合版本视图 | 版本树（parent_version 链）+ 状态机条（§3.3 图的横向胶囊流）；当前版本高亮；canary 节点灰显标注「未启用」 | 点版本→详情（全 schema+gate_report+weight_solution+solver_meta 含 fallback_triggered/fallback_reason） | `/api/v1/portfolios`、`/api/v1/portfolios/:id` | 300s |
+| ③ 组合版本视图 | 版本树（parent_version 链）+ 状态机条（§3.3 图的横向胶囊流，主图止于 approved→paper→live，当前段高亮）；canary 入「未来扩展」折叠段（灰显，标注启用前置=期限/失效自动降级/G-L 阈值契约） | 点版本→详情（全 schema+gate_report+weight_solution+solver_meta 含 fallback_triggered/fallback_reason） | `/api/v1/portfolios`、`/api/v1/portfolios/:id` | 300s |
 | ④ 事件流水 | 全事件倒序时间线：type 着色（promotion.* 蓝/risk.* 红/weight.* 绿/reconciliation.failed 高亮）、actor 标签、payload 摘要 | 按 type/actor/target 过滤；cursor 分页；点 promotion.downgraded 展开触发规则+实测值 | `/api/v1/events?type=&cursor=` | 120s |
 | ⑤ 风控闸门 | 回撤分级闸门仪表（当前回撤落位 4 带之一，§4.4 阈值：<5/5-10/10-15/>15）、target_vol vs 实测±2pp 带、两腿 20 日相关性与 0.75/0.85/0.90 三档旗（§7.5.4）、D1-D4 漂移带内/超带与连续超带期数（§7.2）、断路器状态 | 超带项自动置顶+红沿；点开看事件溯源 | `/api/v1/risk/gates`、`/api/v1/risk/drift` | 120s |
 | ⑥ 迁移阶段进度 | Phase A-D 卡片列（§8 迁移总览表口径）：每动作 done/doing/todo + 证据链接（报告/产物路径）；A1/A2 审计项单独置顶（FAIL=绝对阻塞语义直接可视） | 点动作跳证据文件（镜像目录只读链接） | `/api/v1/migration` | 手动刷新+600s |
 
-> 数据新鲜度告警（区块①）：健康条 sync_lag 超 2 个自然日 → 页面顶部红横幅「数据已陈旧」（对应 R-336 §6.1 数据陈旧断路语义）；用户通知路径走既有渠道（心跳/任务中心通知），看板只做「打开必见」的兜底呈现、不负责推送（对齐 R-344 §6.2）。
-> 待处理事项聚合视图（P1，按 R-344 对齐 §3 区块⑤）：风控页前端聚合「断路器触发中 / 对账失败未解 / 漂移连续超带 / 退役 review 中」为一屏待处理清单；数据全部来自既有端点聚合展示，不新增 API。
+> 数据新鲜度告警（区块①）：健康条 sync_lag 超 2 个自然日 → 页面顶部红横幅「数据已陈旧」（对应 R-336 §6.1 数据陈旧断路语义）；用户通知路径走既有渠道（心跳/任务中心通知），看板只做「打开必见」的兜底呈现、不负责推送（对齐 R-344 §6.2）。交易日计算基准（v1.2 补，口径明确为「≥2 个交易日」）：按 A 股交易日历，周末与法定节假日不计入滞后；自最近一个应更新交易日 T 的次日 00:00 起算，T+1 交易日仍未收到数据即记 1 交易日滞后、T+2 记 2（节假日顺延，跨长假按日历实际交易日数计）。
+> 待处理事项聚合视图（P1，按 R-344 对齐 §3 区块⑤与 §2.2 角标口径）：风控页前端聚合「断路器触发中 / 对账失败未解 / 漂移连续超带 / 退役 review 中 / promotion.requested 未决」为一屏待处理清单；聚合计数由 `/api/v1/health` 的 pending_risks 字段提供（v1.2 新增），明细仍取自既有端点。**待决超期口径（v1.2 补）**：promotion.requested 超 1 个调仓周期未决 → 列表项打标「待决超期」（前端仅呈现，不做任何自动处置）。
 
 ### 4.4 实时性策略：轮询，不用 SSE/WebSocket
 
-结论：**HTTP 轮询，分频 60s/120s/300s/600s**。理由：
+结论：**HTTP 轮询，分频 60s/120s/300s/600s**。本节不引入常驻推送基础设施（不新增 MQ/WS 服务端），与 §3.3「单机无消息队列」冻结精神一致；按需升级 SSE 的接口形态见本节末（仅同路径演进预留，非本期建设）。理由：
 1. 数据源本身低频：月频调仓、日频 NAV/对账、事件驱动门禁——无任何亚分钟级状态。
 2. sync cron 镜像有天然延迟，BFF 推得再快也快不过上游 rsync 周期；SSE/WebSocket 只优化「BFF→浏览器」最后一跳，收益趋零。
 3. 推送通道带来连接管理/重连/断线语义/内存驻留，单 VPS 上是净负担。
@@ -285,7 +287,7 @@ flowchart TB
 4. 图表降级规则：NAV 曲线保留（自适应宽）；版本树→垂直链表；状态机横向胶囊流→2 行折返流；权重饼→堆叠条。
 5. 数字优先：关键指标（回撤带位、对账徽标、漂移超带数）用大号数字+色块，图表为辅。
 6. 触控目标 ≥44px；点开详情一律 drawer/bottom-sheet，不弹模态。
-7. 验收含 390×844 截图基线（沿用现有 dashv5-*-390x844.png 惯例），逐区块截图入验收清单。
+7. 验收含 390×844 截图基线（沿用现有 dashv5-*-390x844.png 惯例，新看板命名 `dashv6-{block}-390x844.png`），逐区块截图入验收清单并入库存档（`docs/baseline/`，随验收报告版本化）。
 
 ### 4.6 数据来源对接（只读三源）
 
