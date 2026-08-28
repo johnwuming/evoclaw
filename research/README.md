@@ -296,6 +296,7 @@ F6组合回测趋势图可视化（task-0497，量化Tab回测页新增F6模块�
 
 | 日期 | 操作 | 编号 | 标题 | 项目 | 路径 |
 |------|------|------|------|------|------|
+| 2026-08-28 | 新增 | R-345 | PhaseA回测正确性审计 | 05-量化投资 | 05-量化投资/R-345-PhaseA回测正确性审计.md |
 | 2026-08-28 | 修改 | R-344 | Dashboard产品方案PRD | 05-量化投资 | 05-量化投资/R-344-Dashboard产品方案PRD.md |
 | 2026-08-28 | 修改 | R-342 | R336实施级架构设计含Dashboard | 05-量化投资 | 05-量化投资/R-342-R336实施级架构设计含Dashboard.md |
 | 2026-08-28 | 修改 | R-336 | 破而后立量化系统目标架构与迁移方案 | 05-量化投资 | 05-量化投资/R-336-破而后立量化系统目标架构与迁移方案.md |
@@ -649,3 +650,6 @@ F6组合回测趋势图可视化（task-0497，量化Tab回测页新增F6模块�
 | 2026-04-05 | 自动 | R-019 | AI助手变现方案 | 05-变现与增长 | shared/results/05-变现与增长/R-019-AI助手变现方案.md |
 | 2026-04-05 | 自动 | R-017 | 模型用量API限额调研 | 09-生活杂项 | shared/results/09-生活杂项/R-017-模型用量API限额调研.md |
 | 2026-04-05 | 自动 | R-004 | 深度研究Agent全景调研 | 09-生活杂项 | shared/results/09-生活杂项/R-004-深度研究Agent全景调研.md |
+## 2026-08-28 R-342 W1-W2 事件流水 API+BFF 骨架（task-0538，纯新建代码零在役触碰）— quant-bff 落地 `tools/quant-bff/`：Express 单进程只读 BFF（127.0.0.1:8180，零写面），账本消费实现 §3.2 月滚动 JSONL+热 12 月/gzip 冷档索引+flock LOCK_SH，13 步幂等重放（seq 幂等键/文件序事件序/逐对象 sha256/tmp+rename 原子写/重读校验），本批 4 端点 health（pending_risks 五类聚合+replay 耗时）/events（倒序分页+type 通配+X-Ledger-Tail-Ts）/migration（L191 完整结构）/overview（契约结构+引擎卡桩）；损坏账本→派生端点 503 不回空数据；四件套 SIGTERM/Restart=always/单请求 5s 超时/JSON 投影等价超时；Phase B 真实账本前以合成夹具开发（good 49 行 17 类型全覆盖+乱序行+冷档 gz，corrupt 变体），20/20 测试全绿+curl 四端点+增量 tail 实测过，systemd 单元仅交付未安装。→ `tools/quant-bff/`，笔记 `work/task-0538-bff-w1w2-notes.md`
+
+## 2026-08-28 R-345 Phase A 回测正确性六项审计（task-0537，纯只读+新目录产物）— 六项无 FAIL：A1/A2 绝对阻塞项均 PASS（gold sleeve 157 月重放 md5 逐位一致、513100 拆分悬崖 qfq 修正实证、pb 真 as-of join）；A6 分红窗口 0 命中、A4 卖出侧跌停闸缺口未行使、A1 附 fundamentals_monthly PIT 补验条件——总裁决放行 Phase B（附三项非阻塞跟踪条件）。产物：shared/results/05-量化投资/R-345-PhaseA回测正确性审计.md + HP results/phase_a_audit_0537/

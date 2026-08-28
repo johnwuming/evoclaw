@@ -24,3 +24,33 @@
 ## 环境核验
 - node v22.23.2（node:test 可用）。
 - npm 装 express：待验证 → 结果见下。
+
+## 环境核验（续）
+- express 4.22.2 装好；fs-ext 装好且 require 成功 → 读侧用真 flock LOCK_SH。
+- 目录骨架：fixtures/{good,corrupt}、src、test、deploy 已建。
+
+## 实现清单（全部落在 tools/quant-bff/）
+- src/config.js（loadConfig+withTimeout）· src/ledger.js（发现/热冷分层/flock LOCK_SH/行解析/全量+tail 增量）· src/replay.js（13 步幂等重放+canonicalJson+sha256）· src/pending-risks.js（五类口径聚合）· src/ctx.js（fullLoad/增量刷新/投影原子写/重读校验）· src/app.js（4 端点+5s 超时中间件+503 门卫）· src/server.js（127.0.0.1 绑定+后台重放+SIGTERM 优雅关停）
+- deploy/quant-bff.service（Restart=always、ProtectSystem=strict，仅交付不安装）
+- fixtures/good：3 月热文件 49 行（17 事件类型全覆盖+末行乱序 ts 补录+前两行无 seq 走兜底幂等键）+ 冷档 iteration-ledger-2024.jsonl.gz（3 行）+ data/{migration,overview}.json
+- fixtures/corrupt：2026-07 文件第 11 行替换为截断 JSON
+- test/：replay.test.js（7 用例）+ api-contract.test.js（8）+ api-degrade.test.js（5，含子进程 SIGTERM exit 0）
+
+## 验收证据（2026-08-28 实测）
+- `node --check` src/*.js test/*.js 全过；`npm test` → **20 pass / 0 fail**（node --test）
+- 真实启动 curl 四端点（PORT=8180，STATE_DIR=/tmp/qbff-smoke）：
+  - /api/v1/health → ready:true, ledger_tail_ts=2026-08-27T01:00:00Z, projection_sha256_ok:true, reconciliation_ok:true, sync_lag=138315.2s（夹具末事件距今天然滞后，字段语义正确）, pending_risks.count=4（drift×2+promotion_requested+retirement_review）, replay_duration_ms=25（≤3s 基线）, cold_archive{files:1,events:3}
+  - /api/v1/events?limit=2 → items[0]=乱序补录行（倒序=文件序口径）, next_cursor="48:2026-08-27T01:00:00Z"；响应头 X-Ledger-Tail-Ts: 2026-08-27T01:00:00.000Z
+  - /api/v1/migration → phase:B, 5 items（id/title/state/evidence_ref）, blocking{a1_pass:true,a2_pass:true}
+  - /api/v1/overview → nav:1.019, nav_chg_1d:-0.0029, mdd:-0.0069, drawdown_pct:-0.0029, active_pv{pv:PV-2026-07-B, shadow}, sleeves 权重 0.45/0.55（引擎卡 nav/mdd 桩）
+- 损坏账本用例（fixtures/corrupt）：/events 与 /overview → 503 LEDGER_CORRUPTED；/health 200 携带 ledger_corrupted:true+reconciliation_ok:false+ledger 风险项；/migration 独立文件源 200
+- 重放幂等：同账本两次重放 canonical JSON 一致+hash 一致；重复 seq 行 skipped=1 投影不变；投影落盘后重读校验 ok，篡改文件后校验 fail（reconciliation 语义）
+- 增量 tail：运行中向热文件追加 2 行 → /events 与 health 即时反映（events 49→51，replay_mode=tail），追加 promotion.executed 后 active_pv 迁移至 PV-2026-08-D live
+- SIGTERM：smoke 实例与测试子进程均 exit 0（停止接新+在途完成+8s 兜底）
+
+## 设计口径备忘（供后续批次对齐）
+- ledger_tail_ts=全部事件 max ts（乱序行不回拨 tail）；cursor=`<全局序号>:<ts>`（契约 ts+seq 的可实现化）；事件序=文件名序+行序（附录口径，不按 ts 重排）
+- 对账失败解除语义：reconciliation.failed 后出现更晚 checkpoint.created 视为修复检查点（fixture 覆盖开/闭对）；账本损坏注入合成 ledger 风险项
+- SQLite 未引入：JSON 投影+state/projection.json（tmp+rename）；四件套第④条以「账本读+重放 5s withTimeout 包裹」等价落实，接 SQLite 物化时补 busy_timeout（README+unit 文件内已注记）
+- 未知事件类型不崩溃（前向兼容，计数入 composites.unknown_types）
+- npm 依赖仅 express；fs-ext 用于真 flock LOCK_SH（读侧获锁失败短重试超时后带 warn 放行，不阻塞读）

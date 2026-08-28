@@ -1,0 +1,150 @@
+{
+ "findings": {
+  "A1_ths_panel": {
+   "rows": 235170,
+   "lag_median": 62,
+   "lag_min": 30,
+   "neg_count": 0
+  },
+  "A1_load_engine_head": "def load_engine():\n    \"\"\"加载 q4b(全量池 loader) + engine 模块, 不触发任何回测\"\"\"\n    spec = importlib.util.spec_from_file_location(\"q4b\", os.path.join(HP, \"scripts\", \"q4b_run_BC.py\"))\n    q4b = importlib.util.module_from_spec(spec)\n    sys.argv = [\"q4b_run_BC.py\", \"none\"]\n    spec.loader.exec_module(q4b)\n    import backtest_dividend_quality_iter as engine\n    return engine, q4b\n",
+  "A1_shift_timing_layer_prod.py": {
+   "shift(1)": 1,
+   "上一个月末": 1
+  },
+  "A1_shift_paper_engine_gold.py": {
+   "prev_me": 12,
+   "PIT": 2
+  },
+  "A1_shift_paper_engine.py": {
+   "prev_me": 0,
+   "signal_date": 0,
+   "prev_month": 0
+  },
+  "A2_513100_files": [],
+  "A2_qfq_vs_raw": {
+   "error": "'code'"
+  },
+  "A3_delisted_pool": {
+   "n": 361,
+   "cols": [
+    "code",
+    "name",
+    "exchange",
+    "category",
+    "delist_date",
+    "pause_date",
+    "cols_seen"
+   ]
+  },
+  "A3_coverage": {
+   "delisted_in_qfq_dir": 0,
+   "ratio": 0.0
+  },
+  "A4_trades": {
+   "rows": 8,
+   "cols": [
+    "date",
+    "code",
+    "action",
+    "shares",
+    "price",
+    "cost"
+   ]
+  },
+  "A4_buy_on_limitup": {
+   "n_buys": 8,
+   "violations": [],
+   "n_viol": 0
+  },
+  "A4_limit_board_impl_files": [
+   "a11_rules.py",
+   "r278_run.py",
+   "a8_bucket.py",
+   "r297_run.py",
+   "r263_run.py",
+   "a4b_run.py",
+   "a10_v6a_formal.py",
+   "a2_run_candidates.py"
+  ],
+  "A5_trades_fee": {
+   "buy_rows": 8,
+   "sell_rows": 0,
+   "cost_na": 0
+  },
+  "A5_fee_sample": [
+   {
+    "date": "2026-08-14",
+    "code": "600867",
+    "action": "buy",
+    "shares": "900",
+    "price": "8.57",
+    "cost": "8.57"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "2027",
+    "action": "buy",
+    "shares": "1500",
+    "price": "5.08",
+    "cost": "5.08"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "601600",
+    "action": "buy",
+    "shares": "800",
+    "price": "9.26",
+    "cost": "9.26"
+   }
+  ],
+  "A6_div_events": {
+   "rows": 48081,
+   "cols": [
+    "code",
+    "ex_date",
+    "cash_per_share",
+    "period"
+   ]
+  },
+  "A6_div_recent": {
+   "n_since_202605": 3470
+  },
+  "A6_div_x_paper_holdings": {
+   "n": 4,
+   "sample": [
+    {
+     "code": "300009",
+     "ex_date": "2026-05-29",
+     "cash_per_share": "0.25",
+     "period": "20251231"
+    },
+    {
+     "code": "600867",
+     "ex_date": "2026-06-05",
+     "cash_per_share": "0.3",
+     "period": "20251231"
+    },
+    {
+     "code": "603551",
+     "ex_date": "2026-06-09",
+     "cash_per_share": "0.55",
+     "period": "20251231"
+    },
+    {
+     "code": "601600",
+     "ex_date": "2026-08-14",
+     "cash_per_share": "0.147",
+     "period": "20251231"
+    }
+   ]
+  },
+  "RECON_state": {
+   "cash": 40393.0,
+   "n_pos": 0,
+   "nav_from_state": 40393.0
+  },
+  "RECON": {
+   "error": "[Errno 2] No such file or directory: 'results/paper-nav.csv'"
+  }
+ }
+}
