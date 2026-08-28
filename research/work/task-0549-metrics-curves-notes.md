@@ -38,3 +38,11 @@
 - portfolioDetailHandler 扩展：doc + performance 字段
 - loadPerformance(config,id)：读 performance.json（portfolio_version_id 必须匹配 :id，否则 null）+ 解析 nav_curves.csv 取 curve_source.column 列 → nav_curve[{date,nav(6dp)}]；任一文件缺失 → performance=null（加性字段不 503）
 - fixtures/good/data 增加 performance.json/nav_curves.csv(小样本含干扰列 A)/versions/vC-0.json(最小快照) → 契约测试可跑
+
+## BFF 实现完成（2026-08-29 02:20 前后）
+- src/app.js：新增 loadPerformance()（performance.json 校验 portfolio_version_id=:id + 解析 nav_curves.csv 指定列→nav_curve 6dp；任一缺失→performance=null）；portfolioDetailHandler 注入 {...doc, performance}
+- 顺带修复既有潜在 bug：ledgerDerived 门卫 return handler(...) 缺 await → async handler throw（如 404）变 unhandledRejection；改 return await handler(...) 后错误正确走错误中间件
+- fixtures/good/data 新增：performance.json(776B)/nav_curves.csv(4行含干扰列A)/versions/vC-0.json(最小快照)
+- 测试：api-contract.test.js 新增 2 条（正常契约含曲线末值=1.09 列校验/数据截至；降级三分支：文件缺失→null、id 不匹配→null、未知 id→404）
+- npm test：30/30 全绿（基线 28 + 新 2）
+- 真实 live/data 进程内冒烟：200，metrics 4 值正确，nav_curve 156 点，as_of 2026-07-31，末值 5.229213，weight_solution/status_history 原字段完整
