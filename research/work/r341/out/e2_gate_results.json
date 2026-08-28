@@ -109,7 +109,8 @@
    "PASS": false,
    "premium": "see_partD",
    "premium_abs_at_rebalance": 0.02597,
-   "PASS_premium_T2": false
+   "PASS_premium_T2": false,
+   "premium_abs_dw_weighted": 0.02077
   },
   "ALL_PASS": false
  },
@@ -171,7 +172,8 @@
    "abs_prem_mean_full": 0.02561,
    "rebalance_events": 123,
    "abs_prem_mean_at_rebalance": 0.02597,
-   "abs_prem_p95_at_rebalance": 0.10339
+   "abs_prem_p95_at_rebalance": 0.10339,
+   "absprem_dw_weighted": 0.02077
   },
   "513500": {
    "n_days": 2371,
