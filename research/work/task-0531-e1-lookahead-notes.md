@@ -52,3 +52,15 @@
 - scripts/timing_layer_prod.py L23 注释：「只允许 as_of_date 所在月上一个月末及更早的信号（timing_pos.shift(1)）」→ 生产择时层 shift(1) ✓
 - timing_v2 系列（tv2_compute_v2.py L198/208）信号构造均 shift(1)
 - HP shift(1) grep 共 8 处命中，无同月对齐命中（paper/production 层）
+- paper_engine_gold.py L9「PIT：t 月末信号 → t+1 月执行；调仓日=每月首个交易日（信号取上月末冻结）」+ L178 调仓取 prev_me（上一完整月末）→ 在役引擎无前视 ✓
+
+## 检查点 8：A 股 E2 执行报告抽查（4 份）
+- R-253 L14「月频 PIT，调仓用上月已锁值」✓；R-271 L17「S1 月末采样 → 次月日收益」✓
+- R-302 负结果归档且 PIT 缺口已披露（「PIT 补课即便完成也无法拯救 G6/G1」）✓
+- R-329「真实披露日 PIT 面板（0≤lag≤180 清洗）」✓
+- 结论：A 股 E2 执行层无同月对齐命中；本缺陷为 QDII E1 专属代码孤立事件
+
+## 检查点 9：README 日志格式确认
+- README.md 207501B；日志格式 H2 标题 + 列表条目 + → 链接；最新条目 2026-08-28 R-341
+
+## 排查完成，转入写报告模式（全部证据已落本笔记）
