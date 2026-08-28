@@ -13,8 +13,20 @@
 - Vite+React 手写最小骨架（package.json+@vitejs/plugin-react），dev proxy `/api`→8180。
 - hash 路由（#/events 等）便于无头浏览器直达；路由状态与 Tab 同步。
 - 迁移页：A-D 四段分组（C/D 无数据显示未开始占位）；A1/A2 置顶+blocking FAIL 红色「绝对阻塞」横幅；Phase C 动作带「需用户批准」标注（红线规则，前端预留）；证据以路径芯片呈现（BFF 无文件服务端点，不做跳转，避免假链接）。
-- 事件页：倒序+类型下拉过滤（走 API ?type=）+「加载更多」（next_cursor）+徽标+待决/待决超期打标；顶部轻量新鲜度条（X-Ledger-Tail-Ts+最后刷新时间）。
+- 事件页：倒序+类型下拉过滤（客户端过滤，W3 简化：数据量千行内，单请求含待决判定所需全类型上下文；API ?type= 已验证可用，W4 可切服务端过滤）+「加载更多」（next_cursor）+徽标+待决/待决超期打标；顶部轻量新鲜度条（X-Ledger-Tail-Ts+最后刷新时间）。
 - 事件类型下拉选项=硬编码 17 种（与账本口径一致），另含「全部」。
+- usePoll：visibilityState 隐藏即 clearInterval，恢复可见立即拉取+重启 interval；事件页/迁移页均 60s+手动刷新。
+- 依赖版本：react 18.3 + vite 5.4（node 22 兼容稳态）。npm install 63 包，build 1.74s 通过。
 
-## 验证记录
-（追加中）
+## 验证记录（2026-08-28）
+- `npm run build` 通过（vite 5.4.21，152.7KB js gzip 50KB，1.7s）。
+- 无头浏览器（playwright chromium，viewport 390x844）验收 **14/14 PASS**：
+  - 事件页：49 条夹具渲染、scrollWidth=390 无横滚、倒序首条 2026-06-15、过滤 promotion.requested=4 条且徽标正确、待决标 1 个（PV-2026-08-D）；
+  - 迁移页：7 卡渲染、scrollWidth=390、A1/A2 置顶 2 张、横幅「A1/A2 审计通过·当前阶段 B」、证据芯片 7 个；
+  - 占位页 scrollWidth=390；
+  - 运行时网络审计：23 请求全 GET。
+- 写控件审计：dist+src 无 `<form`/`submit`/`method=post|put|delete`；bundle 内 `.delete(` 均为 React 内部 Map/DOM 操作，显式 method 仅 `"GET"`。
+- 目检截图：布局正常，5 Tab 完整，健康条长文案 ellipsis 截断属预期。
+- 截图留档：`tools/quant-dashboard/docs/baseline/dashv6-{events,migration,overview}-390x844.png`（68/71/30KB）。
+- 遗留（后续里程碑）：事件过滤当前为客户端过滤（W3 简化），W4 切 API `?type=`；轮询 60s（规范值事件 120s/迁移 600s，任务书允许简化）；证据链接为路径芯片（BFF 无文件服务端点）；健康条为轻量版（sync_lag/投影校验待 /api/v1/health 前端接入）。
+- dev 服务器验证后已停止，环境无残留。
