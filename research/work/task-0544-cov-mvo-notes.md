@@ -41,6 +41,12 @@
 - 违例计数器 bug 已修（原把 turnover=0 误计违例）；修复后字面配置 95 违例、腿级配置 0 违例
 - 幂等验证：重跑前后 4 个 CSV md5 逐位一致；3 个 JSON 去 generated_at 后哈希一致（cov:4b2830a1, rat:2385afe3, mvo:2b50918e）
 
+## 在役零改动核验（已通过）
+- find -newermt '2026-08-28 16:30'（HP UTC）：新目录外命中 8 个文件，全部为 paper 引擎/risk patrol cron 定点节奏产物（paper-state/baseline-* 16:30:01、risk-status/risk_patrol.log 16:45:02，整分触发贯穿会话前后），非本次会话写入
+- 本次新增仅：portfolio_v1/cov_compare/（脚本+MD+results/4件）、portfolio_v1/mvo_compare/（同）及各自 __pycache__
+- crontab md5=3983e350b74051d45860502954270ab1（未触碰，留档对照基线）
+- 未修改 solver_equal_vol.py/registry/paper_engine/portfolio/events；rm 未使用
+
 ## 执行进度
 - [x] 编号确认 R-349
 - [x] HP 结构探查 + 数据口径核验（实际 5008 行/持仓段 4990 日，任务书 4491 不符已留档）
