@@ -52,8 +52,8 @@
 - [x] HP 结构探查 + 数据口径核验（实际 5008 行/持仓段 4990 日，任务书 4491 不符已留档）
 - [x] cov_compare/ 实现+运行（幂等验证通过）
 - [x] mvo_compare/ 实现+运行（幂等验证通过）
-- [ ] 在役零改动核验（find -newermt）
-- [ ] cov_compare.md + mvo_compare.md
-- [ ] 报告 R-349
-- [ ] README 更新日志
-- [ ] 完成回报
+- [x] 在役零改动核验（find -newermt：仅 cron 定点产物；crontab 基线 md5 3983e350）
+- [x] cov_compare.md + mvo_compare.md
+- [x] 报告 R-349
+- [x] README 更新日志
+- [x] 完成回报（.task-completions.jsonl + 状态 pending_review）
