@@ -53,6 +53,7 @@
 - HP 产物清单：combo_selector/{caliber.py, state_machine.py, combo_backtest.py, run_vc0_repro.py, engine/backtest_f1_drift_engine.py, data/(3 文件), results/(all_results.json, nav_curves.csv, weights_f3_f4.csv, repro_gate.json, vc0_repro_comparison.csv 21 行 True, selector/*_check.json + monthly csv)}
 - README 更新日志：portfolio_v1/README.md 追加 task-0541 一行（见下）
 
-## 6. 报告与收尾
-- 报告：shared/results/05-量化投资/R-347-PhaseB动作3-选择器化与vC0复现门.md（只从本笔记取材）
-- completions jsonl + PUT task-0541 pending_review
+## 6. 报告与收尾（2026-08-29 00:2x）✅
+- 报告：shared/results/05-量化投资/R-347-PhaseB动作3-选择器化与vC0复现门.md（本笔记取材）
+- completions jsonl 已追加；task-0541 状态已 PUT pending_review
+- README 更新日志一行已追加（HP portfolio_v1/README.md）
