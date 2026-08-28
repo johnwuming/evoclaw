@@ -1,0 +1,188 @@
+{
+ "metrics": {
+  "V1_net": {
+   "ann": 0.0972,
+   "mdd": -0.0988,
+   "calmar": 0.984,
+   "n": 139
+  },
+  "V1_cash_gross": {
+   "ann": 0.1004,
+   "mdd": -0.0983,
+   "calmar": 1.021,
+   "n": 139
+  },
+  "V1_gross": {
+   "ann": 0.0888,
+   "mdd": -0.107,
+   "calmar": 0.83,
+   "n": 139
+  },
+  "V2_net": {
+   "ann": 0.0614,
+   "mdd": -0.1227,
+   "calmar": 0.5,
+   "n": 139
+  },
+  "V3_net": {
+   "ann": 0.1386,
+   "mdd": -0.2045,
+   "calmar": 0.678,
+   "n": 139
+  },
+  "V1_net_g15": {
+   "ann": 0.098,
+   "mdd": -0.0987,
+   "calmar": 0.993,
+   "n": 139
+  },
+  "V1_net_g30": {
+   "ann": 0.0956,
+   "mdd": -0.0999,
+   "calmar": 0.957,
+   "n": 139
+  },
+  "BH_same": {
+   "ann": 0.194,
+   "mdd": -0.2528,
+   "calmar": 0.767,
+   "n": 139
+  },
+  "BH_full": {
+   "ann": 0.2043,
+   "mdd": -0.2528,
+   "calmar": 0.808,
+   "n": 159
+  },
+  "V1_avgpos": 0.488,
+  "V2_avgpos": 0.548,
+  "V3_avgpos": 0.835,
+  "turnover_ann": 1.503,
+  "cost_drag_ann": 0.00301,
+  "corr": {
+   "v1net_a13_full": 0.1678,
+   "v1net_a13_post2020": 0.3878,
+   "v1net_gold": -0.0415
+  }
+ },
+ "gates": {
+  "G1": {
+   "excess_ann": -0.0968,
+   "thr": 0.02,
+   "calmar_ratio": 1.283,
+   "thr_cal": 1.5,
+   "PASS": false
+  },
+  "G2": {
+   "net_mdd": -0.0988,
+   "thr": -0.15,
+   "PASS": true
+  },
+  "G3_vs_a13": {
+   "static_full": 0.1678,
+   "static_post2020": 0.3878,
+   "n_overlap": 113,
+   "rolling_median": 0.1229,
+   "rolling_max": 0.9384,
+   "n_windows": 108,
+   "n_win_gt_obs035": 43,
+   "n_win_gt_term045": 40,
+   "PASS": false,
+   "obs_tag": false
+  },
+  "G3_vs_gold": {
+   "corr": -0.0415,
+   "n_overlap": 138,
+   "thr": 0.15,
+   "PASS": true
+  },
+  "G4": {
+   "excess_ann_sub": -0.0703,
+   "mdd_sub": -0.0988,
+   "PASS": false,
+   "sub_span": "201502..202312"
+  },
+  "G5": {
+   "calmar_0.15": 0.993,
+   "calmar_0.30": 0.957,
+   "PASS_friction": false,
+   "PASS": false,
+   "premium": "see_partD",
+   "premium_abs_at_rebalance": 0.02597,
+   "PASS_premium_T2": false
+  },
+  "ALL_PASS": false
+ },
+ "g0_shift_vs_published": {
+  "pos_V1": {
+   "got": 0.488,
+   "ref": 0.481,
+   "dev_pp": 0.007
+  },
+  "pos_V2": {
+   "got": 0.548,
+   "ref": 0.526,
+   "dev_pp": 0.022
+  },
+  "cashann_V1": {
+   "got": 0.1004,
+   "ref": 0.1638,
+   "dev_rel": -0.3871
+  },
+  "cashann_V2": {
+   "got": 0.0659,
+   "ref": 0.1581,
+   "dev_rel": -0.5832
+  },
+  "corr_mix_a13_full": {
+   "got": 0.1678,
+   "ref": 0.125,
+   "dev": 0.0428
+  },
+  "corr_mix_a13_post": {
+   "got": 0.3878,
+   "ref": 0.346,
+   "dev": 0.0418
+  },
+  "corr_mix_gold": {
+   "got": -0.0415,
+   "ref": -0.0574,
+   "dev": 0.0159
+  },
+  "replication_dev": {
+   "513100_mix_avgpos": 0.005,
+   "513500_mix_avgpos": 0.021,
+   "513100_mix_cash": 0.0005,
+   "513500_mix_cash": 0.0004,
+   "513100_mix_a13_full": 0.0,
+   "513100_mix_a13_post": 0.0003,
+   "513100_trend_a13_full": 0.0,
+   "513100_trend_a13_post": 0.0005,
+   "513100_mix_gold": 0.0
+  }
+ },
+ "prem_summary": {
+  "513100": {
+   "n_days": 2486,
+   "prem_mean": 0.01604,
+   "prem_median": 0.00446,
+   "prem_p05": -0.0228,
+   "prem_p95": 0.08753,
+   "abs_prem_mean_full": 0.02561,
+   "rebalance_events": 123,
+   "abs_prem_mean_at_rebalance": 0.02597,
+   "abs_prem_p95_at_rebalance": 0.10339
+  },
+  "513500": {
+   "n_days": 2371,
+   "prem_mean": 0.01386,
+   "prem_median": 0.00309,
+   "prem_p05": -0.01965,
+   "prem_p95": 0.07723,
+   "abs_prem_mean_full": 0.0226,
+   "rebalance_events": 115,
+   "abs_prem_mean_at_rebalance": 0.02447,
+   "abs_prem_p95_at_rebalance": 0.07857
+  }
+ }
+}
