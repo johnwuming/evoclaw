@@ -1,0 +1,186 @@
+@@@ E1 :: 配置与求解分离|预算怎么分
+88:- 职责：给定风险预算，求解各 sleeve 权重。**与⑤解耦的铁律：portfolio_version 存「配置」（sleeve 指针/风控参数/求解器�
+316:- **口诀：「预算怎么分」进版本，「分出来的数」运行时算。**
+317:- 与 §1.2④「配置与求解分离」衔接：portfolio_version 只存结构/预算/求解器选型+参数，weight_solution 永远运行时产出并追
+446:2. **目标架构**：七层标准分层（数据→因子→回测→组合构建→组合→执行→风控，横切 Iteration Ledger），全标准术语
+@@@END
+@@@ E2 :: 注册式 solver
+93:- 可插拔点：**新求解器** = 注册式 solver（equal_vol / risk_parity / ERC / 未来 HRP），portfolio_version 里只存 solver_id+params。P2/P3 �
+@@@END
+@@@ E6 :: HRP
+93:- 可插拔点：**新求解器** = 注册式 solver（equal_vol / risk_parity / ERC / 未来 HRP），portfolio_version 里只存 solver_id+params。P2/P3 �
+@@@END
+@@@ E8 :: 0\.85|0\.75
+85:- 可插拔点：**第二裁判**（qlib qrun 双轨，R-334 表②）= 独立回测实现注册进交叉验证清单，双窗 e2e diff 达阈值前不替换
+200:| G-S5 | 与在役组合持仓相关性（holding-based） | ≤ 0.70 | 同源信号 >0.75 告警；危机期趋近 1 = 分散失效，重评 |
+228:| 运行时持仓相关性 | 滚动 20 日两腿相关性 >0.85 且上升 → 防御性降仓；>0.90 → 提级审查（定义出处 §7.5.4，本表只引
+315:- **必须升版本（走完整流水线 + 成绩单）**：①换求解器（等波动率 → 风险预算/ERC）；②改风险预算分配（如 A腿 45%
+345:- **0.75 = 入池筛查阈值**（平时测，衔接 G-S5 与 R-335 两腿相关性上限）。
+346:- **运行时监控**：滚动 20 日持仓相关性，任意两腿 > 0.85 且呈上升趋势 → 自动触发防御性降仓（即使未到 15% 熔断线�
+347:- 与 §7.1 RET-4 衔接：0.85 上升趋势 = 先发防御动作；0.90 = 提级审查。分级动作不等熔断。
+@@@END
+@@@ E9 :: 分级闸门|4 维漂移
+29:| 只有归档、无退役规则 | 客观退役规则 + 影子 4 维漂移监控 | 评审缺点5/6 |
+61:│    回撤分级闸门 · sleeve级ddc · 断路器 · 退役 · 再平衡协调协议     │
+102:- promotion 状态机（v1.1 补反向迁移）：正向串行晋升 `candidate → backtested → gated → shadow → approved → paper → canary → li
+115:  - 组合级：回撤分级闸门（<5% 正常 / 5–10% 提级审查 / 10–15% 降仓×0.5 / >15% 熔断）+ 波动率目标化（参数位：target_vol 
+159:risk.action            # 断路器/分级闸门/ddc 触发（含触发值与阈值）
+210:| G-P4 | 4 维漂移初查（表见 7.2） | 无一项超带 |
+216:| G-L1 | 4 维漂移全部在带内 | 连续 ≥ 2 个调仓周期（表见 7.2）。「调仓周期」机器可校验定义：月频策略 = 1 个自然月
+225:| 回撤分级闸门 | <5% 正常 / 5–10% 提级审查 / 10–15% 降仓×0.5 / >15% 熔断停新仓 | 组合级 |
+265:| 组合回撤 | 进入 10–15% 带 | 降仓 ×0.5（分级闸门联动） |
+289:| RET-1 | 组合级回撤超历史最大回撤 1.5 倍 | 现役参照 mdd −6.80% → 触发线 −10.2%（与分级闸门 10–15% 降仓带衔接） | `r
+296:### 7.2 影子 4 维漂移监控表（shadow/live 通用）
+360:  3. 安全兜底三件套（§6）设计定稿，断路器/分级闸门/退役阈值经用户确认
+374:  5. 影子 4 维漂移监控（§7.2）在影子侧启用，paper 实测滑点回填成本模型（§5.1 A5 校准）
+@@@END
+@@@ E10 :: 等波动率
+19:| v1.2 | 2026-08-28 | R-339 外部核验比对决策输入（task-0519）+ 用户 2026-08-28 09:38/10:00 两轮裁决 | ① A1 portfolio_version schema 扩�
+31:| 组合权重靠口径拍板（F6/F7 二选一） | 组合构建层（可插拔求解器：等波动率→风险预算/ERC，不用 MVO） | 23:39 增补建
+51:│    给定风险预算求解 sleeve 权重：等波动率 → 风险预算/ERC           │
+89:- 演进分阶段：第一阶段=等波动率（equal-volatility，两三腿时最稳健）；第二阶段=风险预算/ERC（协方差用 Ledoit-Wolf 收缩
+315:- **必须升版本（走完整流水线 + 成绩单）**：①换求解器（等波动率 → 风险预算/ERC）；②改风险预算分配（如 A腿 45%
+371:  2. 组合构建层（§1.2④）落地：等波动率求解器 v1，输出 weight_solution（追加进 event_log）
+376:  7. 带约束 MVO 对比跑批（v1.2 设计小节，用户 2026-08-28 10:00 裁决）：约束=个股权重上限 5% + 行业偏离 ≤5% + 换手 ≤20%�
+446:2. **目标架构**：七层标准分层（数据→因子→回测→组合构建→组合→执行→风控，横切 Iteration Ledger），全标准术语
+511:| B5 | 多资产整合 | R-337 国债 ETF / R-330 QDII 接入；等波动率→风险预算→ERC 三阶段 | backlog 待拍板 | 每新资产先过 Data Ad
+@@@END
+@@@ E11 :: 冷却期
+117:  - 再平衡协调协议：sleeve 内部重大调仓后，组合层进入**冷却期（1 个完整调仓周期）**，期间组合级不因该 sleeve 风�
+330:2. **第二段·组合级裁决**：无熔断时，组合级指令优先于单腿级。典型：组合加仓 vs 单腿减仓 → 按组合级执行（加仓
+336:| 反向（组合加 / 单腿减，无熔断） | 组合级优先（加，但进冷却期） |
+@@@END
+@@@ E12 :: holding-based|RET-4
+200:| G-S5 | 与在役组合持仓相关性（holding-based） | ≤ 0.70 | 同源信号 >0.75 告警；危机期趋近 1 = 分散失效，重评 |
+292:| RET-4 | 相关性失效 | 危机窗（组合回撤>5% 期间）holding corr >0.90 | 分散失效 flag → 提级审查 |
+347:- 与 §7.1 RET-4 衔接：0.85 上升趋势 = 先发防御动作；0.90 = 提级审查。分级动作不等熔断。
+@@@END
+@@@ E14 :: solver_id
+93:- 可插拔点：**新求解器** = 注册式 solver（equal_vol / risk_parity / ERC / 未来 HRP），portfolio_version 里只存 solver_id+params。P2/P3 �
+100:  - schema 扩充（v1.2，A1）：`sleeves{}` 每条组件指针附 `code_hash + data_cut`（model manifest 最小集）；新增 `capital_policy{gross_lim
+@@@END
+@@@ E15 :: 双触发|成本闸门
+319:### 7.5.2 运行时重算双触发 + 交易成本闸门
+321:- **重算触发显式化（双触发）**：默认「定时（每周一开盘前）+ 偏离触发（某腿风险贡献偏离目标 > 阈值）」；任一�
+322:- **再平衡过交易成本闸门**：预期风险下降收益 > 换手 × 双边成本 才执行。
+@@@END
+@@@ E16 :: per_sleeve_risk_cap|断路器
+18:| v1.1 | 2026-08-28 | 用户验收意见（P0×2 / P1×3 / 小修×3） | ① P0-1 裁决顺序统一三段式：熔断硬上限 > 组合级 > 单腿级（§
+30:| 零常驻=零兜底 | 断路器 + checkpoint + 仓位对账三件套 | 评审缺点7 |
+61:│    回撤分级闸门 · sleeve级ddc · 断路器 · 退役 · 再平衡协调协议     │
+96:- 职责：portfolio_version 一等对象（继承 R-335 vC-x.y 全部设计，重命名）：`{portfolio_version_id, sleeves{}, risk_control{drawdown_gates,
+97:  - **层级纪律（v1.1）**：`risk_control` 只存**组合级**约束；单腿级风控参数（含 ddc）下沉到各 sleeve 自己的版本对象；`pe
+102:- promotion 状态机（v1.1 补反向迁移）：正向串行晋升 `candidate → backtested → gated → shadow → approved → paper → canary → li
+115:  - 组合级：回撤分级闸门（<5% 正常 / 5–10% 提级审查 / 10–15% 降仓×0.5 / >15% 熔断）+ 波动率目标化（参数位：target_vol 
+116:  - sleeve 级：ddc（现 ddc_th20_rd50_rc5，受控净值回撤 ≤−20% → ×0.5，回补 −5%，T 判定 T+1 生效）保留不动，参数下沉存 
+159:risk.action            # 断路器/分级闸门/ddc 触发（含触发值与阈值）
+260:### 6.1 断路器（circuit_breaker）
+270:恢复规则：断路器动作只能人工复位（promotion.approved 同级人工门），自动恢复禁止。
+360:  3. 安全兜底三件套（§6）设计定稿，断路器/分级闸门/退役阈值经用户确认
+388:  4. 断路器（§6.1）+ checkpoint（§6.2）接入执行层
+389:- **退出条件**：切换后首个调仓日三方对账全绿；断路器/checkpoint 干跑验证通过；重放重建状态 vs 旧 JSON 状态 diff=0
+412:| C 治理切换 | 事件溯源切换+paper 指针语义+对账+断路器 | **指针切换需停机** | 分钟级 | **必须（=改 active）** | 指针回�
+425:| P0-3 安全兜底（断路器+checkpoint+仓位对账） | **采纳** | §6 三件套，Phase A 定稿、Phase C 接入 | 评审缺点 7；R-333 已发现
+441:| P2-2 容器化+双机冗余 | **缓/部分拒** | 降级为"配置备份+可重建性（IaC 文档）+ checkpoint/断路器兜底"（§6）；真冗余列
+449:5. **自动化绝不越过人工门**：Phase C 指针切换（用户批准）+ 断路器人工复位 + 退役裁决 + 各毕业门用户批准环节，与�
+488:| risk_control.sleeve_ddc（v1.0 旧字段名） | per_sleeve_risk_cap（可选） | 组合层对单腿的风控上限封顶（只封顶不下指令）；�
+@@@END
+@@@ E17 :: retirement.triggered|退役≠删除
+160:retirement.triggered   # 退役规则触发（含规则编号与实测值）
+289:| RET-1 | 组合级回撤超历史最大回撤 1.5 倍 | 现役参照 mdd −6.80% → 触发线 −10.2%（与分级闸门 10–15% 降仓带衔接） | `r
+294:退役≠删除：`retirement.executed` 后该 sleeve 移出 portfolio_version、生成新版本走流水线，旧版本与全部事件留档可回溯。
+433:| P1-3 退役规则 | **采纳** | §7.1 RET-1..4，Phase D 从 dry-run 转正式 | 只有归档无退役=死策略占位；自动触发+人工处置，与"
+@@@END
+@@@ E18 :: G-S5|G-L2|G-L3|绝对阻塞
+19:| v1.2 | 2026-08-28 | R-339 外部核验比对决策输入（task-0519）+ 用户 2026-08-28 09:38/10:00 两轮裁决 | ① A1 portfolio_version schema 扩�
+101:  - data_cut 硬断言（v1.2，A1）：**data_cut ≤ min(所有输入数据源最大时间戳)**，校验器强制执行，违反即 `config.invalid`（�
+200:| G-S5 | 与在役组合持仓相关性（holding-based） | ≤ 0.70 | 同源信号 >0.75 告警；危机期趋近 1 = 分散失效，重评 |
+217:| G-L2 | 成交/调仓执行率 | ≥ 90% |
+218:| G-L3 | 实测滑点 vs 假设滑点（R-333 记账 0bp vs 现实） | ≤ 假设带 11.5bp/边 × 1.5 |
+239:| A1 | 前视偏差（PIT 对齐逐因子核查） | R-328 已立 NOTICE_DATE 细则（严禁报告期直 join，000001 滞后 371 天反例）；R-317 回�
+240:| A2 | 复权口径 | R-330 F4 冻结 qfq 唯一口径；513100 拆分未复权假 MDD −85% 为已知反例 | 全标的复权因子抽样对账（含 ETF 
+243:| A5 | 滑点/冲击成本模型 | 现状=记账滑点恒 0（R-333 实证 dev_bp≡0）+假设 13bp/边（R-304 v2 冻结）vs 实测三情景 4.0/11.5/15.
+345:- **0.75 = 入池筛查阈值**（平时测，衔接 G-S5 与 R-335 两腿相关性上限）。
+358:  1. 回测正确性审计六项（§5.1 A1–A6），产出《回测审计报告》，逐项 PASS/FAIL+证据；A1/A2 任一 FAIL=绝对阻塞，进入"审
+424:| P0-2 回测引擎正确性审计 | **采纳（第一优先）** | §5 审计方案 A1–A6，Phase A 首位；A1/A2 FAIL=绝对阻塞 | 评审最重判断
+447:3. **P0 审计先行是迁移地基**：回测正确性审计（A1–A6，A1/A2 FAIL=绝对阻塞）、门禁量化（§4 全数字）、安全兜底三件�
+511:| B5 | 多资产整合 | R-337 国债 ETF / R-330 QDII 接入；等波动率→风险预算→ERC 三阶段 | backlog 待拍板 | 每新资产先过 Data Ad
+@@@END
+@@@ E20 :: n_trials_ledger|试验账本
+136:| 历史追溯 | 靠 6 种散装留痕（decision-log/ledger/history/switch_log/n_trials_ledger/cycle-report + engines.audit） | 重放投影即完整历�
+@@@END
+@@@ E21 :: promotion.rejected|md5 锚
+154:promotion.rejected     # 用户拒绝（附原因）
+164:backtest.completed     # 回测完成（含 md5 锚）
+@@@END
+@@@ E22 :: append-only
+12:**先把系统当作白纸，用机构标准术语画出七层架构（数据→因子→回测→组合构建→组合→执行→风控，横切事件账�
+26:| 状态机隐式存于可变 JSON（composites/engines/registry） | append-only event_log，JSON 降级为重放投影缓存 | 评审缺点2「未做事件
+63:        横切：Iteration Ledger 迭代账本（append-only event_log）
+102:- promotion 状态机（v1.1 补反向迁移）：正向串行晋升 `candidate → backtested → gated → shadow → approved → paper → canary → li
+121:- append-only JSONL 事件账本（第 3 节）：每层每次状态变更追加事件；composites.json/engines.json/registry 全部降级为「重放投�
+135:| 状态载体 | registry / engines.json / composites.json 三处可变 JSON，改了就没了原值 | append-only `events/iteration-ledger.jsonl`，一事�
+156:promotion.downgraded   # 反向降级（v1.1：live→shadow 漂移超标自动降级 / live→gated 严重问题回滚重审；含触发规则与实测值�
+431:| P1-1 状态机显式化+append-only 事件日志 | **采纳** | §3 Iteration Ledger（事件枚举+重放伪代码+flock/fsync/月滚动），Phase C 切
+@@@END
+@@@ E23 :: checkpoint.positions|三方对账
+33:保留不破：组合作为一等版本对象、一切变更走同一条流水线、成绩单=回测成绩+逐条门禁原因、三方对账、双层门禁�
+165:reconciliation.failed  # 三方对账不一致（含差异明细）
+276:### 6.3 仓位三方对账（three_way_reconciliation）
+387:  3. 三方对账（§6.3）上线，paper 一致性徽标升级为对账前端呈现
+389:- **退出条件**：切换后首个调仓日三方对账全绿；断路器/checkpoint 干跑验证通过；重放重建状态 vs 旧 JSON 状态 diff=0
+445:1. **破的边界清晰**：破=私有术语体系、隐式可变 JSON 状态机、未量化的组合/晋升门禁、打补丁式回测脚本、无退役机
+455:- R-335 组合版本统一迭代架构方案（task-0513）：vC-x.y 组合版本对象、六种迭代类型、g1-g6 组件门禁、M1–M5 迁移、三方�
+492:| 三方对账 / 一致性徽标 | Three-way Reconciliation | PV↔registry↔engines 一致性核验 |
+@@@END
+@@@ E24 :: 幂等|sha256
+180:        state.apply(ev)                  # 幂等 apply：version.created 建对象、
+183:# 校验：每次重放后对投影做 sha256，与缓存文件头记录比对，不一致即 reconciliation.failed
+385:  1. 事件溯源切换：registry/engines/composites 写路径改为"追加事件 + 重放投影"，写前 flock、写后 fsync、投影文件头带 sha256
+@@@END
+@@@ E25 :: 四口径
+42:│    PIT对齐·qfq复权·退市股·涨跌停掩码·成本模型 —— 四口径唯一出处    │
+70:- 职责：行情/财务/公告数据的唯一权威出口。四口径在此冻结并强制下发：PIT 对齐（NOTICE_DATE 细则，R-328）、qfq 前复�
+73:- 可插拔点：**新资产类别**（可转债 R-332、利率债 ETF R-331、QDII R-330）= 新增一个 data adapter，注册进四口径校验清单即�
+511:| B5 | 多资产整合 | R-337 国债 ETF / R-330 QDII 接入；等波动率→风险预算→ERC 三阶段 | backlog 待拍板 | 每新资产先过 Data Ad
+@@@END
+@@@ E26 :: Phase A
+233:评审原话：**「一个严格的门禁如果建立在错误的回测上，越严格越危险。」** 故本方案把回测审计放在迁移路径 Phase 
+354:### Phase A 审计地基（P0 三件套 + GLOSSARY，纯只读+文档）
+368:- **进入条件**：Phase A 审计通过（backtest_report 契约可打"审计后可信"标记）
+417:裁决口径：**P0 全部采纳并前置到 Phase A（上线前必做）**；P1 全部采纳（半年内）；P2 部分采纳/缓（演进方向）。每�
+419:### P0（上线前必做——全部采纳，全部前置 Phase A）
+423:| P0-1 门禁量化：每层毕业硬阈值 | **采纳** | §4 阈值表（G-S1..6 / G-P1..4 / G-L1..4 + 组合级风险闸门），Phase A 落成 gate spec
+424:| P0-2 回测引擎正确性审计 | **采纳（第一优先）** | §5 审计方案 A1–A6，Phase A 首位；A1/A2 FAIL=绝对阻塞 | 评审最重判断
+425:| P0-3 安全兜底（断路器+checkpoint+仓位对账） | **采纳** | §6 三件套，Phase A 定稿、Phase C 接入 | 评审缺点 7；R-333 已发现
+434:| P1-4 术语表+通用命名 | **采纳（提前到 Phase A）** | §2 + 附录 A GLOSSARY 全文 | 消除个人命名锁定成本最低见效最快；与�
+447:3. **P0 审计先行是迁移地基**：回测正确性审计（A1–A6，A1/A2 FAIL=绝对阻塞）、门禁量化（§4 全数字）、安全兜底三件�
+@@@END
+@@@ E27 :: 演进方向|留 P2
+19:| v1.2 | 2026-08-28 | R-339 外部核验比对决策输入（task-0519）+ 用户 2026-08-28 09:38/10:00 两轮裁决 | ① A1 portfolio_version schema 扩�
+93:- 可插拔点：**新求解器** = 注册式 solver（equal_vol / risk_parity / ERC / 未来 HRP），portfolio_version 里只存 solver_id+params。P2/P3 �
+100:  - schema 扩充（v1.2，A1）：`sleeves{}` 每条组件指针附 `code_hash + data_cut`（model manifest 最小集）；新增 `capital_policy{gross_lim
+417:裁决口径：**P0 全部采纳并前置到 Phase A（上线前必做）**；P1 全部采纳（半年内）；P2 部分采纳/缓（演进方向）。每�
+436:### P2（演进方向——部分采纳/缓）
+@@@END
+@@@ E28 :: canary
+18:| v1.1 | 2026-08-28 | 用户验收意见（P0×2 / P1×3 / 小修×3） | ① P0-1 裁决顺序统一三段式：熔断硬上限 > 组合级 > 单腿级（§
+19:| v1.2 | 2026-08-28 | R-339 外部核验比对决策输入（task-0519）+ 用户 2026-08-28 09:38/10:00 两轮裁决 | ① A1 portfolio_version schema 扩�
+27:| 门禁靠口径描述、无逐层数字 | 分层毕业阈值表（研究→影子→paper→canary，全数字） | 评审缺点3「未量化=主观放行�
+58:│    paper / canary / live · rebalance · checkpoint · 撮合假设      │
+102:- promotion 状态机（v1.1 补反向迁移）：正向串行晋升 `candidate → backtested → gated → shadow → approved → paper → canary → li
+108:- 职责：paper → canary → live **串行三段**执行（模拟盘 → 小资金实盘 → 全额；canary 为 live 前必经段，非二选一）、�
+111:- 可插拔点：**paper→live 切换** = 本层唯一人工门（用户批准）；canary 档 = 小资金实盘灰度（串行第二段），当前未启�
+152:promotion.requested    # 晋升申请（shadow/paper/canary/live）
+212:### 4.3 paper → canary → live（执行毕业，串行三段式）
+305:毕业规则回连第 4 节：shadow→paper 看 G-P1..P4，paper→canary→live 看 G-L1..L4（串行三段式；4 维全部在带内连续 ≥2 个调仓
+484:| canary（预留） | Canary Stage | 串行晋升第二段：小资金实盘灰度（paper→canary→live 串行必经，非二选一；当前未启用）
+@@@END
+@@@ E29 :: RET-3|季度
+291:| RET-3 | 组件因子 IC 衰减 | rolling IC 连续 3 月 <0 或 ICIR 连续 3 月为负 | 组件级退役（sleeve 内换 signal，不动组合） |
+@@@END
+@@@ E30 :: promotion.downgraded|live→shadow
+18:| v1.1 | 2026-08-28 | 用户验收意见（P0×2 / P1×3 / 小修×3） | ① P0-1 裁决顺序统一三段式：熔断硬上限 > 组合级 > 单腿级（§
+102:- promotion 状态机（v1.1 补反向迁移）：正向串行晋升 `candidate → backtested → gated → shadow → approved → paper → canary → li
+156:promotion.downgraded   # 反向降级（v1.1：live→shadow 漂移超标自动降级 / live→gated 严重问题回滚重审；含触发规则与实测值�
+@@@END
