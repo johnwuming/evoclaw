@@ -46,3 +46,32 @@
 - 测试：api-contract.test.js 新增 2 条（正常契约含曲线末值=1.09 列校验/数据截至；降级三分支：文件缺失→null、id 不匹配→null、未知 id→404）
 - npm test：30/30 全绿（基线 28 + 新 2）
 - 真实 live/data 进程内冒烟：200，metrics 4 值正确，nav_curve 156 点，as_of 2026-07-31，末值 5.229213，weight_solution/status_history 原字段完整
+
+## 前端实现（Version.jsx / styles.css）
+- Version.jsx：新增 NavChart（轻量 SVG，viewBox 358x132 自适应，无新依赖）+ PerformanceSection（四指标卡 grid 2x2 + 曲线 + 数据截至行 + 口径行）；Detail 内 performance=null 整区不渲染
+- styles.css：追加 .perf-* 样式块（panel-2 卡片、tabular-nums、up绿/down橙、曲线图容器）
+- vite build 通过（172.94KB gzip 55.93KB，无新依赖）
+
+## 无头验收（2026-08-29 02:23，playwright-core + chromium-1208，脚本 /tmp/task-0549/verify-w45.mjs）
+- 15/15 PASS：scrollWidth=390 收起/展开均无横滚；四指标卡真实值 13.57%/9.47%/1.43/-9.08%；SVG 曲线 156 点（1M+155L）宽 340≤390；数据截至 2026-07-31 + 区间/156 个月/月频；口径行非空
+- 截图：docs/baseline/dashv6-version-390x844.png（视口基线，覆盖更新）+ /tmp/task-0549/dashv6-version-390x844-full.png（整页留档）
+- 视觉复核 2 轮：峰值标签右边距 4.5px 偏紧 → PX 4→9 加白后复验通过；"急涨急跌"段为真实行情非渲染缺陷
+
+## 环境事实（后续运维要记住的）
+- vite preview（sirv dev:false）启动时扫目录清单：重建后新哈希资产 404，须重启 preview 进程；本次已重启（pid 2928354，setsid nohup）
+- pkill -f "vite preview" 会自杀（bash -c 命令行匹配模式），改用精确 pid 或 pgrep 后 kill
+- 生产 BFF=quant-bff.service（8180，LEDGER_DIR=live）已 restart 加载新代码，performance 字段线上生效
+- playwright-core 引用方式：import mod from '...playwright-core/index.js'; const { chromium } = mod（该 npx 缓存版本无具名导出）
+
+## 最终状态
+- BFF npm test 30/30（基线 28+2）；build 通过；线上 8180 /portfolios/vC-0 返回 performance（156 点，末值 5.229213）
+- 未做（可选项，预算控制）：总览页一行年化/夏普摘要——需扩 /overview 契约+测试+重建，建议作为后续小任务（overviewHandler 读 performance.json metrics 即可）
+- 改动文件清单：
+  - tools/quant-bff/src/app.js（loadPerformance+detail 注入+await 修复）
+  - tools/quant-bff/test/api-contract.test.js（+2 测试）
+  - tools/quant-bff/fixtures/good/data/{performance.json,nav_curves.csv,versions/vC-0.json}
+  - tools/quant-bff/live/data/{performance.json,nav_curves.csv}（HP 只读拷贝）
+  - tools/quant-bff/live/export/hp_export_metrics.py（新，HP 导出脚本）
+  - tools/quant-bff/README.md（更新日志一行）
+  - tools/quant-dashboard/src/pages/Version.jsx、src/styles.css
+  - docs/baseline/dashv6-version-390x844.png（基线刷新）
