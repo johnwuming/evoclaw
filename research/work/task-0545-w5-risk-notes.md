@@ -16,3 +16,6 @@
 - 断路器数据源决策：账本 risk.action 事件（replay.js composites.risk_actions{ts,target,type,action,dim,in_band,...}）为断路器事实源（§1.2⑦ risk.* 事件进 event_log）；fixtures/good 触发后 reset→not_triggered；live 账本无 circuit_breaker 事件→未触发，与任务书一致
 - fixtures/good 账本派生 pending_risks（risk 相关过滤后）= 2 条 drift_over_band（sleeve:gold_momentum#D3、sleeve:qdii_trend#D2，均 consecutive 2）
 - 部署现状：8180=node src/server.js LEDGER_DIR=live（W4 部署）；4173=vite preview（dist）；18180=/tmp/qbff-tail-fixture 测试遗留（不动）；headless 工具=pip playwright 1.58.0（chromium_headless_shell-1208 已缓存）
+- [2026-08-29 00:52] BFF 实装完成：config.js+reconDir/driftDir；新 src/risk-gates.js（latestDatedFile 取最新日期文件/driftInBand 打标 in_band→true,over_band→false,insufficient_*→null/circuitBreakerState=账本最后一条 circuit_breaker 事件/三视角摘要/pending=影子派生+账本三类合并去重）；app.js 挂 /api/v1/risk/gates（ledgerDerived 门卫）
+- fixtures：good/{drift,recon}/ 各 2 文件（08-27 最新 D4 超带连超2 + 08-26 旧文件测选取）；测试新 test/api-risk-gates.test.js（7 用例：契约/打标/三视角/pending 合并/缺目录 null 源/覆写注入/单元）；api-contract 改用 /risk/drift 作 404 例；api-degrade 加 /risk/gates→503
+- [2026-08-29 00:53] npm test 28/28 全绿（基线20+降级新增1+新契约7）；live 冒烟：run_date=2026-08-28，D1 insufficient_overlap(null)/D2 insufficient_obs(null)/D3 in_band(true)/D4 in_band(true)，cb not_triggered，recon v1:11.485bp 带内 v2 已知口径差 v3 ok，pending 0
