@@ -4,3 +4,10 @@
 - quant-bff.service 存在（1433B），LEDGER_DIR 当前=fixtures/good，需改 live/events
 - live/events/ 含 iteration-ledger-2026-08.jsonl
 - vite.config.js 无 base；src/api.js 4469B，fetchEvents 用 new URL('/api/v1/events', origin)
+
+## 1. BFF 服务化（完成）
+- 障碍：8180 被旧 dev 实例占（pid 2887844，LEDGER_DIR=live，00:53 由前一 agent 会话 bash 启动）→ kill 后 systemd 接管
+- 关键发现：server 代码把 LEDGER_DIR 当作含 events/ 子目录的账本根（scandir LEDGER_DIR/events）→ 正确值=/root/.../quant-bff/live（非 live/events）；fixtures/good 结构印证（内含 events/）
+- 安装结果：/etc/systemd/system/quant-bff.service，LEDGER_DIR=/root/.openclaw/workspace/tools/quant-bff/live，enabled+active
+- 验证：GET /api/v1/health → status=ok ready=true ledger_tail_ts=2026-08-28T15:50:22+00:00 replay_events=2（真实 vC-0 账本，非夹具；夹具 tail=2026-08-28T03:00:00Z/pending_risks=3 可区分）
+- 18180 端口另有一个 /tmp/qbff-tail-fixture 测试实例（pid 2821800），与本任务无关，未动
