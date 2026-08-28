@@ -1,0 +1,19 @@
+{
+ "fetch": {
+  "sh513100_qfq": "rows=3231 2013-05-15..2026-08-27",
+  "sh513500_qfq": "rows=3067 2014-01-15..2026-08-27",
+  "sh513100_sina": "rows=3179 2013-07-31..2026-08-27",
+  "sh513500_sina": "rows=3067 2014-01-15..2026-08-27",
+  "mmf_000198": "FAIL fund_money_fund_info_em() got an unexpected keyword argument 'fund'",
+  "513100_nav": "rows=3202 2013-04-24 00:00:00..2026-08-25 00:00:00",
+  "513500_nav": "rows=2998 2013-12-04 00:00:00..2026-08-25 00:00:00"
+ },
+ "sentinel": {
+  "sh513100_qfq_gt15pct": 0,
+  "sh513100_qfq_maxdaily": 0.1119,
+  "sh513100_sina_gt15pct": 1,
+  "sh513500_qfq_gt15pct": 0,
+  "sh513500_qfq_maxdaily": 0.1129,
+  "sh513500_sina_gt15pct": 1
+ }
+}

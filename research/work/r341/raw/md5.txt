@@ -1,0 +1,8 @@
+{
+ "513100_official_nav.csv": "6efc61d84107",
+ "513500_official_nav.csv": "1d02eea5b2ff",
+ "sh513100_sina_raw.csv": "42aa14d73139",
+ "sh513100_tx_qfq.csv": "c8d8f62ff38b",
+ "sh513500_sina_raw.csv": "55c2dddf762a",
+ "sh513500_tx_qfq.csv": "ea72e83cb011"
+}
