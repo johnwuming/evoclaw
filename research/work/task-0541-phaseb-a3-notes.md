@@ -18,7 +18,15 @@
 - F1 口径（R-317 L13 + task-0492 notes §3）：w_A=0.5/w_gold=0.5 月度再平衡；窗口 2013-08..2026-07 n=156；成本 0.13%×(|Δw_A|+|Δw_gold|) 双腿，首月部署 0.13%×1.0；现金腿 0 利息；月内漂移不建模
 - dd 状态机：task-0494（th20_rd50 默认参数，源码 :533-540 语义）；episode 2015-06-29 REDUCE → 2020-06-19 RESTORE（60 REDUCE 月）
 
-## 3. HP portfolio_v1 上游交付（task-0540，已盘点）
+### 5.3 选择器实现与本地干跑（2026-08-29 00:0x）✅
+- 代码：work/task-0541/combo_selector/{caliber.py(口径插件), state_machine.py(dd状态机+PIT+四锚点), combo_backtest.py(选择器入口 F1/F6/F7a/F7b), run_vc0_repro.py(复现门 G1-G5), engine/backtest_f1_drift_engine.py(task-0492 字节级副本, md5=ed95aa7603fdefec7110959bbd3a77c9 核验一致)}
+- vC-0 口径实现：vC-0.json → gross=1.0 双 sleeve 等权分割 0.5/0.5 + ddc 从 equity_sleeve.risk_control.ddc + cost 从 gold.frozen_form.cost_per_absdw=0.0013 + F7a/b 降仓权重由规则推导后断言==在役常量
+- 本地干跑（VPS, pandas 3.0.5, 数据=task-0492/data 同 md5 副本）：**OVERALL PASS，G1-G5 全过**
+  - G1 两输入 md5 对齐；G2 四变体 in_service==vc0 等价；G3 重跑 all_results.json=915e446388fc8e63c281378c3dd66580 + nav_curves.csv=9704a300… + monthly_returns.csv=0113f40d… **三件逐位对齐**；G4 四锚点+episode(2015-06-29 REDUCE→2020-06-19 RESTORE)+60 REDUCE 月全过；G5 四变体指标==在役原脚本在案值（f7_results.json md5=c8866a2d…）
+- 对照表：combo_selector/results/vc0_repro_comparison.csv（18 行逐项）+ repro_gate.json
+
+## 6. HP 权威跑与零改动核验
+（进行中）
 - 目录：~/quant-evolve/portfolio_v1/{portfolio_version.py, solver_equal_vol.py, event_ledger.py, trading_calendar.py, build_vc0.py, run_solver_demo.py, tests/, portfolio/}
 - vC-0 快照：portfolio/versions/vC-0.json（另有 .trash-dev/ 副本=开发残留）
 - 待细读：vC-0.json 字段、portfolio_version.py 接口
