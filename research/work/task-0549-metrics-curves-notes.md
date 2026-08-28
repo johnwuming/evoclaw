@@ -28,3 +28,13 @@
 - bugfix 1 次：基期 1.0 前插后误加首月特殊项导致 157 条收益，修复为纯环比 156 条
 - 本地验证输出: ann=0.135706 vol=0.094703 sharpe=1.433 mdd=-0.090794（与口径B预演一致）
 - 输出默认 /tmp/performance.json（HP results/ 不写盘，保持只读）
+
+## HP 正式执行与数据落位（2026-08-29 02:11）
+- HP quant python 执行 /tmp/hp_export_metrics.py：OK md5=9704a300… n=156 ann=0.135702 vol=0.094679 sharpe=1.4333 mdd=-0.090794
+- scp 落位：live/data/performance.json(1518B) + live/data/nav_curves.csv(23721B, md5 9704a300… 与 HP 源一致)
+- live/data 现有 engines.json(597B, 00:24 别任务新增) migration/overview/portfolios/versions 原样未动
+
+## BFF 设计（对齐既有数据文件驱动模式）
+- portfolioDetailHandler 扩展：doc + performance 字段
+- loadPerformance(config,id)：读 performance.json（portfolio_version_id 必须匹配 :id，否则 null）+ 解析 nav_curves.csv 取 curve_source.column 列 → nav_curve[{date,nav(6dp)}]；任一文件缺失 → performance=null（加性字段不 503）
+- fixtures/good/data 增加 performance.json/nav_curves.csv(小样本含干扰列 A)/versions/vC-0.json(最小快照) → 契约测试可跑
