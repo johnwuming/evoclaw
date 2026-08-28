@@ -36,3 +36,23 @@
 - R-341 已被并行任务占用（R-341-QDII海外趋势轮动E2执行判门.md 已出现）→ R-342 grep=0 清白 → 报告定名 R-342
 - README 落点: /root/.openclaw/workspace/shared/results/README.md（+1 行）
 - 前 ls -l 基线已存（15:10 首次 exec 输出，05-量化投资/ 目录，最大 R-340+并行 R-341）
+
+## grep 自证记录（2026-08-28，验收执行）
+命令: for kw in <锚词>; do grep -c "$kw" R-336原文; done（R=报告 / S=R-336 原文）
+| 锚词 | R-336 原文命中 | 报告引用 |
+|---|---|---|
+| data_cut ≤ min(所有输入数据源最大时间戳) | 2 | 2 |
+| candidate → backtested → gated → shadow → approved → paper → canary → live | 1 | 1 |
+| weight_solution(portfolio_version_id, solve_date | 1 | 1 |
+| paper_entered_at | 5 | 2 |
+| promotion.downgraded | 3 | 3 |
+| 915e446388 | 3 | 1 |
+| 禁止回填含未来信息的统计量 | 3 | 1 |
+| code_hash + data_cut | 1 | 1 |
+≥5 处章节引用锚词双向命中：达标（8 处）。报告章节引用标注：§1.2①②③④⑤⑥⑦、§3.1/§3.2/§3.3、§4.3/§4.4、§6.3、§7.2、§7.5.3/§7.5.4、§8 均在报告正文出现。
+
+## 结构验收
+- 五章齐全（grep "^## 第" = 5）
+- mermaid 代码块 = 4（≥3：总览数据流/月频链路/状态机/前端信息架构）
+- API 契约表 = 1（10 endpoints）
+- 报告 30389B（≥15KB）
