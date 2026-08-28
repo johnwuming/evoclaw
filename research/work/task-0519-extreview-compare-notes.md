@@ -13,3 +13,37 @@
 
 ## R-336 v1.1 章节结构（行号）
 0 定位(19) / 1 七层架构(33)：1.1 总图(35) 1.2 逐层职责(65) / 2 术语(118) / 3 事件溯源(124)：3.1(126) 3.2 事件枚举v1(138) 3.3 事件格式与重放(164) / 4 门禁阈值表(183)：4.1 研究候选→shadow(187) 4.2 shadow→paper(198) 4.3 paper→canary→live(207) 4.4 组合级风险闸门(216) / 5 回测审计(226) / 6 安全兜底三件套(251)：6.1 断路器(255) 6.2 checkpoint(267) 6.3 三方对账(271) / 7 退役+漂移(278)：7.1 退役规则(280) 7.2 影子漂移(291) / 7.5 组合构建增补(302)：7.5.1 版本承诺边界(306) 7.5.2 重算双触发+成本闸门(314) 7.5.3 裁决三段式(320) 7.5.4 危机相关性跃迁(338) / 8 迁移四阶段(345) / 9 外部评审逐条回应(408) / 10 结论(436) / 来源(445) / 附录A GLOSSARY(459)
+
+## 外部报告建议抽取（编号 E-xx，标注外部章节）
+- E1 [§3] portfolio_version 必须区分「配置版本」与「每日求解实例」；求解实例绑定市场快照/求解状态/成交结果
+- E2 [§3] 配置可插拔结构 config→estimator→optimizer→post-trade checks→target weights；每种方法留输入快照/参数/随机种子/求解状态/诊断
+- E3 [§6.1] portfolio_version schema 扩充：model_manifest(model_id/code_hash/data_cut/training_date)、capital_policy(gross/net limit)、risk_model(estimator/shrinkage/window)、objective、constraints(bounds/turnover/sector/liquidity)、solver(name/tolerances/fallback)、governance(gate_report/approval/freeze_time/rollback_version)
+- E4 [§4] 组合构建六步顺序：可交易性准入过滤→信号预测→风险模型→约束目标→正式求解→交易转换后验检查
+- E5 [§4/§5] 协方差估计不锁单一方法：滚动/EWMA/状态依赖对比、相关稳定性检验、压力期误差、换手敏感性、OOS 检验；LW 仅是候选默认
+- E6 [§4/§5] HRP/ERC 作候选基线；需冻结距离/链接/排序/方差估计
+- E7 [§4/§5] MVO 不应无条件规避：降权收益预测+收缩协方差+显式约束+稳健优化；应同池比较 MVO/min-vol/ERC/HRP
+- E8 [§5] corr>0.75 阈值条件化：检查滚动相关CI/市场状态/回归beta/因子暴露/行业重叠/尾部依赖/流动性；转为风险贡献上限等约束，不做单系数硬剔除
+- E9 [§5] 回撤闸门区分观测口径与触发层级：paper/canary/live 分层容忍度；联合监控波动率/beta/压力损失/流动性覆盖/预测衰减/数据质量/成交偏差
+- E10 [§5] 等波动率仅用于准入风险标准化，组合层面须正式协方差求解
+- E11 [§5] 冷却期期限按半衰期/换手/置信恢复校准
+- E12 [§6.2] 模型叠加需检查收益相关/持仓相关/风险贡献相关/滚动beta/因子暴露重叠/极端共移/容量
+- E13 [§6.3] RiskModelService：返回方差/协方差/条件数/缺失比例/有效样本数/估计日期/压力标签；候选池 sample/EWMA/LW/因子/压力正则；正定性+最小特征值+权重敏感性检查；无可行解降级路径
+- E14 [§6.4] 求解器可替换：QP/CQP 内点法优先；比较最优值/约束违反/耗时/权重灵敏度/起始点稳定性；固定随机种子
+- E15 [§6.5] 再平衡混合触发：权重偏离+成本预算(expected_cost_per_unit_risk_reduction)+波动状态+流动性；记录原因/旧版本/新版本/预期成本/预期风险下降/实际成交/成交后风险
+- E16 [§6.5] 风控参数四级传导：账户/组合/sleeve/单腿，不只全局参数
+- E17 [§6.6] 退役正向生命周期 active→under review→cooldown/reduced→retired→archived；触发条件清单；退役后可重建权重/复盘/验边界
+- E18 [§7] 四类门禁：A 数据/PIT（阻断不可降级放行）、B 研究完整性、C 组合/求解（自动 fallback 或阻断）、D 交易/运维（禁 live）
+- E19 [§7] 100 分评分制+硬性一票否决（A类前视/无解/超账户硬限额/缺成交回放）；六维度分值 20/20/15/15/15/15
+- E20 [§7/§10] 试验账本：试验次数/参数网格/拒绝规则/阈值选择全部可审计（防 DSR 本身被调参）
+- E21 [§8] 事件字段扩充：actor/理由/版本哈希/父事件/市场快照ID/批准证据/回滚指针
+- E22 [§8] 研究/交易状态隔离：immutable order intent→execution service→broker；配置变更走签名发布物
+- E23 [§8] Portfolio Layer 持实时风险状态：目标/批准/已成交权重、gross/net、杠杆、现金、费用、未覆盖暴露；risk(approved)→risk(post_trade)→risk(marked) 三点比较超阈降级
+- E24 [§8] 事件消费幂等+可重放+与券商持仓现金对账
+- E25 [§8] 数据工程风险清单与统一 schema+契约测试（特征漂移/复权/涨跌停/分红/时区/迟到/代码分叉/权限）
+- E26 [§9 P0] 冻结 portfolio_version schema、PIT 仓库、统一事件 schema、试验账本、paper/canary 对账；禁止直接调权优化
+- E27 [§9 P1] 配置与求解分离；比较风险模型与权重算法（sample/EWMA/LW/因子 × min-vol/ERC/HRP/带约束MVO）；显式纳入流动性成本约束；不可交易 OOS+滚动 OOS
+- E28 [§9 P2] 分级 promotion 不同风险容忍度；canary 小资金/期限/失效条件/自动降级；降级演练+回滚 RTO
+- E29 [§9 P3] 持续记录 decay/因子暴露/相关结构/成本冲击；算法替换走嵌套 OOS/预注册；季度复盘门禁阈值
+- E30 [§10.1] 八项风险清单+realized vs approved vs target 标记（错误归因控制）
+
+共 30 条。跳过：§1 证据边界方法论、§2 LEAN/CFA 通用论述（除非支撑建议）、§10.2 最终判断本身。
