@@ -31,3 +31,8 @@
 - 04-投资研究/ 共 1976 文件：含 engines/{a2,gold}、experiment-ledger.jsonl、risk-events.jsonl（EV-xxx 事件、level1_cut_half 规则、nav_drawdown_vs_hwm 阈值 0.25）、w6-registry-bind-v1.x.json、各引擎 nav/trades/metrics/holdings csv+json 产物族
 - 量化产物由 HP sync cron 落 shared/results/04-投资研究/（只读镜像）
 - 设计决策输入：新 Dashboard 定位纯只读读镜像；写操作（人工门）经任务中心流转回 HP 单写点，规避前端直改 active（R-336 §8 红线）
+
+## 编号裁决（2026-08-28 15:10 复核）
+- R-341 已被并行任务占用（R-341-QDII海外趋势轮动E2执行判门.md 已出现）→ R-342 grep=0 清白 → 报告定名 R-342
+- README 落点: /root/.openclaw/workspace/shared/results/README.md（+1 行）
+- 前 ls -l 基线已存（15:10 首次 exec 输出，05-量化投资/ 目录，最大 R-340+并行 R-341）
