@@ -1,6 +1,6 @@
 # R-342 R-336 实施级架构设计（含 Dashboard 全新可视化设计）
 
-> 任务 task-0529 ｜ 2026-08-28 ｜ 状态：设计报告（纯设计零代码）
+> 任务 task-0529 ｜ 2026-08-28 ｜ 状态：设计报告（纯设计零代码）｜ 当前版本 v1.1（修订记录见文末）
 > 设计依据（唯一口径）：R-336 v1.2《破而后立量化系统目标架构与迁移方案》。本文所有「§N」引用除特别注明外均指 R-336 原文章节。新增设计不与 v1.2 冻结条款冲突；凡与冻结条款相关的字段名/阈值/事件类型一律原文引用。
 
 ## 架构一图流
@@ -152,6 +152,8 @@ flowchart TB
 - 文件：`events/iteration-ledger-YYYY-MM.jsonl`，每行 `{ts, actor, event_type, target, payload}`；actor ∈ {evolution_pipeline, user, risk_layer}；写前 flock、写完 fsync、按月滚动（§3.3）。
 - 事件类型 = §3.2 枚举 v1 原样：version.created / version.updated / component.registered / solver.selected / weight.solved / gate.evaluated / promotion.requested / promotion.approved / promotion.rejected / promotion.executed / promotion.downgraded / risk.action / retirement.triggered / retirement.executed / backtest.completed / reconciliation.failed / checkpoint.created。
 - 既有资产并入：`experiment-ledger.jsonl`、`risk-events.jsonl`（EV-xxx 事件族）按 component.registered / risk.action 语义映射导入，历史行不重写（append-only 原则），仅加 import 标记事件。
+- retention_policy：近 12 个月为热数据（月滚动 JSONL 原样保留，BFF 启动重放热数据）；更早按年归档 gzip 冷档（`events/archive/iteration-ledger-YYYY.jsonl.gz`），BFF 启动时合并冷档索引供历史溯源查询；冷档只读、不参与高频重放路径。
+- 写锁约定：flock 锁文件路径 `events/.ledger.lock`，模式 `LOCK_EX|LOCK_NB`（排他+非阻塞）；获锁失败立即记 warn 并短重试，超时记日志告警、不无限阻塞写入主流程。
 
 ### 3.3 状态机持久化与查询
 
@@ -175,6 +177,7 @@ stateDiagram-v2
 - 正向晋升串行链 + 反向降级（live→shadow / live→gated）全部通过 `promotion.*` 事件驱动；**禁止人工直改 JSON**（§1.2⑤：降级事件同样追加 event_log）。
 - **持久化**：状态本体只存在于账本重放结果；投影缓存 JSON 是物化（头部带 sha256，重放后比对，不一致即 reconciliation.failed，§3.3）。
 - **查询路径**：BFF 启动时全量重放 + 每次轮询增量重放新事件行 → 生成 SQLite 物化视图（版本表/状态表/事件索引表）→ API 只查 SQLite。重放幂等（§3.3 重放伪代码：version.created 建对象、promotion.executed 移指针、risk.action 记录）。
+- **启动重放性能目标**：≤3s（12 个月账本规模）；重放在 BFF 启动后台执行、不阻塞 API 响应——物化未就绪期间对应端点返回显式「初始化中」状态，不返回空数据假装正常。
 
 ### 3.4 前端 API 契约（BFF 只读）
 
@@ -192,6 +195,8 @@ stateDiagram-v2
 | `/api/v1/health` | GET | — | `{ledger_tail_ts, projection_sha256_ok, sync_lag_seconds}` | 全局状态条 |
 
 契约约定：全响应为 JSON、UTC ISO8601 时间戳、分页用 cursor（= 事件行 ts+seq）、无鉴权写操作（BFF 零写面）。`/api/v1/risk/gates` 的三档相关性 flag 对应 §7.5.4 的 0.75/0.85/0.90 分级。
+- 安全备注：无鉴权是显式设计决策（单用户内网场景 + 零写面），非遗漏；未来若对外暴露，必须在反代层先加 Basic Auth 或 IP 白名单，BFF 本身不内置鉴权。
+- API 版本策略：URL 路径前缀管理（现全量 `/api/v1/`）；Breaking Change 升 `/api/v2/` 并双版本并行，旧版本保留 ≥1 个调仓周期后废弃（废弃期返回 410 + 迁移提示）。
 
 ## 第 4 章 Dashboard 全新设计（推倒重来）
 
@@ -211,6 +216,8 @@ stateDiagram-v2
 
 图表库：ECharts（备选 Recharts——放弃理由：状态机图/关系图需自绘，Recharts 偏统计图表）。构建期 TypeScript。
 
+BFF 可用性四件套：① 收到 SIGTERM 优雅关闭（停止接新请求、在途请求处理完再退出）；② systemd 单元 `Restart=always` 自动重启；③ 上游读操作单请求 5s 超时（文件读/SQLite 查询均受控），防悬挂拖垮单进程；④ SQLite 操作带 busy_timeout 超时保护，超时拒绝该次操作并记日志告警、不长持锁。
+
 ### 4.2 信息架构（六区块）
 
 ```mermaid
@@ -227,16 +234,21 @@ flowchart TB
   B5 -.漂移超带.-> B4
 ```
 
+> 导航归并（按 R-344 对齐 §2.1）：底部 Tab 5 项封顶=总览/风控/版本/事件/迁移——引擎卡片（区块②）并入总览页第二屏（它是「组合现在健康吗」的组成部分）；六区块本体与跨区块跳转关系不变，仅导航层归并，详情一律 drawer/抽屉不占 Tab。
+
 ### 4.3 区块明细（展示/交互/endpoint/更新频率）
 
 | 区块 | 展示 | 关键交互 | endpoint | 更新频率 |
 |---|---|---|---|---|
 | ① 总览驾驶舱 | NAV 曲线（30/90/1Y 切换）、日变动、MDD/当前回撤带位、在役 PV 卡（id+status+权重饼）、三方对账徽标（§6.3 语义，绿=reconciliation ok） | 点引擎卡→区块②；点 PV→区块③；对账徽标点开看差异明细 | `/api/v1/overview` | 60s |
-| ② 引擎卡片 | 每 sleeve 一卡：status（shadow/paper/live/archived）、IC 最新值+3 月趋势（联动 RET-3 老化预警）、ICIR_OOS、最近信号日、paper/shadow 天数（自 paper_entered_at 推导） | 点卡片展开 signal 明细 drawer | `/api/v1/engines` | 300s |
+| ② 引擎卡片 | 每 sleeve 一卡：status（shadow/paper/live/archived）、IC 最新值+3 月趋势（联动 RET-3 老化预警）、ICIR_OOS、最近信号日、paper/shadow 天数（自 paper_entered_at 推导） | 点卡片展开 signal 明细 drawer | `/api/v1/engines` | 事件驱动刷新+300s 兜底（按 R-344 对齐：跟随事件流水节奏，状态变化本质由事件驱动） |
 | ③ 组合版本视图 | 版本树（parent_version 链）+ 状态机条（§3.3 图的横向胶囊流）；当前版本高亮；canary 节点灰显标注「未启用」 | 点版本→详情（全 schema+gate_report+weight_solution+solver_meta 含 fallback_triggered/fallback_reason） | `/api/v1/portfolios`、`/api/v1/portfolios/:id` | 300s |
 | ④ 事件流水 | 全事件倒序时间线：type 着色（promotion.* 蓝/risk.* 红/weight.* 绿/reconciliation.failed 高亮）、actor 标签、payload 摘要 | 按 type/actor/target 过滤；cursor 分页；点 promotion.downgraded 展开触发规则+实测值 | `/api/v1/events?type=&cursor=` | 120s |
 | ⑤ 风控闸门 | 回撤分级闸门仪表（当前回撤落位 4 带之一，§4.4 阈值：<5/5-10/10-15/>15）、target_vol vs 实测±2pp 带、两腿 20 日相关性与 0.75/0.85/0.90 三档旗（§7.5.4）、D1-D4 漂移带内/超带与连续超带期数（§7.2）、断路器状态 | 超带项自动置顶+红沿；点开看事件溯源 | `/api/v1/risk/gates`、`/api/v1/risk/drift` | 120s |
 | ⑥ 迁移阶段进度 | Phase A-D 卡片列（§8 迁移总览表口径）：每动作 done/doing/todo + 证据链接（报告/产物路径）；A1/A2 审计项单独置顶（FAIL=绝对阻塞语义直接可视） | 点动作跳证据文件（镜像目录只读链接） | `/api/v1/migration` | 手动刷新+600s |
+
+> 数据新鲜度告警（区块①）：健康条 sync_lag 超 2 个自然日 → 页面顶部红横幅「数据已陈旧」（对应 R-336 §6.1 数据陈旧断路语义）；用户通知路径走既有渠道（心跳/任务中心通知），看板只做「打开必见」的兜底呈现、不负责推送（对齐 R-344 §6.2）。
+> 待处理事项聚合视图（P1，按 R-344 对齐 §3 区块⑤）：风控页前端聚合「断路器触发中 / 对账失败未解 / 漂移连续超带 / 退役 review 中」为一屏待处理清单；数据全部来自既有端点聚合展示，不新增 API。
 
 ### 4.4 实时性策略：轮询，不用 SSE/WebSocket
 
@@ -246,6 +258,7 @@ flowchart TB
 3. 推送通道带来连接管理/重连/断线语义/内存驻留，单 VPS 上是净负担。
 - 接口形态预留演进：BFF 响应头带 `X-Ledger-Tail-Ts`，未来若接入告警实时化可平滑升级为同路径 SSE，前端轮询器与订阅器共用同一响应解析。
 - 全局健康条（`/api/v1/health`）展示 sync_lag_seconds，超阈值黄色提示「数据非最新」。
+- 页面可见性节流：监听 `document.visibilityState`——Tab 隐藏时暂停全部轮询（省手机电量与 VPS 无谓负载），恢复可见立即拉取一次，再回到标准分频节奏。
 
 ### 4.5 390px 移动端优先（硬约束组件规范）
 
@@ -260,17 +273,18 @@ flowchart TB
 
 ### 4.6 数据来源对接（只读三源）
 
-| 源 | 读取方式 | 说明 |
-|---|---|---|
-| HP 产物 sync 目录（`shared/results/04-投资研究/`） | BFF 直接文件读：nav/trades/metrics csv+json 按需解析，热路径产物在 SQLite 物化缓存 | 1976 文件现状，增量为 rsync 语义；BFF 只读 mount 视角 |
-| registry / engines / composites 投影 | BFF 读 JSON 投影 + 头部 sha256 与重放结果比对；不一致即渲染「reconciliation.failed」状态条（§3.3 语义），不静默用旧投影 | 投影=缓存不是事实，账本才是 |
-| event_log（iteration-ledger JSONL） | BFF 启动全量重放、每轮询周期 tail 增量行追加进 SQLite 事件表 | 只 append 读、永不写；月滚动文件按文件名序拼接 |
+| 源 | 读取方式 | 说明 | 降级策略 |
+|---|---|---|---|
+| HP 产物 sync 目录（`shared/results/04-投资研究/`） | BFF 直接文件读：nav/trades/metrics csv+json 按需解析，热路径产物在 SQLite 物化缓存 | 1976 文件现状，增量为 rsync 语义；BFF 只读 mount 视角 | sync 目录不可读 → 渲染降级页面（缓存快照 + 顶部红条「数据源不可达」，不白屏） |
+| registry / engines / composites 投影 | BFF 读 JSON 投影 + 头部 sha256 与重放结果比对；不一致即渲染「reconciliation.failed」状态条（§3.3 语义），不静默用旧投影 | 投影=缓存不是事实，账本才是 | 账本锁超时 → 返回上次成功重放结果 + 红条告警（显式标注非最新） |
+| event_log（iteration-ledger JSONL） | BFF 启动全量重放、每轮询周期 tail 增量行追加进 SQLite 事件表 | 只 append 读、永不写；月滚动文件按文件名序拼接 | SQLite 写失败 → 内存缓存兜底 + 告警，恢复后补写，读路径不受影响 |
 
 ### 4.7 过渡策略（并行新建→验收→切换）
 
 1. **并行新建（Phase B）**：新 Dashboard 独立端口/子域部署，读同一镜像目录与账本；旧 agent-dashboard 照常在役，观测能力不断档；新前端区块⑥直接把「双看板并行对照」列为验收证据项。
 2. **验收（Phase B 退出前）**：双看板对照 ≥1 个完整月频调仓周期——NAV 口径一致、事件覆盖一致、旧看板无仅存能力（清单化）；390px 截图基线全绿。
 3. **切换（Phase C 内、指针切换获用户批准后）**：nginx 路由级切换（新路径升级为主域，旧看板降级到 `/legacy` 保留 ≥1 个调仓周期）；回退=改回 nginx 路由，秒级。旧服务物理下线与代码归档在 Phase D（§8 Phase D 动作 1/2：旧名退役、归档目录保留可回跑）。
+4. **新旧分工边界（按 R-344 对齐 §5）**：旧看板任务中心/用量/报告三大非量化 Tab 不迁移——`/legacy` 全功能保留至 Phase D 退役；新看板零写面一律不承接，任务/审核类操作始终走任务中心。
 
 ## 第 5 章 实施路线（对齐 Phase A-D）
 
@@ -320,3 +334,10 @@ flowchart TB
 | 阈值/事件类型/字段名全部原文引用 | §1.2、§3.2、§4.4、§7.2、§7.5.3、§7.5.4 | 一致（零改写、零新造术语） |
 
 *本报告纯设计零代码。设计仅覆盖 R-336 v1.2 已冻结条款的实施映射；R-336 附录 B backlog 项不在本文范围。*
+
+---
+
+## 修订记录
+
+- **v1.0**（2026-08-28，task-0529）：首版。
+- **v1.1**（2026-08-28，task-0530）：并入用户反馈 9 项——①§3.2 retention_policy（近 12 个月热数据+gzip 冷档，BFF 启动重放热数据+合并冷档索引）；②§4.1 BFF 可用性四件套（SIGTERM 优雅关闭 / systemd 自动重启 / 单请求 5s 超时 / SQLite 超时保护）；③§4.3 驾驶舱数据新鲜度告警（sync_lag 超 2 个自然日顶部红横幅+用户通知路径）；④§4.4 document.visibilityState 节流；⑤§4.6 数据源表增「降级策略」列；⑥§3.4 无鉴权=显式设计决策安全备注；⑦§3.3 启动重放 ≤3s 且不阻塞 API；⑧§3.2 flock 锁文件路径（events/.ledger.lock）与模式（LOCK_EX|LOCK_NB）；⑨§3.4 API 版本策略（Breaking Change 升 /api/v2/，旧版本保留 ≥1 个调仓周期）——以及 R-344 PRD 对齐 4 处（Tab 归并 5 Tab 导航 / 引擎卡片事件驱动刷新 / 待处理事项前端聚合视图 / 新旧分工边界 legacy 至 Phase D）；全部小改零结构变更。P0-2「migration 响应截断」经实查 L191 为完整结构，属评审端误报，不采纳。
