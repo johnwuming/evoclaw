@@ -26,7 +26,21 @@
 - 截图惯例：docs/baseline/dashv6-{block}-390x844.png。
 - HP 拷贝：scp -O -P 2222（sftp subsystem 不可用）；源实际路径 portfolio_v1/portfolio/{versions/vC-0.json, events/iteration-ledger-2026-08.jsonl}（任务书路径少 v1 段）。
 
-### 00:50 数据源升级完成
+### 01:05 前端实装与验收（35/35 PASS）
+- 改动文件：
+  - `src/pages/Overview.jsx`（新）：一屏三问健康卡/风险角标/引擎摘要+第二屏引擎卡/在役卡+权重条/NAV 待接入桩；顶部 R-344 §4.1 验收锚注释
+  - `src/pages/Version.jsx`（新）：版本卡高亮+胶囊流（approved→paper→live，canary 不渲染）+详情展开（sleeve/code_hash/门禁/求解留痕/fallback/状态历史）+状态过滤
+  - `src/components/WeightBar.jsx`（新）：堆叠条（≤390 饼降级，末段吸收浮点误差保 100%）
+  - `src/App.jsx`：挂载两页，version Tab 里程碑标注提前实装
+  - `src/api.js`：新增 5 个 GET fetch；`src/styles.css`：ov-*/ver-*/wbar-*/pv-chip 样式
+- BFF 修复：Overview 曾误取 `portfolios.portfolios`（BFF 返回数组），已修；npm run build ✓
+- 无头验收（playwright chromium 390×844，/tmp/task-0542/verify-w4.mjs）：**35/35 PASS**
+  - 两页 scrollWidth=390 无横滚；一屏三问元素均在首屏 844px 内
+  - 真实数据断言：data_cut=2026-08-26、滞后 46 分钟绿、pending=0、权重 58.0/42.0 合计 100%、paper 4 天、status=paper、状态历史 2 条、批准留痕 task-0540
+  - 零写控件：无 text input/textarea/form；按钮仅刷新/展开/Tab（写动词黑名单断言）
+- 截图：docs/baseline/dashv6-{overview,version}-390x844.png（覆盖/新增）；全页版 /tmp/task-0542/dashv6-*-full.png
+- 视觉目检：布局无溢出无破损；健康条 ellipsis 截断为既有行为可接受
+- 遗留（W5+）：NAV 序列/IC/最近信号日待 HP 产物接入；portfolios 详情数据文件需随账本更新重新派生（当前一次性生成）；engines equity sleeve paper 天数 null（status=active 非 paper）
 - BFF app.js 新增 3 只读 GET（engines/portfolios/portfolios/:id），套 ledgerDerived；测试更新（W1-W2 守卫测试原断言 engines 404，已改为实装后预期）；npm test 20/20 过。
 - 8180 进程已重启：LEDGER_DIR=live（原夹具进程 2821156 已 TERM；nohup 日志 /tmp/quant-bff-8180.log）；18180 tail 测试实例未动。
 - API 验证（真实数据）：health tail=2026-08-28T15:50:22Z sync_lag≈2151s 绿 pending=0；overview nav=null（真实无 NAV 产物）；engines 2 sleeve（equity=active / gold=active_paper，gold paper 4 天）；portfolios vC-0 paper；详情全 schema+weight_solution（0.5803/0.4197）+status_history 2 条。
