@@ -192,3 +192,82 @@ stateDiagram-v2
 | `/api/v1/health` | GET | — | `{ledger_tail_ts, projection_sha256_ok, sync_lag_seconds}` | 全局状态条 |
 
 契约约定：全响应为 JSON、UTC ISO8601 时间戳、分页用 cursor（= 事件行 ts+seq）、无鉴权写操作（BFF 零写面）。`/api/v1/risk/gates` 的三档相关性 flag 对应 §7.5.4 的 0.75/0.85/0.90 分级。
+
+## 第 4 章 Dashboard 全新设计（推倒重来）
+
+设计立场：旧 agent-dashboard 的量化 Tab 是「产物文件浏览器」心智；新前端按 R-336 治理模型重造为「组合治理驾驶舱」心智——用户打开即答三问：现在组合什么状态、谁在管风险、迁移到哪一步了。旧服务继续在役至切换完成（见 §4.7 过渡策略）。
+
+### 4.1 技术栈选型（2-3 候选+推荐）
+
+| 候选 | 构成 | 单机 VPS 部署成本 | 移动端体验 | 维护复杂度 |
+|---|---|---|---|---|
+| **A. Vite+React SPA + Express BFF（推荐）** | 前端静态产物由 nginx 直出，BFF=Express 单进程 | 低：复用现有 nginx+systemd 模式，BFF 与 node:sqlite 基建同构 | 好：完全自控断点/布局 | 中：两包仓库（server+web）但零新运维概念 |
+| B. SvelteKit 全栈 | SSR+API 同进程 | 低 | 好 | 低（单仓库），但团队/生态面窄，图表库选型受限 |
+| C. Next.js 全栈 | SSR+API routes | 中：构建链重、常驻内存占用高于 BFF 直出 | 好 | 中高：框架概念多，月频只读场景杀鸡用牛刀 |
+
+**推荐 A**，放弃理由各一条：
+- 放弃 B（SvelteKit）：单仓库诱人，但现有 agent-dashboard v4 已是 Express+node:sqlite（零原生依赖），BFF 层可直接继承基建与部署心智，换框架省下的复杂度 < 迁移成本。
+- 放弃 C（Next.js）：SSR/ISR 能力对「数据 60-300s 轮询、内容按事件驱动」的月频看板无增益，构建链与内存占用在单 VPS 上纯属负担。
+
+图表库：ECharts（备选 Recharts——放弃理由：状态机图/关系图需自绘，Recharts 偏统计图表）。构建期 TypeScript。
+
+### 4.2 信息架构（六区块）
+
+```mermaid
+flowchart TB
+  NAV["顶部导航（移动端=底部 Tab，≤5 项）"] --> B1["① 总览驾驶舱<br/>NAV/回撤/在役PV/对账徽标"]
+  NAV --> B2["② 引擎卡片<br/>sleeve×引擎状态"]
+  NAV --> B3["③ 组合版本视图<br/>状态机可视化+版本树"]
+  NAV --> B4["④ 事件流水<br/>Iteration Ledger 时间线"]
+  NAV --> B5["⑤ 风控闸门<br/>回撤分级/相关性/漂移D1-D4"]
+  NAV --> B6["⑥ 迁移阶段进度<br/>Phase A-D 看板"]
+  B1 -.点击引擎.-> B2
+  B1 -.点击版本.-> B3
+  B3 -.点击事件点.-> B4
+  B5 -.漂移超带.-> B4
+```
+
+### 4.3 区块明细（展示/交互/endpoint/更新频率）
+
+| 区块 | 展示 | 关键交互 | endpoint | 更新频率 |
+|---|---|---|---|---|
+| ① 总览驾驶舱 | NAV 曲线（30/90/1Y 切换）、日变动、MDD/当前回撤带位、在役 PV 卡（id+status+权重饼）、三方对账徽标（§6.3 语义，绿=reconciliation ok） | 点引擎卡→区块②；点 PV→区块③；对账徽标点开看差异明细 | `/api/v1/overview` | 60s |
+| ② 引擎卡片 | 每 sleeve 一卡：status（shadow/paper/live/archived）、IC 最新值+3 月趋势（联动 RET-3 老化预警）、ICIR_OOS、最近信号日、paper/shadow 天数（自 paper_entered_at 推导） | 点卡片展开 signal 明细 drawer | `/api/v1/engines` | 300s |
+| ③ 组合版本视图 | 版本树（parent_version 链）+ 状态机条（§3.3 图的横向胶囊流）；当前版本高亮；canary 节点灰显标注「未启用」 | 点版本→详情（全 schema+gate_report+weight_solution+solver_meta 含 fallback_triggered/fallback_reason） | `/api/v1/portfolios`、`/api/v1/portfolios/:id` | 300s |
+| ④ 事件流水 | 全事件倒序时间线：type 着色（promotion.* 蓝/risk.* 红/weight.* 绿/reconciliation.failed 高亮）、actor 标签、payload 摘要 | 按 type/actor/target 过滤；cursor 分页；点 promotion.downgraded 展开触发规则+实测值 | `/api/v1/events?type=&cursor=` | 120s |
+| ⑤ 风控闸门 | 回撤分级闸门仪表（当前回撤落位 4 带之一，§4.4 阈值：<5/5-10/10-15/>15）、target_vol vs 实测±2pp 带、两腿 20 日相关性与 0.75/0.85/0.90 三档旗（§7.5.4）、D1-D4 漂移带内/超带与连续超带期数（§7.2）、断路器状态 | 超带项自动置顶+红沿；点开看事件溯源 | `/api/v1/risk/gates`、`/api/v1/risk/drift` | 120s |
+| ⑥ 迁移阶段进度 | Phase A-D 卡片列（§8 迁移总览表口径）：每动作 done/doing/todo + 证据链接（报告/产物路径）；A1/A2 审计项单独置顶（FAIL=绝对阻塞语义直接可视） | 点动作跳证据文件（镜像目录只读链接） | `/api/v1/migration` | 手动刷新+600s |
+
+### 4.4 实时性策略：轮询，不用 SSE/WebSocket
+
+结论：**HTTP 轮询，分频 60s/120s/300s/600s**。理由：
+1. 数据源本身低频：月频调仓、日频 NAV/对账、事件驱动门禁——无任何亚分钟级状态。
+2. sync cron 镜像有天然延迟，BFF 推得再快也快不过上游 rsync 周期；SSE/WebSocket 只优化「BFF→浏览器」最后一跳，收益趋零。
+3. 推送通道带来连接管理/重连/断线语义/内存驻留，单 VPS 上是净负担。
+- 接口形态预留演进：BFF 响应头带 `X-Ledger-Tail-Ts`，未来若接入告警实时化可平滑升级为同路径 SSE，前端轮询器与订阅器共用同一响应解析。
+- 全局健康条（`/api/v1/health`）展示 sync_lag_seconds，超阈值黄色提示「数据非最新」。
+
+### 4.5 390px 移动端优先（硬约束组件规范）
+
+**硬约束：任何视口 ≤390px 下无横向滚动。** 组件规范：
+1. 根容器 `overflow-x: hidden`；所有布局用 flex/grid 百分比列，禁固定像素宽。
+2. 断点：`≤390 手机`（单列、底部 Tab 导航）/ `391-768 平板`（双列）/ `>768 桌面`（导航+三列网格）。
+3. 表格降级规则：≤560px 时表格→卡片列表（每行变卡片，字段标签前置）。
+4. 图表降级规则：NAV 曲线保留（自适应宽）；版本树→垂直链表；状态机横向胶囊流→2 行折返流；权重饼→堆叠条。
+5. 数字优先：关键指标（回撤带位、对账徽标、漂移超带数）用大号数字+色块，图表为辅。
+6. 触控目标 ≥44px；点开详情一律 drawer/bottom-sheet，不弹模态。
+7. 验收含 390×844 截图基线（沿用现有 dashv5-*-390x844.png 惯例），逐区块截图入验收清单。
+
+### 4.6 数据来源对接（只读三源）
+
+| 源 | 读取方式 | 说明 |
+|---|---|---|
+| HP 产物 sync 目录（`shared/results/04-投资研究/`） | BFF 直接文件读：nav/trades/metrics csv+json 按需解析，热路径产物在 SQLite 物化缓存 | 1976 文件现状，增量为 rsync 语义；BFF 只读 mount 视角 |
+| registry / engines / composites 投影 | BFF 读 JSON 投影 + 头部 sha256 与重放结果比对；不一致即渲染「reconciliation.failed」状态条（§3.3 语义），不静默用旧投影 | 投影=缓存不是事实，账本才是 |
+| event_log（iteration-ledger JSONL） | BFF 启动全量重放、每轮询周期 tail 增量行追加进 SQLite 事件表 | 只 append 读、永不写；月滚动文件按文件名序拼接 |
+
+### 4.7 过渡策略（并行新建→验收→切换）
+
+1. **并行新建（Phase B）**：新 Dashboard 独立端口/子域部署，读同一镜像目录与账本；旧 agent-dashboard 照常在役，观测能力不断档；新前端区块⑥直接把「双看板并行对照」列为验收证据项。
+2. **验收（Phase B 退出前）**：双看板对照 ≥1 个完整月频调仓周期——NAV 口径一致、事件覆盖一致、旧看板无仅存能力（清单化）；390px 截图基线全绿。
+3. **切换（Phase C 内、指针切换获用户批准后）**：nginx 路由级切换（新路径升级为主域，旧看板降级到 `/legacy` 保留 ≥1 个调仓周期）；回退=改回 nginx 路由，秒级。旧服务物理下线与代码归档在 Phase D（§8 Phase D 动作 1/2：旧名退役、归档目录保留可回跑）。
