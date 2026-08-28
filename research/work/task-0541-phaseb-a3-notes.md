@@ -30,4 +30,14 @@
 - 产物落 portfolio_v1/，报告 R-347
 
 ## 5. 核验记录（边查边写）
-（进行中）
+
+### 5.1 task-0492 本地产物 md5 核验（2026-08-28 23:5x）✅
+- all_results.json=**915e446388fc8e63c281378c3dd66580**（完整 32 位，与 R-317 基线 915e446388… 逐位对齐）
+- nav_curves.csv=9704a300767613523815173a5881c304；monthly_returns.csv=0113f40d7218d53f49f53b33052a3369
+- 输入 data/a13_full_nav.csv=358ce8192880d615d620d2297387601d、data/gold_shadow_nav.csv=3654c3e80103fc313e24c9eb641de4e2（与 task-0492 notes §5 记录一致）
+
+### 5.2 引擎口径关键结论
+- task-0492 backtest.py：漂移引擎（收益后权重漂移，月初再平衡）；F1=static_w(0.5)+allT 全月度再平衡；输出 json.dump(indent=1, ensure_ascii=False) 无时间戳 → md5 可逐位复现
+- f7_backtest.py（task-0495）：简化引擎（无月内漂移）；F1 简化口径 ann 13.57% vs task-0492 漂移引擎 13.54%（<0.05pt，R-317 已声明）
+- **推论：md5 基线 915e446388… 对应 task-0492 漂移引擎 all_results.json → vC-0 复现门必须驱动 task-0492 引擎，不能用 f7 简化引擎**
+- f7_backtest.py 内建 PIT 四锚点 assert：2015-06=FULL/2015-07=REDUCE/2020-06=REDUCE/2020-07=FULL + 首月非 REDUCE；状态机 sim_dd(th=0.2, reduce=0.5, recover=0.05) 跑 a13 full 日频 nav
