@@ -13,3 +13,13 @@
 - monthly_returns.csv 实际位于 data/monthly_returns.csv（md5 0113f40d…，G3 PASS）
 - 在役组合曲线判定：vc0_F1_check.json metrics ann=0.1357 vol=0.0923 sharpe=1.431 mdd=-0.0825 final_nav=5.229，match=true；final_nav 与 nav_curves.csv F1_quarterly 末值 5.22921278108852 一致 → 在役回测曲线=F1_quarterly 列
 - 注意：all_results.json 里 F1_quarterly 条目(vol 0.0947/mdd -0.0908)与 vc0 口径在案指标(0.0923/-0.0825)略异；本任务口径=从 nav_curves.csv 全期自行计算并在 performance.json 注明
+
+## 指标口径验证（VPS 本地 python 预演，/tmp/task-0549/）
+- md5 落盘核验: nav_curves.csv=9704a300… all_results.json=915e4463… monthly_returns.csv=0113f40d… 全部与 G3 门一致
+- 选定口径（从 nav_curves.csv F1_quarterly 列全期计算，基期 1.0，N=156 月收益）:
+  - 年化收益 = (NAV末/1.0)^(12/156)-1 = 0.1357
+  - 年化波动 = 月收益样本std(ddof=1)×sqrt(12) = 0.0947
+  - 夏普 = 年化收益÷年化波动 = 1.433（无风险利率=0）
+  - maxDD = min(1-NAV/峰值)（含基期1.0）= -0.0908
+- 交叉验证: 与 all_results.json F1_quarterly 条目 ann=0.1357/vol=0.0947/mdd=-0.0908 完全一致；其 sharpe=1.397 为算术年化口径（mean×12÷vol≈0.1323/0.0947），与我们几何口径 1.433 的差异已定位
+- 与 vc0 在案指标(0.0923/1.431/-0.0825)差异根因: 在役原脚本曲线含 DDC REDUCE 月现金段，nav_curves.csv F1_quarterly 列为满仓复现曲线（final_nav 5.229 一致到 4dp）；performance.json 将如实注明口径
