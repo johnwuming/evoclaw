@@ -162,6 +162,7 @@ flowchart TB
 - 既有资产并入：`experiment-ledger.jsonl`、`risk-events.jsonl`（EV-xxx 事件族）按 component.registered / risk.action 语义映射导入，历史行不重写（append-only 原则），仅加 import 标记事件。
 - retention_policy：近 12 个月为热数据（月滚动 JSONL 原样保留，BFF 启动重放热数据）；更早按年归档 gzip 冷档（`events/archive/iteration-ledger-YYYY.jsonl.gz`），BFF 启动时合并冷档索引供历史溯源查询；冷档只读、不参与高频重放路径。
 - 写锁约定：flock 锁文件路径 `events/.ledger.lock`，模式 `LOCK_EX|LOCK_NB`（排他+非阻塞）；获锁失败立即记 warn 并短重试，超时记日志告警、不无限阻塞写入主流程。
+- 灾备最小条款（v1.2 补）：①账本每日异地副本——sync cron 之外增加第二 rsync 目标目录（`events.backup/`，传输前 gzip 压缩当日滚动文件），保留 ≥3 个月；②sync_lag 超阈恢复 SOP：确认 HP 写入正常 → 检查 rsync 进程/网络 → 手动补跑 sync → 核对投影 sha256 一致后才解除「数据陈旧」横幅（§4.3）；③reconciliation.failed 处理优先级=P0：冻结受影响端点的状态展示（见 §4.1 指标：相关端点 503），1 个交易日内人工裁决修复或回放，修复动作本身走事件追加留痕。
 
 ### 3.3 状态机持久化与查询
 
@@ -173,14 +174,20 @@ stateDiagram-v2
   gated --> shadow : promotion.requested+approved
   shadow --> approved : G-P1..P4 达标
   approved --> paper : 用户批准
-  paper --> canary : G-L1..L3
-  canary --> live : G-L4 用户批准(唯一人工门)
+  paper --> live : G-L4 用户批准(唯一人工门，canary 未启用时直通)
   live --> shadow : 4维漂移任一维连续2期超带(自动)
   live --> gated : reconciliation.failed/断路器/审计不合格
   live --> archived : retirement.executed
   shadow --> archived
   gated --> retired : RET-1..4
+  note right of live
+    未来扩展（canary 段，枚举保留不删）：paper→canary(G-L1..L3)→live
+    启用前置=先定义启用契约：期限/失效自动降级条件/G-L 阈值
+    契约就绪后回归主图（R-344 v1.1 裁决，§1.2⑥ 零删改）
+  end note
 ```
+
+前端渲染口径（v1.2，对齐 R-344 v1.1 区块③裁决）：主图止于 approved→paper→live；canary 段入「未来扩展」折叠呈现，上图 note 保留其完整迁移语义。
 
 - 正向晋升串行链 + 反向降级（live→shadow / live→gated）全部通过 `promotion.*` 事件驱动；**禁止人工直改 JSON**（§1.2⑤：降级事件同样追加 event_log）。
 - **持久化**：状态本体只存在于账本重放结果；投影缓存 JSON 是物化（头部带 sha256，重放后比对，不一致即 reconciliation.failed，§3.3）。
@@ -200,10 +207,11 @@ stateDiagram-v2
 | `/api/v1/risk/gates` | GET | — | `{portfolio_dd_gate{drawdown_pct,band,action}, vol{target,realized,in_band}, sleeves_ddc[{id,state,drawdown,th}], correlation{pair,corr_20d,flag:0.75/0.85/0.90}, circuit_breaker{state,reason}}` | 风控闸门 |
 | `/api/v1/risk/drift` | GET | `?pv=&window=` | `D1..D4[{dim,value,band,in_band,consecutive_violations}]` | 风控闸门-漂移子区 |
 | `/api/v1/migration` | GET | — | `{phase:"A|B|C|D", items[{id,title,state:done|doing|todo,evidence_ref}], blocking:{a1_pass,a2_pass}}` | 迁移阶段进度 |
-| `/api/v1/health` | GET | — | `{ledger_tail_ts, projection_sha256_ok, sync_lag_seconds}` | 全局状态条 |
+| `/api/v1/health` | GET | — | `{ledger_tail_ts, projection_sha256_ok, sync_lag_seconds, pending_risks{count, items[{type, ref, opened_ts}]}}`；pending_risks 聚合口径=断路器触发中/对账失败未解/漂移连续超带/退役 review 中/promotion.requested 未决（供 R-344 §2.2 风险角标消费，角标数=本字段 count） | 全局状态条 |
 
 契约约定：全响应为 JSON、UTC ISO8601 时间戳、分页用 cursor（= 事件行 ts+seq）、无鉴权写操作（BFF 零写面）。`/api/v1/risk/gates` 的三档相关性 flag 对应 §7.5.4 的 0.75/0.85/0.90 分级。
 - 安全备注：无鉴权是显式设计决策（单用户内网场景 + 零写面），非遗漏；未来若对外暴露，必须在反代层先加 Basic Auth 或 IP 白名单，BFF 本身不内置鉴权。
+- 部署暴露面矩阵（v1.2 补）：nginx 监听 `0.0.0.0:443`（TLS=现有 IP 证书链）→ 反代 BFF；BFF 进程仅监听 `127.0.0.1`（绕过反代不可达）；访问控制=内网/白名单（反代层 allow/deny）；敏感字段口径按 R-344 §6.3——单用户内部使用持仓/权重全量展示不脱敏，未来对外暴露时在反代层启用脱敏+鉴权（字段级设计届时另立），BFF 不内置。
 - API 版本策略：URL 路径前缀管理（现全量 `/api/v1/`）；Breaking Change 升 `/api/v2/` 并双版本并行，旧版本保留 ≥1 个调仓周期后废弃（废弃期返回 410 + 迁移提示）。
 
 ## 第 4 章 Dashboard 全新设计（推倒重来）
