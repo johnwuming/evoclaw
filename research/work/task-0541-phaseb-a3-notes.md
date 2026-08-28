@@ -43,8 +43,15 @@
 - G5 选择器交叉验证：vc0 口径四变体指标==在役原脚本在案值（task-0495/out/f7_results.json md5=c8866a2d137ab7c7e7fa9954fd1500e4 落盘值：F1 13.57%/F7a 13.61%/F7b 13.26%/F6 19.11%…）PASS
 - **OVERALL: PASS**；对照表 combo_selector/results/vc0_repro_comparison.csv（18 行）+ repro_gate.json
 
-## 5. HP 权威跑与零改动核验
-（进行中：tar 管道部署 → quant python 跑门 → find -newermt 零改动对照 → README 一行日志）
+## 5. HP 权威跑与零改动核验（2026-08-29 00:1x）✅
+- 部署：tar 管道 → HP ~/quant-evolve/portfolio_v1/combo_selector/（引擎副本 HP 端 md5=ed95aa7603fdefec7110959bbd3a77c9 核验一致）
+- 部署后清除 VPS 带来的 data/results 缓存，数据从 HP 只读源重新入位+md5 校验
+- **HP 权威跑（quant python）：OVERALL PASS，G1-G5 全过**
+- HP 端 md5 直接证据：results/all_results.json=915e446388fc8e63c281378c3dd66580、results/nav_curves.csv=9704a300767613523815173a5881c304、data/monthly_returns.csv=0113f40d7218d53f49f53b33052a3369
+- 选择器 CLI 独立入口验证：vc0 口径 F7a → ann 0.1361/sharpe 1.483/calmar 2.001/mdd -0.068 == 在役在案值
+- **在役零改动核验**：find scripts results model config registry.json evolution_pipeline.py paper_engine*.py -newermt "2026-08-28 23:50" → 空（无任何在役文件被触碰）；产物全部落在 portfolio_v1/combo_selector/ 新目录
+- HP 产物清单：combo_selector/{caliber.py, state_machine.py, combo_backtest.py, run_vc0_repro.py, engine/backtest_f1_drift_engine.py, data/(3 文件), results/(all_results.json, nav_curves.csv, weights_f3_f4.csv, repro_gate.json, vc0_repro_comparison.csv 21 行 True, selector/*_check.json + monthly csv)}
+- README 更新日志：portfolio_v1/README.md 追加 task-0541 一行（见下）
 
 ## 6. 报告与收尾
 - 报告：shared/results/05-量化投资/R-347-PhaseB动作3-选择器化与vC0复现门.md（只从本笔记取材）
