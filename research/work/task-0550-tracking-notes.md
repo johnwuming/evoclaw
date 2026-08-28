@@ -31,3 +31,11 @@
 - L344-380 PIT join: bisect_right(av_dates, d)-1 → 只取 avail_date ≤ 月末d 的最后一条 roe/roa — 真 as-of backward, 无报告期直 join
 - 边界: d==avail_date 当日即用（法定截止日收盘前必须披露, 安全）; drop_duplicates keep=last
 - 初步结论: 构建器无前视。待查下游消费对齐。
+
+## 检查点 3: ①下游消费链核验 (闭合)
+- a13_run.py L22-31: load_engine() → backtest_dividend_quality_iter.py + patch_engine(a9_common)
+- backtest_dividend_quality_iter.py L187-190: panel 排序; L389-390: fund = panel[panel.date <= d].groupby("code").tail(1).set_index("code") — 调仓日 d 向后 as-of 取快照, 无前视
+- L250: rebalance_dates = 每月首个交易日 (groupby(M).min()) → 信号(≤上月末信息) → 次月首日执行, 标准 shift 结构
+- a9_common.py L49-73 (PA 闸门): fund.loc[code,roe_ttm/roa_ttm/div_yield_ttm] 过滤; L155-156 roe 因子取 tdf(目标持仓,来自同一 fund 快照); pb_inv 经 merge_pb_into_panel (R-345 已验 L237-249 as-of)
+- q4b_build_delisted_panel.py L15: 退市镜像 statYear 数据 (year+1)-05 生效, 面板date=生效月末日 — 更保守, PIT 安全
+- ①总结论: **roe/roa 过滤通道构建器+消费链全链路无前视**。构建器=prep_dividend_roa.py(R-345 误指 fetch_valuation_data.py, 该文件只读不写); 披露日用法定截止日映射(保守方向); as-of 用 bisect/searchsorted(故 R-345 grep lag/shift/avail/as_of 未命中)。精确性瑕疵均为"滞后"方向(截止日晚于实际披露/月末归一), 无一"领先"方向 → a13 roe 通道历史结论**无需重新定性**, Phase B 影子层消费放行。
