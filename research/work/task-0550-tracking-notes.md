@@ -39,3 +39,34 @@
 - a9_common.py L49-73 (PA 闸门): fund.loc[code,roe_ttm/roa_ttm/div_yield_ttm] 过滤; L155-156 roe 因子取 tdf(目标持仓,来自同一 fund 快照); pb_inv 经 merge_pb_into_panel (R-345 已验 L237-249 as-of)
 - q4b_build_delisted_panel.py L15: 退市镜像 statYear 数据 (year+1)-05 生效, 面板date=生效月末日 — 更保守, PIT 安全
 - ①总结论: **roe/roa 过滤通道构建器+消费链全链路无前视**。构建器=prep_dividend_roa.py(R-345 误指 fetch_valuation_data.py, 该文件只读不写); 披露日用法定截止日映射(保守方向); as-of 用 bisect/searchsorted(故 R-345 grep lag/shift/avail/as_of 未命中)。精确性瑕疵均为"滞后"方向(截止日晚于实际披露/月末归一), 无一"领先"方向 → a13 roe 通道历史结论**无需重新定性**, Phase B 影子层消费放行。
+
+## 检查点 4: ②卖出路径证据 (paper_engine.py, 1759行)
+- L1433-1441 sell_list 构建: 不在目标/ST/get_price=None
+- L1442-1455 清仓卖出: price=get_price(d) or cost; fee=comm+印花; del holdings — 无跌停检查
+- L1460-1492 timing 减仓: 同样无跌停检查
+- L1499-1502 买入闸: is_limit_up 硬闸(对照)
+- L949-963 is_limit_up: pct=cur/prev-1, th=ST?0.05:0.098, 容差-1e-4, qfq close
+- L965-975 get_price: qfq kline 最近收盘 ≤d
+- L286 load_kline: KLINE_DIR/{code}_daily_qfq.parquet
+- L97-98: LIMIT_UP_PCT=0.098 / ST_LIMIT_UP_PCT=0.05
+- L905-925: 选股侧 limup_max 近21日涨停计数过滤(另一处掩码)
+- grep -c limit_down = 0 (确认 R-345)
+- 持仓结构: {"shares":int,"cost":float,"buy_date":str}
+
+## 检查点 5: ③DIV_EVENTS 证据
+- L61 定义, grep 全文件仅此 1 处 (确认 R-345 L100)
+- dividend_events.parquet: 559KB, mtime 2026-08-13 03:30 (与面板同次构建); crontab 无自动刷新
+- data_validator.py L33-34 引用 FUND_PANEL+DIV_EVENTS (调仓前校验已触碰该文件)
+- action_daily L1312+: 每日 NAV, 缺口回填循环逐日 holdings_value_at+append_nav → 分红挂点
+- action_rebalance: 卖出块在 L1442 起 → 分红需在卖出前处理(除息日当日卖出仍享有, T-1 收盘持仓即享有)
+- state 无 last_div 字段; 现有 state: holdings/cash/created_at/last_rebalance/model_version/timing_ratio
+
+## 检查点 6: 敞口现状
+- paper-state.json: n_holdings=8, cash=40393, last_rb=2026-08-14, created_at=2026-08-17 (task-0486 重建)
+- → 两缺口均为活敞口(非 R-345 审计时点的空仓态): 9-1 调仓可能遇跌停卖出; 8 持仓随时可能跨除息日(2026-05 以来 3470 条分红事件)
+- spot-check R-345/R-343 数字: L72 limit_up_pct=0.098 ✓; L97 48,081 ✓; L100 DIV_EVENTS L61 ✓; R-343 L25 10.04%/0.3878 ✓
+
+## 方案要点草稿
+② is_limit_down: 板块感知阈值 — 300/301/688/689 → 0.198(创业板/科创板±20%, ST 仍 20%); 主板 ST → 0.05; 其余 0.098; pct <= -th+1e-4。接线两处(清仓 L1442 块 skip+保留持仓; 减仓 L1464 块 continue 下一个)。env 开关 PAPER_LIMIT_DOWN_GATE。回退: .bak + 开关。
+③ watermark state["last_div_date"] + 双挂点(action_daily 回填循环逐日 credit; action_rebalance 卖出块前) + entitlement buy_date<ex_date + ledger 文件 paper-div-ledger.csv(不动 trades.csv schema) + 税务 v1 毛额入账(v1.1 可选 10% 预扣) + 依赖: dividend_events 需定期刷新(无 cron, 手动 prep_dividend_roa --only div)。
+实施顺序: ①已完成(只读) → ②批准后实施(下次调仓前) → ③批准后实施(分红季紧迫)。两缺口现均活敞口。
