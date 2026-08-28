@@ -113,3 +113,82 @@ flowchart TB
 | 状态投影 | JSON 文件（重放 dump 回 registry/engines/composites） | §3.1 表冻结：JSON 降级为投影缓存，可随时删了重建 | 数据库为主存储：同上冲突 |
 | Dashboard 读侧缓存 | node:sqlite 只读物化（BFF 内，可选） | 复用现有 agent-dashboard v4 基建（Express+node:sqlite 零原生依赖）；语义仍是投影缓存，删了重建无损失 | 纯内存每请求重放：账本增长后轮询每 60s 全量重放开销不可控，放弃 |
 | 产物文件 | csv+json 文件族（现状） | 1976 个文件、HP↔VPS rsync 增量同步成熟，回测/复盘工具链直读 | 对象存储/DB：改变 sync cron 与全部下游工具读法，收益为零，放弃 |
+
+## 第 3 章 版本与状态机数据设计
+
+### 3.1 portfolio_version schema（照抄 §1.2⑤ v1.2 A1 冻结结构）
+
+```json
+{
+  "portfolio_version_id": "PV-0.1",
+  "sleeves": {
+    "equity_sleeve": {"component_ref": "...", "code_hash": "sha256:...", "data_cut": "2026-08-01"},
+    "hedge_sleeve_gold": {"component_ref": "...", "code_hash": "sha256:...", "data_cut": "2026-08-01"}
+  },
+  "risk_control": {
+    "drawdown_gates": {"lt5": "normal", "5_10": "escalated_review", "10_15": "cut_half", "gt15": "circuit_break"},
+    "vol_target": {"target_vol": 0.08, "rebalance_band": 0.02},
+    "backfill_rule": "禁止回填含未来信息的统计量"
+  },
+  "per_sleeve_risk_cap": null,
+  "solver_ref": {"solver_id": "equal_vol", "params": {}, "tolerances": {}, "fallback": {}},
+  "capital_policy": {"gross_limit": 1.0, "net_limit": 0.95},
+  "parent_version": "PV-0.0",
+  "status": "live",
+  "gate_report": "gate_report_ref",
+  "paper_entered_at": "2026-09-01T00:00:00+08:00",
+  "paper_duration": "auto"
+}
+```
+
+落地要点（全部为冻结条款，非本设计新增）：
+- **data_cut 硬断言**：`data_cut ≤ min(所有输入数据源最大时间戳)`，校验器强制，违反即 `config.invalid` 绝对阻塞、不允许降级放行（§1.2⑤）。
+- **risk_control 只存组合级**：单腿 ddc 参数下沉 sleeve 版本对象；`per_sleeve_risk_cap` 语义=只封顶、不下指令（§1.2⑤）。
+- **版本承诺边界**（§7.5.1 验收硬门）：「预算怎么分」进版本，「分出来的数」运行时算——换求解器/改风险预算/增减 sleeve/改相关性筛查阈值=必须升版本；协方差刷新与 RC 漂移重算不升版本。
+- **vC-0 快照**：Phase B 首条=当前在役三元组（§8 Phase B 动作 1）。
+
+### 3.2 event_log 落地
+
+- 文件：`events/iteration-ledger-YYYY-MM.jsonl`，每行 `{ts, actor, event_type, target, payload}`；actor ∈ {evolution_pipeline, user, risk_layer}；写前 flock、写完 fsync、按月滚动（§3.3）。
+- 事件类型 = §3.2 枚举 v1 原样：version.created / version.updated / component.registered / solver.selected / weight.solved / gate.evaluated / promotion.requested / promotion.approved / promotion.rejected / promotion.executed / promotion.downgraded / risk.action / retirement.triggered / retirement.executed / backtest.completed / reconciliation.failed / checkpoint.created。
+- 既有资产并入：`experiment-ledger.jsonl`、`risk-events.jsonl`（EV-xxx 事件族）按 component.registered / risk.action 语义映射导入，历史行不重写（append-only 原则），仅加 import 标记事件。
+
+### 3.3 状态机持久化与查询
+
+```mermaid
+stateDiagram-v2
+  [*] --> candidate : version.created
+  candidate --> backtested : backtest.completed
+  backtested --> gated : gate.evaluated 全 PASS
+  gated --> shadow : promotion.requested+approved
+  shadow --> approved : G-P1..P4 达标
+  approved --> paper : 用户批准
+  paper --> canary : G-L1..L3
+  canary --> live : G-L4 用户批准(唯一人工门)
+  live --> shadow : 4维漂移任一维连续2期超带(自动)
+  live --> gated : reconciliation.failed/断路器/审计不合格
+  live --> archived : retirement.executed
+  shadow --> archived
+  gated --> retired : RET-1..4
+```
+
+- 正向晋升串行链 + 反向降级（live→shadow / live→gated）全部通过 `promotion.*` 事件驱动；**禁止人工直改 JSON**（§1.2⑤：降级事件同样追加 event_log）。
+- **持久化**：状态本体只存在于账本重放结果；投影缓存 JSON 是物化（头部带 sha256，重放后比对，不一致即 reconciliation.failed，§3.3）。
+- **查询路径**：BFF 启动时全量重放 + 每次轮询增量重放新事件行 → 生成 SQLite 物化视图（版本表/状态表/事件索引表）→ API 只查 SQLite。重放幂等（§3.3 重放伪代码：version.created 建对象、promotion.executed 移指针、risk.action 记录）。
+
+### 3.4 前端 API 契约（BFF 只读）
+
+| Endpoint | 方法 | 请求 | 响应结构 | 对应区块 |
+|---|---|---|---|---|
+| `/api/v1/overview` | GET | `?date=YYYY-MM-DD`（默认最新） | `{nav, nav_chg_1d, mdd, drawdown_pct, active_pv{portfolio_version_id,status}, sleeves[{id,weight,nav,mdd}], last_event_ts, reconciliation_ok}` | 总览驾驶舱 |
+| `/api/v1/engines` | GET | — | `engines[{sleeve_id, status, ic_latest, icir_oos, last_signal_date, paper_or_shadow_days}]` | 引擎卡片 |
+| `/api/v1/portfolios` | GET | `?status=&limit=` | `[{portfolio_version_id, parent_version, status, created_ts, solver_id, gate_pass_ratio}]` | 组合版本视图 |
+| `/api/v1/portfolios/:id` | GET | — | `portfolio_version 全 schema + 状态历史 events[...] + 当前 weight_solution` | 组合版本视图 |
+| `/api/v1/portfolios/:id/timeline` | GET | `?from=&to=` | `events[{ts,event_type,actor,summary}]`（按 target 过滤账本） | 版本详情/事件流水 |
+| `/api/v1/events` | GET | `?type=promotion.*&limit=50&cursor=` | `{items:[{ts,event_type,target,actor,payload摘要}], next_cursor}` | 事件流水 |
+| `/api/v1/risk/gates` | GET | — | `{portfolio_dd_gate{drawdown_pct,band,action}, vol{target,realized,in_band}, sleeves_ddc[{id,state,drawdown,th}], correlation{pair,corr_20d,flag:0.75/0.85/0.90}, circuit_breaker{state,reason}}` | 风控闸门 |
+| `/api/v1/risk/drift` | GET | `?pv=&window=` | `D1..D4[{dim,value,band,in_band,consecutive_violations}]` | 风控闸门-漂移子区 |
+| `/api/v1/migration` | GET | — | `{phase:"A|B|C|D", items[{id,title,state:done|doing|todo,evidence_ref}], blocking:{a1_pass,a2_pass}}` | 迁移阶段进度 |
+| `/api/v1/health` | GET | — | `{ledger_tail_ts, projection_sha256_ok, sync_lag_seconds}` | 全局状态条 |
+
+契约约定：全响应为 JSON、UTC ISO8601 时间戳、分页用 cursor（= 事件行 ts+seq）、无鉴权写操作（BFF 零写面）。`/api/v1/risk/gates` 的三档相关性 flag 对应 §7.5.4 的 0.75/0.85/0.90 分级。
