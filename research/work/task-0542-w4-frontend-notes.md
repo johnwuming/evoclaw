@@ -17,7 +17,23 @@
 - 8180 与 18180 两个 node 进程并存（18180 用途待查）。
 - HP SSH：`hp-quant` 主机名解析失败，改用 IP 直连（TOOLS.md: ssh -p 22 noname@10.12.192.174，密码在 secrets.env QUANT_SSH_PASSWORD）。
 
-### 决策：BFF 结构微调（任务书授权口「若结构需微调，报告说明」）
-- 版本页要消费的 portfolios 端点不存在，不改码无法满足「渲染真实 vC-0 数据」验收。
-- 方案：app.js 新增 3 个只读 GET 端点（engines / portfolios / portfolios/:id），全部数据文件驱动（data/ 下新 JSON，同 migration 模式），零写面，可逆；汇报时明确说明偏离。
+### 00:35 关键事实（定稿依据）
+- R-344 §4.1 一屏三问原文：①健康条同步滞后秒数≤阈值绿+净值日期最近交易日；②下滑引擎卡无「状态未知/停更」；③对账徽标绿+断路器未触发+无超带红点，任一异常首屏红指示。§4.3 版本页：在役高亮、胶囊流与账本重放一致、不渲染 canary。
+- 真实账本仅 2 事件：version.created + weight.solved（均 vC-0）。**无 promotion.executed** → 投影 active_pv_id=null、vC-0.status 投影=candidate；权威 status='paper' 只在 vC-0.json 文件（paper_entered_at 2026-08-25）。
+- 真实权重（账本 weight.solved）：equity_sleeve 0.5803 / hedge_sleeve_gold 0.4197，solver=equal_volatility(solver_equal_vol_v1)，solve_date 2026-08-28。
+- vC-0 sleeves 真实 status：equity_sleeve=active（engine A a13_rsraw_e1f10dz）、hedge_sleeve_gold=active_paper（gold_trend_sma200）。
+- 8180 进程无 LEDGER_DIR（默认 fixtures/good 夹具）；18180 是 tail 测试实例（/tmp/qbff-tail-fixture）不动。无 nginx 站点，验收走 vite dev 5173。
+- 截图惯例：docs/baseline/dashv6-{block}-390x844.png。
+- HP 拷贝：scp -O -P 2222（sftp subsystem 不可用）；源实际路径 portfolio_v1/portfolio/{versions/vC-0.json, events/iteration-ledger-2026-08.jsonl}（任务书路径少 v1 段）。
+
+### 数据方案定稿
+- 新建 `tools/quant-bff/live/`（可逆：删目录即回退）＝正式 LEDGER_DIR：
+  - events/iteration-ledger-2026-08.jsonl（真实账本拷贝）
+  - data/overview.json（nav_series=[]——HP 尚无 NAV 产物，UI 显「待接入」桩；sleeve_stub 删）
+  - data/engines.json（vC-0 派生：真实 sleeve status+paper 天数；IC/最近信号日=null 待接入）
+  - data/portfolios.json（vC-0 权威 status=paper）
+  - data/versions/vC-0.json（全 schema+status_history+weight_solution 含 solver_meta，从真实文件/账本派生）
+  - data/migration.json（沿用夹具内容，迁移页不在本批范围）
+- BFF 改码（任务书授权口）：app.js 新增 3 只读 GET：/engines、/portfolios、/portfolios/:id，数据文件驱动同 migration 模式，均套 ledgerDerived 门卫（账本损坏→503）。id 白名单校验防 traversal。
+- 总览页消费 health+overview+engines+portfolios（在役卡/权重条走 portfolios——投影 active_pv_id=null 因真实账本无 promotion.executed，不伪造事件）。
 
