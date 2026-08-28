@@ -23,3 +23,8 @@
   - maxDD = min(1-NAV/峰值)（含基期1.0）= -0.0908
 - 交叉验证: 与 all_results.json F1_quarterly 条目 ann=0.1357/vol=0.0947/mdd=-0.0908 完全一致；其 sharpe=1.397 为算术年化口径（mean×12÷vol≈0.1323/0.0947），与我们几何口径 1.433 的差异已定位
 - 与 vc0 在案指标(0.0923/1.431/-0.0825)差异根因: 在役原脚本曲线含 DDC REDUCE 月现金段，nav_curves.csv F1_quarterly 列为满仓复现曲线（final_nav 5.229 一致到 4dp）；performance.json 将如实注明口径
+
+## 导出脚本（deliverable: tools/quant-bff/live/export/hp_export_metrics.py）
+- bugfix 1 次：基期 1.0 前插后误加首月特殊项导致 157 条收益，修复为纯环比 156 条
+- 本地验证输出: ann=0.135706 vol=0.094703 sharpe=1.433 mdd=-0.090794（与口径B预演一致）
+- 输出默认 /tmp/performance.json（HP results/ 不写盘，保持只读）
