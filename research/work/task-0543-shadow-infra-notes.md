@@ -42,3 +42,20 @@
 3. equity last_data_date 2026-08-26 vs gold marks 至 08-27：equity 数据滞后1个交易日（08-27 周五缺）→ 对账新鲜度项
 4. paper 成交价=信号价 → D4 滑点=0 by construction，标注 paper 口径，真实滑点回填属动作5 A5 校准后续
 5. gold shadow_nav 2026-08-31 已有行（月末行预生成/含 mmf est），gold paper 8月 MTD +6.95e-5 vs 监控链 net 5.38e-4（口径：paper w=0 仅 mmf est 部分月内 vs 链含 gold_ret？w_applied=0 → net 应同 mmf est 口径，需脚本细看列含义）
+
+## 脚本实现与 dry-run 结果（HP 时区 UTC；run_date=2026-08-28）
+- portfolio_v1/shadow_recon.py（16KB）：V1 目标组合NAV(weight_solution加权) vs 在役名义(0.5/0.5)双链rebase逐日diff→max 11.485bp≤20bp 带内；V2 权重差±0.0803>band0.02 超带(已知口径差,附归因不触发动作)；V3 ledger seq连续2事件+sleeve引用全部可达+vC0后在役日无缺口+新鲜度(equity滞2工作日/gold滞1)
+- portfolio_v1/drift_monitor.py（16KB）：D1 equity=重叠不足(回测full_nav末行08-14 vs paper起08-14,交集0收益日)+gold=provisional_in_band(paper MTD 6.949e-5 vs 链net 5.38e-4,diff 4.685bp≤20bp)；D2 equity/gold=观测不足(9/60、4/60,最早可判~2026-11-07)；D3 在带内(执行率100%对齐100%,8/8笔+gold w_signal=cur_w=0)；D4 在带内(max滑点0bp,构造性,注明A5校准后续)；连超计数全0(drift-history.jsonl append,同日去重)
+- 修复2处：gold D1 month列实为月末日期→startswith匹配；D1/D2顶层状态取最差侧
+- 幂等：同日重跑×2 无报错，产物同名覆盖(tmp+os.replace)，history 1行
+- 零改动：find -newermt 16:10 全树仅 portfolio_v1/ 下8文件(2脚本+README+5产物)；notify-state.json/notify_hub.log 16:10:01=在役通知进程自身心跳，早于本任务首跑16:25
+- README 更新日志已追加 task-0543 行
+
+## crontab 安装提案（未安装）
+理由：equity daily 16:30 出T日NAV；gold daily 07:40 补T-1 marks → 08:10 起双链T-1数据齐，日频对账+漂移刚好覆盖最新完整交易日；两脚本秒级轻量；幂等重跑安全
+建议行（HP noname crontab）：
+10 8 * * 1-5  cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python portfolio_v1/shadow_recon.py >> logs/shadow_recon.log 2>&1
+15 8 * * 1-5  cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python portfolio_v1/drift_monitor.py >> logs/drift_monitor.log 2>&1
+安装命令（批准后执行）：
+crontab -l > /tmp/crontab.bak-task0543 && (crontab -l; echo '10 8 * * 1-5  cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python portfolio_v1/shadow_recon.py >> logs/shadow_recon.log 2>&1'; echo '15 8 * * 1-5  cd /home/noname/quant-evolve && /home/noname/miniconda3/envs/quant/bin/python portfolio_v1/drift_monitor.py >> logs/drift_monitor.log 2>&1') | crontab - && crontab -l | tail -4
+D2 频率说明：§7.2 定周频；初版日频跑全4维，obs≥60 前本就不判带，判定触发早于周频属更保守，不改带宽
