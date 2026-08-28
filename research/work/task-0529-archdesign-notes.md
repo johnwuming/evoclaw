@@ -25,3 +25,9 @@
 - §8 Phase A 审计地基(纯文档零接触)→B 影子双轨(vC-0快照=F1 md5 915e446388… 对齐;删文件即回退)→C 治理切换(唯一红线=改active需批准,分钟级停机,指针回滚)→D 旧件退役(归档可回切)
 - 附录A GLOSSARY: vC→PV, registry=Model Registry, composites.json=Portfolio Registry, g1-g6=CG-1..6, A腿=Equity Sleeve, gold腿=Hedge Sleeve—Gold
 - 附录B: B7 IC趋势线/B8 前视检测=统一开发待派(Phase B 批次,纯看板层零架构变更)
+
+## 现状系统事实（VPS 实查 2026-08-28）
+- agent-dashboard: /root/.openclaw/workspace/tools/agent-dashboard/，Express+node:sqlite（v4，deps 仅 express+volcengine），systemd 常驻 agent-dashboard.service，nginx 反代。已有 390x844 移动端截图基线惯例（dashv5-*-390x844.png）
+- 04-投资研究/ 共 1976 文件：含 engines/{a2,gold}、experiment-ledger.jsonl、risk-events.jsonl（EV-xxx 事件、level1_cut_half 规则、nav_drawdown_vs_hwm 阈值 0.25）、w6-registry-bind-v1.x.json、各引擎 nav/trades/metrics/holdings csv+json 产物族
+- 量化产物由 HP sync cron 落 shared/results/04-投资研究/（只读镜像）
+- 设计决策输入：新 Dashboard 定位纯只读读镜像；写操作（人工门）经任务中心流转回 HP 单写点，规避前端直改 active（R-336 §8 红线）
