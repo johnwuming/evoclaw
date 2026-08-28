@@ -21,4 +21,13 @@
 - W1 事件流水读取层 | W2 只读API(events/portfolios/health) | W3 前端骨架+区块④⑥ | W4 驾驶舱+引擎卡+版本视图(卡PhaseB动作1 vC-0快照) | W5 风控闸门+对账徽标(卡PhaseB动作4/5) | W6 双看板验收 | W7 切换准备(Phase C批准后) | W8 切换+观察 | W9 收尾归档
 - 原则：事件流水API先行是地基；旧看板不下线，全程观测能力不断档
 
-## 旧看板能力盘点（进行中）
+## 旧看板能力盘点（完成，server.js 718KB 仅 grep 未全读）
+主导航4 Tab：任务 / 用量 / 报告 / 量化（#page= hash 路由）
+1. **任务**：任务中心看板（projects/tasks/task_events/agent_status，状态 pending→running→done/failed），创建/编辑/重试/删除/审核（/internal/review）、项目文档查看（docs 子Tab）
+2. **用量**：多模型配额面板（zai/volc/volc-coding/deepseek，各带手动 refresh POST）、metrics 趋势/成本/系统指标（/api/metrics/*）、HP状态（/api/hp-stats）、调度状态（/api/dispatch-status）、agent监控（agent-monitor 详情+告警+会话replay+abort）
+3. **报告**：shared/results 扫描列表+详情渲染（marked）、筛选
+4. **量化**（6子Tab）：数据（timing-config/data-health/data-assets/registry/freshness/consistency/crowding）、因子（factor-catalog/ic-series/models/evolution）、模型、回测（btlc/e2e-curves/f6-curves/timing-matrix/q4b-contrast）、模拟实盘·灰度（paper-summary/nav/trades/portfolio/engines/shadow-nav/run-status）、迭代历史（history/decisions/pending/ideas/ledger/lifecycle/gates/dsr/active/version-options/baseline）
+5. 全局：告警（alerts 表，active/history + acknowledge POST）、30s 自动刷新、登录鉴权（多用户 auth 有规划文档 docs/multi-user-auth-plan.md）
+6. **旧看板里的写操作**（新看板必须零写面）：任务 CRUD+retry+review、配额 refresh、agent abort、alerts acknowledge、**/api/quant/action（量化动作队列）**
+7. 量化 deprecated 端点：quant/summary|nav|factors|evolution、microcap/*
+→ 对照表直接用这份清单（4主Tab+6子页+全局告警/鉴权）
