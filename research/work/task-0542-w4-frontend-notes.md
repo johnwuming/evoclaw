@@ -26,7 +26,11 @@
 - 截图惯例：docs/baseline/dashv6-{block}-390x844.png。
 - HP 拷贝：scp -O -P 2222（sftp subsystem 不可用）；源实际路径 portfolio_v1/portfolio/{versions/vC-0.json, events/iteration-ledger-2026-08.jsonl}（任务书路径少 v1 段）。
 
-### 数据方案定稿
+### 00:50 数据源升级完成
+- BFF app.js 新增 3 只读 GET（engines/portfolios/portfolios/:id），套 ledgerDerived；测试更新（W1-W2 守卫测试原断言 engines 404，已改为实装后预期）；npm test 20/20 过。
+- 8180 进程已重启：LEDGER_DIR=live（原夹具进程 2821156 已 TERM；nohup 日志 /tmp/quant-bff-8180.log）；18180 tail 测试实例未动。
+- API 验证（真实数据）：health tail=2026-08-28T15:50:22Z sync_lag≈2151s 绿 pending=0；overview nav=null（真实无 NAV 产物）；engines 2 sleeve（equity=active / gold=active_paper，gold paper 4 天）；portfolios vC-0 paper；详情全 schema+weight_solution（0.5803/0.4197）+status_history 2 条。
+- 事实：equity sleeve status=active（registry_ref，非 paper），paper_or_shadow_days 仅 gold=4。
 - 新建 `tools/quant-bff/live/`（可逆：删目录即回退）＝正式 LEDGER_DIR：
   - events/iteration-ledger-2026-08.jsonl（真实账本拷贝）
   - data/overview.json（nav_series=[]——HP 尚无 NAV 产物，UI 显「待接入」桩；sleeve_stub 删）
