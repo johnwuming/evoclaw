@@ -31,3 +31,21 @@
 6. **旧看板里的写操作**（新看板必须零写面）：任务 CRUD+retry+review、配额 refresh、agent abort、alerts acknowledge、**/api/quant/action（量化动作队列）**
 7. 量化 deprecated 端点：quant/summary|nav|factors|evolution、microcap/*
 → 对照表直接用这份清单（4主Tab+6子页+全局告警/鉴权）
+
+## R-336 关键治理语义（已读 §4/§5/§6/§7/§7.5/§8）
+- **状态机**：candidate→backtested→gated→shadow→approved→paper→canary→live；反向 live→shadow（4维漂移连续2期超带）/live→gated（对账失败/断路器/审计不合格）→archived/retired；canary 预留未启用；G-L4 用户批准=唯一人工门
+- **门禁阈值**：G-S1-S6（候选→影子：OOS Sharpe≥1.0等）；G-P1-P4（影子→paper：影子期≥1调仓周期/对齐率≥95%/TE带/漂移初查）；G-L1-L3+G-L4（paper→canary→live：漂移连续2周期在带/执行率≥90%/滑点≤11.5bp×1.5/用户批准）
+- **组合级风险闸门（§4.4）**：回撤4带 <5%正常/5-10%提级审查/10-15%降仓×0.5/>15%熔断；target_vol 8%±2pp带；单腿ddc -20%×0.5回补-5%；运行时相关性>0.85且升→防御降仓、>0.90→提级审查；裁决三段式=熔断硬上限>组合级>单腿级
+- **断路器（§6.1）**：单日亏≥2%NAV停新仓/回撤>15%熔断+用户通知/连续2次调仓失败或日频任务3日失败转人工/NAV停摆≥2交易日冻结自动决策；只能人工复位
+- **三方对账（§6.3）**：paper账本 vs 引擎持仓 vs portfolio_version；每调仓日强制+每周例行；容忍带单腿≤1pp/现金≤0.5%NAV/标的集合完全一致；超限→reconciliation.failed+冻结新仓+用户通知。旧看板一致性徽标升级为对账呈现
+- **漂移4维（§7.2）**：D1日P&L偏差≤20bp/日(每日)、D2 Sharpe偏差≤0.3(每周)、D3执行率≥90%+对齐率≥95%(调仓日)、D4滑点≤假设×1.5(调仓日)；任一维连续2期超带→晋升冻结+归因报告
+- **退役 RET-1..4（§7.1）**：回撤超历史MDD×1.5(现役触发线-10.2%)/连续6月跑输/因子IC连续3月<0/危机窗相关性>0.90；退役≠删除，留档可回溯
+- **迁移四阶段（§8）**：A审计地基(六项审计A1/A2绝对阻塞+gate spec+兜底定稿+GLOSSARY)→B影子双轨(vC-0快照+等波动求解器+回测选择器化+影子对账≥1调仓周期+漂移启用+协方差对比+MVO跑批不启用)→C治理切换(唯一红线：paper指针切换=改active需用户批准，分钟级停机；事件溯源写路径+对账上线+断路器/checkpoint接入)→D旧件退役(旧命名/旧脚本归档+退役规则转正式)；全部可回退
+- **事件类型17种**：version.created/updated、component.registered、solver.selected、weight.solved、gate.evaluated、promotion.requested/approved/rejected/executed/downgraded、risk.action、retirement.triggered/executed、backtest.completed、reconciliation.failed、checkpoint.created；actor∈{evolution_pipeline,user,risk_layer}
+- **版本承诺边界（§7.5.1）**：「预算怎么分」进版本，「分出来的数」运行时算；换求解器/改预算/增减sleeve/改相关性阈值=升版本
+
+## 冲突点/待 R-342 修订对齐（写作中记录）
+1. R-342 §4.3 区块④更新频率120s vs 区块②300s：引擎状态变化由事件驱动，建议②改为事件驱动+300s兕底（待商榷，写作时定）
+2. R-342 API 契约无「告警/异常汇总」单一入口（断路器/对账失败/漂移超带分散在③区块），四场景之「风险事件响应」需要一个统一的问题清单入口——PRD 建议新增「待处理事项」视图（数据全部来自既有 endpoint，不需要新 API）→ 建议修订时对齐
+3. R-342 §4.2 导航为底部Tab≤5项但六区块>5：需明确Tab归并方案（驾驶舱/引擎+风控/版本/事件/迁移=5 或六区块并入四Tab）→ 建议修订时对齐
+4. 旧看板的任务中心/用量/报告三大功能与量化无关：新看板若只做量化治理，这三块在过渡期由旧看板 /legacy 承接——R-342 §4.7 只说旧看板降级保留，需明确「新旧分工边界」→ 建议修订时对齐
