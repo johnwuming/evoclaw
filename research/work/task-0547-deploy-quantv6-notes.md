@@ -34,3 +34,8 @@
 - 静态资源 200；API 无凭据 401
 - 无头浏览器 390x844 + basic auth：status 200，scrollWidth=390 ✓，总览页渲染：账本尾 2026-08-28 23:50、对账✅、风险 0、引擎 2 全部在役、vC-0 paper 权重 58/42 与账本一致；截图 work/task-0547-quantv6-390.png
 - 截图视觉复核：暗色主题布局正常，无溢出/错位/报错；"待接入"为信息性占位（NAV 待 HP 产物）
+
+## 6. 交付物
+- 报告：shared/results/05-量化投资/R-350-新看板部署quantv6.md（编号 R-350，ls 确认前序为 R-349）
+- 截图：work/task-0547-quantv6-390.png
+- README：quant-bff/README.md 追加更新日志一行 + deploy 注释改为已安装（quant-dashboard 无 README）
