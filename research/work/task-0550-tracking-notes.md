@@ -70,3 +70,7 @@
 ② is_limit_down: 板块感知阈值 — 300/301/688/689 → 0.198(创业板/科创板±20%, ST 仍 20%); 主板 ST → 0.05; 其余 0.098; pct <= -th+1e-4。接线两处(清仓 L1442 块 skip+保留持仓; 减仓 L1464 块 continue 下一个)。env 开关 PAPER_LIMIT_DOWN_GATE。回退: .bak + 开关。
 ③ watermark state["last_div_date"] + 双挂点(action_daily 回填循环逐日 credit; action_rebalance 卖出块前) + entitlement buy_date<ex_date + ledger 文件 paper-div-ledger.csv(不动 trades.csv schema) + 税务 v1 毛额入账(v1.1 可选 10% 预扣) + 依赖: dividend_events 需定期刷新(无 cron, 手动 prep_dividend_roa --only div)。
 实施顺序: ①已完成(只读) → ②批准后实施(下次调仓前) → ③批准后实施(分红季紧迫)。两缺口现均活敞口。
+
+## 检查点 7: 交付自检 (02:55)
+- 报告 R-351 落盘 9453 bytes (>=8KB 达标); README L300 新增日志行; 报告+notes+README=仅有的三处本地写入
+- HP 侧: 全程 SSH 只读 grep/sed/python -c, 无脚本上传, 无在役文件改动, 无进程操作
