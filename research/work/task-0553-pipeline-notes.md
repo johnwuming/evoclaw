@@ -45,3 +45,11 @@
 - HP `~/.openclaw/workspace-quant/scripts/` 仅 collect-metrics.sh（1 分钟推送任务指标到 VPS:8055，非数据文件通道）
 - VPS root crontab/systemd timers//etc/cron.d：无 quant-bff 相关同步
 - task-0549 为一次性手动 scp。**结论：BFF 双文件目前无自动供给通道，"对齐既有 rsync cron"前提不成立，提案需如实给出（含新挂点必须用户批准）**
+
+## 发现5：固化脚本实施与验证（2026-08-29）
+- 新脚本：VPS `tools/quant-bff/live/export/hp_export_metrics.py`（覆盖更新，7891B）+ HP 部署副本 `~/quant-evolve/portfolio_v1/governance/export/hp_export_metrics.py`（md5 43f3932a… 两端一致）
+- 变更点（可归因）：①新增 --out-dir 同时导出 performance.json+nav_curves.csv（原名，原子写 tmp+rename+fsync）②generated_at 改为源 csv mtime（UTC 确定性）+新增 generated_at_basis 字段③generator 标注 task-0549/0553④新增 --check 比对模式（exit 0/3）⑤指标计算逐行未动
+- HP 实跑验证（/tmp/task0553-export）：两次运行输出字节相同（performance.json md5 e959d21a…、csv 9704a300…），--check CHECK-SAME exit=0；四指标 ann=0.135702/vol=0.094679/sharpe=1.4333/maxDD=-0.090794 与 0549 完全一致
+- 对现役文件 diff：nav_curves.csv md5 逐位相同=0；performance.json 除 generated_at/generated_at_basis/generator 三字段（幂等语义变更，可归因）外逐字段一致
+- BFF 实查：quant-bff.service active，127.0.0.1:8180；/api/v1/portfolios 返回 vC-0 正常；/api/v1/portfolios/vC-0 performance.metrics 四指标=导出值，data_as_of=2026-07-31，curve_md5=9704a300…；BFF 代码零改动（缺失降级 null 逻辑原样保留，grep 到 performance 注入点 fallback）
+- 约束遵守：未动 registry/paper_engine/evolution_pipeline/crontab/在役进程；HP 新增文件仅 governance/export/ 子目录（Phase C 治理层内新增，additive）
