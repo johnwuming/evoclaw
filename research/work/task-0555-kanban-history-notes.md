@@ -34,3 +34,19 @@
 - 现役 vC-0：引用既有 performance.json，不重复
 - 跳过清单（标注理由）：F6（无曲线）、F7b（无曲线）、r309 旧 paper（真实盘 7 交易日）
 - 版本 scoped 文件（新增，VPS live/data/）：performance.F0_buyhold50.json 等 6 个 + nav_curves.F7a.csv + perf_history_index.json
+
+## 指标回填结果（0549 口径重算，HP /tmp/t0555/compute.py）
+| 版本 | 月数 | ann | vol | sharpe | mdd | 锚匹配 |
+|---|---|---|---|---|---|---|
+| F0_buyhold50 | 156 | 0.148614 | 0.124607 | 1.1927 | -0.129509 | ✓ all_results#F0_buyhold50 |
+| F1_equal | 156 | 0.135377 | 0.092276 | 1.4671 | -0.082757 | ✓ |
+| F3_volparity | 120(列前36月为空,2017-08起) | 0.0951 | 0.068804 | 1.3822 | -0.060453 | ✓ |
+| F4_erc | 120 | 同 F3（ERC 与 volparity 该窗口收敛，锚一致） | | | | ✓ |
+| F5_b50_tilt65_80 | 156 | 0.133653 | 0.091942 | 1.4537 | -0.08236 | ✗ 无锚（all_results 无此键，F5 键为空结构）→ cross_check_match=null |
+| F7a | 156 | 0.136063 | 0.089057 | 1.5278 | -0.068012 | ✓ final_nav 5.25089≈5.251；其 sharpe1.483 为算术口径已注记 |
+
+## 交付文件（VPS live/data/，全部新增，现役零改动）
+- performance.{F0_buyhold50,F1_equal,F3_volparity,F4_erc,F5_b50_tilt65_80,F7a}.json ×6
+- nav_curves.F7a.csv（月频 month,nav 156 行）
+- perf_history_index.json（versions+skipped: F6/F7b/paper-r309）
+- 现役校验：performance.json md5 e959d21a…（未动）；nav_curves.csv md5 9704a300…（与 curve_source 记录一致）

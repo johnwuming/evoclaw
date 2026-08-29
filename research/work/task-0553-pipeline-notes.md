@@ -53,3 +53,14 @@
 - 对现役文件 diff：nav_curves.csv md5 逐位相同=0；performance.json 除 generated_at/generated_at_basis/generator 三字段（幂等语义变更，可归因）外逐字段一致
 - BFF 实查：quant-bff.service active，127.0.0.1:8180；/api/v1/portfolios 返回 vC-0 正常；/api/v1/portfolios/vC-0 performance.metrics 四指标=导出值，data_as_of=2026-07-31，curve_md5=9704a300…；BFF 代码零改动（缺失降级 null 逻辑原样保留，grep 到 performance 注入点 fallback）
 - 约束遵守：未动 registry/paper_engine/evolution_pipeline/crontab/在役进程；HP 新增文件仅 governance/export/ 子目录（Phase C 治理层内新增，additive）
+
+## 发现6：端到端闭环（同名覆盖）
+- 现役文件备份：/tmp/task0553-bak-performance.json、/tmp/task0553-bak-nav_curves.csv（回滚点）
+- 新产物 tmp+mv 原子覆盖 live/data/ 两文件 → BFF 复查 vC-0 metrics/curve_md5 与导出值一致（ann=0.135702/vol=0.094679/sharpe=1.4333/maxDD=-0.090794，md5 9704a300…）
+- 降级探针：GET /api/v1/portfolios/vNOPE → performance=null（app.js:207 降级语义原样生效，不 503）
+
+## 报告要点备忘（供 R-355 撰写取材）
+- 脚本固化差异 4 点：--out-dir 双文件原子写 / generated_at=源mtime确定性+generated_at_basis 新字段 / generator 标注 0549-0553 / --check exit0-3；指标计算逐行未动
+- 月频提案两方案：A 求解器挂点（Sat cycle 后，覆盖版本切换日，但需版本感知列映射且非月频语义）；B 月度调仓日挂点（推荐，`0 16 1-7 * *`，幂等无变化零副作用，vixie cron 日+星期 OR 陷阱已规避）
+- 同步通道：无既有 rsync（双侧实查），提案 VPS 拉取式 sshpass+scp -O（本任务验证同款），secrets.env 引用不入 cron 明文；新挂点=新增一行 cron+包装脚本，均待用户批准，本次零 crontab 改动
+- 已知限制：脚本硬编码 vC-0/F1_quarterly，vC-1 激活需更新两常量（或后续参数化 --version）
