@@ -17,3 +17,17 @@ started
 - 代码定位：Overview.jsx（60s 轮询）、Risk.jsx（断路器+四维漂移+recon）、api.js（EVENT_TYPES 17）
 - 页面实测 390×844 scrollWidth 均 390（无横向滚动纪律基线）
 - 注意：R-359 说三档旗 0.75/0.85/0.90，R-336 §4.4 只有 0.85/0.90 两档 → 需查 R-342/R-344 找 0.75 档出处
+
+## 3. R-355/R-358 传输通道要点
+- R-355：HP→VPS 无既有 rsync 文件通道；最接近模式是 VPS→HP 拉取式 sshpass+scp -O；HP 每分钟 collect-metrics.sh HTTP 推送（非文件通道）；导出脚本范式：VPS 仓 tools/quant-bff/live/export/hp_export_metrics.py + HP 副本 portfolio_v1/governance/export/，幂等（generated_at 取源 mtime）+ 原子写 tmp+fsync+rename + --check；月频挂点方案 B 待批（未落 crontab）
+- R-358：既有通道 auto_sync_notify.py（/root/.openclaw/workspace-quant/scripts/），cron 每30分钟增量 cron-auto-sync + 每日03:00全量；MIRROR_INCLUDES 有 --include=baseline-paper-*，覆盖 baseline-paper-nav.csv/trades/portfolio.json/summary.json 四件套；镜像落 /root/.openclaw/workspace-quant/results/
+- R-358 BFF 新端点范式：src/nav-series.js + config.js paperNavPath（env PAPER_NAV_FILE）+ app.js 注册路由（.catch(next)，不套 ledgerDerived）；契约 nav_series@v1；降级语义 200+null 不 503；npm test 38/38
+- R-358 前端范式：api.js fetchNavSeries + Overview.jsx SVG 轻量曲线（viewBox 自适应）+ 口径标注；390×844 验证 bodyScrollW=390
+- BFF 端口 127.0.0.1:8180；quant-bff.service；线上 https://www.zhengqiangnan.cn/quantv6/
+
+## 4. R-342 §3.4 risk/gates 契约草案（既有出处！）
+- GET /api/v1/risk/gates → {portfolio_dd_gate{drawdown_pct,band,action}, vol{target,realized,in_band}, sleeves_ddc[{id,state,drawdown,th}], correlation{pair,corr_20d,flag:0.75/0.85/0.90}, circuit_breaker{state,reason}}
+- 契约约定：JSON、UTC ISO8601、cursor 分页、无写操作；三档相关性 flag 对应 §7.5.4 的 0.75/0.85/0.90 分级（R-342 行208/213）
+- R-342 关键决策：三落点分工——计算与写入全在 HP，VPS 只持只读镜像，Dashboard 纯只读消费者；390px 硬约束全局 overflow-x hidden（决策9）
+- R-342 §3.1 portfolio_version schema 有 drawdown_gates: {lt5:normal, 5_10:escalated_review, 10_15:cut_half, gt15:circuit_break}
+- 待办：读 R-336 §7.5.4 拿 0.75 档定义；读 R-342 §4.3 轮询分频、§4.4 390px 规范
