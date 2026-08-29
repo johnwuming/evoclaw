@@ -13,6 +13,7 @@
 
 ## 已完成步骤
 1. 备份：scripts/paper_engine.py.bak-task0546-20260829（md5 c2cc87bb…）
+2. 补丁：本地 apply_patch → ssh cat 上传 .new → HP py_compile COMPILE_OK → 原子 mv；新文件 1870 行，md5 3de3aa965cfaff18d581e3ac31754451；diff vs .bak 111 行全部为②③
 3. 单测：~/quant-evolve/tests/test_task0546.py → 33 PASS / 0 FAIL（阈值8、清仓闸2、闸关回退1、减仓闸3、分杠10、daily挂点3、rebalance挂点3、开关env 2、无K线1）
    调试记录：①首轮 action_rebalance 未 stub pe.load_state 读到默认空 state 提前 sys.exit（未触任何在役文件，因 STATE_FILE 已 patch 到 tmp）→ 补 stub；② E 场景未恢复真实 IO 函数 → 保存 REAL 引用后恢复；③台账断言 dtype 过严（CSV 读回 code 变 int）→ astype(str).zfill
 4. HP 实地验收：is_limit_down 定义 L969、接线 L1548（清仓）/L1577（减仓）；DIV_EVENTS+credit_dividends 引用 1→7；diff vs .bak 共 111 行与本地一致；在役 paper-state/trades/nav mtime 均早于部署（未被触碰）；在役 results/ 下无 paper-div-ledger.csv；最终文件 py_compile OK
