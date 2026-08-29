@@ -52,3 +52,45 @@
 - K5 说明卡版本化 → task-0558 已生效
 
 ## 3. 代码核验（进行中…）
+
+## 3. BFF 端点核验（2026-08-29 14:35，curl 全部 200/404，响应落 /tmp/q561/）
+实装端点（12 个，全部 HTTP 200）：health, overview, engines, portfolios, portfolios/vC-0(12.3KB), portfolios/vC-0/holdings(1KB), portfolios/vC-0/trades(1.3KB), events(limit=3 OK, cursor 分页), migration, risk/gates(2.4KB), perf-history, perf-history/:id
+未实装（404 NOT_IMPLEMENTED_THIS_BATCH）：**/risk/drift**、**/portfolios/:id/timeline**（R-342 §3.4 契约承诺但 W3+ 未做）
+BFF 端口 127.0.0.1:8180（systemd quant-bff.service, LEDGER_DIR=tools/quant-bff/live）
+
+### 端点内容要点
+- health ✓ 契约全字段（ledger_tail_ts/projection_sha256_ok/sync_lag_seconds=3358s/pending_risks{count,items}）+ 扩展（replay 统计/cold_archive）
+- overview：**nav/nav_chg_1d/mdd/drawdown_pct=null、sleeves=[]、active_pv=null**（overview.json 静态文件注明 HP NAV 产物未输出）；last_event_ts/reconciliation_ok ✓ → 根因=数据源缺（HP 侧 NAV 汇总产物），task-0560 处理中
+- engines：2 引擎（equity_sleeve/A, hedge_sleeve_gold/gold_trend_sma200），status/data_cut/description/paper_or_shadow_days=4 ✓；**ic_latest/icir_oos/last_signal_date=null**（已知 K2，HP 引擎指标产物待接入）
+- portfolios：vC-0 一条 ✓；migration：phase=B，仅 5 items（A1✓A2✓done，B1 doing，B2/B3 todo），blocking a1/a2 pass
+- risk/gates：**仅 circuit_breaker + drift(D1-D4 含 consecutive_out_of_band/freeze_trigger) + recon(v1/v2/v3) + pending_risks**；契约承诺的 **portfolio_dd_gate（回撤四带）/vol（波动带）/sleeves_ddc/correlation（两腿相关性三档）四组全部缺失**
+- perf-history（扩展端点，非 R-342 契约）：W6 task-0553/0555 已生效（K4）
+
+## 4. 前端逐页核验（grep/read 实据）
+
+### Overview.jsx（9.2KB 全读）
+- 已实装：健康卡（滞后秒数+数据截止+账本尾）、③待处理风险卡（count+对账徽标 ✅/❌）、②引擎活性摘要卡、在役版本卡+WeightBar 权重堆叠条（detail 接口取 weight_solution）、引擎卡第二屏（status/IC 待接入/信号日待接入/paper 天数）、NAV 待接入桩、lag>=72h 红横幅、60s/300s 轮询
+- 缺口：①NAV 曲线+30/90/1Y 切换（K1 task-0560 进行中）；②当前回撤数值与四带带位展示（依赖 overview 数据源，同为 K1 范围）；③PRD「点对账徽标→差异抽屉 P1」未见（P1 未做）
+
+### Risk.jsx（8.6KB）
+- 已实装：断路器状态卡、4 维漂移逐项（带内/超带/观察不足+连超计数+冻结触发）、对账三视角摘要、关联待处理风险、降级 SOP 说明、超带置顶逻辑（overBandCount 徽标）
+- 缺口（对照 PRD §4.2 六组闸门验收）：①回撤分级闸门四带仪表（无渲染+BFF 无数据）②波动率带 8%±2pp（同）③两腿 20 日相关性三档 0.75/0.85/0.90（同）④退役监视 RET-1..4 余量（PRD 标 P1，无渲染）⑤「点闸门→事件页定位 risk 事件」交互未见
+
+### Version.jsx（17.7KB）
+- 已实装：状态机胶囊流 approved→paper→live（canary 不渲染 ✓ 符合 PRD 差异点5）、版本列表状态过滤、详情抽屉（sleeve/code_hash/data_cut/gate_report 显「未评级」/求解器/求解类型/fallback 契约/权重解合计100%）、三视图+说明卡版本化（K3/K4/K5 已生效）
+- 缺口：①版本树（parent_version 链，R-342 §4.3 区块③承诺）grep 无 → 未渲染（当前仅 vC-0 单版本，树退化；P1 范围）②风险控制配置展示（回撤四带阈值/波动目标 8%±2pp，PRD 区块③ P1 详情抽屉字段）grep 无 → 未渲染 ③两版本 diff（PRD P2 backlog，不算缺口）
+
+### Events.jsx（3.9KB）
+- 已实装：倒序时间线、EVENT_TYPES 17 种全集着色族（promotion 蓝/risk 红/weight+solver 绿/reconciliation.failed critical/retirement）、payloadSummary 摘要、前端过滤（W3 简化：全量载入后过滤）、cursor 分页、待决/待决超期计算（computePendingFlags，35 天周期）
+- 缺口：①过滤维度=单一 filter（需对照验收「按类型/执行者/对象过滤」——W3 简化为全量前端过滤，actor/target 过滤维度待确认 UI）②P1：点降级事件展开触发规则+实测 vs 阈值、点对账失败展开差异明细、晋升批准显示批准人时间（未做）
+
+### Migration.jsx（4.1KB）
+- 已实装：A1/A2 审计置顶+绝对阻塞红条（blocked 判定）、Phase C 未完成项「需用户批准」标签、证据链接（evidence_ref 有则显路径）、四阶段数据渲染
+- 缺口（数据侧为主）：migration.json 仅 5 行——Phase B 缺动作 1-5 行（R-346/347/348 已完成的 vC-0 快照/求解器/选择器化/影子对账/漂移监控未入表）；**B2(MVO 对照)/B3(协方差对比) 标 todo 但 R-349(task-0544) 已完成留档 → 投影滞后**；Phase C/D 动作行全缺（R-344 区块⑥要求四阶段卡片列按 R-336 §8 总览表口径）
+
+### 全局
+- HealthStrip（799B）：新鲜度+刷新按钮 ✓；**投影校验状态未展示**（health 接口有 projection_sha256_ok 字段，条上不显示；sha 失败时 BFF 503→页面报错条兜底）
+- TabBar（20 行）：无风险角标红点 → PRD §2.2「待处理风险→风控 Tab+健康条红点」**Tab 侧角标未实现**（健康条侧也无红点，只有总览页内 ③ 卡片）
+- 零写入口 ✓（全站无表单/提交）
+- 轮询分频：overview/events 60s（PRD/R-342 定 120s for events——W3 简化注明，轻微偏差）
+- Placeholder.jsx 为 W3 骨架遗留，五 Tab 均已实装页面，Placeholder 未被引用（需确认 App.jsx TABS 表）
