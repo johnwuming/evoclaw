@@ -39,3 +39,18 @@
 兜底：${p} 下未实现→404 NOT_IMPLEMENTED_THIS_BATCH；全局→404 NOT_FOUND；错误中间件 {error:{code,message}}
 横切：requestTimeout 5s → 503 UPSTREAM_TIMEOUT；ledgerDerived 门卫 → 503 INITIALIZING/LEDGER_CORRUPTED/PROJECTION_MISMATCH/LEDGER_REFRESH_TIMEOUT
 未实现（R-342 §3.4 原承诺、R-359 B1/B2）：risk/drift、portfolios/:id/timeline → 404 NOT_IMPLEMENTED_THIS_BATCH
+
+## 前端项目（quant-dashboard，dashv6）
+- 路径 /root/.openclaw/workspace/tools/quant-dashboard/，Vite+React18，base=/quantv6/
+- dev 5173 / preview 4173，proxy /api → 127.0.0.1:8180（quant-bff）
+- src/api.js L4：API_BASE=(import.meta.env.VITE_API_BASE||'').replace(/\/$/,'')；生产 VITE_API_BASE=/quantv6 → 请求 /quantv6/api/v1/*（nginx 映射回 BFF /api/*）
+- fmtID(id,max=14) 在 api.js L97；Events.jsx actor/target 过滤已有（E3 已补）
+
+## risk/gates 完整返回（assembleRiskGates，schema risk_gates@v2）
+{schema, run_date, circuit_breaker{state,reason}, drift{run_date,source_file,dims[]}, recon{run_date,source_file,...摘要}, pending_risks{count,items}, portfolio_dd_gate{drawdown_pct,peak_nav,peak_date,as_of,band,action,caliber,band_source,charter{cut_half_at,stop_at,charter_version},status,note}, vol{target,band_pp,window_days,realized,obs_count,in_band,status,note}, correlation{pair,method,window_days,corr,corr_prev_5d,flag_level,flag_label,thresholds{t1:0.75,t2:0.85,t3:0.9},status,note}}
+
+## 其他端点关键结构
+- portfolios/:id/navseries：schema nav_series@v1，{portfolio_version_id,status,caliber:runtime_paper,source,nav_series,summary{nav,nav_chg_1d,nav_chg_1d_pct,mdd,drawdown_pct,data_start,data_end,points}}；非 paper→note 引 /perf-history/:id；缺失降级 null
+- perf-history：schema perf_history@v1 {generated_at,caliber_ref,versions[],skipped[]}；:id → perf_history_detail@v1 {performance|null（nav_curve）}；vC-0 特判
+- health 增量字段：ready,status,reconciliation_ok,ledger_corrupted,replay_duration_ms,replay_mode,replay_events,ledger_errors,cold_archive{files,events,min_ts,max_ts}
+- events：X-Ledger-Tail-Ts 响应头；cursor=`<ordinal>:<ts>`；type 支持 promotion.* 前缀通配；payload>400B 截断为 summary
