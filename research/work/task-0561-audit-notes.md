@@ -94,3 +94,15 @@ BFF 端口 127.0.0.1:8180（systemd quant-bff.service, LEDGER_DIR=tools/quant-bf
 - 零写入口 ✓（全站无表单/提交）
 - 轮询分频：overview/events 60s（PRD/R-342 定 120s for events——W3 简化注明，轻微偏差）
 - Placeholder.jsx 为 W3 骨架遗留，五 Tab 均已实装页面，Placeholder 未被引用（需确认 App.jsx TABS 表）
+
+## 5. 无头浏览器实访（14:38，390×844，Basic Auth，截图 /tmp/q561/shots/）
+- 五 Tab 全部渲染正常，scrollWidth 均=390（无横向溢出 ✓ G4）
+- overview：三问卡全呈现+引擎卡 2 张+权重条 58/42+NAV 待接入桩 ✓
+- risk：断路器未触发+D1-D4（D1/D2 暂不判带如实）+recon V1带内/V2超带(口径差打标)/V3带内+SOP ✓；无回撤/波动/相关性/退役四组闸门 ✗
+- version：状态过滤+vC-0 卡+胶囊流 ✓已批准→paper当前→live ✓
+- events：17 类型过滤（含计数）+倒序+payload 摘要（recon 类显原始 JSON）+trade.fill 事件（W7 扩展类型）
+- migration：A1/A2 置顶✅+Phase A/B 卡+B2/B3「未开始/暂无证据」← R-349 已完成仍 todo（投影滞后实证）；无 Phase C/D 行
+
+## 6. 报告落盘
+R-359 → shared/results/05-量化投资/R-359-新看板未生效模块对照审计.md（8.5KB，43 模块对照表）
+编号说明：任务书指定 R-359（R-358 留给并行 task-0560），落盘时树内实际最大 R-357。
