@@ -35,3 +35,12 @@
 **任务状态：paused（源无数据，非故障缺口）。**
 
 ## 只读佐证（不做写动作）
+
+### recon 复跑（20:52）：PASS ✅
+
+```json
+{"result":"PASS","checks":{"holdings_set_equal":true,"nav_present_for_last_row":true,"cash_band_0.5pct_nav":null,"equity_registry_entry_active":true,"gold_engine_active_paper":true,"weight_solution_sums_1":null,"mirror_nav_rows_match_csv":true,"mirror_nav_fields_match":true,"mirror_trades_count_match_csv":true,"nav_fresh":true}}
+```
+7 项 true、2 项 null 为 R-354 已知如实降级（cash_band/weight_solution_sums）、nav_fresh=true。镜像与权威 CSV 逐字段一致，链路健康，无 8-29 缺口需要补。
+
+## BFF navseries 检查
