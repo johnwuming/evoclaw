@@ -44,3 +44,24 @@
 7 项 true、2 项 null 为 R-354 已知如实降级（cash_band/weight_solution_sums）、nav_fresh=true。镜像与权威 CSV 逐字段一致，链路健康，无 8-29 缺口需要补。
 
 ## BFF navseries 检查
+
+### BFF navseries（20:54，本机 :8180）
+
+端点 `GET /api/v1/portfolios/vC-0/navseries`（样本落盘 /tmp/t0564-navseries.json，726B）：
+- schema=nav_series@v1、status=paper、points=11、data_start=2026-08-14、**data_end=2026-08-28**
+- 末 3 点：(08-26,0.9974) (08-27,0.9984) (08-28,1.00993)；summary nav=1.00993、nav_chg_1d=0.0115、mdd=-0.0255
+- **has_0829=False**——8-29 无点是周六非交易日的正确状态（若出现反而异常）；与 R-358 线上验证末值一致。
+
+## 最终验收对照（停止路径口径）
+
+| 验收项 | 结果 |
+|---|---|
+| qfq 源 max 日期 | **2026-08-28**（4 只抽样一致）→ 走步骤 1 停止路径 |
+| equity 官方 NAV 8-29 行 | 不补跑（源无 8-29 行情）；底账正确止于 8-28 行 NAV=1.00993 |
+| 镜像 8-29 行 + 幂等 | 不触发（权威 CSV 无 8-29 新行）；recon mirror_* 三项 true 佐证镜像=CSV、幂等基线健在 |
+| recon | **PASS**（nav_fresh=true） |
+| BFF navseries 8-29 点 | 无 8-29 点 = 周六正确状态；末点 8-28=1.00993 与底账一致 |
+
+**任务处置：paused（源无 8-29 数据，非故障缺口）；下一交易日 8-31（周一）16:30 在役 cron 自然延续，无遗留动作。**
+
+风险提示：任务书「8-29 16:30 cron 有触发」前提与 crontab `30 16 * * 1-5` 不符（周六不调度，paper_daily.log 亦止于 8-28）；task-0556 的「8-29 缺口」结论建议主会话复核——实际不存在 8-29 缺口。
