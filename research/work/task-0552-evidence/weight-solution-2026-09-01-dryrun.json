@@ -1,0 +1,48 @@
+{
+ "portfolio_version_id": "vC-0",
+ "solve_date": "2026-09-01",
+ "weights": {
+  "equity_sleeve": 0.5802969609176188,
+  "hedge_sleeve_gold": 0.41970303908238105
+ },
+ "solver_meta": {
+  "type": "equal_volatility",
+  "params": {
+   "window_days": 60,
+   "annualization": 252,
+   "min_obs": 40
+  },
+  "cov_estimator": "sample_diagonal_vol",
+  "cov_estimator_rationale": "等波动率仅需各腿边际波动率（协方差对角线），v1 用样本标准差(ddof=1)+sqrt(252)年化，与在役 gold vol60 口径一致；Phase B 校准期 Ledoit-Wolf vs 样本 vs EWMA 对比留档由 R-336 §8 动作6 另行产出，结论更新本字段（§1.2④ A3）",
+  "convergence_status": "closed_form",
+  "random_seed": null,
+  "diagnostics": {
+   "window_days": 60,
+   "annualization": 252,
+   "freq_by_sleeve": {
+    "equity_sleeve": "daily",
+    "hedge_sleeve_gold": "monthly"
+   },
+   "min_obs_by_sleeve": {
+    "equity_sleeve": 40,
+    "hedge_sleeve_gold": 12
+   },
+   "vols_annualized": {
+    "equity_sleeve": 0.1111301432,
+    "hedge_sleeve_gold": 0.1536526505
+   },
+   "obs_used": {
+    "equity_sleeve": 60,
+    "hedge_sleeve_gold": 60
+   },
+   "risk_contributions": {
+    "equity_sleeve": 0.0644884844,
+    "hedge_sleeve_gold": 0.0644884844
+   },
+   "max_risk_contrib_deviation": 0.0
+  },
+  "fallback_triggered": false,
+  "fallback_reason": null
+ },
+ "dry_run": true
+}
