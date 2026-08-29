@@ -39,3 +39,11 @@
 - 契约缺口记录：暂无（#12/#13 字段足够；active 条目 cross_check_match=null → 显示「未核」而非伪造）
 
 （后续验证输出摘录见文末）
+
+## 验收验证输出摘录（主 agent 独立复跑补录 2026-08-30 07:04）
+- `VITE_API_BASE=/quantv6 npm run build` → ✓ 44 modules transformed, built in 2.00s，零报错
+- `grep -rl quantv6 dist/assets/` → dist/assets/index-BU9OzPbo.js（base 注入产物确认）
+- `npm test` → engine-copy assertions: 39 passed
+- 负结果判定修复确认：negative 现读 `v.metrics.ann_return`（子代理自曝 bug 已修复，主 agent 实读源码+复跑构建核验）
+- 390 静态自查（无头浏览器本批不可用，按纪律降级）：新组件无固定宽表格、长 ID fmtID 截断 4 处、nowrap 均为既有 overflow+ellipsis 模式，无横向滚动风险源
+- 改动文件清单（全量）：src/pages/Candidates.jsx（新增）、src/App.jsx（路由+入口分发）、src/hooks.js（TAB_IDS 白名单）、src/styles.css（cand-* 样式 23 处）、src/pages/Version.jsx（候选库入口按钮）；api.js 未动（封装已有）；BFF/nginx 零改动
