@@ -88,3 +88,17 @@ started
 - 契约 risk_gates@v2 纯新增；缺失值三态 ok/insufficient_obs/unavailable；200 不 503；数字小数单位
 - 拆分：T1 BFF 扩展（回撤+vol）、T2 前端三卡、T3 相关性 HP 日频产物（依赖 D-1 决策）、T4 HP 权威产物增强（可选）
 - 回滚：git revert BFF+前端 rebuild；数据面零改动
+
+## 14. R-362 重派复核证据（2026-08-29 17:08-17:12，第二次 run）
+
+背景：task-0563 于 15:42 完成（R-361）并审核通过；17:06 主 agent 重派，指令产出 R-362。本 run 对 R-361 全部关键事实独立复核：
+
+1. R-336 §4.4 原文（行 238-247）：四带 5/10/15、target_vol 8%±2pp（Phase B 校准）、sleeve ddc ≤−20%×0.5 回补 −5%（ddc_th20_rd50_rc5）、相关性 >0.85 且上升防御降仓 / >0.90 提级审查（出处 §7.5.4）、裁决顺序 v1.1 三段式（熔断硬上限>组合级>单腿级）。§7.5.4 原文（行 360-364）：0.75 入池筛查 / 0.85+上升 防御降仓 / 0.90 提级审查。✅ 与 R-361 引用逐字一致。
+2. BFF risk-gates.js assembleRiskGates（行 164-186）：仅返回 run_date/circuit_breaker/drift/recon/pending_risks，无 dd/vol/corr → BFF 侧三连缺属实。✅
+3. MIRROR_INCLUDES（auto_sync_notify.py 行 78-97）：baseline-paper-*、*_full_nav.csv、risk-status.json、engines/** 全覆盖。✅
+4. VPS crontab：*/30 cron-auto-sync（在役，task-0279）+ 0 3 full sync → 零 crontab 变更成立。✅
+5. 镜像实存：workspace-quant/results/ 下 baseline-paper-nav.csv（末行 2026-08-28,1.00993）、a13_rsraw_e1f10dz_full_nav.csv、engines/gold/shadow_nav.csv 三件齐。✅
+6. HP 只读抽验：baseline-paper-nav.csv 12 行（≈11 obs，较 R-361 时 +1 日）、shadow_nav.csv 158 行月频 2013-08 起（列 month,w_applied,gold_ret,mmf_ret,gross,net,nav）、a13 NAV 5009 行（回测日频止 data_cut）；data/ 首屏无黄金日频源。✅
+7. Risk.jsx（8.6KB）：断路器卡+DimCard（漂移）+PerspectiveCard（对账三视角）+120s 轮询，无回撤/波动率/相关性卡 → 前端侧三连缺属实。✅
+
+结论：R-361 方案结论全部成立，R-362 作为终版承接（补复核证据，方案本体无变更）。
