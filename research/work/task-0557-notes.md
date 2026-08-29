@@ -17,3 +17,10 @@
 ## 前端
 - Version.jsx 接入：持仓表+交易表+手续费汇总卡+模型组成说明卡（sleeve×2+风控+求解器，从 vC-0.json sleeves/risk_control/solver 渲染）。
 - ⚠️ build 必须 VITE_API_BASE=/quantv6。
+
+## 进度（2026-08-29 14:0x）
+- ✅ HP 账本已拉取并原子替换 VPS live/events/iteration-ledger-2026-08.jsonl（16 事件，原 2 事件备份 /tmp/vps-ledger-backup-2ev.jsonl）。
+- ✅ BFF 新增 portfolioHoldingsHandler/portfolioTradesHandler（app.js），路由 /portfolios/:id/holdings 与 /trades，套 ledgerDerived+ID_RE，fee 汇总并入 trades 响应头 total。
+- ✅ npm test 33/33（基线 30 + 新增 w7-holdings-trades.test.js 3：持仓投影含卖扣减/权重和=1/版本隔离、trades 分页不重不漏+fee 汇总、空态/坏 id）。
+- 测试坑：新测试文件模块级 server 必须 after(close)，否则 keep-alive 挂住进程不退出。
+- 下一步：前端 Version.jsx 接入 → build（VITE_API_BASE=/quantv6）→ 部署 → HTTPS 端到端 → 无头浏览器 390x844。
