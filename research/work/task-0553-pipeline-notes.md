@@ -19,3 +19,10 @@
 
 ## 发现记录
 （边查边写）
+
+## 发现1：契约与现状（VPS 侧实测）
+- BFF 数据目录 `tools/quant-bff/live/data/`：performance.json(1518B) + nav_curves.csv(23721B,157行=156月+表头)，2026-08-29 02:11 由 task-0549 产出
+- 导出脚本位置：`tools/quant-bff/live/export/hp_export_metrics.py`（VPS 侧，task-0549 交付）
+- performance.json 契约：portfolio_version_id=vC-0；curve_source(file=nav_curves.csv,column=F1_quarterly,md5=9704a300...)；metrics ann=0.135702/vol=0.094679/sharpe=1.4333/maxDD=-0.090794；data 2013-08~2026-07 n=156；caliber 全段口径说明；generator 字段
+- 指标口径：月频基期1.0，几何CAGR，ddof=1×sqrt(12)，rf=0，maxDD含基期，全期窗口
+- NAV 源列：F1_quarterly（vC-0 口径），列末值 5.22921278108852
