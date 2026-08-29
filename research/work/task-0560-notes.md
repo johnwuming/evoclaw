@@ -15,3 +15,12 @@
 ## HP 侧文件名核实（14:32）
 - HP ~/quant-evolve/results/ 实际文件名：baseline-paper-nav.csv（header date,nav，mtime 2026-08-29，任务书所写 paper-nav.csv 不存在，系口径名差异）；baseline-paper-trades.csv（date,code,action,shares,price,cost）；baseline-paper-summary.json。
 - 结论：任务书交付物1的"include 扩展"实际已由 task-0352 的 `--include=baseline-paper-*` 覆盖，无需改 auto_sync_notify.py；cron 每30分钟自动增量，今日 10:43 已同步末行 2026-08-28,1.00993（8/29 周六无新交易日，数据已最新）。
+
+## BFF 实现（14:40）
+- 新增 src/nav-series.js：readRuntimeNavCsv（表头按名取 date/nav，容忍附加列）+ summarizeNavSeries（末值/nav_chg_1d 4dp/nav_chg_1d_pct/mdd 负值/drawdown_pct 负值/data_start/data_end/points）+ navSeriesHandler。
+- config.js 加 paperNavPath（env PAPER_NAV_FILE 覆盖；默认 /root/.openclaw/workspace-quant/results/baseline-paper-nav.csv）。systemd unit 零改动（默认值即生产路径）。
+- app.js 注册 GET /portfolios/:id/navseries（独立文件源 .catch(next)，同 migration 形态；不套 ledgerDerived——镜像文件与账本无关，参照 perf-history 先例）。
+- 语义：id 非法 400；portfolios.json 无此 id 404；非 paper 组合 → series=null+note（回测口径不冒充运行态）；文件缺失 → 200+null 空态。
+- fixtures：good/data/portfolios.json（vC-0 paper）+ runtime-paper-nav.csv（11点含附加列）。
+- 测试 test/nav-series.test.js 3 例：happy path（末值1.00993/首点8-14/MDD≈-2.55%/新高回撤0）、缺失降级 null、400/404/非paper。
+- npm test：38 tests 全 pass（基线 33 + holdings/trades/W7 既有 2 + 新增 3）。
