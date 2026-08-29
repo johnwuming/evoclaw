@@ -1,0 +1,6 @@
+{
+ "checkpoint_id": "cp-2026-08-28-off14",
+ "ledger_offset": 14,
+ "recovery_diff": {},
+ "result": "diff=0"
+}

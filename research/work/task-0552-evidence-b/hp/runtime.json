@@ -1,0 +1,147 @@
+{
+ "header": {
+  "projection": "runtime",
+  "schema": "governance-projection@v1",
+  "sha256": "3fc7aab6de87d1b85cda0d4c967a201dc754876d577af4430670cb01a028febe",
+  "generated_at": "2026-08-29T02:49:32+00:00"
+ },
+ "body": {
+  "portfolio_version_ref": "vC-0",
+  "nav_daily": [
+   {
+    "date": "2026-08-14",
+    "nav": "0.9996",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-17",
+    "nav": "0.996149",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-18",
+    "nav": "0.992783",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-19",
+    "nav": "0.98879",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-20",
+    "nav": "1.00892",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-21",
+    "nav": "0.98989",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-24",
+    "nav": "0.98319",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-25",
+    "nav": "0.99345",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-26",
+    "nav": "0.9974",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-27",
+    "nav": "0.9984",
+    "source_file": "results/baseline-paper-nav.csv"
+   },
+   {
+    "date": "2026-08-28",
+    "nav": "1.00993",
+    "source_file": "results/baseline-paper-nav.csv"
+   }
+  ],
+  "trades": [
+   {
+    "date": "2026-08-14",
+    "code": "000848",
+    "action": "buy",
+    "shares": "900",
+    "price": "8.32",
+    "fee": "8.32",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "002027",
+    "action": "buy",
+    "shares": "1500",
+    "price": "5.08",
+    "fee": "5.08",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "002107",
+    "action": "buy",
+    "shares": "1200",
+    "price": "6.41",
+    "fee": "6.41",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "300009",
+    "action": "buy",
+    "shares": "800",
+    "price": "8.95",
+    "fee": "8.95",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "300824",
+    "action": "buy",
+    "shares": "900",
+    "price": "7.74",
+    "fee": "7.74",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "600867",
+    "action": "buy",
+    "shares": "900",
+    "price": "8.57",
+    "fee": "8.57",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "601600",
+    "action": "buy",
+    "shares": "800",
+    "price": "9.26",
+    "fee": "9.26",
+    "source_file": "results/baseline-paper-trades.csv"
+   },
+   {
+    "date": "2026-08-14",
+    "code": "603551",
+    "action": "buy",
+    "shares": "800",
+    "price": "9.4",
+    "fee": "9.4",
+    "source_file": "results/baseline-paper-trades.csv"
+   }
+  ],
+  "authoritative_sources": {
+   "nav": "results/baseline-paper-nav.csv",
+   "trades": "results/baseline-paper-trades.csv"
+  },
+  "semantics": "§3.6 镜像：权威=CSV/JSON，账本=append-only 镜像，BFF 只读"
+ }
+}

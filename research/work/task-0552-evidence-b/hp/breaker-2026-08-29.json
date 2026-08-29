@@ -1,0 +1,40 @@
+{
+ "mode": "live",
+ "nav_points": 11,
+ "actions": [],
+ "checks": {
+  "daily_return": 0.011548,
+  "drawdown": 0.0,
+  "nav_age_days": 1
+ },
+ "status": "GREEN",
+ "eval_ts": "2026-08-29T02:50:38+00:00",
+ "reset_policy": "断路器动作只能人工复位（promotion.approved 同级人工门），自动恢复禁止",
+ "sandbox_sim": {
+  "nav_series": [
+   1.0,
+   1.02,
+   0.99,
+   0.8,
+   0.784
+  ],
+  "actions": [
+   "halt_new_opens_today",
+   "halt_new_opens",
+   "escalate_review",
+   "notify_user"
+  ],
+  "checks": {
+   "daily_return": -0.02,
+   "drawdown": 0.231373,
+   "nav_age_days": 0
+  },
+  "expect": [
+   "halt_new_opens_today",
+   "halt_new_opens",
+   "escalate_review",
+   "notify_user"
+  ],
+  "pass": true
+ }
+}

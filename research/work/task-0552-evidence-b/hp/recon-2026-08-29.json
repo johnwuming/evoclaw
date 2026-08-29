@@ -1,0 +1,26 @@
+{
+ "recon_ts": "2026-08-29T02:50:38+00:00",
+ "tolerances": {
+  "sleeve_weight_pp": 1.0,
+  "cash_pct_nav": 0.5,
+  "holdings_set": "exact"
+ },
+ "checks": {
+  "holdings_set_equal": true,
+  "nav_present_for_last_row": true,
+  "cash_band_0.5pct_nav": null,
+  "equity_registry_entry_active": true,
+  "gold_engine_active_paper": true,
+  "weight_solution_sums_1": null,
+  "mirror_nav_rows_match_csv": true,
+  "mirror_nav_fields_match": true,
+  "mirror_trades_count_match_csv": true,
+  "nav_fresh": true
+ },
+ "details": {
+  "holdings_only_in_paper": [],
+  "holdings_only_in_engine": [],
+  "cash_check": "holdings 无 last_price 字段：现金带检查降级为 NAV 对账日核（引擎侧计价，不在治理层复算）"
+ },
+ "result": "PASS"
+}

@@ -1,0 +1,36 @@
+{
+ "header": {
+  "projection": "paper",
+  "schema": "governance-projection@v1",
+  "sha256": "a6159e00d33a1eaebdc568081fc79386a64c25b1bd86540973a091aef7f9ec5c",
+  "generated_at": "2026-08-29T02:49:32+00:00"
+ },
+ "body": {
+  "portfolio_version_ref": "vC-0",
+  "status": "paper",
+  "from": "A(a13_rsraw_e1f10dz)+gold(active_paper)+ddc 散装三元组",
+  "sleeves": {
+   "equity_sleeve": {
+    "registry_entry": "a13_rsraw_e1f10dz",
+    "status": "active",
+    "state_file": "results/paper-state.json",
+    "state_sha256_at_switch": "1154074e7144b9a52f791767ecbf713b3e412b03af8da3c548185ff2f60dd4ee"
+   },
+   "hedge_sleeve_gold": {
+    "engine_id": "gold_trend_sma200",
+    "status": "active_paper",
+    "state_file": "results/engines/gold/paper_state.json",
+    "state_sha256_at_switch": "89dcb2fbe42d11c675ce1cb263722253e10f3f26603812d493da4e97c41a89bb"
+   }
+  },
+  "semantics": "指针语义切换：持仓/现金/NAV 数值不落指针，权威数值仍在引擎文件（§3.6 镜像）",
+  "paper_live_facts": {
+   "cash": 40393.0,
+   "initial_capital": 100000,
+   "holdings_count": 8,
+   "last_daily": "2026-08-28"
+  },
+  "switch_task": "task-0552 Phase B",
+  "user_approved": "2026-08-29 10:13"
+ }
+}

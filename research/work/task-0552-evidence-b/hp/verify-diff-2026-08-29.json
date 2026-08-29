@@ -1,0 +1,18 @@
+{
+ "verify_ts": "2026-08-29T02:50:38+00:00",
+ "checks": {
+  "registry_entry_a13": "identical",
+  "gold_state": "identical",
+  "vC-0": "identical"
+ },
+ "projection_headers": {
+  "registry": "ok",
+  "engines": "ok",
+  "composites": "ok",
+  "paper": "ok",
+  "runtime": "ok"
+ },
+ "paper_state_numeric_diff_fields": [],
+ "paper_state_ignored_bookkeeping_fields": [],
+ "result": "diff=0"
+}

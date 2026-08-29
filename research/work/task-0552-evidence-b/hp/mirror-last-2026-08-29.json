@@ -1,0 +1,15 @@
+{
+ "result": "mirrored",
+ "nav_appended": 0,
+ "trades_appended": 0,
+ "append_seconds": 0.0087,
+ "projection_sha256": {
+  "registry": "551b271e4a83b9532ca637cc56b076fe9d747332f697f672748fc836900a3b09",
+  "engines": "61e88abda7c560854bb76ba75bb9edfd628f02131cbe161c85f9e41fea81f416",
+  "composites": "c0e08ebdfa0dd30a94071e509d260e90b6193857c503f552c24b3d7720ddc941",
+  "paper": "a6159e00d33a1eaebdc568081fc79386a64c25b1bd86540973a091aef7f9ec5c",
+  "runtime": "3fc7aab6de87d1b85cda0d4c967a201dc754876d577af4430670cb01a028febe"
+ },
+ "nav_total": 11,
+ "trades_total": 8
+}
