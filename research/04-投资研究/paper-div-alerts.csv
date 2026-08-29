@@ -1,0 +1,2 @@
+alert_date,type,code,detail
+2026-08-29,freshness,,parquet mtime 距今 16.3 天 > 7 天
