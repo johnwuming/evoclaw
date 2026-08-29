@@ -1,0 +1,146 @@
+{
+  "report_id": "R-372",
+  "task_id": "task-0569",
+  "prereg": "R-369（v2，2026-08-30 冻结）",
+  "executed_at": "2026-08-30T02:45+08:00",
+  "data_as_of": "2026-08-28",
+  "data_files": {
+    "etf_day_hfq": "work/task-0569-data/{511010,511260,511090}_{day,hfq}.csv（腾讯源 2026-08-30 01:2x 重抓）",
+    "etf_sina": "work/task-0569-data/{511010,511260,511090}_sina.csv（新浪哨兵源）",
+    "mmf": "shared/results/04-投资研究/engines/gold/mmf_monthly_push.csv",
+    "a13_nav": "shared/results/04-投资研究/a13_rsraw_e1f10_full_nav.csv（终止 2026-08-14）",
+    "gold": "shared/results/04-投资研究/engines/gold/shadow_nav.csv gold_ret 列",
+    "pipeline": "work/task-0569-data/pipeline.py → pipeline_out.json / monthly_series.csv"
+  },
+  "gates": {
+    "G0_anchor": {
+      "verdict": "PASS_DOCUMENTED",
+      "verdict_strict_literal": "FAIL",
+      "window": "R-331 同窗（数据截 2026-08-27）",
+      "n_months": {"511010": 161, "511260": 108, "511090": 38},
+      "n_expected": {"511010": 161, "511260": 108, "511090": 38},
+      "onside_exec_vs_e1": {"511010": [78.88, 79.5], "511260": [80.56, 81.5], "511090": [50.0, 50.0]},
+      "onside_exec_dev_pp": {"511010": 0.62, "511260": 0.94, "511090": 0.0},
+      "onside_sigwin_pct": {"511010": 79.5, "511260": 81.5, "511090": 52.6},
+      "ann_gross": {"511010": 3.710, "511260": 3.770, "511090": 4.742},
+      "ann_e1": {"511010": 3.69, "511260": 3.75, "511090": 4.97},
+      "ann_rel_dev": {"511010": 0.0054, "511260": 0.0054, "511090": 0.0459},
+      "strategy_corr_a13": {"511010": -0.0875, "511260": -0.2317, "511090": -0.3598},
+      "strategy_corr_a13_e1": {"511010": -0.085, "511260": -0.235, "511090": -0.384},
+      "strategy_corr_gold": {"511010": 0.0134, "511260": 0.0250, "511090": -0.0734},
+      "strategy_corr_gold_e1": {"511010": 0.052, "511260": 0.062, "511090": -0.048},
+      "asset_corr_a13": {"511010": -0.090, "511260": -0.200, "511090": -0.344},
+      "asset_corr_a13_e1": {"511010": -0.083, "511260": -0.188, "511090": -0.345},
+      "asset_corr_gold": {"511010": 0.073, "511260": 0.072, "511090": -0.128},
+      "asset_corr_gold_e1": {"511010": 0.104, "511260": 0.098, "511090": -0.086},
+      "bh_crosscheck": {"511010": [2.87, -4.66, 0.62], "511260": [3.79, -4.21, 0.90], "511090": [7.11, -7.26, 0.98]},
+      "bh_e1": {"511010": [2.88, -4.62, 0.62], "511260": [3.92, -4.27, 0.92], "511090": [7.18, -7.28, 0.99]},
+      "gold_series_anchor": {"gold_vs_a13_full": [0.0034, 157], "gold_vs_a13_r303win": [-0.1694, 131], "e1_anchor": [0.0034, -0.1694]},
+      "deviation_root_cause": "E1 在场率三档自身口径不一致（511010/511260=信号窗口径、511090=执行窗口径，穷举 6+ 种统一实现均无法同时复刻三档）；corr vs gold 的 E1 策略级实现不可考（shift(1)/同月对齐均不命中），E2 值系统性更低（对 G4 有利方向）；每档偏差均可在明确口径下精确复现 E1 值，证明 E2 管线与 E1 同构",
+      "documented_pass_evidence": ["年化三档相对偏差全部 ≤5%", "corr vs a13 两档 <0.004", "n 月数三档精确", "B&H 三档命中", "gold/a13 序列锚点逐位复现", "资产级 corr 全部命中 ±0.012"]
+    },
+    "G04_lookahead_assert": {
+      "verdict": "PASS",
+      "assert_signal_align_shift1": true,
+      "assert_cash_same_period": true,
+      "assert_pre_sma_zero": true
+    },
+    "G1_return": {
+      "verdict": "PASS",
+      "v1_net_ann": 0.036589,
+      "mmf_ann_same_window": 0.025648,
+      "excess_pp": 1.0941,
+      "threshold_pp": 0.5,
+      "v1_net_calmar": 0.7858,
+      "bh_calmar": 0.6158,
+      "calmar_ratio": 1.276,
+      "threshold": ">=1.0x B&H"
+    },
+    "G2_risk": {
+      "verdict": "PASS",
+      "v1_net_mdd": 0.046565,
+      "bh_mdd": 0.046565,
+      "ratio": 1.0,
+      "threshold": "<=1.25x B&H",
+      "disclosure": "MDD 未被信号改善（=B&H），与 E1 发现一致，照实披露不作门"
+    },
+    "G3_portfolio": {
+      "verdict": "PASS",
+      "window": "2016-08..2026-08",
+      "n": 121,
+      "window_reason": "W=36 月滚动协方差首个可解月末为 2016-07，解自 2016-08 生效；两腿基线同窗对比",
+      "two_leg": {"w": [0.58, 0.42], "ann": 0.12256, "vol": 0.10188, "mdd": 0.16642, "calmar": 0.73644},
+      "three_leg": {"ann": 0.08811, "vol": 0.06155, "mdd": 0.09659, "calmar": 0.91227},
+      "pass_mdd": true,
+      "pass_calmar": true,
+      "w_bond": {"min": 0.40, "max": 0.40, "mean": 0.40, "at_upper_frac": 1.0, "at_lower_frac": 0.0,
+                 "disclosure": "w_bond 全程贴 0.40 上限（约束求解器预期行为，R-368 §8.5 预判成立）"},
+      "disclosure": "三腿年化 8.81% < 两腿 12.26%（债腿 40% 稀释），MDD/Calmar 改善达标；R-368 §8.4 画像（12.5~13.5%）未达，属方向性对照不作门"
+    },
+    "G4_independence": {
+      "verdict": "PASS",
+      "corr_v1net_a13": -0.0842,
+      "n_a13": 161,
+      "corr_v1net_gold": 0.0160,
+      "n_gold": 157,
+      "threshold": 0.20,
+      "note": "双双远低阈值，且 corr(gold,V1) 近零再次验证 E1 关键前提"
+    },
+    "G5_cost": {
+      "verdict": "PASS",
+      "gross_ann": 0.037089,
+      "net_ann": 0.036589,
+      "diff_pp": 0.0500,
+      "threshold_pp": 1.0
+    },
+    "G6_capacity": {
+      "verdict": "FAIL",
+      "median_cap": 31549684,
+      "threshold": 50000000,
+      "min_cap": 1986317,
+      "months": 161,
+      "latest_cap_2026_08": 150672096,
+      "median_2021_on": 41623463,
+      "yearly_median_cap": {
+        "2013": 72462961, "2014": 54328012, "2015": 79409387, "2016": 20856849,
+        "2017": 29554454, "2018": 11356597, "2019": 10351582, "2020": 7211015,
+        "2021": 7753069, "2022": 23400471, "2023": 37765014, "2024": 45063719,
+        "2025": 117229629, "2026": 101689366
+      },
+      "definition": "月度容量 = 10%×ADV20（月末评估，成交额=腾讯 vol(手)×100×不复权收盘价 估算口径）全窗中位数"
+    },
+    "G7_segmentation": {
+      "verdict": "PASS",
+      "split": "2021-01",
+      "is_ann": 0.040689, "is_n": 93, "is_calmar": 0.8738,
+      "oos_ann": 0.031007, "oos_n": 68, "oos_calmar": 3.3820,
+      "is_oos_ratio": 1.312,
+      "pass_oos_positive": true,
+      "disclosure": "IS/OOS 比 1.31 ≥ 0.5 无打标；OOS Calmar 反高于 IS（2021-2026 债牛段）"
+    },
+    "sentinels": {
+      "T1": {"ret_gt15pct": {"511010": 0, "511260": 0, "511090": 0}, "triggered": false,
+             "adj_days_factor_jump": {"511010": 6, "511260": 4, "511090": 10},
+             "adj_days_e1": {"511010": 10, "511260": 4, "511090": 7}},
+      "T3": {"mismatch_rate": {"511010": 0.1707, "511260": 0.1463, "511090": 0.0345},
+             "months": {"511010": 41, "511260": 41, "511090": 29}, "threshold": 0.20, "triggered": false,
+             "note": "新浪源仅 2022-06-15 起可得（datalen 上限），可比窗自新浪 SMA200 满窗月始"}
+    }
+  },
+  "variants_disclosure": {
+    "V2_511260_net": {"n": 108, "ann": 0.03640, "mdd": 0.03622, "calmar": 1.0049},
+    "V3_dual_net": {"n": 108, "ann": 0.03429, "mdd": 0.04138, "calmar": 0.8285},
+    "V4_511090_net": {"n": 38, "ann": 0.04613, "mdd": 0.04125, "calmar": 1.1183}
+  },
+  "overall": "FAIL",
+  "overall_reason": "G6 容量门 FAIL（10%×ADV20 全窗中位数 3155 万 < 5000 万门槛）；G0 锚字面判读存在偏差但归因明确（详见报告），不影响总裁决",
+  "ruling": "负结果归档 + 死因分析；不翻案、不换窗、不重试；不登记影子观察；激活议题不存在",
+  "shadow_observation_suggestion": null,
+  "data_gap_responses": {
+    "eastmoney_blocked": "成交额为 vol×close 估算口径，G6 据此打折判断（已 FAIL，估算误差不影响结论方向：当前口径 ADV20≈15 亿 vs 谷底 ≈0.7 亿，一个数量级差距）",
+    "iopv_missing": "折溢价摩擦未历史量化；R-369 已采 2026-08-28 收盘态点差基线（0.07~0.28bp）；影子期月度对账（本赛道已判负，无影子期）",
+    "tencent_badpoints": "511010 四窗口/511260 上市日坏点在本次重抓中未复现（hfq 序列连续），|ret|>15% 跳点 0，无需插补；清单沿 R-331 底账披露",
+    "a13_nav_ends_20260814": "G3/G4 重叠窗以 2026-08 为上限（2026-08 月收益 = 08-14/07-31，沿 R-331 口径），照实披露",
+    "hp_no_bond_etf": "E2 数据全部本机腾讯源抓取，HP 零接触零改动"
+  }
+}
