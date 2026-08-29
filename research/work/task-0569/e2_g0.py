@@ -19,34 +19,27 @@ ANCHOR = {  # presence, strat_ann(gross), strat_corr_a13, strat_corr_gold
 }
 
 def load_hfq(code):
+    # E1 convention (root-caused 2026-08-30): E1's 'close' = API array idx4 = daily LOW; verified
+    # zero-diff vs /tmp/t509 E1 artifacts on 6229 common days <=2026-08-27. G0 anchors are low-hfq based.
     ds, cs = [], []
-    with open(f"{DATA}/{code}_hfq.csv") as f:
+    with open(f"{DATA}/{code}_hfq2.csv") as f:
         for row in csv.DictReader(f):
-            ds.append(row["date"]); cs.append(float(row["hc"]))
-    # clean bad windows: replace anomaly days by geometric mean of nearest good neighbors
+            ds.append(row["date"]); cs.append(float(row["low"]))
+    # E1-structure interpolation: replace EVERY day in listed window, fwd iter c'[t]=sqrt(c'[t-1]*c_raw[t+1])
     n_bad = 0
     for w0, w1 in BAD.get(code, []):
         idx = [i for i, d in enumerate(ds) if w0 <= d <= w1]
         if not idx:
             continue
-        # detect anomalies inside window: |ln(c/prev_c)| > 3%
-        bad_i = set()
-        for i in idx:
-            if i == 0:
-                bad_i.add(i); continue
-            if abs(math.log(cs[i] / cs[i - 1])) > 0.03:
-                bad_i.add(i)
-        for i in sorted(bad_i):
-            j = i - 1
-            while j in bad_i:
-                j -= 1
-            k = i + 1
-            while k in bad_i:
-                k += 1
-            if k >= len(cs):  # no next good (511260 first day) -> next day's value
-                cs[i] = cs[idx[-1] + 1] if idx[-1] + 1 < len(cs) else cs[j]
-            else:
-                cs[i] = math.sqrt(cs[j] * cs[k])
+        i0, i1 = idx[0], idx[-1]
+        if i0 == 0:  # 511260 first day: E1 used sqrt(self*next)=95.436
+            cs[i0] = math.sqrt(cs[i0] * cs[i1 + 1])
+            n_bad += 1
+            continue
+        prev = cs[i0 - 1]
+        for i in range(i0, i1 + 1):
+            cs[i] = math.sqrt(prev * cs[i + 1])
+            prev = cs[i]
             n_bad += 1
     return ds, cs, n_bad
 
