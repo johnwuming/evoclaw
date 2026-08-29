@@ -1,6 +1,6 @@
 # R-342 R-336 实施级架构设计（含 Dashboard 全新可视化设计）
 
-> 任务 task-0529/task-0534 ｜ 2026-08-28 ｜ 状态：设计报告（纯设计零代码）｜已评审闭环（二轮+三轮外部评审+三方交叉评审，2026-08-28）｜ 当前版本 v1.3（修订记录见文末）
+> 任务 task-0529/task-0534 ｜ 2026-08-28 ｜ 状态：设计报告（纯设计零代码）｜已评审闭环（二轮+三轮外部评审+三方交叉评审，2026-08-28）｜ 当前版本 v2.0（修订记录见文末）
 > 设计依据（唯一口径）：R-336 v1.2《破而后立量化系统目标架构与迁移方案》。本文所有「§N」引用除特别注明外均指 R-336 原文章节。新增设计不与 v1.2 冻结条款冲突；凡与冻结条款相关的字段名/阈值/事件类型一律原文引用。
 
 ## 架构一图流
@@ -389,6 +389,7 @@ flowchart TB
 - **v1.2**（2026-08-28，task-0534）：二轮评审架构项 + 第三轮残值 + R-344 v1.1 对齐（用户裁决链第二阶段「先产品后架构」）——①新增 §2.3 状态迁移守护者 state guardian（HP 侧，消费漂移/对账失败/断路器，产出 promotion.downgraded，日频轻巡+月频后置检，排期入 W4）；②§3.3 状态机主图止于 approved→paper→live、canary 入「未来扩展」（§1.2⑥ 枚举零删改，R-344 v1.1 裁决；§4.3/§1.2/自检表同步）；③§3.1 补 vC-0 构建规程（T-1 交易日 cutoff、git sha+registry 快照双锚、变更=重打快照结论、签名与 built_ts）；④/health 增 pending_risks 聚合（R-344 §2.2 角标口径）；⑤§4.7 双看板验收量化契约 T1-T3（NAV ≤1bp/事件集合/指针）；⑥§4.4 SSE 措辞修正（不引入常驻推送基础设施）；⑦§3.4 部署暴露面矩阵（nginx 0.0.0.0+TLS+白名单+敏感口径引 R-344 §6.3）；⑧§3.2 灾备最小条款（每日异地副本+sync_lag SOP+reconciliation.failed P0）；⑨§4.1 业务正确性指标与容量公式（重放耗时/tail lag/sha256 失败→503/P95）；⑩§4.3 promotion.requested 待决超期打标+文末 R-336 修订建议；⑪新鲜度口径改「≥2 个交易日」+A 股日历顺延规则；⑫附录补 BFF 重放幂等伪代码自包含版；⑬P2 小项：排期相对周数、390×844 截图入库约定、ECharts/mermaid 图分工。净增约 50 行零结构变更。
 - **v1.1**（2026-08-28，task-0530）：并入用户反馈 9 项——①§3.2 retention_policy（近 12 个月热数据+gzip 冷档，BFF 启动重放热数据+合并冷档索引）；②§4.1 BFF 可用性四件套（SIGTERM 优雅关闭 / systemd 自动重启 / 单请求 5s 超时 / SQLite 超时保护）；③§4.3 驾驶舱数据新鲜度告警（sync_lag 超 2 个自然日顶部红横幅+用户通知路径）；④§4.4 document.visibilityState 节流；⑤§4.6 数据源表增「降级策略」列；⑥§3.4 无鉴权=显式设计决策安全备注；⑦§3.3 启动重放 ≤3s 且不阻塞 API；⑧§3.2 flock 锁文件路径（events/.ledger.lock）与模式（LOCK_EX|LOCK_NB）；⑨§3.4 API 版本策略（Breaking Change 升 /api/v2/，旧版本保留 ≥1 个调仓周期）——以及 R-344 PRD 对齐 4 处（Tab 归并 5 Tab 导航 / 引擎卡片事件驱动刷新 / 待处理事项前端聚合视图 / 新旧分工边界 legacy 至 Phase D）；全部小改零结构变更。P0-2「migration 响应截断」经实查 L191 为完整结构，属评审端误报，不采纳。
 - **v1.3**（2026-08-28，task-0536）：21:27 三方交叉评审 P2 残值——§2.3 state guardian 补故障模式分级：日频轻巡失败→不阻塞在役、记日志告警；月频后置检失败→转人工介入（登记任务中心）；误判防护=降级事件仍走 promotion.downgraded 事件链可回退。单点小修零结构变更。
+- **v2.0**（2026-08-30，task-0570，用户 01:18 批准「按此修订」）：契约收编——①文末新增「契约总表（v2.0 收编）」：BFF 全部 13 条已注册路由（/health、/events、/migration、/overview、/engines、/portfolios、/portfolios/:id、/portfolios/:id/holdings、/portfolios/:id/trades、/portfolios/:id/navseries、/risk/gates、/perf-history、/perf-history/:id，全 GET）逐端点列参数/响应 schema 要点/降级语义/数据源/首次实装批次，以 `tools/quant-bff/src/app.js` 实际注册为准（2026-08-30 核对），散落在 R-355/R-356/R-357/R-358/R-361 等实施报告中的契约细节自此以本节为唯一权威；/risk/drift 与 /portfolios/:id/timeline 维持「后续版本项」标注（见上文「契约与现实对齐」）；②新增「构建与部署规约」节（VITE_API_BASE=/quantv6 构建期陷阱、零新依赖、390x844 bodyScrollW=390、fmtID、quant-bff 重启流程）；③§3.4 原表格与上文「契约与现实对齐」节零删改，保留作历史承诺记录。纯增量收编零结构变更。
 
 ## 契约与现实对齐（2026-08-29）
 
@@ -397,3 +398,39 @@ flowchart TB
 - `/api/v1/risk/drift`（§3.4 原承诺，见上文 209 行表）：**降为后续版本项，当前版本不实现**。现实：漂移四维 D1-D4 与连超期数已直接揉进 `/api/v1/risk/gates` 返回（含 `drift[]` 与 `pending_risks`），前端风控 Tab 已消费该结构（R-359 R4 已达）；独立拆分端点属重复暴露，待未来有独立漂移历史曲线需求（R-359 P2 backlog）时再评估。
 - `/api/v1/portfolios/:id/timeline`（§3.4 原承诺，见上文 206 行表）：**降为后续版本项，当前版本不实现**。现实：单版本状态变迁已由 `/api/v1/portfolios/:id` 的 `status_history`（账本重放）承接；全量事件流水由 `/api/v1/events`（cursor 分页）承接，事件 Tab 已覆盖「按 target 过滤」诉求（R-359 E3/E1 已达）。
 - 影响面：消费方仅 quantv6 前端，实测未调用上述两端点（R-359：两响化 404 且页面功能无缺）； Breaking 变更策略（§3.4 v1.1⑨ API 版本策略）不受影响——本条属承诺范围收敛而非已发布端点下线。
+
+---
+
+## 契约总表（v2.0 收编，2026-08-30）
+
+> 动机：端点契约细节此前散落在各实施报告（R-355/R-356/R-357/R-358/R-361 等），本节收编为**唯一权威**，以 `tools/quant-bff/src/app.js` 实际注册为准（2026-08-30 逐行核对，13 条路由全 GET）。§3.4 原表格保留作历史承诺记录，两者冲突时以本表为准。前缀 `p=/api/v1`（`src/config.js` apiPrefix）；生产经 nginx `location ^~ /quantv6/api/` 反代本机 quant-bff（127.0.0.1:8180，前端构建期 `VITE_API_BASE=/quantv6`）。
+
+| # | 方法+路径 | 参数 | 响应 schema 要点 | 降级语义 | 数据源 | 首次实装 |
+|---|---|---|---|---|---|---|
+| 1 | GET /health | 无 | `ready/status(ok\|degraded\|initializing)/ledger_tail_ts/projection_sha256_ok/sync_lag_seconds/pending_risks{count,items[]}/reconciliation_ok/ledger_corrupted/replay_duration_ms/replay_mode/replay_events/ledger_errors/cold_archive{files,events,min_ts,max_ts}` | 永不 503：未就绪返回 200+`ready:false`（initializing/degraded，数值字段全 null，pending_risks 计 0），绝不假装正常 | 账本重放投影（ctx 内存态） | W3 初批（设计 §3.4；上线验证 R-350） |
+| 2 | GET /events | `type`（前缀通配，如 `promotion.*`）、`limit`（默认 50，≤200）、`cursor`（格式 `<ordinal>:<ts>`） | `items[{ts,event_type,target,actor,payload}]`（payload ≤400B 原样返回，超长截为 `{summary}` 200 字）+`next_cursor`；响应头 `X-Ledger-Tail-Ts` | 账本门卫 503（见通用语义①）；cursor 非法 400 BAD_CURSOR | 账本重放（倒序，ordinal 严格递减） | W3 初批（R-350 验证） |
+| 3 | GET /migration | 无 | `phase/items[{id,title,state,evidence_ref}]/blocking{a1_pass,a2_pass}` | 独立文件源，**不随账本 503**；文件缺失→缺省骨架（phase A 空表+blocking false） | `data/migration.json` | W3 初批（R-350 验证） |
+| 4 | GET /overview | 无 | `nav/nav_chg_1d(4 位小数)/mdd/drawdown_pct/active_pv{portfolio_version_id,status}/sleeves[{id,weight,nav,mdd}]/last_event_ts/reconciliation_ok` | overview.json 缺失→NAV 系字段 null（如实不伪造）；账本门卫 503 同① | `data/overview.json` + 账本投影（active 版本/权重） | W3 初批（R-350 验证） |
+| 5 | GET /engines | 无 | `engines[]`（引擎卡：状态/days/description；IC/ICIR/信号日待 HP 产物接入时为 null） | 账本门卫 503 同①；文件缺失→`engines:[]` | `data/engines.json` | W4（task-0542） |
+| 6 | GET /portfolios | `status`（等值过滤）、`limit`（默认 50，≤200） | 版本列表数组直返（非包裹对象） | 账本门卫 503 同①；文件缺失→`[]` | `data/portfolios.json` | W4（task-0542） |
+| 7 | GET /portfolios/:id | 路径 `id`（白名单正则校验，非法 400 BAD_ID） | `data/versions/<id>.json` 全 schema（weight_solution/status_history/risk_control/gate_report…）+ W4.5 `performance` 扩展（`{...perf, nav_curve[{date,nav}]}`，curve_source/caliber 见 R-355） | 版本文件缺失 404 NOT_FOUND；performance 任一文件缺失/:id 不匹配/曲线列不存在→`performance:null`（加性降级，不 503） | `data/versions/<id>.json` + `performance.json` + NAV CSV（文件名白名单防 traversal） | W4（task-0542）；W4.5 扩展（task-0549，R-355） |
+| 8 | GET /portfolios/:id/holdings | 路径 `id`（同上校验） | `portfolio_version_id/items[{code,shares,cost_price,last_price,market_value,weight}]/total_market_value/count/price_basis:'last_fill'/as_of/source` | 已清仓（shares≤0）不进表；价格源缺失→market_value/weight null；账本门卫 503 同① | 账本 `trade.fill` 读时投影（target 前缀 `paper/<id>#`，零写路径） | W7（task-0557，R-356/R-357） |
+| 9 | GET /portfolios/:id/trades | `limit`（默认 50，≤200）、`cursor`（同 #2） | `items[{ordinal,date,ts,code,action,shares,price,fee}]`（倒序）+`total{count,total_fee,buy_count,sell_count,buy_fee,sell_fee}`+`next_cursor/source` | 账本门卫 503 同①；BAD_CURSOR 400 | 账本 `trade.fill` 读时投影（fee 汇总并入响应头，省一次请求） | W7（task-0557，R-356/R-357） |
+| 10 | GET /portfolios/:id/navseries | 路径 `id` | `schema:'nav_series@v1'` + `portfolio_version_id/status/caliber:'runtime_paper'/source('mirror:<file>')/nav_series/summary` | 独立镜像文件源，**不随账本 503**；文件缺失/空→source/nav_series/summary 全 null 空态；非 paper 状态→null+note 指回 `/perf-history/:id`（运行态与回测两口径不互替）；id 不在 portfolios.json→404 | runtime NAV 镜像 CSV（§3.6 供给管道）+ portfolios.json 状态位 | W8（task-0560，R-358） |
+| 11 | GET /risk/gates | 无 | 断路器状态 + recon 三视角 `perspectives{v1 P&L,v2 权重 per_sleeve,v3 覆盖}`（in_band/max_abs_diff_bp/tol_bp…）+ `drift[]`（D1-D4：dim/name/band/status/in_band/consecutive_out_of_band/freeze_trigger）+ `pending_risks` + 回撤带（caliber:'runtime_paper'/band_source/charter 25%/35%）+ 波动率/相关性闸门字段 | 监控产物缺失→status:'unavailable'/字段 null 如实标注（不伪造）；账本门卫 503 同① | `recon/` + `drift/` 数据文件 + 账本断路器状态 | W5（task-0545）；六组闸门扩展 R-361/R-362/R-366 |
+| 12 | GET /perf-history | 无 | `schema:'perf_history@v1'` + `generated_at/caliber_ref('live/export/hp_export_metrics.py (task-0549)')/versions[]/skipped[]`（历史迭代回测对照列表） | 独立文件源，**不随账本 503**；索引缺失→空列表降级 | performance 供给管道产物索引 | W6（task-0555） |
+| 13 | GET /perf-history/:id | 路径 `id`（非法 400 BAD_ID） | `schema:'perf_history_detail@v1'` + `performance{...指标,nav_curve[]}`（per 版本指标+NAV） | 缺失/:id 不匹配/曲线列不存在→`performance:null`（不 503） | 同 #12 管道 per 版本文件 | W6（task-0555） |
+
+通用语义（全部端点适用，v2.0 冻结口径）：
+
+1. **账本门卫 503 显式状态码**：账本派生端点（#2/#4-#9/#11）在重放未就绪/刷新超时/账本损坏/投影 sha256 失配时分别返回 503 `INITIALIZING` / `LEDGER_REFRESH_TIMEOUT` / `LEDGER_CORRUPTED` / `PROJECTION_MISMATCH`——**绝不返回空数据假装正常**。
+2. 单请求 5s 超时 → 503 `UPSTREAM_TIMEOUT`（§4.1 四件套③）；`/api/v1` 前缀下未注册路径 → 404 `NOT_IMPLEMENTED_THIS_BATCH`；其余 → 404 `NOT_FOUND`；id 一律 `/^[A-Za-z0-9._-]+$/` 白名单校验（400 `BAD_ID`，防 path traversal）。
+3. **废弃/后续版本项**（承诺范围收敛，详见上文「契约与现实对齐（2026-08-29）」）：`GET /api/v1/risk/drift`、`GET /api/v1/portfolios/:id/timeline` 当前不实现，漂移数据已揉进 #11 risk/gates，单版本状态变迁由 #7 详情 status_history 承接。
+
+## 构建与部署规约（v2.0 收编，2026-08-30）
+
+1. **构建期变量**：前端必须以 `VITE_API_BASE=/quantv6` 构建（2026-08-29 事故教训：API base 为构建期注入，仅改 nginx 不重新 build 不生效，页面请求全 404；交付前核对产物内注入值）。
+2. **零新依赖**：前端与 quant-bff 均不得新增 npm 依赖（既有 package.json 清单外不加）。
+3. **390px 移动端硬约束**：交付前无头浏览器 390x844 抽查 `bodyScrollW=390`（无横向滚动）；长 ID/哈希一律 fmtID 截断渲染+允许换行（§4.5）。
+4. **重启流程**：`sudo systemctl restart quant-bff`（单元 `quant-bff.service`，监听 127.0.0.1，PORT env 默认 8180）；先 listen 再后台重放（就绪前派生端点 503 INITIALIZING，§3.3），SIGTERM 优雅关闭+8s 兜底强杀（§4.1 四件套①）。
+5. **只读三源清单**：账本 `events/.ledger`（重放投影）、`data/` 投影 JSON（migration/overview/engines/portfolios/versions/performance）、运行态镜像 CSV（NAV/成交）——BFF 零写面，数据修正走投影修订+SOP，不改 BFF 写路径（本无可写路径）。
