@@ -24,3 +24,10 @@
 - fixtures：good/data/portfolios.json（vC-0 paper）+ runtime-paper-nav.csv（11点含附加列）。
 - 测试 test/nav-series.test.js 3 例：happy path（末值1.00993/首点8-14/MDD≈-2.55%/新高回撤0）、缺失降级 null、400/404/非paper。
 - npm test：38 tests 全 pass（基线 33 + holdings/trades/W7 既有 2 + 新增 3）。
+
+## 验收结果（14:55）
+- 线上 HTTPS navseries：200，11 点，首点 2026-08-14/0.9996，末值 1.00993，chg +1.15%，MDD -2.55%，drawdown 0（新高）。
+- 无头浏览器 390x844：bodyScrollW=390 无横滚；区块① navCard=true，「运行态 · 起始 2026-08-14」+ 角标（末值 1.00993/日变动 +1.15%/MDD -2.55%/回撤 新高）+ 30/90/1Y tabs + SVG path 渲染。截图存 work/task-0560-nav-section.png 与 task-0560-overview-390.png。
+- 修复留痕：首版 load() 内 p 作用域 bug（try 块外引用）致空态，pidRef 方案修复后通过。
+- 构建新 hash index-u5RmvFPM.js/index-DL_pGBEc.css，线上已引用。npm test 38/38。
+- 报告已落盘：R-358-总览页NAV区块接入与同步通道.md（R-358 空闲，R-359 为并发任务 task-0561 所占）。
