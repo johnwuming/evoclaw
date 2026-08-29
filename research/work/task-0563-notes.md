@@ -49,3 +49,42 @@ started
 - 依据：R-342 §4.3 + R-336 §4.4/§6.1/§7.2/§7.5.4
 
 ## 8. HP 盘点（只读）开始
+
+## 9. HP crontab 在役项盘点（只读，未动）
+- 30 16 * * 1-5 paper_engine.py --action daily（今日16:30实跑，勿碰）
+- 45 16 * * 1-5 risk_patrol.py → 产出 results/risk-status.json + risk-events.jsonl + notifications-queue.jsonl
+- 10 8 * * 1-5 portfolio_v1/shadow_recon.py → drift-*/recon-* 影子产物
+- 每分钟 collect-metrics.sh HTTP 推送（系统指标，非文件通道）；10 * * * * notify_hub.py
+- 0 18 * * 1-5 cron_qfq_daily.py（A股日线更新 data/stocks_hfq）
+- 0 9 * * 6 evolution_pipeline cycle（周六，今日）
+- risk_patrol.py 覆盖=退出纪律（drawdown_vs_hwm 主序列 i3_abs_s1 回测 track record + rolling 超额 + sharpe 对比），≠ R-336 §4.4 组合级三闸门，无重合产物
+
+## 10. 数据可得性核验（三组闸门逐项）
+- 回撤四带：baseline-paper-nav.csv 10 obs（2026-08-14~08-28，末值 1.00993 新高 drawdown=0）→ BFF 镜像现算立即可用；HP paper daily 每交易日 16:30 追加
+- 波动率带：同 NAV 序列 20 日滚动年化 vol；obs=10<20 → insufficient_obs；约 2 周后窗口满（到 9 月中）
+- 两腿相关性：vC-0 两腿=equity_sleeve(a13_rsraw_e1f10dz) + hedge_sleeve_gold，配置权重 58/42（task-0542）
+  - equity 腿日频：a13_rsraw_e1f10dz_full_nav.csv（2006-01-04~2026-08-14，回测止于 8/14，镜像 VPS 已有 8/19 版）
+  - gold 腿：results/engines/gold/shadow_nav.csv 仅月频（2013-08~2026-08，列 month/gold_ret/mmf_ret/gross/net/nav）；HP data/ 无黄金日频数据（只有 stocks_hfq）
+  - 结论：日频两腿相关性当前不可算 → insufficient_data；paper holdings 现为 8 只股票纯 equity 敞口
+- sleeve ddc 数据可从两腿 NAV 各自现算（后续项，非 P0 三缺）
+
+## 11. 传输通道核验（零新增成立）
+- auto_sync_notify.py（VPS cron 每30min cron-auto-sync + 每日03:00全量）MIRROR_INCLUDES 已覆盖：baseline-paper-*、*_full_nav.csv、*_locked_nav.csv、risk-status.json、crowding-indicators.json、engines/、engines/**（gold 四件套）
+- VPS 镜像实存：/root/.openclaw/workspace-quant/results/{baseline-paper-nav.csv(8/29 10:43), risk-status.json(8/29 00:45), a13_rsraw_e1f10dz_full_nav.csv(8/19), engines/gold/shadow_nav.csv(8/24)}
+- drift/recon 到 BFF live/ = task-0545 手动只读拷贝（非自动通道）；risk-status.json 已自动镜像但 BFF 未消费
+
+## 12. BFF 现状
+- quant-bff.service: LEDGER_DIR=/root/.openclaw/workspace/tools/quant-bff/live, PORT 8180, 127.0.0.1
+- risk/gates = src/risk-gates.js assembleRiskGates()，app.js:391 ledgerDerived 包装（账本503联动）；现返回 keys: run_date/circuit_breaker/drift/recon/pending_risks——缺 portfolio_dd_gate/vol/sleeves_ddc/correlation
+- config.js: reconDir=live/recon, driftDir=live/drift, dataDir=live/data, paperNavPath=/root/.openclaw/workspace-quant/results/baseline-paper-nav.csv（task-0560 加）
+- 先例：nav-series.js 独立镜像文件源现算 summary（drawdown_pct/mdd/nav_chg_1d），.catch(next) 不套 ledgerDerived；降级 200+null
+- 前端 Risk.jsx 已有：断路器卡/D1-D4 漂移卡超带置顶连超计数/对账三视角/pending 关联，120s 轮询（task-0545）
+
+## 13. 方案要点定稿（写报告依据）
+- 推荐 BFF 镜像现算（R-358 先例）为 Phase 1：零 HP 改动、零传输新增、零 crontab 变更；HP 权威产物列为后续增强（方案 A，需批准 cron/挂点）
+- 相关性闸门 Phase 1 = insufficient_data + 三档阈值结构展示；Phase 2 = HP 侧两腿日频收益产物任务（gold 日频数据源为决策点：黄金ETF日线采集 vs paper 持仓重建 vs 等 mmf/gold 月频升级）
+- 回撤双轨口径：目标四带（5/10/15，R-336 §4.4）为主仪表 + 宪章带（25/35，vC-0 risk_control.in_service_charter）标注
+- vol realized 窗口 20 日（R-359 建议）；相关性上升趋势判定建议 corr(t)>corr(t-5) 初版口径 Phase B 标定
+- 契约 risk_gates@v2 纯新增；缺失值三态 ok/insufficient_obs/unavailable；200 不 503；数字小数单位
+- 拆分：T1 BFF 扩展（回撤+vol）、T2 前端三卡、T3 相关性 HP 日频产物（依赖 D-1 决策）、T4 HP 权威产物增强（可选）
+- 回滚：git revert BFF+前端 rebuild；数据面零改动
