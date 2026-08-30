@@ -21,3 +21,14 @@
 - → 本任务对称处理：闸层与 ddc 层的仓位变更都按 v2 显式计价（组合 overlay 仓位 P_t 的 |ΔP_t| 逐名交易）
 - 引擎 v2 计价细节：capital_base=1e7（名义本金）；port_val=nav_t×1e7；每名 order=port_val×w_each（等权近似）；adv20=K线 amount 列 20 日均值（min 10 窗）；total_cost_frac=Σ total_bps/1e4×w_each，上限 0.05；失效兜底=legacy 一半（单边 5bp）
 - 数据：results/a13_rsraw_e1f10dz_full_holdings.csv 存在（88KB）；K线 data/all_stocks_qfq/（目录，逐票文件）；data/all_stocks_merged.parquet 合并面板备选
+
+## 3. 数据与计价口径定格（运行前预注册 2026-08-30 12:3x）
+- 对象数据：results/a13_rsraw_e1f10dz_full_nav.csv（raw 无 ddc 无 q3z）+ full_holdings.csv（月频 20 只等权，target 管道分隔）+ zz500_daily parquet（闸标的，E1 同款）
+- 闸形态（E1 判门唯一候选，先验固定不复选）：zz500 close≥MA20（暖机满仓），confirm=0 即日生效，shift(1) 执行；full(0/1) 与 half(0.5/1) 两档
+- ddc15：引擎语义复刻（E1 ddc_sim 同款：nav 先按当日 P 结算→cur_dd→≤-15% 切 0.5 / ≥-5% 回 1.0）；闸配置的 ddc 作用于闸后收益流
+- 成本主口径=v2 在役同款（import scripts/cost_model_v2.estimate_cost）：切换日逐名 order=|ΔP|×(1/N)×nav_own_gross[t-1]×1e7，adv20=成交额 20 日均值(min10)，side 按ΔP 符号，失效名兜底 5bp，总成本上限 5%；敏感性=平坦 15bp/30bp×|ΔP|（E1 粗估带）
+- 对称性：闸层与 ddc15 层仓位变更统一计入组合 P=gate×ddc 的 |ΔP|（引擎对两层都不计显式成本，本算补上）
+- 配置 6：RAW / DDC15 / GATE_FULL / GATE_HALF / GATE_FULL+DDC15 / GATE_HALF+DDC15；各 × {gross, v2, flat15, flat30}
+- WF 双窗 OOS（形态先验固定无需再选择）：OOS1 2016-2021、OOS2 2022-2026-08；五痛段 E1 同款
+- 锚校验：raw MDD=-0.3355；gross gate_full≈19.17%/-15.51%、gate_half≈21.43%/-20.43%（R-374）；ddc15 sim≈-25.29%（E1 复算）
+- 验证点：adv20 查询用 searchsorted as-of；K线 data/all_stocks_qfq/<code>.parquet 列「日期/成交额」
