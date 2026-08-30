@@ -8,3 +8,9 @@
 纪律：HP 新代码只放 ~/quant-evolve/work_tmp_task0579/；results/ 只新增；零改在役；预算 ≤40min；边查边写本文件。
 
 ## 进度日志
+
+## 1. HP 实查 round1（2026-08-30 12:2x，只读）
+- 编号：本地 05-量化投资 最大 R-376 → 本报告取 R-377 ✓（R-377 未被占用）
+- **cost_model v2 已在役定义**：model/main.json L36 `"cost_model": "v2"`；引擎 scripts/backtest_dividend_quality_iter.py L52 `from cost_model_v2 import estimate_cost, is_untradeable`；L493-527 v2 路径=estimate_cost(order_amt, adv20, side).total_bps，退化兜底 legacy 一半（单边 cost_rate=0.001/2），上限 total_cost_frac≤0.05；L787 注释：legacy=固定单边0.1%，v2=佣金+印花+ADV平方根冲击
+- 引擎默认 DEFAULTS: cost_rate=0.001, cost_model="legacy"（v2 需 cfg 显式指定；registry 已 v2）
+- scripts/ 下含 cost_model 字样的脚本：a11_rules.py / r278_run.py / r297_run.py / a8_bucket.py / a2_registry_bootstrap.py / a4b_run.py / a10_v6a_formal.py / e2_eng_timing.py 等（复用先例多）
