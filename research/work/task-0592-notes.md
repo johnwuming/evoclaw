@@ -39,3 +39,10 @@
 4. lint 输出末尾加扫描面清单（SCAN 面与实际循环同数据源）
 5. scripts/t0594-headless-check.cjs：8981 起服→390x844→bodyScrollW/docScrollW=390 + .cand-badge-auth computed height (0<h≤90px 实测) + badge text==policy.display_name + /quantv6/api/v1/perf-history versions[0].label==policy.display_name
 6. 前端源码零改动（只加 scripts 脚本）→ 无需 rebuild；dist 已验证无旧字面
+
+## ①验证证据（00:53）
+- node --check src/config.js src/perf-history.js → PASS
+- systemctl restart quant-bff && is-active → active
+- policyPath 实测 = /root/.openclaw/workspace/tools/quant-dashboard/policy.json
+- /perf-history versions[0].label = "设计口径·提案轨迹（静态 58/42 月度再平衡·无风控层）" == policy.caliber.display_name（逐字断言 ASSERT_OK，旧字面消失）
+- 抽端点：/perf-history/vC-0 → 200；/engines → 200
