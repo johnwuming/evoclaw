@@ -41,3 +41,22 @@
 - 偏差（展示 vs 58/42月度）：ann −0.87pp（低报收益）、vol −0.85pp（低报波动）、sharpe +0.034（高报）、mdd +0.61pp（高报抗回撤）
 - 方向解释：50/50 黄金仓位更高（42%→50%），gold 波动低收益低 → 曲线更平更稳；看板把「更稳」错误归因给 58/42 等波动率解
 - 注意：更严格口径还应含 equity DDC + gold vol_target/mmf（vC-0.json 定义），nav_curves.csv 无此数据，重算只能到「58/42 裸双腿」这一层；真实 vC-0 回测曲线与展示差异只会更大（在案在役曲线 vol 0.0923/mdd −0.0825 为 50/50+DDC，可证 DDC 显著改变曲线形状）
+
+## 6. 连带检查：runtime NAV 镜像（契约 #10）
+
+- `live/data/governance/runtime.json`：portfolio_version_ref=vC-0，nav_daily=11 个日频点（2026-08-14..08-28），source_file=results/baseline-paper-nav.csv，§3.6 镜像语义
+- HP `results/baseline-paper-summary.json` 实查：mode=paper，start 2026-08-17，8 只持仓 equity_w=0.6、cash 40393（40%），**无任何黄金/货基持仓**，model_version=a13_rsraw_e1f10dz，timing_layer=timing_v4_i4_q3z（timing_ratio 0.6174）
+- 判定：runtime 镜像与 perf-history **不同源不同病**（不经 nav_curves.csv），但它是第三个口径——60% equity(a13+择时)+40% 现金的单腿纸面链，被 R-354 治理切换挂到 vC-0 ref 下（有意决策、有记录）；严格讲 runtime NAV 也不是 58/42 双腿组合
+
+## 7. 核✓倒挂成因（代码级闭环）
+
+- 写入方：task-0555 一次性计算（perf_history_index.json generator="task-0555 one-off compute (HP read-only)"）
+- 语义：对 nav_curves.csv 各历史列用 0549 口径重算指标 vs HP all_results.json 在案锚逐项比对；true=F0/F1_equal/F3/F4/F7a；null=F5（all_results 无锚）
+- vC-0 为何缺失：①performance.json 根本没有 cross_check_match 布尔字段（只有 cross_check_ref 数值 + provenance 文本）；②`src/perf-history.js:84` activeEntry() 硬编码 `cross_check_match: null`，label 同样硬编码'vC-0 现役（F1·vc0 口径）'
+- 即：vC-0 的 null 是「代码硬编码+字段缺失」，不是核验失败；而历史条目的 true 是「同文件列 vs 同引擎锚」的弱核验（自洽性核验）——信号倒挂成立：核验最厚的 vC-0（G1-G5 复现门）反而无布尔标记
+- 另：G3 断言「vC-0→0.5/0.5 等权+ddc」是 task-0541 时代口径；08-28 task-0540 快照把 vC-0 权威定义改为 solver_equal_vol_v1（58.03/41.97），但曲线列未随定义更新——展示基底滞后于定义变更
+
+## 8. 最终判定
+
+**基底错误（展示≠权威 vC-0 双腿组合）**。F1_quarterly 虽是双腿（A+gold）曲线，但权重 50/50 季度再平衡、满仓、无 DDC、无 vol_target，与 vC-0.json 权威定义（等波动率 58.03/41.97 + equity DDC + gold sma200/vol_target/mmf）是两个策略。重算偏差（58/42 固定权重月度再平衡 vs 展示）：ann −0.87pp、vol −0.85pp、sharpe +0.034、mdd +0.61pp。
+数据缺口：滚动等波动率权重的全历史 vC-0 组合回测曲线在任何地方都不存在；本报告重算为「58/42 固定权重」近似（任务书指定口径），真实组合历史曲线只会偏离更远。
