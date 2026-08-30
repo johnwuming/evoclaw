@@ -13,3 +13,8 @@
 ## 改动方案
 - Version.jsx：①黄金腿 `.sleeve-w` 改「目标权重 X%（设计）」；②新增 `.sleeve-warning` 警示行（R-377 核验 60/40）；③运行状态 chip 后加「（引擎状态，非实际持仓）」注；④股票腿卡头部下加 `.sleeve-runtime-note`：「设计权重 X%；runtime 实际 60% 权益 + 40% 现金（含择时）· R-377 核验」。
 - styles.css 末尾追加 3 个类，零新依赖，api.js/App.jsx/hooks.js 不动。
+
+## 验证结果
+- build：✓ built in 3.65s（index-BKdH4lmu.js 207.19kB / index-gK_P45PD.css 29.23kB）
+- npm test：engine-copy assertions: 39 passed
+- grep quantv6 dist/assets/：命中 dist/assets/index-BKdH4lmu.js
