@@ -23,6 +23,14 @@
 | fallback | solver_meta.fallback_triggered/reason |
 | 演进行 | 静态文案（R-336 §8 口径：MVO 仅对比留档未启用） |
 
+## 实现方案（定稿）
+- Version.jsx：新增 PortfolioConstructionSection（组合构建）/ GateReportSection（门禁成绩单），增强 RiskControlSection（四带动态兼容 + per_sleeve_risk_cap 语义行）；Detail 顺序=…ModelCard、PaperViews(不动) → 组合构建 → 风控配置 → 门禁成绩单 → Sleeve 明细 → 状态历史
+- 移除旧内联「门禁成绩单」行与底部「权重解」块（内容并入新卡，无信息丢失）
+- 四带回撤门：lt5/5_10/10_15/gt15 键存在则逐带渲染（vC-0 无 → 走 in_service_charter 分支）
+- gate_report 非空但无结构化条目 → 截断 JSON 如实显示，绝不误标「未评级」
+- styles.css 增量：.ver-wblock/.gate-none/.gate-row/.gate-chip(.gp/.gf)
+- npm test 只测 engine-copy（39 断言），与本次改动无耦合
+
 ## 待办
 - [ ] 读 Version.jsx 现有结构（22KB < 30KB 可全读，但先 grep 分段）
 - [ ] 实现③区块
