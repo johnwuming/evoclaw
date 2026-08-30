@@ -32,3 +32,24 @@
 
 ## 初判（待其余核验点佐证）
 执行形态属「虚腿」：有完整计算链（模拟 NAV + 权重状态 + 月度结账），零成交链。
+
+## 核验点 2：HP 实测 gold 目录（~/quant-evolve/results/engines/gold/）
+
+目录内容全部清单：mmf_monthly_push.csv / paper_state.json / shadow_nav.csv / shadow_nav_seed.csv。
+**无任何 trades/fills/positions/broker 文件** —— 唯一的「账本」就是 paper_state.json（模拟 NAV 链）。
+
+paper_state.json 实测（2026-08-28 07:40 更新）：
+- status=active_paper；created 2026-08-24；activation.real_money="未涉及——真金分配为独立人工门"
+- current_weight=**0.0**（2026-07-31 信号：px 8.433 < sma200 9.479 → w=0，即模拟链当前也是零黄金+纯货基）
+- months=[]（尚未有任何月度结账）；marks 4 条（8-24~8-27，NAV 1.0→1.000069，纯 MMF 漂移）
+- 激活即声明：NAV=1.0 新链，157月模拟史由 shadow_nav.csv 承载
+
+shadow_nav.csv 性质：月频模拟表（列=month,w_applied,gold_ret,mmf_ret,gross,net,nav），
+2013-08~2026-08 共 157 行，全部为公式计算列（价格×规则），无仓位/成交佐证。
+注意：近期 w_applied=0（金价低于 SMA200，趋势信号空仓）——**即便虚腿，模拟仓当前也是 0 金**。
+
+## 中期结论（已可定性）
+三态判定：**虚腿**（纯计算状态，无真实仓位）。
+且当前模拟权重也是 0（趋势空仓信号），设计权重 41.97% 若接线，首个信号也是空仓。
+
+---
