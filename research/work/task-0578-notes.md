@@ -31,8 +31,18 @@
 - styles.css 增量：.ver-wblock/.gate-none/.gate-row/.gate-chip(.gp/.gf)
 - npm test 只测 engine-copy（39 断言），与本次改动无耦合
 
-## 待办
-- [ ] 读 Version.jsx 现有结构（22KB < 30KB 可全读，但先 grep 分段）
-- [ ] 实现③区块
-- [ ] build + test + grep dist
-- [ ] 390 无头自查
+## 验证结果（2026-08-30）
+- build：`VITE_API_BASE=/quantv6 npm run build` 零报错（✓ built in 1.99s）；npm test：engine-copy assertions: 39 passed；grep -rl quantv6 dist/assets/ → dist/assets/index-BuytD1hm.js 命中
+- 390 无头（scripts/t0578-headless-check.cjs，本地 dist+8180 代理静态服务器 t0578-static-server.cjs:8981）：
+  - bodyScrollW=390 / docScrollW=390，无页面级横滚
+  - 详情标题「组合 vC-0 · 版本详情」；区块顺序：模型组成 → 组合构建（solver）→ 风控配置（risk_control）→ 门禁成绩单（gate_report）；持仓双腿卡未动
+  - 组合构建：等波动率 / 窗口 60 天·年化 252·最小样本 40 / sample_diagonal_vol / closed_form / fallback未触发 / 权重 58.0%+42.0%（解 2026-08-28）/ 演进行含「MVO 仅对比留档，未启用」
+  - 风控配置：在役宪章分支（减半 25%·清仓 35%，宪章 v1.0，源 config/risk-charter.json）+ note；波动目标未设定；单腿风险上限 — + 语义行「只封顶、不下指令」；回填规则如实
+  - 门禁成绩单：gate_report=null → 整卡「未评级（本版本未过门禁流程）」（PRD 裁决口径）
+  - overflowEls 全部为持仓表既有 `<td>2026-08-14</td>`（task-0575 pos-table 内部 5px 裁剪，非本次引入，页面级无横滚）
+
+## 修改文件清单
+- src/pages/Version.jsx（新增 PortfolioConstructionSection/GateReportSection，增强 RiskControlSection 四带兼容+cap，Detail 重排三区块，移除被取代的内联门禁行/权重解块）
+- src/styles.css（+8 行：.ver-wblock/.gate-none/.gate-row/.gate-chip）
+- scripts/t0578-headless-check.cjs、scripts/t0578-static-server.cjs（新增，过程验收工具，仿 t0575 先例）
+- 纯前端：api.js/App.jsx/hooks.js/零 BFF/nginx 零改动；零新依赖
