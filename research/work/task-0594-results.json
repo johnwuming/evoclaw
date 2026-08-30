@@ -1,0 +1,123 @@
+{
+ "anchor": {
+  "static": {
+   "ann": 0.144394,
+   "vol": 0.103211,
+   "sharpe": 1.399,
+   "mdd": -0.096896,
+   "calmar": 1.4902,
+   "final": 5.774092,
+   "dd_peak": "2015-04-30",
+   "dd_trough": "2015-07-31"
+  },
+  "rolling": {
+   "ann": 0.101173,
+   "vol": 0.066419,
+   "sharpe": 1.5233,
+   "mdd": -0.057067,
+   "calmar": 1.7729,
+   "final": 3.500438,
+   "dd_peak": "2020-07-31",
+   "dd_trough": "2020-12-31"
+  }
+ },
+ "n": 156,
+ "warmup": {
+  "first_non_fallback": "2013-12-31",
+  "n_warmup_months": 4,
+  "w_roll_head": [
+   [
+    "2013-08-31",
+    0.5,
+    0.5
+   ],
+   [
+    "2013-09-30",
+    0.512896,
+    0.487104
+   ],
+   [
+    "2013-10-31",
+    0.5,
+    0.5
+   ],
+   [
+    "2013-11-30",
+    0.504372,
+    0.495628
+   ]
+  ],
+  "engine_vs_csv_maxdiff": 4.989204882566156e-11
+ },
+ "sens1": {
+  "cut": "2013-12-31",
+  "static_trunc": {
+   "ann": 0.135045,
+   "vol": 0.102651,
+   "sharpe": 1.3156,
+   "mdd": -0.096896,
+   "calmar": 1.3937,
+   "final": 4.97547,
+   "dd_peak": "2014-12-31",
+   "dd_trough": "2015-03-31"
+  },
+  "drift": {
+   "ann_pp": -0.93,
+   "mdd_pp": 0.0,
+   "sharpe": -0.083
+  }
+ },
+ "sens2": {
+  "rolling_trunc": {
+   "ann": 0.092551,
+   "vol": 0.064724,
+   "sharpe": 1.4299,
+   "mdd": -0.057067,
+   "calmar": 1.6218,
+   "final": 3.068507,
+   "dd_peak": "2020-03-31",
+   "dd_trough": "2020-08-31"
+  },
+  "gap_full": {
+   "ann_pp": 4.32,
+   "mdd_pp": -3.98,
+   "sharpe": -0.124,
+   "calmar": -0.283
+  },
+  "gap_aligned": {
+   "ann_pp": 4.25,
+   "mdd_pp": -3.98,
+   "sharpe": -0.114,
+   "calmar": -0.228
+  },
+  "level_decomp_aligned": {
+   "w_avg": 0.28,
+   "total_pp": 4.25,
+   "level_pp": 2.9,
+   "dyn_pp": 1.35
+  },
+  "m_level_aligned": {
+   "ann": 0.106018,
+   "vol": 0.069738,
+   "sharpe": 1.5202,
+   "mdd": -0.047767,
+   "calmar": 2.2195,
+   "final": 3.583614,
+   "dd_peak": "2020-03-31",
+   "dd_trough": "2020-08-31"
+  }
+ },
+ "judge": {
+  "band_full": {
+   "rolling": true,
+   "static": false
+  },
+  "band_aligned": {
+   "rolling": true,
+   "static": false
+  },
+  "vt": 0.08,
+  "vt_band": 0.02,
+  "defdate_snapshot_vol": 0.1289769688
+ }
+}

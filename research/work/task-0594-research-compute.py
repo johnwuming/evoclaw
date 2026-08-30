@@ -13,7 +13,7 @@ COST, BAND, WIN, MIN_OBS = 0.0013, 0.02, 6, 4
 df = pd.read_csv(CSV, parse_dates=['month']).set_index('month')
 rA = df['A'].pct_change().fillna(df['A'] - 1.0)
 rG = df['gold'].pct_change().fillna(df['gold'] - 1.0)
-n = len(df); rAv, rGv = rA.values, rGv = rG.values
+n = len(df); rAv, rGv = rA.values, rG.values
 months = list(df.index)
 
 def run_engine(target_fn, rebal_mask=None):
