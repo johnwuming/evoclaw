@@ -12,3 +12,29 @@
 - policy.json rolling_compare 补 vol=0.0664、sharpe=1.5233；label/note 原文保留（走前真解·待归因，未启用）。
 - Version.jsx PerformanceSection：滚动对照行改为 ann/vol/sharpe/mdd 四指标，同构主口径格式（fmtPct×3+fmtNum(2)），全部 policy.rolling_compare 派生（RC 变量），无手写字面。
 - 验证：VITE_API_BASE=/quantv6 npm run build 零报错（index-DvgzRzsj.js 208.54kB）；npm test 39 passed；grep -rl quantv6 dist/assets 命中 index-DvgzRzsj.js；policy-lint PASS（⑤四指标实算一致+⑥在场）。
+
+## ③ PRD 演进目标化（已完成，v1.4→v1.5）
+- 实查：37KB 禁全读，grep 定位三处打架点——区块③三层定义（L116 构建层「现役等波动率」，未区分静态/滚动/无风控）；模块对照表「净值曲线」行（L322 仍写「待 B8 权威口径管道」，实际 B8 已落地）；修订记录止于 v1.4（早于 B8 偏离披露）。
+- 改写（纯增量，v1.4 快照与两条用户落款裁定原文不动）：区块③ L116 后增补「组合构建层口径演进目标」=v1 当前（静态 58.03/41.97 月度再平衡·无风控层，R-379 上线，VC0_EQVOL_5842_M，task-0590 撤权威标签+lint⑥把守）/v2 目标（滚动真解+风控层，末端失配 26.6pp+hindsight 未排除，随 HP 日频翻转 authoritative_rolling_candidate，翻转后权威徽标恢复）/翻转前全文按 v1 理解不打架。
+- 模块对照表「净值曲线」行根因/处置增量修订：B8 管道已落地（task-0585）+ 总览接线待复测 + 滚动真解走 candidate（P1）。
+- 修订记录追加 v1.5 行（注明 08-30 方法偏离与 R-379/task-0590、lint⑥ 与滚动四指标同构）。错字一次（hindsight 写坏）当场修复。
+
+## 390 无头自查（已完成）
+- scripts/t0591-headless-check.cjs（新增，参照 t0590 版式）+ 复用 t0578-static-server.cjs（8981，代理 8180 BFF）。
+- 结果 CHECK_PASS：bodyScrollW=390/docScrollW=390；caliberLine 原样；rollingLine=「滚动等波动率对照：ann 10.12% / vol 6.64% / sharpe 1.52 / mdd -5.71%（走前真解·待期限结构对齐与 hindsight 归因，未启用）」四指标与主口径同构且全部 policy 派生；主指标卡 4 张 14.44%/10.32%/1.40/-9.69%；无旧字面「权威口径（等波动率」。截图 work/task-0591-version-390.png。
+
+## 修改文件清单（dev 线全部）
+1. tools/quant-dashboard/policy.json —— rolling_compare 补 vol/sharpe；新增 caliber.static_recalc（⑥参数锚）
+2. tools/quant-dashboard/scripts/policy-lint.mjs —— 新增检查⑥重算血缘断言；⑤c 升级四指标实比；头部注释+PASS 输出
+3. tools/quant-dashboard/src/pages/Version.jsx —— 滚动对照行四指标同构（RC 变量 policy 派生）
+4. shared/results/05-量化投资/R-344-Dashboard产品方案PRD.md —— v1.5：演进目标结构（纯增量）
+5. tools/quant-dashboard/scripts/t0591-headless-check.cjs —— 新增无头自查
+6. 过程笔记本文件
+
+## 验证汇总（全绿）
+- VITE_API_BASE=/quantv6 npm run build 零报错（index-DvgzRzsj.js）；npm test 39 passed；grep -rl quantv6 dist/assets 命中
+- node scripts/policy-lint.mjs PASS 六项全过（含⑥ 156 点逐位 rel≤1e-10）
+- 破坏性自测：/tmp/t0591-bff 篡改 2020-03-31 值 ×1.01 → FAIL exit1，⑤md5+⑥「重算与产物失配 max 9.901e-3」双双命中
+- 390 无头 #/version CHECK_PASS（四指标在场、无横滚、无旧字面）
+- 数据文件零改动（nav_curves*.csv/performance.json 只读；/tmp 篡改仅自测副本）；零新依赖；零 BFF 运行时改动
+- 未新增 R-xxx 报告（本批=代码+PRD 修订；README 更新日志按「每报告一行」惯例不动，避免与并行 research 线编号冲突）
