@@ -17,3 +17,22 @@
 - trades/navseries 是否含黄金腿
 - 前端 6 页逐一核对
 - risk/gates、perf-history、events、migration 组合视角
+
+## 3. 前端逐页核对（源码 grep，10:38）
+- **Overview.jsx**：activePv 从 /portfolios 兜底取（代码注释自认"投影 active 指针依赖 promotion.executed，账本尚无"）→ vC-0 卡+PvWeights 权重堆叠条（58/42）能渲染，组合主语在场。引擎卡（区块②）只显 sleeve_id/status/engine_id/IC/信号日/paper 天数/data_cut，**无权重、无 pv_ref**。健康卡硬编码文案「NAV 序列待 HP 产物接入」与下方运行态 NAV 曲线（navseries 已有 11 点，末值 1.00993）**文案打架**。
+- **Risk.jsx**：两腿相关性（equity × gold）+ recon per_sleeve 视角 ✓ 组合视角在场；correlation/vol insufficient 态如实。
+- **Version.jsx**：组合版本页，sleeve×2 组成卡 + weight_solution 各腿权重 + task-0575 双腿持仓视角（L137-183 动态读契约 #7 字段）——修复代码已入源码，dist 10:32 重建含双腿资产。
+- **Events.jsx**：通用账本视图；trade.fill target 自带 `#equity` 腿后缀可辨识；无 sleeve 过滤（小）。
+- **Migration.jsx**：迁移工程主语（Phase A-D 含 C1/D1），与组合/引擎主语无关，合规。
+- **Candidates.jsx**：迭代候选库=单引擎历史回测对照（合法成分视角）；active 项 label=「vC-0 现役（F1·vc0 口径）」已带归属语义；KIND_LABEL 现役/迭代/跳过。
+- **App.jsx**：站名「量化看板」无组合主语字样（小，可不改）。
+
+## 4. 契约/文档对照
+- R-342 v2.0 契约总表（L404+）：#4 overview 契约含 active_pv/sleeves[{id,weight,nav,mdd}]——实现结构合规、数据断供；#8 holdings **契约 schema 本身无 sleeve 字段**（items 仅 code/shares/cost/last/mv/weight）→ 单腿盲区是契约层根因；#9 trades 同样无 sleeve，filter 前缀 `paper/<id>#` 两腿通吃（黄金成交后会混排）；#10 navseries 仅组合口径（config equityNavPath/goldShadowNavPath 两腿镜像位已留，task-0565 D-1=c 未点亮）；#11 risk/gates per_sleeve+correlation pair+组合 dd_gate 合规。
+- R-344 PRD 43 模块对照表（L308+，快照 2026-08-29）：≥5 行已过时——净值曲线❌（实际 navseries 已通）、回撤闸门❌"risk/gates 无 portfolio_dd_gate"（实测已有）、波动率带❌/两腿相关性❌（字段已落 insufficient 态）、迁移 C/D 缺（实测 C1/D1 在表）。
+
+## 5. 结论分级（定稿）
+- P0-1 持仓页单腿（task-0575 修复中，dist 已建）；根因链含契约 #8 无 sleeve 字段。
+- P1-1 /overview active_pv+sleeves 空断供（账本无 executed + overview.json 无 stub）；P1-2 overview NAV 全 null 而镜像 CSV 已有数据（两源不同步）；P1-3 每腿 NAV/回撤无 API 呈现（配置位已留）；P1-4 引擎卡缺权重/pv_ref 标注；P1-5 trades 契约无 sleeve（黄金成交后混排隐患）；P1-6 R-344 对照表快照过时。
+- P2：engines.json 数据层合规；Candidates 页合规；Events 合规；Risk 页合规；Migration 合规。附：overview note 文案指向裸 API、健康卡 NAV 文案打架（并入 P1-2 副作用）。
+- 范围外提示：sync_lag 20.8h 接近陈旧心智阈值，建议交易日感知口径。
