@@ -24,6 +24,7 @@
 4. **月度「调仓」**：`close_and_roll()` 里 `w_new = float(w_sig.loc[prev_me])` 直接写 JSON 权重，成本按 `|Δw|×0.13%` 从模拟净值里扣除——成本是 NAV 公式项，不是真实交易费。
 5. **产出物**：唯一状态文件 `results/engines/gold/paper_state.json`（months 结账链 / marks 日标记尾部 120 条 / audit append-only 日志）。无 nav 成交流水、无持仓明细、无对账单。
 6. **引擎自我声明**（cmd_init 写入 state）：`"activation": {..., "real_money": "未涉及——真金分配为独立人工门"}`。设计时就声明 paper 链不碰真金。
+7. **自动化现状**（HP crontab 实查）：R-307 当时装的 cron 只有 shadow append+evaluate 两行（每月 3 日），daily 标记 cron 属「后续项」未装；其后已补装（crontab L35-36，无任务注释行，结合 state 08-28 更新时点推断为 task-0540 前后）：`40 7 * * 1-5` paper_engine_gold.py --action daily（工作日 15:40 北京）+ `0 3 * * 0` weekly verify。即模拟计算链现已自动化，但这只强化「自动纸面链」的定性——自动化的是 NAV 标记，不是任何交易。
 
 ### 2.2 HP 实测（~/quant-evolve/results/engines/gold/，2026-08-30 读取）
 

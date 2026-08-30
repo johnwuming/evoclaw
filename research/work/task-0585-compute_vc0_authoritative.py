@@ -94,15 +94,12 @@ nav_roll = (1 + rp_roll).cumprod()
 
 # 权重合理性断言
 assert np.allclose(wlog.sum(axis=1), 1.0, atol=1e-12), '权重和≠1'
-# PIT 断言: 重算 t 月目标只允许依赖 <t 数据——扰动 t 及以后收益不应改变 t 月目标
-def target_at(i, rAv_mut=None, rGv_mut=None):
-    A = rAv if rAv_mut is None else rAv_mut; G = rGv if rGv_mut is None else rGv_mut
-    if i < MIN_OBS: return (0.5, 0.5)
-    a = A[max(0, i - WIN):i]; g = G[max(0, i - WIN):i]
-    sA = a.std(ddof=1) * np.sqrt(12); sG = g.std(ddof=1) * np.sqrt(12)
-    wA = (1/sA) / (1/sA + 1/sG); return (float(wA), float(1 - wA))
-rAmut, rGmut = rAv.copy(), rGv.copy(); rAmut[100:] = 0.01; rGmut[100:] = -0.02
-pit_ok = all(abs(target_at(i)[0] - target_at(i, rAmut, rGmut)[0]) == 0 for i in range(n))
+# PIT 断言: 对抽样 i，扰动 ≥i 的收益不得改变 i 月目标（窗口右开 [i-WIN, i) 结构性无前视）
+rAmut, rGmut = rAv.copy(), rGv.copy()
+pit_ok = True
+for i in (MIN_OBS, 50, 100, 155, n - 1):
+    A2, G2 = rAv.copy(), rGv.copy(); A2[i:] = 0.01; G2[i:] = -0.02
+    pit_ok &= abs(target_at(i)[0] - target_at(i, A2, G2)[0]) == 0
 print(f'[sanity] 权重和=1 ✓; PIT(扰动 t 及以后不影响 t 月目标) = {pit_ok}; 调仓次数={n_reb}/{n}')
 assert pit_ok
 
