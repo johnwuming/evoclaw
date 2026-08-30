@@ -25,3 +25,29 @@
 - 微盘指数无序列 → MA 闸标的降级用 zz500（须注明理由）；无中证2000
 - 回测期 2006-01-04~2026-08-14，nav 5008 行，月频 248 次调仓，raw 无 ddc
 
+### R-222 关键数字（已读全文）
+- q3z off 纯趋势 MA 闸全部 MDD −38%~−52%（证伪「外部 MA15+空仓压 MDD 到 −17%」）
+- 带地板/q3z 后最优 MA15_on_f0：14.63%/−24.67%（locked 口径，a9 血统，非 a13 nav，仅参考）
+- 裁决：快线救回撤 = 快线+q3z 估值压缩+低地板三条件缺一不可
+
+### R-284 ddc15 精确机制（可复算）
+- 参数（R-243 C4a）：drawdown_control=1, dd_thresh=0.15, dd_reduce=0.5, dd_recover=0.05
+- 语义：nav vs HWM，dd≥15% → 目标仓位×0.5；自谷底收复≥5% → 恢复
+- a15_ddc15 全期：ann 18.39%/MDD −25.33%/Sharpe 1.355/Calmar 0.726/score 0.8834（a9 血统口径，非 a13 nav，但机制可在 a13 raw nav 上同参数复算对照）
+- 2015 段：−33.6%→−25.3%
+
+### R-250 RV 门重叠口径（复算基准）
+- dd≤−20% 共 197 交易日；85.3% 处 RV 高态；Jaccard 0.12；p(dd20|RV高)=12.4%
+- 同构判据：新闸 risk-off 天对 dd20 天 coverage 高 + precision 低 = 疑似同步伴随，降级
+
+### 扫描设计定案
+- MA 闸标的：zz500（库内无微盘指数序列，R-373 全程用 zz500 降级口径，一致性优先，注明）
+- MA 闸：period{20,60}×confirm{0,2}×仓位{全额0/1,半仓0/0.5}；信号 close<MA 连续 confirm+1 天→OFF，收复 MA 当日→ON；pos 信号 shift(1) 防前视
+- 价差动量闸：ratio=zz500/hs300，mom=ratio/ratio.shift(L)−1<0→OFF，L∈{20,60,120}，全额进出
+- 组合：IS 段最优 MA 闸 × IS 段最优动量闸，pos=min(posA,posB)
+- 切分：IS 2006-01~2017-12，OOS 2018-01~2026-08
+- 同 nav 对照：ddc15 同参数模拟（R-243 C4a 机制，shift(1)）
+- 重叠检验：各闸 risk-off 天 vs dd≤−20% 天（复算 197 天校验）coverage/precision/Jaccard + RV 高态近似（zz500 20日RV expanding 分位≥0.7，min250，注明近似口径）
+- 指标：ann/MDD/Sharpe/Calmar/鞭打次数(仓位状态变更次/年)/关键段段收益
+- 产物：HP ~/quant-evolve/results/p2gate_task0576_scan.csv + p2gate_task0576_states.csv
+
