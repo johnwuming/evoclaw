@@ -24,5 +24,16 @@
 - 390 约束：table-layout:fixed + width:100% + 白空格 nowrap + 数字列 tabular-nums；ID/标签超宽 ellipsis；页控件按钮式（← x/y →）。
 - 基准线：客户端从 versions[] 找 /buyhold/i 条目 → 单独调 #13 取 nav_curve 叠加（虚线灰）；缺失/无曲线/performance:null → 单曲线降级并文字说明，不伪造。
 
-## 验证记录
-- （构建前占位，构建后补）
+## 验证记录（2026-08-30）
+- 构建：`VITE_API_BASE=/quantv6 npm run build` 零报错（44 modules，dist/assets/index-DuxMVa6o.js 201KB）；产物 `grep -rl quantv6 dist/assets/` → index-DuxMVa6o.js ✓ 注入核对通过。
+- 测试：`npm test` → engine-copy assertions: 39 passed。
+- 无头 390x844 抽查（scripts/t0573-headless-check.cjs，serve 8981 反代 8180 实数据）：
+  - bodyScrollW=390 / docScrollW=390，无横向滚动 ✓
+  - 趋势区在表格之前（compareDocumentPosition FOLLOWING）✓；默认选中 vC-0（active）✓；基准虚线（dasharray 5 4）已叠加 + 图例「策略/基准」✓
+  - 表格 6 列（版本/标签/年化/波动/夏普/回撤），第 1 页 5 行，页脚「第 1/2 页 · 共 7 条 · 缺指标排末尾」✓
+  - 点第 2 行 → cand-sec-cur 与行高亮切至 F0_buyhold50 ✓
+  - 点「年化」→ ▼ 首行 F0_buyhold50（14.86% 最高）；再点 → ▲ 首行 F3_volparity（F3/F4 并列 9.51%，ID 兜底序）✓
+  - 下页 → 第 2/2 页 2 行；「恢复默认」→ 契约原序 vC-0 首行、按钮禁用、回第 1 页 ✓
+  - skipped 3 条全量渲染 ✓
+- 本批改动文件：src/pages/Candidates.jsx（重写）、src/styles.css（追加 66 行增量样式）、scripts/t0573-headless-check.cjs（新增验收脚本）。api.js/App.jsx/hooks.js 零改动，零 BFF/nginx 改动，零新依赖。
+- 契约缺口：无新发现（#12/#13 与 v2.0 总表一致；基准型条目无专门字段，前端以 id 含 buyhold 识别，已在代码注释与降级说明中如实标注）。
