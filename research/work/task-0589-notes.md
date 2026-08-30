@@ -53,3 +53,20 @@ shadow_nav.csv 性质：月频模拟表（列=month,w_applied,gold_ret,mmf_ret,g
 且当前模拟权重也是 0（趋势空仓信号），设计权重 41.97% 若接线，首个信号也是空仓。
 
 ---
+
+## 核验点 4：reconciliation gold_engine_active_paper=true 的实现
+
+HP governance.py L420（~/quant-evolve/portfolio_v1/governance/governance.py）：
+```python
+checks["gold_engine_active_paper"] = sl.get("hedge_sleeve_gold", {}).get("component_ref", {}).get("status") == "active_paper"
+```
+**它只检查 vC-0.json 设计文档里 sleeves.hedge_sleeve_gold.component_ref.status 字符串 == "active_paper"**。
+- 能证明：设计文档引用的 gold 引擎自declared状态是 active_paper（引用一致性）。
+- 不能证明：任何真实仓位/成交/runtime 组合含黄金。纯字符串比对，与 paper_state.json 的 status 字段同源（引擎自己写的）。
+- 同函数 L419 equity 检查同理（registry_entry=="a13_rsraw_e1f10dz"）。
+
+## 核验点 3 进行中：R-354 报告已读（本地 5KB 全文）
+R-354 = Phase C 治理切换执行报告（2026-08-29）。关键：
+- paper 指针切至 portfolio_version_ref=vC-0；runtime 镜像钩子 nav.daily/trade.fill 实跑 8 trade.fill（equity 侧）
+- §2e：gold paper_state 五文件 sha256 切换前后 SAME —— 即切换**没动 gold 引擎**，gold 不在切换写入面内
+- **报告里没有「黄金为何不进 runtime 组合」的决策原文** —— 切换只是忠实投影既有 vC-0 定义。需向前追：vC-0 定义时的 sleeves 权重设计（R-336/R-353？）与 baseline-paper 组合构建时的决策。
