@@ -55,14 +55,14 @@ f1q_mask = np.array([d.month % 3 == 1 for d in df.index])
 rp_f1q, _ = run_engine(lambda i: (0.5, 0.5), f1q_mask)
 nav_f1q = (1 + rp_f1q).cumprod()
 maxdiff = float(np.max(np.abs(nav_f1q.values - df['F1_quarterly'].values)))
-print(f'[repro] F1_quarterly max|diff| = {maxdiff}')
-assert maxdiff == 0.0, '方法论复现失败'
+print(f'[repro] F1_quarterly max|diff| = {maxdiff:.3e}')
+# R-377 用月收益文件直乘得精确 0.0；本脚本从 NAV 列 pct_change 反解收益，引入 <1e-14 机器噪声，判定等价
+assert maxdiff < 1e-12, '方法论复现失败'
 
 # ---------- ② 滚动等波动率目标权重（PIT: t 月只用 t-6..t-1） ----------
 def eqvol_target(i):
     if i < MIN_OBS:
         return (0.5, 0.5)  # min_obs 前等权 fallback（solver fallback=equal_weight）
-    w = np.concatenate([rAv[max(0, i - WIN):i], rGv[max(0, i - WIN):i]])  # 占位不用
     a = rAv[max(0, i - WIN):i]; g = rGv[max(0, i - WIN):i]
     sA = a.std(ddof=1) * np.sqrt(12); sG = g.std(ddof=1) * np.sqrt(12)
     if not (np.isfinite(sA) and np.isfinite(sG)) or sA <= 0 or sG <= 0:
