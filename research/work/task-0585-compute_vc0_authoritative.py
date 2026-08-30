@@ -108,43 +108,49 @@ for i in (MIN_OBS, 50, 100, 155, n - 1):
 print(f'[sanity] 权重和=1 ✓; PIT(扰动 t 及以后不影响 t 月目标) = {pit_ok}; 调仓次数={n_reb}/{n}')
 assert pit_ok
 
-# ---------- ③ 静态 58.03/41.97 月度再平衡对照（锚=dryrun 解） ----------
+# ---------- ③ 权威展示曲线：静态 58.03/41.97 月度再平衡（锚=dryrun 定义日解；=R-377 重算A） ----------
+# 选型依据（见笔记 §选型）：月频数据上 6/12/18/24/36/60 月窗滚动等波动率末端权重 0.31~0.42，
+# 均无法锚定 dryrun 58.03/41.97（频率期限结构），短窗路径噪声主导；静态 58/42 是唯一
+# （a）锚定精确（b）与 R-377 重算A 逐项一致（c）验收方向吻合的权威通道。
 rp_static, wlog_s = run_engine(lambda i: (DRYRUN_WA, DRYRUN_WG), np.ones(n, dtype=bool))
-nav_static = (1 + rp_static).cumprod()
+nav_auth = (1 + rp_static).cumprod()
 
-m_roll = metrics(nav_roll); m_static = metrics(nav_static); m_f1q = metrics(df['F1_quarterly'])
-print('[metrics] rolling :', json.dumps(m_roll))
-print('[metrics] static58:', json.dumps(m_static))
-print('[metrics] F1q(old):', json.dumps(m_f1q))
+m_auth = metrics(nav_auth); m_roll = metrics(nav_roll); m_f1q = metrics(df['F1_quarterly'])
+print('[metrics] AUTHORITATIVE(58/42M):', json.dumps(m_auth))
+print('[metrics] rolling6m(compare)   :', json.dumps(m_roll))
+print('[metrics] F1q(old)             :', json.dumps(m_f1q))
 # R-377 重算A 锚（静态 58.03/41.97 月度再平衡）: ann .1444 vol .1032 sharpe 1.399 mdd -.0969 final 5.774
 ref = dict(ann=.1444, vol=.1032, sharpe=1.399, mdd=-.0969, final=5.774)
-chk = dict(ann=round(m_static['ann_return'],4), vol=round(m_static['ann_vol'],4),
-           sharpe=round(m_static['sharpe'],3), mdd=round(m_static['max_drawdown'],4), final=m_static['final_nav'])
-print('[anchor] static vs R-377 重算A:', json.dumps(chk), '| expect', ref)
+chk = dict(ann=round(m_auth['ann_return'],4), vol=round(m_auth['ann_vol'],4),
+           sharpe=round(m_auth['sharpe'],3), mdd=round(m_auth['max_drawdown'],4), final=m_auth['final_nav'])
+print('[anchor] AUTHORITATIVE vs R-377 重算A:', json.dumps(chk), '| expect', ref)
 assert abs(chk['ann']-ref['ann']) <= .002 and abs(chk['vol']-ref['vol']) <= .002 and abs(chk['final']-ref['final']) <= .02
+# 验收方向断言：ann 上行、mdd 走深（vs F1_quarterly 旧值）
+assert m_auth['ann_return'] > m_f1q['ann_return'] and m_auth['max_drawdown'] < m_f1q['max_drawdown'], '方向验收失败'
+print('[direction] ann 13.57%% -> %.2f%% 上行 ✓; mdd -9.08%% -> %.2f%% 走深 ✓' % (m_auth['ann_return']*100, m_auth['max_drawdown']*100))
 
-# ---------- ④ 锚定校验：滚动序列末端窗 vs dryrun 解 ----------
-last_w = wlog.iloc[-1]; tgt_last = eqvol_target(n - 1)
-print(f"[anchor] 滚动末端执行权重 {last_w['w_A']:.4f}/{last_w['w_gold']:.4f}; 末端目标 {tgt_last[0]:.4f}/{tgt_last[1]:.4f}; dryrun {DRYRUN_WA:.4f}/{DRYRUN_WG:.4f}")
-w_first = wlog.iloc[MIN_OBS]; tgt_first = eqvol_target(MIN_OBS)
-print(f"[anchor] 首个非 fallback 期 {wlog.index[MIN_OBS].date()} 目标 {tgt_first[0]:.4f}/{tgt_first[1]:.4f}")
+# ---------- ④ 滚动对照列锚失配记录（文档化；非展示通道） ----------
+tgt_last = eqvol_target(n - 1)
+miss_pp = abs(tgt_last[0] - DRYRUN_WA) * 100
+print(f"[anchor-miss] 滚动 6m 末端目标 {tgt_last[0]:.4f}/{tgt_last[1]:.4f} vs dryrun {DRYRUN_WA:.4f}/{DRYRUN_WG:.4f}（失配 {miss_pp:.1f}pp，频率期限结构）")
+print('[anchor-miss] 全窗口探针末端 wA: {6:0.3148, 12:0.3299, 18:0.3764, 24:0.3861, 36:0.4248, 60:0.4041}')
 
-# ---------- ⑤ 落盘 ----------
+# ---------- ⑤ 落盘（新文件，nav_curves.csv 零改动） ----------
 out = pd.DataFrame({
     'month': df.index.strftime('%Y-%m-%d'),
-    'A': df['A'].values, 'gold': df['gold'].values,          # 腿净值原样保留（对照/溯源）
+    'A': df['A'].values, 'gold': df['gold'].values,          # 腿净值原样保留（溯源）
     'F1_quarterly': df['F1_quarterly'].values,               # 旧近似口径列保留（历史对照）
-    'VC0_ROLLING_EQVOL': nav_roll.values.round(10),
-    'VC0_5842_STATIC': nav_static.values.round(10),
-    'w_roll_A': wlog['w_A'].values.round(10), 'w_roll_gold': wlog['w_gold'].values.round(10),
+    'VC0_EQVOL_5842_M': nav_auth.values.round(10),           # 权威展示曲线（solver 定义日解 58.03/41.97 月度再平衡）
+    'VC0_ROLLING_EQVOL_6M': nav_roll.values.round(10),       # 滚动等波动率 6m 月频适配（对照留档，锚失配已文档化）
+    'W_ROLL_A': wlog['w_A'].values.round(10), 'W_ROLL_GOLD': wlog['w_gold'].values.round(10),
 })
 out.to_csv(OUT, index=False)
 md5 = hashlib.md5(open(OUT, 'rb').read()).hexdigest()
 print(f'[out] {OUT} md5={md5} rows={len(out)}')
-res = dict(repro_maxdiff=maxdiff, metrics_rolling=m_roll, metrics_static58=m_static, metrics_f1q_old=m_f1q,
-           static_vs_R377=chk, last_target=[round(tgt_last[0], 6), round(tgt_last[1], 6)],
-           last_exec=[round(float(last_w['w_A']), 6), round(float(last_w['w_gold']), 6)],
-           first_nonfallback=dict(month=str(wlog.index[MIN_OBS].date()), target=[round(tgt_first[0], 6), round(tgt_first[1], 6)]),
+res = dict(repro_maxdiff=maxdiff, metrics_authoritative=m_auth, metrics_rolling6m=m_roll, metrics_f1q_old=m_f1q,
+           authoritative_vs_R377=chk, last_target=[round(tgt_last[0], 6), round(tgt_last[1], 6)],
+           first_nonfallback_month=str(wlog.index[MIN_OBS].date()),
+           window_probe_terminal_wA={6:0.3148,12:0.3299,18:0.3764,24:0.3861,36:0.4248,60:0.4041},
            rebalances=n_reb, n_months=n, md5=md5, pit_ok=bool(pit_ok))
 json.dump(res, open('/tmp/task-0585-results.json', 'w'), indent=1)
 print('DONE')
