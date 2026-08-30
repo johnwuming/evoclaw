@@ -14,12 +14,11 @@
 - npm test = scripts/engine-copy.test.mjs，39 断言只测 src/engineCopy.js，不 import Candidates.jsx → 重构无影响
 - t0575-headless-check.cjs 模式：playwright-core @ pnpm 全局路径 + chrome-headless-shell，goto 127.0.0.1:8981（t0578-static-server）待复用
 
-## 改动方案（Candidates.jsx + styles.css）
-1. 主区「组合模型与基准」：2 张指标卡（vC-0 带琥珀警示徽标「数据口径核验中（B0）」title=task-0581 核验中；F0 基准参照卡）；点卡切换趋势选中
-2. 趋势区不动：默认选中 active，基准线=buyhold 条目另拉 #13 叠加
-3. 「构建层 ablation 对照（不含绩效，仅逻辑/状态）」<details> 默认折叠：表列=版本/构建方法(label)/核验/状态；无年化/波动/夏普/回撤
-4. skipped 区不动；RANK_COLS 表格+排序+分页整体移除（仅 2 卡无需排序）
-5. styles.css 增量：cand-model-grid（2列?→390 单列堆叠）、cand-metric-cell、cand-badge-warn、cand-abl 细节
+## 改动方案（Candidates.jsx + styles.css）→ 已落地 13:50
+1. ✅ 主区「组合模型与基准 · 绩效指标」：2 张指标卡（vC-0 带 cand-badge-warn 徽标 title=task-0581；F0 蓝色基准卡不可点选）；MetricGrid 4 格年化/波动/夏普/回撤；点卡切换趋势选中
+2. ✅ 趋势区不动；CandTrend 增 warn prop：选中现役时顶部琥珀警示行（口径核验中 B0）
+3. ✅ 「构建层 ablation 对照（不含绩效，仅逻辑/状态）」<details> 默认折叠：版本/构建方法/核验/状态 4 列 + 底部说明「不含绩效指标」；排序/分页/RANK_COLS/cmpMetrics 整体移除
+4. ✅ skipped 区不动；分类=status==='active' ∪ id含buyhold，其余→ablation
 
 ## 验证
 - [ ] VITE_API_BASE=/quantv6 npm run build 零报错
