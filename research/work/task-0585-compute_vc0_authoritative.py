@@ -95,7 +95,12 @@ nav_roll = (1 + rp_roll).cumprod()
 # 权重合理性断言
 assert np.allclose(wlog.sum(axis=1), 1.0, atol=1e-12), '权重和≠1'
 # PIT 断言: 对抽样 i，扰动 ≥i 的收益不得改变 i 月目标（窗口右开 [i-WIN, i) 结构性无前视）
-rAmut, rGmut = rAv.copy(), rGv.copy()
+def target_at(i, A=None, G=None):
+    A = rAv if A is None else A; G = rGv if G is None else G
+    if i < MIN_OBS: return (0.5, 0.5)
+    a = A[max(0, i - WIN):i]; g = G[max(0, i - WIN):i]
+    sA = a.std(ddof=1) * np.sqrt(12); sG = g.std(ddof=1) * np.sqrt(12)
+    wA = (1/sA) / (1/sA + 1/sG); return (float(wA), float(1 - wA))
 pit_ok = True
 for i in (MIN_OBS, 50, 100, 155, n - 1):
     A2, G2 = rAv.copy(), rGv.copy(); A2[i:] = 0.01; G2[i:] = -0.02
