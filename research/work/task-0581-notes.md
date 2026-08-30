@@ -24,3 +24,20 @@
 - task-0541 run_vc0_repro.py G3 前置断言写明「vC-0 → 0.5/0.5 等权 + ddc 0.20/0.5/0.05 + cost 0.0013」，源 ~/quant-evolve/portfolio_v1/portfolio/versions/vC-0.json
 - 任务书称 R-355/R-368 快照口径为 equity 58.03% / gold 41.97%（等波动率求解 2026-08-28）
 - 两个「vC-0 权重」矛盾 → 待查 R-355/R-368 与 HP vC-0.json 原文
+
+## 4. HP 权威 vC-0.json 实查（只读）
+
+- `~/quant-evolve/portfolio_v1/portfolio/versions/vC-0.json`（3976B, created 2026-08-28T15:50Z）：equity_sleeve=registry_ref a13_rsraw_e1f10dz+DDC(0.2/0.5/0.05,t+1)；hedge_sleeve_gold=engine_ref gold_trend_sma200，frozen_form{sma200,vol60,vol_target 0.1,mmf 000198,月首个交易日}；solver_ref=solver_equal_vol_v1{60d窗,252年化,min_obs40,band 0.02,fallback equal_weight}；**文件本身不存权重**
+- `portfolio/samples/weight-solution-2026-08-28-dryrun.json`：solve 2026-08-28，weights equity=0.5802970 / gold=0.4197030（vol 11.11%/15.37%，风险贡献各 0.0645，closed_form，无 fallback）→ 任务书 58.03/41.97 出处实锤
+
+## 5. 重算偏差（本地 python，源=live/data/nav_curves.csv A/gold 列）
+
+- 复现校验：50/50 季度再平衡重跑 vs F1_quarterly 列 max|diff|=0.0（逐位一致，口径判定铁证）
+- 正确口径重算（58.03/41.97 双腿月收益加权，同引擎同成本 0.13%）：
+  - 月度再平衡：ann 14.44% / vol 10.32% / sharpe(几何) 1.399 / mdd −9.69% / final 5.774
+  - 季度再平衡：ann 14.47% / vol 10.56% / sharpe 1.370 / mdd −10.44%
+  - 期初配平漂移：ann 15.64% / vol 13.38% / sharpe 1.169 / mdd −13.85%
+- 展示值（F1_quarterly 50/50季）：ann 13.57% / vol 9.47% / sharpe 1.433 / mdd −9.08% / final 5.229
+- 偏差（展示 vs 58/42月度）：ann −0.87pp（低报收益）、vol −0.85pp（低报波动）、sharpe +0.034（高报）、mdd +0.61pp（高报抗回撤）
+- 方向解释：50/50 黄金仓位更高（42%→50%），gold 波动低收益低 → 曲线更平更稳；看板把「更稳」错误归因给 58/42 等波动率解
+- 注意：更严格口径还应含 equity DDC + gold vol_target/mmf（vC-0.json 定义），nav_curves.csv 无此数据，重算只能到「58/42 裸双腿」这一层；真实 vC-0 回测曲线与展示差异只会更大（在案在役曲线 vol 0.0923/mdd −0.0825 为 50/50+DDC，可证 DDC 显著改变曲线形状）
