@@ -102,12 +102,6 @@ def ddc_sim(r_stream):
     return pd.Series(out, index=r_stream.index)
 
 ONES = pd.Series(1.0, index=cal)
-CONFIGS = {
-    "RAW": ONES,
-    "DDC15": None,  # 占位，下面统一生成
-    "GATE_FULL": gate_full,
-    "GATE_HALF": gate_half,
-}
 
 def build(P_gate):
     r_cfg = r * P_gate
@@ -118,9 +112,11 @@ def build(P_gate):
 cfgs = {}
 cfgs["RAW"] = {"r_cfg": r, "ddc": ONES, "P": ONES, "nav_gross": nav_raw / nav_raw.iloc[0]}
 cfgs["DDC15"] = build(ONES)
-cfgs["GATE_FULL"] = build(gate_full)
-cfgs["GATE_HALF"] = build(gate_half)
-cfgs["GATE_FULL_DDC15"] = build(gate_full)      # P 同 build 内（gate×ddc）
+def pure(P_gate):
+    return {"r_cfg": r * P_gate, "ddc": ONES, "P": P_gate, "nav_gross": (1.0 + r * P_gate).cumprod()}
+cfgs["GATE_FULL"] = pure(gate_full)
+cfgs["GATE_HALF"] = pure(gate_half)
+cfgs["GATE_FULL_DDC15"] = build(gate_full)
 cfgs["GATE_HALF_DDC15"] = build(gate_half)
 log("configs built")
 
