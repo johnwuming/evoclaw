@@ -25,3 +25,19 @@
 - #8：items 加 sleeve；降级语义加枚举+unknown 口径；数据源 target 格式改 `paper/<id>#<suffix>`、按 sleeve+code 聚合；首次实装加「sleeve v2.1（task-0580）」
 - #9：items 加 sleeve（action 后）；降级语义加枚举引用；首次实装同上
 - 修订记录追加 v2.1 行（task-0580，格式沿用既有条目）
+
+## 6. 前端改动（Version.jsx + styles.css，零新依赖）
+- 新增 LEG_CHIP 映射 + LegChip 组件：equity_sleeve→股票腿、hedge_sleeve_gold→黄金腿、缺失/unknown→未知（如实）
+- 持仓表/交易表各加「腿」列（7 列），key 改 sleeve:code 防双腿同代码冲突
+- 卡头改「持仓明细（账本投影 · 逐行腿标注）」/「交易清单（账本投影 · 逐行腿标注）」，移除表头上方仅代表股票腿的权重位（避免双腿表误标股票腿权重）
+- 交易日期 390 下截为 MM-DD（t.date.slice(5)，年份全 2026；fmtID 同款截断纪律）——修 7 列后日期格 nowrap 溢出 13px 问题
+- styles.css 新增 .leg-chip/.leg-equity/.leg-gold/.leg-unknown（10px 小徽标）
+- 新增 scripts/t0580-headless-check.cjs（390x844 无头验收，基于 t0575 同款）
+
+## 7. 构建与验证（最终轮）
+- VITE_API_BASE=/quantv6 npm run build：✓ 零报错（index-Cnpxo1U-.js 206.15 kB）
+- grep -rl quantv6 dist/assets/：✓ 命中 index-Cnpxo1U-.js
+- npm test：✓ engine-copy assertions: 39 passed
+- 390 无头（t0580）：T0580_CHECK_PASS——bodyScrollW=390、docScrollW=390、持仓 8/8 行+交易 8/8 行全带徽标（16 chips 全「股票腿」）、unknown=0、TD 内部溢出 0
+- 修改文件清单：quant-bff/src/app.js、quant-dashboard/src/pages/Version.jsx、src/styles.css、scripts/t0580-headless-check.cjs（新）、R-342 契约文档、本笔记；账本零改动
+- 验收命令复跑：curl holdings sleeve 集合输出 {'equity_sleeve'} ✓
