@@ -33,4 +33,8 @@
 5. styles.css：徽标长文案 390 防横滚（待查现类样式后定增量）
 
 ## 验证记录
-（待填）
+- policy.json 改后 JSON 合法：current=static_5842_monthly_rebalance_proposal / display_name 在场 / hindsight_attribution_pending=true / authoritative_available=false ✓
+- lint：node --check 语法过；初版 checkLineage 内 await import 报 SyntaxError → 改顶部静态 import createHash 后 PASS（五检查全过，含⑤血缘）✓
+- 改动落地：policy.json（caliber 升版+display_name+hindsight_attribution_pending+authoritative_available=false+authoritative_available_note+rolling_compare）、Candidates.jsx（徽标/警示行/active 卡 label 覆盖/滚动对照行，全部 policy 派生）、Version.jsx（PerformanceSection 同源口径行+滚动对照行）、styles.css（badge max-width 100%+滚动行样式）、policy-lint.mjs（②语义更新+⑤血缘断言）
+- BFF 未改（perf-history.js 的 fallback label「vC-0 现役（权威·等波动率 58/42）」仍在 BFF 源码，但前端 active 卡已用 policy 派生文案覆盖渲染，页面不再展示；如实报告）
+（待填：build/test/grep/390 自查/篡改自证）
