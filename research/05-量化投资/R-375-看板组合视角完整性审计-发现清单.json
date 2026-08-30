@@ -1,0 +1,32 @@
+{
+  "taskId": "task-0577",
+  "audit_date": "2026-08-30",
+  "subject": "组合模型主语（vC-0 双腿）下的看板+BFF 单引擎残留",
+  "report": "R-375-看板组合视角完整性审计.md",
+  "P0": [
+    {
+      "id": "P0-1",
+      "title": "持仓/交易视图只见股票腿，黄金腿不可见",
+      "location": "GET /portfolios/:id/holdings(契约#8), /trades(契约#9); 版本页模拟盘区",
+      "evidence": "holdings count=8 全微盘股 items 无 sleeve 字段 weight 腿内归一合计=1.0; trades 8 条全 equity; 账本 16 事件 trade.fill target 全 paper/vC-0#equity",
+      "status": "task-0575 修复中（dist 08-30 10:32 已重建）",
+      "residual": ["契约#8/#9 升版加 sleeve 字段(S)", "账本 payload 补 sleeve + 黄金 target 后缀规范确认(S)"]
+    }
+  ],
+  "P1": [
+    {"id": "P1-1", "title": "/overview active_pv=null sleeves=[] 组合主语断供", "location": "GET /overview 契约#4", "evidence": "实测 nav/mdd/drawdown/active_pv 全 null; 根因=账本无 promotion.executed + overview.json 无 sleeve_stub", "fix": "active 指针快照兜底(S) 或账本事件链(M)" },
+    {"id": "P1-2", "title": "组合 NAV 两源不同步", "location": "overview.json vs baseline-paper-nav.csv 镜像", "evidence": "overview nav_series=[] 而 navseries 11 点末值 1.00993; 健康卡文案「NAV 待接入」与曲线同页打架", "fix": "sync 回填/BFF 兜底 + 文案数据源感知(S)" },
+    {"id": "P1-3", "title": "每腿运行态 NAV/回撤无 API", "location": "契约#10 navseries + config equityNavPath/goldShadowNavPath", "evidence": "navseries 仅组合口径; 两腿镜像路径仅落配置位(task-0565 D-1=c)", "fix": "navseries 加 sleeve 参数 + 前端腿切换(M)" },
+    {"id": "P1-4", "title": "引擎卡无组合归属/腿权重标注(P2 降级)", "location": "Overview.jsx 区块②引擎卡", "evidence": "卡片不渲染 pv_ref(vC-0) 与 58%/42% 权重; engines.json 数据层字段完备", "fix": "权重徽标 + pv_ref 尾注(S)" },
+    {"id": "P1-5", "title": "trades 契约无 sleeve,黄金成交后混排隐患", "location": "契约#9", "evidence": "filter 前缀 paper/<id># 两腿通吃; 当前 8 条全 equity 未爆发", "fix": "与 P0-1 契约升版同批(S)" },
+    {"id": "P1-6", "title": "R-344 PRD 43 模块对照表快照过时", "location": "R-344 附录 L308+", "evidence": "净值曲线/回撤闸门/波动率/相关性/迁移C-D 至少 5 行与 08-30 实跑相反", "fix": "v1.4 快照刷新(S)" }
+  ],
+  "P2": [
+    {"id": "P2-1", "title": "engines.json 引擎卡数据层", "verdict": "合规: sleeve_id+pv_ref 成分身份自明; 前端标注缺口列 P1-4"},
+    {"id": "P2-2", "title": "Candidates 候选库页", "verdict": "合规: 单引擎迭代对照属合法成分视角, active label 含 vC-0 归属语义"},
+    {"id": "P2-3", "title": "Events 事件页", "verdict": "合规: target 自带 #equity 腿后缀; 黄金暂无事件"},
+    {"id": "P2-4", "title": "Risk 风控页", "verdict": "合规: per_sleeve+两腿相关性+组合 dd_gate, 组合视角标杆"},
+    {"id": "P2-5", "title": "Migration 迁移页", "verdict": "合规: 迁移工程主语, Phase A-D 含 C1/D1"}
+  ],
+  "out_of_scope_hints": ["sync_lag 20.8h 建议交易日感知口径", "契约升版时同步收编 R-342 总表 #8/#9"]
+}
