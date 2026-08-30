@@ -46,3 +46,9 @@
 - policyPath 实测 = /root/.openclaw/workspace/tools/quant-dashboard/policy.json
 - /perf-history versions[0].label = "设计口径·提案轨迹（静态 58/42 月度再平衡·无风控层）" == policy.caliber.display_name（逐字断言 ASSERT_OK，旧字面消失）
 - 抽端点：/perf-history/vC-0 → 200；/engines → 200
+
+## ②④验证证据（00:58）
+- node --check scripts/policy-lint.mjs → PASS；node scripts/policy-lint.mjs → PASS + 扫描面清单（实扫 13 文件，禁字面 3 条，在扫/不扫盲区明示）
+- 首跑曾 FAIL：perf-history.js 注释里残留完整旧字面被⑤f抓到 → 注释改写后 PASS（防回流断言连注释同禁，符合「任何位置禁手写」）
+- 负样本自测：复制 BFF 到 /tmp 注入旧字面 fallback → lint FAIL 抓到「残留旧口径字面」→ 防回流有效，已清理临时目录
+- BFF 重启后 is-active=active
