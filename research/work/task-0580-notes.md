@@ -8,3 +8,10 @@
 
 ## 2. BFF 现状
 - projectFills 在 src/app.js:261，用前缀 `paper/${id}#` 过滤但丢弃 `#` 后缀 → P0 根因确认
+
+## 3. BFF 改动（src/app.js，零写路径）
+- 新增 `sleeveFromTarget()`：target 含 `#` 取后缀；`equity`/`equity_sleeve`→`equity_sleeve`；`hedge_sleeve_gold`/`gold`→`hedge_sleeve_gold`；否则 `unknown`
+- projectFills 投影项新增 `sleeve` 字段
+- 持仓聚合键 code → `sleeve|code`（双腿同代码不合并），items 每行带 sleeve，排序 code+sleeve
+- trades items 每行带 sleeve
+- `node --check` OK；服务名确认 quant-bff.service（read-only BFF，允许重启）
