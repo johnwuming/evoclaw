@@ -1,0 +1,104 @@
+{
+ "walk_forward": [
+  {
+   "wf": "WF1",
+   "is_window": [
+    "2006-01-04",
+    "2015-12-31"
+   ],
+   "oos_window": [
+    "2016-01-01",
+    "2021-12-31"
+   ],
+   "selected": "zz500|20|0|bin_half",
+   "is_calmar": 2.105,
+   "oos_comb_only": {
+    "metrics": {
+     "ann": 0.0755,
+     "mdd": -0.1044,
+     "calmar": 0.723,
+     "sharpe": 0.973,
+     "vol": 0.0776
+    },
+    "segs": {
+     "E2015": {
+      "mdd": -0.0355,
+      "ret": -0.0006
+     },
+     "E2020style": {
+      "mdd": -0.1044,
+      "ret": -0.064
+     }
+    }
+   },
+   "oos_stack_base": {
+    "metrics": {
+     "ann": 0.0397,
+     "mdd": -0.0825,
+     "calmar": 0.48,
+     "sharpe": 0.827,
+     "vol": 0.048
+    }
+   },
+   "oos_stack_comb": {
+    "metrics": {
+     "ann": 0.1634,
+     "mdd": -0.0343,
+     "calmar": 4.761,
+     "sharpe": 3.667,
+     "vol": 0.0446
+    }
+   }
+  },
+  {
+   "wf": "WF2",
+   "is_window": [
+    "2006-01-04",
+    "2021-12-31"
+   ],
+   "oos_window": [
+    "2022-01-01",
+    "2026-08-14"
+   ],
+   "selected": "zz500|20|0|bin_half",
+   "is_calmar": 1.433,
+   "oos_comb_only": {
+    "metrics": {
+     "ann": 0.0573,
+     "mdd": -0.1303,
+     "calmar": 0.44,
+     "sharpe": 0.697,
+     "vol": 0.0823
+    },
+    "segs": {
+     "E2024Q1": {
+      "mdd": -0.0152,
+      "ret": 0.0582
+     },
+     "E2026": {
+      "mdd": -0.0769,
+      "ret": -0.0384
+     }
+    }
+   },
+   "oos_stack_base": {
+    "metrics": {
+     "ann": 0.0669,
+     "mdd": -0.0914,
+     "calmar": 0.732,
+     "sharpe": 0.901,
+     "vol": 0.0742
+    }
+   },
+   "oos_stack_comb": {
+    "metrics": {
+     "ann": 0.1084,
+     "mdd": -0.0429,
+     "calmar": 2.527,
+     "sharpe": 2.452,
+     "vol": 0.0442
+    }
+   }
+  }
+ ]
+}

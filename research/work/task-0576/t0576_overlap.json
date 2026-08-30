@@ -1,0 +1,97 @@
+{
+ "rep_combo": "micro MA20 K=2 map_tri; ro_any=pos<1 (n=2948), ro_hard=pos<=0.5 (n=2948)",
+ "rv_hi_days": 1363,
+ "dd20_days": 197,
+ "ro_any_vs_rvhi": {
+  "p_b_given_a": 0.303,
+  "p_a_given_b": 0.655,
+  "jaccard": 0.261,
+  "n_a": 2948,
+  "n_b": 1363
+ },
+ "ro_hard_vs_rvhi": {
+  "p_b_given_a": 0.303,
+  "p_a_given_b": 0.655,
+  "jaccard": 0.261,
+  "n_a": 2948,
+  "n_b": 1363
+ },
+ "rvhi_vs_dd20": {
+  "p_b_given_a": 0.123,
+  "p_a_given_b": 0.853,
+  "jaccard": 0.121,
+  "n_a": 1363,
+  "n_b": 197
+ },
+ "ro_any_vs_dd20": {
+  "p_b_given_a": 0.05,
+  "p_a_given_b": 0.741,
+  "jaccard": 0.049,
+  "n_a": 2948,
+  "n_b": 197
+ },
+ "ro_hard_vs_dd20": {
+  "p_b_given_a": 0.05,
+  "p_a_given_b": 0.741,
+  "jaccard": 0.049,
+  "n_a": 2948,
+  "n_b": 197
+ },
+ "trendonly_vs_rvhi": {
+  "p_b_given_a": 0.341,
+  "p_a_given_b": 0.525,
+  "jaccard": 0.261,
+  "n_a": 2100,
+  "n_b": 1363
+ },
+ "spreadonly_vs_rvhi": {
+  "p_b_given_a": 0.309,
+  "p_a_given_b": 0.525,
+  "jaccard": 0.241,
+  "n_a": 2317,
+  "n_b": 1363
+ },
+ "corr_1pos_vs_rvhi": 0.124,
+ "q3z_terciles": {
+  "q33": 0.361,
+  "q66": 0.561
+ },
+ "ro_any_vs_q3z_low": {
+  "p_b_given_a": 0.379,
+  "p_a_given_b": 0.664,
+  "jaccard": 0.318,
+  "n_a": 2948,
+  "n_b": 1685
+ },
+ "ro_any_given_q3z_high": 0.464,
+ "ro_hard_given_q3z_high": 0.464,
+ "q3z_mean_on_ro_any": 0.449,
+ "q3z_mean_on_ro_off": 0.518,
+ "seg_fire": {
+  "E2015": {
+   "pos_rep_mean": 0.549,
+   "q3z_mean": 0.25,
+   "ro_any_pct": 0.565
+  },
+  "E201412": {
+   "pos_rep_mean": 0.208,
+   "q3z_mean": 0.881,
+   "ro_any_pct": 1.0
+  },
+  "E2020style": {
+   "pos_rep_mean": 0.102,
+   "q3z_mean": 0.472,
+   "ro_any_pct": 1.0
+  },
+  "E2024Q1": {
+   "pos_rep_mean": 0.135,
+   "q3z_mean": 0.29,
+   "ro_any_pct": 0.946
+  },
+  "E2026": {
+   "pos_rep_mean": 0.259,
+   "q3z_mean": 0.483,
+   "ro_any_pct": 0.948
+  }
+ }
+}
