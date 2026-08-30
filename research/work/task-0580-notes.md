@@ -15,3 +15,13 @@
 - 持仓聚合键 code → `sleeve|code`（双腿同代码不合并），items 每行带 sleeve，排序 code+sleeve
 - trades items 每行带 sleeve
 - `node --check` OK；服务名确认 quant-bff.service（read-only BFF，允许重启）
+
+## 4. BFF 重启后 curl 实查（127.0.0.1:8180）
+- /portfolios/vC-0/holdings：items 8 行全带 `"sleeve":"equity_sleeve"`；验收单行命令输出 `{'equity_sleeve'}` ✓
+- /portfolios/vC-0/trades?limit=3：items 带 sleeve ✓，total.count=8 不变，字段序 ordinal/date/ts/code/action/sleeve/… ✓
+
+## 5. 契约文档增量（R-342，55.4KB 只 grep/定位改）
+- 行3 当前版本 v2.0→v2.1；契约总表标题→v2.1 收编
+- #8：items 加 sleeve；降级语义加枚举+unknown 口径；数据源 target 格式改 `paper/<id>#<suffix>`、按 sleeve+code 聚合；首次实装加「sleeve v2.1（task-0580）」
+- #9：items 加 sleeve（action 后）；降级语义加枚举引用；首次实装同上
+- 修订记录追加 v2.1 行（task-0580，格式沿用既有条目）
