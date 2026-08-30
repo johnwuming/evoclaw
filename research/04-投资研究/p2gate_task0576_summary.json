@@ -1,0 +1,14 @@
+{
+ "validate": {
+  "ann_raw": 0.2331,
+  "mdd_raw": -0.3355,
+  "n_dd20": 197,
+  "expect": "ann~0.2202 mdd~-0.3355 n_dd20=197(R-250/R-373)"
+ },
+ "best_ma": "MA20_c0_full",
+ "best_mom": "MOM_L20",
+ "best_combo": "COMBO_MA20_c0_full+MOM_L20",
+ "n_rows": 14,
+ "rv_high_days": 858,
+ "dd20_days": 197
+}
