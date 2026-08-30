@@ -10,3 +10,10 @@
 ## 改动
 1. Candidates.jsx：新增 fmtNum helper；滚动行改四指标（与 Version.jsx 同格式）。
 2. policy.json：rel_tol 1e-10 → 1e-9。
+
+## 验证结果
+- VITE_API_BASE=/quantv6 npm run build：✓ built in 2.81s 零报错
+- npm test：39 assertions passed
+- policy-lint：exit 0；⑥重算血缘 rel≤1e-9 在新容差下 PASS（四指标实算一致断言也过）
+- grep -rl quantv6 dist/assets：dist/assets/index-DgzUFqNU.js 命中
+- 待跑：390 无头渲染抽查
