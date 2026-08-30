@@ -35,6 +35,16 @@
 ## 验证记录
 - policy.json 改后 JSON 合法：current=static_5842_monthly_rebalance_proposal / display_name 在场 / hindsight_attribution_pending=true / authoritative_available=false ✓
 - lint：node --check 语法过；初版 checkLineage 内 await import 报 SyntaxError → 改顶部静态 import createHash 后 PASS（五检查全过，含⑤血缘）✓
-- 改动落地：policy.json（caliber 升版+display_name+hindsight_attribution_pending+authoritative_available=false+authoritative_available_note+rolling_compare）、Candidates.jsx（徽标/警示行/active 卡 label 覆盖/滚动对照行，全部 policy 派生）、Version.jsx（PerformanceSection 同源口径行+滚动对照行）、styles.css（badge max-width 100%+滚动行样式）、policy-lint.mjs（②语义更新+⑤血缘断言）
-- BFF 未改（perf-history.js 的 fallback label「vC-0 现役（权威·等波动率 58/42）」仍在 BFF 源码，但前端 active 卡已用 policy 派生文案覆盖渲染，页面不再展示；如实报告）
-（待填：build/test/grep/390 自查/篡改自证）
+## 验证记录（终）
+- build：VITE_API_BASE=/quantv6 npm run build 零报错，产物 dist/assets/index-DueHgcVK.js ✓
+- test：npm test 39 assertions passed ✓
+- grep -rl quantv6 dist/assets → 命中 ✓；bundle 内新文案 1 命中/滚动对照 1 命中/旧字面 0 命中 ✓
+- lint：node scripts/policy-lint.mjs PASS（五检查含⑤血缘）✓
+- 血缘自证（/tmp/t0590 副本，四场景全 exit 1）：①列名篡改→不在实际 CSV 表头 ②md5 篡改→实测≠记录 ③旧字面回流→残留旧硬编码徽标字面 ④rolling ann 声明改 0.5→≠列实算 0.101173 ✓
+- 390 无头自查（playwright，t0590-headless-check.cjs）：CHECK_PASS，bodyScrollW=docScrollW=390（version/candidates 双页）；徽标=「设计口径·提案轨迹（静态 58/42 月度再平衡·无风控层）」；滚动对照行在场（ann 10.12% / mdd -5.71%…未启用）；旧字面双页均不在场；active 卡 label=「现役 · 设计口径·提案轨迹…」✓；快照 shared/results/work/task-0590-candidates-390.png（image 模型不可用未做视觉复核，DOM 断言已覆盖）
+
+## 已知边界（如实报告）
+- 任务书说徽标在 Version.jsx，实查徽标字面在 Candidates.jsx（L119/L291）→ 两文件都改，Candidates.jsx 加入交付物
+- BFF perf-history.js 的 fallback label「vC-0 现役（权威·等波动率 58/42）」仍在 BFF 源码（performance.json 无 label 字段时生效）：BFF 不在交付物且需重启才能生效，改用前端渲染层覆盖（active 卡 label 用 policy 派生文案），页面已不再展示该文本；建议后续任务清 BFF fallback
+- mdd 渲染用连字符「-5.71%」（全站 fmtPct 同约定），非 Unicode 减号
+- 新增脚本 scripts/t0590-headless-check.cjs（无头验收脚本，随本任务留档）
