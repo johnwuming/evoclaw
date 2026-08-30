@@ -18,3 +18,14 @@
 - build：✓ built in 3.65s（index-BKdH4lmu.js 207.19kB / index-gK_P45PD.css 29.23kB）
 - npm test：engine-copy assertions: 39 passed
 - grep quantv6 dist/assets/：命中 dist/assets/index-BKdH4lmu.js
+
+## 无头自查（390x844，t0588-headless-check.cjs）
+- bodyScrollW=390 / docScrollW=390 无横滚
+- goldHead「目标权重 41.97%（设计）」、警示行「⚠ 实际未建仓：runtime 为 60% 股票 + 40% 现金，无黄金腿（R-377 核验）」、状态注「（引擎状态，非实际持仓）」、chip「模拟运行中」保留
+- equityNote「设计权重 58.03%；runtime 实际 60% 权益 + 40% 现金（含择时）· 依据 R-377 实测核验」
+- CHECK_PASS
+
+## 修改文件
+- tools/quant-dashboard/src/pages/Version.jsx（4 处）
+- tools/quant-dashboard/src/styles.css（末尾 +3 类）
+- tools/quant-dashboard/scripts/t0588-headless-check.cjs（新增自查脚本）
