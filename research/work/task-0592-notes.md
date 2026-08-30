@@ -25,3 +25,17 @@
 ### systemd 实况
 - LEDGER_DIR=/root/.openclaw/workspace/tools/quant-bff/live（dataDir=live/data）
 - ReadWritePaths 仅 state（BFF 零写面，读 policy.json 无碍）
+
+## 改前基线（00:50）
+- curl 127.0.0.1:8180/api/v1/perf-history → versions[0].label = "vC-0 现役（权威·等波动率 58/42）"（旧字面在场，与 policy.display_name 矛盾）
+- dist/assets 无「权威·等波动率」「权威口径（等波动率」旧字面（前端产物干净）
+- BFF src 旧字面唯一处：perf-history.js:75；app.js 等注释中「权威」单词不属徽标字面（lint 断言用完整子串防误伤）
+- t0594 编号未占用；无头检查模板=t0593-headless-check.cjs + t0578-static-server.cjs(8981, /quantv6/api→8180 代理)
+
+## 实施方案
+1. config.js: +policyPath（env POLICY_FILE 覆盖，默认 ../../quant-dashboard/policy.json）
+2. perf-history.js: activeEntry label = perf.label ?? policy.caliber.display_name ?? portfolio_version_id（readPolicyLabel 全异常→null，不阻塞列表）
+3. lint ⑤d 扩：OLD_LABEL_LITERALS=['权威口径（等波动率','现役（权威·等波动率','权威·等波动率 58/42']，扫 DASH pages jsx + DASH dist/assets/*.js + BFF src/*.js；perf-history.js 加 display_name 同源派生断言
+4. lint 输出末尾加扫描面清单（SCAN 面与实际循环同数据源）
+5. scripts/t0594-headless-check.cjs：8981 起服→390x844→bodyScrollW/docScrollW=390 + .cand-badge-auth computed height (0<h≤90px 实测) + badge text==policy.display_name + /quantv6/api/v1/perf-history versions[0].label==policy.display_name
+6. 前端源码零改动（只加 scripts 脚本）→ 无需 rebuild；dist 已验证无旧字面
