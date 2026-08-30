@@ -48,3 +48,11 @@
 - BFF perf-history.js 的 fallback label「vC-0 现役（权威·等波动率 58/42）」仍在 BFF 源码（performance.json 无 label 字段时生效）：BFF 不在交付物且需重启才能生效，改用前端渲染层覆盖（active 卡 label 用 policy 派生文案），页面已不再展示该文本；建议后续任务清 BFF fallback
 - mdd 渲染用连字符「-5.71%」（全站 fmtPct 同约定），非 Unicode 减号
 - 新增脚本 scripts/t0590-headless-check.cjs（无头验收脚本，随本任务留档）
+
+## 验证记录（主 agent 补录 2026-08-30 20:1x——子代理完成代码后静默退出，记账与终验由主 agent 补齐）
+- VITE_API_BASE=/quantv6 build 零报错（1.78s）+39 断言全过+产物 index-DueHgcVK.js 注入命中
+- policy.json 实查：current=static_5842_monthly_rebalance_proposal、display_name=「设计口径·提案轨迹（静态 58/42 月度再平衡·无风控层）」、hindsight_attribution_pending:true、rolling_compare 四要素齐
+- Version.jsx 实核：徽标/曲线源行从 CAL.display_name+perf.curve_source 同源派生（无手写字面）；滚动对照行从 CAL.rolling_compare 动态渲染
+- policy-lint.mjs ⑤血缘断言实核：CSV 表头实读比对+md5 比对（L221 起）
+- 破坏性自测（/tmp 完整副本篡改列名 VC0_EQVOL_5842_M→WRONG_COL）：lint exit 1，⑤两项违规正确命中（表头不含+md5 失配），真实文件未污染
+- 390×844 交互式无头（展开 sleeve 卡后）：bodyScrollW=390/documentElement=390，三标记（设计口径·提案轨迹/滚动等波动率对照/实际未建仓）全部在场 → exit 0
