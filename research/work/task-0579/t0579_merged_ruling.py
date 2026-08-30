@@ -58,12 +58,16 @@ log("holdings: %d reb dates, %d unique codes" % (len(reb_dates), len(all_codes))
 KL = {}
 n_missing = 0
 for c in all_codes:
-    p = os.path.join(KLINE, c + ".parquet")
+    p = os.path.join(KLINE, c + "_daily_qfq.parquet")     # 引擎 load_kline 同款命名
     if not os.path.exists(p):
-        KL[c] = None; n_missing += 1; continue
+        p2 = os.path.join(KLINE, c + ".parquet")
+        if not os.path.exists(p2):
+            KL[c] = None; n_missing += 1; continue
+        p = p2
     df = pd.read_parquet(p)
-    dcol = next((x for x in df.columns if "日期" in str(x) or "date" in str(x).lower()), None)
-    acol = next((x for x in df.columns if str(x) == "成交额" or "amount" in str(x).lower()), None)
+    df.columns = [str(x).lower() for x in df.columns]
+    dcol = next((x for x in df.columns if x == "date" or "日期" in str(x)), None)
+    acol = next((x for x in df.columns if x == "amount" or str(x) == "成交额"), None)
     if dcol is None or acol is None:
         KL[c] = None; n_missing += 1; continue
     s = df.set_index(pd.to_datetime(df[dcol]))[acol].astype(float).sort_index()
