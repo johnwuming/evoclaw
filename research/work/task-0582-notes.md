@@ -20,8 +20,18 @@
 3. ✅ 「构建层 ablation 对照（不含绩效，仅逻辑/状态）」<details> 默认折叠：版本/构建方法/核验/状态 4 列 + 底部说明「不含绩效指标」；排序/分页/RANK_COLS/cmpMetrics 整体移除
 4. ✅ skipped 区不动；分类=status==='active' ∪ id含buyhold，其余→ablation
 
-## 验证
-- [ ] VITE_API_BASE=/quantv6 npm run build 零报错
-- [ ] npm test 39 过
-- [ ] grep -rl quantv6 dist/assets/ 命中
-- [ ] 390 无头：主区 2 卡、ablation 折叠无指标、徽标在、bodyScrollW=390
+## 验证（全部通过，14:25）
+- [x] VITE_API_BASE=/quantv6 npm run build 零报错（44 modules，dist/assets/index-D16lyTxZ.js）
+- [x] npm test：engine-copy assertions: 39 passed
+- [x] grep -rl quantv6 dist/assets/ → dist/assets/index-D16lyTxZ.js 命中
+- [x] 390 无头（scripts/t0582-headless-check.cjs + t0578-static-server 复用）→ T0582 CHECK PASS：
+  bodyScrollW=390/docScrollW=390；主区恰 2 卡（● vC-0、F0_buyhold50）各 4 指标格；
+  vC-0 徽标「数据口径核验中（B0）」在场且 title 含 task-0581；趋势 svg+虚线基准+警示行在场；
+  ablation 默认折叠（open=false 且内容 checkVisibility=false），展开后表头仅 版本/构建方法/核验/状态，无绩效表头、行内无指标值泄漏，5 行；skipped 3 条
+- 注：折叠可见性探测历经 3 版（computed display→offsetHeight→checkVisibility），headless chromium 对 closed details 用 content-visibility 隐藏，前两者误报，最终用 checkVisibility()
+
+## 改动文件清单
+- src/pages/Candidates.jsx（重写主区/ablation；趋势/skipped 保留）
+- src/styles.css（末尾 cand-0582 增量 ~40 行）
+- scripts/t0582-headless-check.cjs（新增验收脚本）
+- 零改动实证（mtime）：Version.jsx 08-30 13:13（spawn 前）、App.jsx/hooks.js 06:55、api.js 08-29；BFF 零改动
