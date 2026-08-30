@@ -8,3 +8,14 @@
 - 四参数网格：MA标的/周期/仓位映射/确认期；确认期扫0/1/2/3；先做RV门重叠度检验（防冻结覆辙）
 - 数据源线索：R-250 记 timing_v2/signal_series.parquet 有 M_micro_ew（微盘等权日指数 2006-01-05~2026-08-07）；a12_pos_micro.csv 有 MA15_base（q3z形日频仓位）→ 库内无中证2000/万得微盘官方指数，M_micro_ew 即微盘标的代理
 - RV 参照系：HP results/r250/rv_monthly.csv（日频状态可按 R-250 公式复算：ln(M_micro_ew) 20日std×√252，trailing756日分位≥0.7=高）
+
+### 扫描结果（日频执行，2026-08-30 跑通，HP results/p2gate_task0576_scan.csv 14 行）
+- 校验：MDD raw −0.3355 精确吻合 registry −33.55%；dd20=197 天精确吻合 R-250/R-373；ann 复算 23.31% vs registry 22.02%（年化基数口径差：交易日年 vs 日历年，如实标注）
+- MA 闸（zz500 标的）：MA20_c0_full ann 19.17%/MDD −15.51%/Sharpe 1.696/鞭打 25.9/年；MA20_c0_half ann 21.43%/MDD −20.43%；MA20_c2_full OOS MDD −11.47% 最优
+- MA60 档 MDD 改善弱于 MA20 全部档；鞭打低（9.4-12.9/年）
+- 价差动量闸独立：全面劣——L20 ann 14.42%(−8.9pp)/MDD −28.96%(仅+4.6pp)；L60 MDD −37.28% 反恶化；L120 持平 raw。独立不成立
+- COMBO(MA20_c0_full+MOM_L20)：MDD −13.66%（比单 MA20 再+1.9pp）但 ann 12.85%（再−6.3pp），不划算
+- DDC15 同 nav 同参数复算：MDD −25.29% vs R-284 报告 −25.33%（机制复算吻合✓），ann −1.06pp，鞭打 2.62/年
+- 重叠检验（risk-off 天 vs dd20 天）：MA20 coverage 68.5%/precision 6.1%/Jaccard 0.059；MA60 coverage 86.8%（接近 RV 的 85.3%）→ MA60 与危机段高重叠疑似同构；MA20 coverage 低 31.5% 危机日在场（修复段回场），结构不同于 RV 同步伴随
+- 关键缺口①：日频闸切换成本未计（25.9 次/年×整仓进出成本量级可观）→ 必须跑月频执行变体（搭 a13 月频调仓便车）
+- 关键缺口②：2026 段/2015 段分段行为需从 scan CSV 取数核对
