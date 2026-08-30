@@ -1,6 +1,6 @@
 # R-342 R-336 实施级架构设计（含 Dashboard 全新可视化设计）
 
-> 任务 task-0529/task-0534 ｜ 2026-08-28 ｜ 状态：设计报告（纯设计零代码）｜已评审闭环（二轮+三轮外部评审+三方交叉评审，2026-08-28）｜ 当前版本 v2.0（修订记录见文末）
+> 任务 task-0529/task-0534 ｜ 2026-08-28 ｜ 状态：设计报告（纯设计零代码）｜已评审闭环（二轮+三轮外部评审+三方交叉评审，2026-08-28）｜ 当前版本 v2.1（修订记录见文末）
 > 设计依据（唯一口径）：R-336 v1.2《破而后立量化系统目标架构与迁移方案》。本文所有「§N」引用除特别注明外均指 R-336 原文章节。新增设计不与 v1.2 冻结条款冲突；凡与冻结条款相关的字段名/阈值/事件类型一律原文引用。
 
 ## 架构一图流
@@ -391,6 +391,8 @@ flowchart TB
 - **v1.3**（2026-08-28，task-0536）：21:27 三方交叉评审 P2 残值——§2.3 state guardian 补故障模式分级：日频轻巡失败→不阻塞在役、记日志告警；月频后置检失败→转人工介入（登记任务中心）；误判防护=降级事件仍走 promotion.downgraded 事件链可回退。单点小修零结构变更。
 - **v2.0**（2026-08-30，task-0570，用户 01:18 批准「按此修订」）：契约收编——①文末新增「契约总表（v2.0 收编）」：BFF 全部 13 条已注册路由（/health、/events、/migration、/overview、/engines、/portfolios、/portfolios/:id、/portfolios/:id/holdings、/portfolios/:id/trades、/portfolios/:id/navseries、/risk/gates、/perf-history、/perf-history/:id，全 GET）逐端点列参数/响应 schema 要点/降级语义/数据源/首次实装批次，以 `tools/quant-bff/src/app.js` 实际注册为准（2026-08-30 核对），散落在 R-355/R-356/R-357/R-358/R-361 等实施报告中的契约细节自此以本节为唯一权威；/risk/drift 与 /portfolios/:id/timeline 维持「后续版本项」标注（见上文「契约与现实对齐」）；②新增「构建与部署规约」节（VITE_API_BASE=/quantv6 构建期陷阱、零新依赖、390x844 bodyScrollW=390、fmtID、quant-bff 重启流程）；③§3.4 原表格与上文「契约与现实对齐」节零删改，保留作历史承诺记录。纯增量收编零结构变更。
 
+- **v2.1**（2026-08-30，task-0580，R-375 审计 P0 修复 B2）：契约总表 #8/#9 items[] 增量加 sleeve 字段——枚举 `equity_sleeve|hedge_sleeve_gold|unknown`，来源=账本 trade.fill target 腿后缀（实查格式 `paper/<id>#<suffix>`；suffix `equity`→equity_sleeve、`hedge_sleeve_gold`/`gold`→hedge_sleeve_gold；无后缀/未知后缀→unknown 如实不猜）；持仓改按 sleeve+code 聚合；同步实装 quant-bff projectFills 保留腿后缀 + quant-dashboard 持仓/交易逐行腿徽标。纯增量，其余零改动。
+
 ## 契约与现实对齐（2026-08-29）
 
 > 依据：R-359《新看板未生效模块对照审计》§2「BFF 契约缺口」B1/B2 两项（task-0562 增补；只增不删，原 §3.4 表格保留作历史承诺记录）。
@@ -401,7 +403,7 @@ flowchart TB
 
 ---
 
-## 契约总表（v2.0 收编，2026-08-30）
+## 契约总表（v2.1 收编，2026-08-30）
 
 > 动机：端点契约细节此前散落在各实施报告（R-355/R-356/R-357/R-358/R-361 等），本节收编为**唯一权威**，以 `tools/quant-bff/src/app.js` 实际注册为准（2026-08-30 逐行核对，13 条路由全 GET）。§3.4 原表格保留作历史承诺记录，两者冲突时以本表为准。前缀 `p=/api/v1`（`src/config.js` apiPrefix）；生产经 nginx `location ^~ /quantv6/api/` 反代本机 quant-bff（127.0.0.1:8180，前端构建期 `VITE_API_BASE=/quantv6`）。
 
@@ -414,8 +416,8 @@ flowchart TB
 | 5 | GET /engines | 无 | `engines[]`（引擎卡：状态/days/description；IC/ICIR/信号日待 HP 产物接入时为 null） | 账本门卫 503 同①；文件缺失→`engines:[]` | `data/engines.json` | W4（task-0542） |
 | 6 | GET /portfolios | `status`（等值过滤）、`limit`（默认 50，≤200） | 版本列表数组直返（非包裹对象） | 账本门卫 503 同①；文件缺失→`[]` | `data/portfolios.json` | W4（task-0542） |
 | 7 | GET /portfolios/:id | 路径 `id`（白名单正则校验，非法 400 BAD_ID） | `data/versions/<id>.json` 全 schema（weight_solution/status_history/risk_control/gate_report…）+ W4.5 `performance` 扩展（`{...perf, nav_curve[{date,nav}]}`，curve_source/caliber 见 R-355） | 版本文件缺失 404 NOT_FOUND；performance 任一文件缺失/:id 不匹配/曲线列不存在→`performance:null`（加性降级，不 503） | `data/versions/<id>.json` + `performance.json` + NAV CSV（文件名白名单防 traversal） | W4（task-0542）；W4.5 扩展（task-0549，R-355） |
-| 8 | GET /portfolios/:id/holdings | 路径 `id`（同上校验） | `portfolio_version_id/items[{code,shares,cost_price,last_price,market_value,weight}]/total_market_value/count/price_basis:'last_fill'/as_of/source` | 已清仓（shares≤0）不进表；价格源缺失→market_value/weight null；账本门卫 503 同① | 账本 `trade.fill` 读时投影（target 前缀 `paper/<id>#`，零写路径） | W7（task-0557，R-356/R-357） |
-| 9 | GET /portfolios/:id/trades | `limit`（默认 50，≤200）、`cursor`（同 #2） | `items[{ordinal,date,ts,code,action,shares,price,fee}]`（倒序）+`total{count,total_fee,buy_count,sell_count,buy_fee,sell_fee}`+`next_cursor/source` | 账本门卫 503 同①；BAD_CURSOR 400 | 账本 `trade.fill` 读时投影（fee 汇总并入响应头，省一次请求） | W7（task-0557，R-356/R-357） |
+| 8 | GET /portfolios/:id/holdings | 路径 `id`（同上校验） | `portfolio_version_id/items[{code,sleeve,shares,cost_price,last_price,market_value,weight}]/total_market_value/count/price_basis:'last_fill'/as_of/source` | 已清仓（shares≤0）不进表；价格源缺失→market_value/weight null；sleeve 枚举 `equity_sleeve|hedge_sleeve_gold|unknown`（v2.1 task-0580：来源=target 腿后缀，旧格式无后缀/未知后缀→'unknown' 如实不猜）；账本门卫 503 同① | 账本 `trade.fill` 读时投影（target 格式 `paper/<id>#<suffix>`，按 sleeve+code 聚合，零写路径） | W7（task-0557，R-356/R-357）；sleeve v2.1（task-0580） |
+| 9 | GET /portfolios/:id/trades | `limit`（默认 50，≤200）、`cursor`（同 #2） | `items[{ordinal,date,ts,code,action,sleeve,shares,price,fee}]`（倒序）+`total{count,total_fee,buy_count,sell_count,buy_fee,sell_fee}`+`next_cursor/source` | sleeve 枚举同 #8（v2.1 task-0580，未知→'unknown' 如实）；账本门卫 503 同①；BAD_CURSOR 400 | 账本 `trade.fill` 读时投影（fee 汇总并入响应头，省一次请求） | W7（task-0557，R-356/R-357）；sleeve v2.1（task-0580） |
 | 10 | GET /portfolios/:id/navseries | 路径 `id` | `schema:'nav_series@v1'` + `portfolio_version_id/status/caliber:'runtime_paper'/source('mirror:<file>')/nav_series/summary` | 独立镜像文件源，**不随账本 503**；文件缺失/空→source/nav_series/summary 全 null 空态；非 paper 状态→null+note 指回 `/perf-history/:id`（运行态与回测两口径不互替）；id 不在 portfolios.json→404 | runtime NAV 镜像 CSV（§3.6 供给管道）+ portfolios.json 状态位 | W8（task-0560，R-358） |
 | 11 | GET /risk/gates | 无 | 断路器状态 + recon 三视角 `perspectives{v1 P&L,v2 权重 per_sleeve,v3 覆盖}`（in_band/max_abs_diff_bp/tol_bp…）+ `drift[]`（D1-D4：dim/name/band/status/in_band/consecutive_out_of_band/freeze_trigger）+ `pending_risks` + 回撤带（caliber:'runtime_paper'/band_source/charter 25%/35%）+ 波动率/相关性闸门字段 | 监控产物缺失→status:'unavailable'/字段 null 如实标注（不伪造）；账本门卫 503 同① | `recon/` + `drift/` 数据文件 + 账本断路器状态 | W5（task-0545）；六组闸门扩展 R-361/R-362/R-366 |
 | 12 | GET /perf-history | 无 | `schema:'perf_history@v1'` + `generated_at/caliber_ref('live/export/hp_export_metrics.py (task-0549)')/versions[]/skipped[]`（历史迭代回测对照列表） | 独立文件源，**不随账本 503**；索引缺失→空列表降级 | performance 供给管道产物索引 | W6（task-0555） |
