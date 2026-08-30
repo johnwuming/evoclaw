@@ -109,7 +109,7 @@ print(f'[sanity] 权重和=1 ✓; PIT(扰动 t 及以后不影响 t 月目标) =
 assert pit_ok
 
 # ---------- ③ 静态 58.03/41.97 月度再平衡对照（锚=dryrun 解） ----------
-rp_static, wlog_s, _ = run_engine(lambda i: (DRYRUN_WA, DRYRUN_WG), np.ones(n, dtype=bool))
+rp_static, wlog_s = run_engine(lambda i: (DRYRUN_WA, DRYRUN_WG), np.ones(n, dtype=bool))
 nav_static = (1 + rp_static).cumprod()
 
 m_roll = metrics(nav_roll); m_static = metrics(nav_static); m_f1q = metrics(df['F1_quarterly'])
