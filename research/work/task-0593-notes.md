@@ -17,3 +17,13 @@
 - policy-lint：exit 0；⑥重算血缘 rel≤1e-9 在新容差下 PASS（四指标实算一致断言也过）
 - grep -rl quantv6 dist/assets：dist/assets/index-DgzUFqNU.js 命中
 - 待跑：390 无头渲染抽查
+
+## 390 无头抽查（t0593-headless-check.cjs + t0578 静态服务 8981 端口）
+- bodyScrollW=390 / docScrollW=390（无横向滚动）
+- vC-0 卡在场（● vC-0）
+- 滚动行全文：「滚动等波动率对照：ann 10.12% / vol 6.64% / sharpe 1.52 / mdd -5.71%（走前真解·待期限结构对齐与 hindsight 归因，未启用）」
+- 四值与 policy.json 逐项核对一致：0.1012→10.12% / 0.0664→6.64% / 1.5233→1.52 / -0.0571→-5.71%
+- CHECK_PASS
+
+## 结论
+全部验证通过，交付：Candidates.jsx（滚动行四指标同构 + fmtNum helper）、policy.json（rel_tol 1e-9）、新增验证脚本 scripts/t0593-headless-check.cjs。零 BFF/api.js/App.jsx/hooks.js 改动，零新依赖。
