@@ -50,3 +50,20 @@
 - B9(0588) 黄金卡已诚实标注（目标权重≠实际持仓）；B7(0583) policy.json+policy-lint.mjs；B8(0585) 权威口径管道上线（静态 58/42 主通道，滚动被否，policy 预留翻转位）；B10(0590) 徽标同源化+去权威标签+滚动对照挂出+lint 血缘断言；B11(0591) lint⑥重算断言+滚动四指标同构+PRD v1.5。
 - 组合三层模型：构建/组合/风控（R-336/R-342/R-344）；绩效指标只有组合层有，看板不上单模型指标（用户 08-30 11:10 裁定）。
 
+### R-378（gold 引擎核验，task-0589）——A/B/C 决策核心证据
+- **判定：虚腿 by design**。active_paper=自维护模拟 NAV 账本（state JSON 浮点权重+公式 NAV），零下单/券商路径、零真实仓位；HP gold 目录仅 mmf_monthly_push.csv/paper_state.json/shadow_nav.csv/shadow_nav_seed.csv，无 trades/fills/positions 文件。
+- 时间线：08-14/17 baseline-paper 建仓启动（单 a13，equity_w=0.6+现金 40%）；08-25 00:35 用户批准 gold shadow→active（R-307「激活≠真金：真金分配、层2 ERC 接入均为独立人工门，永不自动化」）；08-28 vC-0 创建；08-29 R-354 治理切换（paper 指针→vC-0，五文件 sha256 零变化声明，无黄金排除决策原文）。
+- 当前 gold 信号 w=0（07-31 px 8.433 < SMA200 9.479 趋势空仓）；**即使立刻接线，首期黄金暴露也是 0**（腿内全货基 000198）；时间敏感点=9-01 调仓日信号（8 月金价 +13.4% 部分月，08-24 px 9.564 逼近 SMA200）。
+- 对账检查 gold_engine_active_paper=true 只是设计引用一致性检查，不证明持仓存在（语义错位非造假）。
+- R-378 §5 已有选项骨架：A=组合层 paper 合成（工程量中，在役触碰面大：governance 投影/recon/BFF/看板全动，双记账歧义风险，需预注册再平衡语义+起点对齐 equity 08-14 10万成本口径 vs gold 08-24 NAV=1.0）；B=真买（真金人工门+资金操作+券商通道，当前无接入，信号 w=0 首笔也只会是货基）；C=承认未完成腿（工程量小：runtime/BFF 语义标注+recon 注释+看板一行说明，零在役数值改动）。
+- F1_quarterly 口径问题与本问题正交（回测展示基底 vs 运行账户实仓），分开决策。
+
+### baseline-paper-summary.json（04-投资研究）
+- mode=paper，start 2026-08-17，initial 100000，current_nav 100993（+0.99%）；**cash 40393（40.4%）+ holdings 60600（60.6%，8 只股票）**，无黄金仓。
+- model_version=a13_rsraw_e1f10dz，timing_layer=timing_v4_i4_q3z（timing_ratio 0.617）；last_rebalance 2026-08-14，price_basis qfq。
+- 40% 现金是 a13 择时层的真实输出（R-378 §1 确认账目成立）。
+
+### engines.json（registry 条目结构，work/task-0464 + live/data）
+- schema 1，条目键：engine_id/name/status/layer1(layer3)/shadow/audit；A=a13 active（layer1.registry entry+version_line+nav_source kind=paper_engine_daily）；A2=a14_crowdf2 shadow 叠加臂（w=0.5，min_months 3/max 6 clean_evals 规则）。
+- live/data/engines.json：A（active）+ gold_trend_sma200（active_paper）两条目——BFF 数据侧 gold 以独立引擎条目存在。
+
