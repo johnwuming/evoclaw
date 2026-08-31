@@ -1,28 +1,28 @@
 {
- "display_static5842_actual": {
+ "gold_leg_actual_157m": {
+  "end": 2.6046,
+  "ann": 0.0759,
+  "mdd": 0.059,
+  "mdd_when": "2017-06-30"
+ },
+ "gold_leg_true_157m": {
+  "end": 3.1707,
+  "ann": 0.0922,
+  "mdd": 0.0809,
+  "mdd_when": "2017-10-31"
+ },
+ "display5842_actual_156m": {
   "end": 5.8004,
   "ann": 0.1448,
   "mdd": 0.0966,
   "mdd_when": "2015-08-31"
  },
- "display_static5842_true": {
-  "end": 5.8004,
-  "ann": 0.1448,
+ "display5842_true_156m": {
+  "end": 6.324,
+  "ann": 0.1524,
   "mdd": 0.0966,
   "mdd_when": "2015-08-31"
  },
- "gold_leg_actual": {
-  "end": 2.6032,
-  "ann": 0.0764,
-  "mdd": 0.059,
-  "mdd_when": "2017-06-30"
- },
- "gold_leg_true_156m": {
-  "end": 2.6032,
-  "ann": 0.0764,
-  "mdd": 0.059,
-  "mdd_when": "2017-06-30"
- },
- "jun2026_gold_ret_act": 0.0004,
- "jun2026_gold_ret_true": 0.0004
+ "jun2026_gold_act": 0.0004,
+ "jun2026_gold_true": -0.034
 }
