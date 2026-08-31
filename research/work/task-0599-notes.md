@@ -29,11 +29,14 @@
 - [x] PRD 结构定位完成（§9 插入点：§8 末尾 P1 段之后、`---` 分隔线之前）
 - [x] R 号实查：R-385 可用
 - [x] 素材抽验完成（R-374/R-377b/R-384/policy-lint ⑥）
-- [ ] PRD §9 写入 + 修订记录 v1.6
-- [ ] R-385 报告
+- [x] PRD §9 写入（L298）+ 修订记录 v1.6（L397）；wc -c 40323→43670，纯增 3347B，其余章节零改动
+- [x] 检查⑥实址勘误：任务书指引 spawn-task.md 无命中，实为 tools/quant-dashboard/scripts/policy-lint.mjs L21（PRD 条文已用实址）
 - [ ] README 更新日志
 - [ ] 复跑 check_rid_dup.py 断言零碰撞
 - [ ] .task-completions.jsonl + PUT pending_review
 
 ## 6. 校验输出（贴原文）
 （待补）
+
+## 7. R-385 报告结构备忘
+- 标题+任务号+日期/背景/规则条文全文/落点与影响面/待用户确认清单/来源；≥2KB
