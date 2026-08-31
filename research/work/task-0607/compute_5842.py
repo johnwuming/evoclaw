@@ -56,7 +56,8 @@ def portfolio(wA0=0.58, end=None):
     """月末再平衡 + 日频逐日估值; 返回日频 nav 与月末采样 nav"""
     idx = common_idx if end is None else common_idx[common_idx <= pd.Timestamp(end)]
     rA_, rG_ = rA.reindex(idx).fillna(0.0), rG.reindex(idx).fillna(0.0)
-    navA, navG, navP = [], [], 1.0
+    navA, navG, navPs = [], [], []
+    navP = 1.0
     wA, wG = wA0, 1 - wA0
     prev_month = None
     for t in idx:
@@ -65,10 +66,11 @@ def portfolio(wA0=0.58, end=None):
         # 当日各腿增长
         gA, gG = (1 + rA_.loc[t]) * wA, (1 + rG_.loc[t]) * wG
         navP = navP * (gA + gG)
+        navPs.append(navP)
         navA.append(gA / (gA + gG))  # 期末漂移权重
         navG.append(gG / (gA + gG))
         prev_month = t.month
-    daily = pd.Series(navP, index=idx)
+    daily = pd.Series(navPs, index=idx)
     me = daily.groupby(idx.to_period('M')).last()
     return daily, me
 
