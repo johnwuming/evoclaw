@@ -9,3 +9,9 @@
 - `paper_engine_gold.py --action daily`：`40 7 * * 1-5`（工作日 07:40）
 - shadow_nav append：38 9 3 * *；shadow_evaluate：40 9 3 * *（每月 3 号）
 - 09-01 周二触发点 07:40，当前 07:16 → 距触发 ~24 分钟 → 进入轮询等待分支（间隔 ≥5 分钟）
+
+### [07:18] 账本定位 + schema
+- 账本：`~/quant-evolve/results/engines/gold/paper_state.json`（1980B，内嵌 audit list，当前 N=1）
+- audit[0] schema：ts / event / w_cur / signal_month_end / px_basis / basis_date / stub_month / note
+- 触发表达式核验：last_signal.month_end=2026-07-31，open.month=2026-08 → 2026-09 期未落盘
+- cron 07:40 触发（~22 分钟后）→ 轮询等待分支（间隔 ≥5 分钟）
