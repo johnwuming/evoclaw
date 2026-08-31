@@ -1,0 +1,55 @@
+{
+ "r372_replica_5842_goldret_n157": {
+  "n": 157,
+  "ann": 15.9373,
+  "vol": 12.3034,
+  "mdd": -16.5394,
+  "sharpe": 1.295,
+  "calmar": 0.964
+ },
+ "r372_replica_5803_n157": {
+  "n": 157,
+  "ann": 15.9398,
+  "vol": 12.3055,
+  "mdd": -16.5358,
+  "sharpe": 1.295,
+  "calmar": 0.964
+ },
+ "display_replica_A_goldeng_n157": {
+  "n": 157,
+  "ann": 14.5122,
+  "vol": 11.0396,
+  "mdd": -9.6663,
+  "sharpe": 1.315,
+  "calmar": 1.501
+ },
+ "display_replica_A_goldeng_n157_w58": {
+  "n": 157,
+  "ann": 14.5088,
+  "vol": 11.0354,
+  "mdd": -9.661,
+  "sharpe": 1.315,
+  "calmar": 1.502
+ },
+ "same121_goldret": {
+  "n": 121,
+  "ann": 12.0854,
+  "vol": 10.5378,
+  "mdd": -16.5394,
+  "sharpe": 1.147,
+  "calmar": 0.731
+ },
+ "same121_goldeng": {
+  "n": 121,
+  "ann": 10.0475,
+  "vol": 8.2093,
+  "mdd": -7.5387,
+  "sharpe": 1.224,
+  "calmar": 1.333
+ },
+ "aug2026": {
+  "A": 2.5028,
+  "gold_ret": 13.4116,
+  "gold_eng": 0.0538
+ }
+}
