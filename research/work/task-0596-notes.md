@@ -47,3 +47,22 @@
 
 ### 5. R-382 可复用外部素材
 来源清单 17 条全部可复用（B 站三流派、R&D-Agent(Q)、国联民生实测、21 经济网量化平权、Kimi 实践、知乎、smzdm、避坑指南、因子生命周期管理、小红书登录墙说明+R-371 样本）。
+
+## 外部检索补充（2026-08-31，web_search 不可用改用 web-search-prime）
+- B站｜科大金工｜《量化金融gplearn遗传规划自动因子挖掘框架》（播放 9514）：https://www.bilibili.com/video/BV1X24y1a7Ai/
+- B站｜《AI量化进化遇瓶颈？全新的多因子挖掘框架》（自进化 40+ 版本、需人工介入）：https://www.bilibili.com/video/BV1pV5S6mEWQ/
+- B站｜《因子挖掘最佳实践》：https://www.bilibili.com/video/BV1NY411F75J/
+- QuantaAlpha（上财团队，LLM+进化策略自进化因子挖掘）：https://github.com/QuantaAlpha/QuantaAlpha
+- BigQuant Wiki｜《遗传规划挖掘因子》：https://bigquant.com/wiki/doc/FYXdVMRHRu
+- 知乎专栏｜《为什么你的策略回测完美，实盘腰斩？》（样本内 70-80%/样本外 20-30%、滚动窗口）：https://zhuanlan.zhihu.com/p/1977130656162129679
+- quant67｜《量化交易系统架构：研究、回测、模拟、实盘四套环境》：https://quant67.com/post/quant/27-trading-system-arch/27-trading-system-arch.html
+- 21经济网｜《26岁离开10亿私募，一个交易天才与他的AI Trading创业》（2026-08-23；含对小红书 AI 交易内容生态的公开评价「高赞笔记仍是骗子、割韭菜的新话术」）：https://m.21jingji.com/article/20260823/herald/dd637d64ce2f1885b84194c126041cff.html
+- 中国基金报｜《量化的"AlphaGo时刻"：AI重写全球资本市场的游戏规则》：https://www.chnfund.com/article/AR5debe521-fb5e-bcee-3e06-3a22707e4df5
+- 知乎专栏｜《AI 量化交易的过去现在和未来》（演进路径：金融知识化→Workflow→Agent→策略代码化→闭环优化）：https://zhuanlan.zhihu.com/p/2070518802069055178
+- GitHub｜UFund-Me/Qbot（回测+模拟交易+实盘三段式开源框架）：https://github.com/UFund-Me/Qbot
+- 小红书：站内仍登录墙，无法核验原文；用 21经济网公开转述 + R-371 内部提取样本，如实标注。
+
+## 写作裁决
+- PEAD 按文件口径写（因子层 PASS/组合层四门 FAIL），不采用任务书「三试验全败 G1」简写。
+- 版本线门禁按 R-322 g1-g6 写；「五门禁一票否决→评分 rank1 自动 activate」保留。
+- 单引擎零绩效数字；黄金只讲「分阶段门控、纸面验证、真买留独立决策」。
