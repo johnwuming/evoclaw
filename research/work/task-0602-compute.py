@@ -118,12 +118,13 @@ for d in ['2013-08-31', '2015-08-31', '2020-08-31', '2026-07-31']:
 out['A_vs_a13_ratio_check'] = ratios  # 恒定 => 同一条腿
 
 # ---------- 日频 runtime 直算（微盘腿 0.60 + 现金 0.40，月末再平衡，权益腿换手计成本） ----------
-nav_d = a13[a13.index >= '2013-08-30']
-rd = nav_d.pct_change().fillna(nav_d.iloc[0] / 1.0 - 1.0)  # 首日以 1 为基
-# 对齐 R-380 展示窗：2013-08-30..2026-07-31；以及 R-372 全窗：..2026-08-14
+nav_d = a13[a13.index >= '2013-07-31']  # 从 2013-07-31 基准起算，首月含 2013-08 完整收益（与月频口径一致）
+
+# 对齐 R-380 展示窗：2013-07-31..2026-07-31；以及 R-372 全窗：..2026-08-14
 def daily_runtime(nav_series, wA=0.60, end=None):
     s = nav_series if end is None else nav_series[:end]
-    r = s.pct_change().fillna(s.iloc[0] / 1.0 - 1.0)
+    s = s / s.iloc[0]  # 基准归一（2013-07-31 = 1.0）
+    r = s.pct_change().fillna(0.0)  # 基准日不计收益
     w = wA; rp = []
     rebal_dates = set(pd.Series(s.index).dt.to_period('M').drop_duplicates().index)
     prev_month = None
@@ -159,7 +160,7 @@ out['runtime_daily_w60_full_win'] = daily_runtime(nav_d, 0.60, None)  # 2013-08-
 def daily_leg(nav_series, end=None):
     s = nav_series if end is None else nav_series[:end]
     navl = s / s.iloc[0]
-    r = navl.pct_change().fillna(navl.iloc[0] - 1.0)
+    r = navl.pct_change().dropna()  # 首日为基准，不计收益
     yrs = len(r) / 244.0
     dd = navl / navl.cummax() - 1
     return dict(ann=round(float(navl.iloc[-1] ** (1 / yrs) - 1), 6),

@@ -81,44 +81,44 @@
   0.15184
  ],
  "runtime_daily_w60_display_win": {
-  "ann": 0.251122,
-  "vol": 1.001268,
-  "sharpe": 0.2508,
+  "ann": 0.113663,
+  "vol": 0.094184,
+  "sharpe": 1.2068,
   "mdd": -0.21307,
-  "final": 17.854089,
+  "final": 4.033601,
   "dd_peak": "2015-06-12",
   "dd_trough": "2015-07-08",
   "dd_recovery": "2019-09-09",
-  "n_days": 3139,
-  "first": "2013-08-30",
+  "n_days": 3161,
+  "first": "2013-07-31",
   "last": "2026-07-31"
  },
  "runtime_daily_w60_full_win": {
-  "ann": 0.251677,
-  "vol": 0.999679,
-  "sharpe": 0.2518,
+  "ann": 0.114563,
+  "vol": 0.094072,
+  "sharpe": 1.2178,
   "mdd": -0.21307,
-  "final": 18.122186,
+  "final": 4.094169,
   "dd_peak": "2015-06-12",
   "dd_trough": "2015-07-08",
   "dd_recovery": "2019-09-09",
-  "n_days": 3149,
-  "first": "2013-08-30",
+  "n_days": 3171,
+  "first": "2013-07-31",
   "last": "2026-08-14"
  },
  "legA_daily_display_win": {
-  "ann": 0.18638,
-  "vol": 0.157177,
+  "ann": 0.190112,
+  "vol": 0.157044,
   "mdd": -0.335542,
   "dd_trough": "2015-07-08",
-  "n_days": 3139
+  "n_days": 3160
  },
  "legA_daily_full_win": {
-  "ann": 0.18801,
-  "vol": 0.156988,
+  "ann": 0.191724,
+  "vol": 0.156856,
   "mdd": -0.335542,
   "dd_trough": "2015-07-08",
-  "n_days": 3149
+  "n_days": 3170
  },
  "runtime_actual_paper": {
   "first": "2026-08-14",
