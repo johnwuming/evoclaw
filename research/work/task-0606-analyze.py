@@ -20,7 +20,7 @@ res = pd.DataFrame({
     "prev_me_is_cal_nan": sp["is_cal_nan"].astype(bool),
     "prev_me_is_warmup_nan": sp["is_warmup_nan"].astype(bool),
 })
-res["agree_engine_vs_ledger"] = (res["w_eng_recomputed"] - res["w_applied"]).abs() < 1e-9
+res["agree_engine_vs_ledger"] = (res["w_eng_recomputed"] - res["w_applied"]).abs() < 1e-4  # 账本存4位小数
 
 # 成本模型自洽性验证：net ?= gross - COST*|dw|
 dw = res["w_applied"].diff().abs(); dw.iloc[0] = abs(res["w_applied"].iloc[0] - 0.0)
@@ -42,7 +42,12 @@ nav_true = (1 + net_t).cumprod()
 nav_act = led["nav"]
 
 def mdd(nav):
-    return float((1 - nav / nav.cummax()).max())
+    dd = 1 - nav / nav.cummax()
+    i = dd.idxmax()
+    return float(dd.max()), str(i.date())
+
+mdd_act, when_act = mdd(nav_act)
+mdd_true, when_true = mdd(nav_true)
 
 out = {
     "n_rows": int(len(res)),
@@ -60,8 +65,8 @@ out = {
     "nav_end_actual": round(float(nav_act.iloc[-1]), 6),
     "nav_end_true": round(float(nav_true.iloc[-1]), 6),
     "nav_diff_end": round(float(nav_true.iloc[-1] - nav_act.iloc[-1]), 6),
-    "mdd_actual": round(mdd(nav_act), 6),
-    "mdd_true": round(mdd(nav_true), 6),
+    "mdd_actual": round(mdd_act, 6), "mdd_actual_when": when_act,
+    "mdd_true": round(mdd_true, 6), "mdd_true_when": when_true,
     "ann_actual": round(float(nav_act.iloc[-1] ** (12 / len(nav_act)) - 1), 6),
     "ann_true": round(float(nav_true.iloc[-1] ** (12 / len(nav_true)) - 1), 6),
 }

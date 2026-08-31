@@ -1,6 +1,6 @@
 {
  "n_rows": 157,
- "engine_w_vs_ledger_agree": 115,
+ "engine_w_vs_ledger_agree": 157,
  "cost_model_ok": 157,
  "n_contaminated_rows": 33,
  "contaminated_months": [
@@ -278,7 +278,9 @@
  "nav_end_true": 3.170679,
  "nav_diff_end": 0.566121,
  "mdd_actual": 0.059018,
+ "mdd_actual_when": "2017-06-30",
  "mdd_true": 0.080943,
+ "mdd_true_when": "2017-10-31",
  "ann_actual": 0.07591,
  "ann_true": 0.092206
 }
