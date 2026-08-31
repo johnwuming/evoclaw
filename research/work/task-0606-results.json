@@ -1,0 +1,284 @@
+{
+ "n_rows": 157,
+ "engine_w_vs_ledger_agree": 115,
+ "cost_model_ok": 157,
+ "n_contaminated_rows": 33,
+ "contaminated_months": [
+  "2014-09",
+  "2015-02",
+  "2016-02",
+  "2016-05",
+  "2016-08",
+  "2017-05",
+  "2017-10",
+  "2019-01",
+  "2019-04",
+  "2019-07",
+  "2019-09",
+  "2019-12",
+  "2020-02",
+  "2020-03",
+  "2020-06",
+  "2020-11",
+  "2022-05",
+  "2022-08",
+  "2023-01",
+  "2023-05",
+  "2023-10",
+  "2024-01",
+  "2024-04",
+  "2024-07",
+  "2024-09",
+  "2024-12",
+  "2025-02",
+  "2025-06",
+  "2025-09",
+  "2025-12",
+  "2026-02",
+  "2026-03",
+  "2026-06"
+ ],
+ "contaminated_detail": [
+  {
+   "month": "2014-09",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": -0.0489,
+   "gross_pnl_diff": -0.04894
+  },
+  {
+   "month": "2015-02",
+   "w_applied": 0.0,
+   "w_true": 0.579,
+   "gold_ret": -0.0303,
+   "gross_pnl_diff": -0.01754
+  },
+  {
+   "month": "2016-02",
+   "w_applied": 0.0,
+   "w_true": 0.801,
+   "gold_ret": 0.0948,
+   "gross_pnl_diff": 0.07593
+  },
+  {
+   "month": "2016-05",
+   "w_applied": 0.0,
+   "w_true": 0.6151,
+   "gold_ret": -0.0316,
+   "gross_pnl_diff": -0.01943
+  },
+  {
+   "month": "2016-08",
+   "w_applied": 0.0,
+   "w_true": 0.5807,
+   "gold_ret": -0.0126,
+   "gross_pnl_diff": -0.00731
+  },
+  {
+   "month": "2017-05",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": -0.0132,
+   "gross_pnl_diff": -0.01316
+  },
+  {
+   "month": "2017-10",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": -0.0088,
+   "gross_pnl_diff": -0.00875
+  },
+  {
+   "month": "2019-01",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": 0.0039,
+   "gross_pnl_diff": 0.00389
+  },
+  {
+   "month": "2019-04",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": -0.0039,
+   "gross_pnl_diff": -0.00395
+  },
+  {
+   "month": "2019-07",
+   "w_applied": 0.0,
+   "w_true": 0.8822,
+   "gold_ret": 0.0177,
+   "gross_pnl_diff": 0.01561
+  },
+  {
+   "month": "2019-09",
+   "w_applied": 0.0,
+   "w_true": 0.4932,
+   "gold_ret": -0.0319,
+   "gross_pnl_diff": -0.01575
+  },
+  {
+   "month": "2019-12",
+   "w_applied": 0.0,
+   "w_true": 0.7956,
+   "gold_ret": 0.0364,
+   "gross_pnl_diff": 0.029
+  },
+  {
+   "month": "2020-02",
+   "w_applied": 0.0,
+   "w_true": 0.7025,
+   "gold_ret": 0.0563,
+   "gross_pnl_diff": 0.03953
+  },
+  {
+   "month": "2020-03",
+   "w_applied": 0.0,
+   "w_true": 0.6183,
+   "gold_ret": -0.0102,
+   "gross_pnl_diff": -0.00631
+  },
+  {
+   "month": "2020-06",
+   "w_applied": 0.0,
+   "w_true": 0.4229,
+   "gold_ret": 0.0129,
+   "gross_pnl_diff": 0.00547
+  },
+  {
+   "month": "2020-11",
+   "w_applied": 0.0,
+   "w_true": 0.4945,
+   "gold_ret": -0.069,
+   "gross_pnl_diff": -0.03414
+  },
+  {
+   "month": "2022-05",
+   "w_applied": 0.0,
+   "w_true": 0.6023,
+   "gold_ret": -0.0165,
+   "gross_pnl_diff": -0.00993
+  },
+  {
+   "month": "2022-08",
+   "w_applied": 0.0,
+   "w_true": 0.8882,
+   "gold_ret": 0.0024,
+   "gross_pnl_diff": 0.00213
+  },
+  {
+   "month": "2023-01",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": 0.0208,
+   "gross_pnl_diff": 0.02082
+  },
+  {
+   "month": "2023-05",
+   "w_applied": 0.0,
+   "w_true": 0.814,
+   "gold_ret": 0.0156,
+   "gross_pnl_diff": 0.01269
+  },
+  {
+   "month": "2023-10",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": 0.0415,
+   "gross_pnl_diff": 0.04148
+  },
+  {
+   "month": "2024-01",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": 0.0011,
+   "gross_pnl_diff": 0.00108
+  },
+  {
+   "month": "2024-04",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": 0.0312,
+   "gross_pnl_diff": 0.03121
+  },
+  {
+   "month": "2024-07",
+   "w_applied": 0.0,
+   "w_true": 0.5511,
+   "gold_ret": 0.0262,
+   "gross_pnl_diff": 0.01446
+  },
+  {
+   "month": "2024-09",
+   "w_applied": 0.0,
+   "w_true": 0.6964,
+   "gold_ret": 0.0335,
+   "gross_pnl_diff": 0.02333
+  },
+  {
+   "month": "2024-12",
+   "w_applied": 0.0,
+   "w_true": 0.7014,
+   "gold_ret": 0.0008,
+   "gross_pnl_diff": 0.00059
+  },
+  {
+   "month": "2025-02",
+   "w_applied": 0.0,
+   "w_true": 0.7716,
+   "gold_ret": 0.039,
+   "gross_pnl_diff": 0.03011
+  },
+  {
+   "month": "2025-06",
+   "w_applied": 0.0,
+   "w_true": 0.4316,
+   "gold_ret": -0.0075,
+   "gross_pnl_diff": -0.00322
+  },
+  {
+   "month": "2025-09",
+   "w_applied": 0.0,
+   "w_true": 1.0,
+   "gold_ret": 0.1139,
+   "gross_pnl_diff": 0.11395
+  },
+  {
+   "month": "2025-12",
+   "w_applied": 0.0,
+   "w_true": 0.4056,
+   "gold_ret": 0.0258,
+   "gross_pnl_diff": 0.01047
+  },
+  {
+   "month": "2026-02",
+   "w_applied": 0.0,
+   "w_true": 0.3687,
+   "gold_ret": -0.0069,
+   "gross_pnl_diff": -0.00255
+  },
+  {
+   "month": "2026-03",
+   "w_applied": 0.0,
+   "w_true": 0.2638,
+   "gold_ret": -0.1129,
+   "gross_pnl_diff": -0.02977
+  },
+  {
+   "month": "2026-06",
+   "w_applied": 0.0,
+   "w_true": 0.3171,
+   "gold_ret": -0.1084,
+   "gross_pnl_diff": -0.03439
+  }
+ ],
+ "contaminated_helped": 15,
+ "contaminated_hurt": 18,
+ "sum_monthly_gross_diff": 0.21662,
+ "nav_end_actual": 2.604559,
+ "nav_end_true": 3.170679,
+ "nav_diff_end": 0.566121,
+ "mdd_actual": 0.059018,
+ "mdd_true": 0.080943,
+ "ann_actual": 0.07591,
+ "ann_true": 0.092206
+}
