@@ -1,0 +1,150 @@
+{
+ "baseline1_display_5842": {
+  "ann": 0.144394,
+  "vol": 0.103211,
+  "sharpe": 1.399,
+  "mdd": -0.096896,
+  "final": 5.774092,
+  "dd_peak": "2015-04-30",
+  "dd_trough": "2015-07-31",
+  "dd_recovery": "2015-07-31"
+ },
+ "baseline2_roll6m": {
+  "ann": 0.101173,
+  "vol": 0.066419,
+  "sharpe": 1.5233,
+  "mdd": -0.057067,
+  "final": 3.500438,
+  "dd_peak": "2020-07-31",
+  "dd_trough": "2020-12-31",
+  "dd_recovery": "2022-05-31"
+ },
+ "runtime_w60_rebal": {
+  "ann": 0.113251,
+  "vol": 0.101621,
+  "sharpe": 1.1144,
+  "mdd": -0.10344,
+  "final": 4.033762,
+  "dd_peak": "2015-04-30",
+  "dd_trough": "2015-07-31",
+  "dd_recovery": "2015-07-31"
+ },
+ "runtime_w60_rebal_nocost": {
+  "ann": 0.113459,
+  "vol": 0.101639,
+  "sharpe": 1.1163,
+  "mdd": -0.103326,
+  "final": 4.043555,
+  "dd_peak": "2015-04-30",
+  "dd_trough": "2015-07-31",
+  "dd_recovery": "2015-07-31"
+ },
+ "runtime_w5961_rebal": {
+  "ann": 0.112506,
+  "vol": 0.100956,
+  "sharpe": 1.1144,
+  "mdd": -0.102786,
+  "final": 3.998792,
+  "dd_peak": "2015-04-30",
+  "dd_trough": "2015-07-31",
+  "dd_recovery": "2015-07-31"
+ },
+ "runtime_w60_bh": {
+  "ann": 0.1494,
+  "vol": 0.139,
+  "sharpe": 1.0748,
+  "mdd": -0.143817,
+  "final": 6.111184,
+  "dd_peak": "2015-04-30",
+  "dd_trough": "2016-01-31",
+  "dd_recovery": "2016-01-31"
+ },
+ "runtime_w606_rebal": {
+  "ann": 0.114389,
+  "vol": 0.102637,
+  "sharpe": 1.1145,
+  "mdd": -0.104438,
+  "final": 4.087698,
+  "dd_peak": "2015-04-30",
+  "dd_trough": "2015-07-31",
+  "dd_recovery": "2015-07-31"
+ },
+ "legA_monthly": {
+  "ann": 0.189329,
+  "vol": 0.169554,
+  "mdd": -0.16954
+ },
+ "A_vs_a13_ratio_check": [
+  0.15184,
+  0.15184,
+  0.15184,
+  0.15184
+ ],
+ "runtime_daily_w60_display_win": {
+  "ann": 0.251122,
+  "vol": 1.001268,
+  "sharpe": 0.2508,
+  "mdd": -0.21307,
+  "final": 17.854089,
+  "dd_peak": "2015-06-12",
+  "dd_trough": "2015-07-08",
+  "dd_recovery": "2019-09-09",
+  "n_days": 3139,
+  "first": "2013-08-30",
+  "last": "2026-07-31"
+ },
+ "runtime_daily_w60_full_win": {
+  "ann": 0.251677,
+  "vol": 0.999679,
+  "sharpe": 0.2518,
+  "mdd": -0.21307,
+  "final": 18.122186,
+  "dd_peak": "2015-06-12",
+  "dd_trough": "2015-07-08",
+  "dd_recovery": "2019-09-09",
+  "n_days": 3149,
+  "first": "2013-08-30",
+  "last": "2026-08-14"
+ },
+ "legA_daily_display_win": {
+  "ann": 0.18638,
+  "vol": 0.157177,
+  "mdd": -0.335542,
+  "dd_trough": "2015-07-08",
+  "n_days": 3139
+ },
+ "legA_daily_full_win": {
+  "ann": 0.18801,
+  "vol": 0.156988,
+  "mdd": -0.335542,
+  "dd_trough": "2015-07-08",
+  "n_days": 3149
+ },
+ "runtime_actual_paper": {
+  "first": "2026-08-14",
+  "last": "2026-08-28",
+  "n_days": 11,
+  "total_return": 0.010334,
+  "ann": 0.285129,
+  "vol": 0.172917,
+  "mdd": -0.025503,
+  "dd_peak": "2026-08-20",
+  "dd_trough": "2026-08-24"
+ },
+ "paper_state": {
+  "cash": 40393.0,
+  "initial": 100000,
+  "created_at": "2026-08-17T16:09:39",
+  "updated_at": "2026-08-29T02:43:10",
+  "model_version": "a13_rsraw_e1f10dz",
+  "n_holdings": 8,
+  "equity_cost": 59567.0,
+  "equity_w_costbasis": 0.595908
+ },
+ "gap_display_vs_runtime_pp": {
+  "mdd": -0.654,
+  "ann": -3.114,
+  "vol": -0.159,
+  "sharpe": -0.285
+ }
+}

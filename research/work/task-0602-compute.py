@@ -109,7 +109,7 @@ out['legA_monthly'] = dict(ann=round(float(df['A'].iloc[-1] ** (1 / (n / 12)) - 
 
 # 一致性核验：nav_curves A 列 vs a13 日频引擎月末值（应为恒定比例）
 a13 = pd.read_csv(A13, parse_dates=['date']).set_index('date')['nav']
-a13_me = a13.resample('M').last()
+a13_me = a13.resample('ME').last()
 ratios = []
 for d in ['2013-08-31', '2015-08-31', '2020-08-31', '2026-07-31']:
     ts = pd.Timestamp(d)
