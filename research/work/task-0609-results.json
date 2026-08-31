@@ -1,0 +1,162 @@
+{
+ "window": {
+  "first": "2013-07-29",
+  "last": "2026-08-14",
+  "n": 3173
+ },
+ "ddc_a13_leg": {
+  "baseline": {
+   "final": 9.821,
+   "ann": 0.1914,
+   "vol": 0.1594,
+   "mdd": -0.33554,
+   "dd_win": "2015-06-12->2015-07-08"
+  },
+  "with_ddc": {
+   "final": 9.082,
+   "ann": 0.1843,
+   "vol": 0.1449,
+   "mdd": -0.2712,
+   "dd_win": "2015-06-12->2015-07-08"
+  },
+  "n_episodes": 1,
+  "episodes": [
+   {
+    "trigger_judge": "2015-06-29",
+    "trigger_eff": "2015-06-30",
+    "depth_at_trigger": -0.2026,
+    "recover_judge": "2016-11-11",
+    "trough": "2015-07-08",
+    "trough_dd": -0.1934,
+    "recover_eff": "2016-11-14",
+    "halved_days": 334
+   }
+  ]
+ },
+ "ddc_gold_leg": {
+  "baseline": {
+   "final": 3.407,
+   "ann": 0.0985,
+   "vol": 0.1512,
+   "mdd": -0.30519,
+   "dd_win": "2026-01-29->2026-07-01"
+  },
+  "with_ddc": {
+   "final": 2.871,
+   "ann": 0.0842,
+   "vol": 0.1351,
+   "mdd": -0.27606,
+   "dd_win": "2026-01-29->2026-07-01"
+  },
+  "n_episodes": 3,
+  "episodes": [
+   {
+    "trigger_judge": "2014-11-07",
+    "trigger_eff": "2014-11-10",
+    "depth_at_trigger": -0.2013,
+    "recover_judge": "2016-05-03",
+    "trough": "2015-07-31",
+    "trough_dd": -0.1729,
+    "recover_eff": "2016-05-04",
+    "halved_days": 361
+   },
+   {
+    "trigger_judge": "2021-03-05",
+    "trigger_eff": "2021-03-08",
+    "depth_at_trigger": -0.2047,
+    "recover_judge": "2023-03-16",
+    "trough": "2022-07-21",
+    "trough_dd": -0.1138,
+    "recover_eff": "2023-03-17",
+    "halved_days": 492
+   },
+   {
+    "trigger_judge": "2026-03-23",
+    "trigger_eff": "2026-03-24",
+    "depth_at_trigger": -0.2489,
+    "trough": "2026-07-01",
+    "trough_dd": -0.1821,
+    "recover_judge": null,
+    "note": "样本末仍处减半状态",
+    "halved_days": 99
+   }
+  ]
+ },
+ "portfolio_5842": {
+  "baseline": {
+   "final": 6.758,
+   "ann": 0.1578,
+   "vol": 0.1148,
+   "mdd": -0.22878,
+   "dd_win": "2015-06-12->2015-07-08"
+  },
+  "with_sleeve_ddc": {
+   "final": 5.933,
+   "ann": 0.1463,
+   "vol": 0.1036,
+   "mdd": -0.17655,
+   "dd_win": "2015-06-12->2015-07-08"
+  },
+  "n_ddc_episodes_a13": 1,
+  "n_ddc_episodes_gold": 3
+ },
+ "portfolio_dd_bands_days": {
+  "normal_<5pct": 2139,
+  "esc_5-10": 767,
+  "cut_10-15": 213,
+  "cb_>15": 54
+ },
+ "vol_target": {
+  "win20": {
+   "rv_last": 0.1118,
+   "days_above10": 1089,
+   "days_below6": 751,
+   "days_in_band": 1314,
+   "share_in_band": 0.417,
+   "breach_episodes_above": 66,
+   "breach_episodes_below": 53,
+   "longest_above_days": 140,
+   "targeted": {
+    "final": 3.815,
+    "ann": 0.1087,
+    "vol": 0.079,
+    "mdd": -0.13987,
+    "dd_win": "2026-01-29->2026-07-24"
+   }
+  },
+  "win60": {
+   "rv_last": 0.1524,
+   "days_above10": 1187,
+   "days_below6": 455,
+   "days_in_band": 1472,
+   "share_in_band": 0.473,
+   "breach_episodes_above": 22,
+   "breach_episodes_below": 16,
+   "longest_above_days": 272,
+   "targeted": {
+    "final": 4.154,
+    "ann": 0.1178,
+    "vol": 0.0795,
+    "mdd": -0.108,
+    "dd_win": "2016-11-22->2018-02-07"
+   }
+  },
+  "note": "带宽6-10%无文档出处(R-388发现), 8%目标同待确认; targeting expo=clip(8%/rv,0,1) T+1生效"
+ },
+ "combined": {
+  "ddc_then_vol20": {
+   "final": 3.786,
+   "ann": 0.1075,
+   "vol": 0.076,
+   "mdd": -0.1378,
+   "dd_win": "2026-01-29->2026-07-24"
+  },
+  "vol20_on_raw": {
+   "final": 4.025,
+   "ann": 0.1127,
+   "vol": 0.0792,
+   "mdd": -0.13987,
+   "dd_win": "2026-01-29->2026-07-24"
+  }
+ }
+}
