@@ -67,3 +67,22 @@
 - schema 1，条目键：engine_id/name/status/layer1(layer3)/shadow/audit；A=a13 active（layer1.registry entry+version_line+nav_source kind=paper_engine_daily）；A2=a14_crowdf2 shadow 叠加臂（w=0.5，min_months 3/max 6 clean_evals 规则）。
 - live/data/engines.json：A（active）+ gold_trend_sma200（active_paper）两条目——BFF 数据侧 gold 以独立引擎条目存在。
 
+### R-347/R-348/R-349（Phase B 基建）
+- R-347：combo_selector 口径插件 in_service/vc0，vC-1 换权重不换代码；复现门 G1–G5 全 PASS（F1 基线 md5 915e4463…逐位）；F1 13.57%/1.431、F7a 13.61%/1.483、F7b 13.26%/1.469、F6 19.11%/1.197。
+- R-348：shadow_recon 三视角（V1 NAV diff 带 20bp/V2 权重 diff vs band 0.02/V3 事件覆盖）+ drift_monitor 四维（D1 日P&L 20bp/D2 Sharpe 0.3/D3 执行率 90%/对齐率 95%/D4 滑点 17.25bp）；连超 2 期→冻结线（冻结动作属人工门）。
+- **V2 首跑权重差 ±0.0803 超带=已知口径差**：在役 0.5/0.5 名义 vs solver 0.58/0.42，无组合层调仓机制，solver 权重要到 **Phase C 指针切换**才生效。
+- R-349：协方差三估计器（sample/LW/EWMA）+ MVO 对照均为留档，不换默认求解器、promotion 仍走等波动率/ERC。
+
+### ddc15 / 回撤四带 / 风控宪章
+- **R-284 教训（关键）**：ddc15 评估通过但激活实施层阻断——paper_engine.py grep drawdown 0 命中，零回撤控制代码路径，配置字段激活=死字段；ddc 代码只在回测引擎。最终 F6 拍板落 dd_thresh=0.20 进 vC-0 equity_sleeve（也是设计层字段）。
+- **R-362 R1 回撤四带（纯方案，未实施）**：<5% 正常 / 5–10% 提级审查 / 10–15% 降仓×0.5 / >15% 熔断停新仓；裁决顺序三段式（熔断硬上限>组合级>单腿级）；宪章双轨辅显 cut_half 0.25 / stop 0.35（risk-charter.json v1.0）。现状：risk/gates 无 portfolio_dd_gate、HP 无带位产物、前端无仪表卡。
+- R-322 N13：risk_patrol.py 读 risk-charter 三规则（25%→降半；rolling_6m_excess<−10%→观察+暂停升级；live/backtest sharpe<0.5 持 6 月→失效 review）。
+
+### 时间敏感点
+- **明天 9-01 是 gold 腿月度调仓日**：8 月金价 +13.4% 部分月，08-24 px 9.564 逼近 SMA200 ~9.48；若金叉，模拟链内开始持有黄金（仍纸面）。A/C 选项下看板黄金暴露的差异会在该日显现。
+
+## 报告写作要点
+- 标题：R-384 「让组合第一次成为真的」决策依据与实现规格。
+- 三块结构：①黄金腿 A/B/C 依据包（机制改动面/显隐性成本/运维/风险/可回退，排序 A>C>B 短期，最终决策留用户）②风控层规格（零实现证据链 5 条：R-346 vol_target null、R-284 死字段、R-380 红线①裸腿、R-362 三连缺、展示口径超带；路径 P1 监控先行>P2 启用拦截，口径矛盾=先口径后判定，与四带关系=事前波动 vs 事后回撤、互不替代、共享执行路径）③滚动化前置 8 条+翻转路径两分支（月频近似标注 vs 日频真解）+影响面+回退预案。
+- 文内不出现内部路径，只引用 R 号；路径只在来源清单。
+
