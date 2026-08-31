@@ -1,0 +1,46 @@
+{
+ "p5842_display": {
+  "first": "2013-07-29",
+  "last": "2026-07-31",
+  "n_days": 3163,
+  "daily_mdd": 0.0,
+  "daily_dd": "2013-07-29->2013-07-29",
+  "monthend_mdd": 0.0,
+  "monthend_dd": "013-07->013-07",
+  "coef": NaN,
+  "daily_ann": 0.1548,
+  "daily_vol": 0.0,
+  "monthend_ann": 0.1548,
+  "monthend_vol": 0.0,
+  "final": 6.497
+ },
+ "p5842_full": {
+  "first": "2013-07-29",
+  "last": "2026-08-14",
+  "n_days": 3173,
+  "daily_mdd": 0.0,
+  "daily_dd": "2013-07-29->2013-07-29",
+  "monthend_mdd": 0.0,
+  "monthend_dd": "013-07->013-07",
+  "coef": NaN,
+  "daily_ann": 0.1578,
+  "daily_vol": 0.0,
+  "monthend_ann": 0.1578,
+  "monthend_vol": 0.0,
+  "final": 6.758
+ },
+ "gold_leg": {
+  "daily_mdd": -0.30519,
+  "monthend_mdd": -0.23899,
+  "coef": 1.277,
+  "daily_dd": "2026-01-29->2026-07-01",
+  "monthend_dd": "026-01->026-06",
+  "first": "2013-07-29",
+  "last": "2026-08-14"
+ },
+ "a13_leg_common_win": {
+  "daily_mdd": -0.33554,
+  "monthend_mdd": -0.16954,
+  "coef": 1.979
+ }
+}
