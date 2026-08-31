@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-28 16:45:02",
+  "generated_at": "2026-08-31 16:45:01",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
   "nav_sources": {
     "paper_nav": {
       "file": "results/baseline-paper-nav.csv",
-      "obs": 10,
-      "range": "2026-08-14~2026-08-27"
+      "obs": 11,
+      "range": "2026-08-14~2026-08-28"
     },
     "strategy_track_record": {
       "file": "results/i3_abs_s1_nav.csv",
@@ -30,7 +30,7 @@
       "action": "降仓至50%",
       "data_source": "strategy_track_record(i3_abs_s1_nav.csv)",
       "as_of": "2026-08-07",
-      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=-0.01043"
+      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=0.0"
     },
     "drawdown_circuit_breaker.level2_stop": {
       "rule": "drawdown_circuit_breaker.level2_stop",
@@ -44,35 +44,35 @@
       "action": "清仓复盘，人工重启",
       "data_source": "strategy_track_record(i3_abs_s1_nav.csv)",
       "as_of": "2026-08-07",
-      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=-0.01043"
+      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=0.0"
     },
     "underperform_discipline.watch": {
       "rule": "underperform_discipline.watch",
       "metric": "rolling_6m_excess_vs_benchmark",
-      "current": -0.01234,
+      "current": -0.00233,
       "threshold": -0.1,
       "window": "6m",
-      "margin": 0.8766,
+      "margin": 0.9767,
       "color": "green",
       "status": "ok",
       "action": "进入观察，暂停模型升级",
       "data_source": "strategy_track_record(6m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": 0.20882
+      "cross_check_vs_microcap_eqw": 0.22735
     },
     "underperform_discipline.downweight": {
       "rule": "underperform_discipline.downweight",
       "metric": "rolling_12m_excess_vs_benchmark",
-      "current": -0.07137,
+      "current": -0.05744,
       "threshold": -0.15,
       "window": "12m",
-      "margin": 0.5242,
+      "margin": 0.6171,
       "color": "green",
       "status": "ok",
       "action": "降仓至70%",
       "data_source": "strategy_track_record(12m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": 0.26018
+      "cross_check_vs_microcap_eqw": 0.20837
     },
     "live_vs_backtest": {
       "rule": "live_vs_backtest",
@@ -86,30 +86,30 @@
       "status": "insufficient_data",
       "action": "策略失效review",
       "data_source": "paper < 20 obs => insufficient",
-      "as_of": "2026-08-27"
+      "as_of": "2026-08-28"
     }
   },
   "crowding_reference": {
-    "latest_date": "2026-08-21",
+    "latest_date": "2026-08-28",
     "overall_flag": "red",
     "indicators": {
       "micro_turnover_share": {
-        "latest": 0.03282,
+        "latest": 0.03347,
         "flag": "red",
         "pct_rank": null
       },
       "micro_turnover_pctile": {
-        "latest": 10.0,
+        "latest": 51.67,
         "flag": "green",
         "pct_rank": null
       },
       "excess_decay": {
-        "latest": -0.001384,
-        "flag": "red",
+        "latest": -0.000129,
+        "flag": "yellow",
         "pct_rank": null
       },
       "snowball_knockin": {
-        "latest": 0.54917,
+        "latest": 0.53492,
         "flag": "green",
         "pct_rank": null
       }
@@ -117,13 +117,13 @@
     "capacity": {
       "as_of": "last trading day",
       "method": "单日可买量=ADV20×参与率，策略容量=可买量÷持仓权重，取11票瓶颈(min)",
-      "conservative_5pct": 17538318.0,
-      "neutral_10pct": 35076636.0,
-      "optimistic_15pct": 52614954.0,
+      "conservative_5pct": 17129490.0,
+      "neutral_10pct": 34258981.0,
+      "optimistic_15pct": 51388471.0,
       "bottleneck_stock": "603551",
-      "mean_5pct": 339104841.0,
-      "mean_10pct": 678209682.0,
-      "mean_15pct": 1017314523.0
+      "mean_5pct": 323959710.0,
+      "mean_10pct": 647919420.0,
+      "mean_15pct": 971879130.0
     }
   }
 }
