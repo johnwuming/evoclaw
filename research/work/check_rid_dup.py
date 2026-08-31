@@ -14,28 +14,29 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # shared/res
 if os.path.basename(BASE) != "results":
     BASE = "/root/.openclaw/workspace/shared/results"
 
-# 文件名中的 R- 编号模式：
-#   R-213-xxx        -> 213
-#   R-342R-344-xxx   -> 342, 344（复合占用，视为违例）
+# 声称占用口径（task-0598 定性）：
+#   1) 文件名首个 R-号；
+#   2) 无分隔复合模式 R-NNNR-MMM（紧邻，中间无破折号）也算声称占用；
+#   3) 其后破折号分隔的 R-号（如 R-290-…-按-R-256-R-259-…）为描述性引用，不占号。
 PAT_COMPOSITE = re.compile(r"R-(\d{2,4})R-(\d{2,4})(?=[-_.]|$)")
 PAT_SINGLE = re.compile(r"R-(\d{2,4})(?=[-_.]|\b)")
 
 
 def extract_ids(filename: str):
-    """返回 (ids, composite_hits)。ids 为文件名声称占用的编号列表。"""
+    """返回 (claimed_ids, composite_hits)。claimed_ids 为该文件声称占用的编号。"""
     stem = os.path.splitext(filename)[0]
-    ids = []
-    composite = []
     m = PAT_COMPOSITE.search(stem)
     if m:
-        composite = [m.group(1), m.group(2)]
-        ids.extend(composite)
-        # 复合模式之后可能还有独立号
-        rest = stem[m.end():]
-        ids.extend(PAT_SINGLE.findall(rest))
-        return ids, composite
-    ids.extend(PAT_SINGLE.findall(stem))
-    return ids, []
+        # 复合模式：占用其中两号；若首个 R-号在复合段之前且不同，也占用
+        ids = [m.group(1), m.group(2)]
+        head = stem[: m.start()]
+        heads = PAT_SINGLE.findall(head)
+        if heads and heads[0] not in ids:
+            ids.insert(0, heads[0])
+        return ids, [m.group(1), m.group(2)]
+    all_ids = PAT_SINGLE.findall(stem)
+    # 只取第一个作为声称占用
+    return ([all_ids[0]] if all_ids else []), []
 
 
 def main():

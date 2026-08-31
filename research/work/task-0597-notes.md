@@ -28,3 +28,25 @@
 - 「方向不对」一词废弃；滚动=「标注启用」候选（须先补同源性核验才能升级权威）；静态=「定义日快照 retro 展示」。
 - policy.authoritative_rolling_candidate 预留位存在（R-379 预留）。
 
+### policy.json（tools/quant-dashboard/policy.json，3.1KB）
+- metrics-display-policy@v1：只有 active_portfolio_version/benchmark 可展示绩效；引擎层禁字段 ann_return/ann_vol/sharpe/max_drawdown/nav_curve/metrics。
+- caliber.authoritative=equal_vol_58_42_static_monthly，但 **authoritative_available=false**（「权威」标签已暂停）；display_name=设计口径·提案轨迹（静态 58/42 月度再平衡·无风控层）；hindsight_attribution_pending=true。
+- rolling_compare 挂出：VC0_ROLLING_EQVOL_6M，ann 10.12%/vol 6.64%/sharpe 1.5233/mdd −5.71%，note「走前真解·待期限结构对齐与 hindsight 归因，未启用」。
+- authoritative_rolling_candidate=rolling_equal_vol_58_42（月频适配无法锚定 dryrun 解，末端失配 26.6pp；待 HP 日频 sleeve 数据接入后升版）。
+- current/authoritative curve column 均为 VC0_EQVOL_5842_M；enforcement 走 policy-lint.mjs，scope 覆盖 engines.json/BFF/performance.json/Candidates.jsx/perf-history.js。
+
+### R-346（vC-0 快照与求解器，task-0540）
+- vC-0：status=paper；equity_sleeve=a13_rsraw_e1f10dz（active）+ 腿级 DDC {dd_thresh 0.20, dd_reduce 0.5, dd_recover 0.05, t+1}；hedge_sleeve_gold=gold_trend_sma200（active_paper，2026-08-25 批准），frozen_form sma200/vol60/vol_target=0.1/月频首个交易日/货基 000198。
+- **组合级 risk_control：在役宪章断路器（回撤 25% 降半/35% 清仓，config/risk-charter.json v1.0）+ vol_target: null（在役组合级未启用）**。
+- capital_policy gross/net=1.0（无杠杆双腿独立链）；weighting 实况=dual_independent_paper_chains。
+- solver_equal_vol_v1：w∝1/σ，闭式解；params window 60 日/年化 252/min_obs 40；再平衡带 0.02；fallback 等权+fb_* 必产事件。
+- dryrun 解：w=(0.58030,0.41970)，σ_ann=(0.11113,0.15365)——**定义日短窗内 gold 波动反超 A 腿**（与全历史 A:gold≈2.5:1 相反），这就是 58/42 的来历。
+- 事件账本 JSONL+flock+fsync+月滚动+sha256+seq 幂等；求解器月频调度未启用 cron（当时约束）。
+- 版本迭代规程：改 solver/风控/腿 → 升 vC-0.y 子版本（parent_version 链）；协方差刷新不升版本。
+
+### memory/2026-08-30.md
+- **R-378(0589) gold 引擎核验：虚腿 by design**——paper_engine_gold.py 无下单接口，产出仅模拟账本；runtime 60/40 无黄金；R-307「激活≠真金」=有意分阶段门控；当前引擎模拟权重 w=0。
+- 唯一待用户决策：黄金腿 A（纸面合成）/B（真买）/C（维持现状+标注）。
+- B9(0588) 黄金卡已诚实标注（目标权重≠实际持仓）；B7(0583) policy.json+policy-lint.mjs；B8(0585) 权威口径管道上线（静态 58/42 主通道，滚动被否，policy 预留翻转位）；B10(0590) 徽标同源化+去权威标签+滚动对照挂出+lint 血缘断言；B11(0591) lint⑥重算断言+滚动四指标同构+PRD v1.5。
+- 组合三层模型：构建/组合/风控（R-336/R-342/R-344）；绩效指标只有组合层有，看板不上单模型指标（用户 08-30 11:10 裁定）。
+
