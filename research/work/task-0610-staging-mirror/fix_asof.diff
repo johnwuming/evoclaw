@@ -1,0 +1,26 @@
+--- /tmp/pre0610/scripts/paper_engine_gold.py	2026-08-24 16:55:31.000000000 +0000
++++ scripts/paper_engine_gold.py	2026-09-01 03:09:38.921401445 +0000
+@@ -84,8 +84,8 @@
+ # ---------- E2 冻结信号复刻（与 r483/e2_backtest.py §2 逐行同构） ----------
+ def compute_signals(s):
+     m = s.resample("ME").last().dropna()
+-    sma200 = s.rolling(SMA_N).mean().reindex(m.index)
+-    vol60 = s.pct_change().dropna().rolling(VOL_N).std().reindex(m.index) * np.sqrt(252)
++    sma200 = s.rolling(SMA_N).mean().reindex(m.index, method="ffill")
++    vol60 = s.pct_change().dropna().rolling(VOL_N).std().reindex(m.index, method="ffill") * np.sqrt(252)
+     dir200 = pd.Series((m.values > sma200.values).astype(float), index=m.index)
+     vt10 = (VOL_TARGET / vol60).clip(0, 1)
+     w_sig = (dir200 * vt10).fillna(0.0)
+--- /tmp/pre0610/scripts/engines_shadow_nav_gold.py	2026-08-24 15:13:34.000000000 +0000
++++ scripts/engines_shadow_nav_gold.py	2026-09-01 03:09:38.921609008 +0000
+@@ -75,8 +75,8 @@
+ # ---------- E2 冻结信号复刻（与 r483/e2_backtest.py §2/§4 逐行同构） ----------
+ def compute_signals(s):
+     m = s.resample("ME").last().dropna()
+-    sma200 = s.rolling(SMA_N).mean().reindex(m.index)
+-    vol60 = s.pct_change().dropna().rolling(VOL_N).std().reindex(m.index) * np.sqrt(252)
++    sma200 = s.rolling(SMA_N).mean().reindex(m.index, method="ffill")
++    vol60 = s.pct_change().dropna().rolling(VOL_N).std().reindex(m.index, method="ffill") * np.sqrt(252)
+     dir200 = pd.Series((m.values > sma200.values).astype(float), index=m.index)  # NaN 比较→False=0（E1 同口径）
+     vt10 = (VOL_TARGET / vol60).clip(0, 1)
+     w_sig = (dir200 * vt10).fillna(0.0)

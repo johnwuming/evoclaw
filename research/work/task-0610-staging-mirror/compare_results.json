@@ -1,0 +1,40 @@
+{
+ "old_ledger": {
+  "rows": 157,
+  "start": "2013-08-31",
+  "end": "2026-08-31",
+  "endpoint": 2.6046,
+  "ann_pct": 7.59,
+  "vol_pct": 6.85,
+  "mdd_pct": -5.9,
+  "corr_a13": 0.0798
+ },
+ "new_common_window": {
+  "rows": 157,
+  "start": "2013-08-31",
+  "end": "2026-08-31",
+  "endpoint": 3.1707,
+  "ann_pct": 9.22,
+  "vol_pct": 8.42,
+  "mdd_pct": -8.09,
+  "corr_a13": 0.0411
+ },
+ "new_full_window": {
+  "rows": 157,
+  "start": "2013-08-31",
+  "end": "2026-08-31",
+  "endpoint": 3.1707,
+  "ann_pct": 9.22,
+  "vol_pct": 8.42,
+  "mdd_pct": -8.09,
+  "corr_a13": 0.0411
+ },
+ "recon": {
+  "new_w": "1/157",
+  "old_w_defect": "1/157"
+ },
+ "nan_defect": 60,
+ "nan_fixed": 10,
+ "forced0_fixed_nonzero": 33,
+ "diff_months": 34
+}
