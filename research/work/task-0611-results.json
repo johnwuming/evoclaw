@@ -1,0 +1,204 @@
+{
+ "gold_window": {
+  "first": "2013-07-29",
+  "last": "2026-08-31",
+  "n": 3184
+ },
+ "gold_bare_full_mdd": {
+  "depth": -0.30519,
+  "peak": "2013-07-29",
+  "peak_px": 2.626,
+  "trough": "2026-07-01",
+  "trough_px": 8.271
+ },
+ "gold_ddc_episodes": [
+  {
+   "trigger_judge": "2014-11-07",
+   "dd_at_trigger": -0.20127,
+   "peak_date": "2013-07-29",
+   "peak_px": 2.626,
+   "close_at_trigger": 2.258,
+   "recover_judge": "2016-05-03",
+   "effective_T1": "2014-11-10",
+   "trough_date": "2015-07-31",
+   "trough_px": 2.167,
+   "trough_dd": -0.1729
+  },
+  {
+   "trigger_judge": "2021-03-05",
+   "dd_at_trigger": -0.20466,
+   "peak_date": "2013-07-29",
+   "peak_px": 2.626,
+   "close_at_trigger": 3.482,
+   "recover_judge": "2023-03-16",
+   "effective_T1": "2021-03-08",
+   "trough_date": "2022-07-21",
+   "trough_px": 3.599,
+   "trough_dd": -0.11377
+  },
+  {
+   "trigger_judge": "2026-03-23",
+   "dd_at_trigger": -0.24891,
+   "peak_date": "2013-07-29",
+   "peak_px": 2.626,
+   "close_at_trigger": 8.941,
+   "effective_T1": "2026-03-24",
+   "trough_date": "2026-07-01",
+   "trough_px": 8.271,
+   "trough_dd": -0.18214,
+   "status": "still_halved_at_sample_end"
+  }
+ ],
+ "gold_20260323": {
+  "close": 8.941,
+  "dd_vs_running_max": -0.24891,
+  "peak_date": "2013-07-29",
+  "peak_px": 2.626,
+  "breach_le_20pct": true
+ },
+ "gold_monthend_mdd": {
+  "depth": -0.23899,
+  "peak": "2013-07-31",
+  "peak_px": 2.657,
+  "trough": "2026-06-30",
+  "trough_px": 8.378
+ },
+ "gold_monthend_2026_dd": {
+  "2026-01-31": 0.0,
+  "2026-02-28": -0.0069,
+  "2026-03-31": -0.11899,
+  "2026-04-30": -0.1209,
+  "2026-05-31": -0.14643,
+  "2026-06-30": -0.23899
+ },
+ "a13_window": {
+  "first": "2006-01-04",
+  "last": "2026-08-14",
+  "n": 5008
+ },
+ "a13_20150629": {
+  "nav": 21.5414,
+  "dd_vs_running_max": -0.20257,
+  "breach_le_20pct": true
+ },
+ "a13_full_mdd": {
+  "depth": -0.33554,
+  "peak": "2006-01-04",
+  "peak_px": 1.0,
+  "trough": "2015-07-08",
+  "trough_px": 17.9495
+ },
+ "a13_ddc_episodes": [
+  {
+   "trigger_judge": "2008-09-08",
+   "dd_at_trigger": -0.20498,
+   "peak_date": "2006-01-04",
+   "peak_px": 1.0,
+   "close_at_trigger": 2.8546,
+   "recover_judge": "2009-04-10",
+   "effective_T1": "2008-09-09",
+   "trough_date": "2008-11-04",
+   "trough_px": 2.7187,
+   "trough_dd": -0.05551
+  },
+  {
+   "trigger_judge": "2015-06-29",
+   "dd_at_trigger": -0.20257,
+   "peak_date": "2006-01-04",
+   "peak_px": 1.0,
+   "close_at_trigger": 21.5414,
+   "recover_judge": "2016-11-11",
+   "effective_T1": "2015-06-30",
+   "trough_date": "2015-07-08",
+   "trough_px": 17.9495,
+   "trough_dd": -0.19343
+  }
+ ],
+ "engine_ledger_mdd": {
+  "depth": -0.05902,
+  "trough": "1970-01-01"
+ },
+ "engine_true_mdd": {
+  "depth": -0.08094,
+  "trough": "2017-10-31"
+ },
+ "engine_2026": [
+  {
+   "month": "2026-01-31",
+   "w_applied": 0.40006,
+   "gold_ret": 0.183636,
+   "net": 0.073458,
+   "nav": 2.612254
+  },
+  {
+   "month": "2026-02-28",
+   "w_applied": 0.0,
+   "gold_ret": -0.006903,
+   "net": 0.000272,
+   "nav": 2.612966
+  },
+  {
+   "month": "2026-03-31",
+   "w_applied": 0.0,
+   "gold_ret": -0.112869,
+   "net": 0.000846,
+   "nav": 2.615176
+  },
+  {
+   "month": "2026-04-30",
+   "w_applied": 0.213026,
+   "gold_ret": -0.002165,
+   "net": -8.4e-05,
+   "nav": 2.614956
+  },
+  {
+   "month": "2026-05-31",
+   "w_applied": 0.214292,
+   "gold_ret": -0.029035,
+   "net": -0.005642,
+   "nav": 2.600204
+  },
+  {
+   "month": "2026-06-30",
+   "w_applied": 0.0,
+   "gold_ret": -0.108439,
+   "net": 0.000418,
+   "nav": 2.60129
+  },
+  {
+   "month": "2026-07-31",
+   "w_applied": 0.0,
+   "gold_ret": 0.006565,
+   "net": 0.000718,
+   "nav": 2.603158
+  },
+  {
+   "month": "2026-08-31",
+   "w_applied": 0.0,
+   "gold_ret": 0.134116,
+   "net": 0.000538,
+   "nav": 2.604559
+  }
+ ],
+ "engine_true_2026_nav": {
+  "2026-01-31": 3.4045,
+  "2026-02-28": 3.3974,
+  "2026-03-31": 3.2979,
+  "2026-04-30": 3.2983,
+  "2026-05-31": 3.2797,
+  "2026-06-30": 3.168,
+  "2026-07-31": 3.169,
+  "2026-08-31": 3.1707
+ },
+ "aug_px_check": {
+  "px_0731": 8.433,
+  "px_0828": 9.475,
+  "px_0831": 9.135,
+  "ret_0831_vs_0731": 0.083244,
+  "ret_0828_vs_0731": 0.123562,
+  "ledger_aug_gold_ret": 0.134115972963,
+  "sma200_asof_0828": 9.4941,
+  "sma200_asof_0831": 9.4962,
+  "dow_0831": "Monday"
+ }
+}
