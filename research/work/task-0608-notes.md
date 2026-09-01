@@ -20,3 +20,15 @@
 - `close_and_roll()`（paper_engine_gold.py L156-199）：跨月时结账上月 → audit append `{event:"month_close+rebalance", month_closed, net, w_new, mmf_est, stub}` → `open.month` 推进到 2026-09
 - 触发表达式落实为：`open.month=="2026-09"` 且 `last_signal.month_end=="2026-08-31"`（NaN 路径：sma200=NaN→w=0）
 - 开始轮询：等待 07:40 cron 触发后核验
+
+### [北京 07:58] 触发点核验结论：未到触发点，显式终态退出
+- **未落盘证据**：paper_state.json 仍 open.month=2026-08 / last_signal=2026-07-31 / audit_len=1（07:42 与 07:58 两次核验一致）
+- **时区事实**：HP Timezone=Etc/UTC（timedatectl）；北京当前 09-01 07:58 = HP 08-31 23:58 UTC
+- **cron 计划时间**：`paper_engine_gold.py --action daily` = `40 7 * * 1-5`，按 HP 本地(UTC)执行 → **北京时间每个工作日 15:40**
+- **上次执行**：log 与 paper_state mtime 均 2026-08-31 07:40:03 UTC（周一，北京 15:40），log 最后 mark=2026-08-28（周末无 bar，正常）
+- **重查时机**：北京 09-01 15:40 触发，**建议 15:45 后重查** paper_state.json 是否 open.month=2026-09 且 last_signal=2026-08-31；确认后再执行 audit 追加（备份→追加→N→N+1 校验→证据回传）
+- 备注：任务书叙述"08-31 为周日"与实际历法不符（2026-08-31 实为周一，HP date 输出 Mon），不影响 NaN 缺陷机制（8 月末 bar=08-28 周五，sma200 reindex 缺口仍存在）；09-01 周二 daily 触发时按 NaN 路径记录 9 月信号的预期不变
+- 本阶段零写入：未改动账本/代码/registry/crontab，无备份需求
+
+### 终态
+task-0608 状态回退 pending，等待北京 15:45 后重查窗口再由主 agent 重新派发。
