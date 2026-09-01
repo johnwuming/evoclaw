@@ -36,3 +36,10 @@
 - d_net 定义差：R-391 表2 为毛收益差 (w_true−w_applied)×gold_ret；本次为净账本差（含 mmf 腿与成本），方向一致量级略大（如 2014-09：毛 -4.89pp vs 净 -5.11pp）
 - R-391 小勘误：61 NaN 月实为 60——2026-08-31 为周一交易日（腾讯有行情行），R-391 误记为周日；不影响其结论
 - 账本观察（不阻塞）：生产 shadow_nav.csv 与 shadow_nav_seed.csv 字节相同（sha256 1bec...4bd），mtime=08-24 15:13 UTC，但内容含 2026-08-31 行（gold_ret +13.41%）；疑种子一次性构建后 cp -p。留阶段二复核。
+
+## 终验与交付 (北京 2026-09-01 ~13:05)
+- 生产零改动复测：shadow_nav.csv mtime 08-24 15:13:35 UTC sha 1bec…14bd ✅；paper_state.json mtime 08-31 07:40:03 UTC sha 3a31…5d91 ✅；mmf_monthly_push.csv sha a5c5…aff99 ✅（均=备份清单值）
+- staging 7 文件：fix_asof.diff / recompute_full_history.py / gold_daily_used.csv / shadow_nav_a2fixed.csv / wdiff_months.csv / compare_results.json / errata_R389_L50_draft.md
+- 本地镜像：work/task-0610-staging-mirror/（5 文件）
+- 报告：05-量化投资/R-394-A2阶段一-asof修复与全历史重算staging.md（R-394 空闲已确认，无碰撞）；README 日志已前置
+- 状态回写：pending_review
