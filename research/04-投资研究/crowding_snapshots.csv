@@ -7,3 +7,4 @@
 # do NOT edit history rows manually; source: results/crowding_history.csv (weekly rebuilt)
 month,date,share_roll20,share_roll20_epct,share_roll20_roll3y_pct,micro_turnover_share,micro_turnover_pct60,n_hist,generated_at
 2026-07,2026-07-31,0.0243777058,1.3609,3.3113,0.0260531717,51.6667,1838,2026-08-20 17:42:23
+2026-08,2026-08-28,0.0301664805,3.2849,8.0795,0.0334695718,51.6667,1858,2026-09-01 19:35:01
