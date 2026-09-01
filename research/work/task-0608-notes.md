@@ -37,3 +37,11 @@ task-0608 状态回退 pending，等待北京 15:45 后重查窗口再由主 age
 - 前置事实（R-393 已证，直接采用）：更正事件 asof=08-31 收盘 9.135（9.475=08-28 收盘禁用）；两口径 9 月 w 均=0。
 - 方案二四点：①NaN 默认 w=0 非真实判定 ②人工核验真实信号一致 ③指向 task-0606/A2 修复 ④「该记录不得作为信号有效性证据使用」。
 - 执行顺序：HP 前置自检（open.month=2026-09 且 last_signal=2026-08-31）→ 备份 paper_state → 追加 audit 事件（9.135）→ 校验长度+1。
+
+### [北京 17:3x] 阶段二前置自检：不通过，零写入终态（阻塞）
+- 命令：HP `python3` 读 `results/engines/gold/paper_state.json`（sha256 be9e30f1...，updated_at=2026-09-01T07:40:03+00:00）
+- 证据：open.month=**2026-08**（要求 2026-09）；last_signal.month_end=**2026-07-31**（要求 2026-08-31）；audit_len=**1**（无 month_close+rebalance 事件）
+- 根因（代码实读 paper_engine_gold.py cmd_daily L284-300）：滚动条件=`month_key(最新bar) != open.month`。09-01 07:40 UTC run 最新 bar 仍=2026-08-31（logs/paper_gold_daily.log 末行 `mark 2026-08-31: px=9.1350`，仅补记 mark），9 月 bar 未入数据源 → 不滚动、不记 9 月信号。主任务书触发假设「09-01 15:40 cron 已记录 9 月信号」与引擎实际语义不符
+- 附带事实：09-01 run 的 mark px=9.1350 与 R-393 已证 08-31 收盘一致（修复后 asof 语义工作正常）
+- **解除窗口：北京 09-02 15:40 cron 后**（该 run 必见 09-01/09-02 bar → close_and_roll 结账 2026-08 → open.month=2026-09、last_signal=2026-08-31、audit +1）
+- 本阶段零写入：paper_state/shadow_nav/registry/crontab 均未动；更正事件未追加（须待 9 月 NaN 记录存在后才有对象可更正）
