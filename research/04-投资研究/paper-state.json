@@ -45,11 +45,11 @@
   "created_at": "2026-08-17T16:09:39",
   "initial_capital": 100000,
   "last_rebalance": "2026-08-14",
-  "last_daily": "2026-08-28",
+  "last_daily": "2026-08-31",
   "model_version": "a13_rsraw_e1f10dz",
-  "updated_at": "2026-08-31T16:30:02",
+  "updated_at": "2026-09-01T16:30:02",
   "last_daily_update": "2026-08-24T17:40:02.021231",
   "timing_ratio": 0.617398,
-  "last_data_date": "2026-08-28",
-  "last_div_date": "2026-08-28"
+  "last_data_date": "2026-08-31",
+  "last_div_date": "2026-08-31"
 }
