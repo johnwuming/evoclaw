@@ -23,7 +23,7 @@ def dds(s):
 def full_mdd(s):
     dd = dds(s)
     tr = dd.idxmin()
-    pk = dd.loc[:tr].idxmax()
+    pk = s.loc[:tr].idxmax()
     return dict(depth=round(float(dd.min()), 5), peak=str(pk.date()), peak_px=round(float(s.loc[pk]), 4),
                 trough=str(tr.date()), trough_px=round(float(s.loc[tr]), 4))
 
@@ -33,7 +33,7 @@ def episodes(s, th=-0.20, rec=-0.05):
     for d, x in dd.items():
         if x <= th:
             if state == 1.0:
-                pk = dd.loc[:d].idxmax()
+                pk = s.loc[:d].idxmax()
                 cur = dict(trigger_judge=str(d.date()), dd_at_trigger=round(float(x), 5),
                            peak_date=str(pk.date()), peak_px=round(float(s.loc[pk]), 4),
                            close_at_trigger=round(float(s.loc[d]), 4))
@@ -87,6 +87,7 @@ out['a13_ddc_episodes'] = episodes(a13)
 
 # ④ 引擎月频账本 vs 反事实 MDD（5.90/8.09 复算）
 def m_mdd(nav):
+    nav = nav.sort_index()
     dd = nav / nav.cummax() - 1.0
     tr = dd.idxmin()
     return dict(depth=round(float(dd.min()), 5), trough=str(pd.Timestamp(tr).date()))

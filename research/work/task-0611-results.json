@@ -6,8 +6,8 @@
  },
  "gold_bare_full_mdd": {
   "depth": -0.30519,
-  "peak": "2013-07-29",
-  "peak_px": 2.626,
+  "peak": "2026-01-29",
+  "peak_px": 11.904,
   "trough": "2026-07-01",
   "trough_px": 8.271
  },
@@ -15,8 +15,8 @@
   {
    "trigger_judge": "2014-11-07",
    "dd_at_trigger": -0.20127,
-   "peak_date": "2013-07-29",
-   "peak_px": 2.626,
+   "peak_date": "2013-08-28",
+   "peak_px": 2.827,
    "close_at_trigger": 2.258,
    "recover_judge": "2016-05-03",
    "effective_T1": "2014-11-10",
@@ -27,8 +27,8 @@
   {
    "trigger_judge": "2021-03-05",
    "dd_at_trigger": -0.20466,
-   "peak_date": "2013-07-29",
-   "peak_px": 2.626,
+   "peak_date": "2020-08-07",
+   "peak_px": 4.378,
    "close_at_trigger": 3.482,
    "recover_judge": "2023-03-16",
    "effective_T1": "2021-03-08",
@@ -39,8 +39,8 @@
   {
    "trigger_judge": "2026-03-23",
    "dd_at_trigger": -0.24891,
-   "peak_date": "2013-07-29",
-   "peak_px": 2.626,
+   "peak_date": "2026-01-29",
+   "peak_px": 11.904,
    "close_at_trigger": 8.941,
    "effective_T1": "2026-03-24",
    "trough_date": "2026-07-01",
@@ -58,8 +58,8 @@
  },
  "gold_monthend_mdd": {
   "depth": -0.23899,
-  "peak": "2013-07-31",
-  "peak_px": 2.657,
+  "peak": "2026-01-31",
+  "peak_px": 11.009,
   "trough": "2026-06-30",
   "trough_px": 8.378
  },
@@ -83,8 +83,8 @@
  },
  "a13_full_mdd": {
   "depth": -0.33554,
-  "peak": "2006-01-04",
-  "peak_px": 1.0,
+  "peak": "2015-06-12",
+  "peak_px": 27.0137,
   "trough": "2015-07-08",
   "trough_px": 17.9495
  },
@@ -92,8 +92,8 @@
   {
    "trigger_judge": "2008-09-08",
    "dd_at_trigger": -0.20498,
-   "peak_date": "2006-01-04",
-   "peak_px": 1.0,
+   "peak_date": "2008-01-15",
+   "peak_px": 3.5906,
    "close_at_trigger": 2.8546,
    "recover_judge": "2009-04-10",
    "effective_T1": "2008-09-09",
@@ -104,8 +104,8 @@
   {
    "trigger_judge": "2015-06-29",
    "dd_at_trigger": -0.20257,
-   "peak_date": "2006-01-04",
-   "peak_px": 1.0,
+   "peak_date": "2015-06-12",
+   "peak_px": 27.0137,
    "close_at_trigger": 21.5414,
    "recover_judge": "2016-11-11",
    "effective_T1": "2015-06-30",
