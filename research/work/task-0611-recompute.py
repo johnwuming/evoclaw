@@ -64,7 +64,7 @@ out['gold_ddc_episodes'] = episodes(g)
 d = pd.Timestamp('2026-03-23')
 ddg = dds(g)
 assert d in g.index, '2026-03-23 非交易日'
-pk = ddg.loc[:d].idxmax()
+pk = g.loc[:d].idxmax()
 out['gold_20260323'] = dict(close=round(float(g.loc[d]), 4), dd_vs_running_max=round(float(ddg.loc[d]), 5),
                             peak_date=str(pk.date()), peak_px=round(float(g.loc[pk]), 4),
                             breach_le_20pct=bool(ddg.loc[d] <= -0.20))
@@ -87,10 +87,10 @@ out['a13_ddc_episodes'] = episodes(a13)
 
 # ④ 引擎月频账本 vs 反事实 MDD（5.90/8.09 复算）
 def m_mdd(nav):
-    nav = nav.sort_index()
+    nav = pd.Series(nav.values, index=pd.to_datetime(pd.Index(nav.index))).sort_index()
     dd = nav / nav.cummax() - 1.0
     tr = dd.idxmin()
-    return dict(depth=round(float(dd.min()), 5), trough=str(pd.Timestamp(tr).date()))
+    return dict(depth=round(float(dd.min()), 5), trough=str(tr.date()))
 out['engine_ledger_mdd'] = m_mdd(sn['nav'])
 out['engine_true_mdd'] = m_mdd(nt['nav_true'])
 out['engine_2026'] = sn[sn['month'] >= '2026-01'][['month', 'w_applied', 'gold_ret', 'net', 'nav']].round(6).to_dict('records')
