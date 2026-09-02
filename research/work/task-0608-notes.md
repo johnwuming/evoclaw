@@ -45,3 +45,9 @@ task-0608 状态回退 pending，等待北京 15:45 后重查窗口再由主 age
 - 附带事实：09-01 run 的 mark px=9.1350 与 R-393 已证 08-31 收盘一致（修复后 asof 语义工作正常）
 - **解除窗口：北京 09-02 15:40 cron 后**（该 run 必见 09-01/09-02 bar → close_and_roll 结账 2026-08 → open.month=2026-09、last_signal=2026-08-31、audit +1）
 - 本阶段零写入：paper_state/shadow_nav/registry/crontab 均未动；更正事件未追加（须待 9 月 NaN 记录存在后才有对象可更正）
+
+### [北京 09-02 16:07] 阶段二重派（task-0612）前置自检：仍不过，零写入阻塞终态（第二次）
+- 实测：open_month=**2026-08** / last_signal=**2026-07-31** / audit_len=**1**，paper_state sha 仍 be9e30f1...（updated_at=2026-09-01T07:40:03Z）
+- 与 09-01 阻塞差异：本次 09-02 15:40 北京 cron 确实准点触发（log mtime=07:40:32 UTC），但数据源 urllib SSL read TimeoutError，run 异常终止于拉数阶段，未滚动、9 月信号仍未落盘 → 更正事件仍无对象可追加
+- 解除条件更新：需①数据源恢复使 daily run 成功拉到 9 月 bar 且②close_and_roll 完成（open_month=2026-09、last_signal=2026-08-31、audit_len=2）；此后更正事件（asof=08-31 收盘 9.135，禁用 9.475）按原方案追加（audit 2→3）
+- 本阶段零写入：paper_state/shadow_nav/staging/registry/crontab 均未动
