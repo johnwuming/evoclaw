@@ -3,121 +3,121 @@
     "603075": {
       "shares": 100,
       "cost": 19.48,
-      "weight": 0.019293,
+      "weight": 0.019353,
       "name": "热威股份",
-      "price": 19.48,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 19.53,
+      "price_date": "2026-09-02",
+      "pnl_amount": 5.0,
+      "pnl_pct": 0.002567
     },
     "301170": {
       "shares": 100,
       "cost": 23.16,
-      "weight": 0.022938,
+      "weight": 0.02289,
       "name": "锡南科技",
-      "price": 23.16,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 23.1,
+      "price_date": "2026-09-02",
+      "pnl_amount": -6.0,
+      "pnl_pct": -0.002591
     },
     "301386": {
       "shares": 100,
       "cost": 20.59,
-      "weight": 0.020393,
+      "weight": 0.020482,
       "name": "未来电器",
-      "price": 20.59,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 20.67,
+      "price_date": "2026-09-02",
+      "pnl_amount": 8.0,
+      "pnl_pct": 0.003885
     },
     "603205": {
       "shares": 100,
       "cost": 23.46,
-      "weight": 0.023235,
+      "weight": 0.022761,
       "name": "健尔康",
-      "price": 23.46,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 22.97,
+      "price_date": "2026-09-02",
+      "pnl_amount": -49.0,
+      "pnl_pct": -0.020887
     },
     "301006": {
       "shares": 100,
       "cost": 14.18,
-      "weight": 0.014044,
+      "weight": 0.014041,
       "name": "迈拓股份",
-      "price": 14.18,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 14.17,
+      "price_date": "2026-09-02",
+      "pnl_amount": -1.0,
+      "pnl_pct": -0.000705
     },
     "603073": {
       "shares": 100,
       "cost": 17.26,
-      "weight": 0.017094,
+      "weight": 0.017014,
       "name": "彩蝶实业",
-      "price": 17.26,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 17.17,
+      "price_date": "2026-09-02",
+      "pnl_amount": -9.0,
+      "pnl_pct": -0.005214
     },
     "301429": {
       "shares": 100,
       "cost": 17.77,
-      "weight": 0.0176,
+      "weight": 0.017638,
       "name": "森泰股份",
-      "price": 17.77,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 17.8,
+      "price_date": "2026-09-02",
+      "pnl_amount": 3.0,
+      "pnl_pct": 0.001688
     },
     "300994": {
       "shares": 200,
       "cost": 11.51,
-      "weight": 0.022799,
+      "weight": 0.022989,
       "name": "久祺股份",
-      "price": 11.51,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 11.6,
+      "price_date": "2026-09-02",
+      "pnl_amount": 18.0,
+      "pnl_pct": 0.007819
     },
     "603190": {
       "shares": 100,
       "cost": 17.03,
-      "weight": 0.016867,
+      "weight": 0.016628,
       "name": "亚通精工",
-      "price": 17.03,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 16.78,
+      "price_date": "2026-09-02",
+      "pnl_amount": -25.0,
+      "pnl_pct": -0.01468
     },
     "301559": {
       "shares": 100,
       "cost": 13.34,
-      "weight": 0.013212,
+      "weight": 0.01309,
       "name": "中集环科",
-      "price": 13.34,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 13.21,
+      "price_date": "2026-09-02",
+      "pnl_amount": -13.0,
+      "pnl_pct": -0.009745
     },
     "603409": {
       "shares": 100,
       "cost": 18.46,
-      "weight": 0.018283,
+      "weight": 0.018461,
       "name": "汇通控股",
-      "price": 18.46,
-      "price_date": "2026-09-01",
-      "pnl_amount": 0.0,
-      "pnl_pct": 0.0
+      "price": 18.63,
+      "price_date": "2026-09-02",
+      "pnl_amount": 17.0,
+      "pnl_pct": 0.009209
     }
   },
   "cash": 80193.27,
-  "total_value": 100968.27,
-  "holdings_value": 20775.0,
-  "total_asset": 100968.27,
-  "total_pnl": 968.27,
+  "total_value": 100916.27,
+  "holdings_value": 20723.0,
+  "total_asset": 100916.27,
+  "total_pnl": 916.27,
   "price_basis": "qfq",
-  "updated_at": "2026-09-02T16:30:03",
+  "updated_at": "2026-09-03T16:30:02",
   "model_version": "a13_rsraw_e1f10dz",
   "timing_layer": "timing_v4_i4_q3z",
   "timing_ratio": 0.522179
