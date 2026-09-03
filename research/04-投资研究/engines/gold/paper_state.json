@@ -23,18 +23,17 @@
   "note": "激活日新链 NAV=1.0；157 月模拟史由 shadow_nav.csv 监控链继续承载"
  },
  "open": {
-  "month": "2026-08",
+  "month": "2026-09",
   "w": 0.0,
-  "price_ref": 9.564,
-  "basis_date": "2026-08-24",
-  "nav_open": 1.0,
+  "price_ref": 9.135,
+  "basis_date": "2026-08-31",
+  "nav_open": 1.000537998642013,
   "cost_pending": 0.0,
-  "mmf_daily_est": 2.316385105032258e-05,
-  "mmf_est_source": "2026-07-31",
-  "stub": true
+  "mmf_daily_est": 1.7354794903645162e-05,
+  "mmf_est_source": "2026-08-31"
  },
  "current_weight": 0.0,
- "last_rebalance": "2026-08",
+ "last_rebalance": "2026-09",
  "last_signal": {
   "month_end": "2026-07-31",
   "px": 8.433,
@@ -42,7 +41,20 @@
   "vol60_ann": 0.22011098479222824,
   "w_signal": 0.0
  },
- "months": [],
+ "months": [
+  {
+   "month": "2026-08",
+   "w": 0.0,
+   "gold_ret": -0.04485570890840651,
+   "mmf_ret": 0.000537998642013,
+   "mmf_est": false,
+   "stub": true,
+   "cost": 0.0,
+   "gross": 0.000537998642013,
+   "net": 0.000537998642013,
+   "nav_close": 1.000537998642013
+  }
+ ],
  "marks": [
   {
    "date": "2026-08-24",
@@ -73,6 +85,11 @@
    "date": "2026-08-31",
    "px": 9.135,
    "nav": 1.0001621469573523
+  },
+  {
+   "date": "2026-09-02",
+   "px": 8.902,
+   "nav": 1.0005727269055325
   }
  ],
  "audit": [
@@ -85,7 +102,16 @@
    "basis_date": "2026-08-24",
    "stub_month": true,
    "note": "仓位=上月末冻结信号（PIT）；init 不触发交易（与当月已应用信号一致），成本 0"
+  },
+  {
+   "ts": "2026-09-03T07:40:02+00:00",
+   "event": "month_close+rebalance",
+   "month_closed": "2026-08",
+   "net": 0.000537998642013,
+   "w_new": 0.0,
+   "mmf_est": false,
+   "stub": true
   }
  ],
- "updated_at": "2026-09-01T07:40:03+00:00"
+ "updated_at": "2026-09-03T07:40:02+00:00"
 }
