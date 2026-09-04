@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-03 16:45:01",
+  "generated_at": "2026-09-04 16:45:02",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
   "nav_sources": {
     "paper_nav": {
       "file": "results/baseline-paper-nav.csv",
-      "obs": 14,
-      "range": "2026-08-14~2026-09-02"
+      "obs": 15,
+      "range": "2026-08-14~2026-09-03"
     },
     "strategy_track_record": {
       "file": "results/i3_abs_s1_nav.csv",
@@ -30,7 +30,7 @@
       "action": "降仓至50%",
       "data_source": "strategy_track_record(i3_abs_s1_nav.csv)",
       "as_of": "2026-08-07",
-      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=-0.00076"
+      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=-0.00391"
     },
     "drawdown_circuit_breaker.level2_stop": {
       "rule": "drawdown_circuit_breaker.level2_stop",
@@ -44,15 +44,15 @@
       "action": "清仓复盘，人工重启",
       "data_source": "strategy_track_record(i3_abs_s1_nav.csv)",
       "as_of": "2026-08-07",
-      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=-0.00076"
+      "note": "paper 净值不足(2点)，主判定用同策略回测 track record；paper_dd=-0.00391"
     },
     "underperform_discipline.watch": {
       "rule": "underperform_discipline.watch",
       "metric": "rolling_6m_excess_vs_benchmark",
-      "current": 0.01459,
+      "current": 0.01373,
       "threshold": -0.1,
       "window": "6m",
-      "margin": 1.1459,
+      "margin": 1.1373,
       "color": "green",
       "status": "ok",
       "action": "进入观察，暂停模型升级",
@@ -63,10 +63,10 @@
     "underperform_discipline.downweight": {
       "rule": "underperform_discipline.downweight",
       "metric": "rolling_12m_excess_vs_benchmark",
-      "current": -0.07076,
+      "current": -0.06305,
       "threshold": -0.15,
       "window": "12m",
-      "margin": 0.5283,
+      "margin": 0.5796,
       "color": "green",
       "status": "ok",
       "action": "降仓至70%",
@@ -86,7 +86,7 @@
       "status": "insufficient_data",
       "action": "策略失效review",
       "data_source": "paper < 20 obs => insufficient",
-      "as_of": "2026-09-02"
+      "as_of": "2026-09-03"
     }
   },
   "crowding_reference": {
