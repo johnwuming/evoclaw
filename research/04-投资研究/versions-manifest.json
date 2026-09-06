@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T00:30:02",
+  "generated_at": "2026-09-06T01:00:02",
   "active": "a13_rsraw_e1f10dz",
   "versions": [
     {
@@ -1701,6 +1701,74 @@
         }
       },
       "files_note": "results/a9x_equiv_v5h_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "b_lc20_e1f10dz",
+      "strategy_prefix": "b_lc20_e1f10dz",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.0261,
+          "max_drawdown": -0.3507,
+          "sharpe": 0.2694,
+          "calmar": 0.0744,
+          "cumulative_return": 0.2763,
+          "monthly_win_rate": 0.5044,
+          "period_start": "2015-01-05",
+          "period_end": "2024-06-28",
+          "years": 9.48,
+          "num_rebalance": 114
+        },
+        "locked": {
+          "annual_return": 0.0261,
+          "max_drawdown": -0.3507,
+          "sharpe": 0.2694,
+          "calmar": 0.0744,
+          "cumulative_return": 0.2763,
+          "monthly_win_rate": 0.5044,
+          "period_start": "2015-01-05",
+          "period_end": "2024-06-28",
+          "years": 9.48,
+          "num_rebalance": 114
+        }
+      },
+      "files_note": "results/b_lc20_e1f10dz_{full,locked}_metrics.json（未注册 registry）"
+    },
+    {
+      "version_id": "b_lc30_e1f10dz",
+      "strategy_prefix": "b_lc30_e1f10dz",
+      "status": "backtest-only",
+      "strategy": null,
+      "registered_at": null,
+      "windows": {
+        "full": {
+          "annual_return": 0.0295,
+          "max_drawdown": -0.2945,
+          "sharpe": 0.2957,
+          "calmar": 0.1003,
+          "cumulative_return": 0.3177,
+          "monthly_win_rate": 0.5221,
+          "period_start": "2015-01-05",
+          "period_end": "2024-06-28",
+          "years": 9.48,
+          "num_rebalance": 114
+        },
+        "locked": {
+          "annual_return": 0.0295,
+          "max_drawdown": -0.2945,
+          "sharpe": 0.2957,
+          "calmar": 0.1003,
+          "cumulative_return": 0.3177,
+          "monthly_win_rate": 0.5221,
+          "period_start": "2015-01-05",
+          "period_end": "2024-06-28",
+          "years": 9.48,
+          "num_rebalance": 114
+        }
+      },
+      "files_note": "results/b_lc30_e1f10dz_{full,locked}_metrics.json（未注册 registry）"
     },
     {
       "version_id": "engines",
