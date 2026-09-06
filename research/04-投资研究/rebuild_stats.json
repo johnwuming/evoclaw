@@ -1,9 +1,9 @@
 {
-  "total_rows": 15161564,
-  "n_stocks": 273,
+  "total_rows": 16140303,
+  "n_stocks": 1072,
   "date_min": "2006-01-04",
-  "date_max": "2026-08-21",
-  "file_size_mb": 823.1,
+  "date_max": "2026-09-04",
+  "file_size_mb": 847.3,
   "columns": [
     "date",
     "symbol",
@@ -19,7 +19,7 @@
     "turnover",
     "outstanding_share"
   ],
-  "chinese_col_files_count": 273,
+  "chinese_col_files_count": 1072,
   "year_distribution": {
     "2006": {
       "n_stocks": 0,
@@ -78,32 +78,32 @@
       "n_rows": 835130
     },
     "2020": {
-      "n_stocks": 61,
-      "n_rows": 909677
+      "n_stocks": 355,
+      "n_rows": 954007
     },
     "2021": {
-      "n_stocks": 90,
-      "n_rows": 1033352
+      "n_stocks": 581,
+      "n_rows": 1129812
     },
     "2022": {
-      "n_stocks": 148,
-      "n_rows": 1135087
+      "n_stocks": 781,
+      "n_rows": 1269740
     },
     "2023": {
-      "n_stocks": 202,
-      "n_rows": 1224783
+      "n_stocks": 925,
+      "n_rows": 1390163
     },
     "2024": {
-      "n_stocks": 218,
-      "n_rows": 1268651
+      "n_stocks": 960,
+      "n_rows": 1445963
     },
     "2025": {
-      "n_stocks": 239,
-      "n_rows": 1298446
+      "n_stocks": 1004,
+      "n_rows": 1480411
     },
     "2026": {
-      "n_stocks": 273,
-      "n_rows": 835810
+      "n_stocks": 1072,
+      "n_rows": 1014449
     }
   }
 }
