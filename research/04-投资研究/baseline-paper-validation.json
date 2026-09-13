@@ -1,6 +1,6 @@
 {
   "mode": "validation",
-  "updated_at": "2026-09-06T20:01:13",
+  "updated_at": "2026-09-13T20:01:05",
   "all_pass": true,
   "passed": 6,
   "failed": 0,
@@ -9,9 +9,9 @@
       "id": "kline_freshness",
       "name": "K线新鲜度",
       "status": "PASS",
-      "message": "最新交易日 2026-09-04，距今 2 天（阈值 3）",
+      "message": "最新交易日 2026-09-11，距今 2 天（阈值 3）",
       "detail": {
-        "latest_trade_date": "2026-09-04",
+        "latest_trade_date": "2026-09-11",
         "age_days": 2,
         "threshold": 3
       }
@@ -43,69 +43,69 @@
         "detail": [
           {
             "code": "603075",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 19.15
+            "close": 19.82
           },
           {
             "code": "301170",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 22.92
+            "close": 21.76
           },
           {
             "code": "301386",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 20.23
+            "close": 19.49
           },
           {
             "code": "603205",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 22.47
+            "close": 22.32
           },
           {
             "code": "301006",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 13.8
+            "close": 13.28
           },
           {
             "code": "603073",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 16.98
+            "close": 16.03
           },
           {
             "code": "301429",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 17.5
+            "close": 16.9
           },
           {
             "code": "300994",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 11.39
+            "close": 10.64
           },
           {
             "code": "603190",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 16.61
+            "close": 15.65
           },
           {
             "code": "301559",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 13.09
+            "close": 12.85
           },
           {
             "code": "603409",
-            "last_date": "2026-09-04",
+            "last_date": "2026-09-11",
             "age_days": 0,
-            "close": 18.11
+            "close": 17.29
           }
         ]
       }
@@ -128,41 +128,41 @@
       "id": "dividend_continuity",
       "name": "分红数据连续性",
       "status": "PASS",
-      "message": "近12个月分红事件 4586 条，涉及 3677 只股票",
+      "message": "近12个月分红事件 4635 条，涉及 3682 只股票",
       "detail": {
-        "events_last_12m": 4586,
-        "stocks_last_12m": 3677,
-        "earliest_recent": "2025-09-08"
+        "events_last_12m": 4635,
+        "stocks_last_12m": 3682,
+        "earliest_recent": "2025-09-15"
       }
     },
     {
       "id": "selection_count",
       "name": "调仓日选股结果≥5",
       "status": "PASS",
-      "message": "最新交易日 2026-09-04 选股 20 只（阈值 5）",
+      "message": "最新交易日 2026-09-11 选股 20 只（阈值 5）",
       "detail": {
         "selection_count": 20,
         "codes": [
           "301616",
           "301173",
-          "603075",
+          "603062",
           "301170",
+          "603325",
           "301386",
           "603205",
-          "603325",
+          "603409",
           "001335",
           "603350",
+          "301353",
           "603073",
           "301429",
-          "301006",
           "301508",
           "603275",
-          "301559",
-          "300994",
+          "301006",
           "603190",
-          "301491",
-          "301353",
-          "603409"
+          "300994",
+          "301303",
+          "301559"
         ],
         "threshold": 5
       }
