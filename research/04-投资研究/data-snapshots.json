@@ -23,6 +23,12 @@
       "kline_as_of": "2026-09-04",
       "hash": "699cd83f3624e2d71a8420a35e27dbbc",
       "hash_method": "file-meta(W6升级内容hash)"
+    },
+    {
+      "ts": "2026-09-19 09:01:04",
+      "kline_as_of": "2026-09-11",
+      "hash": "ba0fabb0966030faa0b7d39a600f3371",
+      "hash_method": "file-meta(W6升级内容hash)"
     }
   ]
 }
