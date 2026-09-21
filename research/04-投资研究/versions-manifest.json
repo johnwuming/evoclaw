@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T14:30:02",
+  "generated_at": "2026-09-21T15:00:02",
   "active": "a13_rsraw_e1f10dz",
   "versions": [
     {
@@ -743,7 +743,7 @@
           "cumulative_return": 22.1582,
           "monthly_win_rate": 0.6561,
           "period_start": "2006-01-04",
-          "period_end": "2024-06-28"
+          "period_end": "2024-06-28",
           "years": 18.48,
           "num_rebalance": 222
         }
@@ -758,11 +758,11 @@
       "registered_at": null,
       "windows": {
         "full": {
-     T    "annual_return": 0.2635,
+          "annual_return": 0.2635,
           "max_drawdown": -0.6949,
           "sharpe": 0.9027,
           "calmar": 0.3791,
-          "cumulative_return": 122.8777
+          "cumulative_return": 122.8777,
           "monthly_win_rate": 0.587,
           "period_start": "2006-01-04",
           "period_end": "2026-08-14",
@@ -775,7 +775,7 @@
           "sharpe": 0.885,
           "calmar": 0.3779,
           "cumulative_return": 73.3822,
-          "monihly_win_rate": 0.5837,
+          "monthly_win_rate": 0.5837,
           "period_start": "2006-01-04",
           "period_end": "2024-06-28",
           "years": 18.48,
@@ -785,11 +785,11 @@
       "files_note": "results/a2_equivcheck_{full,locked}_metrics.json（未注册 registry）"
     },
     {
-      "versin_id": "a2b_equivcheck",
+      "version_id": "a2b_equivcheck",
       "strategy_prefix": "a2b_equivcheck",
       "status": "backtest-only",
       "strategy": null,
-     "registered_at": null,
+      "registered_at": null,
       "windows": {
         "full": {
           "annual_return": 0.2635,
@@ -803,11 +803,11 @@
           "years": 20.61,
           "num_rebalance": 248
         },
-       "locked": {
+        "locked": {
           "annual_return": 0.2626,
           "max_drawdown": -0.6949,
           "sharpe": 0.885,
-          "caÎmar": 0.3779,
+          "calmar": 0.3779,
           "cumulative_return": 73.3822,
           "monthly_win_rate": 0.5837,
           "period_start": "2006-01-04",
