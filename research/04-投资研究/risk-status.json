@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21 16:45:02",
+  "generated_at": "2026-09-22 16:45:02",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
@@ -49,10 +49,10 @@
     "underperform_discipline.watch": {
       "rule": "underperform_discipline.watch",
       "metric": "rolling_6m_excess_vs_benchmark",
-      "current": 0.00846,
+      "current": 0.01447,
       "threshold": -0.1,
       "window": "6m",
-      "margin": 1.0846,
+      "margin": 1.1447,
       "color": "green",
       "status": "ok",
       "action": "进入观察，暂停模型升级",
@@ -63,10 +63,10 @@
     "underperform_discipline.downweight": {
       "rule": "underperform_discipline.downweight",
       "metric": "rolling_12m_excess_vs_benchmark",
-      "current": -0.00215,
+      "current": -0.00263,
       "threshold": -0.15,
       "window": "12m",
-      "margin": 0.9857,
+      "margin": 0.9825,
       "color": "green",
       "status": "ok",
       "action": "降仓至70%",
