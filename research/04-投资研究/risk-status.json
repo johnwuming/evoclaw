@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25 16:45:02",
+  "generated_at": "2026-09-28 16:45:01",
   "charter_version": "1.0",
   "benchmark": "hs300",
   "overall_status": "green",
@@ -58,7 +58,7 @@
       "action": "进入观察，暂停模型升级",
       "data_source": "strategy_track_record(6m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": 0.20167
+      "cross_check_vs_microcap_eqw": 0.16211
     },
     "underperform_discipline.downweight": {
       "rule": "underperform_discipline.downweight",
@@ -72,7 +72,7 @@
       "action": "降仓至70%",
       "data_source": "strategy_track_record(12m累计超额 vs hs300)",
       "as_of": "2026-08-07",
-      "cross_check_vs_microcap_eqw": 0.20076
+      "cross_check_vs_microcap_eqw": 0.18351
     },
     "live_vs_backtest": {
       "rule": "live_vs_backtest",
@@ -90,26 +90,26 @@
     }
   },
   "crowding_reference": {
-    "latest_date": "2026-09-18",
-    "overall_flag": "green",
+    "latest_date": "2026-09-21",
+    "overall_flag": "red",
     "indicators": {
       "micro_turnover_share": {
-        "latest": 0.03258,
-        "flag": "green",
+        "latest": 0.03817,
+        "flag": "red",
         "pct_rank": null
       },
       "micro_turnover_pctile": {
-        "latest": 43.33,
+        "latest": 83.33,
         "flag": "green",
         "pct_rank": null
       },
       "excess_decay": {
-        "latest": 0.00252,
+        "latest": 0.002537,
         "flag": "green",
         "pct_rank": null
       },
       "snowball_knockin": {
-        "latest": 0.45549,
+        "latest": 0.41932,
         "flag": "green",
         "pct_rank": null
       }
@@ -117,13 +117,13 @@
     "capacity": {
       "as_of": "last trading day",
       "method": "单日可买量=ADV20×参与率，策略容量=可买量÷持仓权重，取11票瓶颈(min)",
-      "conservative_5pct": 45286819.0,
-      "neutral_10pct": 90573638.0,
-      "optimistic_15pct": 135860457.0,
+      "conservative_5pct": 44829271.0,
+      "neutral_10pct": 89658542.0,
+      "optimistic_15pct": 134487813.0,
       "bottleneck_stock": "301170",
-      "mean_5pct": 78889431.0,
-      "mean_10pct": 157778862.0,
-      "mean_15pct": 236668293.0
+      "mean_5pct": 80053481.0,
+      "mean_10pct": 160106961.0,
+      "mean_15pct": 240160442.0
     }
   }
 }
