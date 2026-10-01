@@ -55,3 +55,37 @@ requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected(
   "note": "delisted_missing_kline_history=已退市且K线目录无其历史的只数(历史缺口); kline_missing_vs_live=当前在市但K线目录缺失的只数(若为负/0说明覆盖全)"
 }
 [done] 2026-09-01 06:00:28 | pool=361 rows | st=203 | kline=5542
+[ok] sh 全部: 159 行, cols=['公司代码', '公司简称', '上市日期', '暂停上市日期']
+[ok] sz 终止上市公司: 208 行, cols=['证券代码', '证券简称', '上市日期', '终止上市日期']
+[warn] stock_zh_a_spot_em 失败: Traceback (most recent call last):
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/noname/quant-evolve/scripts/w6_collect_delisted.py", line 111, in collect_st_current
+    df = fn()
+         ^^^^
+  File "/home/noname/miniconda3/envs/quant/lib/python3.11/site-packages/akshare/stock_feature/stock_hist_em.py", line 36, in stock_zh_a_spot_em
+    temp_df = fetch_paginated_data(url, params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+Please wait for a moment:   0%|          | 0/70 [00:00<?, ?it/s]Please wait for a moment:   1%|▏         | 1/70 [00:00<00:11,  5.83it/s]Please wait for a moment:   3%|▎         | 2/70 [00:00<00:11,  5.82it/s]Please wait for a moment:   4%|▍         | 3/70 [00:00<00:11,  5.97it/s]Please wait for a moment:   6%|▌         | 4/70 [00:00<00:11,  5.99it/s]Please wait for a moment:   7%|▋         | 5/70 [00:00<00:10,  5.95it/s]Please wait for a moment:   9%|▊         | 6/70 [00:01<00:11,  5.35it/s]Please wait for a moment:  10%|█         | 7/70 [00:01<00:11,  5.58it/s]Please wait for a moment:  11%|█▏        | 8/70 [00:01<00:10,  5.78it/s]Please wait for a moment:  13%|█▎        | 9/70 [00:01<00:10,  5.88it/s]Please wait for a moment:  14%|█▍        | 10/70 [00:01<00:10,  5.98it/s]Please wait for a moment:  16%|█▌        | 11/70 [00:01<00:11,  5.18it/s]Please wait for a moment:  17%|█▋        | 12/70 [00:02<00:12,  4.69it/s]
