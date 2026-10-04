@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27 07:00:23",
+  "generated_at": "2026-10-04 07:00:23",
   "latest_date": "2026-09-21",
   "data_source": "本地 data/all_stocks_qfq/*_daily_qfq.parquet (有效股票数见面板) + hs300/zz500 指数；akshare 不可达(连接失败) 故全本地自算",
   "microcap_definition": "每日全市场按总市值(收盘×总股本)排序后20%",
