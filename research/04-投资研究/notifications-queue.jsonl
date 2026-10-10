@@ -59,3 +59,4 @@
 {"ts": "2026-09-26 09:01:04", "channel": "evolution", "severity": "critical", "title": "cycle中止：数据校验FAIL", "body": "passed=5 failed=1，详见 validate 输出", "task_id": "task-0275", "source": "evolution_pipeline"}
 {"ts": "2026-09-27 07:10:01", "level": "orange", "type": "crowding", "title": "🟠 微盘拥挤度：微盘成交占比（市值后20%成交额/全A）异常", "body": "latest=0.03817，flag=red，latest_date=2026-09-21（数据源：本地 data/all_stocks_qfq/*_daily_qfq.parquet (有效股票数见面板) + hs30）", "source": "notify_hub", "severity": "warning", "_dedupe_key": "crowding|micro_turnover_share|2026-09-21"}
 {"ts": "2026-10-03 09:01:05", "channel": "evolution", "severity": "critical", "title": "cycle中止：数据校验FAIL", "body": "passed=5 failed=1，详见 validate 输出", "task_id": "task-0275", "source": "evolution_pipeline"}
+{"ts": "2026-10-10 09:01:05", "channel": "evolution", "severity": "critical", "title": "cycle中止：数据校验FAIL", "body": "passed=5 failed=1，详见 validate 输出", "task_id": "task-0275", "source": "evolution_pipeline"}
