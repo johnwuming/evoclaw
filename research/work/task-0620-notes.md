@@ -19,3 +19,7 @@
 以2027-03-31作为观察窗截止建议，但2027全年净利不可能在此前证实；到期结论应为观察期结束、远期目标未到验证期。若要验证2027全年须另开后续任务，不能自动把未发布的2026/2027财报判成功或失败。
 状态枚举：待数据/证据增强/证据减弱/相互矛盾/无法验证/已证伪。证伪需同边界数据明确推翻必要环节，不能仅靠气候预测或一个价格点。阈值未标定时只报数值、变动、基准和来源，不凭空设置“大幅”“库存低”“吨毛利守稳”百分比。
 来源：海大报告第九节及其2024年报、2025年报、2026半年报、PRODUCE 2023季次公告；华能报告第九节及其2025年报、2026半年报。严格区分本地引文与本轮外部核验。
+
+## 主agent外核回传（2026-10-16）
+PRODUCE 2025北中部第二季2025-11-02（周日）公告初始临时50万吨、EUREKA后定最终额；2026-01-31结季公告最终163万吨、实际1596013吨/97.91%。必须版本化临时/最终/修订配额，周末检查硬事件。来源：https://www.gob.pe/institucion/produce/noticias/1279909-produce-autoriza-inicio-de-la-segunda-temporada-de-pesca-de-anchoveta-2025-en-la-zona-norte-centro ；https://www.gob.pe/institucion/produce/noticias/1344291-produce-da-por-concluida-la-segunda-temporada-de-pesca-2025-de-anchoveta-en-la-zona-norte-centro 。
+NOAA当前官方改用RONI，ONI保留历史不可混接，来源：https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v5/ 。2026Q3预约日尚未查到，不得写10月底已确认。
