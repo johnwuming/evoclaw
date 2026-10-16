@@ -7,3 +7,5 @@
 - CCTD公开口径页https://www.cctd.com.cn/index.php?a=show&c=index&catid=700&id=243489&m=content 区分现货、长协、综合，禁止混用。Mysteel https://siliao.mysteel.com/yufen/ 可搜索到20261014库存标题但本次未取得完整连续序列，偏低阈值无法核定。CFO https://chinafeedonline.com.hk/node/4673 有同港口品级报价及stock/offtake结构，但直取证书失败。
 
 独立算术抽验：0.01/0.0003=33.3333元/吨标煤；乘5500/7000=26.1905元/吨5500原煤；除0.5/0.3得52.381/87.302元。只是在统一税基、电量、热值且满额/部分传导假设下对冲单位电价收入，不能推出700元交易阈值。
+
+补验：长江水文http://www.cjh.com.cn/swyb_sssq.html HTTP200/249576字节；Mysteel鱼粉栏目HTTP200/163389字节；巨潮既知半年报PDF直链HTTP200/6303458字节。因此“公告发现入口失败”和“PDF已知链接可下载”要分开。水情页面与鱼粉栏目连通不等于连续数据字段已验证。
