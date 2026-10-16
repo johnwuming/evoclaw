@@ -23,3 +23,6 @@
 ## 主agent外核回传（2026-10-16）
 PRODUCE 2025北中部第二季2025-11-02（周日）公告初始临时50万吨、EUREKA后定最终额；2026-01-31结季公告最终163万吨、实际1596013吨/97.91%。必须版本化临时/最终/修订配额，周末检查硬事件。来源：https://www.gob.pe/institucion/produce/noticias/1279909-produce-autoriza-inicio-de-la-segunda-temporada-de-pesca-de-anchoveta-2025-en-la-zona-norte-centro ；https://www.gob.pe/institucion/produce/noticias/1344291-produce-da-por-concluida-la-segunda-temporada-de-pesca-2025-de-anchoveta-en-la-zona-norte-centro 。
 NOAA当前官方改用RONI，ONI保留历史不可混接，来源：https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v5/ 。2026Q3预约日尚未查到，不得写10月底已确认。
+
+## 定稿覆盖旧草案
+主agent外核笔记task-0620-external-notes.md已读取：海大2026Q3第三方预约2026-10-27，actual=null，官方尚待确认。依主审修正建议：2027-03作为复审节点，裁决继续/降频/终止，保留2026年报和2027H1待验；不机械自动结项。接口按实抓/接入待验/人工授权分层，见外核笔记。原估值与安全边际未通过，研究监控不可自动给交易判断。
