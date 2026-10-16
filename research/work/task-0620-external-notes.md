@@ -5,3 +5,5 @@
 - PRODUCE 2025-11-02周日公告北中部第二季临时50万吨，最终额待EUREKA调查。2026-01-31官方结季公告最终163万吨，累计1596013吨/97.91%。来源https://www.gob.pe/institucion/produce/noticias/1279909-produce-autoriza-inicio-de-la-segunda-temporada-de-pesca-de-anchoveta-2025-en-la-zona-norte-centro 与 https://www.gob.pe/institucion/produce/noticias/1344291-produce-da-por-concluida-la-segunda-temporada-de-pesca-2025-de-anchoveta-en-la-zona-norte-centro 。这些是历史机制，不是2026第二季配额。
 - NOAA https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v5/ 明示2026官方采用RONI；ONI继续发布，不能混接。ENSO公告https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml 2026-10-08文本仍对2027JFM预测，不支持3月机械关窗。
 - CCTD公开口径页https://www.cctd.com.cn/index.php?a=show&c=index&catid=700&id=243489&m=content 区分现货、长协、综合，禁止混用。Mysteel https://siliao.mysteel.com/yufen/ 可搜索到20261014库存标题但本次未取得完整连续序列，偏低阈值无法核定。CFO https://chinafeedonline.com.hk/node/4673 有同港口品级报价及stock/offtake结构，但直取证书失败。
+
+独立算术抽验：0.01/0.0003=33.3333元/吨标煤；乘5500/7000=26.1905元/吨5500原煤；除0.5/0.3得52.381/87.302元。只是在统一税基、电量、热值且满额/部分传导假设下对冲单位电价收入，不能推出700元交易阈值。
